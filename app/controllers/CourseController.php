@@ -16,6 +16,30 @@ class CourseController extends \BaseController {
 		return View::make("backend.courses.index", array( 'courses' => $courses ) );
 		
 	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function getCreate()
+	{
+		//
+		$courses = Courses::getUntrash();
+		return View::make("backend.courses.create");
+		
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function postCreate()
+	{
+		//
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -43,74 +67,122 @@ class CourseController extends \BaseController {
 		endif;
 	}
 
-
 	/**
-	 * Show the form for creating a new resource.
+	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function postUpdate( $id = '' )
 	{
 		//
+
 	}
 
-
 	/**
-	 * Store a newly created resource in storage.
+	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function getCreatesupporters()
 	{
 		//
+		$courses = Courses::getUntrash();
+		return View::make("backend.courses.createsupporters");
+		
 	}
 
-
 	/**
-	 * Display the specified resource.
+	 * Display a listing of the resource.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function postCreatesupporters()
 	{
 		//
+		
 	}
 
-
 	/**
-	 * Show the form for editing the specified resource.
+	 * Display a listing of the resource.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function getCreatepromotioners()
 	{
 		//
+		$courses = Courses::getUntrash();
+		return View::make("backend.courses.createpromotioners");
+		
 	}
 
-
 	/**
-	 * Update the specified resource in storage.
+	 * Display a listing of the resource.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function postCreatepromotioners()
 	{
 		//
+		
 	}
 
-
 	/**
-	 * Remove the specified resource from storage.
+	 * Display a listing of the resource.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function getCreateteachers()
 	{
 		//
+		$courses = Courses::getUntrash();
+		return View::make("backend.courses.createteachers");
+		
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function postCreateteachers()
+	{
+		//
+		
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function getTrash()
+	{
+		//
+		$courses = Courses::getUntrash();
+		return View::make("backend.courses.trash");
+		
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function postTrash()
+	{
+		//
+		
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function postDelete()
+	{
+		//
+		
 	}
 
 
