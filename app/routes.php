@@ -34,12 +34,12 @@ Route::get('/', function(){
 	$course = Courses::find(1);
 
 	$teachers = $course->teachers;
-	//echo $teachers[0]->firstName;
-	//echo $teachers[1]->firstName;
-	//echo $teachers[2]->firstName;
+	
 	foreach($teachers as $teacher):
 		var_dump($teacher->firstName);
 	endforeach;
+
+	var_dump($course->company);
 	
 //	dd($course->teachers);
 });

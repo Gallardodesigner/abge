@@ -14,8 +14,8 @@ class CreatePromotionersTable extends Migration {
 	{
 		Schema::connection('mysql')->create('promotioners', function($table){
 			$table->increments('id');
-			$table->integer('idCourse');
-			$table->integer('idCompany');
+			$table->integer('course_id');
+			$table->integer('company_id');
 			$table->string('type');
 			$table->string('status');
 			$table->timestamps();
