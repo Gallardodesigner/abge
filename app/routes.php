@@ -11,6 +11,7 @@
 |
 */
 
+/*
 if(Auth::check()):
 	Route::controller('/dashboard/courses', 'CourseController');
 	Route::controller('/dashboard/categories', 'CategoryController');
@@ -26,3 +27,9 @@ else:
 	});
 	Route::controller('/', 'FrontendController');
 endif;
+
+*/
+
+Route::get('/', function(){
+	return var_dump(Courses::all());
+});
