@@ -24,7 +24,5 @@ else:
 	Route::get('/dashboard/', function(){
 		return Redirect::to('/');
 	});
-
 	Route::controller('/', 'FrontendController');
-
 endif;
