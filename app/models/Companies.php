@@ -6,9 +6,11 @@ class Companies extends Eloquent {
 		return $this->hasMany('Courses', 'company_id', 'id');
 	}
 
+
+
 /* --------------------------- */
 
-	public function _get( $arg = 'all' ){
+	public static function _get( $arg = 'all' ){
 		$operator = '=';
 		$status = '';
 		switch($arg){
@@ -27,46 +29,46 @@ class Companies extends Eloquent {
 				$status = $arg;
 				break;
 		}
-		return self::where( 'status', $operator, $status )->take()->get();
+		
+		return self::where( 'status', $operator, $status )->get();
 	}
 
-	public function getPublish(){
+	public static function getPublish(){
 		return self::_get('publish');
 	}
 
-	public function getDraft(){
+	public static function getDraft(){
 		return self::_get('draft');
 	}
 
-	public function getTrash(){
+	public static function getTrash(){
 		return self::_get('trash');
 	}
 
-	public function getUntrash(){
+	public static function getUntrash(){
 		return self::_get('untrash');
 	}
 
-	public function getAll(){
+	public static function getAll(){
 		return self::_get('all');
 	}
 
-	public function _edit($id, $arg = 'draft'){
+	public static function _edit($id, $arg = 'draft'){
 		$reg = self::find($id);
 		$reg->status = $arg;
 		$reg->save();
 		return true;
 	}
 
-	public function publish($id){
+	public static function publish($id){
 		return self::_edit($id, 'publish');
 	}
 
-	public function draft($id){
+	public static function draft($id){
 		return self::_edit($id, 'draft');
 	}
 
-	public function trash($id){
+	public static function trash($id){
 		return self::_edit($id, 'trash');
 	}
-	
 }

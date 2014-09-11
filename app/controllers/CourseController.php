@@ -2,6 +2,8 @@
 
 class CourseController extends \BaseController {
 
+	protected $route = '/dashboard/courses';
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -10,7 +12,35 @@ class CourseController extends \BaseController {
 	public function getIndex()
 	{
 		//
-		return View::make("backend.courses.index");
+		$courses = Courses::getUntrash();
+		return View::make("backend.courses.index", array( 'courses' => $courses ) );
+		
+	}
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function getUpdate( $id = '' )
+	{
+		//
+		if( $id == ''):
+			return Redirect::to($this->route);
+		else:
+
+			$course = Courses::find($id);
+		
+			if(!$course):
+	
+				return Redirect::to($this->route);
+	
+			else:
+
+				return View::make("backend.courses.index", array( 'courses' => $courses ) );
+		
+			endif;
+
+		endif;
 	}
 
 
