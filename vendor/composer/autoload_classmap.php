@@ -36,7 +36,6 @@ return array(
     'Courses' => $baseDir . '/app/models/Couses.php',
     'CreateCategoriesTable' => $baseDir . '/app/database/migrations/2014_09_11_083500_create_categories_table.php',
     'CreateCompaniesTable' => $baseDir . '/app/database/migrations/2014_09_11_083537_create_companies_table.php',
-    'CreateCourseTeacherTable' => $baseDir . '/app/database/migrations/2014_09_11_114551_create_course_teacher_table.php',
     'CreateCoursesTable' => $baseDir . '/app/database/migrations/2014_09_11_083413_create_courses_table.php',
     'CreatePromotionersTable' => $baseDir . '/app/database/migrations/2014_09_11_083953_create_promotioners_table.php',
     'CreateSupportersTable' => $baseDir . '/app/database/migrations/2014_09_11_084017_create_supporters_table.php',
