@@ -11,7 +11,20 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+if(Auth::check()):
+	Route::controller('/dashboard/courses', 'CourseController');
+	Route::controller('/dashboard/categories', 'CategoryController');
+	Route::controller('/dashboard/companies', 'CompanyController');
+	Route::controller('/dashboard/promotioners', 'PromotionerController');
+	Route::controller('/dashboard/supporters', 'SupporterController');
+	Route::controller('/dashboard/teachers', 'TeacherController');
+	Route::controller('/dashboard/', 'DashboardController');
+	Route::controller('/', 'FrontendController');
+else:
+	Route::get('/dashboard/', function(){
+		return Redirect::to('/');
+	});
+
+	Route::controller('/', 'FrontendController');
+
+endif;
