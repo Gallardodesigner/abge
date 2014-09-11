@@ -12,7 +12,7 @@ class CreateTeachersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('teachers', function($table){
+		Schema::connection('mysql')->create('teachers', function($table){
 			$table->increments('id');
 			$table->string('firstName');
 			$table->string('lastName');

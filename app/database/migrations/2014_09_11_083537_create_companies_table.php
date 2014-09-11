@@ -12,7 +12,7 @@ class CreateCompaniesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('companies', function($table){
+		Schema::connection('mysql')->create('companies', function($table){
 			$table->increments('id');
 			$table->string('title');
 			$table->longText('content');

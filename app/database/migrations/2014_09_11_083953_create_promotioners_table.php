@@ -12,7 +12,7 @@ class CreatePromotionersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('promotioners', function($table){
+		Schema::connection('mysql')->create('promotioners', function($table){
 			$table->increments('id');
 			$table->integer('idCourse');
 			$table->integer('idCompany');

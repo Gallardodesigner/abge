@@ -12,7 +12,7 @@ class CreateCoursesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('courses', function($table){
+		Schema::connection('mysql')->create('courses', function($table){
 			$table->increments('id');
 			$table->string('title');
 			$table->longText('content');

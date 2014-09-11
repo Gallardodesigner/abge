@@ -12,7 +12,7 @@ class CreateSupportersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('supporters', function($table){
+		Schema::connection('mysql')->create('supporters', function($table){
 			$table->increments('id');
 			$table->integer('idCourse');
 			$table->integer('idCompany');

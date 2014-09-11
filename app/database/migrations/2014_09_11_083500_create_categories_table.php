@@ -12,7 +12,7 @@ class CreateCategoriesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('categories', function($table){
+		Schema::connection('mysql')->create('categories', function($table){
 			$table->increments('id');
 			$table->string('title');
 			$table->longText('content');
