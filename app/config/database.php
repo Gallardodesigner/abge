@@ -54,10 +54,21 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'forge',
-			'username'  => 'forge',
-			'password'  => '',
+			'host'      => '186.202.152.19',
+			'database'  => 'abge',
+			'username'  => 'abge',
+			'password'  => 'egba4102',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+
+		'mysql_2' => array(
+			'driver'    => 'mysql',
+			'host'      => '186.202.152.54',
+			'database'  => 'abge13',
+			'username'  => 'abge13',
+			'password'  => 'Abge3280743',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
