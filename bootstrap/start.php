@@ -26,8 +26,8 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('*localhost*'),
-	'remoto'=> array('*abge.com.br'),
+	'local' => array('localhost'),
+	'remote'=> array('homestead'),
 
 	//'local' => array('homestead'),
 
