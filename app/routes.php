@@ -31,5 +31,15 @@ endif;
 */
 
 Route::get('/', function(){
-	return var_dump(Courses::all());
+	$course = Courses::find(1);
+
+	$teachers = $course->teachers;
+	//echo $teachers[0]->firstName;
+	//echo $teachers[1]->firstName;
+	//echo $teachers[2]->firstName;
+	foreach($teachers as $teacher):
+		var_dump($teacher->firstName);
+	endforeach;
+	
+//	dd($course->teachers);
 });
