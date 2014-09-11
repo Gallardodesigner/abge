@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ABGE - </title>
+<title>ABGE - Admin Painel</title>
 {{HTML::style("assetsadmin/css/style.default.css")}}
 {{HTML::style("assetsadmin/css/responsive-tables.css")}}
 @yield("css")

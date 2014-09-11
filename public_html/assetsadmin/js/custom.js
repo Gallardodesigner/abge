@@ -74,7 +74,7 @@ jQuery(document).ready(function(){
 		var s = jQuery(this).attr('href');
 		if(jQuery('#skinstyle').length > 0) {
 			if(s!='default') {
-				jQuery('#skinstyle').attr('href','css/style.'+s+'.css');	
+				jQuery('#skinstyle').attr('href','../assetsadmin/css/style.'+s+'.css');	
 				jQuery.cookie('skin-color', s, { path: '/' });
 			} else {
 				jQuery('#skinstyle').remove();
@@ -82,7 +82,7 @@ jQuery(document).ready(function(){
 			}
 		} else {
 			if(s!='default') {
-				jQuery('head').append('<link id="skinstyle" rel="stylesheet" href="css/style.'+s+'.css" type="text/css" />');
+				jQuery('head').append('<link id="skinstyle" rel="stylesheet" href="../assetsadmin/css/style.'+s+'.css" type="text/css" />');
 				jQuery.cookie("skin-color", s, { path: '/' });
 			}
 		}
