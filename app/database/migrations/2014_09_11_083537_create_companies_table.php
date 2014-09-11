@@ -12,7 +12,18 @@ class CreateCompaniesTable extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::create('companies', function($table){
+			$table->increments('id');
+			$table->string('title');
+			$table->longText('content');
+			$table->longText('address');
+			$table->longText('contact');
+			$table->text('url');
+			$table->string('type');
+			$table->string('status');
+			$table->timestamps();
+			$table->softDeletes();
+		});
 	}
 
 	/**
@@ -22,7 +33,7 @@ class CreateCompaniesTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::dropIfExists('companies');
 	}
 
 }

@@ -12,7 +12,17 @@ class CreateTeachersTable extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::create('teachers', function($table){
+			$table->increments('id');
+			$table->string('firstName');
+			$table->string('lastName');
+			$table->text('url');
+			$table->text('content');
+			$table->string('type');
+			$table->string('status');
+			$table->timestamps();
+			$table->softDeletes();
+		});
 	}
 
 	/**
@@ -22,7 +32,7 @@ class CreateTeachersTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::dropIfExists('teachers');
 	}
 
 }

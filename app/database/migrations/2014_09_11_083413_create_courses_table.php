@@ -12,7 +12,20 @@ class CreateCoursesTable extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::create('courses', function($table){
+			$table->increments('id');
+			$table->string('title');
+			$table->longText('content');
+			$table->longText('objectives');
+			$table->longText('methodology');
+			$table->longText('target');
+			$table->text('duration');
+			$table->integer('idCompany');
+			$table->string('type');
+			$table->string('status');
+			$table->timestamps();
+			$table->softDeletes();
+		});
 	}
 
 	/**
@@ -22,7 +35,7 @@ class CreateCoursesTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::dropIfExists('courses');
 	}
 
 }
