@@ -7,9 +7,9 @@ class FrontendController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
-		//
+		echo "Hola Mundo";
 	}
 
 

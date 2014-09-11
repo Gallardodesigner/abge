@@ -11,7 +11,7 @@
 |
 */
 
-/*
+
 if(Auth::check()):
 	Route::controller('/dashboard/courses', 'CourseController');
 	Route::controller('/dashboard/categories', 'CategoryController');
@@ -22,13 +22,11 @@ if(Auth::check()):
 	Route::controller('/dashboard/', 'DashboardController');
 	Route::controller('/', 'FrontendController');
 else:
-	Route::get('/dashboard/', function(){
-		return Redirect::to('/');
-	});
-	Route::controller('/', 'FrontendController');
 endif;
+	Route::controller('dashboard', 'DashboardController');
+	Route::controller('/', 'FrontendController');
 
-*/
+/*
 
 Route::get('/', function(){
 	$course = Courses::find(1);
@@ -58,3 +56,5 @@ Route::get('/', function(){
 	//
 //	dd($course->teachers);
 });
+
+*/
