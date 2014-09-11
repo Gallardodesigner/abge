@@ -11,7 +11,7 @@
 |
 */
 
-/*
+
 if(Auth::check()):
 	Route::controller('/dashboard/courses', 'CourseController');
 	Route::controller('/dashboard/categories', 'CategoryController');
@@ -21,40 +21,42 @@ if(Auth::check()):
 	Route::controller('/dashboard/teachers', 'TeacherController');
 	Route::controller('/dashboard/', 'DashboardController');
 	Route::controller('/', 'FrontendController');
-else:
-	Route::get('/dashboard/', function(){
-		return Redirect::to('/');
-	});
-	Route::controller('/', 'FrontendController');
+// else:
 endif;
+	Route::controller('/dashboard', 'DashboardController');
 
-*/
+	// Route::get('/dashboard/', function(){
+	// 	return Redirect::to('/');
+	// });
+	Route::controller('/', 'FrontendController');
 
-Route::get('/', function(){
-	$course = Courses::find(1);
 
-	$teachers = $course->teachers;
-	$promotioners = $course->promotioners;
-	$supporters = $course->supporters;
-	//var_dump($promotioners);
-	foreach($teachers as $teacher):
-		var_dump($teacher->firstName);
-	endforeach;
+
+// Route::get('/', function(){
+// 	$course = Courses::find(1);
+
+// 	$teachers = $course->teachers;
+// 	$promotioners = $course->promotioners;
+// 	$supporters = $course->supporters;
+// 	//var_dump($promotioners);
+// 	foreach($teachers as $teacher):
+// 		var_dump($teacher->firstName);
+// 	endforeach;
 	
-	foreach($supporters as $supporter):
-		var_dump($supporter->title);
-	endforeach;
+// 	foreach($supporters as $supporter):
+// 		var_dump($supporter->title);
+// 	endforeach;
 
-	foreach($promotioners as $promotioner):
-		var_dump($promotioner->title);
-	endforeach;
+// 	foreach($promotioners as $promotioner):
+// 		var_dump($promotioner->title);
+// 	endforeach;
 
-	var_dump($course->company->title);
-	var_dump($course->category->title);
+// 	var_dump($course->company->title);
+// 	var_dump($course->category->title);
 
-	//var_dump($course->category->title);
-	//var_dump($course->category->title);
-	//var_dump($course->category->title);
-	//
-//	dd($course->teachers);
-});
+// 	//var_dump($course->category->title);
+// 	//var_dump($course->category->title);
+// 	//var_dump($course->category->title);
+// 	//
+// //	dd($course->teachers);
+// });

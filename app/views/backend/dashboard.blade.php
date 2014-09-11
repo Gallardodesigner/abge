@@ -1,3 +1,4 @@
+@extends("backend.layout")
 @section("mainContent")
 <div class="maincontent">
             <div class="maincontentinner">

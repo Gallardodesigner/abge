@@ -7,9 +7,10 @@ class FrontendController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
 		//
+		return View::make("hello");
 	}
 
 
