@@ -17,6 +17,10 @@ return array(
 	| choice installed on your machine before you begin development.
 	|
 	*/
+	'fetch' => PDO::FETCH_CLASS,
+
+
+	'default' => 'mysql',
 
 	'connections' => array(
 
@@ -30,6 +34,7 @@ return array(
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
+
 		'mysql_2' => array(
 			'driver'    => 'mysql',
 			'host'      => '186.202.152.54',
@@ -53,5 +58,7 @@ return array(
 		),
 
 	),
+	'migrations' => 'migrations',
+	
 
 );
