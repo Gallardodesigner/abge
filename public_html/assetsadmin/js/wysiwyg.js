@@ -8,6 +8,20 @@
  */
 
 jQuery().ready(function() {
+	tinymce.init({
+	    selector: "textarea",
+		plugins :[
+		"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+		"save table contextmenu directionality template paste textcolor colorpicker"
+	],
+	    toolbar: "insertfile undo redo | copy cut paste | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor table",
+	    //toolbar: "hr,link,image,charmap,paste,print,preview,anchor,pagebreak,spellchecker,searchreplace,visualblocks,visualchars,code,fullscreen,insertdatetime,media,nonbreaking,save cancel,table,directionality,,textcolor,emoticons,template,forecolor backcolor,insertfile",
+    	insertdatetime_formats: ["%Y.%m.%d", "%H:%M"],
+	    link_list: [
+	    ]
+	 });
+	/*
 		jQuery('textarea.tinymce').tinymce({
 			// Location of TinyMCE script
 			script_url : 'js/tinymce/tiny_mce.js',
@@ -44,7 +58,7 @@ jQuery().ready(function() {
 			}
 		});
 				
-		
+	*/	
 		jQuery('.editornav a').click(function(){
 			jQuery('.editornav li.current').removeClass('current');
 			jQuery(this).parent().addClass('current');
