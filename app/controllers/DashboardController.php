@@ -7,10 +7,10 @@ class DashboardController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
 		//
-		return View::make("backend.dahsboard");
+		return View::make("backend.dashboard");
 	}
 
 
