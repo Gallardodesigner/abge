@@ -35,6 +35,7 @@ jQuery().ready(function() {
 			external_link_list_url : "lists/link_list.js",
 			external_image_list_url : "lists/image_list.js",
 			media_external_list_url : "lists/media_list.js",
+			tools: "inserttable",
 
 			// Replace values for the template plugin
 			template_replace_values : {

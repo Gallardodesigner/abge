@@ -1,5 +1,5 @@
 @extends("backend.layout")
-@section("mainContent")
+@section("MainContent")
 <div class="maincontent">
             <div class="maincontentinner">
                 <div class="row-fluid">
@@ -356,16 +356,6 @@
                     </div><!--span4-->
                 </div><!--row-fluid-->
                 
-                <div class="footer">
-                    <div class="footer-left">
-                        <span>&copy; 2014. ABGE.</span>
-                    </div>
-                    <div class="footer-right">
-                        <span>Designed by: <a href="http://www.gallardodesigner.com.br/">Gallardo Designer</a></span>
-                    </div>
-                </div><!--footer-->
                 
-            </div><!--maincontentinner-->
-        </div><!--maincontent-->
 
 @stop
