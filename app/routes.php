@@ -31,5 +31,30 @@ endif;
 */
 
 Route::get('/', function(){
-	return var_dump(Courses::all());
+	$course = Courses::find(1);
+
+	$teachers = $course->teachers;
+	$promotioners = $course->promotioners;
+	$supporters = $course->supporters;
+	//var_dump($promotioners);
+	foreach($teachers as $teacher):
+		var_dump($teacher->firstName);
+	endforeach;
+	
+	foreach($supporters as $supporter):
+		var_dump($supporter->title);
+	endforeach;
+
+	foreach($promotioners as $promotioner):
+		var_dump($promotioner->title);
+	endforeach;
+
+	var_dump($course->company->title);
+	var_dump($course->category->title);
+
+	//var_dump($course->category->title);
+	//var_dump($course->category->title);
+	//var_dump($course->category->title);
+	//
+//	dd($course->teachers);
 });

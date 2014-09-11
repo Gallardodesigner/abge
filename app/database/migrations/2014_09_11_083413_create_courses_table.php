@@ -20,7 +20,8 @@ class CreateCoursesTable extends Migration {
 			$table->longText('methodology');
 			$table->longText('target');
 			$table->text('duration');
-			$table->integer('idCompany');
+			$table->integer('company_id');
+			$table->integer('category_id');
 			$table->string('type');
 			$table->string('status');
 			$table->timestamps();
