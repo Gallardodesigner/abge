@@ -132,13 +132,13 @@
         <div class="leftmenu">        
             <ul class="nav nav-tabs nav-stacked">
             	<li class="nav-header">Navigation</li>
-                <li class="{{{ (Request::is('dashboard') ? 'active' : '') }}}"><a href="{{{ URL::to('dashboard') }}}"><span class="iconfa-laptop"></span> Dashboard</a></li>
-                <li class="dropdown {{{ (Request::is('dashboard/courses') ? 'active' : '') }}}{{{ (Request::is('dashboard/courses/*') ? 'active' : '') }}}"><a href=""><span class="iconfa-book"></span>Courses</a>
+                <li class="{{{ (Request::is('/dashboard') ? 'active' : '') }}}"><a href="{{{ URL::to('/dashboard') }}}"><span class="iconfa-laptop"></span> Dashboard</a></li>
+                <li class="dropdown {{{ (Request::is('/dashboard/courses') ? 'active' : '') }}}{{{ (Request::is('/dashboard/courses/*') ? 'active' : '') }}}"><a href=""><span class="iconfa-book"></span>Courses</a>
                 	<ul>
                     	<li class="dropdown"><a href="">Course</a>
                         <ul>
-                            <li><a href="{{{ URL::to('dashboard/courses') }}}">All</a></li>
-                            <li><a href="{{{ URL::to('dashboard/courses/create') }}}">Add</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/courses') }}}">All</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/courses/create') }}}">Add</a></li>
                             <li><a href="">Edit</a></li>
                             <li><a href="">Trashed</a></li>
                         </ul>
@@ -156,9 +156,10 @@
                         </ul>
                         <li class="dropdown"><a href="">Category</a>
                         <ul>
-                            <li><a href="">Add</a></li>
-                            <li><a href="">Edit</a></li>
-                            <li><a href="">Trashed</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/categories') }}}">All</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/categories/create') }}}">Add</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/categories/update') }}}">Edit</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/categories/trash') }}}">Trashed</a></li>
                         </ul>
                      </li>
                     </ul>
