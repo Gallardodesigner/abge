@@ -2,85 +2,205 @@
 
 class CategoryController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
+	protected $route = '/dashboard/categories';
+
+	public function getIndex(){
+
+		$categories = Categories::getUntrash();
+
+		return View::make('backend.categories.index');
+
 	}
 
+	public function getCreate(){
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+		return View::make('backend.categories.create');
+
 	}
 
+	public function postCreate(){
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
+		$category = new Categories();
+		$category->title = Input::get('title');
+		$category->content = Input::get('content');
+		$category->type = 'category';
+		$category->status = 'draft';
+		$category->save();
+
+		return View::make('backend.categories.index', array('msg-success' => 'The category was successfully created!'));
+
 	}
 
+	public function getUpdate( $id = '' ){
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+		if( $id == '' ):
+
+			return Redirect::to($this->route);
+		
+		else:
+
+			$category = Categories::find($id);
+
+			if(!$category):
+
+				return Redirect::to($this->route);
+
+			else:
+
+				return View::make('backend.categories.update', array('category' = $category));
+
+			endif;
+
+		endif;
+
 	}
 
+	public function postUpdate( $id = '' ){
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+		if( $id == '' ):
+
+			return Redirect::to($this->route);
+		
+		else:
+
+			$category = Categories::find($id);
+
+			if(!$category):
+
+				return Redirect::to($this->route);
+
+			else:
+
+				$category->title = Input::get('title');
+				$category->content = Input::get('content');
+				$category->type = 'category';
+				$category->status = 'draft';
+				$category->save();
+				return Redirect::to($this->route);
+
+			endif;
+
+		endif;
+
 	}
 
+	public function getPublish( $id = '' ){
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('message-error','Can\'t read publish without an identification key of categories');
+		
+		else:
+
+			$category = Categories::publish($id);
+
+			if(!$category):
+
+				return Redirect::to($this->route)->with('message-error','Can\'t publish the category');
+
+			else:
+
+				return Redirect::to($this->route)->with('message-success', 'Category was published successfully');
+
+			endif;
+
+		endif;
+
 	}
 
+	public function getDraft( $id = '' ){
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('message-error','Can\'t read draft without an identification key of categories');
+		
+		else:
+
+			$category = Categories::draft($id);
+
+			if(!$category):
+
+				return Redirect::to($this->route)->with('message-error','Can\'t draft the category');
+
+			else:
+
+				return Redirect::to($this->route)->with('message-success', 'Category was drafted successfully');
+
+			endif;
+
+		endif;
+
 	}
 
+	public function getTrash( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('message-error','Can\'t read trash without an identification key of categories');
+		
+		else:
+
+			$category = Categories::trash($id);
+
+			if(!$category):
+
+				return Redirect::to($this->route)->with('message-error','Can\'t trash the category');
+
+			else:
+
+				return Redirect::to($this->route)->with('message-success', 'Category was trashed successfully');
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getUntrash( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('message-error','Can\'t read untrash without an identification key of categories');
+		
+		else:
+
+			$category = Categories::draft($id);
+
+			if(!$category):
+
+				return Redirect::to($this->route)->with('message-error','Can\'t untrash the category');
+
+			else:
+
+				return Redirect::to($this->route)->with('message-success', 'Category was untrashed successfully');
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getDelete( $id = '' ){
+
+		if( $id == '' ):
+
+			return View::make('backend.categories.trash');
+
+		else:
+
+			$category = Categories::destroy($id);
+
+			if(!$category):
+
+				return Redirect::to($this->route)->with('message-error','Can\'t delete the category');
+
+			else:
+
+				return Redirect::to($this->route)->with('message-success', 'Category was deleted successfully');
+
+			endif;
+
+
+	}
 
 }
