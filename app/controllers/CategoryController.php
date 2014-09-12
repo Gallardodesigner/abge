@@ -208,6 +208,7 @@ class CategoryController extends \BaseController {
 
 			endif;
 
+		endif;
 
 	}
 
