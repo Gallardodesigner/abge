@@ -114,9 +114,11 @@ class CategoryController extends \BaseController {
 		
 		else:
 
-			$category = Categories::publish($id);
+			$category = Categories::find($id);
 
-			if(!$category):
+			$publish = Categories::publish($id);
+
+			if(!$publish):
 
 				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_publish_err', array( 'title' => $category->title )));
 
@@ -138,9 +140,11 @@ class CategoryController extends \BaseController {
 		
 		else:
 
-			$category = Categories::draft($id);
+			$category = Categories::find($id);
 
-			if(!$category):
+			$draft = Categories::draft($id);
+
+			if(!$draft):
 
 				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_draft_err', array( 'title' => $category->title )));
 
@@ -162,9 +166,11 @@ class CategoryController extends \BaseController {
 		
 		else:
 
-			$category = Categories::trash($id);
+			$category = Categories::find($id);
 
-			if(!$category):
+			$trash = Categories::trash($id);
+
+			if(!$trash):
 
 				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_trash_err', array( 'title' => $category->title )));
 
@@ -186,9 +192,11 @@ class CategoryController extends \BaseController {
 		
 		else:
 
-			$category = Categories::draft($id);
+			$category = Categories::find($id);
 
-			if(!$category):
+			$draft = Categories::draft($id);
+
+			if(!$draft):
 
 				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_untrash_err', array( 'title' => $category->title )));
 
