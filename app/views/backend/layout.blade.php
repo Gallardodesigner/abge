@@ -171,7 +171,7 @@
     <div class="rightpanel">
         
         <ul class="breadcrumbs">
-            <li><a href="dashbo"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li><a href="/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
             <li>@yield("title")</li>
             <li class="right">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
