@@ -121,7 +121,11 @@ Courses
             
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 <div class="widget">
-
+                    <div class="headtitle">
+                    <div class="btn-group">
+                        <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
+                    </div>
+                    </div>
                     <h4 class="widgettitle">Add Courses</h4>
                     <div class="widgetcontent">
                         <form class="stdform " action="">
