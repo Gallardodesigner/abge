@@ -40,7 +40,7 @@ class CategoryController extends \BaseController {
 
 		else:
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_create_err', array( 'title' => $category->title )))
+			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_create_err', array( 'title' => $category->title )));
 
 		endif;
 	}
