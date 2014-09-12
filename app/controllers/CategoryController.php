@@ -79,6 +79,8 @@ class CategoryController extends \BaseController {
 
 			$category = Categories::find($id);
 
+			return var_dump($category);
+
 			if(!$category):
 
 				return Redirect::to($this->route);
