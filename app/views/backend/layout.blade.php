@@ -204,10 +204,10 @@
             <form action="results.html" method="post" class="searchbar">
                 <input type="text" name="keyword" placeholder="To search type and hit enter..." />
             </form>
-            <div class="pageicon"><span class="iconfa-laptop"></span></div>
+            <div class="pageicon">@yield("iconpage",'<span class="iconfa-laptop"></span>')</div>
             <div class="pagetitle">
-                <h5>All Features Summary</h5>
-                <h1>Dashboard</h1>
+                <h5>@yield("maintitle","Dashboard")</h5>
+                <h1>@yield("nameview","Dashboard")</h1>
             </div>
         </div><!--pageheader-->
         

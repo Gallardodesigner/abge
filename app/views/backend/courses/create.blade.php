@@ -102,13 +102,6 @@
 <span class="iconfa-book"></span>
 @stop
 
-@section("maintitle")
-Courses
-@stop
-
-@section("nameview")
-    Add Course
-@stop
 
 @section("MainContent")
 <div class="maincontent">
