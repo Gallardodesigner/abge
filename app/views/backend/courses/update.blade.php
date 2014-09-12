@@ -111,7 +111,7 @@ Courses
 @stop
 
 @section("nameview")
-    Add Course
+    Update Course
 @stop
 
 
@@ -122,7 +122,7 @@ Courses
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 <div class="widget">
 
-                    <h4 class="widgettitle">Add Courses</h4>
+                    <h4 class="widgettitle">Update Courses</h4>
                     <div class="widgetcontent">
                         <form class="stdform " action="">
                             <div class="par control-group info">

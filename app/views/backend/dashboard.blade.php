@@ -1,4 +1,10 @@
 @extends("backend.layout")
+@section("title")
+Dashboard
+@stop
+
+
+
 @section("MainContent")
 <div class="maincontent">
             <div class="maincontentinner">

@@ -98,6 +98,10 @@
 </script>
 @stop
 
+@section("title")
+Courses
+@stop
+
 @section("iconpage")
 <span class="iconfa-book"></span>
 @stop
@@ -107,7 +111,7 @@ Courses
 @stop
 
 @section("nameview")
-    Add Course
+    All Courses
 @stop
 
 @section("MainContent")
@@ -117,7 +121,7 @@ Courses
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 <div class="widget">
 
-                    <h4 class="widgettitle">Add Courses</h4>
+                    <h4 class="widgettitle">All Courses</h4>
                     <div class="widgetcontent">
                         <form class="stdform " action="">
                             <div class="par control-group info">

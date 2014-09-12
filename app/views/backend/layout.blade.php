@@ -29,7 +29,7 @@
     
     <div class="header">
         <div class="logo">
-            <a href="dashboard.html">{{HTML::image("assetsadmin/images/logo.png")}}</a>
+            <a href="{{{ URL::to('dashboard') }}}">{{HTML::image("assetsadmin/images/logo.png")}}</a>
         </div>
         <div class="headerinner">
             <ul class="headmenu">
@@ -132,12 +132,13 @@
         <div class="leftmenu">        
             <ul class="nav nav-tabs nav-stacked">
             	<li class="nav-header">Navigation</li>
-                <li class=""><a href="dashboard.html"><span class="iconfa-laptop"></span> Dashboard</a></li>
-                <li class="dropdown active"><a href=""><span class="iconfa-book"></span> Courses</a>
+                <li class="{{{ (Request::is('dashboard') ? 'active' : '') }}}"><a href="{{{ URL::to('dashboard') }}}"><span class="iconfa-laptop"></span> Dashboard</a></li>
+                <li class="dropdown {{{ (Request::is('dashboard/courses') ? 'active' : '') }}}{{{ (Request::is('dashboard/courses/*') ? 'active' : '') }}}"><a href=""><span class="iconfa-book"></span>Courses</a>
                 	<ul>
-                    	<li class="dropdown"><a href="">Theme</a>
+                    	<li class="dropdown"><a href="">Course</a>
                         <ul>
-                            <li><a href="">Add</a></li>
+                            <li><a href="{{{ URL::to('dashboard/courses') }}}">All</a></li>
+                            <li><a href="{{{ URL::to('dashboard/courses/create') }}}">Add</a></li>
                             <li><a href="">Edit</a></li>
                             <li><a href="">Trashed</a></li>
                         </ul>
@@ -170,7 +171,7 @@
     <div class="rightpanel">
         
         <ul class="breadcrumbs">
-            <li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li><a href="dashbo"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
             <li>@yield("title")</li>
             <li class="right">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
