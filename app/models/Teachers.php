@@ -32,7 +32,7 @@ class Teachers extends Eloquent {
 				break;
 		}
 		
-		return self::where( 'status', $operator, $status )->get();
+		return self::where( 'status', $operator, $status )->orderBy('created_at', 'desc')->get();
 	}
 
 	public static function getPublish(){
