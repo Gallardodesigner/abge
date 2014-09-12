@@ -33,7 +33,7 @@ return array(
     'Companies' => $baseDir . '/app/models/Companies.php',
     'CompanyController' => $baseDir . '/app/controllers/CompanyController.php',
     'CourseController' => $baseDir . '/app/controllers/CourseController.php',
-    'Courses' => $baseDir . '/app/models/Couses.php',
+    'Courses' => $baseDir . '/app/models/Courses.php',
     'CreateCategoriesTable' => $baseDir . '/app/database/migrations/2014_09_11_083500_create_categories_table.php',
     'CreateCompaniesTable' => $baseDir . '/app/database/migrations/2014_09_11_083537_create_companies_table.php',
     'CreateCoursesTable' => $baseDir . '/app/database/migrations/2014_09_11_083413_create_courses_table.php',
