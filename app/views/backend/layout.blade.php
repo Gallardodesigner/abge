@@ -4,20 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ABGE - </title>
-<link rel="stylesheet" href="assetsadmin/css/style.default.css" type="text/css" />
+{{HTML::style("assetsadmin/css/style.default.css")}}
+{{HTML::style("assetsadmin/css/responsive-tables.css")}}
+@yield("css")
 
-<link rel="stylesheet" href="assetsadmin/css/responsive-tables.css">
-<script type="text/javascript" src="assetsadmin/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="assetsadmin/js/jquery-migrate-1.1.1.min.js"></script>
-<script type="text/javascript" src="assetsadmin/js/jquery-ui-1.9.2.min.js"></script>
-<script type="text/javascript" src="assetsadmin/js/modernizr.min.js"></script>
-<script type="text/javascript" src="assetsadmin/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="assetsadmin/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="assetsadmin/js/jquery.uniform.min.js"></script>
-<script type="text/javascript" src="assetsadmin/js/flot/jquery.flot.min.js"></script>
-<script type="text/javascript" src="assetsadmin/js/flot/jquery.flot.resize.min.js"></script>
-<script type="text/javascript" src="assetsadmin/js/responsive-tables.js"></script>
-<script type="text/javascript" src="assetsadmin/js/custom.js"></script>
+{{HTML::script("assetsadmin/js/jquery-1.9.1.min.js")}}
+{{HTML::script("assetsadmin/js/jquery-migrate-1.1.1.min.js")}}
+{{HTML::script("assetsadmin/js/jquery-ui-1.9.2.min.js")}}
+{{HTML::script("assetsadmin/js/modernizr.min.js")}}
+{{HTML::script("assetsadmin/js/bootstrap.min.js")}}
+{{HTML::script("assetsadmin/js/jquery.cookie.js")}}
+{{HTML::script("assetsadmin/js/jquery.uniform.min.js")}}
+{{HTML::script("assetsadmin/js/flot/jquery.flot.min.js")}}
+{{HTML::script("assetsadmin/js/flot/jquery.flot.resize.min.js")}}
+{{HTML::script("assetsadmin/js/responsive-tables.js")}}
+{{HTML::script("assetsadmin/js/custom.js")}}
 @yield("js")
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assetsadmin/js/excanvas.min.js"></script><![endif]-->
 </head>
@@ -28,7 +29,7 @@
     
     <div class="header">
         <div class="logo">
-            <a href="dashboard.html"><img src="images/logo.png" alt="" /></a>
+            <a href="dashboard.html">{{HTML::image("assetsadmin/images/logo.png")}}</a>
         </div>
         <div class="headerinner">
             <ul class="headmenu">
@@ -58,35 +59,35 @@
                         <li class="nav-header">New Users</li>
                         <li>
                             <a href="">
-                                <img src="images/photos/thumb1.png" alt="" class="userthumb" />
+                                {{HTML::image("assetsadmin/images/photos/thumb1.png","",array("class"=>"userthumb"))}}
                                 <strong>Draniem Daamul</strong>
                                 <small>April 20, 2013</small>
                             </a>
                         </li>
                         <li>
                             <a href="">
-                                <img src="images/photos/thumb2.png" alt="" class="userthumb" />
+                                {{HTML::image("assetsadmin/images/photos/thumb2.png","",array("class"=>"userthumb"))}}
                                 <strong>Shamcey Sindilmaca</strong>
                                 <small>April 19, 2013</small>
                             </a>
                         </li>
                         <li>
                             <a href="">
-                                <img src="images/photos/thumb3.png" alt="" class="userthumb" />
+                                {{HTML::image("assetsadmin/images/photos/thumb3.png","",array("class"=>"userthumb"))}}
                                 <strong>Nusja Paul Nawancali</strong>
                                 <small>April 19, 2013</small>
                             </a>
                         </li>
                         <li>
                             <a href="">
-                                <img src="images/photos/thumb4.png" alt="" class="userthumb" />
+                                {{HTML::image("assetsadmin/images/photos/thumb4.png","",array("class"=>"userthumb"))}}
                                 <strong>Rose Cerona</strong>
                                 <small>April 18, 2013</small>
                             </a>
                         </li>
                         <li>
                             <a href="">
-                                <img src="images/photos/thumb5.png" alt="" class="userthumb" />
+                                {{HTML::image("assetsadmin/images/photos/thumb5.png","",array("class"=>"userthumb"))}}
                                 <strong>John Doe</strong>
                                 <small>April 16, 2013</small>
                             </a>
@@ -111,7 +112,7 @@
                 </li>
                 <li class="right">
                     <div class="userloggedinfo">
-                        <img src="images/photos/thumb1.png" alt="" />
+                        {{HTML::image("assetsadmin/images/photos/thumb1.png")}}
                         <div class="userinfo">
                             <h5>Juan Dela Cruz <small>- juan@themepixels.com</small></h5>
                             <ul>
