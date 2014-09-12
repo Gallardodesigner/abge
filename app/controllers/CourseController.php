@@ -7,9 +7,10 @@ class CourseController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
 		//
+		return View::make("backend.courses.index");
 	}
 
 

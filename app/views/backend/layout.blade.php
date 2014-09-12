@@ -18,6 +18,7 @@
 <script type="text/javascript" src="assetsadmin/js/flot/jquery.flot.resize.min.js"></script>
 <script type="text/javascript" src="assetsadmin/js/responsive-tables.js"></script>
 <script type="text/javascript" src="assetsadmin/js/custom.js"></script>
+@yield("js")
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assetsadmin/js/excanvas.min.js"></script><![endif]-->
 </head>
 
@@ -210,7 +211,17 @@
         </div><!--pageheader-->
         
         @yield("MainContent")
-        
+        <div class="footer">
+                    <div class="footer-left">
+                        <span>&copy; 2014. ABGE.</span>
+                    </div>
+                    <div class="footer-right">
+                        <span>Designed by: <a href="http://www.gallardodesigner.com.br/">Gallardo Designer</a></span>
+                    </div>
+                </div><!--footer-->
+                
+            </div><!--maincontentinner-->
+        </div><!--maincontent-->
     </div><!--rightpanel-->
     
 </div><!--mainwrapper-->
