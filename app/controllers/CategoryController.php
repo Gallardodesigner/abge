@@ -36,7 +36,7 @@ class CategoryController extends \BaseController {
 		
 		if($category->save()):
 
-			return View::make('backend.categories.index', array('msg_success' => Lang::get('categories_create', array( 'title' => $category->title ))));
+			return Redirect::to($this->route)->with('msg_success' => Lang::get('categories_create', array( 'title' => $category->title ))));
 
 		else:
 
