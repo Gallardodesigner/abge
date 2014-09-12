@@ -36,11 +36,11 @@ class CategoryController extends \BaseController {
 		
 		if($category->save()):
 
-			return Redirect::to($this->route)->with('msg_success', Lang::get('categories_create', array( 'title' => $category->title )));
+			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.categories_create', array( 'title' => $category->title )));
 
 		else:
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_create_err', array( 'title' => $category->title )));
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_create_err', array( 'title' => $category->title )));
 
 		endif;
 	}
@@ -57,7 +57,7 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_display_err'));
 
 			else:
 
@@ -92,11 +92,11 @@ class CategoryController extends \BaseController {
 
 				if($category->save()):
 
-					return Redirect::to($this->route)->with('msg_error', Lang::get('categories_update_err', array( 'title' => $category->title )));
+					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_update_err', array( 'title' => $category->title )));
 
 				else:
 
-					return Redirect::to($this->route)->with('msg_succes', Lang::get('categories_update', array( 'title' => $category->title )));
+					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.categories_update', array( 'title' => $category->title )));
 
 				endif;
 
@@ -110,7 +110,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_display_err'));
 		
 		else:
 
@@ -118,11 +118,11 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_publish_err', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_publish_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_publish', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.categories_publish', array( 'title' => $category->title )));
 
 			endif;
 
@@ -134,7 +134,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_display_err'));
 		
 		else:
 
@@ -142,11 +142,11 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_draft_err', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_draft_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_draft', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.categories_draft', array( 'title' => $category->title )));
 
 			endif;
 
@@ -158,7 +158,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_display_err'));
 		
 		else:
 
@@ -166,11 +166,11 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_trash_err', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_trash_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_trash', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.categories_trash', array( 'title' => $category->title )));
 
 			endif;
 
@@ -182,7 +182,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_display_err'));
 		
 		else:
 
@@ -190,11 +190,11 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_untrash_err', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_untrash_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_untrash', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.categories_untrash', array( 'title' => $category->title )));
 
 			endif;
 
@@ -216,11 +216,11 @@ class CategoryController extends \BaseController {
 
 			if(!$delete):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_delete_err', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_delete_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_delete', array( 'title' => $category->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.categories_delete', array( 'title' => $category->title )));
 
 			endif;
 
