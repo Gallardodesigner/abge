@@ -92,11 +92,11 @@ class CategoryController extends \BaseController {
 
 				if($category->save()):
 
-					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_update_err', array( 'title' => $category->title )));
+					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.categories_update', array( 'title' => $category->title )));
 
 				else:
 
-					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.categories_update', array( 'title' => $category->title )));
+					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_update_err', array( 'title' => $category->title )));
 
 				endif;
 
