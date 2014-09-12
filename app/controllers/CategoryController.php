@@ -33,10 +33,16 @@ class CategoryController extends \BaseController {
 		$category->content = Input::get('content');
 		$category->type = 'category';
 		$category->status = 'draft';
-		$category->save();
+		
+		if($category->save()):
 
-		return View::make('backend.categories.index', array('msg_success' => 'The category was successfully created!'));
+			return View::make('backend.categories.index', array('msg_success' => Lang::get('categories_create', array( 'title' => $category->title ))));
 
+		else:
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_create_err', array( 'title' => $category->title )))
+
+		endif;
 	}
 
 	public function getUpdate( $id = '' ){
@@ -51,7 +57,7 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route);
+				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
 
 			else:
 
@@ -83,8 +89,16 @@ class CategoryController extends \BaseController {
 				$category->content = Input::get('content');
 				$category->type = 'category';
 				$category->status = 'draft';
-				$category->save();
-				return Redirect::to($this->route);
+
+				if($category->save()):
+
+					return Redirect::to($this->route)->with('msg_error', Lang::get('categories_update_err', array( 'title' => $category->title )));
+
+				else:
+
+					return Redirect::to($this->route)->with('msg_succes', Lang::get('categories_update', array( 'title' => $category->title )));
+
+				endif;
 
 			endif;
 
@@ -96,7 +110,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error','Can\'t read publish without an identification key of categories');
+			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
 		
 		else:
 
@@ -104,11 +118,11 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t publish the category');
+				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_publish_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was published successfully');
+				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_publish', array( 'title' => $category->title )));
 
 			endif;
 
@@ -120,7 +134,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error','Can\'t read draft without an identification key of categories');
+			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
 		
 		else:
 
@@ -128,11 +142,11 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t draft the category');
+				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_draft_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was drafted successfully');
+				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_draft', array( 'title' => $category->title )));
 
 			endif;
 
@@ -144,7 +158,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error','Can\'t read trash without an identification key of categories');
+			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
 		
 		else:
 
@@ -152,11 +166,11 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t trash the category');
+				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_trash_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was trashed successfully');
+				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_trash', array( 'title' => $category->title )));
 
 			endif;
 
@@ -168,7 +182,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error','Can\'t read untrash without an identification key of categories');
+			return Redirect::to($this->route)->with('msg_error', Lang::get('categories_display_err'));
 		
 		else:
 
@@ -176,11 +190,11 @@ class CategoryController extends \BaseController {
 
 			if(!$category):
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t untrash the category');
+				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_untrash_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was untrashed successfully');
+				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_untrash', array( 'title' => $category->title )));
 
 			endif;
 
@@ -196,15 +210,17 @@ class CategoryController extends \BaseController {
 
 		else:
 
-			$category = Categories::destroy($id);
+			$category = Categories::find($id);
 
-			if(!$category):
+			$delete = Categories::destroy($id);
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t delete the category');
+			if(!$delete):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('categories_delete_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was deleted successfully');
+				return Redirect::to($this->route)->with('msg_success', Lang::get('categories_delete', array( 'title' => $category->title )));
 
 			endif;
 
