@@ -98,8 +98,20 @@
 </script>
 @stop
 
+@section("title")
+Courses
+@stop
+
 @section("iconpage")
 <span class="iconfa-book"></span>
+@stop
+
+@section("maintitle")
+Courses
+@stop
+
+@section("nameview")
+    Add Course
 @stop
 
 
@@ -182,8 +194,11 @@
                                 </div>
                             </div>
                             <br />
-                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" name="reset" class="btn">Reset</button>
+                            <div class="pull-right">
+                                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" name="reset" class="btn">Reset</button>
+                            </div>
+                            <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>
