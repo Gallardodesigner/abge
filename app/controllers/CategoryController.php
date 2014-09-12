@@ -55,7 +55,7 @@ class CategoryController extends \BaseController {
 
 			else:
 
-				return View::make('backend.categories.update', array('category' = $category));
+				return View::make('backend.categories.update', array('category' => $category));
 
 			endif;
 
