@@ -150,9 +150,10 @@
                         </ul>
                         <li class="dropdown"><a href="">Company</a>
                         <ul>
-                            <li><a href="">Add</a></li>
-                            <li><a href="">Edit</a></li>
-                            <li><a href="">Trashed</a></li>
+                           <li><a href="{{{ URL::to('/dashboard/companies') }}}">All</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/companies/create') }}}">Add</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/companies/update') }}}">Edit</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/companies/trash') }}}">Trashed</a></li>
                         </ul>
                         <li class="dropdown"><a href="">Category</a>
                         <ul>
