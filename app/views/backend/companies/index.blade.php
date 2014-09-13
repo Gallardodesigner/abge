@@ -49,7 +49,7 @@ Courses
 @stop
 
 @section("iconpage")
-<span class="iconfa-tags"></span>
+<span class="iconfa-briefcase"></span>
 @stop
 
 @section("maintitle")
@@ -86,7 +86,7 @@ Companies
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="companies/create" class="btn dropdown-toggle">Add New Category</a>
+                            <a href="companies/create" class="btn dropdown-toggle">Add New Company</a>
                         </div>
                         <h4 class="widgettitle">All companies</h4>
                     </div>
