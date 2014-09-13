@@ -109,7 +109,7 @@ Companies
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td><img src="/uploads/thumb_{{$company->url}}" /></td>
+                                <td><img class="rounded" src="/uploads/thumb_{{$company->url}}" /></td>
                                 <td><h4>{{$company->title}}</h4></td>
                                 <td>{{$company->content}}</td>
                                 <td>{{ Lang::get('display.'.$company->status) }}</td>
