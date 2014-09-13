@@ -1,7 +1,6 @@
 <?php
 
 class CompanyController extends \BaseController {
-
 	
 	protected $route = '/dashboard/companies';
 
@@ -29,22 +28,46 @@ class CompanyController extends \BaseController {
 
 	public function postCreate(){
 
-		$company = new Companies();
-		$company->title = Input::get('title');
-		$company->content = Input::get('content');
-		$company->address = Input::get('address');
-		$company->contact = Input::get('contact');
-		$company->url = Input::get('url');
-		$company->type = 'company';
-		$company->status = 'draft';
-		
-		if($company->save()):
+		$image = Input::file('url');
 
-			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $company->title )));
+		$validator = Validator::make(
+			array(
+				'image' => $image
+				), 
+			array(
+				'image' => 'required|mimes:png,jpeg,gif'
+				),
+			array(
+				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+				)
+			);
+
+		if($validator->fails()):
+
+			return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.companies_create_img_err', array( 'title' => $company->title )));
 
 		else:
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $company->title )));
+			$filename = $this->uploadImage($image);
+
+			$company = new Companies();
+			$company->title = Input::get('title');
+			$company->content = Input::get('content');
+			$company->address = Input::get('address');
+			$company->contact = Input::get('contact');
+			$company->type = 'company';
+			$company->status = 'draft';
+			$company->url = $filename;
+
+			if($company->save()):
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $company->title )));
+
+			else:
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $company->title )));
+
+			endif;
 
 		endif;
 	}
@@ -89,13 +112,39 @@ class CompanyController extends \BaseController {
 
 			else:
 
-				$company->title = Input::get('title');
-				$company->content = Input::get('content');
-				$company->address = Input::get('address');
-				$company->contact = Input::get('contact');
-				$company->url = Input::get('url');
-				$company->type = 'company';
-				$company->status = 'draft';
+				$image = Input::file('url');
+
+				$validator = Validator::make(
+					array(
+						'image' => $image
+						), 
+					array(
+						'image' => 'required|mimes:png,jpeg,gif'
+						),
+					array(
+						'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+						)
+					);
+
+				if($validator->fails()):
+
+					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.companies_update_err', array( 'title' => $company->title )));
+
+				else:
+
+					$filename = $this->uploadImage($image);
+
+					$company = new Companies();
+					$company->title = Input::get('title');
+					$company->content = Input::get('content');
+					$company->address = Input::get('address');
+					$company->contact = Input::get('contact');
+					$company->type = 'company';
+					$company->status = 'draft';
+					$company->url = $filename;
+					$company->save();
+
+				endif;
 
 				if($company->save()):
 
@@ -253,6 +302,26 @@ class CompanyController extends \BaseController {
 
 	}
 
+	public function uploadImage($image){
 
+		$info_image = getimagesize($image);
+		$ratio = $info_image[0] / $info_image[1];
+		$newheight=array();
+		$width=array("100","200","400",$info_image[0]);
+		$ext=explode(".",$image->getClientOriginalName());
+		$ext = strtolower($ext[count($ext) - 1]);
+		$filename = str_replace('/', '!', Hash::make($image->getClientOriginalName().date('Y-m-d H:i:s'))).".".$ext;
+		$nombres=["thumb_".$filename,"small_".$filename,"medium_".$filename,$filename];
+
+		for ($i=0; $i <count($width) ; $i++):
+
+			$path = public_path("uploads/".$nombres[$i]);
+			Image::make($image->getRealPath())->resize($width[$i],null,function ($constraint) {$constraint->aspectRatio();})->save($path);
+		
+		endfor;
+
+		return $filename;
+		
+	}
 
 }
