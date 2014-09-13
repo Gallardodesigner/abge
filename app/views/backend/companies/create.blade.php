@@ -50,7 +50,7 @@ Company
                     </div>
                 <h4 class="widgettitle">Add Company</h4>
                 <div class="widgetcontent">
-                    <form class="stdform stdform2" method="post">
+                    <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
                                 <label>Logo</label>
                                 <span class="field"><input type="file" name="url" id="url" class="btn btn-primary"></span>
