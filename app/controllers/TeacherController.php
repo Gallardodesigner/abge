@@ -54,7 +54,8 @@ class TeacherController extends \BaseController {
 			$teacher = new Teachers();
 			$teacher->title = Input::get('title');
 			$teacher->content = Input::get('content');
-			$teacher->address = Input::get('address');
+			$teacher->firstName = Input::get('firstName');
+			$teacher->lastName = Input::get('lastName');
 			$teacher->contact = Input::get('contact');
 			$teacher->type = 'teacher';
 			$teacher->status = 'draft';
@@ -115,7 +116,8 @@ class TeacherController extends \BaseController {
 
 				$teacher->title = Input::get('title');
 				$teacher->content = Input::get('content');
-				$teacher->address = Input::get('address');
+				$teacher->firstName = Input::get('firstName');
+				$teacher->lastName = Input::get('lastName');
 				$teacher->contact = Input::get('contact');
 				$teacher->type = 'teacher';
 				$teacher->status = 'draft';
