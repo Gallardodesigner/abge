@@ -52,7 +52,6 @@ class TeacherController extends \BaseController {
 			$filename = $this->uploadImage($image);
 
 			$teacher = new Teachers();
-			$teacher->title = Input::get('title');
 			$teacher->content = Input::get('content');
 			$teacher->firstName = Input::get('firstName');
 			$teacher->lastName = Input::get('lastName');
@@ -114,7 +113,6 @@ class TeacherController extends \BaseController {
 
 			else:
 
-				$teacher->title = Input::get('title');
 				$teacher->content = Input::get('content');
 				$teacher->firstName = Input::get('firstName');
 				$teacher->lastName = Input::get('lastName');
