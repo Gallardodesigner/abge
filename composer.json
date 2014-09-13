@@ -5,7 +5,9 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-    	"way/generators": "~2.0"
+    	"way/generators": "~2.0",
+    	"thujohn/pdf": "dev-master",
+    	"maatwebsite/excel": "1.*"
 	},
 	"autoload": {
 		"classmap": [
