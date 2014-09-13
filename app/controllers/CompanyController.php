@@ -304,6 +304,8 @@ class CompanyController extends \BaseController {
 
 	public function uploadImage($image){
 
+		//dd(storage_path('uploads/'));
+
 		$info_image = getimagesize($image);
 		$ratio = $info_image[0] / $info_image[1];
 		$newheight=array();
@@ -314,7 +316,7 @@ class CompanyController extends \BaseController {
 
 		for ($i=0; $i <count($width) ; $i++):
 
-			$path = public_path("uploads/".$nombres[$i]);
+			$path = public_path('uploads/'.$nombres[$i]);
 			Image::make($image->getRealPath())->resize($width[$i],null,function ($constraint) {$constraint->aspectRatio();})->save($path);
 		
 		endfor;
