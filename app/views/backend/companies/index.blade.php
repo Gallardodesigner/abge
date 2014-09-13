@@ -109,11 +109,11 @@ Companies
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td><img class="rounded" src="/uploads/thumb_{{$company->url}}" /></td>
-                                <td><h4>{{$company->title}}</h4></td>
-                                <td>{{$company->content}}</td>
-                                <td>{{ Lang::get('display.'.$company->status) }}</td>
-                                <td class="center">
+                                <td class="center" style="vertical-align:middle;"><img class="rounded" src="/uploads/thumb_{{$company->url}}" /></td>
+                                <td class="center" style="vertical-align:middle;"><h4>{{$company->title}}</h4></td>
+                                <td class="center" style="vertical-align:middle;">{{$company->content}}</td>
+                                <td class="center" style="vertical-align:middle;">{{ Lang::get('display.'.$company->status) }}</td>
+                                <td class="center" style="vertical-align:middle;">
 
                                     <a href="/dashboard/companies/update/{{$company->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    
