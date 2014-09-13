@@ -19,7 +19,8 @@ class CreateCoursesTable extends Migration {
 			$table->longText('objectives');
 			$table->longText('methodology');
 			$table->longText('target');
-			$table->text('duration');
+			$table->date('start');
+			$table->date('end');
 			$table->integer('company_id');
 			$table->integer('category_id');
 			$table->string('type');
