@@ -112,37 +112,41 @@ class CompanyController extends \BaseController {
 
 			else:
 
+				$filename = $this->uploadImage($image);
+
+				$company = new Companies();
+				$company->title = Input::get('title');
+				$company->content = Input::get('content');
+				$company->address = Input::get('address');
+				$company->contact = Input::get('contact');
+				$company->type = 'company';
+				$company->status = 'draft';
+
 				$image = Input::file('url');
 
-				$validator = Validator::make(
-					array(
-						'image' => $image
-						), 
-					array(
-						'image' => 'required|mimes:png,jpeg,gif'
-						),
-					array(
-						'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
-						)
-					);
+				if($image != null):
 
-				if($validator->fails()):
+					$validator = Validator::make(
+						array(
+							'image' => $image
+							), 
+						array(
+							'image' => 'required|mimes:png,jpeg,gif'
+							),
+						array(
+							'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+							)
+						);
 
-					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.companies_update_err', array( 'title' => $company->title )));
+					if($validator->fails()):
 
-				else:
+						return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.companies_update_err', array( 'title' => $company->title )));
 
-					$filename = $this->uploadImage($image);
+					else:
 
-					$company = new Companies();
-					$company->title = Input::get('title');
-					$company->content = Input::get('content');
-					$company->address = Input::get('address');
-					$company->contact = Input::get('contact');
-					$company->type = 'company';
-					$company->status = 'draft';
-					$company->url = $filename;
-					$company->save();
+						$company->url = $filename;
+					
+					endif;
 
 				endif;
 
