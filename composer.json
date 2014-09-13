@@ -7,7 +7,8 @@
 		"laravel/framework": "4.2.*",
     	"way/generators": "~2.0",
     	"thujohn/pdf": "dev-master",
-    	"maatwebsite/excel": "1.*"
+    	"maatwebsite/excel": "1.*",
+    	"intervention/image": "2.*"
 	},
 	"autoload": {
 		"classmap": [
