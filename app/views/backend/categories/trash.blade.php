@@ -57,7 +57,7 @@ Category
 @stop
 
 @section("nameview")
-    All Categories
+    All Categories Trashed
 @stop
 
 @section("MainContent")
@@ -88,7 +88,7 @@ Category
                         <div class="btn-group">
                             <a href="categories/create" class="btn dropdown-toggle">Add New Category</a>
                         </div>
-                        <h4 class="widgettitle">All Categories</h4>
+                        <h4 class="widgettitle">All Categories Trashed</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
