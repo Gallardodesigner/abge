@@ -32,12 +32,21 @@ class CompanyController extends \BaseController {
 		$company = new Companies();
 		$company->title = Input::get('title');
 		$company->content = Input::get('content');
+		$company->address = Input::get('address');
+		$company->contact = Input::get('contact');
+		$company->url = Input::get('url');
 		$company->type = 'company';
 		$company->status = 'draft';
-		$company->save();
+		
+		if($company->save()):
 
-		return View::make('backend.companies.index', array('msg_success' => 'The company was successfully created!'));
+			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $company->title )));
 
+		else:
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $company->title )));
+
+		endif;
 	}
 
 	public function getUpdate( $id = '' ){
@@ -52,11 +61,11 @@ class CompanyController extends \BaseController {
 
 			if(!$company):
 
-				return Redirect::to($this->route);
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
 
 			else:
 
-				return View::make('backend.companies.update', array('company' = $company));
+				return View::make('backend.companies.update', array('company' => $company));
 
 			endif;
 
@@ -82,10 +91,21 @@ class CompanyController extends \BaseController {
 
 				$company->title = Input::get('title');
 				$company->content = Input::get('content');
+				$company->address = Input::get('address');
+				$company->contact = Input::get('contact');
+				$company->url = Input::get('url');
 				$company->type = 'company';
 				$company->status = 'draft';
-				$company->save();
-				return Redirect::to($this->route);
+
+				if($company->save()):
+
+					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.companies_update', array( 'title' => $company->title )));
+
+				else:
+
+					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_update_err', array( 'title' => $company->title )));
+
+				endif;
 
 			endif;
 
@@ -97,19 +117,21 @@ class CompanyController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error','Can\'t read publish without an identification key of companies');
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
 		
 		else:
 
-			$company = Companies::publish($id);
+			$company = Companies::find($id);
 
-			if(!$company):
+			$publish = Companies::publish($id);
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t publish the company');
+			if(!$publish):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_publish_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was published successfully');
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_publish', array( 'title' => $company->title )));
 
 			endif;
 
@@ -121,19 +143,21 @@ class CompanyController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error','Can\'t read draft without an identification key of companies');
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
 		
 		else:
 
-			$company = Companies::draft($id);
+			$company = Companies::find($id);
 
-			if(!$company):
+			$draft = Companies::draft($id);
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t draft the company');
+			if(!$draft):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_draft_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was drafted successfully');
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_draft', array( 'title' => $company->title )));
 
 			endif;
 
@@ -145,19 +169,31 @@ class CompanyController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error','Can\'t read trash without an identification key of companies');
+			$companies = Companies::getTrash();
+
+			$msg_success = Session::get('msg_success');
+
+			$msg_error = Session::get('msg_error');
+
+			return View::make('backend.companies.trash', array(
+				'companies' => $companies,
+				'msg_success' => $msg_success,
+				'msg_error' => $msg_error
+				));
 		
 		else:
 
-			$company = Companies::trash($id);
+			$company = Companies::find($id);
 
-			if(!$company):
+			$trash = Companies::trash($id);
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t trash the company');
+			if(!$trash):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_trash_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was trashed successfully');
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_trash', array( 'title' => $company->title )));
 
 			endif;
 
@@ -169,19 +205,21 @@ class CompanyController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error','Can\'t read untrash without an identification key of companies');
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
 		
 		else:
 
-			$company = Companies::draft($id);
+			$company = Companies::find($id);
 
-			if(!$company):
+			$draft = Companies::draft($id);
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t untrash the company');
+			if(!$draft):
+
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.companies_untrash_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was untrashed successfully');
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.companies_untrash', array( 'title' => $company->title )));
 
 			endif;
 
@@ -193,22 +231,25 @@ class CompanyController extends \BaseController {
 
 		if( $id == '' ):
 
-			return View::make('backend.companies.trash');
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
 
 		else:
 
-			$company = Companies::destroy($id);
+			$company = Companies::find($id);
 
-			if(!$company):
+			$delete = Companies::destroy($id);
 
-				return Redirect::to($this->route)->with('msg_error','Can\'t delete the company');
+			if(!$delete):
+
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.companies_delete_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', 'Category was deleted successfully');
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.companies_delete', array( 'title' => $company->title )));
 
 			endif;
 
+		endif;
 
 	}
 
