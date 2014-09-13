@@ -162,7 +162,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_display_err'));
+			return View::make('backend.categories.trash');
 		
 		else:
 
@@ -214,7 +214,7 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return View::make('backend.categories.trash');
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_display_err'));
 
 		else:
 
