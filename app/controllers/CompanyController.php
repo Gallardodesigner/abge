@@ -106,13 +106,14 @@ class CompanyController extends \BaseController {
 
 			$company = Companies::find($id);
 
+			dd($company);
+
 			if(!$company):
 
 				return Redirect::to($this->route);
 
 			else:
 
-				$company = new Companies();
 				$company->title = Input::get('title');
 				$company->content = Input::get('content');
 				$company->address = Input::get('address');
@@ -138,7 +139,9 @@ class CompanyController extends \BaseController {
 
 					if($validator->fails()):
 
-						return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.companies_update_err', array( 'title' => $company->title )));
+						dd('Fails');
+
+						return Redirect::to($this->route.'/update/'.$id)->with('msg_succes', Lang::get('messages.companies_update_err', array( 'title' => $company->title )));
 
 					else:
 
