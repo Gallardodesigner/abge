@@ -51,6 +51,8 @@ return array(
 
 	'companies_create_err' => 'Oops, we had a problem creating the company :title',
 
+	'companies_create_img_err' => 'Oops, we had a problem uploading the photo, please take care with the formats of the file',
+
 	'companies_update' => 'The company :title was updated succesfully',
 
 	'companies_update_err' => 'Oops, we had a problem updating the company',

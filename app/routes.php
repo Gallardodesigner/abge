@@ -13,7 +13,6 @@
 
 
 if(Auth::check()):
-	Route::controller('/dashboard/companies', 'CompanyController');
 	Route::controller('/dashboard/promotioners', 'PromotionerController');
 	Route::controller('/dashboard/supporters', 'SupporterController');
 	Route::controller('/dashboard/teachers', 'TeacherController');
@@ -21,6 +20,7 @@ if(Auth::check()):
 	Route::controller('/', 'FrontendController');
 // else:
 endif;
+	Route::controller('/dashboard/companies', 'CompanyController');
 	Route::controller('/dashboard/categories', 'CategoryController');
 	Route::controller('/dashboard/courses', 'CourseController');
 	Route::controller('/dashboard', 'DashboardController');

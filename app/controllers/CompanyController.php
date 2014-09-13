@@ -44,7 +44,7 @@ class CompanyController extends \BaseController {
 
 		if($validator->fails()):
 
-			return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.companies_create_img_err', array( 'title' => $company->title )));
+			return Redirect::to($this->route.'/create')->with('msg_succes', Lang::get('messages.companies_create_img_err'));
 
 		else:
 
@@ -308,9 +308,8 @@ class CompanyController extends \BaseController {
 		$ratio = $info_image[0] / $info_image[1];
 		$newheight=array();
 		$width=array("100","200","400",$info_image[0]);
-		$ext=explode(".",$image->getClientOriginalName());
-		$ext = strtolower($ext[count($ext) - 1]);
-		$filename = str_replace('/', '!', Hash::make($image->getClientOriginalName().date('Y-m-d H:i:s'))).".".$ext;
+		$filename = "prueba.".$image->getClientOriginalExtension();
+		#$filename = str_replace('/', '!', Hash::make($image->getClientOriginalName().date('Y-m-d H:i:s'))).".".$image->getClientOriginalExtension();
 		$nombres=["thumb_".$filename,"small_".$filename,"medium_".$filename,$filename];
 
 		for ($i=0; $i <count($width) ; $i++):
