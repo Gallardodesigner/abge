@@ -29,11 +29,11 @@ Courses
 @stop
 
 @section("maintitle")
-Category
+Company
 @stop
 
 @section("nameview")
-    Add Category
+    Add Company
 @stop
 
 
@@ -45,12 +45,16 @@ Category
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/categories" class="btn dropdown-toggle">Back</a>
+                        <a href="/dashboard/companies" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Add Category</h4>
+                <h4 class="widgettitle">Add Company</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post">
+                            <p>
+                                <label>Logo</label>
+                                <span class="field"><input type="file" name="url" id="url" class="btn btn-primary"></span>
+                            </p>
                             <p>
                                 <label>Title</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge"></span>
@@ -59,7 +63,15 @@ Category
                             <p>
                                 <label>Description</label>
                                 <span class="field"><textarea cols="80" rows="5" name="content" id="content" class="span6"></textarea></span>
-                            </p>                        
+                            </p>    
+                             <p>
+                                <label>Address</label>
+                                <span class="field"><textarea cols="80" rows="5" name="address" id="address" class="span6"></textarea></span>
+                            </p>
+                             <p>
+                                <label>Contact</label>
+                                <span class="field"><textarea cols="80" rows="5" name="contact" id="contact" class="span6"></textarea></span>
+                            </p>                            
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn">Reset</button>
