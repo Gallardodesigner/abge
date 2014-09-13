@@ -62,21 +62,15 @@ Company
                             
                             <p>
                                 <label>Description</label>
-                                <span class="field"><textarea cols="80" rows="5" name="content" id="content" class="span6">
-                                    {{$company->content}}
-                                </textarea></span>
+                                <span class="field"><textarea cols="80" rows="5" name="content" id="content" class="span6">{{$company->content}}</textarea></span>
                             </p>    
                              <p>
                                 <label>Address</label>
-                                <span class="field"><textarea cols="80" rows="5" name="address" id="address" class="span6">
-                                    {{$company->address}}
-                                </textarea></span>
+                                <span class="field"><textarea cols="80" rows="5" name="address" id="address" class="span6">{{$company->address}}</textarea></span>
                             </p>
                              <p>
                                 <label>Contact</label>
-                                <span class="field"><textarea cols="80" rows="5" name="contact" id="contact" class="span6">
-                                    {{$company->contact}}
-                                </textarea></span>
+                                <span class="field"><textarea cols="80" rows="5" name="contact" id="contact" class="span6">{{$company->contact}}</textarea></span>
                             </p>                            
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>
