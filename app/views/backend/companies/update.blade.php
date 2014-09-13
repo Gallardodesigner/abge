@@ -53,7 +53,7 @@ Company
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
                                 <label>Logo</label>
-                                <span class="field"><img src="/uploads/thumb_{{$company->url}}"<input type="file" name="url" id="url" class="btn btn-primary"></span>
+                                <span class="field"><img class="rounded" src="/uploads/thumb_{{$company->url}}"/><input type="file" name="url" id="url" class="btn btn-primary"></span>
                             </p>
                             <p>
                                 <label>Title</label>
