@@ -34,7 +34,7 @@
 			jConfirm('Are you sure to delete this element?', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
-					window.location.assign("/dashboard/categories/delete/"+elem.attr("data-id"));
+					window.location.assign("/dashboard/companies/delete/"+elem.attr("data-id"));
 				}
 			});
 		});
@@ -53,11 +53,11 @@ Courses
 @stop
 
 @section("maintitle")
-Category
+Company
 @stop
 
 @section("nameview")
-    All Categories Trashed
+    All Companies Trashed
 @stop
 
 @section("MainContent")
@@ -86,9 +86,9 @@ Category
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                             <a href="/dashboard/categories" class="btn dropdown-toggle">Back</a>
+                             <a href="/dashboard/companies" class="btn dropdown-toggle">Back</a>
                         </div>
-                        <h4 class="widgettitle">All Categories Trashed</h4>
+                        <h4 class="widgettitle">All Companies Trashed</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -96,25 +96,27 @@ Category
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
+                                <th class="head0" style="text-align:center;">Thumb</th>
                                 <th class="head0" style="text-align:center;">Title</th>
                                 <th class="head1" style="text-align:center;">Description</th>
                                 <th class="head0" style="text-align:center;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        	@foreach($categories as $category)
+                        	@foreach($companies as $company)
                             <tr class="gradeX">
-                              <td class="aligncenter"><span class="center">
+                             <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td><h4>{{$category->title}}</h4></td>
-                                <td>{{$category->content}}</td>
+                                <td class="center" style="vertical-align:middle;"><img class="rounded" src="/uploads/thumb_{{$company->url}}" /></td>
+                                <td class="center" style="vertical-align:middle;"><h4>{{$company->title}}</h4></td>
+                                <td class="center" style="vertical-align:middle;">{{$company->content}}</td>
                                 <td class="center">
 
 
 
-                                <a href="/dashboard/categories/untrash/{{$category->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>Untrash</a>
-								<a data-id="{{$category->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>Delete</a>
+                                <a href="/dashboard/companies/untrash/{{$company->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>Untrash</a>
+								<a data-id="{{$company->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>Delete</a>
 
                                </td>
                             </tr>
