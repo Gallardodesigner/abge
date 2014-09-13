@@ -12,9 +12,9 @@
 <script src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 
  -->
- {{HTML::script("assetsadmin/js/tiny_mce/jquery.tinymce.min.js")}}
-{{HTML::script("assetsadmin/js/tiny_mce/tinymce.js")}}
-{{HTML::script("assetsadmin/js/wysiwyg.js")}}
+ <!-- {{HTML::script("assetsadmin/js/tiny_mce/jquery.tinymce.min.js")}} -->
+<!-- {{HTML::script("assetsadmin/js/tiny_mce/tinymce.js")}} -->
+<!-- {{HTML::script("assetsadmin/js/wysiwyg.js")}} -->
 <script>
  
 </script>
@@ -25,15 +25,15 @@ Courses
 @stop
 
 @section("iconpage")
-<span class="iconfa-tags"></span>
+<span class="iconfa-briefcase"></span>
 @stop
 
 @section("maintitle")
-Category
+Company
 @stop
 
 @section("nameview")
-    Edit Category
+    Add Company
 @stop
 
 
@@ -45,23 +45,39 @@ Category
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/categories" class="btn dropdown-toggle">Back</a>
+                        <a href="/dashboard/companies" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Edit Category</h4>
+                <h4 class="widgettitle">Add Company</h4>
                 <div class="widgetcontent">
-                    <form class="stdform stdform2" method="post" action="/dashboard/categories/update/{{$category->id}}">
+                    <form class="stdform stdform2" method="post" enctype="multipart/form-data">
+                            <p>
+                                <label>Logo</label>
+                                <span class="field"><img src="/uploads/thumb_{{$company->url}}"<input type="file" name="url" id="url" class="btn btn-primary"></span>
+                            </p>
                             <p>
                                 <label>Title</label>
-                                <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" value="{{$category->title}}"></span>
+                                <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" value="{{$company->title}}"></span>
                             </p>
                             
                             <p>
                                 <label>Description</label>
                                 <span class="field"><textarea cols="80" rows="5" name="content" id="content" class="span6">
-                                	{{$category->content}}
+                                    {{$company->content}}
                                 </textarea></span>
-                            </p>                        
+                            </p>    
+                             <p>
+                                <label>Address</label>
+                                <span class="field"><textarea cols="80" rows="5" name="address" id="address" class="span6">
+                                    {{$company->address}}
+                                </textarea></span>
+                            </p>
+                             <p>
+                                <label>Contact</label>
+                                <span class="field"><textarea cols="80" rows="5" name="contact" id="contact" class="span6">
+                                    {{$company->contact}}
+                                </textarea></span>
+                            </p>                            
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn">Reset</button>
