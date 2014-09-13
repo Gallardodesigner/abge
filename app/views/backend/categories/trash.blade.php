@@ -49,7 +49,7 @@ Courses
 @stop
 
 @section("iconpage")
-<span class="iconfa-tags"></span>
+<span class="iconfa-trash"></span>
 @stop
 
 @section("maintitle")
@@ -57,7 +57,7 @@ Category
 @stop
 
 @section("nameview")
-    All Categories
+    All Categories Trashed
 @stop
 
 @section("MainContent")
@@ -86,9 +86,9 @@ Category
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="categories/create" class="btn dropdown-toggle">Add New Category</a>
+                             <a href="/dashboard/categories" class="btn dropdown-toggle">Back</a>
                         </div>
-                        <h4 class="widgettitle">All Categories</h4>
+                        <h4 class="widgettitle">All Categories Trashed</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
