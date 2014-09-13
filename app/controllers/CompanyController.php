@@ -112,8 +112,6 @@ class CompanyController extends \BaseController {
 
 			else:
 
-				$filename = $this->uploadImage($image);
-
 				$company = new Companies();
 				$company->title = Input::get('title');
 				$company->content = Input::get('content');
@@ -143,6 +141,8 @@ class CompanyController extends \BaseController {
 						return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.companies_update_err', array( 'title' => $company->title )));
 
 					else:
+
+						$filename = $this->uploadImage($image);
 
 						$company->url = $filename;
 					
