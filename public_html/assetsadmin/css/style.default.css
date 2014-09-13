@@ -1476,7 +1476,7 @@ table td.center, table th.center { text-align: center; }
 .no-rgba .fc-event { background: #333; }
 
 
-.rounded{border-radius: 50%;}
+.rounded{border-radius: 15px;}
 /*** MEDIA QUERIES ***/
 
 @media screen and (max-width: 1024px) {
