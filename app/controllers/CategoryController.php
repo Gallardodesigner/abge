@@ -162,7 +162,17 @@ class CategoryController extends \BaseController {
 
 		if( $id == '' ):
 
-			return View::make('backend.categories.trash');
+			$categories = Categories::getTrash();
+
+			$msg_success = Session::get('msg_success');
+
+			$msg_error = Session::get('msg_error');
+
+			return View::make('backend.categories.trash', array(
+				'categories' => $categories,
+				'msg_success' => $msg_success,
+				'msg_error' => $msg_error
+				));
 		
 		else:
 
@@ -198,11 +208,11 @@ class CategoryController extends \BaseController {
 
 			if(!$draft):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_untrash_err', array( 'title' => $category->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.categories_untrash_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.categories_untrash', array( 'title' => $category->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.categories_untrash', array( 'title' => $category->title )));
 
 			endif;
 
@@ -224,11 +234,11 @@ class CategoryController extends \BaseController {
 
 			if(!$delete):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.categories_delete_err', array( 'title' => $category->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.categories_delete_err', array( 'title' => $category->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.categories_delete', array( 'title' => $category->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.categories_delete', array( 'title' => $category->title )));
 
 			endif;
 
