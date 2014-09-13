@@ -88,7 +88,7 @@ Companies
                         <div class="btn-group">
                             <a href="companies/create" class="btn dropdown-toggle">Add New Company</a>
                         </div>
-                        <h4 class="widgettitle">All companies</h4>
+                        <h4 class="widgettitle">All Companies</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -109,11 +109,11 @@ Companies
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td class="center" style="vertical-align:middle;"><img class="rounded" src="/uploads/thumb_{{$company->url}}" /></td>
-                                <td class="center" style="vertical-align:middle;"><h4>{{$company->title}}</h4></td>
-                                <td class="center" style="vertical-align:middle;">{{$company->content}}</td>
-                                <td class="center" style="vertical-align:middle;">{{ Lang::get('display.'.$company->status) }}</td>
-                                <td class="center" style="vertical-align:middle;">
+                                <td class="center" style="vertical-align:middle;width:10%;"><img class="rounded" src="/uploads/thumb_{{$company->url}}" /></td>
+                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$company->title}}</h4></td>
+                                <td class="center" style="vertical-align:middle;width:40%;">{{$company->content}}</td>
+                                <td class="center" style="vertical-align:middle;width:10%;">{{ Lang::get('display.'.$company->status) }}</td>
+                                <td class="center" style="vertical-align:middle;width:20%;">
 
                                     <a href="/dashboard/companies/update/{{$company->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    
