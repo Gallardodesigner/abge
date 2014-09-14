@@ -109,7 +109,7 @@ Teacher
                                 <input type="checkbox" />
                               </span></td>
                                 <td class="center" style="vertical-align:middle;"><img class="rounded" src="/uploads/thumb_{{$teacher->url}}" /></td>
-                                <td class="center" style="vertical-align:middle;"><h4>{{$teacher->firstname}}{{$teacher->lastname}}</h4></td>
+                                <td class="center" style="vertical-align:middle;"><h4>{{$teacher->firstName}}{{$teacher->lastName}}</h4></td>
                                 <td class="center" style="vertical-align:middle;">{{$teacher->content}}</td>
                                 <td class="center">
 
