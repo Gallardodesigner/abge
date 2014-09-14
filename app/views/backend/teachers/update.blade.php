@@ -57,7 +57,7 @@ Teacher
                             </p>
                             <p>
                                 <label>Name</label>
-                                <span class="field"><input type="text" name="name" id="name" class="input-xxlarge" value="{{$teacher->name}}"></span>
+                                <span class="field"><input type="text" name="name" id="name" class="input-xxlarge" value="{{$teacher->firstname}}"></span>
                             </p>
                             <p>
                                 <label>Lastname</label>

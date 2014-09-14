@@ -110,7 +110,7 @@ Teacher
                                 <input type="checkbox" />
                               </span></td>
                                 <td class="center" style="vertical-align:middle;width:10%;"><img class="rounded" src="/uploads/thumb_{{$teacher->url}}" /></td>
-                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$teacher->name}} {{$teacher->lastname}}</h4></td>
+                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$teacher->firstname}} {{$teacher->lastname}}</h4></td>
                                 <td class="center" style="vertical-align:middle;width:40%;">{{$teacher->content}}</td>
                                 <td class="center" style="vertical-align:middle;width:10%;">{{ Lang::get('display.'.$teacher->status) }}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
