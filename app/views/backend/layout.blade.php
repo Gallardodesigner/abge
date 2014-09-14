@@ -144,9 +144,10 @@
                         </ul>
                         <li class="dropdown"><a href="">Teacher</a>
                         <ul>
-                            <li><a href="">Add</a></li>
-                            <li><a href="">Edit</a></li>
-                            <li><a href="">Trashed</a></li>
+                             <li><a href="{{{ URL::to('/dashboard/teachers') }}}">All</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/teachers/create') }}}">Add</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/teachers/update') }}}">Edit</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/teachers/trash') }}}">Trashed</a></li>
                         </ul>
                         <li class="dropdown"><a href="">Company</a>
                         <ul>
