@@ -45,7 +45,7 @@ Teacher
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/companies" class="btn dropdown-toggle">Back</a>
+                        <a href="/dashboard/teachers" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
                 <h4 class="widgettitle">Add Teacher</h4>
