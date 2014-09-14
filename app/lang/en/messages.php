@@ -79,4 +79,38 @@ return array(
 
 	'companies_display_err' => 'Oops, we could not find the company',
 
+	# Teacher Messages
+
+	'teachers_create' => 'The teacher :firstName :lastName was created successfully',
+
+	'teachers_create_err' => 'Oops, we had a problem creating the teacher :firstName :lastName',
+
+	'teachers_create_img_err' => 'Oops, we had a problem uploading the photo, please take care with the formats of the file',
+
+	'teachers_update' => 'The teacher :firstName :lastName was updated succesfully',
+
+	'teachers_update_err' => 'Oops, we had a problem updating the teacher',
+
+	'teachers_trash' => 'The teacher :firstName :lastName was sent to the recicle bin',
+
+	'teachers_trash_err' => 'Oops, we had a problem sendig the teacher to the recicle bin',
+
+	'teachers_publish' => 'The teacher :firstName :lastName was published succesfully',
+
+	'teachers_publish_err' => 'Oops, we had a problem publishing the teacher :firstName :lastName',
+
+	'teachers_draft' => 'The teacher :firstName :lastName has been changed to draft mode',
+
+	'teachers_draft_err' => 'Oops, we had a problem changing the teacher :firstName :lastName to draft mode',
+
+	'teachers_untrash' => 'The teacher :firstName :lastName was successfully restored',
+
+	'teachers_untrash_err' => 'Oops, we had a problem restoring the teacher :firstName :lastName',
+
+	'teachers_delete' => 'The teacher :firstName :lastName was deleted succesfully',
+
+	'teachers_delete_err' => 'Oops, we had a problem deleting the teacher :firstName :lastName',
+
+	'teachers_display_err' => 'Oops, we could not find the teacher',
+
 );
