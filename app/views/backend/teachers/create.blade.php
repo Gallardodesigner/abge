@@ -57,11 +57,11 @@ Teacher
                             </p>
                             <p>
                                 <label>Name</label>
-                                <span class="field"><input type="text" name="name" id="name" class="input-xxlarge"></span>
+                                <span class="field"><input type="text" name="firstName" id="name" class="input-xxlarge"></span>
                             </p>
                             <p>
                                 <label>Lastname</label>
-                                <span class="field"><input type="text" name="lastname" id="lastname" class="input-xxlarge"></span>
+                                <span class="field"><input type="text" name="lastName" id="lastname" class="input-xxlarge"></span>
                             </p>
                             
                             <p>
