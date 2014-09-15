@@ -24,9 +24,23 @@ class CourseController extends \BaseController {
 	 */
 	public function getCreate()
 	{
+
+		$teachers = Teachers::getPublish();
+		$categories = Categories::getPublish();
+		$events = Events::getPublish();
+		$companies = Companies::getPublish();
+
+		$array = array(
+			'teachers' => $teachers,
+			'categories' => $categories,
+			'events' => $events,
+			'companies' => $companies,
+			'promotioners' => $companies,
+			'supporters' => $companies
+			);
 		//
 		$courses = Courses::getUntrash();
-		return View::make("backend.courses.create");
+		return View::make("backend.courses.create")->with($array);
 		
 	}
 
