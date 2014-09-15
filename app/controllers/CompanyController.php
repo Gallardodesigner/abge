@@ -116,8 +116,6 @@ class CompanyController extends \BaseController {
 				$company->content = Input::get('content');
 				$company->address = Input::get('address');
 				$company->contact = Input::get('contact');
-				$company->type = 'company';
-				$company->status = 'draft';
 
 				$image = Input::file('url');
 

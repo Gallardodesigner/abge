@@ -56,17 +56,15 @@ class TeacherController extends \BaseController {
 			$teacher->firstName = Input::get('firstName');
 			$teacher->lastName = Input::get('lastName');
 			$teacher->contact = Input::get('contact');
-			$teacher->type = 'teacher';
-			$teacher->status = 'draft';
 			$teacher->url = $filename;
 
 			if($teacher->save()):
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_create', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_create', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_create_err', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_create_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			endif;
 
@@ -138,7 +136,7 @@ class TeacherController extends \BaseController {
 
 					if($validator->fails()):
 
-						return Redirect::to($this->route.'/update/'.$id)->with('msg_succes', Lang::get('messages.teachers_update_err', array( 'title' => $teacher->title )));
+						return Redirect::to($this->route.'/update/'.$id)->with('msg_succes', Lang::get('messages.teachers_update_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 					else:
 
@@ -152,11 +150,11 @@ class TeacherController extends \BaseController {
 
 				if($teacher->save()):
 
-					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.teachers_update', array( 'title' => $teacher->title )));
+					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.teachers_update', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 				else:
 
-					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_update_err', array( 'title' => $teacher->title )));
+					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_update_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 				endif;
 
@@ -180,11 +178,11 @@ class TeacherController extends \BaseController {
 
 			if(!$publish):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_publish_err', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_publish_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_publish', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_publish', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			endif;
 
@@ -206,11 +204,11 @@ class TeacherController extends \BaseController {
 
 			if(!$draft):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_draft_err', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_draft_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_draft', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_draft', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			endif;
 
@@ -242,11 +240,11 @@ class TeacherController extends \BaseController {
 
 			if(!$trash):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_trash_err', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_trash_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_trash', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_trash', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			endif;
 
@@ -268,11 +266,11 @@ class TeacherController extends \BaseController {
 
 			if(!$draft):
 
-				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.teachers_untrash_err', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.teachers_untrash_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			else:
 
-				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.teachers_untrash', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.teachers_untrash', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			endif;
 
@@ -294,11 +292,11 @@ class TeacherController extends \BaseController {
 
 			if(!$delete):
 
-				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.teachers_delete_err', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.teachers_delete_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			else:
 
-				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.teachers_delete', array( 'title' => $teacher->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.teachers_delete', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
 
 			endif;
 

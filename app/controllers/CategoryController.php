@@ -87,8 +87,6 @@ class CategoryController extends \BaseController {
 
 				$category->title = Input::get('title');
 				$category->content = Input::get('content');
-				$category->type = 'category';
-				$category->status = 'draft';
 
 				if($category->save()):
 
