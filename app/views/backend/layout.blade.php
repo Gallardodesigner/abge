@@ -33,7 +33,7 @@
         </div>
         <div class="headerinner">
             <ul class="headmenu">
-                <li class="odd">
+                <!-- <li class="odd">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <span class="count">4</span>
                         <span class="head-icon head-message"></span>
@@ -48,14 +48,14 @@
                         <li><a href=""><span class="icon-envelope"></span> New message from <strong>Lee</strong> <small class="muted"> - 1 week ago</small></a></li>
                         <li class="viewmore"><a href="messages.html">View More Messages</a></li>
                     </ul>
-                </li>
+                </li> -->
                 <li>
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">
-                    <span class="count">10</span>
+                    <span class="count">0</span>
                     <span class="head-icon head-users"></span>
                     <span class="headmenu-label">New Users</span>
                     </a>
-                    <ul class="dropdown-menu newusers">
+                   <!--  <ul class="dropdown-menu newusers">
                         <li class="nav-header">New Users</li>
                         <li>
                             <a href="">
@@ -92,9 +92,9 @@
                                 <small>April 16, 2013</small>
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
-                <li class="odd">
+                <!-- <li class="odd">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">
                     <span class="count">1</span>
                     <span class="head-icon head-bar"></span>
@@ -109,12 +109,12 @@
                         <li><a href=""><span class="icon-align-left"></span> Most Viewed in <strong>Blog</strong> <small class="muted"> - 1 week ago</small></a></li>
                         <li class="viewmore"><a href="charts.html">View More Statistics</a></li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="right">
                     <div class="userloggedinfo">
                         {{HTML::image("assetsadmin/images/photos/thumb1.png")}}
                         <div class="userinfo">
-                            <h5>Juan Dela Cruz <small>- juan@themepixels.com</small></h5>
+                            <h5>Username <small>- username@gallardodesigner.com.br</small></h5>
                             <ul>
                                 <li><a href="editprofile.html">Edit Profile</a></li>
                                 <li><a href="">Account Settings</a></li>
