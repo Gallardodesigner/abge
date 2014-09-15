@@ -15,8 +15,10 @@ class CreateCoursesTable extends Migration {
 		Schema::connection('mysql')->create('courses', function($table){
 			$table->increments('id');
 			$table->string('title');
+			$table->text('description');
 			$table->longText('content');
-			$table->longText('objectives');
+			$table->longText('program');
+			$table->longText('address');
 			$table->date('start');
 			$table->date('end');
 			$table->integer('company_id');
