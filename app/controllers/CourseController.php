@@ -92,7 +92,7 @@ class CourseController extends \BaseController {
 		$course->end = Input::get('end');
 		$course->save();
 
-		Redirect::to($this->route)
+		Redirect::to($this->route);
 	}
 
 	/**
