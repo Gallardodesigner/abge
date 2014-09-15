@@ -17,11 +17,13 @@
 
 {{HTML::script("assetsadmin/js/wysiwyg.js")}}
 {{HTML::script("assetsadmin/js/fullcalendar.min.js")}}
+{{HTML::script("assetsadmin/js/jquery.smartWizard.min.js")}}
 
 <script type='text/javascript'>
 
     jQuery(document).ready(function() {
-    
+    jQuery('#wizard').smartWizard({onFinish: onFinishCallback});
+        
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
@@ -129,78 +131,92 @@ Courses
                     <h4 class="widgettitle">Add Courses</h4>
                     <div class="widgetcontent">
                         <form class="stdform " action="">
-                            <div class="par control-group info">
-                                <h4 class="widgettitle title-inverse">Title</h4>
-                                <input id="title" class="input-block-level" type="text" placeholder="Title">
-                            </div>
-                            <div class="row-fluid">   
-                                <div class="control-group info span12">
-                                    <h4 class="widgettitle title-inverse">Content</h4>
-                                 <textarea id="content" name="content" rows="12" cols="80" style="width: 80%" class="tinymce" placeholder="Conteúdo">
-                                 </textarea>
-                                </div>
-                            </div>
-                            <div class="row-fluid">
-                                <div class="span6 control-group info">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Objetives</h4>
-                                        <textarea id="objetive" name="objetive" rows="7" cols="80" style="width: 80%" class="tinymce" placeholder="Conteúdo">
-                                        </textarea>
+                            <div id="wizard" class="wizard">
+                                <ul class="hormenu">
+                                    <li>
+                                        <a href="#wiz1step1">
+                                            <span class="h2">Step 1</span>
+                                            <span class="label">Basic Information</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step2">
+                                            <span class="h2">Step 2</span>
+                                            <span class="label">Data and Location</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step3">
+                                            <span class="h2">Step 3</span>
+                                            <span class="label">Content</span>
+                                        </a>
+                                    </li>
+                                     <li>
+                                        <a href="#wiz1step4">
+                                            <span class="h2">Step 4</span>
+                                            <span class="label">Program Content</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step5">
+                                            <span class="h2">Step 5</span>
+                                            <span class="label">Teachers</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step6">
+                                            <span class="h2">Step 6</span>
+                                            <span class="label">Company</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step7">
+                                            <span class="h2">Step 7</span>
+                                            <span class="label">Sponsors</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step8">
+                                            <span class="h2">Step 8</span>
+                                            <span class="label">Promo</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step9">
+                                            <span class="h2">Step 9</span>
+                                            <span class="label">General Informations</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                
 
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Methodology</h4>
-                                        <textarea id="methodology" name="methodology" rows="7" cols="80" style="width: 80%" class="tinymce" placeholder="Conteúdo">
-                                        </textarea>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row-fluid">
-                                <div class="control-group info">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Target</h4>
-                                        <textarea id="target" name="target" rows="7" cols="80" style="width: 80%" class="tinymce" placeholder="Conteúdo">
-                                        </textarea>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row-fluid">
-                                <div class="span6">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Duration</h4>
-                                        <div id='calendar'></div>
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Company</h4>
-                                        <select name="selection" id="selection2" class="uniformselect input-block-level">
+                            <div id="wiz1step1" class="formwiz">
+                            <h4 class="widgettitle">Step 1: Basic Information</h4>
+                            
+                                <p>
+                                    <label>Title</label>
+                                    <span class="field"><input type="text" name="firstname" id="firstname" class="input-xxlarge" /></span>
+                                </p>
+                                
+                                <p>
+                                    <label>Description</label>
+                                    <span class="field"><input type="text" name="lastname" id="lastname" class="input-xxlarge" /></span>
+                                </p>
+                                                                
+                                <p>
+                                    <label>Type</label>
+                                    <span class="field">
+                                        <select name="selection" id="selection" class="uniformselect">
                                             <option value="">Choose One</option>
-                                            <option value="1">Selection One</option>
-                                            <option value="2">Selection Two</option>
-                                            <option value="3">Selection Three</option>
-                                            <option value="4">Selection Four</option>
+                                            <option value="1">Course</option>
+                                            <option value="2">Congress</option>
                                         </select>
-                                         <h4 class="widgettitle title-inverse">Category</h4>
-                                        <select name="selection" id="selection2" class="uniformselect input-block-level">
-                                            <option value="">Choose One</option>
-                                            <option value="1">Selection One</option>
-                                            <option value="2">Selection Two</option>
-                                            <option value="3">Selection Three</option>
-                                            <option value="4">Selection Four</option>
-                                        </select>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="pull-right">
-                                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                                <button type="reset" name="reset" class="btn">Reset</button>
+                                    </span>
+                                </p>
+                                
+                            
+                            
+                        </div>
                             </div>
                             <div class="clearfix"></div>
                         </form>
