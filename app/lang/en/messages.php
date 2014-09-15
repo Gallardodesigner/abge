@@ -45,6 +45,38 @@ return array(
 
 	'categories_display_err' => 'Oops, we could not find the category',
 
+	# Event Messages
+
+	'events_create' => 'The event :title was created successfully',
+
+	'events_create_err' => 'Oops, we had a problem creating the event :title',
+
+	'events_update' => 'The event :title was updated succesfully',
+
+	'events_update_err' => 'Oops, we had a problem updating the event',
+
+	'events_trash' => 'The event :title was sent to the recicle bin',
+
+	'events_trash_err' => 'Oops, we had a problem sendig the event to the recicle bin',
+
+	'events_publish' => 'The event :title was published succesfully',
+
+	'events_publish_err' => 'Oops, we had a problem publishing the event :title',
+
+	'events_draft' => 'The event :title has been changed to draft mode',
+
+	'events_draft_err' => 'Oops, we had a problem changing the event :title to draft mode',
+
+	'events_untrash' => 'The event :title was successfully restored',
+
+	'events_untrash_err' => 'Oops, we had a problem restoring the event :title',
+
+	'events_delete' => 'The event :title was deleted succesfully',
+
+	'events_delete_err' => 'Oops, we had a problem deleting the event :title',
+
+	'events_display_err' => 'Oops, we could not find the event',
+
 	# Company Messages
 
 	'companies_create' => 'The company :title was created successfully',

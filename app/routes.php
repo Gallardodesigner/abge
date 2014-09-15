@@ -22,6 +22,7 @@ endif;
 	Route::controller('/dashboard/teachers', 'TeacherController');
 	Route::controller('/dashboard/companies', 'CompanyController');
 	Route::controller('/dashboard/categories', 'CategoryController');
+	Route::controller('/dashboard/events', 'EventController');
 	Route::controller('/dashboard/courses', 'CourseController');
 	Route::controller('/dashboard', 'DashboardController');
 
