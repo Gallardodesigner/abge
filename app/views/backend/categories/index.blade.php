@@ -31,7 +31,7 @@
 		  jQuery('.confirmbutton').on("click",function(e){
             e.preventDefault();
 			var elem=jQuery(this);
-			jConfirm('Are you sure to trash this element?', 'Confirmation Dialog', function(r) {
+			jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
 					window.location.assign("/dashboard/categories/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
