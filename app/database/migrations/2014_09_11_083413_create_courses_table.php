@@ -17,12 +17,11 @@ class CreateCoursesTable extends Migration {
 			$table->string('title');
 			$table->longText('content');
 			$table->longText('objectives');
-			$table->longText('methodology');
-			$table->longText('target');
 			$table->date('start');
 			$table->date('end');
 			$table->integer('company_id');
 			$table->integer('category_id');
+			$table->integer('event_id');
 			$table->string('type');
 			$table->string('status');
 			$table->timestamps();

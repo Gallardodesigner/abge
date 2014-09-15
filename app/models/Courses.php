@@ -20,6 +20,10 @@ class Courses extends Eloquent {
 		return $this->belongsTo('Categories', 'category_id');
 	}
 
+	public function event(){
+		return $this->belongsTo('Events', 'event_id');
+	}
+
 	public function company(){
 		return $this->belongsTo('Companies', 'company_id');
 	}
