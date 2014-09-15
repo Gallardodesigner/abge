@@ -925,7 +925,7 @@ ul.list-inline li { display: inline-block; margin: 0 5px 10px 0; }
 /*** FORM WIZARD STYLES ***/
 
 .wizard .hormenu { list-style: none; clear: both; margin-bottom: 75px; }
-.wizard .hormenu li { float: left; width: 33.333%; }
+.wizard .hormenu li { float: left; /*width: 33.333%;*/ }
 .wizard .hormenu li a { display: block; padding: 10px 15px; background: #fff; border: 1px solid #0866c6; border-left: 0; }
 .wizard .hormenu li:first-child a { border-left: 1px solid #0866c6; }
 .wizard .hormenu li a:hover { text-decoration: none; }
