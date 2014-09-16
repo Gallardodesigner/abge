@@ -128,8 +128,8 @@ class CourseController extends \BaseController {
 			$events = Events::getPublish();
 			$companies = Companies::getPublish();
 		
-			$course->start = date("d-m-Y", strtotime(Input::get('start')));
-			$course->end = date("d-m-Y", strtotime(Input::get('end')));
+			$course->start = date("d-m-Y", strtotime($course->start));
+			$course->end = date("d-m-Y", strtotime($course->end));
 
 			$array = array(
 				'course' => $course,
@@ -148,7 +148,7 @@ class CourseController extends \BaseController {
 	
 			else:
 
-				return View::make("backend.courses.update", array( $array ) );
+				return View::make("backend.courses.update", $array );
 		
 			endif;
 
