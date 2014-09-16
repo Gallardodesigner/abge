@@ -84,7 +84,7 @@ Courses
                                       </span></td>
                                         <td>{{$course->title}}/td>
                                         <td>{{$course->description}}</td>
-                                        <td>{{$course->course->title}}</td>
+                                        <td>{{$course->event->title}}</td>
                                         <td class="center">{{$course->start}}</td>
                                         <td class="center">{{$course->end}}</td>
                                         <td class="center">{{$course->end}}</td>
