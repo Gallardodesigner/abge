@@ -95,6 +95,12 @@
 
 
     jQuery(document).ready(function() {
+
+        jQuery('#course').submit(function(e){
+            //e.preventDefault()
+            var elem = jQuery(this);
+            console.log(elem.serialize());
+        });
 ///Lista sortable
         jQuery('.chosen-select').chosen({no_results_text: "Oops, nothing found!"});
      elementos=[];
@@ -325,7 +331,7 @@ Courses
                                         <label>Category</label>
                                         <span class="field">
                                             @if (isset($categories))
-                                                <select class="chosen-select" name="events" >
+                                                <select class="chosen-select" name="category_id" >
                                                 @foreach ($categories as $category)
                                                     <option value="{{$category->id}}">{{$category->title}}</option>
                                                 @endforeach
@@ -337,7 +343,7 @@ Courses
                                         <label>Event</label>
                                         <span class="field">
                                             @if (isset($events))
-                                                <select class="chosen-select" name="events" >
+                                                <select class="chosen-select" name="event_id" >
                                                 @foreach ($events as $event)
                                                     <option value="{{$event->id}}">{{$event->title}}</option>
                                                 @endforeach
@@ -396,7 +402,7 @@ Courses
                                             <span class="field">
                                             
                                                         @if (isset($teachers))
-                                                            <select class="chosen-select" name="teachers" multiple>
+                                                            <select class="chosen-select" name="teachers[]" multiple>
                                                             @foreach ($teachers as $teacher)
                                                                 <option value="{{$teacher->id}}">{{$teacher->lastName.', '.$teacher->firstName}}</option>
                                                             @endforeach
@@ -432,7 +438,7 @@ Courses
                                             <span class="field">
                                             
                                                         @if (isset($promotioners))
-                                                            <select class="chosen-select" name="promotioners" multiple>
+                                                            <select class="chosen-select" name="promotioners[]" multiple>
                                                             @foreach ($promotioners as $promotion)
                                                                 <option value="{{$promotion->id}}">{{$promotion->title}}</option>
                                                             @endforeach
@@ -446,7 +452,7 @@ Courses
                                             <span class="field">
                                             
                                                         @if (isset($supporters))
-                                                            <select class="chosen-select" name="suporters" multiple>
+                                                            <select class="chosen-select" name="supporters[]" multiple>
                                                             @foreach ($supporters as $support)
                                                                 <option value="{{$teacher->id}}">{{$support->title}}</option>
                                                             @endforeach

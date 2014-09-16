@@ -79,6 +79,7 @@ class CourseController extends \BaseController {
 				)
 			);
 			*/
+
 		$course = new Courses();
 		$course->title = Input::get('title');
 		$course->content = Input::get('content');
@@ -91,6 +92,15 @@ class CourseController extends \BaseController {
 		$course->start = Input::get('start');
 		$course->end = Input::get('end');
 		$course->save();
+
+		$teachers = Input::get('teachers');
+		$course->teachers()->sync($teachers);
+		$promotioners = Input::get('promotioners');
+		$course->promotioners()->sync($promotioners);
+		$supporters = Input::get('supporters');
+		$course->supporters()->sync($supporters);
+
+		dd($course);
 
 		Redirect::to($this->route);
 	}
