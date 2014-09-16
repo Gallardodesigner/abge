@@ -316,7 +316,7 @@ Courses
                                 
 
                                 <div id="wiz1step1" class="formwiz">
-                                <h4 class="widgettitle">Step 1: Basic Information</h4>
+                                    <h4 class="widgettitle">Step 1: Basic Information</h4>
                                 
                                     <p>
                                         <label>Title</label>
@@ -456,7 +456,7 @@ Courses
                                                         
                                             </span>
                                         </p>
-                                         <p>
+                                        <p>
                                             <label>Add sponsor</label>
                                             <span class="field">
 
@@ -480,7 +480,7 @@ Courses
                                                         
                                             </span>
                                         </p>
-                                         <p>
+                                        <p>
                                             <label>Add promo</label>
                                             <span class="field">
                                             
