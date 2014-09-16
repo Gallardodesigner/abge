@@ -484,13 +484,7 @@ Courses
                                             <label>Add promo</label>
                                             <span class="field">
                                             
-                                                        @if (isset($supporters))
-                                                            <select class="chosen-select" name="supporters[]" multiple>
-                                                            @foreach ($supporters as $support)
-                                                                <option value="{{$support->id}}">{{$support->title}}</option>
-                                                            @endforeach
-                                                            </select>
-                                                        @endif
+                                                       
                                                         @if (isset($supporters))
                                                             <select class="chosen-select" name="supporters[]" multiple>
                                                             @foreach ($supporters as $support)
