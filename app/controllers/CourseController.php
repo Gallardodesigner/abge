@@ -220,39 +220,144 @@ class CourseController extends \BaseController {
 		
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function getTrash()
-	{
-		//
-		$courses = Courses::getUntrash();
-		return View::make("backend.courses.trash");
+	public function getPublish( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.courses_display_err'));
 		
+		else:
+
+			$course = Courses::find($id);
+
+			$publish = Courses::publish($id);
+
+			if(!$publish):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.courses_publish_err', array( 'title' => $course->title )));
+
+			else:
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.courses_publish', array( 'title' => $course->title )));
+
+			endif;
+
+		endif;
+
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function postTrash()
-	{
-		//
+	public function getDraft( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.courses_display_err'));
 		
+		else:
+
+			$course = Courses::find($id);
+
+			$draft = Courses::draft($id);
+
+			if(!$draft):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.courses_draft_err', array( 'title' => $course->title )));
+
+			else:
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.courses_draft', array( 'title' => $course->title )));
+
+			endif;
+
+		endif;
+
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function postDelete()
-	{
-		//
+	public function getTrash( $id = '' ){
+
+		if( $id == '' ):
+
+			$courses = Courses::getTrash();
+
+			$msg_success = Session::get('msg_success');
+
+			$msg_error = Session::get('msg_error');
+
+			return View::make('backend.courses.trash', array(
+				'courses' => $courses,
+				'msg_success' => $msg_success,
+				'msg_error' => $msg_error
+				));
 		
+		else:
+
+			$course = Courses::find($id);
+
+			$trash = Courses::trash($id);
+
+			if(!$trash):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.courses_trash_err', array( 'title' => $course->title )));
+
+			else:
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.courses_trash', array( 'title' => $course->title )));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getUntrash( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.courses_display_err'));
+		
+		else:
+
+			$course = Courses::find($id);
+
+			$draft = Courses::draft($id);
+
+			if(!$draft):
+
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.courses_untrash_err', array( 'title' => $course->title )));
+
+			else:
+
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.courses_untrash', array( 'title' => $course->title )));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getDelete( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.courses_display_err'));
+
+		else:
+
+			$course = Courses::find($id);
+
+			$delete = Courses::destroy($id);
+
+			if(!$delete):
+
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.courses_delete_err', array( 'title' => $course->title )));
+
+			else:
+
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.courses_delete', array( 'title' => $course->title )));
+
+			endif;
+
+		endif;
+
 	}
 
 
