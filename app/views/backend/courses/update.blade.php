@@ -413,7 +413,7 @@ Courses
                                                             <select class="chosen-select" name="teachers[]" multiple>
                                                             @foreach ($teachers as $teacher)
                                                                 <?php $band = false; ?>
-                                                                @foreach($course->teacher as $asoc_teach)
+                                                                @foreach($course->teachers as $asoc_teach)
                                                                     @if ($teacher->id == $asoc_teach->id)
                                                                         <?php $band = true; ?>
                                                                     @endif
@@ -464,7 +464,7 @@ Courses
                                                             <select class="chosen-select" name="promotioners[]" multiple>
                                                             @foreach ($promotioners as $promotion)
                                                                 <?php $band = false; ?>
-                                                                @foreach($course->promotion as $assoc_prom)
+                                                                @foreach($course->promotioners as $assoc_prom)
                                                                     @if ($promotion->id == $assoc_prom->id)
                                                                         <?php $band = true; ?>
                                                                     @endif
@@ -495,7 +495,7 @@ Courses
                                                             <select class="chosen-select" name="supporters[]" multiple>
                                                             @foreach ($supporters as $support)
                                                                 <?php $band = false; ?>
-                                                                @foreach($course->support as $assoc_suppor)
+                                                                @foreach($course->supporters as $assoc_suppor)
                                                                     @if ($support->id == $assoc_suppor->id)
                                                                         <?php $band = true; ?>
                                                                     @endif
