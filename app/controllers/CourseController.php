@@ -123,6 +123,24 @@ class CourseController extends \BaseController {
 		else:
 
 			$course = Courses::find($id);
+			$teachers = Teachers::getPublish();
+			$categories = Categories::getPublish();
+			$events = Events::getPublish();
+			$companies = Companies::getPublish();
+		
+			$course->start = date("d-m-Y", strtotime(Input::get('start')));
+			$course->end = date("d-m-Y", strtotime(Input::get('end')));
+
+			$array = array(
+				'course' => $course,
+				'teachers' => $teachers,
+				'categories' => $categories,
+				'events' => $events,
+				'companies' => $companies,
+				'promotioners' => $companies,
+				'supporters' => $companies
+				);
+
 		
 			if(!$course):
 	
@@ -130,7 +148,7 @@ class CourseController extends \BaseController {
 	
 			else:
 
-				return View::make("backend.courses.index", array( 'courses' => $courses ) );
+				return View::make("backend.courses.update", array( $array ) );
 		
 			endif;
 
