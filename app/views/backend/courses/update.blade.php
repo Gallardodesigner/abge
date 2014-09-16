@@ -3,7 +3,77 @@
 @section("css")
 {{HTML::style("assetsadmin/css/bootstrap-fileupload.min.css")}}
 {{HTML::style("assetsadmin/css/bootstrap-timepicker.min.css")}}
+{{HTML::style("assetsadmin/js/chosen/chosen.min.css")}}
+<style type="text/css">
+        /*
+    Stylesheet for examples by DevHeart.
+    http://devheart.org/
 
+    Article title:  jQuery: Customizable layout using drag n drop
+    Article URI:    http://devheart.org/articles/jquery-customizable-layout-using-drag-and-drop/
+
+    Example title:  1. Getting started with sortable lists
+    Example URI:    http://devheart.org/examples/jquery-customizable-layout-using-drag-and-drop/1-getting-started-with-sortable-lists/index.html
+*/
+
+/*
+    Alignment
+------------------------------------------------------------------- */
+
+/* Floats */
+
+.left {float: left;}
+.right {float: right;}
+
+.clear,.clearer {clear: both;}
+.clearer {
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+}
+
+
+/*
+    Example specifics
+------------------------------------------------------------------- /
+
+.column.first {margin-bottom: 60px;}
+
+
+/* Sortable items /
+
+.sortable-list {
+    background-color: #F93;
+    list-style: none;
+    margin: 0;
+    min-height: 60px;
+    padding: 10px;
+}
+.sortable-item {
+    background-color: #FFF;
+    border: 1px solid #000;
+    cursor: move;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Containment area */
+
+
+/* Item placeholder (visual helper) /
+
+.placeholder {
+    background-color: #BFB;
+    border: 1px dashed #666;
+    height: 58px;
+    margin-bottom: 5px;
+}
+*/
+    </style>
 @stop
 
 
@@ -16,12 +86,86 @@
 {{HTML::script("assetsadmin/js/tiny_mce/tinymce.js")}}
 
 {{HTML::script("assetsadmin/js/wysiwyg.js")}}
+{{HTML::script("assetsadmin/js/jquery.smartWizard.min.js")}}
 {{HTML::script("assetsadmin/js/fullcalendar.min.js")}}
+{{HTML::script("assetsadmin/js/chosen/chosen.jquery.min.js")}}
+{{HTML::script("assetsadmin/js/chosen/chosen.proto.min.js")}}
 
 <script type='text/javascript'>
 
+
     jQuery(document).ready(function() {
-    
+
+        jQuery('#course').submit(function(e){
+            //e.preventDefault()
+            var elem = jQuery(this);
+            console.log(elem.serialize());
+        });
+///Lista sortable
+        jQuery('.chosen-select').chosen({no_results_text: "Oops, nothing found!"});
+     elementos=[];
+        jQuery('#containment .sortable-list').sortable({
+        connectWith: '#containment .sortable-list',
+        containment: '#containment',
+         start: function (event, ui){
+            var data = {
+                'index': ui.item.index(),
+                'id': ui.item.attr("id")
+            };
+            start_position = data.index;
+            console.log("Arrastrando el Video " + data.id + " en la posicion " + data.index);
+        },
+        stop: function(event, ui){
+            //console.log("Stop");
+            var data = {
+                'index': ui.item.index(),
+                'id': ui.item.attr("id"),
+                'start': start_position
+            };
+            if (jQuery(ui.item).parent().attr("id")=="to-save"){
+                console.log("Agregando el Video " + data.id + " en la posicion " + data.index );
+                console.log(ui);
+                jQuery("#to-save").append("<input id='teacher_"+data.id+"' type='hidden' name='teachers[]' value='"+data.id+"'>");
+                console.log( jQuery("#teacher_"+data.id).val());
+              
+            }
+            if (jQuery(ui.item).parent().attr("id")=="to-remove"){
+                console.log("Borrando el Video " + data.id + " en la posicion " + data.index );
+                console.log(ui);
+                jQuery("#to-save > #teacher_"+data.id).remove();
+                console.log( jQuery("#teacher_"+data.id).val());
+
+            }
+        }
+    });
+
+    /// Fin Lista sortable
+
+
+   
+    jQuery('#wizard').smartWizard({onFinish: onFinishCallback});
+
+    function onFinishCallback(){
+      jQuery("#course").submit();  
+    } 
+        
+        jQuery('#start').datepicker({
+                defaultDate: "+1w",
+            dateFormat: "dd-mm-yy",
+
+              onClose: function( selectedDate ) {
+                jQuery("#end" ).datepicker("option", "minDate", selectedDate );
+            }
+        });
+
+        jQuery( "#end" ).datepicker({
+            defaultDate: "+1w",
+            dateFormat: "dd-mm-yy",
+          onClose: function( selectedDate ) {
+            jQuery( "#start" ).datepicker( "option", "maxDate", selectedDate );
+            }
+        });
+
         var date = new Date();
         var d = date.getDate();
         var m = date.getMonth();
@@ -111,7 +255,7 @@ Courses
 @stop
 
 @section("nameview")
-    Update Course
+    Edit Course
 @stop
 
 
@@ -121,86 +265,211 @@ Courses
             
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 <div class="widget">
+                    <div class="headtitle">
+                    <div class="btn-group">
+                        <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
+                    </div>
+                    </div>
+                    <h4 class="widgettitle">Edit Courses</h4>
+                        <form id="course" class="stdform " method="POST" action="">
+                            <div id="wizard" class="wizard">
+                                <ul class="hormenu">
+                                    <li>
+                                        <a href="#wiz1step1">
+                                            <span class="h2">Step 1</span>
+                                            <span class="label">Basic Information</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step2">
+                                            <span class="h2">Step 2</span>
+                                            <span class="label">Data and Location</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step3">
+                                            <span class="h2">Step 3</span>
+                                            <span class="label">Content</span>
+                                        </a>
+                                    </li>
+                                     <li>
+                                        <a href="#wiz1step4">
+                                            <span class="h2">Step 4</span>
+                                            <span class="label">Program Content</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step5">
+                                            <span class="h2">Step 5</span>
+                                            <span class="label">Teachers</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#wiz1step6">
+                                            <span class="h2">Step 6</span>
+                                            <span class="label">Company, Sponsors & Promo</span>
+                                        </a>
+                                    </li>
+                                   
+                                    
+                                </ul>
+                                
 
-                    <h4 class="widgettitle">Update Courses</h4>
-                    <div class="widgetcontent">
-                        <form class="stdform " action="">
-                            <div class="par control-group info">
-                                <h4 class="widgettitle title-inverse">Title</h4>
-                                <input id="title" class="input-block-level" type="text" placeholder="Title">
-                            </div>
-                            <div class="row-fluid">   
-                                <div class="control-group info span12">
-                                    <h4 class="widgettitle title-inverse">Content</h4>
-                                 <textarea id="content" name="content" rows="12" cols="80" style="width: 80%" class="tinymce" placeholder="Conteúdo">
-                                 </textarea>
-                                </div>
-                            </div>
-                            <div class="row-fluid">
-                                <div class="span6 control-group info">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Objetives</h4>
-                                        <textarea id="objetive" name="objetive" rows="7" cols="80" style="width: 80%" class="tinymce" placeholder="Conteúdo">
-                                        </textarea>
+                                <div id="wiz1step1" class="formwiz">
+                                <h4 class="widgettitle">Step 1: Basic Information</h4>
+                                
+                                    <p>
+                                        <label>Title</label>
+                                        <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" /></span>
+                                    </p>
+                                    
+                                    <p>
+                                        <label>Description</label>
+                                        <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" /></span>
+                                    </p>
+                                    <p>
+                                        <label>Category</label>
+                                        <span class="field">
+                                            @if (isset($categories))
 
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Methodology</h4>
-                                        <textarea id="methodology" name="methodology" rows="7" cols="80" style="width: 80%" class="tinymce" placeholder="Conteúdo">
-                                        </textarea>
+                                                <select class="chosen-select" name="category_id" >
 
-                                    </div>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{$category->id}}">{{$category->title}}</option>
+                                                @endforeach
+                                                </select>
+                                            @endif
+                                        </span>
+                                    </p>                                
+                                    <p>
+                                        <label>Event</label>
+                                        <span class="field">
+                                            @if (isset($events))
+                                                <select class="chosen-select" name="event_id" >
+                                                @foreach ($events as $event)
+                                                    <option value="{{$event->id}}">{{$event->title}}</option>
+                                                @endforeach
+                                                </select>
+                                            @endif
+                                        </span>
+                                    </p>
+                                       
                                 </div>
-                            </div>
-                            <div class="row-fluid">
-                                <div class="control-group info">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Target</h4>
-                                        <textarea id="target" name="target" rows="7" cols="80" style="width: 80%" class="tinymce" placeholder="Conteúdo">
-                                        </textarea>
+                                <div id="wiz1step2" class="formwiz">
+                                    <h4 class="widgettitle">Step 2: Data and Location</h4>
+                                    
+                                        <p>
+                                            <label>Data Start</label>
+                                            <span class="field">
+                                               <input id="start" type="input" name="start">
+                                                    <!-- <input type="hidden" id="finish" name="finish"> -->
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <label>Data End</label>
+                                            <span class="field">
+                                               <input id="end" type="input" name="end">
+                                                    <!-- <input type="hidden" id="finish" name="finish"> -->
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <label>Address</label>
+                                            <span class="field"><textarea cols="30" rows="10" name="address" class="span3"></textarea></span>
+                                        </p>
+                                                                                                       
+                                </div>
+                                <div id="wiz1step3" class="formwiz">
+                                    <h4 class="widgettitle">Step 3: Content</h4>
+                                    
+                                        <p>
+                                            <label>Content</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="content" class="span6"></textarea></span>
+                                        </p>
+                                                                                                       
+                                </div>
+                                <div id="wiz1step4" class="formwiz">
+                                    <h4 class="widgettitle">Step 4: Program Content</h4>
+                                    
+                                        <p>
+                                            <label>Content</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="program" class="span6"></textarea></span>
+                                        </p>
+                                                                                                       
+                                </div>
+                                <div id="wiz1step5" class="formwiz">
+                                    <h4 class="widgettitle">Step 5: Teachers</h4>
+                                    
+                                        <p>
+                                            <label>Add Teachers</label>
+                                            <span class="field">
+                                            
+                                                        @if (isset($teachers))
+                                                            <select class="chosen-select" name="teachers[]" multiple>
+                                                            @foreach ($teachers as $teacher)
+                                                                <option value="{{$teacher->id}}">{{$teacher->lastName.', '.$teacher->firstName}}</option>
+                                                            @endforeach
+                                                            </select>
+                                                        @endif
+                                                        
+                                            </span>
+                                        </p>
+                                    <div class="clearfix"></div>
 
-                                    </div>
+                                                                                                       
                                 </div>
-                            </div>
-                            <div class="row-fluid">
-                                <div class="span6">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Duration</h4>
-                                        <div id='calendar'></div>
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <div class="control-group info">
-                                        <h4 class="widgettitle title-inverse">Company</h4>
-                                        <select name="selection" id="selection2" class="uniformselect input-block-level">
-                                            <option value="">Choose One</option>
-                                            <option value="1">Selection One</option>
-                                            <option value="2">Selection Two</option>
-                                            <option value="3">Selection Three</option>
-                                            <option value="4">Selection Four</option>
-                                        </select>
-                                         <h4 class="widgettitle title-inverse">Category</h4>
-                                        <select name="selection" id="selection2" class="uniformselect input-block-level">
-                                            <option value="">Choose One</option>
-                                            <option value="1">Selection One</option>
-                                            <option value="2">Selection Two</option>
-                                            <option value="3">Selection Three</option>
-                                            <option value="4">Selection Four</option>
-                                        </select>
 
-                                    </div>
+                                <div id="wiz1step6" class="formwiz">
+                                    <h4 class="widgettitle">Step 6: Company, Sponsors & Promo</h4>
+                                    
+                                        <p>
+                                            <label>Add company</label>
+                                            <span class="field">
+                                            
+                                                        @if (isset($companies))
+                                                            <select class="chosen-select" name="company_id">
+                                                            @foreach ($companies as $company)
+                                                                <option value="{{$company->id}}">{{$company->title}}</option>
+                                                            @endforeach
+                                                            </select>
+                                                        @endif
+                                                        
+                                            </span>
+                                        </p>
+                                         <p>
+                                            <label>Add sponsor</label>
+                                            <span class="field">
+                                            
+                                                        @if (isset($promotioners))
+                                                            <select class="chosen-select" name="promotioners[]" multiple>
+                                                            @foreach ($promotioners as $promotion)
+                                                                <option value="{{$promotion->id}}">{{$promotion->title}}</option>
+                                                            @endforeach
+                                                            </select>
+                                                        @endif
+                                                        
+                                            </span>
+                                        </p>
+                                         <p>
+                                            <label>Add promo</label>
+                                            <span class="field">
+                                            
+                                                        @if (isset($supporters))
+                                                            <select class="chosen-select" name="supporters[]" multiple>
+                                                            @foreach ($supporters as $support)
+                                                                <option value="{{$support->id}}">{{$support->title}}</option>
+                                                            @endforeach
+                                                            </select>
+                                                        @endif
+                                                        
+                                            </span>
+                                        </p>
+                                    <div class="clearfix"></div>
+                                                                                                       
                                 </div>
-                            </div>
-                            <br />
-                            <div class="pull-right">
-                                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                                <button type="reset" name="reset" class="btn">Reset</button>
+                                
                             </div>
                             <div class="clearfix"></div>
                         </form>
-                    </div>
                 </div>
 
                 

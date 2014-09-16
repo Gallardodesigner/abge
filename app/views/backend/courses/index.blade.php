@@ -30,10 +30,11 @@
             jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
                  // jAlert('Confirmed: ' + r, 'Confirmation Results');
                 if(r==true){
-                    window.location.assign("/dashboard/events/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+                    window.location.assign("/dashboard/courses/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
                 }
             });
         });
+      }
         
     });
 </script>
