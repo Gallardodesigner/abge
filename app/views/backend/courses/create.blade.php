@@ -321,7 +321,18 @@ Courses
                                         <label>Description</label>
                                         <span class="field"><input type="text" name="lastname" id="lastname" class="input-xxlarge" /></span>
                                     </p>
-                                                                    
+                                    <p>
+                                        <label>Category</label>
+                                        <span class="field">
+                                            @if (isset($categories))
+                                                <select class="chosen-select" name="events" >
+                                                @foreach ($categories as $category)
+                                                    <option value="{{$category->id}}">{{$category->title}}</option>
+                                                @endforeach
+                                                </select>
+                                            @endif
+                                        </span>
+                                    </p>                                
                                     <p>
                                         <label>Event</label>
                                         <span class="field">
