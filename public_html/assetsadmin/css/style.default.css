@@ -1012,6 +1012,170 @@ ul.list-inline li { display: inline-block; margin: 0 5px 10px 0; }
 
 .editprofileform p { margin: 20px 0; }
 
+.peoplegroup { display: inline-block; margin-bottom: 10px; }
+.peoplegroup li { border-right: 1px solid #ddd; display: inline-block; float: left; padding: 0 10px; }
+.peoplegroup li:first-child { padding-left: 0; }
+.peoplegroup li:last-child { border-right: 0; }
+.peoplegroup li a { display: block; padding: 2px 10px; font-size: 11px; text-transform: uppercase; color: #666; }
+.peoplegroup li a:hover { background: #ddd; color: #666; text-decoration: none; }
+.peoplegroup li.active a { background: #333; color: #fff; }
+
+.alphabets {
+	list-style: none; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc; background: #fff; }
+.alphabets::after { clear: both; content: ''; display: block; }
+.alphabets li {
+	display: inline-block; float: left; border-left: 1px solid #ccc; padding: 5px 10px;
+	color: #999; width: 10px; }
+.alphabets li:last-child { border-right: 1px solid #ccc; }
+
+.peoplelist { margin: 25px 0; }
+.peoplelist .peoplewrapper { border: 1px solid #ccc; padding: 15px; background: #fff; height: 115px; margin-bottom: 20px; }
+.peoplelist .thumb { float: left; }
+.peoplelist .thumb img { display: block; width: 80px; }
+.peoplelist .peopleinfo { margin-left: 95px; }
+.peoplelist .peopleinfo h4 { font-size: 15px; }
+.peoplelist .peopleinfo h4 span {
+	font-family: sans-serif; font-size: 10px; text-transform: uppercase; margin-left: 5px; }
+.peoplelist .peopleinfo h4 span.on { color: green; }
+.peoplelist .peopleinfo h4 span.off { color: #999; }
+.peoplelist .peopleinfo ul { list-style: none; font-size: 11px; color: #666; }
+.peoplelist .peopleinfo ul li { line-height: 18px; }
+.peoplelist .peopleinfo ul li span { line-height: 18px; }
+
+.onlineuserpanel { width: 200px; height: 100%; background: #333; position: fixed; top: 0; right: 0; display: none; }
+.onlineuserpanel .slimScrollDiv { border: 0; }
+.onlineusers ul { list-style: none; position: relative; }
+.onlineusers ul li {
+	display: block; padding: 7px; border-bottom: 1px solid #3c3c3c; height: 25px; font-family: sans-serif; font-size: 11px;
+	cursor: pointer; }
+.onlineusers ul li:hover { cursor: pointer; background: #373737; }
+.onlineusers ul li.on {
+	background-image: url(../images/on.png); background-repeat: no-repeat; background-position: 180px center; }
+.onlineusers ul li img { width: 24px; display: block; float: left; }
+.onlineusers ul li span { display: block; margin-left: 29px; color: #999; }
+
+.chatwindows { position: fixed; bottom: 0; right: 200px; z-index: 100; display: none; }
+
+.chatwin {
+	position: relative; width: 230px; border: 1px solid #0866c6; border-bottom: 0; background: #fff; margin-right: 5px;
+	float: right; -moz-box-shadow: 0 0 5px rgba(0,0,0,0.6); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.6);
+	box-shadow: 0 0 5px rgba(0,0,0,0.6); }
+.chatwin h4 { font-size: 11px; padding: 5px; background: #0866c6; color: #fff; }
+.chatwin .close {
+	position: absolute; top: 1px; right: 3px; color: #fff; font-weight: normal; opacity: 0.3;
+	text-shadow: none; font-size: 16px; cursor: pointer; }
+.chatwin .close:hover { cursor: pointer; opacity: 0.6; }
+.chatwin .chatmsg { height: 180px; }
+.chatwin .chattext { padding: 5px; }
+.chatwin .chattext input {
+	min-height: 20px; padding: 7px 5px; border: 1px solid #bbb; font-size: 11px; font-family: sans-serif; }
+	
+#chatwinlist {
+	display: inline-block; float: right; padding: 2px 6px; background: #fff; margin-right: 5px; margin-top: 217px; 
+	color: #0866c6; border: 1px solid #0866c6; border-bottom: 0; vertical-align: bottom; position: relative; }
+#chatwinlist span { cursor: pointer; }
+#chatwinlist ul {
+	list-style: none; width: 150px; position: absolute; right: -1px; bottom: 25px;
+	border: 1px solid #0866c6; display: none; }
+#chatwinlist ul li {
+	display: block; background: #fff; padding: 5px; border-bottom: 1px solid #ddd; cursor: pointer; }
+#chatwinlist ul li:hover { background: #f7f7f7; }
+#chatwinlist ul li:last-child { border-bottom: 0; }
+#chatwinlist h4 { font-family: sans-serif; font-size: 11px; }
+
+.chatmsg { list-style: none; }
+.chatmsg li { display: block; font-size: 11px; padding: 0 5px; }
+	
+	
+.chatenabled .mainwrapper { margin-right: 200px; }
+.chatenabled .mainwrapper .mainwrapper { margin-right: 0; }
+.chatenabled .chatwindows { display: block; }
+.chatenabled .onlineuserpanel { display: block; }
+
+
+/*** People Directory ***/
+.peoplegroup { display: inline-block; margin-bottom: 10px; }
+.peoplegroup li { border-right: 1px solid #ddd; display: inline-block; float: left; padding: 0 10px; }
+.peoplegroup li:first-child { padding-left: 0; }
+.peoplegroup li:last-child { border-right: 0; }
+.peoplegroup li a { display: block; padding: 2px 10px; font-size: 11px; text-transform: uppercase; color: #666; }
+.peoplegroup li a:hover { background: #ddd; color: #666; text-decoration: none; }
+.peoplegroup li.active a { background: #333; color: #fff; }
+
+.alphabets {
+	list-style: none; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc; background: #fff; }
+.alphabets::after { clear: both; content: ''; display: block; }
+.alphabets li {
+	display: inline-block; float: left; border-left: 1px solid #ccc; padding: 5px 10px;
+	color: #999; width: 10px; }
+.alphabets li:last-child { border-right: 1px solid #ccc; }
+
+.peoplelist { margin: 25px 0; }
+.peoplelist .peoplewrapper { border: 1px solid #ccc; padding: 15px; background: #fff; height: 115px; margin-bottom: 20px; }
+.peoplelist .thumb { float: left; }
+.peoplelist .thumb img { display: block; width: 80px; }
+.peoplelist .peopleinfo { margin-left: 95px; }
+.peoplelist .peopleinfo h4 { font-size: 15px; }
+.peoplelist .peopleinfo h4 span {
+	font-family: sans-serif; font-size: 10px; text-transform: uppercase; margin-left: 5px; }
+.peoplelist .peopleinfo h4 span.on { color: green; }
+.peoplelist .peopleinfo h4 span.off { color: #999; }
+.peoplelist .peopleinfo ul { list-style: none; font-size: 11px; color: #666; }
+.peoplelist .peopleinfo ul li { line-height: 18px; }
+.peoplelist .peopleinfo ul li span { line-height: 18px; }
+
+.onlineuserpanel { width: 200px; height: 100%; background: #333; position: fixed; top: 0; right: 0; display: none; }
+.onlineuserpanel .slimScrollDiv { border: 0; }
+.onlineusers ul { list-style: none; position: relative; }
+.onlineusers ul li {
+	display: block; padding: 7px; border-bottom: 1px solid #3c3c3c; height: 25px; font-family: sans-serif; font-size: 11px;
+	cursor: pointer; }
+.onlineusers ul li:hover { cursor: pointer; background: #373737; }
+.onlineusers ul li.on {
+	background-image: url(../images/on.png); background-repeat: no-repeat; background-position: 180px center; }
+.onlineusers ul li img { width: 24px; display: block; float: left; }
+.onlineusers ul li span { display: block; margin-left: 29px; color: #999; }
+
+.chatwindows { position: fixed; bottom: 0; right: 200px; z-index: 100; display: none; }
+
+.chatwin {
+	position: relative; width: 230px; border: 1px solid #0866c6; border-bottom: 0; background: #fff; margin-right: 5px;
+	float: right; -moz-box-shadow: 0 0 5px rgba(0,0,0,0.6); -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.6);
+	box-shadow: 0 0 5px rgba(0,0,0,0.6); }
+.chatwin h4 { font-size: 11px; padding: 5px; background: #0866c6; color: #fff; }
+.chatwin .close {
+	position: absolute; top: 1px; right: 3px; color: #fff; font-weight: normal; opacity: 0.3;
+	text-shadow: none; font-size: 16px; cursor: pointer; }
+.chatwin .close:hover { cursor: pointer; opacity: 0.6; }
+.chatwin .chatmsg { height: 180px; }
+.chatwin .chattext { padding: 5px; }
+.chatwin .chattext input {
+	min-height: 20px; padding: 7px 5px; border: 1px solid #bbb; font-size: 11px; font-family: sans-serif; }
+	
+#chatwinlist {
+	display: inline-block; float: right; padding: 2px 6px; background: #fff; margin-right: 5px; margin-top: 217px; 
+	color: #0866c6; border: 1px solid #0866c6; border-bottom: 0; vertical-align: bottom; position: relative; }
+#chatwinlist span { cursor: pointer; }
+#chatwinlist ul {
+	list-style: none; width: 150px; position: absolute; right: -1px; bottom: 25px;
+	border: 1px solid #0866c6; display: none; }
+#chatwinlist ul li {
+	display: block; background: #fff; padding: 5px; border-bottom: 1px solid #ddd; cursor: pointer; }
+#chatwinlist ul li:hover { background: #f7f7f7; }
+#chatwinlist ul li:last-child { border-bottom: 0; }
+#chatwinlist h4 { font-family: sans-serif; font-size: 11px; }
+
+.chatmsg { list-style: none; }
+.chatmsg li { display: block; font-size: 11px; padding: 0 5px; }
+	
+	
+.chatenabled .mainwrapper { margin-right: 200px; }
+.chatenabled .mainwrapper .mainwrapper { margin-right: 0; }
+.chatenabled .chatwindows { display: block; }
+.chatenabled .onlineuserpanel { display: block; }
+
 
 /*** SEARCH RESULTS PAGE ***/
 

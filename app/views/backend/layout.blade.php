@@ -15,8 +15,8 @@
 {{HTML::script("assetsadmin/js/bootstrap.min.js")}}
 {{HTML::script("assetsadmin/js/jquery.cookie.js")}}
 {{HTML::script("assetsadmin/js/jquery.uniform.min.js")}}
-{{HTML::script("assetsadmin/js/flot/jquery.flot.min.js")}}
-{{HTML::script("assetsadmin/js/flot/jquery.flot.resize.min.js")}}
+<!-- {{HTML::script("assetsadmin/js/flot/jquery.flot.min.js")}} -->
+<!-- {{HTML::script("assetsadmin/js/flot/jquery.flot.resize.min.js")}} -->
 {{HTML::script("assetsadmin/js/responsive-tables.js")}}
 {{HTML::script("assetsadmin/js/custom.js")}}
 @yield("js")
@@ -139,35 +139,30 @@
                         <ul>
                             <li><a href="{{{ URL::to('/dashboard/courses') }}}">All</a></li>
                             <li><a href="{{{ URL::to('/dashboard/courses/create') }}}">Add</a></li>
-                            <li><a href="">Edit</a></li>
                             <li><a href="">Trashed</a></li>
                         </ul>
                         <li class="dropdown"><a href="">Teacher</a>
                         <ul>
                              <li><a href="{{{ URL::to('/dashboard/teachers') }}}">All</a></li>
                             <li><a href="{{{ URL::to('/dashboard/teachers/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/teachers/update') }}}">Edit</a></li>
                             <li><a href="{{{ URL::to('/dashboard/teachers/trash') }}}">Trashed</a></li>
                         </ul>
                         <li class="dropdown"><a href="">Company</a>
                         <ul>
                            <li><a href="{{{ URL::to('/dashboard/companies') }}}">All</a></li>
                             <li><a href="{{{ URL::to('/dashboard/companies/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/companies/update') }}}">Edit</a></li>
                             <li><a href="{{{ URL::to('/dashboard/companies/trash') }}}">Trashed</a></li>
                         </ul>
                         <li class="dropdown"><a href="">Category</a>
                         <ul>
                             <li><a href="{{{ URL::to('/dashboard/categories') }}}">All</a></li>
                             <li><a href="{{{ URL::to('/dashboard/categories/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/categories/update') }}}">Edit</a></li>
                             <li><a href="{{{ URL::to('/dashboard/categories/trash') }}}">Trashed</a></li>
                         </ul>
                         <li class="dropdown"><a href="">Event</a>
                         <ul>
                             <li><a href="{{{ URL::to('/dashboard/events') }}}">All</a></li>
                             <li><a href="{{{ URL::to('/dashboard/events/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/events/update') }}}">Edit</a></li>
                             <li><a href="{{{ URL::to('/dashboard/events/trash') }}}">Trashed</a></li>
                         </ul>
                      </li>
@@ -223,7 +218,7 @@
     
 </div><!--mainwrapper-->
 <script type="text/javascript">
-    jQuery(document).ready(function() {
+   /* jQuery(document).ready(function() {
         
       // simple chart
 		var flash = [[0, 11], [1, 9], [2,12], [3, 8], [4, 7], [5, 3], [6, 1]];
@@ -293,7 +288,7 @@
         
         
     
-    });
+    });*/
 </script>
 </body>
 </html>
