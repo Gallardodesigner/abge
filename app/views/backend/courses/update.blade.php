@@ -320,12 +320,12 @@ Courses
                                 
                                     <p>
                                         <label>Title</label>
-                                        <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" /></span>
+                                        <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" value="{{$course->title}}" /></span>
                                     </p>
                                     
                                     <p>
                                         <label>Description</label>
-                                        <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" /></span>
+                                        <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" value="{{$course->description}}" /></span>
                                     </p>
                                     <p>
                                         <label>Category</label>
@@ -361,20 +361,22 @@ Courses
                                         <p>
                                             <label>Data Start</label>
                                             <span class="field">
-                                               <input id="start" type="input" name="start">
+                                               <input id="start" type="input" name="start" value="{{$course->start}}">
                                                     <!-- <input type="hidden" id="finish" name="finish"> -->
                                             </span>
                                         </p>
                                         <p>
                                             <label>Data End</label>
                                             <span class="field">
-                                               <input id="end" type="input" name="end">
+                                               <input id="end" type="input" name="end" value="{{$course->end}}">
                                                     <!-- <input type="hidden" id="finish" name="finish"> -->
                                             </span>
                                         </p>
                                         <p>
                                             <label>Address</label>
-                                            <span class="field"><textarea cols="30" rows="10" name="address" class="span3"></textarea></span>
+                                            <span class="field"><textarea cols="30" rows="10" name="address" class="span3">
+                                            {{$course->address}}
+                                            </textarea></span>
                                         </p>
                                                                                                        
                                 </div>
@@ -383,7 +385,9 @@ Courses
                                     
                                         <p>
                                             <label>Content</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="content" class="span6"></textarea></span>
+                                            <span class="field"><textarea cols="50" rows="10" name="content" class="span6">
+                                                {{$course->content}}
+                                            </textarea></span>
                                         </p>
                                                                                                        
                                 </div>
@@ -392,7 +396,9 @@ Courses
                                     
                                         <p>
                                             <label>Content</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="program" class="span6"></textarea></span>
+                                            <span class="field"><textarea cols="50" rows="10" name="program" class="span6">
+                                                {{$course->program}}
+                                            </textarea></span>
                                         </p>
                                                                                                        
                                 </div>
@@ -406,7 +412,17 @@ Courses
                                                         @if (isset($teachers))
                                                             <select class="chosen-select" name="teachers[]" multiple>
                                                             @foreach ($teachers as $teacher)
-                                                                <option value="{{$teacher->id}}">{{$teacher->lastName.', '.$teacher->firstName}}</option>
+                                                                <?php $band = false; ?>
+                                                                @foreach($course->teacher as $asoc_teach)
+                                                                    @if ($teacher->id == $asoc_teach->id)
+                                                                        <?php $band = true; ?>
+                                                                    @endif
+                                                                @endforeach
+                                                                @if ($band)
+                                                                    <option value="{{$teacher->id}}" selected >{{$teacher->lastName.', '.$teacher->firstName}}</option>
+                                                                @else
+                                                                    <option value="{{$teacher->id}}">{{$teacher->lastName.', '.$teacher->firstName}}</option>
+                                                                @endif
                                                             @endforeach
                                                             </select>
                                                         @endif
@@ -428,7 +444,12 @@ Courses
                                                         @if (isset($companies))
                                                             <select class="chosen-select" name="company_id">
                                                             @foreach ($companies as $company)
-                                                                <option value="{{$company->id}}">{{$company->title}}</option>
+                                                                @if($company->id == $course->company->id)
+                                                                    <option value="{{$company->id}}" selected>{{$company->title}}</option>
+                                                                @else
+                                                                    <option value="{{$company->id}}">{{$company->title}}</option>
+
+                                                                @endif
                                                             @endforeach
                                                             </select>
                                                         @endif
@@ -438,11 +459,21 @@ Courses
                                          <p>
                                             <label>Add sponsor</label>
                                             <span class="field">
-                                            
+
                                                         @if (isset($promotioners))
                                                             <select class="chosen-select" name="promotioners[]" multiple>
                                                             @foreach ($promotioners as $promotion)
-                                                                <option value="{{$promotion->id}}">{{$promotion->title}}</option>
+                                                                <?php $band = false; ?>
+                                                                @foreach($course->promotion as $assoc_prom)
+                                                                    @if ($promotion->id == $assoc_prom->id)
+                                                                        <?php $band = true; ?>
+                                                                    @endif
+                                                                @endforeach
+                                                                @if ($band)
+                                                                    <option value="{{$promotion->id}}" selected >{{$promotion->title}}</option>
+                                                                @else
+                                                                    <option value="{{$promotion->id}}">{{$promotion->title}}</option>
+                                                                @endif
                                                             @endforeach
                                                             </select>
                                                         @endif
@@ -460,7 +491,23 @@ Courses
                                                             @endforeach
                                                             </select>
                                                         @endif
-                                                        
+                                                        @if (isset($supporters))
+                                                            <select class="chosen-select" name="supporters[]" multiple>
+                                                            @foreach ($supporters as $support)
+                                                                <?php $band = false; ?>
+                                                                @foreach($course->support as $assoc_suppor)
+                                                                    @if ($support->id == $assoc_suppor->id)
+                                                                        <?php $band = true; ?>
+                                                                    @endif
+                                                                @endforeach
+                                                                @if ($band)
+                                                                    <option value="{{$support->id}}" selected >{{$support->title}}</option>
+                                                                @else
+                                                                    <option value="{{$support->id}}">{{$support->title}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                            </select>
+                                                        @endif
                                             </span>
                                         </p>
                                     <div class="clearfix"></div>
