@@ -103,7 +103,7 @@ Courses
                                         <td class="center">{{$course->end}}</td>
                                         <td class="center">{{$course->end}}</td>
                                         <td class="center">
-                                             <a href="/dashboard/courses/update/{{$course->event->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
+                                             <a href="/dashboard/courses/update/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    
                                             @if($course->status == 'publish')
 
