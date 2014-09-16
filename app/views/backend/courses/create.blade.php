@@ -333,6 +333,7 @@ Courses
                                             @if (isset($categories))
 
                                                 <select class="chosen-select" name="category_id" >
+
                                                 @foreach ($categories as $category)
                                                     <option value="{{$category->id}}">{{$category->title}}</option>
                                                 @endforeach
@@ -455,7 +456,7 @@ Courses
                                                         @if (isset($supporters))
                                                             <select class="chosen-select" name="supporters[]" multiple>
                                                             @foreach ($supporters as $support)
-                                                                <option value="{{$teacher->id}}">{{$support->title}}</option>
+                                                                <option value="{{$support->id}}">{{$support->title}}</option>
                                                             @endforeach
                                                             </select>
                                                         @endif
