@@ -331,11 +331,8 @@ Courses
                                         <label>Category</label>
                                         <span class="field">
                                             @if (isset($categories))
-<<<<<<< HEAD
-                                                <select class="chosen-select" name="category" >
-=======
+
                                                 <select class="chosen-select" name="category_id" >
->>>>>>> 1c68a773b6ac5c257c2a840784dd33b08d7a81eb
                                                 @foreach ($categories as $category)
                                                     <option value="{{$category->id}}">{{$category->title}}</option>
                                                 @endforeach

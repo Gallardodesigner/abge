@@ -8,6 +8,8 @@
 
 
 @section("js")
+{{HTML::script("assetsadmin/js/jquery.jgrowl.js")}}
+{{HTML::script("assetsadmin/js/jquery.alerts.js")}}
 {{HTML::script("assetsadmin/js/jquery.dataTables.min.js")}}
 
 <script type='text/javascript'>
@@ -20,6 +22,17 @@
             "fnDrawCallback": function(oSettings) {
                 jQuery.uniform.update();
             }
+        });
+        if(jQuery('.confirmbutton').length > 0) {
+          jQuery('.confirmbutton').on("click",function(e){
+            e.preventDefault();
+            var elem=jQuery(this);
+            jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
+                 // jAlert('Confirmed: ' + r, 'Confirmation Results');
+                if(r==true){
+                    window.location.assign("/dashboard/events/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+                }
+            });
         });
         
     });
