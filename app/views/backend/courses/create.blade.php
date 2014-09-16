@@ -140,7 +140,7 @@
     jQuery('#wizard').smartWizard({onFinish: onFinishCallback});
 
     function onFinishCallback(){
-        alert('Finish Clicked');
+      jQuery("#course").submit();  
     } 
         
         jQuery('#start').datepicker({
@@ -265,7 +265,7 @@ Courses
                     </div>
                     </div>
                     <h4 class="widgettitle">Add Courses</h4>
-                        <form class="stdform " action="">
+                        <form id="course" class="stdform " method="POST" action="">
                             <div id="wizard" class="wizard">
                                 <ul class="hormenu">
                                     <li>
