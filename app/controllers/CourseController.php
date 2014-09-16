@@ -89,20 +89,25 @@ class CourseController extends \BaseController {
 		$course->company_id = Input::get('company_id');
 		$course->event_id = Input::get('event_id');
 		$course->category_id = Input::get('category_id');
-		$course->start = Input::get('start');
-		$course->end = Input::get('end');
-		$course->save();
+		$course->start = date("Y-m-d", strtotime(Input::get('start')));
+		$course->end = date("Y-m-d", strtotime(Input::get('end')));
 
-		$teachers = Input::get('teachers');
-		$course->teachers()->sync($teachers);
-		$promotioners = Input::get('promotioners');
-		$course->promotioners()->sync($promotioners);
-		$supporters = Input::get('supporters');
-		$course->supporters()->sync($supporters);
+		if($course->save()):
 
-		dd($course);
+			$teachers = Input::get('teachers');
+			$course->teachers()->sync($teachers);
+			$promotioners = Input::get('promotioners');
+			$course->promotioners()->sync($promotioners);
+			$supporters = Input::get('supporters');
+			$course->supporters()->sync($supporters);
 
-		Redirect::to($this->route);
+			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $course->title )));
+
+		else:
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $course->title )));
+
+		endif;
 	}
 
 	/**
