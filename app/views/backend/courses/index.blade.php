@@ -66,24 +66,45 @@ Courses
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0">Rendering engine</th>
-                                <th class="head1">Browser</th>
-                                <th class="head0">Platform(s)</th>
-                                <th class="head1">Engine version</th>
-                                <th class="head0">CSS grade</th>
+                                <th class="head0">Title</th>
+                                <th class="head1">Description</th>
+                                <th class="head0">Event</th>
+                                <th class="head1">Start at</th>
+                                <th class="head0">End at</th>
+                                <th class="head1">Participants</th>
+                                <th class="head0">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="gradeX">
-                              <td class="aligncenter"><span class="center">
-                                <input type="checkbox" />
-                              </span></td>
-                                <td>Trident</td>
-                                <td>Internet Explorer 4.0</td>
-                                <td>Win 95+</td>
-                                <td class="center">4</td>
-                                <td class="center">X</td>
-                            </tr>
+                            @if(isset($courses))
+                                @foreach($courses as $course)
+                                    <tr class="gradeX">
+                                      <td class="aligncenter"><span class="center">
+                                        <input type="checkbox" />
+                                      </span></td>
+                                        <td>{{$course->title}}/td>
+                                        <td>{{$course->description}}</td>
+                                        <td>{{$course->course->title}}</td>
+                                        <td class="center">{{$course->start}}</td>
+                                        <td class="center">{{$course->end}}</td>
+                                        <td class="center">{{$course->end}}</td>
+                                        <td class="center">
+                                             <a href="/dashboard/courses/update/{{$event->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
+                                   
+                                            @if($course->status == 'publish')
+
+                                                <a data-id="{{$course->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
+                                            
+                                            @else
+                                            
+                                                <a data-id="{{$course->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
+                                                <a data-id="{{$course->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
+
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
