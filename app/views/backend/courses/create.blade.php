@@ -314,12 +314,12 @@ Courses
                                 
                                     <p>
                                         <label>Title</label>
-                                        <span class="field"><input type="text" name="firstname" id="firstname" class="input-xxlarge" /></span>
+                                        <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" /></span>
                                     </p>
                                     
                                     <p>
                                         <label>Description</label>
-                                        <span class="field"><input type="text" name="lastname" id="lastname" class="input-xxlarge" /></span>
+                                        <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" /></span>
                                     </p>
                                     <p>
                                         <label>Category</label>
