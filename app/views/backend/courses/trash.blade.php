@@ -86,7 +86,7 @@ Course
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                             <a href="/dashboard/companies" class="btn dropdown-toggle">Back</a>
+                             <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
                         </div>
                         <h4 class="widgettitle">All Courses Trashed</h4>
                     </div>
@@ -122,8 +122,8 @@ Course
 
 
 
-                                        <a href="/dashboard/courses/untrash/{{$company->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>Untrash</a>
-        								<a data-id="{{$company->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>Delete</a>
+                                        <a href="/dashboard/courses/untrash/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>Untrash</a>
+        								<a data-id="{{$course->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>Delete</a>
 
                                        </td>
                                     </tr>

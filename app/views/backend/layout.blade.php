@@ -139,7 +139,7 @@
                         <ul>
                             <li><a href="{{{ URL::to('/dashboard/courses') }}}">All</a></li>
                             <li><a href="{{{ URL::to('/dashboard/courses/create') }}}">Add</a></li>
-                            <li><a href="">Trashed</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/courses/trash') }}}">Trashed</a></li>
                         </ul>
                         <li class="dropdown"><a href="">Teacher</a>
                         <ul>
