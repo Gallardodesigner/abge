@@ -19,6 +19,8 @@ if(Auth::check()):
 	Route::controller('/', 'FrontendController');
 // else:
 endif;
+	Route::controller('/dashboard/participants', 'ParticipantController');
+	Route::controller('/dashboard/associates', 'AssociateController');
 	Route::controller('/dashboard/teachers', 'TeacherController');
 	Route::controller('/dashboard/companies', 'CompanyController');
 	Route::controller('/dashboard/categories', 'CategoryController');
