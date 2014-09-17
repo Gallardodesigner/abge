@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Associates' => $baseDir . '/app/models/org/Associates.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'Boris\\Boris' => $vendorDir . '/d11wtq/boris/lib/Boris/Boris.php',
     'Boris\\CLIOptionsHandler' => $vendorDir . '/d11wtq/boris/lib/Boris/CLIOptionsHandler.php',
@@ -651,6 +652,7 @@ return array(
     'Net_SSH1' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SSH1.php',
     'Net_SSH2' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SSH2.php',
     'Normalizer' => $vendorDir . '/patchwork/utf8/class/Normalizer.php',
+    'Participants' => $baseDir . '/app/models/org/Participants.php',
     'PHPExcel' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel.php',
     'PHPExcel_Autoloader' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel/Autoloader.php',
     'PHPExcel_Best_Fit' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel/Shared/trend/bestFitClass.php',

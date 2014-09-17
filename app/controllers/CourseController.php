@@ -148,7 +148,7 @@ class CourseController extends \BaseController {
 	
 			else:
 
-				return View::make("backend.courses.update", $array );
+				return View::make("backend.courses.update3", $array );
 		
 			endif;
 
