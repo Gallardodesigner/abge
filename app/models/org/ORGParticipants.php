@@ -41,6 +41,10 @@ class ORGParticipants extends Eloquent {
 		return self::where( 'status', $operator, $status )->orderBy('created_at', 'desc')->get();
 	}
 
+	public static function getByCPF($cpf){
+		return self::where( 'cpf', '=', $cpf )->take(1)->get();
+	}
+
 	public static function getPublish(){
 		return self::_get('publish');
 	}

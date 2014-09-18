@@ -15,6 +15,7 @@ class CreateAssociates extends Migration {
 		Schema::connection('mysql')->create('associates', function($table){
 			$table->increments('id');
 			$table->integer('associate');
+			$table->integer('user');
 			$table->string('name');
 			$table->string('email');
 			$table->string('password');

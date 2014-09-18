@@ -15,6 +15,7 @@ class CreateParticipants extends Migration {
 		Schema::connection('mysql')->create('participants', function($table){
 			$table->increments('id');
 			$table->integer('participant');
+			$table->integer('user');
 			$table->string('name');
 			$table->string('email');
 			$table->string('cpf');
