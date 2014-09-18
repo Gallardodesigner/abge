@@ -2,6 +2,27 @@
 
 class FrontendCourseController extends \BaseController {
 
+	/* ----------------- Vistas ------------------ *
+
+	Main Folder: frontend/courses
+
+	Files: 
+
+		- index.blade.php 			Muestra todos los cursos activos
+		- stand.blade.php 			Muestra la informacion principal del curso
+		- data.blade.php 			Muestra la fecha y localidad del curso
+		- program.blade.php 		Muestra el contenido programatico del curso
+		- teachers.blade.php 		Muestra los profesores del curso
+		- signin.blade.php 			Muestra la informacion de inscripcion al curso
+		- company.blade.php 		Muestra la compañia del curso
+		- promotioners.blade.php 	Muestra las promociones del curso
+		- supporters.blade.php 		Muestra las empresas de Apoio del curso
+		- information.blade.php 	Muestra las informaciones generales del curso
+		- book.blade.php 			Muestra el formulario de registro del curso
+		- notfound.blade.php 		Muestra un mensaje de curso no encontrado
+
+	*/
+
 	public function getIndex( $id = '', $stand = '' ){
 
 		if( $id == '' ):
@@ -48,6 +69,9 @@ class FrontendCourseController extends \BaseController {
 					case 'information':
 						return self::getCourseInformation( $id, $course);
 						break;
+					case 'book':
+						return self::getCourseBook( $id, $course);
+						break;
 					default:
 						return self::getCourseStand( $id, $course );
 						break;
@@ -56,11 +80,17 @@ class FrontendCourseController extends \BaseController {
 
 			else:
 
-				return 'Curso no encontrado';
+				return View::make('frontend.courses.notfound');
 
 			endif;
 
 		endif;
+
+	}
+
+	public function postIndex( $id, $stand ){
+
+
 
 	}
 
@@ -83,6 +113,7 @@ class FrontendCourseController extends \BaseController {
 	}
 
 	public static function getCourseTeachers( $id, $course ){
+
 		$teachers = $course->teachers;
 
 		return View::make('frontend.courses.teacheres')->with( array( 'course' => $course, 'teachers' => $teachers ) );
@@ -120,6 +151,12 @@ class FrontendCourseController extends \BaseController {
 	public static function getCourseInformation( $id, $course ){
 
 		return View::make('frontend.courses.information')->with( array( 'course' => $course ) );
+
+	}
+
+	public static function getCourseBook( $id, $course ){
+
+		return View::make('frontend.courses.book')->with( array( 'course' => $course ) );
 
 	}
 
