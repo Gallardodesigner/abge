@@ -19,7 +19,7 @@
       @foreach($teachers as $teacher)
         <div class="teacher">
           <div class="thumb">
-            <img src="thumb_{{$teacher->url}}" />
+            <img src="/uploads/thumb_{{$teacher->url}}" />
           </div>
           <div class="teacher_desc">
             <p>{{$teacher->firstName}} {{$teacher->lastLame}}</p>
