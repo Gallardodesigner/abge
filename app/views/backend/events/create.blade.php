@@ -55,6 +55,10 @@ Event
                                 <label>Title</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge"></span>
                             </p>
+                            <p>
+                                <label>Uploads</label>
+                                <span class="field"><input type="checkbox" name="upload" value="true"/><em>Check/Uncheck this button to enable/disable the files upload</em></span>
+                            </p>
                             
                             <p>
                                 <label>Description</label>

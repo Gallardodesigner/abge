@@ -86,6 +86,13 @@ class CourseController extends \BaseController {
 		$course->description = Input::get('description');
 		$course->program = Input::get('program');
 		$course->address = Input::get('address');
+		$course->signin = Input::get('signin');
+		$course->associates_payment = Input::get('associates_payment');
+		$course->participants_payment = Input::get('participants_payment');
+		$course->associates_message = Input::get('associates_message');
+		$course->participants_message = Input::get('participants_message');
+		$course->min = Input::get('min');
+		$course->max = Input::get('max');
 		$course->company_id = Input::get('company_id');
 		$course->event_id = Input::get('event_id');
 		$course->category_id = Input::get('category_id');
