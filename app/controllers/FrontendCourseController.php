@@ -88,12 +88,6 @@ class FrontendCourseController extends \BaseController {
 
 	}
 
-	public function postIndex( $id, $stand ){
-
-
-
-	}
-
 	public static function getCourseStand( $id, $course ){
 
 		return View::make('frontend.courses.stand')->with( array( 'course' => $course ) );
