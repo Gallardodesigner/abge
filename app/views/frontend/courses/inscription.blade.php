@@ -16,18 +16,9 @@
       <h5>Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5>
     </div>
     <div id="content">
-      @foreach($teachers as $teacher)
-        <div class="teacher">
-          <div class="thumb">
-            <img src="thumb_{{$teacher->url}}" />
-          </div>
-          <div class="teacher_desc">
-            <p>{{$teacher->firstName}} {{$teacher->lastLame}}</p>
-            <p>{{$teacher->content}}</p>
-            <p>{{$teacher->contact}}</p>
-          </div>
-        </div>
-      @endforeach
+      <div>
+        {{$course->inscription}}
+      </div>
     </div>
     </div>
 	</div>
