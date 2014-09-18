@@ -17,7 +17,13 @@
     </div>
     <div id="content">
       <div>
-        {{$course->company}}
+        <div class="thumb">
+          <img src="/uploads/thumb_{{$course->company->url}}" />
+        </div>
+        <div class="org_desc">
+          <p>{{$course->company->title}}</p>
+          <p>{{$course->company->address}}</p>
+        </div>
       </div>
     </div>
     </div>
