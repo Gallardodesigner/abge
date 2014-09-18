@@ -1,18 +1,18 @@
 <?php
 
-class AssociateController extends \BaseController {
+class ORGAssociateController extends \BaseController {
 	
 	protected $route = '/dashboard/org/associates';
 
 	public function getIndex(){
 
-		$associates = Associates::all();
+		$associates = ORGAssociates::all();
 
 		$msg_success = Session::get('msg_success');
 
 		$msg_error = Session::get('msg_error');
 
-		return View::make('backend.associates.index', array(
+		return View::make('backend.org.associates.index', array(
 			'associates' => $associates,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error

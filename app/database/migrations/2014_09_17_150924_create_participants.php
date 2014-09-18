@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsTable extends Migration {
+class CreateParticipants extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,12 @@ class CreateEventsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::connection('mysql')->create('events', function($table){
+		Schema::connection('mysql')->create('participants', function($table){
 			$table->increments('id');
-			$table->string('title');
-			$table->longText('content');
-			$table->boolean('upload');
+			$table->integer('participant');
+			$table->string('name');
+			$table->string('email');
+			$table->string('cpf');
 			$table->string('type');
 			$table->string('status');
 			$table->timestamps();

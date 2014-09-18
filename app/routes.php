@@ -19,8 +19,8 @@ if(Auth::check()):
 	Route::controller('/', 'FrontendController');
 // else:
 endif;
-	Route::controller('/dashboard/participants', 'ParticipantController');
-	Route::controller('/dashboard/associates', 'AssociateController');
+	Route::controller('/dashboard/org/participants', 'ORGParticipantController');
+	Route::controller('/dashboard/org/associates', 'ORGAssociateController');
 	Route::controller('/dashboard/teachers', 'TeacherController');
 	Route::controller('/dashboard/companies', 'CompanyController');
 	Route::controller('/dashboard/categories', 'CategoryController');
@@ -31,6 +31,7 @@ endif;
 	// Route::get('/dashboard/', function(){
 	// 	return Redirect::to('/');
 	// });
+	Route::controller('/courses/{id?}/{stand?}', 'FrontendCourseController');
 	Route::controller('/', 'FrontendController');
 
 
