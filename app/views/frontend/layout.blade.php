@@ -24,7 +24,7 @@
 </head>
 <body>
 <style>
-  table{
+  table, tr, td{
   border:1px solid;
 }
 </style>
