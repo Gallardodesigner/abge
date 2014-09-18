@@ -310,6 +310,12 @@ Courses
                                             <span class="label">Company, Sponsors & Promo</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="#wiz1step7">
+                                            <span class="h2">Step 7</span>
+                                            <span class="label">Payment</span>
+                                        </a>
+                                    </li>
                                    
                                     
                                 </ul>
@@ -466,7 +472,39 @@ Courses
                                     <div class="clearfix"></div>
                                                                                                        
                                 </div>
-                                
+                                <div id="wiz1step7" class="formwiz">
+                                    <h4 class="widgettitle">Step 7: Payment</h4>
+                                        <p>
+                                            <label>Min</label>
+                                            <span class="field"> <input type="number" name="min"> </span>
+                                        </p>
+                                        <p>
+                                            <label>Max</label>
+                                            <span class="field"> <input type="number" name="max"> </span>
+                                        </p>
+
+                                        <p>
+                                            <label>Description</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="description" class="span6"></textarea></span>
+                                        </p>
+                                        <p>
+                                            <label>Associates Payment</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="associates_payment" class="span6"></textarea></span>
+                                        </p>
+                                        <p>
+                                            <label>Associates Message</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="associates_message" class="span6"></textarea></span>
+                                        </p>
+                                        <p>
+                                            <label>Participants Payment</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="participants_payment" class="span6"></textarea></span>
+                                        </p>
+                                        <p>
+                                            <label>Participants Message</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="participants_message" class="span6"></textarea></span>
+                                        </p>
+                                                                                                       
+                                </div>
                             </div>
                             <div class="clearfix"></div>
                         </form>
