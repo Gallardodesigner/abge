@@ -219,15 +219,15 @@ table{
       <div class="columna_lateral_home">
         <div class="menu_lat">
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Data e Lugar</a></li>
-            <li><a href="#">Conteúdo Programatico</a></li>
-            <li><a href="#">Ministrantes</a></li>
-            <li><a href="#">Inscrições</a></li>
-            <li><a href="#">Organização</a></li>
-            <li><a href="#">Promoção</a></li>
-            <li><a href="#">Apoio</a></li>
-            <li><a href="#">Informações</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/stand')}}">Home</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/data')}}">Data e Lugar</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/program')}}">Conteúdo Programatico</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/teachers')}}">Ministrantes</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/signin')}}">Inscrições</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/company')}}">Organização</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/promotions')}}">Promoção</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/supporters')}}">Apoio</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/information')}}">Informações</a></li>
           </ul>
         </div>
       </div>
