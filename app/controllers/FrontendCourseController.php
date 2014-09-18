@@ -110,7 +110,7 @@ class FrontendCourseController extends \BaseController {
 
 		$teachers = $course->teachers;
 
-		return View::make('frontend.courses.teacheres')->with( array( 'course' => $course, 'teachers' => $teachers ) );
+		return View::make('frontend.courses.teachers')->with( array( 'course' => $course, 'teachers' => $teachers ) );
 
 	}
 

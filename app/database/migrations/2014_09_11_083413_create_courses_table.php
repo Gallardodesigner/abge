@@ -19,7 +19,7 @@ class CreateCoursesTable extends Migration {
 			$table->longText('content');
 			$table->longText('program');
 			$table->longText('address');
-			$table->longText('signin');
+			$table->longText('inscription');
 			$table->longText('associates_payment');
 			$table->longText('participants_payment');
 			$table->longText('associates_message');
