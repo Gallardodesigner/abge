@@ -28,9 +28,12 @@ class EventController extends \BaseController {
 
 	public function postCreate(){
 
+
+
 		$event = new Events();
 		$event->title = Input::get('title');
 		$event->content = Input::get('content');
+		$event->upload = Input::get('upload') == 'true' ? true : false ;
 		$event->type = 'event';
 		$event->status = 'draft';
 		
