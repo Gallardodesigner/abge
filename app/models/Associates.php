@@ -1,22 +1,16 @@
 <?php
 
-class Participants extends Eloquent {
+class Associates extends Eloquent {
 
 	public function courses(){
 		return $this->hasMany('Courses', 'category_id', 'id');
 	}
 
-	protected $connection = 'mysql_2';
+	protected $connection = 'mysql';
 
-	protected $table = 'participantes';
+	protected $table = 'associates';
 
 /* --------------------------- */
-
-	public static function getByEmail( $email ){
-		
-		return self::where( 'email', $operator, $status )->orderBy('created_at', 'desc')->get();
-
-	}
 
 	public static function _get( $arg = 'all' ){
 		$operator = '=';

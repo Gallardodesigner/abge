@@ -90,6 +90,7 @@ Category
                         </div>
                         <h4 class="widgettitle">All Categories</h4>
                     </div>
+
                     
                     <table id="dyntable" class="table table-bordered responsive">
                         

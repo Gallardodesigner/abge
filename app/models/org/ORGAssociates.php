@@ -1,6 +1,6 @@
 <?php
 
-class Associates extends Eloquent {
+class ORGAssociates extends Eloquent {
 
 	public function courses(){
 		return $this->hasMany('Courses', 'category_id', 'id');
@@ -8,7 +8,7 @@ class Associates extends Eloquent {
 
 	protected $connection = 'mysql_2';
 
-	protected $table = 'asociados_fisico';
+	protected $table = 'asociados';
 
 /* --------------------------- */
 
