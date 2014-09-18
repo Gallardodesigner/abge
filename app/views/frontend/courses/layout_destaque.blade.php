@@ -24,6 +24,9 @@
 </head>
 <body>
 <style>
+table{
+  border:1px solid;
+}
   .menu_lat ul{
     list-style: none
   }
