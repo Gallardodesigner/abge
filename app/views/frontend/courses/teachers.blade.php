@@ -22,7 +22,7 @@
             <img src="thumb_{{$teacher->url}}" />
           </div>
           <div class="teacher_desc">
-            <p>{{$teacher->firstName}} {{$teacher->lastLame}}</p>
+            <p>{{$teacher->firstName}} {{$teacher->lastName}}</p>
             <p>{{$teacher->content}}</p>
             <p>{{$teacher->contact}}</p>
           </div>
