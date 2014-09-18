@@ -23,6 +23,11 @@
   {{HTML::script("assets/frontend/js/jquery.fancybox-1.3.4.js")}}
 </head>
 <body>
+<style>
+  table{
+  border:1px solid;
+}
+</style>
     <!--[if lte IE 6]>
       <div align="center" style="border: 1px solid #ccc;padding:10px;">
           This browser is not supported to view this page. Please update it.
