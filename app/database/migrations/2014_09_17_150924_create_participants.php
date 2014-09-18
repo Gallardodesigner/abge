@@ -32,7 +32,7 @@ class CreateParticipants extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('events');
+		Schema::dropIfExists('participants');
 	}
 
 }

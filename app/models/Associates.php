@@ -35,6 +35,10 @@ class Associates extends Eloquent {
 		return self::where( 'status', $operator, $status )->orderBy('created_at', 'desc')->get();
 	}
 
+	public static function getByEmail($email){
+		return self::where( 'email', '=', $email )->take(1)->get();
+	}
+
 	public static function getPublish(){
 		return self::_get('publish');
 	}

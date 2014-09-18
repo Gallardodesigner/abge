@@ -12,13 +12,14 @@
 */
 
 
-if(Auth::check()):
-	Route::controller('/dashboard/promotioners', 'PromotionerController');
-	Route::controller('/dashboard/supporters', 'SupporterController');
-	Route::controller('/dashboard/', 'DashboardController');
-	Route::controller('/', 'FrontendController');
+//if(Auth::check()):
+	//Route::controller('/dashboard/promotioners', 'PromotionerController');
+	//Route::controller('/dashboard/supporters', 'SupporterController');
+	//Route::controller('/dashboard/', 'DashboardController');
+	//Route::controller('/', 'FrontendController');
+	//Route::controller('/auth', 'AuthenticationController');
 // else:
-endif;
+//endif;
 	Route::controller('/dashboard/org/participants', 'ORGParticipantController');
 	Route::controller('/dashboard/org/associates', 'ORGAssociateController');
 	Route::controller('/dashboard/teachers', 'TeacherController');
@@ -31,6 +32,7 @@ endif;
 	// Route::get('/dashboard/', function(){
 	// 	return Redirect::to('/');
 	// });
+	Route::controller('/auth', 'AuthenticationController');
 	Route::controller('/courses/{id?}/{stand?}', 'FrontendCourseController');
 	Route::controller('/', 'FrontendController');
 

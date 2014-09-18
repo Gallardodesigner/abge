@@ -12,11 +12,12 @@ class CreateAssociates extends Migration {
 	 */
 	public function up()
 	{
-		Schema::connection('mysql')->create('events', function($table){
+		Schema::connection('mysql')->create('associates', function($table){
 			$table->increments('id');
 			$table->integer('associate');
 			$table->string('name');
 			$table->string('email');
+			$table->string('password');
 			$table->string('cpf');
 			$table->string('type');
 			$table->string('status');
@@ -32,7 +33,7 @@ class CreateAssociates extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('events');
+		Schema::dropIfExists('associates');
 	}
 
 }
