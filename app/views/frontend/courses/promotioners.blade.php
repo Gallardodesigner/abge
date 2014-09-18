@@ -16,9 +16,17 @@
       <h5>Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5>
     </div>
     <div id="content">
+      @foreach($promotioners as $promotioner)
       <div>
-        {{$course->promotioners}}
+        <div class="thumb">
+          <img src="/uploads/thumb_{{$promotioner->url}}" />
+        </div>
+        <div class="org_desc">
+          <p>{{$promotioner->title}}</p>
+          <p>{{$promotioner->address}}</p>
+        </div>
       </div>
+      @endforeach
     </div>
     </div>
 	</div>
