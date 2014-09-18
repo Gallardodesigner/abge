@@ -194,170 +194,18 @@
       </div>
     </div>
     <div id="page" class="container" style="padding-top: 15px;">
-      <div class="left_column">
         @yield("maincontent")
-      </div>
-
-            <div class="right_column">
-              <div class="home_article">
-
-                <div class="div_float">
-                  <div class="home_article_title texto_azul">
-                    Área do Associado
-                  </div>
-                  <div class="div_float" style="line-height: 17px; ">    
-
-
-                    <!--<form id="lxlogin" action="" method="post" -->
-                    <form id="lxlogin" onsubmit="jQuery.ajax({type:&#39;POST&#39;,dataType:&#39;html&#39;,data:jQuery(this).serialize(),success:function(data, textStatus){jQuery(&#39;#content_logeo&#39;).html(data);},beforeSend:function(XMLHttpRequest){$(&#39;#indicator&#39;).show();},complete:function(XMLHttpRequest, textStatus){$(&#39;#indicator&#39;).hide();},url:&#39;/index.php/ajax/loginAsociado&#39;}); return false;" action="http://abge.org.br/index.php/ajax/loginAsociado" method="post">        
-                      <div id="indicator" class="" align="left" style="display: none">
-                        <p><img src="./Cursos - ABGE_files/preload.gif"> Loading...</p>
-                      </div>
-                      <div id="content_logeo" style="float: left;">
-                        <div class="button_acceso activado" style="width: 65px;">
-                          <a href="javascript:void(0);">Acesso</a>        
-                        </div>
-
-                        <div class="button_acceso">
-                          <a href="http://abge.org.br/index.php/abge/cadastro">Associe-se</a>        
-                        </div>
-                        <div class="button_acceso">
-                          <a href="http://abge.org.br/index.php/abge/loginAssociado">2º via Anuidade</a>        
-                        </div>
-
-                        <div id="frmLogin" style="margin-top: 70px;">
-
-
-                          <table cellpadding="0" cellspacing="3" border="0" style="margin-top: 0px; margin-bottom: 0px;">
-                            <tbody><tr align="left">
-                              <td>
-                                <label for="wdLoginAsociado_email">Usuário</label><br>
-                                <input maxlength="100" type="text" name="wdLoginAsociado[email]" class="validate[required]" style="padding: 5px; width: 215px;" id="wdLoginAsociado_email">              </td>
-                              </tr>
-                              <tr align="left">
-                                <td style="background-color: #FFF !important;">
-                                  <label for="wdLoginAsociado_senha">Senha</label><br>
-                                  <input maxlength="30" type="password" name="wdLoginAsociado[senha]" class="validate[required]" style="padding: 5px; width: 215px;" id="wdLoginAsociado_senha">              </td>
-                                </tr>
-                                <tr>
-                                  <td align="right" style="float: right !important;">
-                                    <a style="color: #06C;" href="http://abge.org.br/index.php/abge/esqueci-minha-senha">Esqueci minha senha</a>
-                                    <input type="submit" value="Login" class="boton" id="login_asociado" name="login_asociado">
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <div class="home_article">
-                  <div class="home_article_title texto_azul">
-                    Socios - Patrocinadores
-                  </div>
-
-                  <div class="div_float">
-       <script type="text/javascript"><!--//<![CDATA[
-         var m3_u = (location.protocol=='https:'?'https://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php':'http://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php');
-         var m3_r = Math.floor(Math.random()*99999999999);
-         if (!document.MAX_used) document.MAX_used = ',';
-         document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-         document.write ("?zoneid=1");
-         document.write ('&amp;cb=' + m3_r);
-         if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-         document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-         document.write ("&amp;loc=" + escape(window.location));
-         if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-         if (document.context) document.write ("&context=" + escape(document.context));
-         if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
-         document.write ("'><\/scr"+"ipt>");
-         //]]>--></script>
-         <noscript>&lt;a href='http://abge1.hospedagemdesites.ws/openx/www/delivery/ck.php?n=a06014f3&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://abge1.hospedagemdesites.ws/openx/www/delivery/avw.php?zoneid=1&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=a06014f3' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
-
-       </div>
-       <div style="position: relative;top: 0px;">
-        <a style="font-size: 12px; float: right; text-decoration: underline;" href="http://abge.org.br/index.php/abge/socios-patrocinadore">Ver todos</a></div>
-      </div>
-
-      <div class="home_article">
-        <div class="home_article_title texto_azul">
-          Eventos- Apoio ABGE
+    </div>
+    <div class="div_float footer_container">
+      <div id="page" class="container" style="position: relative; height: 100%">
+        <div style="position: absolute; left: 10px; bottom: 10px; width: 814px;">
+          Secretaria Executiva ABGE <br> Av. Profº Almeida Prado, 532 - IPT (Prédio 11) - Cidade Universitária- SP 05508-901
+          Tel.: 11-3767-4361 | abge@abge.org.br
         </div>
-
-        <div class="div_float">
-
-     <script type="text/javascript"><!--//<![CDATA[
-       var m3_u = (location.protocol=='https:'?'https://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php':'http://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php');
-       var m3_r = Math.floor(Math.random()*99999999999);
-       if (!document.MAX_used) document.MAX_used = ',';
-       document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-       document.write ("?zoneid=2");
-       document.write ('&amp;cb=' + m3_r);
-       if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-       document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-       document.write ("&amp;loc=" + escape(window.location));
-       if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-       if (document.context) document.write ("&context=" + escape(document.context));
-       if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
-       document.write ("'><\/scr"+"ipt>");
-       //]]>--></script>
-       <noscript>&lt;a href='http://abge1.hospedagemdesites.ws/openx/www/delivery/ck.php?n=a09182f5&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://abge1.hospedagemdesites.ws/openx/www/delivery/avw.php?zoneid=2&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=a09182f5' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
-
-
-     </div>
-     <div style="position: relative;top: 0px;">
-      <br>
-      <a style="font-size: 12px; float: right; text-decoration: underline; margin-top:10px;" href="http://abge.org.br/index.php/abge/apoio">Ver Todos</a></div>
-    </div>
-
-    <div class="home_article">
-     <div class="home_article_title texto_azul">
-      Parceiros
-    </div>
-
-    <div class="div_float">
-
-<script type="text/javascript"><!--//<![CDATA[
- var m3_u = (location.protocol=='https:'?'https://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php':'http://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php');
- var m3_r = Math.floor(Math.random()*99999999999);
- if (!document.MAX_used) document.MAX_used = ',';
- document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
- document.write ("?zoneid=3");
- document.write ('&amp;cb=' + m3_r);
- if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
- document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
- document.write ("&amp;loc=" + escape(window.location));
- if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
- if (document.context) document.write ("&context=" + escape(document.context));
- if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
- document.write ("'><\/scr"+"ipt>");
- //]]>--></script>
- <noscript>&lt;a href='http://abge1.hospedagemdesites.ws/openx/www/delivery/ck.php?n=ad50381e&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://abge1.hospedagemdesites.ws/openx/www/delivery/avw.php?zoneid=3&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=ad50381e' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
-
-
-
-</div>
-<div style="position: relative;top: 0px;">
-  <a style="font-size: 12px; float: right; text-decoration: underline;" href="http://abge.org.br/index.php/abge/entidades">Ver Todos</a></div>
-</div>
-
-
-
-
-</div>
-</div>
-<div class="div_float footer_container">
-  <div id="page" class="container" style="position: relative; height: 100%">
-    <div style="position: absolute; left: 10px; bottom: 10px; width: 814px;">
-      Secretaria Executiva ABGE <br> Av. Profº Almeida Prado, 532 - IPT (Prédio 11) - Cidade Universitária- SP 05508-901
-      Tel.: 11-3767-4361 | abge@abge.org.br
-    </div>
-    <div style="float: right;position: absolute; right: 45px; bottom: 10px;">
-      <a target="_blank" href="http://www.gallardodesigner.com.br/"><img src="/assets/frontend/img/logo-gd.png"></a>    </div>
-    </div>
-  </div>
+        <div style="float: right;position: absolute; right: 45px; bottom: 10px;">
+          <a target="_blank" href="http://www.gallardodesigner.com.br/"><img src="/assets/frontend/img/logo-gd.png"></a>    </div>
+        </div>
+      </div>
 
 
 </body>
