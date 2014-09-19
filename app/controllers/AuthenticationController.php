@@ -281,15 +281,15 @@ class AuthenticationController extends \BaseController {
 		$participant->cidade = Input::get('cidade');
 		$participant->estado = $estado[0]->name_estado;
 		$participant->empresa = Input::get('empresa');
-		$participant->cnpj = Input::get('cnpj');
+		$participant->cnpj = Input::get('cnpj_empresa');
 		$participant->endereco_empresa = Input::get('endereco_empresa');
 		$participant->numero_empresa = Input::get('nome');
 		$participant->complemento_empresa = Input::get('complemento_empresa');
 		$participant->cep_empresa = Input::get('cep_empresa');
 		$participant->cidade_empresa = Input::get('cidade_empresa');
 		$participant->estado_empresa = $estado_empresa[0]->name_estado;
-		$participant->telefone = Input::get('telefone');
-		$participant->celular = Input::get('celular');
+		$participant->telefone = Input::get('telefone_empresa');
+		$participant->celular = Input::get('celular_empresa');
 		$participant->email = Input::get('email');
 		$participant->save();
 
@@ -300,19 +300,21 @@ class AuthenticationController extends \BaseController {
 		$user->type = Input::get('type');
 		$user->save();
 
+		$participant = ORGParticipants::getByCPF($participant->cpf);
+
 		$part = new Participants();
-		$part->participant = $participant->id_participante;
+		$part->participant = $participant[0]->id_participante;
 		$part->user = $user->id;
-		$part->email = $participant->email;
-		$part->name = $participant->nome;
-		$part->cpf = $participant->cpf;
+		$part->email = $participant[0]->email;
+		$part->name = $participant[0]->nome;
+		$part->cpf = $participant[0]->cpf;
 		$part->status = 'publish';
 		$part->type = Input::get('type');
 		$part->save();
 
 		Auth::login($user);
 
-		Redirect::to('/courses/'.$course.'/payment');
+		return Redirect::to('/courses/'.$course.'/payment');
 
 	}
 
