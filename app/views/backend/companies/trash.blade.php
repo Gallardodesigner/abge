@@ -110,7 +110,7 @@ Company
                               </span></td>
                                 <td class="center" style="vertical-align:middle;"><img class="rounded" src="/uploads/thumb_{{$company->url}}" /></td>
                                 <td class="center" style="vertical-align:middle;"><h4>{{$company->title}}</h4></td>
-                                <td class="center" style="vertical-align:middle;">{{$company->content}}</td>
+                                <td class="description" style="vertical-align:middle;">{{$company->content}}</td>
                                 <td class="center">
 
 

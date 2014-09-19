@@ -96,11 +96,11 @@ Teacher
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;">Thumb</th>
-                                <th class="head0" style="text-align:center;">Name</th>
-                                <th class="head1" style="text-align:center;">Description</th>
-                                <th class="head1" style="text-align:center;">Status</th>
-                                <th class="head0" style="text-align:center;">Actions</th>
+                                <th class="head0" style="text-align:center;width:10%">Thumb</th>
+                                <th class="head0" style="text-align:center;width:20%">Name</th>
+                                <th class="head1" style="text-align:center;width:40%">Description</th>
+                                <th class="head1" style="text-align:center;width:10%">Status</th>
+                                <th class="head0" style="text-align:center;width:20%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,7 +111,7 @@ Teacher
                               </span></td>
                                 <td class="center" style="vertical-align:middle;width:10%;"><img class="rounded" src="/uploads/thumb_{{$teacher->url}}" /></td>
                                 <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$teacher->firstName}} {{$teacher->lastName}}</h4></td>
-                                <td class="center" style="vertical-align:middle;width:40%;">{{$teacher->content}}</td>
+                                <td class="description" style="vertical-align:middle;width:40%;">{{$teacher->content}}</td>
                                 <td class="center" style="vertical-align:middle;width:10%;">{{ Lang::get('display.'.$teacher->status) }}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 

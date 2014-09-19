@@ -54,8 +54,8 @@ class FrontendCourseController extends \BaseController {
 					case 'teachers':
 						return self::getCourseTeachers( $id, $course );
 						break;
-					case 'signin':
-						return self::getCourseSignin( $id, $course );
+					case 'inscription':
+						return self::getCourseInscription( $id, $course );
 						break;
 					case 'company':
 						return self::getCourseCompany( $id, $course );
@@ -114,9 +114,9 @@ class FrontendCourseController extends \BaseController {
 
 	}
 
-	public static function getCourseSignin( $id, $course ){
+	public static function getCourseInscription( $id, $course ){
 
-		return View::make('frontend.courses.signin')->with( array( 'course' => $course ) );
+		return View::make('frontend.courses.inscription')->with( array( 'course' => $course ) );
 
 	}
 

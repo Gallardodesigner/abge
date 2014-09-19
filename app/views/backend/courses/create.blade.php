@@ -484,8 +484,8 @@ Courses
                                         </p>
 
                                         <p>
-                                            <label>Description</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="description" class="span6"></textarea></span>
+                                            <label>Inscription</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="inscription" class="span6"></textarea></span>
                                         </p>
                                         <p>
                                             <label>Associates Payment</label>

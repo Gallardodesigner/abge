@@ -97,7 +97,7 @@ Category
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
                                 <th class="head0" style="text-align:center;">Title</th>
-                                <th class="head1" style="text-align:center;">Description</th>
+                                <th class="head1" style="text-align:center;width:60%">Description</th>
                                 <th class="head0" style="text-align:center;">Actions</th>
                             </tr>
                         </thead>

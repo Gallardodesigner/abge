@@ -96,10 +96,10 @@ Event
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;">Title</th>
-                                <th class="head1" style="text-align:center;">Description</th>
-                                <th class="head1" style="text-align:center;">Status</th>
-                                <th class="head0" style="text-align:center;">Actions</th>
+                                <th class="head0" style="text-align:center;width:10%">Title</th>
+                                <th class="head1" style="text-align:center;width:60%">Description</th>
+                                <th class="head1" style="text-align:center;width:10%">Status</th>
+                                <th class="head0" style="text-align:center;width:20%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,10 +108,10 @@ Event
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td><h4>{{$event->title}}</h4></td>
-                                <td>{{$event->content}}</td>
-                                <td>{{ Lang::get('display.'.$event->status) }}</td>
-                                <td class="center">
+                                <td class="center" style="vertical-align:middle;"><h4>{{$event->title}}</h4></td>
+                                <td class="description" style="vertical-align:middle;">{{$event->content}}</td>
+                                <td class="center" style="vertical-align:middle;">{{ Lang::get('display.'.$event->status) }}</td>
+                                <td class="center" style="vertical-align:middle;">
 
                                     <a href="/dashboard/events/update/{{$event->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    

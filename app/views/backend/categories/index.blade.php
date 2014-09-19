@@ -97,10 +97,10 @@ Category
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;">Title</th>
-                                <th class="head1" style="text-align:center;">Description</th>
-                                <th class="head1" style="text-align:center;">Status</th>
-                                <th class="head0" style="text-align:center;">Actions</th>
+                                <th class="head0" style="text-align:center;width:10%">Title</th>
+                                <th class="head1" style="text-align:center;width:60%">Description</th>
+                                <th class="head1" style="text-align:center;width;10%">Status</th>
+                                <th class="head0" style="text-align:center;width:20%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,7 +110,7 @@ Category
                                 <input type="checkbox" />
                               </span></td>
                                 <td><h4>{{$category->title}}</h4></td>
-                                <td>{{$category->content}}</td>
+                                <td class="description">{{$category->content}}</td>
                                 <td>{{ Lang::get('display.'.$category->status) }}</td>
                                 <td class="center">
 

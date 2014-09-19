@@ -25,6 +25,42 @@
 
 <body>
 
+                <style type="text/css">
+                    table{
+                        border-collapse:collapse;
+                        width: 100%;
+                        table-layout: fixed;
+                    }
+
+                    td{
+                        padding: 10px;  
+                        word-wrap:break-word !important;
+                        overflow: none !important;
+                        white-space: normal !important;
+                    }
+
+                    .description{
+                        text-align: justify !important;
+                    }
+/*
+                    .fixed{
+                        background-color: #ddd;
+                        width: 60px;
+                    }
+
+                    .fluid{
+                        background-color: #aaa;
+                    }
+
+                    .visible{
+
+                    }
+
+                    .hidden{
+                        overflow:hidden;
+                    }
+                    */
+                </style>
 <div class="mainwrapper">
     
     <div class="header">

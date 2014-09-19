@@ -96,11 +96,11 @@ Companies
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;">Thumb</th>
-                                <th class="head0" style="text-align:center;">Title</th>
-                                <th class="head1" style="text-align:center;">Description</th>
-                                <th class="head1" style="text-align:center;">Status</th>
-                                <th class="head0" style="text-align:center;">Actions</th>
+                                <th class="head0" style="text-align:center;width:10%;">Thumb</th>
+                                <th class="head0" style="text-align:center;width:20%;">Title</th>
+                                <th class="head1" style="text-align:center;width:40%;">Description</th>
+                                <th class="head1" style="text-align:center;width:10%;">Status</th>
+                                <th class="head0" style="text-align:center;width:20%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,7 +111,7 @@ Companies
                               </span></td>
                                 <td class="center" style="vertical-align:middle;width:10%;"><img class="rounded" src="/uploads/thumb_{{$company->url}}" /></td>
                                 <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$company->title}}</h4></td>
-                                <td class="center" style="vertical-align:middle;width:40%;">{{$company->content}}</td>
+                                <td class="description" style="vertical-align:middle;width:40%;">{{$company->content}}</td>
                                 <td class="center" style="vertical-align:middle;width:10%;">{{ Lang::get('display.'.$company->status) }}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 
