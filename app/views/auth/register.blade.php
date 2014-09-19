@@ -33,7 +33,7 @@
 				@endforeach
 			</select>
 			<br>
-		<label>Ciudade: </label><input type="text" name="ciudade"/><br>
+		<label>Cidade: </label><input type="text" name="cidade"/><br>
 		<div><h3>Informações de Empresa</h3></div>
 		<label>Empresa: </label><input type="text" name="empresa"/><br>
 		<label>CNPJ: </label><input type="text" name="cnpj_empresa"/><br>
@@ -49,7 +49,7 @@
 				@endforeach
 			</select>
 			<br>
-		<label>Ciudade: </label><input type="text" name="ciudade_empresa"/><br>
+		<label>Cidade: </label><input type="text" name="cidade_empresa"/><br>
 		<label>Telefone: </label><input type="text" name="telefone_empresa"/><br>
 		<label>Celular: </label><input type="text" name="celular_empresa"/><br>
 		<label>Tipo de participante: </label><select name="type">
