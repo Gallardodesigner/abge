@@ -162,7 +162,7 @@
                     <a href="http://abge.org.br/index.php/abge/gallery">Galeria de Fotos</a>
                   </li>
                   <li>
-                    <a href="./Cursos - ABGE_files/Cursos - ABGE.htm">Cursos</a>
+                    <a href="./courses">Cursos</a>
                   </li>
                   <li>
                     <a href="http://abge.org.br/index.php/abge/fale-conosco">Fale com a ABGE</a>

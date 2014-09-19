@@ -17,6 +17,7 @@
     </div>
     <div id="content">
     <form method="post">
+    	<input type="hidden" name="course" value="{{$course->id}}"/>
 		<label>CPF: </label><input type="text" name="cpf"/><br>
 		<input type="submit" value="Enviar"/>
 	</form>
@@ -25,8 +26,3 @@
 	</div>
 
 @stop
-<form method="post">
-	<label>Email: </label><input type="text" name="email"/><br>
-	<label>Password: </label><input type="password" name="password"/><br>
-	<input type="submit" value="Enviar"/>
-</form>

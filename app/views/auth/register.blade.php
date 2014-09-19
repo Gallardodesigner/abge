@@ -8,7 +8,6 @@
 
 <!-- Contenido principal -->
 @section("maincontent")
-	
 	<div class="columna_central_home">
 		<div class="course" data-id="{{$course->id}}">
     <div class="course_title">
@@ -17,6 +16,7 @@
     </div>
     <div id="content">
     <form method="post">
+    	<input type="hidden" name="course" value="{{$course->id}}"/>
 		<label>Nome: </label><input type="text" name="nome"/><br>
 		<label>Email: </label><input type="email" name="email"/><br>
 		<label>RG: </label><input type="text" name="rg"/><br>
@@ -26,7 +26,7 @@
 		<label>Complemento: </label><input type="text" name="complemento"/><br>
 		<label>CEP: </label><input type="text" name="cep"/><br>
 		<label>Estado: </label>
-			<selec name="estado"/>
+			<select name="estado">
 				<option value="0" selected>Seleccione um estado</option>
 				@foreach($estados as $state)
 					<option value="{{$state->id_estado}}">{{$state->name_estado}}</option>
@@ -42,7 +42,7 @@
 		<label>Complemento: </label><input type="text" name="complemento_empresa"/><br>
 		<label>CEP: </label><input type="text" name="cep_empresa"/><br>
 		<label>Estado: </label>
-			<selec name="estado_empresa"/>
+			<select name="estado_empresa">
 				<option value="0" selected>Seleccione um estado</option>
 				@foreach($estados as $state)
 					<option value="{{$state->id_estado}}">{{$state->name_estado}}</option>

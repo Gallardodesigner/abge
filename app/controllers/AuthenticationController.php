@@ -56,11 +56,12 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function getAssociate(){
+	public function getAssociate( $course ){
 
 		$msg_error = Session::get('msg_error');
+		$course = Courses::find( $course );
 
-		return View::make('auth.associate')->with( array( 'msg_error' => $msg_error ) );
+		return View::make('auth.associate')->with( array( 'msg_error' => $msg_error, 'course' => $course ) );
 
 	}
 
@@ -157,11 +158,12 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function getParticipant(){
+	public function getParticipant( $course ){
 
 		$msg_error = Session::get('msg_error');
+		$course = Courses::find($course);
 
-		return View::make('auth.participant')->with( array( 'msg_error' => $msg_error ) );
+		return View::make('auth.participant')->with( array( 'msg_error' => $msg_error, 'course' => $course ) );
 
 	}
 
@@ -170,6 +172,8 @@ class AuthenticationController extends \BaseController {
 		$credentials = array(
 			'cpf' => Input::get('cpf')
 			);
+
+		$course = Input::get('course');
 
 		$participant = Participants::getByCPF($credentials['cpf']);
 
@@ -183,7 +187,7 @@ class AuthenticationController extends \BaseController {
 
 				Auth::login($user);
 
-				return Redirect::to('/dashboard')->with( 'msg_success', Lang::get('messages.login_welcome') );
+				return Redirect::to('/course/'.$course.'/payment')->with( 'msg_success', Lang::get('messages.login_welcome') );
 
 			else:
 
@@ -197,7 +201,7 @@ class AuthenticationController extends \BaseController {
 				$participant->user = $user->id;
 				$participant->save();
 
-				return Redirect::to('/dashboard')->with( 'msg_success', Lang::get('messages.login_welcome') );
+				return Redirect::to('/course/'.$course.'/payment')->with( 'msg_success', Lang::get('messages.login_welcome') );
 
 			endif;
 
@@ -228,15 +232,87 @@ class AuthenticationController extends \BaseController {
 
 				Auth::login($user);
 
-				return Redirect::to('/dashboard')->with( 'msg_success', Lang::get('messages.login_welcome') );
+				return Redirect::to('/course/'.$course.'/payment')->with( 'msg_success', Lang::get('messages.login_welcome') );
 
 			else:
 
-				return View::make('auth.error');
+				return Redirect::to('/auth/register')->with( array( 'cpf' => $credentials['cpf'], 'msg_error' => Lang::get('messages.login_not_participant'), 'course' => $course ) );
 
 			endif;
 
 		endif;
+
+	}
+
+	public function getRegister(){
+
+		$estados = ORGStates::all();
+		$cpf = Session::get('cpf');
+
+		$msg_error = Session::get('msg_error');
+
+		$course = Courses::find(Session::get('course'));
+
+		$array = array(
+			'cpf' => $cpf,
+			'estados' => $estados,
+			'course' => $course
+			);
+
+		return View::make('auth.register')->with( $array );
+
+	}
+
+	public function postRegister(){
+
+		$course = Input::get('course');
+
+		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
+		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
+
+		$participant = new ORGParticipants();
+		$participant->nome = Input::get('nome');
+		$participant->rg = Input::get('rg');
+		$participant->cpf = Input::get('cpf');
+		$participant->endereco = Input::get('endereco');
+		$participant->numero = Input::get('numero');
+		$participant->complemento = Input::get('complemento');
+		$participant->cep = Input::get('cep');
+		$participant->cidade = Input::get('cidade');
+		$participant->estado = $estado[0]->name_estado;
+		$participant->empresa = Input::get('empresa');
+		$participant->cnpj = Input::get('cnpj');
+		$participant->endereco_empresa = Input::get('endereco_empresa');
+		$participant->numero_empresa = Input::get('nome');
+		$participant->complemento_empresa = Input::get('complemento_empresa');
+		$participant->cep_empresa = Input::get('cep_empresa');
+		$participant->cidade_empresa = Input::get('cidade_empresa');
+		$participant->estado_empresa = $estado_empresa[0]->name_estado;
+		$participant->telefone = Input::get('telefone');
+		$participant->celular = Input::get('celular');
+		$participant->email = Input::get('email');
+		$participant->save();
+
+		$user = new User();
+		$user->email = $participant->email;
+		$user->name = $participant->nome;
+		$user->status = 'publish';
+		$user->type = Input::get('type');
+		$user->save();
+
+		$part = new Participants();
+		$part->participant = $participant->id_participante;
+		$part->user = $user->id;
+		$part->email = $participant->email;
+		$part->name = $participant->nome;
+		$part->cpf = $participant->cpf;
+		$part->status = 'publish';
+		$part->type = Input::get('type');
+		$part->save();
+
+		Auth::login($user);
+
+		Redirect::to('/courses/'.$course.'/payment');
 
 	}
 

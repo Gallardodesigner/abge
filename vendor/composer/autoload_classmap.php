@@ -663,6 +663,7 @@ return array(
     'ORGAssociates' => $baseDir . '/app/models/org/ORGAssociates.php',
     'ORGParticipantController' => $baseDir . '/app/controllers/org/ORGParticipantController.php',
     'ORGParticipants' => $baseDir . '/app/models/org/ORGParticipants.php',
+    'ORGStates' => $baseDir . '/app/models/org/ORGStates.php',
     'PHPExcel' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel.php',
     'PHPExcel_Autoloader' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel/Autoloader.php',
     'PHPExcel_Best_Fit' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel/Shared/trend/bestFitClass.php',
