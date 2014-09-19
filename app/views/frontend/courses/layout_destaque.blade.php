@@ -225,7 +225,7 @@ table{
             <li><a href="{{URL::to('courses/'.$course->id.'/teachers')}}">Ministrantes</a></li>
             <li><a href="{{URL::to('courses/'.$course->id.'/inscription')}}">Inscrições</a></li>
             <li><a href="{{URL::to('courses/'.$course->id.'/company')}}">Organização</a></li>
-            <li><a href="{{URL::to('courses/'.$course->id.'/promotions')}}">Promoção</a></li>
+            <li><a href="{{URL::to('courses/'.$course->id.'/promotioners')}}">Promoção</a></li>
             <li><a href="{{URL::to('courses/'.$course->id.'/supporters')}}">Apoio</a></li>
             <li><a href="{{URL::to('courses/'.$course->id.'/information')}}">Informações</a></li>
           </ul>
