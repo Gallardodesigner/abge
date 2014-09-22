@@ -15,7 +15,10 @@ class CreateSectionsTable extends Migration {
 		//
 		Schema::connection('mysql')->create('sections', function($table){
 			$table->increments('id');
+			$table->string('title');
 			$table->string('description');
+			$table->string('file');
+			$table->string('status');
 			$table->timestamps();
 			$table->softDeletes();
 		});

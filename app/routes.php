@@ -23,6 +23,7 @@
 	Route::controller('/dashboard/org/participants', 'ORGParticipantController');
 	Route::controller('/dashboard/org/associates', 'ORGAssociateController');
 	Route::controller('/dashboard/teachers', 'TeacherController');
+	Route::controller('/dashboard/sections', 'SectionController');
 	Route::controller('/dashboard/companies', 'CompanyController');
 	Route::controller('/dashboard/categories', 'CategoryController');
 	Route::controller('/dashboard/events', 'EventController');
