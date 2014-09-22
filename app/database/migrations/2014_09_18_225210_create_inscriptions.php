@@ -12,7 +12,14 @@ class CreateInscriptions extends Migration {
 	 */
 	public function up()
 	{
-		//
+		Schema::connection('mysql')->create('inscriptions', function($table){
+			$table->increments('id');
+			$table->integer('id_course');
+			$table->integer('id_user');
+			$table->string('status');
+			$table->timestamps();
+			$table->softDeletes();
+		});
 	}
 
 	/**
@@ -22,7 +29,9 @@ class CreateInscriptions extends Migration {
 	 */
 	public function down()
 	{
-		//
+
+		Schema::dropIfExists('inscriptions');
+
 	}
 
 }
