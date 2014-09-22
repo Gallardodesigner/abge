@@ -145,4 +145,42 @@ return array(
 
 	'teachers_display_err' => 'Oops, we could not find the teacher',
 
+	# Another Messages
+
+	'course_not_found' => 'Oops, we could not find the course',
+
+	# User Types
+
+	'usertypes_create' => 'The user type :title was created successfully',
+
+	'usertypes_create_err' => 'Oops, we had a problem creating the user type :title',
+
+	'usertypes_create_img_err' => 'Oops, we had a problem uploading the photo, please take care with the formats of the file',
+
+	'usertypes_update' => 'The user type :title was updated succesfully',
+
+	'usertypes_update_err' => 'Oops, we had a problem updating the user type',
+
+	'usertypes_trash' => 'The user type :title was sent to the recicle bin',
+
+	'usertypes_trash_err' => 'Oops, we had a problem sendig the user type to the recicle bin',
+
+	'usertypes_publish' => 'The user type :title was published succesfully',
+
+	'usertypes_publish_err' => 'Oops, we had a problem publishing the user type :title',
+
+	'usertypes_draft' => 'The user type :title has been changed to draft mode',
+
+	'usertypes_draft_err' => 'Oops, we had a problem changing the user type :title to draft mode',
+
+	'usertypes_untrash' => 'The user type :title was successfully restored',
+
+	'usertypes_untrash_err' => 'Oops, we had a problem restoring the user type :title',
+
+	'usertypes_delete' => 'The user type :title was deleted succesfully',
+
+	'usertypes_delete_err' => 'Oops, we had a problem deleting the user type :title',
+
+	'usertypes_display_err' => 'Oops, we could not find the user type',
+
 );

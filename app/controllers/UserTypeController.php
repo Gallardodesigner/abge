@@ -2,85 +2,167 @@
 
 class UserTypeController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /usertype
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
+	protected $parent = '/dashboard/courses/';
+
+	protected $route = '/dashboard/courses/{idCourse}/usertypes/';
+
+	public function getIndex( $idCourse ){
+
+		$msg_success = Session::get('msg_success');
+
+		$msg_error = Session::get('msg_error');
+
+		$course = Courses::find($idCourse);
+
+		if($course):
+
+			return View::make('backend.usertypes.index', array(
+			'course' => $course,
+			'usertypes' => $course->usertypes,
+			'parent' => $this->parent,
+			'route' => self::parseRoute($idCourse),
+			'msg_success' => $msg_success,
+			'msg_error' => $msg_error
+			));
+
+		else:
+
+			return Redirect::to(self::parseRoute($idCourse))->with(array('msg_error' => Lang::get('messages.course_not_found')));
+
+		endif;
+
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /usertype/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+	public function getCreate( $idCourse ){
+
+		$course = Courses::find($idCourse);
+
+		if($course):
+
+			return View::make('backend.usertypes.create', array(
+				'course' => $course,
+				'route' => self::parseRoute($idCourse),
+				));
+
+		else:
+
+			return Redirect::to(self::parseRoute($idCourse))->with(array('msg_error' => Lang::get('messages.course_not_found')));
+
+		endif;
+
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /usertype
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
+	public function postCreate( $idCourse ){
+
+		$usertype = new UserTypes();
+		$usertype->course_id = $idCourse;
+		$usertype->title = Input::get('title');
+		$usertype->content = Input::get('content');
+		$usertype->associate = Input::get('associate') == 'true' ? true : false;
+
+		if($usertype->save()):
+
+			return Redirect::to(self::parseRoute($idCourse))->with('msg_success', Lang::get('messages.usertypes_create', array( 'title' => $usertype->title )));
+
+		else:
+
+			return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_create_err', array( 'title' => $usertype->title )));
+
+		endif;
+
 	}
 
-	/**
-	 * Display the specified resource.
-	 * GET /usertype/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+	public function getUpdate( $idCourse, $idUserType = '' ){
+
+		if( $idUserType == '' ):
+
+			return Redirect::to(self::parseRoute($idCourse));
+		
+		else:
+
+			$usertype = UserTypes::find($idUserType);
+
+			if(!$usertype):
+
+				return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_display_err'));
+
+			else:
+
+				return View::make('backend.usertypes.update', array('usertype' => $usertype, 'route' => $this->route ));
+
+			endif;
+
+		endif;
+
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /usertype/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+	public function postUpdate( $idCourse, $idUserType = '' ){
+
+		if( $idUserType == '' ):
+
+			return Redirect::to(self::parseRoute($idCourse));
+		
+		else:
+
+			$usertype = UserTypes::find($idUserType);
+
+			if(!$usertype):
+
+				return Redirect::to(self::parseRoute($idCourse));
+
+			else:
+
+				$usertype->course_id = $idCourse;
+				$usertype->title = Input::get('title');
+				$usertype->content = Input::get('content');
+				$usertype->associate = Input::get('associate') == 'true' ? true : false;
+
+				if($usertype->save()):
+
+					return Redirect::to(self::parseRoute($idCourse))->with('msg_success', Lang::get('messages.usertypes_update', array( 'title' => $usertype->title )));
+
+				else:
+
+					return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_update_err', array( 'title' => $usertype->title )));
+
+				endif;
+
+			endif;
+
+		endif;
+
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /usertype/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
+	public function getDelete( $idCourse, $idUserType = '' ){
+
+		if( $idUserType == '' ):
+
+			return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_display_err'));
+
+		else:
+
+			$usertype = UserTypes::find($idUserType);
+
+			$delete = UserTypes::destroy($idUserType);
+
+			if(!$delete):
+
+				return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_delete_err', array( 'title' => $usertype->title )));
+
+			else:
+
+				return Redirect::to(self::parseRoute($idCourse))->with('msg_success', Lang::get('messages.usertypes_delete', array( 'title' => $usertype->title )));
+
+			endif;
+
+		endif;
+
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /usertype/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+	public function parseRoute( $idCourse ){
+
+		return str_replace('{idCourse}', $idCourse, $this->route );
+
 	}
 
 }

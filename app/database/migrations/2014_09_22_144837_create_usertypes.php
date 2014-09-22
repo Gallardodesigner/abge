@@ -14,7 +14,7 @@ class CreateUsertypes extends Migration {
 	{
 		Schema::connection('mysql')->create('usertypes', function($table){
 			$table->increments('id');
-			$table->integer('id_course');
+			$table->integer('course_id');
 			$table->string('title');
 			$table->string('content');
 			$table->boolean('associate');

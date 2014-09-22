@@ -26,6 +26,8 @@
 	Route::controller('/dashboard/companies', 'CompanyController');
 	Route::controller('/dashboard/categories', 'CategoryController');
 	Route::controller('/dashboard/events', 'EventController');
+	Route::controller('/dashboard/courses/{idCourse}/usertypes/{idUserType}/dates', 'DateController');
+	Route::controller('/dashboard/courses/{idCourse}/usertypes', 'UserTypeController');
 	Route::controller('/dashboard/courses', 'CourseController');
 	Route::controller('/dashboard', 'DashboardController');
 

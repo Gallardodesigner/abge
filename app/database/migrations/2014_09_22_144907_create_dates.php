@@ -14,7 +14,7 @@ class CreateDates extends Migration {
 	{
 		Schema::connection('mysql')->create('dates', function($table){
 			$table->increments('id');
-			$table->integer('id_user_type');
+			$table->integer('usertype_id');
 			$table->longText('message');
 			$table->longText('button');
 			$table->date('start');

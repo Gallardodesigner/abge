@@ -28,6 +28,9 @@ class Courses extends Eloquent {
 		return $this->belongsTo('Companies', 'company_id');
 	}
 
+	public function usertypes(){
+		return $this->hasMany('UserTypes', 'course_id', 'id');
+	}
 
 /* --------------------------- */
 
