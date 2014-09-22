@@ -34,7 +34,7 @@
 			jConfirm('Are you sure to delete this element?', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
-					window.location.assign("/dashboard/teachers/delete/"+elem.attr("data-id"));
+					window.location.assign("/dashboard/sections/delete/"+elem.attr("data-id"));
 				}
 			});
 		});
@@ -53,11 +53,11 @@ Courses
 @stop
 
 @section("maintitle")
-Teacher
+Section
 @stop
 
 @section("nameview")
-    All Teachers Trashed
+    All Sections Trashed
 @stop
 
 @section("MainContent")
@@ -86,9 +86,9 @@ Teacher
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                             <a href="/dashboard/teachers" class="btn dropdown-toggle">Back</a>
+                             <a href="/dashboard/sections" class="btn dropdown-toggle">Back</a>
                         </div>
-                        <h4 class="widgettitle">All Teachers Trashed</h4>
+                        <h4 class="widgettitle">All Sections Trashed</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -96,27 +96,25 @@ Teacher
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;">Thumb</th>
-                                <th class="head0" style="text-align:center;">Name</th>
+                                <th class="head0" style="text-align:center;">Title</th>
                                 <th class="head1" style="text-align:center;">Description</th>
                                 <th class="head0" style="text-align:center;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        	@foreach($teachers as $teacher)
+                        	@foreach($sections as $section)
                             <tr class="gradeX">
                              <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td class="center" style="vertical-align:middle;"><img class="rounded" src="/uploads/thumb_{{$teacher->url}}" /></td>
-                                <td class="center" style="vertical-align:middle;"><h4>{{$teacher->firstName}}{{$teacher->lastName}}</h4></td>
-                                <td class="center" style="vertical-align:middle;">{{$teacher->content}}</td>
+                                <td class="center" style="vertical-align:middle;"><h4>{{$section->title}}</h4></td>
+                                <td class="center" style="vertical-align:middle;">{{$section->description}}</td>
                                 <td class="center">
 
 
 
-                                <a href="/dashboard/teachers/untrash/{{$teacher->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>Untrash</a>
-								<a data-id="{{$teacher->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>Delete</a>
+                                <a href="/dashboard/sections/untrash/{{$section->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>Untrash</a>
+								<a data-id="{{$section->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>Delete</a>
 
                                </td>
                             </tr>

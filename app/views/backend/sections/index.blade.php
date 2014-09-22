@@ -34,7 +34,7 @@
 			jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
-					window.location.assign("/dashboard/teachers/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+					window.location.assign("/dashboard/sections/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
 				}
 			});
 		});
@@ -57,7 +57,7 @@ Teacher
 @stop
 
 @section("nameview")
-    All Teachers
+    All Sections
 @stop
 
 @section("MainContent")
@@ -86,9 +86,9 @@ Teacher
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="teachers/create" class="btn dropdown-toggle">Add New Teacher</a>
+                            <a href="sections/create" class="btn dropdown-toggle">Add New Section</a>
                         </div>
-                        <h4 class="widgettitle">All Teachers</h4>
+                        <h4 class="widgettitle">All Sections</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -96,38 +96,38 @@ Teacher
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;width:10%">Thumb</th>
-                                <th class="head0" style="text-align:center;width:20%">Name</th>
-                                <th class="head1" style="text-align:center;width:40%">Description</th>
+                                <th class="head0" style="text-align:center;width:10%">Title</th>
+                                <th class="head0" style="text-align:center;width:40%">Description</th>
+                                <th class="head1" style="text-align:center;width:20%">Upload Files</th>
                                 <th class="head1" style="text-align:center;width:10%">Status</th>
                                 <th class="head0" style="text-align:center;width:20%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        	@foreach($teachers as $teacher)
+                        	@foreach($sections as $section)
                             <tr class="gradeX">
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td class="center" style="vertical-align:middle;width:10%;"><img class="rounded" src="/uploads/thumb_{{$teacher->url}}" /></td>
-                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$teacher->firstName}} {{$teacher->lastName}}</h4></td>
-                                <td class="description" style="vertical-align:middle;width:40%;">{{$teacher->content}}</td>
-                                <td class="center" style="vertical-align:middle;width:10%;">{{ Lang::get('display.'.$teacher->status) }}</td>
+                                <td class="center" style="vertical-align:middle;width:10%;"><h4>{{$section->title}}</h4></td>
+                                <td class="description" style="vertical-align:middle;width:40%;">{{$section->description}}</td>
+                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$section->file}}</h4></td>
+                                <td class="center" style="vertical-align:middle;width:10%;">{{ Lang::get('display.'.$section->status) }}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 
-                                    <a href="/dashboard/teachers/update/{{$teacher->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
+                                    <a href="/dashboard/sections/update/{{$section->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    
-                                    @if($teacher->status == 'publish')
+                                    @if($section->status == 'publish')
 
-                                        <a data-id="{{$teacher->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
+                                        <a data-id="{{$section->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
                                     
                                     @else
                                     
-                                        <a data-id="{{$teacher->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
+                                        <a data-id="{{$section->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
 
                                     @endif
 
-                                    <a data-id="{{$teacher->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
+                                    <a data-id="{{$section->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
 
                                </td>
                             </tr>

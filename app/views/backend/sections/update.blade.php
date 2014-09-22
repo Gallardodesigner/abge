@@ -21,7 +21,7 @@
 @stop
 
 @section("title")
-Courses
+Sections
 @stop
 
 @section("iconpage")
@@ -29,11 +29,11 @@ Courses
 @stop
 
 @section("maintitle")
-Teacher
+Section
 @stop
 
 @section("nameview")
-    Edit Teacher
+    Edit Section
 @stop
 
 
@@ -45,32 +45,24 @@ Teacher
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/teachers" class="btn dropdown-toggle">Back</a>
+                        <a href="/dashboard/sections" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Edit Teacher</h4>
+                <h4 class="widgettitle">Edit Section</h4>
                 <div class="widgetcontent">
-                    <form class="stdform stdform2" method="post" enctype="multipart/form-data">
-                            <p>
-                                <label>Picture</label>
-                                <span class="field"><img class="rounded" src="/uploads/thumb_{{$teacher->url}}"/><input type="file" name="url" id="url" class="btn btn-primary"></span>
-                            </p>
-                            <p>
-                                <label>Name</label>
-                                <span class="field"><input type="text" name="firstName" id="firstName" class="input-xxlarge" value="{{$teacher->firstName}}"></span>
-                            </p>
-                            <p>
-                                <label>Lastname</label>
-                                <span class="field"><input type="text" name="lastName" id="lastName" class="input-xxlarge" value="{{$teacher->lastName}}"></span>
-                            </p>
+                    <form class="stdform stdform2" method="post">
                             
                             <p>
+                                <label>Title</label>
+                                <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" value="{{$section->title}}"></span>
+                            </p>
+                            <p>
                                 <label>Description</label>
-                                <span class="field"><textarea cols="40" rows="5" name="content" id="content" class="span6">{{$teacher->content}}</textarea></span>
+                                <span class="field"><textarea cols="40" rows="5" name="description" id="description" class="span6">{{$section->description}}</textarea></span>
                             </p>    
                              <p>
-                                <label>Contact</label>
-                                <span class="field"><textarea cols="40" rows="5" name="contact" id="contact" class="span6">{{$teacher->contact}}</textarea></span>
+                                <label>File to download?</label>
+                                <span class="field"><input type="checkbox" name="file" <?php ($section->file) ? "checked value='true'" : "value='false'";?>></span>
                             </p>                            
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>

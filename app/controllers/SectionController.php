@@ -29,9 +29,9 @@ class SectionController extends \BaseController {
 
 	public function postCreate(){
 			$section = new Sections();
-			$section->content = Input::get('title');
-			$section->content = Input::get('description');
-			$section->firstName = Input::get('file');
+			$section->title = Input::get('title');
+			$section->description = Input::get('description');
+			$section->file = Input::get('file');
 			if($section->save()):
 
 				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.sections_create', array( 'title' => $section->title , 'description' => $section->description, 'file'=>$section->file )));
@@ -84,18 +84,19 @@ class SectionController extends \BaseController {
 
 			else:
 
-				$section->content = Input::get('description');
-				$section->firstName = Input::get('file');
+				$section->title = Input::get('title');
+				$section->description = Input::get('description');
+				$section->file = Input::get('file');
 				$section->type = 'section';
 				$section->status = 'draft';
 
 				if($section->save()):
 
-					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.sections_update', array( 'firstName' => $section->firstName , 'lastName' => $section->lastName )));
+					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.sections_update', array( 'title' => $section->title , 'description' => $section->description, 'file'=>$section->file )));
 
 				else:
 
-					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.sections_update_err', array( 'firstName' => $section->firstName , 'lastName' => $section->lastName )));
+					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.sections_update_err', array( 'title' => $section->title , 'description' => $section->description, 'file'=>$section->file )));
 
 				endif;
 

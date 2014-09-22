@@ -29,11 +29,11 @@ Courses
 @stop
 
 @section("maintitle")
-Teacher
+Section
 @stop
 
 @section("nameview")
-    Add Teacher
+    Add Section
 @stop
 
 
@@ -45,33 +45,24 @@ Teacher
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/teachers" class="btn dropdown-toggle">Back</a>
+                        <a href="/dashboard/sections" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Add Teacher</h4>
+                <h4 class="widgettitle">Add Section</h4>
                 <div class="widgetcontent">
-                    <form class="stdform stdform2" method="post" enctype="multipart/form-data">
+                    <form class="stdform stdform2" method="post">
                             <p>
-                                <label>Picture</label>
-                                <span class="field"><input type="file" name="url" id="url" class="btn btn-primary"></span>
+                                <label>Title</label>
+                                <span class="field"><input type="text" name="title" id="title" class="input-xxlarge"></span>
                             </p>
-                            <p>
-                                <label>Name</label>
-                                <span class="field"><input type="text" name="firstName" id="firstName" class="input-xxlarge"></span>
-                            </p>
-                            <p>
-                                <label>Lastname</label>
-                                <span class="field"><input type="text" name="lastName" id="lastName" class="input-xxlarge"></span>
-                            </p>
-                            
                             <p>
                                 <label>Description</label>
-                                <span class="field"><textarea cols="80" rows="5" name="content" id="content" class="span6"></textarea></span>
-                            </p>    
-                             <p>
-                                <label>Contact</label>
-                                <span class="field"><textarea cols="80" rows="5" name="contact" id="contact" class="span6"></textarea></span>
-                            </p>                            
+                                <span class="field"><textarea cols="80" rows="5" name="description" id="description" class="span6"></textarea></span>
+                            </p>
+                            <p>
+                                <label>File to download?</label>
+                                <span class="field"><input type="checkbox" name="file" value="false"></span>
+                            </p>                        
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn">Reset</button>
