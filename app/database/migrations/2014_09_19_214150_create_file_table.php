@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInscriptions extends Migration {
+class CreateFileTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,13 @@ class CreateInscriptions extends Migration {
 	 */
 	public function up()
 	{
-		Schema::connection('mysql')->create('inscriptions', function($table){
+		Schema::connection('mysql')->create('files', function($table){
 			$table->increments('id');
 			$table->integer('id_course');
 			$table->integer('id_user');
+			$table->string('type_user');
+			$table->string('url');
+			$table->string('mime');
 			$table->string('status');
 			$table->timestamps();
 			$table->softDeletes();
@@ -29,9 +32,8 @@ class CreateInscriptions extends Migration {
 	 */
 	public function down()
 	{
-
-		Schema::dropIfExists('inscriptions');
-
+		//
+		Schema::dropIfExists('files');
 	}
 
 }
