@@ -201,6 +201,12 @@
                             <li><a href="{{{ URL::to('/dashboard/events/create') }}}">Add</a></li>
                             <li><a href="{{{ URL::to('/dashboard/events/trash') }}}">Trashed</a></li>
                         </ul>
+                        <li class="dropdown"><a href="">Section</a>
+                        <ul>
+                            <li><a href="{{{ URL::to('/dashboard/sections') }}}">All</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/sections/create') }}}">Add</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/sections/trash') }}}">Trashed</a></li>
+                        </ul>
                      </li>
                     </ul>
                 </li>

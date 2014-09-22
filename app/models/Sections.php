@@ -1,44 +1,15 @@
 <?php
 
-class Courses extends Eloquent {
+class Sections extends Eloquent {
 
-	protected $guarded = array();
-
-	public function teachers(){
-		return $this->belongsToMany('Teachers', 'course_teacher', 'course_id', 'teacher_id');
+	public function courses(){
+		return $this->belongsToMany('Courses', 'course_section', 'section_id', 'course_id');
 	}
 
-	public function sections(){
-		return $this->belongsToMany('Sections', 'course_teacher', 'course_id', 'section_id');
-	}
 
-	public function promotioners(){
-		return $this->belongsToMany('Companies', 'promotioners', 'course_id', 'company_id');
-	}
+/*------------ Common functions ------------------*/
 
-	public function supporters(){
-		return $this->belongsToMany('Companies', 'supporters', 'course_id', 'company_id');
-	}
-
-	public function category(){
-		return $this->belongsTo('Categories', 'category_id');
-	}
-
-	public function event(){
-		return $this->belongsTo('Events', 'event_id');
-	}
-
-	public function company(){
-		return $this->belongsTo('Companies', 'company_id');
-	}
-
-	public function usertypes(){
-		return $this->hasMany('UserTypes', 'course_id', 'id');
-	}
-
-/* --------------------------- */
-
-	public static function _get( $arg = 'all' ){
+public static function _get( $arg = 'all' ){
 		$operator = '=';
 		$status = '';
 		switch($arg){
@@ -99,5 +70,4 @@ class Courses extends Eloquent {
 	public static function trash($id){
 		return self::_edit($id, 'trash');
 	}
-
 }
