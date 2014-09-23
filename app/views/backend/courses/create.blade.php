@@ -289,30 +289,12 @@ Courses
                                     <li>
                                         <a href="#wiz1step3">
                                             <span class="h2">Step 3</span>
-                                            <span class="label">Content</span>
+                                            <span class="label">Sections</span>
                                         </a>
                                     </li>
-                                     <li>
+                                    <li>
                                         <a href="#wiz1step4">
                                             <span class="h2">Step 4</span>
-                                            <span class="label">Program Content</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#wiz1step5">
-                                            <span class="h2">Step 5</span>
-                                            <span class="label">Teachers</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#wiz1step6">
-                                            <span class="h2">Step 6</span>
-                                            <span class="label">Company, Sponsors & Promo</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#wiz1step7">
-                                            <span class="h2">Step 7</span>
                                             <span class="label">Payment</span>
                                         </a>
                                     </li>
@@ -359,7 +341,14 @@ Courses
                                             @endif
                                         </span>
                                     </p>
-                                       
+                                    <p>
+                                        <label>Min Participants</label>
+                                        <span class="field"> <input type="number" name="min"> </span>
+                                    </p>
+                                    <p>
+                                        <label>Max Participants</label>
+                                        <span class="field"> <input type="number" name="max"> </span>
+                                    </p>   
                                 </div>
                                 <div id="wiz1step2" class="formwiz">
                                     <h4 class="widgettitle">Step 2: Data and Location</h4>
@@ -385,104 +374,21 @@ Courses
                                                                                                        
                                 </div>
                                 <div id="wiz1step3" class="formwiz">
-                                    <h4 class="widgettitle">Step 3: Content</h4>
+                                    <h4 class="widgettitle">Step 3: Sections</h4>
                                     
                                         <p>
-                                            <label>Content</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="content" class="span6"></textarea></span>
+                                            <label>Sections</label>
+                                            <span class="field">
+                                                @foreach ($sections as $section):
+                                                    <input type="checkbox" name="section[]" value="{{$section->id}}">{{$section->title}}<br />
+                                                @endforeach
+                                            </span>
                                         </p>
                                                                                                        
                                 </div>
                                 <div id="wiz1step4" class="formwiz">
-                                    <h4 class="widgettitle">Step 4: Program Content</h4>
-                                    
-                                        <p>
-                                            <label>Content</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="program" class="span6"></textarea></span>
-                                        </p>
-                                                                                                       
-                                </div>
-                                <div id="wiz1step5" class="formwiz">
-                                    <h4 class="widgettitle">Step 5: Teachers</h4>
-                                    
-                                        <p>
-                                            <label>Add Teachers</label>
-                                            <span class="field">
-                                            
-                                                        @if (isset($teachers))
-                                                            <select class="chosen-select" name="teachers[]" multiple>
-                                                            @foreach ($teachers as $teacher)
-                                                                <option value="{{$teacher->id}}">{{$teacher->lastName.', '.$teacher->firstName}}</option>
-                                                            @endforeach
-                                                            </select>
-                                                        @endif
-                                                        
-                                            </span>
-                                        </p>
-                                    <div class="clearfix"></div>
-
-                                                                                                       
-                                </div>
-
-                                <div id="wiz1step6" class="formwiz">
-                                    <h4 class="widgettitle">Step 6: Company, Sponsors & Promo</h4>
-                                    
-                                        <p>
-                                            <label>Add company</label>
-                                            <span class="field">
-                                            
-                                                        @if (isset($companies))
-                                                            <select class="chosen-select" name="company_id">
-                                                            @foreach ($companies as $company)
-                                                                <option value="{{$company->id}}">{{$company->title}}</option>
-                                                            @endforeach
-                                                            </select>
-                                                        @endif
-                                                        
-                                            </span>
-                                        </p>
-                                         <p>
-                                            <label>Add sponsor</label>
-                                            <span class="field">
-                                            
-                                                        @if (isset($promotioners))
-                                                            <select class="chosen-select" name="promotioners[]" multiple>
-                                                            @foreach ($promotioners as $promotion)
-                                                                <option value="{{$promotion->id}}">{{$promotion->title}}</option>
-                                                            @endforeach
-                                                            </select>
-                                                        @endif
-                                                        
-                                            </span>
-                                        </p>
-                                         <p>
-                                            <label>Add promo</label>
-                                            <span class="field">
-                                            
-                                                        @if (isset($supporters))
-                                                            <select class="chosen-select" name="supporters[]" multiple>
-                                                            @foreach ($supporters as $support)
-                                                                <option value="{{$support->id}}">{{$support->title}}</option>
-                                                            @endforeach
-                                                            </select>
-                                                        @endif
-                                                        
-                                            </span>
-                                        </p>
-                                    <div class="clearfix"></div>
-                                                                                                       
-                                </div>
-                                <div id="wiz1step7" class="formwiz">
-                                    <h4 class="widgettitle">Step 7: Payment</h4>
-                                        <p>
-                                            <label>Min</label>
-                                            <span class="field"> <input type="number" name="min"> </span>
-                                        </p>
-                                        <p>
-                                            <label>Max</label>
-                                            <span class="field"> <input type="number" name="max"> </span>
-                                        </p>
-
+                                    <h4 class="widgettitle">Step 4: Payment</h4>
+                                       
                                         <p>
                                             <label>Inscription</label>
                                             <span class="field"><textarea cols="50" rows="10" name="inscription" class="span6"></textarea></span>
