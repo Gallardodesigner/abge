@@ -29,6 +29,7 @@ class CourseController extends \BaseController {
 		$categories = Categories::getPublish();
 		$events = Events::getPublish();
 		$companies = Companies::getPublish();
+		$sections = Sections::getPublish();
 
 		$array = array(
 			'teachers' => $teachers,
@@ -36,7 +37,8 @@ class CourseController extends \BaseController {
 			'events' => $events,
 			'companies' => $companies,
 			'promotioners' => $companies,
-			'supporters' => $companies
+			'supporters' => $companies,
+			'sections' => $sections
 			);
 		//
 		$courses = Courses::getUntrash();
