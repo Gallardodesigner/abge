@@ -17,7 +17,7 @@ class CreateCoursesTable extends Migration {
 			$table->string('title');
 			$table->text('description');
 			$table->longText('address');
-			$table->longText('inscription');
+			//$table->longText('inscription');
 			$table->date('start');
 			$table->date('end');
 			$table->integer('min');

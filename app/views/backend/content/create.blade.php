@@ -29,11 +29,11 @@ Courses
 @stop
 
 @section("maintitle")
-Section
+User Types
 @stop
 
 @section("nameview")
-    Add Section
+    Add User Types
 @stop
 
 
@@ -45,24 +45,24 @@ Section
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/sections" class="btn dropdown-toggle">Back</a>
+                        <a href="{{ $route }}" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Add Section</h4>
+                <h4 class="widgettitle">Add User Types</h4>
                 <div class="widgetcontent">
-                    <form class="stdform stdform2" method="post">
+                    <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
                                 <label>Title</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge"></span>
                             </p>
                             <p>
                                 <label>Description</label>
-                                <span class="field"><textarea cols="80" rows="5" name="description" id="description" class="span6"></textarea></span>
+                                <span class="field"><input type="text" name="content" id="content" class="input-xxlarge"></span>
                             </p>
                             <p>
-                                <label>File to download?</label>
-                                <span class="field"><input type="checkbox" name="file" value="true"></span>
-                            </p>                        
+                                <label>Is Associate?</label>
+                                <span class="field"><input type="checkbox" name="associate" id="associate" value="true" class="input-xxlarge"><em>Check this input to indicate that this user type is an associate</em></span>
+                            </p>                           
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn">Reset</button>

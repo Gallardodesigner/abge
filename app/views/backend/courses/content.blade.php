@@ -255,7 +255,7 @@ Courses
 @stop
 
 @section("nameview")
-    Add Course
+    Add Content
 @stop
 
 
@@ -270,8 +270,8 @@ Courses
                         <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                    <h4 class="widgettitle">Add Courses</h4>
-                        <form id="course" class="stdform " method="POST" action="">
+                    <h4 class="widgettitle">Add Content</h4>
+                        <form id="content" class="stdform " method="POST" action="">
                             <div id="wizard" class="wizard">
                                 <ul class="hormenu">
                                     <li>
@@ -295,10 +295,10 @@ Courses
                                     <li>
                                         <a href="#wiz1step4">
                                             <span class="h2">Step 4</span>
-                                            <span class="label">Participants</span>
+                                            <span class="label">Payment</span>
                                         </a>
                                     </li>
-                                  
+                                   
                                     
                                 </ul>
                                 
@@ -315,21 +315,6 @@ Courses
                                         <label>Description</label>
                                         <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" /></span>
                                     </p>
-                                    </p>
-                                    <p>
-                                        <label>Company</label>
-                                        <span class="field">
-                                            @if (isset($companies))
-
-                                                <select class="chosen-select" name="company_id" >
-
-                                                @foreach ($companies as $company)
-                                                    <option value="{{$company->id}}">{{$company->title}}</option>
-                                                @endforeach
-                                                </select>
-                                            @endif
-                                        </span>
-                                    </p>                                
                                     <p>
                                         <label>Category</label>
                                         <span class="field">
@@ -343,6 +328,7 @@ Courses
                                                 </select>
                                             @endif
                                         </span>
+                                    </p>                                
                                     <p>
                                         <label>Event</label>
                                         <span class="field">
@@ -355,6 +341,14 @@ Courses
                                             @endif
                                         </span>
                                     </p>
+                                    <p>
+                                        <label>Min Participants</label>
+                                        <span class="field"> <input type="number" name="min"> </span>
+                                    </p>
+                                    <p>
+                                        <label>Max Participants</label>
+                                        <span class="field"> <input type="number" name="max"> </span>
+                                    </p>   
                                 </div>
                                 <div id="wiz1step2" class="formwiz">
                                     <h4 class="widgettitle">Step 2: Data and Location</h4>
@@ -393,28 +387,6 @@ Courses
                                                                                                        
                                 </div>
                                 <div id="wiz1step4" class="formwiz">
-                                    <h4 class="widgettitle">Step 4: Participants</h4>
-                                       
-                                        <p>
-                                            <label>Min Participants</label>
-                                            <span class="field"> <input type="number" name="min"> </span>
-                                        </p>
-                                        <p>
-                                            <label>Message</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="min_message" class="span6"></textarea></span>
-                                        </p>
-                                        <p>
-                                            <label>Max Participants</label>
-                                            <span class="field"> <input type="number" name="max"> </span>
-                                        </p>   
-                                        <p>
-                                            <label>Message</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="max_message" class="span6"></textarea></span>
-                                            
-                                        </p>
-                                                                                                       
-                                </div>
-                    <!--            <div id="wiz1step4" class="formwiz">
                                     <h4 class="widgettitle">Step 4: Payment</h4>
                                        
                                         <p>
@@ -438,7 +410,7 @@ Courses
                                             <span class="field"><textarea cols="50" rows="10" name="participants_message" class="span6"></textarea></span>
                                         </p>
                                                                                                        
-                                </div>-->
+                                </div>
                             </div>
                             <div class="clearfix"></div>
                         </form>

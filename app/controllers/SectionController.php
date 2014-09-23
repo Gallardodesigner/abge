@@ -31,7 +31,7 @@ class SectionController extends \BaseController {
 			$section = new Sections();
 			$section->title = Input::get('title');
 			$section->description = Input::get('description');
-			$section->file = Input::get('file');
+			$section->file = Input::get('file') == 'true' ? true : false ;
 			if($section->save()):
 
 				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.sections_create', array( 'title' => $section->title , 'description' => $section->description, 'file'=>$section->file )));

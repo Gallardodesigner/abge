@@ -20,6 +20,7 @@ class CreateCoursesSectionsTable extends Migration {
 			$table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
 			$table->integer('section_id')->unsigned()->index();
 			$table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+			$table->longText('content');
 			$table->string('status');
 			$table->timestamps();
 			$table->softDeletes();
@@ -34,7 +35,7 @@ class CreateCoursesSectionsTable extends Migration {
 	public function down()
 	{
 		//
-		Schema::drop('course_teacher');
+		Schema::drop('course_section');
 		
 	}
 

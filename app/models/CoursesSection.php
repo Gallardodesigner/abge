@@ -1,18 +1,21 @@
 <?php
 
-class Sections extends Eloquent {
+class CoursesSections extends Eloquent {
+	protected $table = 'course_section';
+	
+	protected $guarded = array();
 
 	public function courses(){
-		return $this->belongsToMany('Courses', 'course_section', 'section_id', 'course_id');
+		return $this->belongsTo('Courses', 'courses_id');
+	}
+	public function courses(){
+		return $this->belongsTo('Sections', 'section_id');
 	}
 
-	public function coursesections(){
-		return $this->hasMany('CoursesSection', 'section_id', 'id');
-	}
 
-/*------------ Common functions ------------------*/
+/* --------------------------- */
 
-public static function _get( $arg = 'all' ){
+	public static function _get( $arg = 'all' ){
 		$operator = '=';
 		$status = '';
 		switch($arg){

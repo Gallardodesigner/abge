@@ -9,7 +9,11 @@ class Courses extends Eloquent {
 	}
 
 	public function sections(){
-		return $this->belongsToMany('Sections', 'course_teacher', 'course_id', 'section_id');
+		return $this->belongsToMany('Sections', 'course_section', 'course_id', 'section_id');
+	}
+
+	public function coursesections(){
+		return $this->hasMany('CoursesSection', 'course_id', 'id');
 	}
 
 	public function promotioners(){

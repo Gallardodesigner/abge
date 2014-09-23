@@ -81,34 +81,37 @@ class CourseController extends \BaseController {
 				)
 			);
 			*/
-
 		$course = new Courses();
 		$course->title = Input::get('title');
-		$course->content = Input::get('content');
+		$course->description = Input::get('description');/*
 		$course->description = Input::get('description');
-		$course->program = Input::get('program');
-		$course->address = Input::get('address');
 		$course->inscription = Input::get('inscription');
 		$course->associates_payment = Input::get('associates_payment');
 		$course->participants_payment = Input::get('participants_payment');
 		$course->associates_message = Input::get('associates_message');
-		$course->participants_message = Input::get('participants_message');
-		$course->min = Input::get('min');
-		$course->max = Input::get('max');
+		$course->program = Input::get('program');
+		$course->participants_message = Input::get('participants_message');*/
+		$course->category_id = Input::get('category_id');
 		$course->company_id = Input::get('company_id');
 		$course->event_id = Input::get('event_id');
-		$course->category_id = Input::get('category_id');
+		$course->min = Input::get('min');
+		$course->max = Input::get('max');
+		$course->min_message = Input::get('min_message');
+		$course->max_message = Input::get('max_message');
+		$course->address = Input::get('address');
 		$course->start = date("Y-m-d", strtotime(Input::get('start')));
 		$course->end = date("Y-m-d", strtotime(Input::get('end')));
 
 		if($course->save()):
 
-			$teachers = Input::get('teachers');
+			/*$teachers = Input::get('teachers');
 			$course->teachers()->sync($teachers);
 			$promotioners = Input::get('promotioners');
 			$course->promotioners()->sync($promotioners);
 			$supporters = Input::get('supporters');
-			$course->supporters()->sync($supporters);
+			$course->supporters()->sync($supporters);*/
+			$sections = Input::get('section');
+			$course->sections()->sync($sections);
 
 			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $course->title )));
 
@@ -180,6 +183,7 @@ class CourseController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+
 	public function getCreatesupporters()
 	{
 		//
