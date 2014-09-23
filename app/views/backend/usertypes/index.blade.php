@@ -86,7 +86,8 @@ User Type
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="usertypes/create" class="btn dropdown-toggle">Add New User Type</a>
+                            <a href="{{ $parent }}" class="btn dropdown-toggle">Back</a>
+                            <a href="usertypes/create" class="btn dropdown-toggle" style="padding-left:20px">Add New User Type</a>
                         </div>
                         <h4 class="widgettitle">All User Types</h4>
                     </div>

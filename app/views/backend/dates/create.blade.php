@@ -38,6 +38,28 @@ Teacher
 
 
 @section("MainContent")
+
+<script type="text/javascript">
+    jQuery(document).on('ready', function(){
+
+        jQuery('#start').datepicker({
+                defaultDate: "+1w",
+            dateFormat: "dd-mm-yy",
+
+              onClose: function( selectedDate ) {
+                jQuery("#end" ).datepicker("option", "minDate", selectedDate );
+            }
+        });
+
+        jQuery( "#end" ).datepicker({
+            defaultDate: "+1w",
+            dateFormat: "dd-mm-yy",
+          onClose: function( selectedDate ) {
+            jQuery( "#start" ).datepicker( "option", "maxDate", selectedDate );
+            }
+        });
+    });
+</script>
 <div class="maincontent">
             <div class="maincontentinner">
             
@@ -45,33 +67,29 @@ Teacher
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/teachers" class="btn dropdown-toggle">Back</a>
+                        <a href="{{ $route }}" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
                 <h4 class="widgettitle">Add Teacher</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
-                                <label>Picture</label>
-                                <span class="field"><input type="file" name="url" id="url" class="btn btn-primary"></span>
+                                <label>Start date</label>
+                                <span class="field"><input type="input" name="start" id="start" class="datepicker"></span>
                             </p>
                             <p>
-                                <label>Name</label>
-                                <span class="field"><input type="text" name="firstName" id="firstName" class="input-xxlarge"></span>
-                            </p>
-                            <p>
-                                <label>Lastname</label>
-                                <span class="field"><input type="text" name="lastName" id="lastName" class="input-xxlarge"></span>
+                                <label>End Date</label>
+                                <span class="field"><input type="input" name="end" id="end" class="datepicker"></span>
                             </p>
                             
                             <p>
-                                <label>Description</label>
-                                <span class="field"><textarea cols="80" rows="5" name="content" id="content" class="span6"></textarea></span>
+                                <label>Message</label>
+                                <span class="field"><textarea cols="80" rows="5" name="message" id="message" class="span6"></textarea></span>
                             </p>    
                              <p>
-                                <label>Contact</label>
-                                <span class="field"><textarea cols="80" rows="5" name="contact" id="contact" class="span6"></textarea></span>
-                            </p>                            
+                                <label>Button Code</label>
+                                <span class="field"><textarea cols="80" rows="5" name="button" id="button" class="span6"></textarea></span>
+                            </p>
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn">Reset</button>

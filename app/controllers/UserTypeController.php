@@ -27,7 +27,7 @@ class UserTypeController extends \BaseController {
 
 		else:
 
-			return Redirect::to(self::parseRoute($idCourse))->with(array('msg_error' => Lang::get('messages.course_not_found')));
+			return Redirect::to($this->parent)->with(array('msg_error' => Lang::get('messages.course_not_found')));
 
 		endif;
 
@@ -46,7 +46,7 @@ class UserTypeController extends \BaseController {
 
 		else:
 
-			return Redirect::to(self::parseRoute($idCourse))->with(array('msg_error' => Lang::get('messages.course_not_found')));
+			return Redirect::to($this->parent)->with(array('msg_error' => Lang::get('messages.course_not_found')));
 
 		endif;
 

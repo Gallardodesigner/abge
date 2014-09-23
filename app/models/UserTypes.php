@@ -10,7 +10,7 @@ class UserTypes extends \Eloquent {
 		return $this->belongsTo('Courses', 'course_id');
 	}
 
-	public function usertypes(){
+	public function dates(){
 		return $this->hasMany('Dates', 'usertype_id', 'id');
 	}
 

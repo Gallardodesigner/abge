@@ -34,7 +34,7 @@
 			jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
-					window.location.assign("/dashboard/teachers/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+					window.location.assign("{{ $route }}/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
 				}
 			});
 		});
@@ -53,11 +53,11 @@ Courses
 @stop
 
 @section("maintitle")
-Teacher
+Date
 @stop
 
 @section("nameview")
-    All Teachers
+    All Dates
 @stop
 
 @section("MainContent")
@@ -86,9 +86,10 @@ Teacher
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="teachers/create" class="btn dropdown-toggle">Add New Teacher</a>
+                            <a href="{{ $parent }}" class="btn dropdown-toggle">Back</a>
+                            <a href="dates/create" class="btn dropdown-toggle" style="padding-left:20px">Add New Date</a>
                         </div>
-                        <h4 class="widgettitle">All Teachers</h4>
+                        <h4 class="widgettitle">All Dates</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -96,38 +97,26 @@ Teacher
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;width:10%">Thumb</th>
-                                <th class="head0" style="text-align:center;width:20%">Name</th>
-                                <th class="head1" style="text-align:center;width:40%">Description</th>
-                                <th class="head1" style="text-align:center;width:10%">Status</th>
+                                <th class="head0" style="text-align:center;width:10%">Start Date</th>
+                                <th class="head0" style="text-align:center;width:20%">End Date</th>
+                                <th class="head1" style="text-align:center;width:40%">Message</th>
                                 <th class="head0" style="text-align:center;width:20%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        	@foreach($teachers as $teacher)
+                        	@foreach($dates as $date)
                             <tr class="gradeX">
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td class="center" style="vertical-align:middle;width:10%;"><img class="rounded" src="/uploads/thumb_{{$teacher->url}}" /></td>
-                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$teacher->firstName}} {{$teacher->lastName}}</h4></td>
-                                <td class="description" style="vertical-align:middle;width:40%;">{{$teacher->content}}</td>
-                                <td class="center" style="vertical-align:middle;width:10%;">{{ Lang::get('display.'.$teacher->status) }}</td>
+                                <td class="center" style="vertical-align:middle;width:10%;"><h4>{{$date->start}}</h4></td>
+                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$date->end}}</h4></td>
+                                <td class="description" style="vertical-align:middle;width:40%;">{{$date->message}}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 
-                                    <a href="/dashboard/teachers/update/{{$teacher->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
+                                    <a href="{{ $route }}/update/{{$date->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    
-                                    @if($teacher->status == 'publish')
-
-                                        <a data-id="{{$teacher->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
-                                    
-                                    @else
-                                    
-                                        <a data-id="{{$teacher->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
-
-                                    @endif
-
-                                    <a data-id="{{$teacher->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
+                                    <a data-id="{{$date->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Delete</a>
 
                                </td>
                             </tr>

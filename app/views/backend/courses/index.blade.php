@@ -83,9 +83,9 @@ Courses
                                 <th class="head0">Title</th>
                                 <th class="head1">Description</th>
                                 <th class="head0">Event</th>
-                                <th class="head1">Start at</th>
-                                <th class="head0">End at</th>
-                                <th class="head1">Participants</th>
+                                <th class="head1" style="width:10%">Start at</th>
+                                <th class="head0" style="width:10%">End at</th>
+                                <th class="head1" style="width:10%">Participants</th>
                                 <th class="head0">Actions</th>
                             </tr>
                         </thead>
@@ -103,16 +103,17 @@ Courses
                                         <td class="center">{{$course->end}}</td>
                                         <td class="center">{{$course->end}}</td>
                                         <td class="center">
+                                             <a href="/dashboard/courses/{{$course->id}}/usertypes/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>User Types</a>
                                              <a href="/dashboard/courses/update/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    
                                             @if($course->status == 'publish')
 
-                                                <a data-id="{{$course->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
+                                                <a data-id="{{$course->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
                                             
                                             @else
                                             
-                                                <a data-id="{{$course->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
-                                                <a data-id="{{$course->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
+                                                <a data-id="{{$course->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
+                                                <a data-id="{{$course->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
 
                                             @endif
                                         </td>
