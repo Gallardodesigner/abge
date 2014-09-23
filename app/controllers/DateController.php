@@ -10,169 +10,138 @@ class DateController extends \BaseController {
 
 	public function getIndex( $idCourse, $idUserType, $idDate = '' ){
 
-		$course = Courses::find($idCourse);
-
-		$usertype = UserTypes::find($idUserType);
-
-		if($course && $usertype):
-			if($idDate == ''):
-
-			else:
-
-			endif;
-		else:
-
-		endif;
-
-		return "Course: ".$idCourse.", UserType: ".($idUserType != '' ? $idUserType : 'Void');
-		$teachers = Teachers::getUntrash();
-
 		$msg_success = Session::get('msg_success');
 
 		$msg_error = Session::get('msg_error');
 
-		return View::make('backend.teachers.index', array(
-			'teachers' => $teachers,
+		$course = Courses::find($idCourse);
+
+		$usertype = UserTypes::find($idUserType);
+
+		if($course):
+
+			return View::make('backend.dates.index', array(
+			'course' => $course,
+			'usertypes' => $usertype,
+			'dates' => $usertype->dates,
+			'parent' => self::parseParent($idCourse),
+			'route' => self::parseRoute($idCourse, $idUserType),
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
 			));
 
-	}
-
-	public function getCreate(){
-
-		return View::make('backend.teachers.create');
-
-	}
-
-	public function postCreate(){
-
-		$image = Input::file('url');
-
-		$validator = Validator::make(
-			array(
-				'image' => $image
-				), 
-			array(
-				'image' => 'required|mimes:png,jpeg,gif'
-				),
-			array(
-				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
-				)
-			);
-
-		if($validator->fails()):
-
-			return Redirect::to($this->route.'/create')->with('msg_succes', Lang::get('messages.teachers_create_img_err'));
-
 		else:
 
-			$filename = $this->uploadImage($image);
-
-			$teacher = new Teachers();
-			$teacher->content = Input::get('content');
-			$teacher->firstName = Input::get('firstName');
-			$teacher->lastName = Input::get('lastName');
-			$teacher->contact = Input::get('contact');
-			$teacher->url = $filename;
-
-			if($teacher->save()):
-
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_create', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			else:
-
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_create_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			endif;
-
-		endif;
-	}
-
-	public function getUpdate( $id = '' ){
-
-		if( $id == '' ):
-
-			return Redirect::to($this->route);
-		
-		else:
-
-			$teacher = Teachers::find($id);
-
-			if(!$teacher):
-
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_display_err'));
-
-			else:
-
-				return View::make('backend.teachers.update', array('teacher' => $teacher));
-
-			endif;
+			return Redirect::to(self::parseRoute($idCourse, $idUserType))->with(array('msg_error' => Lang::get('messages.course_not_found')));
 
 		endif;
 
 	}
 
-	public function postUpdate( $id = '' ){
+	public function getCreate( $idCourse, $idUserType, $idDate = '' ){
 
-		if( $id == '' ):
+		$course = Courses::find($idCourse);
 
-			return Redirect::to($this->route);
-		
-		else:
+		if($course):
 
-			$teacher = Teachers::find($id);
+		$usertype = UserTypes::find($idUserType);
 
-			if(!$teacher):
+			if($usertype):
 
-				return Redirect::to($this->route);
+			return View::make('backend.dates.create', array(
+				'course' => $course,
+				'usertype' => $usertype,
+				'route' => self::parseRoute($idCourse, $idUserType),
+				));
 
 			else:
 
-				$teacher->content = Input::get('content');
-				$teacher->firstName = Input::get('firstName');
-				$teacher->lastName = Input::get('lastName');
-				$teacher->contact = Input::get('contact');
-				$teacher->type = 'teacher';
-				$teacher->status = 'draft';
+				return Redirect::to(self::parseRoute($idCourse, $idUserType))->with(array('msg_error' => Lang::get('messages.usertype_not_found')));
 
-				$image = Input::file('url');
+			endif;
 
-				if($image != null):
+		else:
 
-					$validator = Validator::make(
-						array(
-							'image' => $image
-							), 
-						array(
-							'image' => 'required|mimes:png,jpeg,gif'
-							),
-						array(
-							'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
-							)
-						);
+			return Redirect::to($this->ancestor)->with(array('msg_error' => Lang::get('messages.course_not_found')));
 
-					if($validator->fails()):
+		endif;
 
-						return Redirect::to($this->route.'/update/'.$id)->with('msg_succes', Lang::get('messages.teachers_update_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
+	}
 
-					else:
+	public function postCreate( $idCourse, $idUserType, $idDate = '' ){
 
-						$filename = $this->uploadImage($image);
+		$date = new Dates();
+		$date->usertype_id = $idUserType;
+		$date->start = date("Y-m-d", strtotime(Input::get('start')));
+		$date->end = date("Y-m-d", strtotime(Input::get('end')));
+		$date->message = Input::get('message');
+		$date->button = Input::get('button');
 
-						$teacher->url = $filename;
-					
-					endif;
+		if($date->save()):
 
-				endif;
+			return Redirect::to(self::parseRoute($idCourse, $idUserType))->with('msg_success', Lang::get('messages.dates_create'));
 
-				if($teacher->save()):
+		else:
 
-					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.teachers_update', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
+			return Redirect::to(self::parseRoute($idCourse, $idUserType))->with('msg_error', Lang::get('messages.dates_create_err'));
+
+		endif;
+	}
+
+	public function getUpdate( $idCourse, $idUserType, $idDate = '' ){
+
+		if( $idDate == '' ):
+
+			return Redirect::to(self::parseRoute($idCourse, $idUserType));
+		
+		else:
+
+			$date = Dates::find($idDate);
+			$date->start = date("d-m-Y", strtotime($date->start));
+			$date->end = date("d-m-Y", strtotime($date->end));
+
+			if(!$date):
+
+				return Redirect::to(self::parseRoute($idCourse, $idUserType))->with('msg_error', Lang::get('messages.dates_display_err'));
+
+			else:
+
+				return View::make('backend.dates.update', array('date' => $date,'route' => self::parseRoute($idCourse, $idUserType)));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function postUpdate( $idCourse, $idUserType, $idDate = '' ){
+
+		if( $idDate == '' ):
+
+			return Redirect::to(self::parseRoute($idCourse, $idUserType));
+		
+		else:
+
+			$date = Dates::find($idDate);
+
+			if(!$date):
+
+				return Redirect::to(self::parseRoute($idCourse, $idUserType));
+
+			else:
+
+				$date->start = date("Y-m-d", strtotime(Input::get('start')));
+				$date->end = date("Y-m-d", strtotime(Input::get('end')));
+				$date->message = Input::get('message');
+				$date->button = Input::get('button');
+
+				if($date->save()):
+
+					return Redirect::to(self::parseRoute($idCourse, $idUserType))->with('msg_succes', Lang::get('messages.dates_update'));
 
 				else:
 
-					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_update_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
+					return Redirect::to(self::parseRoute($idCourse, $idUserType))->with('msg_error', Lang::get('messages.dates_update_err'));
 
 				endif;
 
@@ -182,139 +151,25 @@ class DateController extends \BaseController {
 
 	}
 
-	public function getPublish( $id = '' ){
+	public function getDelete( $idCourse, $idUserType, $idDate = '' ){
 
-		if( $id == '' ):
+		if( $idDate == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_display_err'));
-		
-		else:
-
-			$teacher = Teachers::find($id);
-
-			$publish = Teachers::publish($id);
-
-			if(!$publish):
-
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_publish_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			else:
-
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_publish', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			endif;
-
-		endif;
-
-	}
-
-	public function getDraft( $id = '' ){
-
-		if( $id == '' ):
-
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_display_err'));
-		
-		else:
-
-			$teacher = Teachers::find($id);
-
-			$draft = Teachers::draft($id);
-
-			if(!$draft):
-
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_draft_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			else:
-
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_draft', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			endif;
-
-		endif;
-
-	}
-
-	public function getTrash( $id = '' ){
-
-		if( $id == '' ):
-
-			$teachers = Teachers::getTrash();
-
-			$msg_success = Session::get('msg_success');
-
-			$msg_error = Session::get('msg_error');
-
-			return View::make('backend.teachers.trash', array(
-				'teachers' => $teachers,
-				'msg_success' => $msg_success,
-				'msg_error' => $msg_error
-				));
-		
-		else:
-
-			$teacher = Teachers::find($id);
-
-			$trash = Teachers::trash($id);
-
-			if(!$trash):
-
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_trash_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			else:
-
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.teachers_trash', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			endif;
-
-		endif;
-
-	}
-
-	public function getUntrash( $id = '' ){
-
-		if( $id == '' ):
-
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_display_err'));
-		
-		else:
-
-			$teacher = Teachers::find($id);
-
-			$draft = Teachers::draft($id);
-
-			if(!$draft):
-
-				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.teachers_untrash_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			else:
-
-				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.teachers_untrash', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
-
-			endif;
-
-		endif;
-
-	}
-
-	public function getDelete( $id = '' ){
-
-		if( $id == '' ):
-
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.teachers_display_err'));
+			return Redirect::to(self::parseRoute($idCourse, $idUserType))->with('msg_error', Lang::get('messages.teachers_display_err'));
 
 		else:
 
-			$teacher = Teachers::find($id);
+			$date = Dates::find($idDate);
 
-			$delete = Teachers::destroy($id);
+			$delete = Dates::destroy($idDate);
 
 			if(!$delete):
 
-				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.teachers_delete_err', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
+				return Redirect::to(self::parseRoute($idCourse, $idUserType))->with('msg_error', Lang::get('messages.dates_delete_err'));
 
 			else:
 
-				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.teachers_delete', array( 'firstName' => $teacher->firstName , 'lastName' => $teacher->lastName )));
+				return Redirect::to(self::parseRoute($idCourse, $idUserType))->with('msg_success', Lang::get('messages.dates_delete'));
 
 			endif;
 
@@ -322,27 +177,18 @@ class DateController extends \BaseController {
 
 	}
 
-	public function uploadImage($image){
+	public function parseRoute( $idCourse, $idUserType ){
 
-		//dd(storage_path('uploads/'));
+		$route = str_replace('{idCourse}', $idCourse, $this->route );
 
-		$info_image = getimagesize($image);
-		$ratio = $info_image[0] / $info_image[1];
-		$newheight=array();
-		$width=array("100","200","400",$info_image[0]);
-		#$filename = "prueba.".$image->getClientOriginalExtension();
-		$filename = str_replace('/', '!', Hash::make($image->getClientOriginalName().date('Y-m-d H:i:s'))).".".$image->getClientOriginalExtension();
-		$nombres=["thumb_".$filename,"small_".$filename,"medium_".$filename,$filename];
+		return str_replace('{idUserType}', $idUserType, $route );
 
-		for ($i=0; $i <count($width) ; $i++):
+	}
 
-			$path = public_path('uploads/'.$nombres[$i]);
-			Image::make($image->getRealPath())->resize($width[$i],null,function ($constraint) {$constraint->aspectRatio();})->save($path);
-		
-		endfor;
+	public function parseParent( $idCourse ){
 
-		return $filename;
-		
+		return str_replace('{idCourse}', $idCourse, $this->parent ); 
+
 	}
 
 }
