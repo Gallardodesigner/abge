@@ -219,15 +219,9 @@ table{
       <div class="columna_lateral_home">
         <div class="menu_lat">
           <ul>
-            <li><a href="{{URL::to('courses/'.$course->id.'/stand')}}">Home</a></li>
-            <li><a href="{{URL::to('courses/'.$course->id.'/data')}}">Data e Lugar</a></li>
-            <li><a href="{{URL::to('courses/'.$course->id.'/program')}}">Conteúdo Programatico</a></li>
-            <li><a href="{{URL::to('courses/'.$course->id.'/teachers')}}">Ministrantes</a></li>
-            <li><a href="{{URL::to('courses/'.$course->id.'/inscription')}}">Inscrições</a></li>
-            <li><a href="{{URL::to('courses/'.$course->id.'/company')}}">Organização</a></li>
-            <li><a href="{{URL::to('courses/'.$course->id.'/promotioners')}}">Promoção</a></li>
-            <li><a href="{{URL::to('courses/'.$course->id.'/supporters')}}">Apoio</a></li>
-            <li><a href="{{URL::to('courses/'.$course->id.'/information')}}">Informações</a></li>
+            @foreach($contents as $link)
+              <li><a href="{{URL::to('courses/'.$course->id.'/content/'.$link->id)}}">{{$link->section->title}}</a></li>
+            @endforeach
           </ul>
         </div>
       </div>

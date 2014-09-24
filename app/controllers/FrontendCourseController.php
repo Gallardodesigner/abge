@@ -69,7 +69,7 @@ class FrontendCourseController extends \BaseController {
 
 		if($idContent != ''):
 
-			$array['section'] = Sections::find($idContent);
+			$array['section'] = CoursesSection::find($idContent);
 
 		endif;
 

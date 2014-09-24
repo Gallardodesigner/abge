@@ -12,7 +12,7 @@
 	<div class="courses-list">
 		@foreach($courses as $course)
 			<div class="course" data-id="{{$course->id}}">
-			 	<a href="{{ URL::to('courses/'.$course->id.'/stand') }}" >{{$course->title}}</a>
+			 	<a href="{{ URL::to('courses/'.$course->id) }}" >{{$course->title}}</a>
 			 	<div class="spec">
 			 		<p>{{$course->event->title}}</p>
 			 		<p>Inicio: {{$course->start}}</p>
