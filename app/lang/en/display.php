@@ -21,4 +21,10 @@ return array(
 
 	'trash' => 'Trashed',
 
+	'teachers' => 'Teachers',
+
+	'promotioners' => 'Promotioners',
+
+	'supporters' => 'Supporters',
+
 );

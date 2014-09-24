@@ -86,7 +86,7 @@ Content
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="usertypes/create" class="btn dropdown-toggle">Add New Content</a>
+                            <a href="sections/create" class="btn dropdown-toggle">Add New Content</a>
                         </div>
                         <h4 class="widgettitle">All Contents</h4>
                     </div>
@@ -98,26 +98,22 @@ Content
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
                                 <th class="head0" style="text-align:center;width:20%">Name</th>
                                 <th class="head1" style="text-align:center;width:40%">Description</th>
-                                <th class="head1" style="text-align:center;width:10%">Is Associate</th>
                                 <th class="head0" style="text-align:center;width:20%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        	@foreach($usertypes as $usertype)
+                        	@foreach($contents as $content)
                             <tr class="gradeX">
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$usertype->title}} </h4></td>
-                                <td class="description" style="vertical-align:middle;width:40%;">{{$usertype->content}}</td>
-                                <td class="center" style="vertical-align:middle;width:10%;">{{ $usertype->associate ? 'True' : 'False' }}</td>
+                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$content->section->title}} </h4></td>
+                                <td class="description" style="vertical-align:middle;width:40%;">{{$content->content}}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 
-                                    <a href="{{ $route }}{{$usertype->id}}/dates" class="btn btn-primary alertwarning" style="color:#FFF !important;"><i class="iconfa-calendar" style="color:#FFF;margin-right:10px;"></i>Dates</a>
+                                    <a href="{{ $route }}update/{{$content->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
 
-                                    <a href="{{ $route }}update/{{$usertype->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
-
-                                    <a data-id="{{$usertype->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; "><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Delete</a>
+                                    <a data-id="{{$content->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; "><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Delete</a>
 
                                </td>
                             </tr>

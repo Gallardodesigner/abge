@@ -48,7 +48,7 @@ User Types
                         <a href="{{ $route }}" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Edit User Types</h4>
+                <h4 class="widgettitle">Edit Sections</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                         <p>

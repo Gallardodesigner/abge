@@ -18,6 +18,7 @@ class CreateSectionsTable extends Migration {
 			$table->string('title');
 			$table->string('description');
 			$table->string('file');
+			$table->string('type');
 			$table->string('status');
 			$table->timestamps();
 			$table->softDeletes();

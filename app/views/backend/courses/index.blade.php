@@ -103,6 +103,7 @@ Courses
                                         <td class="center">{{$course->end}}</td>
                                         <td class="center">{{$course->end}}</td>
                                         <td class="center">
+                                             <a href="/dashboard/courses/{{$course->id}}/content/" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>Sections</a>
                                              <a href="/dashboard/courses/{{$course->id}}/usertypes/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>User Types</a>
                                              <a href="/dashboard/courses/update/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    

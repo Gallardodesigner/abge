@@ -1,14 +1,14 @@
 <?php
 
-class CoursesSections extends Eloquent {
+class CoursesSection extends Eloquent {
 	protected $table = 'course_section';
 	
 	protected $guarded = array();
 
-	public function courses(){
+	public function course(){
 		return $this->belongsTo('Courses', 'courses_id');
 	}
-	public function courses(){
+	public function section(){
 		return $this->belongsTo('Sections', 'section_id');
 	}
 

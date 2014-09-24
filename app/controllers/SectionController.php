@@ -28,9 +28,12 @@ class SectionController extends \BaseController {
 	}
 
 	public function postCreate(){
+
 			$section = new Sections();
 			$section->title = Input::get('title');
 			$section->description = Input::get('description');
+			$section->type = 'section';
+			$section->status = 'draft';
 			$section->file = Input::get('file') == 'true' ? true : false ;
 			if($section->save()):
 
@@ -87,7 +90,6 @@ class SectionController extends \BaseController {
 				$section->title = Input::get('title');
 				$section->description = Input::get('description');
 				$section->file = Input::get('file');
-				$section->type = 'section';
 				$section->status = 'draft';
 
 				if($section->save()):

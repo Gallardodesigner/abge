@@ -48,12 +48,20 @@ User Types
                         <a href="{{ $route }}" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Edit User Types</h4>
+                <h4 class="widgettitle">Edit Promotioners</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                         <p>
                             <label>{{ $content->section->title }}</label>
-                            <span class="field"><textarea type="text" name="content" id="content" class="input-xxlarge">{{ $content->content }}</textarea></span>
+                            <span class="field">
+                                @if (isset($promotioners))
+                                    <select class="chosen-select" name="promotioners" >
+                                    @foreach ($promotioners as $promotioner)
+                                        <option value="{{$promotioner->id}}">{{$promotioner->lastName}}, {{$promotioner->firstName}}</option>
+                                    @endforeach
+                                    </select>
+                                @endif
+                            </span>
                         </p>                         
                         <p class="pull-right">
                             <button class="btn btn-primary">Submit</button>

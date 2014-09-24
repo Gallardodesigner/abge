@@ -17,13 +17,14 @@ class ContentController extends \BaseController {
 		if($course):
 
 			return View::make('backend.content.index', array(
-			'course' => $course,
-			'courses_sections' => $course->coursesections,
-			'parent' => $this->parent,
-			'route' => self::parseRoute($idCourse),
-			'msg_success' => $msg_success,
-			'msg_error' => $msg_error
-			));
+				'course' => $course,
+				'sections' => $course->sections,
+				'contents' => $course->coursesections,
+				'parent' => $this->parent,
+				'route' => self::parseRoute($idCourse),
+				'msg_success' => $msg_success,
+				'msg_error' => $msg_error
+				));
 
 		else:
 
@@ -32,7 +33,7 @@ class ContentController extends \BaseController {
 		endif;
 
 	}
-
+/*
 	public function getCreate( $idCourse ){
 
 		$course = Courses::find($idCourse);
@@ -54,41 +55,71 @@ class ContentController extends \BaseController {
 
 	public function postCreate( $idCourse ){
 
-		$usertype = new UserTypes();
-		$usertype->course_id = $idCourse;
-		$usertype->title = Input::get('title');
-		$usertype->content = Input::get('content');
-		$usertype->associate = Input::get('associate') == 'true' ? true : false;
+		$content = new CoursesSection();
+		$content->course_id = $idCourse;
+		$content->title = Input::get('title');
+		$content->content = Input::get('content');
+		$content->associate = Input::get('associate') == 'true' ? true : false;
 
-		if($usertype->save()):
+		if($content->save()):
 
-			return Redirect::to(self::parseRoute($idCourse))->with('msg_success', Lang::get('messages.usertypes_create', array( 'title' => $usertype->title )));
+			return Redirect::to(self::parseRoute($idCourse))->with('msg_success', Lang::get('messages.contents_create', array( 'title' => $content->title )));
 
 		else:
 
-			return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_create_err', array( 'title' => $usertype->title )));
+			return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.contents_create_err', array( 'title' => $content->title )));
 
 		endif;
 
 	}
 
-	public function getUpdate( $idCourse, $idUserType = '' ){
+*/	public function getUpdate( $idCourse, $idContent = '' ){
 
-		if( $idUserType == '' ):
+		if( $idContent == '' ):
 
 			return Redirect::to(self::parseRoute($idCourse));
 		
 		else:
 
-			$usertype = UserTypes::find($idUserType);
+			$content = CoursesSection::find($idContent);
 
-			if(!$usertype):
+			if(!$content):
 
-				return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_display_err'));
+				return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.contents_display_err'));
 
 			else:
 
-				return View::make('backend.usertypes.update', array('usertype' => $usertype, 'route' => $this->route ));
+				$array =  array(
+					'content' => $content, 
+					'route' => self::parseRoute($idCourse) 
+					);
+
+				$course = Courses::find($idCourse);
+
+				$view = null;
+
+				switch($content->section->type){
+					case 'text':
+						$view = 'backend.content.section';
+						break;
+					case 'teachers':
+						$array['teachers'] = $course->teachers;
+						$view = 'backend.content.teachers';
+						break;
+					case 'promotioners':
+						$array['promotioners'] = $course->promotioners;
+						$view = 'backend.content.promotioners';
+						break;
+					case 'supporters':
+						$array['supporters'] = $course->supporters;
+						$view = 'backend.content.supporters';
+						break;
+					default:
+						$view = 'backend.content.section';
+						break;
+				}
+
+				return View::make($view, $array );
 
 			endif;
 
@@ -96,34 +127,44 @@ class ContentController extends \BaseController {
 
 	}
 
-	public function postUpdate( $idCourse, $idUserType = '' ){
+	public function postUpdate( $idCourse, $idContent = '' ){
 
-		if( $idUserType == '' ):
+		if( $idContent == '' ):
 
 			return Redirect::to(self::parseRoute($idCourse));
 		
 		else:
 
-			$usertype = UserTypes::find($idUserType);
+			$content = CoursesSection::find($idContent);
 
-			if(!$usertype):
+			if(!$content):
 
 				return Redirect::to(self::parseRoute($idCourse));
 
 			else:
 
-				$usertype->course_id = $idCourse;
-				$usertype->title = Input::get('title');
-				$usertype->content = Input::get('content');
-				$usertype->associate = Input::get('associate') == 'true' ? true : false;
+				$course = Courses::find($idCourse);
 
-				if($usertype->save()):
+				if(Input::get('teachers') != null ):
+					$teachers = Input::get('teachers');
+					$course->teachers()->sync($teachers);
+				elseif(Input::get('promotioners') != null ):
+					$promotioners = Input::get('promotioners');
+					$course->promotioners()->sync($promotioners);
+				elseif(Input::get('supporters') != null ):
+					$supporters = Input::get('supporters');
+					$course->supporters()->sync($supporters);
+				endif;
 
-					return Redirect::to(self::parseRoute($idCourse))->with('msg_success', Lang::get('messages.usertypes_update', array( 'title' => $usertype->title )));
+				$content->content = Input::get('content');
+
+				if($content->save()):
+
+					return Redirect::to(self::parseRoute($idCourse))->with('msg_success', Lang::get('messages.contents_update', array( 'title' => $content->title )));
 
 				else:
 
-					return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_update_err', array( 'title' => $usertype->title )));
+					return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.contents_update_err', array( 'title' => $content->title )));
 
 				endif;
 
@@ -133,25 +174,25 @@ class ContentController extends \BaseController {
 
 	}
 
-	public function getDelete( $idCourse, $idUserType = '' ){
+	public function getDelete( $idCourse, $idContent = '' ){
 
-		if( $idUserType == '' ):
+		if( $idContent == '' ):
 
-			return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_display_err'));
+			return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.contents_display_err'));
 
 		else:
 
-			$usertype = UserTypes::find($idUserType);
+			$content = CoursesSection::find($idContent);
 
-			$delete = UserTypes::destroy($idUserType);
+			$delete = CoursesSection::destroy($idContent);
 
 			if(!$delete):
 
-				return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_delete_err', array( 'title' => $usertype->title )));
+				return Redirect::to(self::parseRoute($idCourse))->with('msg_error', Lang::get('messages.contents_delete_err', array( 'title' => $content->title )));
 
 			else:
 
-				return Redirect::to(self::parseRoute($idCourse))->with('msg_success', Lang::get('messages.usertypes_delete', array( 'title' => $usertype->title )));
+				return Redirect::to(self::parseRoute($idCourse))->with('msg_success', Lang::get('messages.contents_delete', array( 'title' => $content->title )));
 
 			endif;
 
