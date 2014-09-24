@@ -9,7 +9,7 @@ class FrontendCourseController extends \BaseController {
 	Files: 
 
 		- index.blade.php 			Muestra todos los cursos activos
-		- stand.blade.php 			Muestra la informacion principal del curso
+		- content.blade.php 			Muestra la informacion principal del curso
 		- data.blade.php 			Muestra la fecha y localidad del curso
 		- program.blade.php 		Muestra el contenido programatico del curso
 		- teachers.blade.php 		Muestra los profesores del curso
@@ -23,7 +23,7 @@ class FrontendCourseController extends \BaseController {
 
 	*/
 
-	public function getIndex( $id = '', $stand = '' ){
+	public function getIndex( $id = '', $content = '', $idContent = ''  ){
 
 		if( $id == '' ):
 
@@ -37,43 +37,16 @@ class FrontendCourseController extends \BaseController {
 
 			if($course):
 
-				switch($stand){
+				switch($content){
 
 					case '':
-						return self::getCourseStand( $id, $course );
+						return self::getCourseContent( $id, $course, $idContent );
 						break;
-					case 'stand':
-						return self::getCourseStand( $id, $course );
-						break;
-					case 'data':
-						return self::getCourseData( $id, $course );
-						break;
-					case 'program':
-						return self::getCourseProgram( $id, $course );
-						break;
-					case 'teachers':
-						return self::getCourseTeachers( $id, $course );
-						break;
-					case 'inscription':
-						return self::getCourseInscription( $id, $course );
-						break;
-					case 'company':
-						return self::getCourseCompany( $id, $course );
-						break;
-					case 'promotioners':
-						return self::getCoursePromotioners( $id, $course);
-						break;
-					case 'supporters':
-						return self::getCourseSupporters( $id, $course );
-						break;
-					case 'information':
-						return self::getCourseInformation( $id, $course);
-						break;
-					case 'book':
-						return self::getCourseBook( $id, $course);
+					case 'content':
+						return self::getCourseContent( $id, $course, $idContent );
 						break;
 					default:
-						return self::getCourseStand( $id, $course );
+						return self::getCourseContent( $id, $course, $idContent );
 						break;
 
 				}
@@ -88,12 +61,22 @@ class FrontendCourseController extends \BaseController {
 
 	}
 
-	public static function getCourseStand( $id, $course ){
+	public static function getCourseContent( $id, $course, $idContent ){
 
-		return View::make('frontend.courses.stand')->with( array( 'course' => $course ) );
+		$contents = $course->coursesections;
+
+		$array = array( 'course' => $course, 'contents' => $contents );
+
+		if($idContent != ''):
+
+			$array['section'] = Sections::find($idContent);
+
+		endif;
+
+		return View::make('frontend.courses.content')->with( $array );
 
 	}
-
+/*
 	public static function getCourseData( $id, $course ){
 
 		return View::make('frontend.courses.data')->with( array( 'course' => $course ) );
@@ -153,5 +136,5 @@ class FrontendCourseController extends \BaseController {
 		return View::make('frontend.courses.book')->with( array( 'course' => $course ) );
 
 	}
-
+*/
 }

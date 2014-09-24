@@ -37,7 +37,7 @@
 	// 	return Redirect::to('/');
 	// });
 	Route::controller('/auth', 'AuthenticationController');
-	Route::controller('/courses/{id?}/{stand?}', 'FrontendCourseController');
+	Route::controller('/courses/{id?}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/', 'FrontendController');
 
 
