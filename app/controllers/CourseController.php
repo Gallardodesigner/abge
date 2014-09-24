@@ -148,7 +148,7 @@ class CourseController extends \BaseController {
 			$array = array(
 				'course' => $course,
 				'sections' => $sections,
-				'teachers' => $teachers,
+				// 'teachers' => $teachers,
 				'categories' => $categories,
 				'events' => $events,
 				'companies' => $companies,

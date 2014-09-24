@@ -270,7 +270,7 @@ Courses
                         <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                    <h4 class="widgettitle">Edit Courses</h4>
+                    <h4 class="widgettitle">Add Courses</h4>
                         <form id="course" class="stdform " method="POST" action="">
                             <div id="wizard" class="wizard">
                                 <ul class="hormenu">
@@ -289,34 +289,22 @@ Courses
                                     <li>
                                         <a href="#wiz1step3">
                                             <span class="h2">Step 3</span>
-                                            <span class="label">Content</span>
+                                            <span class="label">Sections</span>
                                         </a>
                                     </li>
-                                     <li>
+                                    <li>
                                         <a href="#wiz1step4">
                                             <span class="h2">Step 4</span>
-                                            <span class="label">Program Content</span>
+                                            <span class="label">Participants</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#wiz1step5">
-                                            <span class="h2">Step 5</span>
-                                            <span class="label">Teachers</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#wiz1step6">
-                                            <span class="h2">Step 6</span>
-                                            <span class="label">Company, Sponsors & Promo</span>
-                                        </a>
-                                    </li>
-                                   
+                                  
                                     
                                 </ul>
                                 
 
                                 <div id="wiz1step1" class="formwiz">
-                                    <h4 class="widgettitle">Step 1: Basic Information</h4>
+                                <h4 class="widgettitle">Step 1: Basic Information</h4>
                                 
                                     <p>
                                         <label>Title</label>
@@ -327,6 +315,24 @@ Courses
                                         <label>Description</label>
                                         <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" value="{{$course->description}}" /></span>
                                     </p>
+                                    </p>
+                                    <p>
+                                        <label>Company</label>
+                                        <span class="field">
+                                            @if (isset($companies))
+
+                                                <select class="chosen-select" name="company_id" >
+                                                @foreach ($companies as $company)
+                                                @if ($course->company->id == $company->id)
+                                                    <option value="{{$company->id}}" selected>{{$company->title}}</option>
+                                                @else
+                                                    <option value="{{$company->id}}">{{$company->title}}</option>
+                                                @endif
+                                                @endforeach
+                                                </select>
+                                            @endif
+                                        </span>
+                                    </p>                                
                                     <p>
                                         <label>Category</label>
                                         <span class="field">
@@ -335,25 +341,31 @@ Courses
                                                 <select class="chosen-select" name="category_id" >
 
                                                 @foreach ($categories as $category)
+                                                @if ($course->category->id == $category->id)
+                                                    <option value="{{$category->id}}" selected>{{$category->title}}</option>
+                                                @else
                                                     <option value="{{$category->id}}">{{$category->title}}</option>
+                                                @endif
                                                 @endforeach
                                                 </select>
                                             @endif
                                         </span>
-                                    </p>                                
                                     <p>
                                         <label>Event</label>
                                         <span class="field">
                                             @if (isset($events))
                                                 <select class="chosen-select" name="event_id" >
                                                 @foreach ($events as $event)
+                                                @if ($course->event->id == $event->id)
+                                                    <option value="{{$event->id}}" selected>{{$event->title}}</option>
+                                                @else
                                                     <option value="{{$event->id}}">{{$event->title}}</option>
+                                                @endif
                                                 @endforeach
                                                 </select>
                                             @endif
                                         </span>
                                     </p>
-                                       
                                 </div>
                                 <div id="wiz1step2" class="formwiz">
                                     <h4 class="widgettitle">Step 2: Data and Location</h4>
@@ -374,140 +386,80 @@ Courses
                                         </p>
                                         <p>
                                             <label>Address</label>
-                                            <span class="field"><textarea cols="30" rows="10" name="address" class="span3">
-                                            {{$course->address}}
-                                            </textarea></span>
+                                            <span class="field"><textarea cols="30" rows="10" name="address" class="span3">{{$course->address}}</textarea></span>
                                         </p>
                                                                                                        
                                 </div>
                                 <div id="wiz1step3" class="formwiz">
-                                    <h4 class="widgettitle">Step 3: Content</h4>
+                                    <h4 class="widgettitle">Step 3: Sections</h4>
                                     
                                         <p>
-                                            <label>Content</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="content" class="span6">
-                                                {{$course->content}}
-                                            </textarea></span>
+                                            <label>Sections</label>
+                                            <span class="field">
+                                                @foreach ($sections as $section)
+                                                    <?php $bandera = false; ?>
+                                                    @foreach($course->coursesections as $selected)
+                                                        @if($selected->section->id == $section->id)
+                                                             <?php $bandera = true; ?>
+                                                        @endif
+                                                    @endforeach
+                                                    @if($bandera)
+                                                        <input type="checkbox" name="section[]" value="{{$section->id}}" checked>{{$section->title}}<br />
+                                                    @else
+                                                         <input type="checkbox" name="section[]" value="{{$section->id}}">{{$section->title}}<br />
+                                                    @endif
+                                                @endforeach
+                                            </span>
                                         </p>
                                                                                                        
                                 </div>
                                 <div id="wiz1step4" class="formwiz">
-                                    <h4 class="widgettitle">Step 4: Program Content</h4>
-                                    
+                                    <h4 class="widgettitle">Step 4: Participants</h4>
+                                       
                                         <p>
-                                            <label>Content</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="program" class="span6">
-                                                {{$course->program}}
-                                            </textarea></span>
+                                            <label>Min Participants</label>
+                                            <span class="field"> <input type="number" name="min"> </span>
+                                        </p>
+                                        <p>
+                                            <label>Message</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="min_message" class="span6"></textarea></span>
+                                        </p>
+                                        <p>
+                                            <label>Max Participants</label>
+                                            <span class="field"> <input type="number" name="max"> </span>
+                                        </p>   
+                                        <p>
+                                            <label>Message</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="max_message" class="span6"></textarea></span>
+                                            
                                         </p>
                                                                                                        
                                 </div>
-                                <div id="wiz1step5" class="formwiz">
-                                    <h4 class="widgettitle">Step 5: Teachers</h4>
-                                    
+                    <!--            <div id="wiz1step4" class="formwiz">
+                                    <h4 class="widgettitle">Step 4: Payment</h4>
+                                       
                                         <p>
-                                            <label>Add Teachers</label>
-                                            <span class="field">
-                                            
-                                                        @if (isset($teachers))
-                                                            <select class="chosen-select" name="teachers[]" multiple>
-                                                            @foreach ($teachers as $teacher)
-                                                                <?php $band = false; ?>
-                                                                @foreach($course->teachers as $asoc_teach)
-                                                                    @if ($teacher->id == $asoc_teach->id)
-                                                                        <?php $band = true; ?>
-                                                                    @endif
-                                                                @endforeach
-                                                                @if ($band)
-                                                                    <option value="{{$teacher->id}}" selected >{{$teacher->lastName.', '.$teacher->firstName}}</option>
-                                                                @else
-                                                                    <option value="{{$teacher->id}}">{{$teacher->lastName.', '.$teacher->firstName}}</option>
-                                                                @endif
-                                                            @endforeach
-                                                            </select>
-                                                        @endif
-                                                        
-                                            </span>
+                                            <label>Inscription</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="inscription" class="span6"></textarea></span>
                                         </p>
-                                    <div class="clearfix"></div>
-
+                                        <p>
+                                            <label>Associates Payment</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="associates_payment" class="span6"></textarea></span>
+                                        </p>
+                                        <p>
+                                            <label>Associates Message</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="associates_message" class="span6"></textarea></span>
+                                        </p>
+                                        <p>
+                                            <label>Participants Payment</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="participants_payment" class="span6"></textarea></span>
+                                        </p>
+                                        <p>
+                                            <label>Participants Message</label>
+                                            <span class="field"><textarea cols="50" rows="10" name="participants_message" class="span6"></textarea></span>
+                                        </p>
                                                                                                        
-                                </div>
-
-                                <div id="wiz1step6" class="formwiz">
-                                    <h4 class="widgettitle">Step 6: Company, Sponsors & Promo</h4>
-                                    
-                                        <p>
-                                            <label>Add company</label>
-                                            <span class="field">
-                                            
-                                                        @if (isset($companies))
-                                                            <select class="chosen-select" name="company_id">
-                                                            @foreach ($companies as $company)
-                                                                @if($company->id == $course->company->id)
-                                                                    <option value="{{$company->id}}" selected>{{$company->title}}</option>
-                                                                @else
-                                                                    <option value="{{$company->id}}">{{$company->title}}</option>
-
-                                                                @endif
-                                                            @endforeach
-                                                            </select>
-                                                        @endif
-                                                        
-                                            </span>
-                                        </p>
-                                        <p>
-                                            <label>Add sponsor</label>
-                                            <span class="field">
-
-                                                        @if (isset($promotioners))
-                                                            <select class="chosen-select" name="promotioners[]" multiple>
-                                                            @foreach ($promotioners as $promotion)
-                                                                <?php $band = false; ?>
-                                                                @foreach($course->promotioners as $assoc_prom)
-                                                                    @if ($promotion->id == $assoc_prom->id)
-                                                                        <?php $band = true; ?>
-                                                                    @endif
-                                                                @endforeach
-                                                                @if ($band)
-                                                                    <option value="{{$promotion->id}}" selected >{{$promotion->title}}</option>
-                                                                @else
-                                                                    <option value="{{$promotion->id}}">{{$promotion->title}}</option>
-                                                                @endif
-                                                            @endforeach
-                                                            </select>
-                                                        @endif
-                                                        
-                                            </span>
-                                        </p>
-                                        <p>
-                                            <label>Add promo</label>
-                                            <span class="field">
-                                            
-                                                       
-                                                        @if (isset($supporters))
-                                                            <select class="chosen-select" name="supporters[]" multiple>
-                                                            @foreach ($supporters as $support)
-                                                                <?php $band = false; ?>
-                                                                @foreach($course->supporters as $assoc_suppor)
-                                                                    @if ($support->id == $assoc_suppor->id)
-                                                                        <?php $band = true; ?>
-                                                                    @endif
-                                                                @endforeach
-                                                                @if ($band)
-                                                                    <option value="{{$support->id}}" selected >{{$support->title}}</option>
-                                                                @else
-                                                                    <option value="{{$support->id}}">{{$support->title}}</option>
-                                                                @endif
-                                                            @endforeach
-                                                            </select>
-                                                        @endif
-                                            </span>
-                                        </p>
-                                    <div class="clearfix"></div>
-                                                                                                       
-                                </div>
-                                
+                                </div>-->
                             </div>
                             <div class="clearfix"></div>
                         </form>
