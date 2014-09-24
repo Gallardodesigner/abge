@@ -120,6 +120,7 @@ class CourseController extends \BaseController {
 			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $course->title )));
 
 		endif;
+
 	}
 
 	/**
@@ -135,16 +136,18 @@ class CourseController extends \BaseController {
 		else:
 
 			$course = Courses::find($id);
-			$teachers = Teachers::getPublish();
 			$categories = Categories::getPublish();
 			$events = Events::getPublish();
 			$companies = Companies::getPublish();
+			$sections = Sections::getPublish();
+			$content = $course->sections;
 		
 			$course->start = date("d-m-Y", strtotime($course->start));
 			$course->end = date("d-m-Y", strtotime($course->end));
 
 			$array = array(
 				'course' => $course,
+				'sections' => $sections,
 				'teachers' => $teachers,
 				'categories' => $categories,
 				'events' => $events,
@@ -160,7 +163,7 @@ class CourseController extends \BaseController {
 	
 			else:
 
-				return View::make("backend.courses.update3", $array );
+				return View::make("backend.courses.update", $array );
 		
 			endif;
 
@@ -174,7 +177,32 @@ class CourseController extends \BaseController {
 	 */
 	public function postUpdate( $id = '' )
 	{
-		//
+
+		$course = Courses::find($id);
+		$course->title = Input::get('title');
+		$course->description = Input::get('description');
+		$course->category_id = Input::get('category_id');
+		$course->company_id = Input::get('company_id');
+		$course->event_id = Input::get('event_id');
+		$course->min = Input::get('min');
+		$course->max = Input::get('max');
+		$course->min_message = Input::get('min_message');
+		$course->max_message = Input::get('max_message');
+		$course->address = Input::get('address');
+		$course->start = date("Y-m-d", strtotime(Input::get('start')));
+		$course->end = date("Y-m-d", strtotime(Input::get('end')));
+
+		if($course->save()):
+			$sections = Input::get('section');
+			$course->sections()->sync($sections);
+
+			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $course->title )));
+
+		else:
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $course->title )));
+
+		endif;
 
 	}
 
