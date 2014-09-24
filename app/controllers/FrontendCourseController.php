@@ -76,12 +76,15 @@ class FrontendCourseController extends \BaseController {
 					return View::make('frontend.courses.content')->with( $array );
 					break;
 				case 'teachers':
+					$array['teachers'] = $course->teachers;
 					return View::make('frontend.courses.teachers')->with( $array );
 					break;
 				case 'promotioners':
+					$array['promotioners'] = $course->promotioners;
 					return View::make('frontend.courses.promotioners')->with( $array );
 					break;
 				case 'supporters':
+					$array['supporters'] = $course->supporters;
 					return View::make('frontend.courses.supporters')->with( $array );
 					break;
 				default:
