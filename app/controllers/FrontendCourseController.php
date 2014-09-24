@@ -91,10 +91,10 @@ class FrontendCourseController extends \BaseController {
 
 		else:
 
-		return View::make('frontend.courses.content')->with( $array );
+		return View::make('frontend.courses.index')->with( $array );
 
 		endif;
-		
+
 	}
 /*
 	public static function getCourseData( $id, $course ){
