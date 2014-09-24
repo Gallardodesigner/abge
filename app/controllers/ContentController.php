@@ -89,12 +89,13 @@ class ContentController extends \BaseController {
 
 			else:
 
+				$course = Courses::find($idCourse);
+
 				$array =  array(
+					'course' => $course,
 					'content' => $content, 
 					'route' => self::parseRoute($idCourse) 
 					);
-
-				$course = Courses::find($idCourse);
 
 				$view = null;
 
@@ -103,15 +104,15 @@ class ContentController extends \BaseController {
 						$view = 'backend.content.section';
 						break;
 					case 'teachers':
-						$array['teachers'] = $course->teachers;
+						$array['teachers'] = Teachers::getPublish();
 						$view = 'backend.content.teachers';
 						break;
 					case 'promotioners':
-						$array['promotioners'] = $course->promotioners;
+						$array['promotioners'] = Companies::getPublish();
 						$view = 'backend.content.promotioners';
 						break;
 					case 'supporters':
-						$array['supporters'] = $course->supporters;
+						$array['supporters'] = Companies::getPublish();
 						$view = 'backend.content.supporters';
 						break;
 					default:

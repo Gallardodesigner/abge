@@ -15,6 +15,9 @@
 {{HTML::script("assetsadmin/js/tiny_mce/jquery.tinymce.min.js")}}
 {{HTML::script("assetsadmin/js/tiny_mce/tinymce.js")}}
 {{HTML::script("assetsadmin/js/wysiwyg.js")}}
+{{HTML::style("assetsadmin/js/chosen/chosen.min.css")}}
+{{HTML::script("assetsadmin/js/chosen/chosen.jquery.min.js")}}
+{{HTML::script("assetsadmin/js/chosen/chosen.proto.min.js")}}
 <script>
  
 </script>
@@ -38,9 +41,13 @@ User Types
 
 
 @section("MainContent")
+<script type="text/javascript">
+    jQuery(document).on('ready', function(){
+        jQuery('.chosen-select').chosen({no_results_text: "Oops, nothing found!"});
+    });
+</script>
 <div class="maincontent">
             <div class="maincontentinner">
-            
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 <div class="widgetbox">
                 <div class="headtitle">
@@ -55,9 +62,19 @@ User Types
                             <label>{{ $content->section->title }}</label>
                             <span class="field">
                                 @if (isset($teachers))
-                                    <select class="chosen-select" name="teachers" >
+                                    <select class="chosen-select" name="teachers[]" multiple>
                                     @foreach ($teachers as $teacher)
-                                        <option value="{{$teacher->id}}">{{$teacher->lastName}}, {{$teacher->firstName}}</option>
+                                        <?php $bandera = false; ?>
+                                        @foreach($course->teachers as $teach)
+                                            @if($teach->id == $teacher->id)
+                                                 <?php $bandera = true; ?>
+                                            @endif
+                                        @endforeach
+                                        @if($bandera)
+                                            <option type="checkbox" value="{{$teacher->id}}" selected>{{$teacher->lastName}}, {{$teacher->firstName}}</option><br />
+                                        @else
+                                             <option type="checkbox"value="{{$teacher->id}}">{{$teacher->lastName}}, {{$teacher->firstName}}</option><br />
+                                        @endif
                                     @endforeach
                                     </select>
                                 @endif

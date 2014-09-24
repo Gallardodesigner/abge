@@ -418,19 +418,19 @@ Courses
                                        
                                         <p>
                                             <label>Min Participants</label>
-                                            <span class="field"> <input type="number" name="min"> </span>
+                                            <span class="field"> <input type="number" name="min" value="{{$course->min}}"> </span>
                                         </p>
                                         <p>
                                             <label>Message</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="min_message" class="span6"></textarea></span>
+                                            <span class="field"><textarea cols="50" rows="10" name="min_message" class="span6">{{$course->min_message}}</textarea></span>
                                         </p>
                                         <p>
                                             <label>Max Participants</label>
-                                            <span class="field"> <input type="number" name="max"> </span>
+                                            <span class="field"> <input type="number" name="max" value="{{$course->max}}"> </span>
                                         </p>   
                                         <p>
                                             <label>Message</label>
-                                            <span class="field"><textarea cols="50" rows="10" name="max_message" class="span6"></textarea></span>
+                                            <span class="field"><textarea cols="50" rows="10" name="max_message" class="span6">{{$course->max_message}}</textarea></span>
                                             
                                         </p>
                                                                                                        

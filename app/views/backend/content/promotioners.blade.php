@@ -15,6 +15,9 @@
 {{HTML::script("assetsadmin/js/tiny_mce/jquery.tinymce.min.js")}}
 {{HTML::script("assetsadmin/js/tiny_mce/tinymce.js")}}
 {{HTML::script("assetsadmin/js/wysiwyg.js")}}
+{{HTML::style("assetsadmin/js/chosen/chosen.min.css")}}
+{{HTML::script("assetsadmin/js/chosen/chosen.jquery.min.js")}}
+{{HTML::script("assetsadmin/js/chosen/chosen.proto.min.js")}}
 <script>
  
 </script>
@@ -38,6 +41,11 @@ User Types
 
 
 @section("MainContent")
+<script type="text/javascript">
+    jQuery(document).on('ready', function(){
+        jQuery('.chosen-select').chosen({no_results_text: "Oops, nothing found!"});
+    });
+</script>
 <div class="maincontent">
             <div class="maincontentinner">
             
@@ -54,10 +62,21 @@ User Types
                         <p>
                             <label>{{ $content->section->title }}</label>
                             <span class="field">
+                                
                                 @if (isset($promotioners))
-                                    <select class="chosen-select" name="promotioners" >
+                                    <select class="chosen-select" name="promotioners[]" multiple>
                                     @foreach ($promotioners as $promotioner)
-                                        <option value="{{$promotioner->id}}">{{$promotioner->lastName}}, {{$promotioner->firstName}}</option>
+                                        <?php $bandera = false; ?>
+                                        @foreach($course->promotioners as $prom)
+                                            @if($prom->id == $promotioner->id)
+                                                 <?php $bandera = true; ?>
+                                            @endif
+                                        @endforeach
+                                        @if($bandera)
+                                            <option type="checkbox" value="{{$promotioner->id}}" selected>{{$promotioner->title}}</option><br />
+                                        @else
+                                             <option type="checkbox"value="{{$promotioner->id}}">{{$promotioner->title}}</option><br />
+                                        @endif
                                     @endforeach
                                     </select>
                                 @endif
