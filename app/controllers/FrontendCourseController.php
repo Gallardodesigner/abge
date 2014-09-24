@@ -71,10 +71,30 @@ class FrontendCourseController extends \BaseController {
 
 			$array['section'] = CoursesSection::find($idContent);
 
-		endif;
+			switch($array['section']->section->type){
+				case 'section':
+					return View::make('frontend.courses.content')->with( $array );
+					break;
+				case 'teachers':
+					return View::make('frontend.courses.teachers')->with( $array );
+					break;
+				case 'promotioners':
+					return View::make('frontend.courses.promotioners')->with( $array );
+					break;
+				case 'supporters':
+					return View::make('frontend.courses.supporters')->with( $array );
+					break;
+				default:
+					return View::make('frontend.courses.content')->with( $array );
+					break;
+			}
+
+		else:
 
 		return View::make('frontend.courses.content')->with( $array );
 
+		endif;
+		
 	}
 /*
 	public static function getCourseData( $id, $course ){
