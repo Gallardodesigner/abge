@@ -16,6 +16,7 @@
     </div>
     <div id="content">
     <form method="post">
+    	<input type="hidden" name="usertype" value="{{$usertype->id}}"/>
     	<input type="hidden" name="course" value="{{$course->id}}"/>
 		<label>Nome: </label><input type="text" name="nome"/><br>
 		<label>Email: </label><input type="email" name="email"/><br>
@@ -54,8 +55,11 @@
 		<label>Celular: </label><input type="text" name="celular_empresa"/><br>
 		<label>Tipo de participante: </label><select name="type">
 			<option value="0" selected>Seleccione um tipo</option>
-			<option value="student">Estudiante</option>
-			<option value="participant">Participant</option>
+			@foreach($course->usertypes as $user)
+				@if(!$user->associate)
+			<option value="{{ $user->id }}">{{$user->title}}</option>
+				@endif
+			@endforeach
 		</select><br>
 		<input type="submit" value="Enviar"/>
 	</form>

@@ -17,6 +17,7 @@ class CreateDates extends Migration {
 			$table->integer('usertype_id');
 			$table->longText('message');
 			$table->longText('button');
+			$table->decimal('price');
 			$table->date('start');
 			$table->date('end');
 //			$table->string('type');

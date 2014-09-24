@@ -109,8 +109,8 @@ Date
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td class="center" style="vertical-align:middle;width:10%;"><h4>{{$date->start}}</h4></td>
-                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$date->end}}</h4></td>
+                                <td class="center" style="vertical-align:middle;width:10%;"><h4>{{date("d-m-Y", strtotime($date->start))}}</h4></td>
+                                <td class="center" style="vertical-align:middle;width:20%;"><h4>{{date("d-m-Y", strtotime($date->end))}}</h4></td>
                                 <td class="description" style="vertical-align:middle;width:40%;">{{$date->message}}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 

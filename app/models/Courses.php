@@ -40,6 +40,10 @@ class Courses extends Eloquent {
 		return $this->hasMany('UserTypes', 'course_id', 'id');
 	}
 
+	public function inscriptions(){
+		return $this->hasMany('Inscriptions', 'id_course', 'id');
+	}
+
 /* --------------------------- */
 
 	public static function _get( $arg = 'all' ){

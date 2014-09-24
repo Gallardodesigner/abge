@@ -27,4 +27,12 @@ return array(
 
 	'supporters' => 'Supporters',
 
+	'inscriptions' => 'Inscriptions',
+
+	'usertype' => 'Panticipant Types',
+
+	'until' => 'Until',
+
+	'signin' => 'Sign-in',
+
 );

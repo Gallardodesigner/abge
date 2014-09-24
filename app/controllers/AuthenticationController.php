@@ -56,12 +56,21 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function getAssociate( $course ){
+	public function getAssociate( $usertype ){
 
 		$msg_error = Session::get('msg_error');
-		$course = Courses::find( $course );
+		$usertype = UserTypes::find( $usertype );
+		$course = $usertype->course;
+		$contents = $course->coursesections;
 
-		return View::make('auth.associate')->with( array( 'msg_error' => $msg_error, 'course' => $course ) );
+		$array = array( 
+			'msg_error' => $msg_error, 
+			'course' => $course, 
+			'usertype' => $usertype, 
+			'contents' => $contents 
+			);
+
+		return View::make('auth.associate')->with( $array );
 
 	}
 
@@ -72,9 +81,23 @@ class AuthenticationController extends \BaseController {
 			'password' => Input::get('password')
 			);
 
+		$usertype = UserTypes::find(Input::get('usertype'));
+
+		$course = Courses::find(Input::get('course'));
+
 		if(Auth::attempt($credentials)):
 
-			return Redirect::to('/dashboard');
+			$inscription = new Inscriptions();
+			$inscription->id_course = $course->id;
+			$inscription->id_user = Auth::user()->id;
+			$inscription->id_usertype = $usertype->id;
+			$inscription->save();
+
+			$array = array(
+				'inscription' => $inscription
+				);
+
+			return Redirect::to('/courses/'.$course.'/signin')->with( $array );
 
 		else:
 
@@ -99,7 +122,17 @@ class AuthenticationController extends \BaseController {
 
 					Auth::login($user);
 
-					return Redirect::to('/dashboard')->with( 'msg_success', Lang::get('messages.login_welcome') );
+					$inscription = new Inscriptions();
+					$inscription->id_course = $course->id;
+					$inscription->id_user = Auth::user()->id;
+					$inscription->id_usertype = $usertype->id;
+					$inscription->save();
+
+					$array = array(
+						'inscription' => $inscription
+						);
+
+					return Redirect::to('/courses/'.$course.'/signin')->with( $array );
 
 				else:
 
@@ -138,7 +171,17 @@ class AuthenticationController extends \BaseController {
 
 						Auth::login($user);
 
-						return Redirect::to('/dashboard')->with( 'msg_success', Lang::get('messages.login_welcome') );
+						$inscription = new Inscriptions();
+						$inscription->id_course = $course->id;
+						$inscription->id_user = Auth::user()->id;
+						$inscription->id_usertype = $usertype->id;
+						$inscription->save();
+
+						$array = array(
+							'inscription' => $inscription
+							);
+
+						return Redirect::to('/courses/'.$course.'/signin')->with( $array );
 
 					else:
 
@@ -158,12 +201,21 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function getParticipant( $course ){
+	public function getParticipant( $usertype ){
 
 		$msg_error = Session::get('msg_error');
-		$course = Courses::find($course);
+		$usertype = UserTypes::find($usertype);
+		$course = $usertype->course;
+		$contents = $course->coursesections;
 
-		return View::make('auth.participant')->with( array( 'msg_error' => $msg_error, 'course' => $course ) );
+		$array =  array( 
+			'msg_error' => $msg_error, 
+			'course' => $course, 
+			'usertype' => $usertype, 
+			'contents' => $contents 
+			);
+
+		return View::make('auth.participant')->with( $array );
 
 	}
 
@@ -173,6 +225,7 @@ class AuthenticationController extends \BaseController {
 			'cpf' => Input::get('cpf')
 			);
 
+		$usertype = Input::get('usertype');
 		$course = Input::get('course');
 
 		$participant = Participants::getByCPF($credentials['cpf']);
@@ -187,7 +240,19 @@ class AuthenticationController extends \BaseController {
 
 				Auth::login($user);
 
-				return Redirect::to('/course/'.$course.'/payment')->with( 'msg_success', Lang::get('messages.login_welcome') );
+				$inscription = new Inscriptions();
+				$inscription->id_course = $course->id;
+				$inscription->id_user = Auth::user()->id;
+				$inscription->id_usertype = $usertype->id;
+				$inscription->save();
+
+				$array = array(
+					'msg_success' => Lang::get('messages.login_welcome'),
+					'usertype' => $usertype,
+					'inscription' => $inscription
+					);
+
+				return Redirect::to('/courses/'.$course.'/signin')->with( $array );
 
 			else:
 
@@ -201,7 +266,21 @@ class AuthenticationController extends \BaseController {
 				$participant->user = $user->id;
 				$participant->save();
 
-				return Redirect::to('/course/'.$course.'/payment')->with( 'msg_success', Lang::get('messages.login_welcome') );
+				Auth::login($user);
+
+				$inscription = new Inscriptions();
+				$inscription->id_course = $course->id;
+				$inscription->id_user = Auth::user()->id;
+				$inscription->id_usertype = $usertype->id;
+				$inscription->save();
+
+				$array = array(
+					'msg_success' => Lang::get('messages.login_welcome'),
+					'usertype' => $usertype,
+					'inscription' => $inscription
+					);
+
+				return Redirect::to('/courses/'.$course.'/signin')->with( $array );
 
 			endif;
 
@@ -232,11 +311,30 @@ class AuthenticationController extends \BaseController {
 
 				Auth::login($user);
 
-				return Redirect::to('/course/'.$course.'/payment')->with( 'msg_success', Lang::get('messages.login_welcome') );
+				$inscription = new Inscriptions();
+				$inscription->id_course = $course->id;
+				$inscription->id_user = Auth::user()->id;
+				$inscription->id_usertype = $usertype->id;
+				$inscription->save();
+
+				$array = array(
+					'msg_success' => Lang::get('messages.login_welcome'),
+					'usertype' => $usertype,
+					'inscription' => $inscription
+					);
+
+				return Redirect::to('/course/'.$course.'/signin')->with( $array );
 
 			else:
 
-				return Redirect::to('/auth/register')->with( array( 'cpf' => $credentials['cpf'], 'msg_error' => Lang::get('messages.login_not_participant'), 'course' => $course ) );
+				$array = array( 
+					'cpf' => $credentials['cpf'], 
+					'msg_error' => Lang::get('messages.login_not_participant'), 
+					'course' => $course,
+					'usertype' => $usertype
+					);
+
+				return Redirect::to('/auth/register')->with( $array );
 
 			endif;
 
@@ -251,12 +349,17 @@ class AuthenticationController extends \BaseController {
 
 		$msg_error = Session::get('msg_error');
 
+		$usertype = UserTypes::find(Session::get('usertype'));
+
 		$course = Courses::find(Session::get('course'));
+		$contents = $course->coursesections;
 
 		$array = array(
 			'cpf' => $cpf,
 			'estados' => $estados,
-			'course' => $course
+			'usertype' => $usertype,
+			'course' => $course,
+			'contents' => $contents
 			);
 
 		return View::make('auth.register')->with( $array );
@@ -266,6 +369,8 @@ class AuthenticationController extends \BaseController {
 	public function postRegister(){
 
 		$course = Input::get('course');
+
+		$usertype = Input::get('usertype');
 
 		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
 		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
@@ -297,7 +402,7 @@ class AuthenticationController extends \BaseController {
 		$user->email = $participant->email;
 		$user->name = $participant->nome;
 		$user->status = 'publish';
-		$user->type = Input::get('type');
+		$user->type = 'participant';
 		$user->save();
 
 		$participant = ORGParticipants::getByCPF($participant->cpf);
@@ -314,7 +419,18 @@ class AuthenticationController extends \BaseController {
 
 		Auth::login($user);
 
-		return Redirect::to('/courses/'.$course.'/payment');
+		$inscription = new Inscriptions();
+		$inscription->id_course = $course->id;
+		$inscription->id_user = Auth::user()->id;
+		$inscription->id_usertype = $usertype->id;
+		$inscription->save();
+
+		$array = array(
+			'usertype' => $usertype,
+			'inscription' => $inscription
+			);
+
+		return Redirect::to('/courses/'.$course.'/signin')->with( $array );
 
 	}
 

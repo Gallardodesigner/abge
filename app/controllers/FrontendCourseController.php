@@ -34,6 +34,9 @@ class FrontendCourseController extends \BaseController {
 		elseif( $id != '' ):
 
 			$course = Courses::find($id);
+		
+			$course->start = date("d-m-Y", strtotime($course->start));
+			$course->end = date("d-m-Y", strtotime($course->end));
 
 			if($course):
 
@@ -44,6 +47,9 @@ class FrontendCourseController extends \BaseController {
 						break;
 					case 'content':
 						return self::getCourseContent( $id, $course, $idContent );
+						break;
+					case 'inscriptions':
+						return self::getCourseInscription( $id, $course, $idContent );
 						break;
 					default:
 						return self::getCourseContent( $id, $course, $idContent );
@@ -119,13 +125,17 @@ class FrontendCourseController extends \BaseController {
 		return View::make('frontend.courses.teachers')->with( array( 'course' => $course, 'teachers' => $teachers ) );
 
 	}
+*/
+	public static function getCourseInscription( $id, $course, $idContent ){
 
-	public static function getCourseInscription( $id, $course ){
+		$contents = $course->coursesections;
 
-		return View::make('frontend.courses.inscription')->with( array( 'course' => $course ) );
+		$array = array( 'course' => $course, 'contents' => $contents );
+
+		return View::make('frontend.courses.inscription')->with( $array );
 
 	}
-
+/*
 	public static function getCourseCompany( $id, $course ){
 
 		return View::make('frontend.courses.company')->with( array( 'course' => $course ) );

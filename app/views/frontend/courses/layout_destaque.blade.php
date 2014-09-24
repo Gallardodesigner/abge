@@ -222,6 +222,9 @@ table{
             @foreach($contents as $link)
               <li><a href="{{URL::to('courses/'.$course->id.'/content/'.$link->id)}}">{{$link->section->title}}</a></li>
             @endforeach
+            @if(count($course->usertypes) > 0)
+              <li><a href="{{URL::to('courses/'.$course->id.'/inscriptions/')}}">{{Lang::get('display.inscriptions')}}</a></li>
+            @endif
           </ul>
         </div>
       </div>

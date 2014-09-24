@@ -17,7 +17,8 @@
     </div>
     <div id="content">
     <form method="post">
-    	<input type="hidden" name="course" value="{{$course->id}}"/>
+      <input type="hidden" name="course" value="{{$course->id}}"/>
+      <input type="hidden" name="usertype" value="{{$usertype->id}}"/>
 		<label>CPF: </label><input type="text" name="cpf"/><br>
 		<input type="submit" value="Enviar"/>
 	</form>

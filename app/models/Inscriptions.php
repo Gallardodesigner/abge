@@ -3,11 +3,16 @@
 class Inscriptions extends Eloquent {
 	protected $fillable = "inscriptions";
 
-	public function participants(){
-		return $this->belongsToMany('Participants', 'course_teacher', 'course_id', 'teacher_id');
+	public function course(){
+		return $this->belongsTo('Courses', 'id_course');
 	}
 
-	public function courses(){
-		return $this->belongsToMany('Courses', 'course_teacher', 'course_id', 'teacher_id');
+	public function usertype(){
+		return $this->belongsTo('Courses', 'id_usertype');
 	}
+
+	public function user(){
+		return $this->belongsTo('Courses', 'id_user');
+	}
+	
 }

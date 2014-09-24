@@ -14,4 +14,8 @@ class UserTypes extends \Eloquent {
 		return $this->hasMany('Dates', 'usertype_id', 'id');
 	}
 
+	public function inscriptions(){
+		return $this->hasMany('Inscriptions', 'id_usertype', 'id');
+	}
+
 }

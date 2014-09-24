@@ -74,6 +74,7 @@ class DateController extends \BaseController {
 		$date->usertype_id = $idUserType;
 		$date->start = date("Y-m-d", strtotime(Input::get('start')));
 		$date->end = date("Y-m-d", strtotime(Input::get('end')));
+		$date->price = Input::get('price');
 		$date->message = Input::get('message');
 		$date->button = Input::get('button');
 
@@ -132,6 +133,7 @@ class DateController extends \BaseController {
 
 				$date->start = date("Y-m-d", strtotime(Input::get('start')));
 				$date->end = date("Y-m-d", strtotime(Input::get('end')));
+				$date->price = Input::get('price');
 				$date->message = Input::get('message');
 				$date->button = Input::get('button');
 

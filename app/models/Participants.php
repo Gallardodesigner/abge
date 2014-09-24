@@ -2,10 +2,6 @@
 
 class Participants extends Eloquent {
 
-	public function courses(){
-		return $this->hasMany('Courses', 'category_id', 'id');
-	}
-
 	protected $connection = 'mysql';
 
 	protected $table = 'participants';

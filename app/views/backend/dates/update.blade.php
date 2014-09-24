@@ -73,6 +73,10 @@ Date
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
+                                <label>Price</label>
+                                <span class="field"><input type="number" name="price" id="price" value="{{ $date->price }}"></span>
+                            </p>
+                            <p>
                                 <label>Start date</label>
                                 <span class="field"><input type="input" name="start" id="start" class="datepicker" value="{{ $date->start }}"></span>
                             </p>
