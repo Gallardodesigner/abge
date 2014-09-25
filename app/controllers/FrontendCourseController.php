@@ -68,7 +68,7 @@ class FrontendCourseController extends \BaseController {
 
 			else:
 
-				return View::make('frontend.courses.notfound');
+				return View::make('specialpages.404');
 
 			endif;
 
@@ -93,7 +93,7 @@ class FrontendCourseController extends \BaseController {
 
 		else:
 
-			return View::make('frontend.courses.notfound');
+			return View::make('specialpages.404');
 
 		endif;
 
@@ -193,8 +193,9 @@ class FrontendCourseController extends \BaseController {
 	}
 
 	public static function postCourseFiles( $id, $course, $idContent ){
-
+		dd(Input::get('title'));
 		foreach(Input::file('files') as $file):
+
 			if ($file != null):
 				$url = $file->getRealPath();
 				$extension = $file->getClientOriginalExtension();
@@ -207,6 +208,7 @@ class FrontendCourseController extends \BaseController {
 				$my_file->id_course = $course->id;
 				$my_file->id_user = Auth::user()->id;
 				$my_file->id_inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+				$my_file->title = 
 				$my_file->url = '/uploads/files/'.$name;
 				$my_file->size = $size;
 				$my_file->mime = $mime;

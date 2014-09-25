@@ -125,7 +125,11 @@ class AuthenticationController extends \BaseController {
 
 					$user = new User();
 					$user->email = $associate->email;
-					$user->name = $associate->nombre_completo;
+					if($associate->nombre_completo != null):
+						$user->name = $associate->nombre_completo;
+					else:
+						$user->name = "User without name";
+					endif;
 					$user->status = 'publish';
 					$user->type = 'associate';
 					$user->password = Hash::make($credentials['password']);
@@ -180,7 +184,11 @@ class AuthenticationController extends \BaseController {
 
 						$user = new User();
 						$user->email = $associate->email;
-						$user->name = $associate->nombre_completo;
+						if($associate->nombre_completo != null):
+							$user->name = $associate->nombre_completo;
+						else:
+							$user->name = "User without name";
+						endif;
 						$user->status = 'publish';
 						$user->type = 'associate';
 						$user->password = Hash::make($credentials['password']);
@@ -190,7 +198,11 @@ class AuthenticationController extends \BaseController {
 						$assoc->associate = $associate->id_asociado;
 						$assoc->user = $user->id;
 						$assoc->email = $associate->email;
-						$assoc->name = $associate->nombre_completo;
+						if($associate->nombre_completo != null):
+							$assoc->name = $associate->nombre_completo;
+						else:
+							$assoc->name = "User without name";
+						endif;
 						$assoc->cpf = $associate->cpf;
 						$assoc->password = $associate->senha;
 						$assoc->status = 'publish';
@@ -314,7 +326,11 @@ class AuthenticationController extends \BaseController {
 
 				$user = new User();
 				$user->email = $participant->email;
-				$user->name = $participant->name;
+				if($participant->name != null):
+					$user->name = $participant->name;
+				else:
+					$user->name = "User without name";
+				endif;
 				$user->status = 'publish';
 				$user->type = 'participant';
 				$user->save();
@@ -364,7 +380,11 @@ class AuthenticationController extends \BaseController {
 
 				$user = new User();
 				$user->email = $participant->email;
-				$user->name = $participant->nome;
+				if($participant->name != null):
+					$user->name = $participant->name;
+				else:
+					$user->name = "User without name";
+				endif;
 				$user->status = 'publish';
 				$user->type = 'participant';
 				$user->save();
@@ -373,7 +393,11 @@ class AuthenticationController extends \BaseController {
 				$part->participant = $participant->id_participante;
 				$part->user = $user->id;
 				$part->email = $participant->email;
-				$part->name = $participant->nome;
+				if($participant->name != null):
+					$part->name = $participant->name;
+				else:
+					$part->name = "User without name";
+				endif;
 				$part->cpf = $participant->cpf;
 				$part->status = 'publish';
 				$part->type = 'participant';
@@ -484,7 +508,11 @@ class AuthenticationController extends \BaseController {
 
 		$user = new User();
 		$user->email = $participant->email;
-		$user->name = $participant->nome;
+		if($participant->name != null):
+			$user->name = $participant->name;
+		else:
+			$user->name = "User without name";
+		endif;
 		$user->status = 'publish';
 		$user->type = 'participant';
 		$user->save();
