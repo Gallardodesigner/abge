@@ -1,28 +1,34 @@
 <?php
 
-class InscriptionController extends \BaseController {
+class FileController extends \BaseController {
 
-	public static $parent = '/dashboard/courses/';
+	public static $ancestor = '/dashboard/courses/';
 
-	public static $route = '/dashboard/courses/{idCourse}/inscriptions';
+	public static $parent = '/dashboard/courses/{idCourse}/inscriptions';
 
-	public function getIndex( $idCourse ){
+	public static $route = '/dashboard/courses/{idCourse}/inscriptions/{idInscription}/files';
+
+	public function getIndex( $idCourse, $idInscription ){
 
 		$course = Courses::find($idCourse);
 
-		$inscriptions = $course->inscriptions;
+		$inscription = Inscriptions::find($idInscription);
+
+		$files = $inscription->files;
 
 
 		$array = array(
 			'course' => $course,
-			'inscriptions' => $inscriptions,
-			'route' => self::parseRoute($course->id),
+			'inscription' => $inscription,
+			'files' => $files,
+			'route' => self::parseRoute($course->id, ),
+			'parent' => self::parseParent($course->id),
 			'parent' => self::$parent,
 			'msg_success' => Session::get('msg_success'),
 			'msg_error' => Session::get('msg_error')
 			);
 
-		return View::make('backend.inscriptions.index')->with( $array );
+		return View::make('backend.inscriptions.files')->with( $array );
 
 	}
 
@@ -64,9 +70,17 @@ class InscriptionController extends \BaseController {
 		endif;
 	}
 
-	public static function parseRoute( $idCourse ){
+	public static function parseRoute( $idCourse, $idInscription ){
 
-		return str_replace('{idCourse}', $idCourse, self::$route );
+		$route = str_replace('{idInscription}', $idInscription, self::$route );
+
+		return str_replace('{idCourse}', $idCourse, $route );
+
+	}
+
+	public static function parseParent( $idCourse ){
+
+		return str_replace('{idCourse}', $idCourse, self::$parent );
 
 	}
 

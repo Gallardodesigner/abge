@@ -29,6 +29,8 @@
 	Route::controller('/dashboard/events', 'EventController');
 	Route::controller('/dashboard/courses/{idCourse}/usertypes/{idUserType}/dates', 'DateController');
 	Route::controller('/dashboard/courses/{idCourse}/usertypes', 'UserTypeController');
+	Route::controller('/dashboard/courses/{idCourse}/inscriptions/{idInscription}/files', 'FileController');
+	Route::controller('/dashboard/courses/{idCourse}/inscriptions', 'InscriptionController');
 	Route::controller('/dashboard/courses/{idCourse}/content', 'ContentController');
 	Route::controller('/dashboard/courses', 'CourseController');
 	Route::controller('/dashboard', 'DashboardController');

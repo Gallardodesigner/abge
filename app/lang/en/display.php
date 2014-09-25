@@ -31,10 +31,30 @@ return array(
 
 	'inscriptions_paid' => 'Paids',
 
-	'usertype' => 'Panticipant Types',
+	'usertype' => 'Panticipant Type',
+
+	'usertypes' => 'Panticipant Types',
 
 	'until' => 'Until',
 
 	'signin' => 'Sign-in',
+
+	'participants' => 'Participants',
+
+	'inscriptions' => 'Inscriptions',
+
+	'edit' => 'Edit',
+
+	'delete' => 'Delete',
+
+	'sections' => 'Sections',
+
+	'verify_payment' => 'Verify Payment',
+
+	'decline_payment' => 'Decline Payment',
+
+	'files' => 'Files'
+
+
 
 );

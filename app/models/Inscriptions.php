@@ -15,7 +15,7 @@ class Inscriptions extends Eloquent {
 	}
 
 	public function files(){
-		return $this->hasMany('Files', 'id_course', 'id');
+		return $this->hasMany('Files', 'id_inscription', 'id');
 	}
 
 	public static function hasInscription( $idUser, $idCourse ){
