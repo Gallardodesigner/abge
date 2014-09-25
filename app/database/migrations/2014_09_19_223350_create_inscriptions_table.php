@@ -18,7 +18,7 @@ class CreateInscriptionsTable extends Migration {
 			$table->integer('id_course');
 			$table->integer('id_user');
 			$table->integer('id_usertype');
-			$table->string('type_user');
+			$table->boolean('paid')->default(false);
 			$table->string('status');
 			$table->timestamps();
 			$table->softDeletes();

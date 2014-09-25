@@ -16,8 +16,10 @@ class CreateFileTable extends Migration {
 			$table->increments('id');
 			$table->integer('id_course');
 			$table->integer('id_user');
+			$table->integer('id_inscription');
 			$table->string('type_user');
 			$table->string('url');
+			$table->string('size');
 			$table->string('mime');
 			$table->string('status');
 			$table->timestamps();

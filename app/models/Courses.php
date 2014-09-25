@@ -44,6 +44,10 @@ class Courses extends Eloquent {
 		return $this->hasMany('Inscriptions', 'id_course', 'id');
 	}
 
+	public function files(){
+		return $this->hasMany('Files', 'id_course', 'id');
+	}
+
 /* --------------------------- */
 
 	public static function _get( $arg = 'all' ){

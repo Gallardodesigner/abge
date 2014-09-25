@@ -29,6 +29,8 @@ return array(
 
 	'inscriptions' => 'Inscriptions',
 
+	'inscriptions_paid' => 'Paids',
+
 	'usertype' => 'Panticipant Types',
 
 	'until' => 'Until',

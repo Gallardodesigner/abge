@@ -99,9 +99,18 @@ Courses
                                         <td>{{$course->title}}</td>
                                         <td>{{$course->description}}</td>
                                         <td>{{$course->event->title}}</td>
-                                        <td class="center">{{$course->start}}</td>
-                                        <td class="center">{{$course->end}}</td>
-                                        <td class="center">{{$course->end}}</td>
+                                        <td class="center">{{date("d-m-Y", strtotime($course->start))}}</td>
+                                        <td class="center">{{date("d-m-Y", strtotime($course->end))}}</td>
+                                        <td class="center">
+                                            {{Lang::get('display.inscriptions')}}: {{count($course->inscriptions)}}
+                                            <?php $count = 0; ?>
+                                            @foreach($course->inscriptions as $inscription)
+                                                @if($inscription->paid)
+                                                    <?php $count++ ?>
+                                                @endif
+                                            @endforeach
+                                            {{Lang::get('display.inscriptions_paid')}}: {{$count}}
+                                        </td>
                                         <td class="center">
                                              <a href="/dashboard/courses/{{$course->id}}/content/" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>Sections</a>
                                              <a href="/dashboard/courses/{{$course->id}}/usertypes/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>User Types</a>

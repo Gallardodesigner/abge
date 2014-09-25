@@ -87,17 +87,31 @@ class AuthenticationController extends \BaseController {
 
 		if(Auth::attempt($credentials)):
 
-			$inscription = new Inscriptions();
-			$inscription->id_course = $course->id;
-			$inscription->id_user = Auth::user()->id;
-			$inscription->id_usertype = $usertype->id;
-			$inscription->save();
+			if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 
-			$array = array(
-				'inscription' => $inscription
-				);
+				$array = array(
+					'msg_success' => Lang::get('messages.login_welcome'),
+					'usertype' => $usertype,
+					'inscription' => $inscription
+					);
 
-			return Redirect::to('/courses/'.$course.'/signin')->with( $array );
+				return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+			else:
+
+				$inscription = new Inscriptions();
+				$inscription->id_course = $course->id;
+				$inscription->id_user = Auth::user()->id;
+				$inscription->id_usertype = $usertype->id;
+				$inscription->save();
+
+				$array = array(
+					'inscription' => $inscription
+					);
+
+				return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+			endif;
 
 		else:
 
@@ -122,17 +136,31 @@ class AuthenticationController extends \BaseController {
 
 					Auth::login($user);
 
-					$inscription = new Inscriptions();
-					$inscription->id_course = $course->id;
-					$inscription->id_user = Auth::user()->id;
-					$inscription->id_usertype = $usertype->id;
-					$inscription->save();
+					if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 
-					$array = array(
-						'inscription' => $inscription
-						);
+						$array = array(
+							'msg_success' => Lang::get('messages.login_welcome'),
+							'usertype' => $usertype,
+							'inscription' => $inscription
+							);
 
-					return Redirect::to('/courses/'.$course.'/signin')->with( $array );
+						return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+					else:
+
+						$inscription = new Inscriptions();
+						$inscription->id_course = $course->id;
+						$inscription->id_user = Auth::user()->id;
+						$inscription->id_usertype = $usertype->id;
+						$inscription->save();
+
+						$array = array(
+							'inscription' => $inscription
+							);
+
+						return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+					endif;
 
 				else:
 
@@ -171,17 +199,31 @@ class AuthenticationController extends \BaseController {
 
 						Auth::login($user);
 
-						$inscription = new Inscriptions();
-						$inscription->id_course = $course->id;
-						$inscription->id_user = Auth::user()->id;
-						$inscription->id_usertype = $usertype->id;
-						$inscription->save();
+						if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 
-						$array = array(
-							'inscription' => $inscription
-							);
+							$array = array(
+								'msg_success' => Lang::get('messages.login_welcome'),
+								'usertype' => $usertype,
+								'inscription' => $inscription
+								);
 
-						return Redirect::to('/courses/'.$course.'/signin')->with( $array );
+							return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+						else:
+
+							$inscription = new Inscriptions();
+							$inscription->id_course = $course->id;
+							$inscription->id_user = Auth::user()->id;
+							$inscription->id_usertype = $usertype->id;
+							$inscription->save();
+
+							$array = array(
+								'inscription' => $inscription
+								);
+
+							return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+						endif;
 
 					else:
 
@@ -225,8 +267,8 @@ class AuthenticationController extends \BaseController {
 			'cpf' => Input::get('cpf')
 			);
 
-		$usertype = Input::get('usertype');
-		$course = Input::get('course');
+		$usertype = UserTypes::find(Input::get('usertype'));
+		$course = Courses::find(Input::get('course'));
 
 		$participant = Participants::getByCPF($credentials['cpf']);
 
@@ -240,19 +282,33 @@ class AuthenticationController extends \BaseController {
 
 				Auth::login($user);
 
-				$inscription = new Inscriptions();
-				$inscription->id_course = $course->id;
-				$inscription->id_user = Auth::user()->id;
-				$inscription->id_usertype = $usertype->id;
-				$inscription->save();
+				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 
-				$array = array(
-					'msg_success' => Lang::get('messages.login_welcome'),
-					'usertype' => $usertype,
-					'inscription' => $inscription
-					);
+					$array = array(
+						'msg_success' => Lang::get('messages.login_welcome'),
+						'usertype' => $usertype,
+						'inscription' => $inscription
+						);
 
-				return Redirect::to('/courses/'.$course.'/signin')->with( $array );
+					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+				else:
+
+					$inscription = new Inscriptions();
+					$inscription->id_course = $course->id;
+					$inscription->id_user = Auth::user()->id;
+					$inscription->id_usertype = $usertype->id;
+					$inscription->save();
+
+					$array = array(
+						'msg_success' => Lang::get('messages.login_welcome'),
+						'usertype' => $usertype,
+						'inscription' => $inscription
+						);
+
+					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+				endif;
 
 			else:
 
@@ -268,19 +324,33 @@ class AuthenticationController extends \BaseController {
 
 				Auth::login($user);
 
-				$inscription = new Inscriptions();
-				$inscription->id_course = $course->id;
-				$inscription->id_user = Auth::user()->id;
-				$inscription->id_usertype = $usertype->id;
-				$inscription->save();
+				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 
-				$array = array(
-					'msg_success' => Lang::get('messages.login_welcome'),
-					'usertype' => $usertype,
-					'inscription' => $inscription
-					);
+					$array = array(
+						'msg_success' => Lang::get('messages.login_welcome'),
+						'usertype' => $usertype,
+						'inscription' => $inscription
+						);
 
-				return Redirect::to('/courses/'.$course.'/signin')->with( $array );
+					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+				else:
+
+					$inscription = new Inscriptions();
+					$inscription->id_course = $course->id;
+					$inscription->id_user = Auth::user()->id;
+					$inscription->id_usertype = $usertype->id;
+					$inscription->save();
+
+					$array = array(
+						'msg_success' => Lang::get('messages.login_welcome'),
+						'usertype' => $usertype,
+						'inscription' => $inscription
+						);
+
+					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+				endif;
 
 			endif;
 
@@ -311,19 +381,33 @@ class AuthenticationController extends \BaseController {
 
 				Auth::login($user);
 
-				$inscription = new Inscriptions();
-				$inscription->id_course = $course->id;
-				$inscription->id_user = Auth::user()->id;
-				$inscription->id_usertype = $usertype->id;
-				$inscription->save();
+				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 
-				$array = array(
-					'msg_success' => Lang::get('messages.login_welcome'),
-					'usertype' => $usertype,
-					'inscription' => $inscription
-					);
+					$array = array(
+						'msg_success' => Lang::get('messages.login_welcome'),
+						'usertype' => $usertype,
+						'inscription' => $inscription
+						);
 
-				return Redirect::to('/course/'.$course.'/signin')->with( $array );
+					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+				else:
+
+					$inscription = new Inscriptions();
+					$inscription->id_course = $course->id;
+					$inscription->id_user = Auth::user()->id;
+					$inscription->id_usertype = $usertype->id;
+					$inscription->save();
+
+					$array = array(
+						'msg_success' => Lang::get('messages.login_welcome'),
+						'usertype' => $usertype,
+						'inscription' => $inscription
+						);
+
+					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+				endif;
 
 			else:
 
@@ -419,16 +503,30 @@ class AuthenticationController extends \BaseController {
 
 		Auth::login($user);
 
-		$inscription = new Inscriptions();
-		$inscription->id_course = $course->id;
-		$inscription->id_user = Auth::user()->id;
-		$inscription->id_usertype = $usertype->id;
-		$inscription->save();
+		if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 
-		$array = array(
-			'usertype' => $usertype,
-			'inscription' => $inscription
-			);
+			$array = array(
+				'msg_success' => Lang::get('messages.login_welcome'),
+				'usertype' => $usertype,
+				'inscription' => $inscription
+				);
+
+			return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+		else:
+
+			$inscription = new Inscriptions();
+			$inscription->id_course = $course->id;
+			$inscription->id_user = Auth::user()->id;
+			$inscription->id_usertype = $usertype->id;
+			$inscription->save();
+
+			$array = array(
+				'usertype' => $usertype,
+				'inscription' => $inscription
+				);
+
+		endif;
 
 		return Redirect::to('/courses/'.$course.'/signin')->with( $array );
 

@@ -23,7 +23,7 @@ class FrontendCourseController extends \BaseController {
 
 	*/
 
-	public function getIndex( $id = '', $content = '', $idContent = ''  ){
+	public function getIndex( $id = '', $content = '', $idContent = '' ){
 
 		if( $id == '' ):
 
@@ -51,6 +51,15 @@ class FrontendCourseController extends \BaseController {
 					case 'inscriptions':
 						return self::getCourseInscription( $id, $course, $idContent );
 						break;
+					case 'signin':
+						return self::getCourseSignin( $id, $course, $idContent );
+						break;
+					case 'files':
+						return self::getCourseFiles( $id, $course, $idContent );
+						break;
+					case 'payment':
+						return self::getCoursePayment( $id, $course, $idContent );
+						break;
 					default:
 						return self::getCourseContent( $id, $course, $idContent );
 						break;
@@ -62,6 +71,29 @@ class FrontendCourseController extends \BaseController {
 				return View::make('frontend.courses.notfound');
 
 			endif;
+
+		endif;
+
+	}
+
+	public function postIndex( $id = '', $content = '', $idContent = '' ){
+
+		$course = Courses::find($id);
+	
+		$course->start = date("d-m-Y", strtotime($course->start));
+		$course->end = date("d-m-Y", strtotime($course->end));
+
+		if($course):
+
+			switch($content){
+				case 'files':
+					return self::postCourseFiles( $id, $course, $idContent );
+					break;
+			}
+
+		else:
+
+			return View::make('frontend.courses.notfound');
 
 		endif;
 
@@ -130,9 +162,81 @@ class FrontendCourseController extends \BaseController {
 
 		$contents = $course->coursesections;
 
-		$array = array( 'course' => $course, 'contents' => $contents );
+		$array = array( 'course' => $course, 'contents' => $course->coursesections );
 
 		return View::make('frontend.courses.inscription')->with( $array );
+
+	}
+
+	public static function getCourseSignin( $id, $course, $idContent ){
+
+		$array = array( 'course' => $course, 'contents' => $course->coursesections );
+
+		if($course->event->upload):
+
+			return Redirect::to('/courses/'.$course->id.'/files')->with( $array );
+
+		else:
+
+			return Redirect::to('/courses/'.$course->id.'/payment')->with( $array );
+
+		endif;
+
+	}
+
+	public static function getCourseFiles( $id, $course, $idContent ){
+
+		$array = array( 'course' => $course, 'contents' => $course->coursesections );
+
+		return View::make('frontend.courses.files')->with( $array );
+
+	}
+
+	public static function postCourseFiles( $id, $course, $idContent ){
+
+		foreach(Input::file('files') as $file):
+			if ($file != null):
+				$url = $file->getRealPath();
+				$extension = $file->getClientOriginalExtension();
+				$name = md5($file->getClientOriginalName().date('Y-m-d H:i:s')).'.'.$extension;
+				$size  = $file->getSize();
+				$mime  = $file->getMimeType();
+				$file->move(public_path('uploads/files/'), $name);
+
+				$my_file = new Files();
+				$my_file->id_course = $course->id;
+				$my_file->id_user = Auth::user()->id;
+				$my_file->id_inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+				$my_file->url = '/uploads/files/'.$name;
+				$my_file->size = $size;
+				$my_file->mime = $mime;
+				$my_file->save();
+			endif;
+		endforeach;
+
+		$array = array( 'course' => $course, 'contents' => $course->coursesections );
+
+		return Redirect::to('courses/'.$course->id.'/payment')->with( $array );
+
+	}
+
+	public static function getCoursePayment( $id, $course, $idContent ){
+
+		$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+		$button = '';
+		foreach($inscription->usertype->dates as $date):
+			$datetime1 = date_create($date->start);
+			$datetime2 = date_create(date('Y-m-d'));
+			$datetime3 = date_create($date->start);
+			$interval1 = date_diff($datetime1, $datetime2);
+			$interval2 = date_diff($datetime2, $datetime3);
+			if(($interval1->format('%R') == '+') AND ($interval2->format('%R') == '-')):
+				$button = $date->button;
+			endif;	
+		endforeach;
+		$array = array( 'button' => $button,'course' => $course,'contents' => $course->coursesections );
+
+		return View::make('frontend.courses.payment')->with( $array );
 
 	}
 /*
