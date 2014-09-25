@@ -11,7 +11,8 @@ class SectionsTableSeeder extends Seeder {
             'description' => '',
         	'file' => false,
         	'status' => 'publish',
-        	'type' => 'teachers'
+        	'type' => 'teachers',
+            'order' => 1
         	);
 
         Sections::create( $section );
@@ -21,7 +22,8 @@ class SectionsTableSeeder extends Seeder {
             'description' => '',
         	'file' => false,
         	'status' => 'publish',
-        	'type' => 'promotioners'
+        	'type' => 'promotioners',
+            'order' => 2
         	);
 
         Sections::create( $section );
@@ -31,7 +33,8 @@ class SectionsTableSeeder extends Seeder {
             'description' => '',
         	'file' => false,
         	'status' => 'publish',
-        	'type' => 'supporters'
+        	'type' => 'supporters',
+            'order' => 3
         	);
 
         Sections::create( $section );

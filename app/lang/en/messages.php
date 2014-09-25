@@ -183,4 +183,38 @@ return array(
 
 	'usertypes_display_err' => 'Oops, we could not find the user type',
 
+	# Sections
+
+	'sections_create' => 'The section type :title was created successfully',
+
+	'sections_create_err' => 'Oops, we had a problem creating the section type :title',
+
+	'sections_create_img_err' => 'Oops, we had a problem uploading the photo, please take care with the formats of the file',
+
+	'sections_update' => 'The section type :title was updated succesfully',
+
+	'sections_update_err' => 'Oops, we had a problem updating the section type',
+
+	'sections_trash' => 'The section type :title was sent to the recicle bin',
+
+	'sections_trash_err' => 'Oops, we had a problem sendig the section type to the recicle bin',
+
+	'sections_publish' => 'The section type :title was published succesfully',
+
+	'sections_publish_err' => 'Oops, we had a problem publishing the section type :title',
+
+	'sections_draft' => 'The section type :title has been changed to draft mode',
+
+	'sections_draft_err' => 'Oops, we had a problem changing the section type :title to draft mode',
+
+	'sections_untrash' => 'The section type :title was successfully restored',
+
+	'sections_untrash_err' => 'Oops, we had a problem restoring the section type :title',
+
+	'sections_delete' => 'The section type :title was deleted succesfully',
+
+	'sections_delete_err' => 'Oops, we had a problem deleting the section type :title',
+
+	'sections_display_err' => 'Oops, we could not find the section type',
+
 );

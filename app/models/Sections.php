@@ -32,7 +32,24 @@ public static function _get( $arg = 'all' ){
 				break;
 		}
 		
-		return self::where( 'status', $operator, $status )->orderBy('created_at', 'desc')->get();
+		return self::where( 'status', $operator, $status )->orderBy('order', 'asc')->get();
+
+	}
+
+	public static function findByPosition( $position ){
+
+		$has = self::where( 'order', '=', $position )->orderBy('created_at', 'desc')->take(1)->get();
+
+		if(count($has) > 0): 
+
+			return $has[0];
+
+		else:
+
+			return false;
+
+		endif;
+
 	}
 
 	public static function getPublish(){

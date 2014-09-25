@@ -193,13 +193,12 @@ class FrontendCourseController extends \BaseController {
 	}
 
 	public static function postCourseFiles( $id, $course, $idContent ){
-		dd(Input::get('title'));
 		foreach(Input::file('files') as $file):
 
 			if ($file != null):
 				$url = $file->getRealPath();
 				$extension = $file->getClientOriginalExtension();
-				$name = md5($file->getClientOriginalName().date('Y-m-d H:i:s')).'.'.$extension;
+				$name = Auth::user()->name.$file->getClientOriginalName().date('Y-m-d H:i:s').'.'.$extension;
 				$size  = $file->getSize();
 				$mime  = $file->getMimeType();
 				$file->move(public_path('uploads/files/'), $name);

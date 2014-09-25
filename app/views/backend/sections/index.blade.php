@@ -96,6 +96,7 @@ Teacher
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
+                                <th class="head0" style="text-align:center;width:10%">Order</th>
                                 <th class="head0" style="text-align:center;width:10%">Title</th>
                                 <th class="head0" style="text-align:center;width:40%">Description</th>
                                 <th class="head1" style="text-align:center;width:20%">Upload Files</th>
@@ -109,6 +110,17 @@ Teacher
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
+                                <td class="center" style="vertical-align:middle;width:10%;">
+                                    <h4 style="display:inline-block; margin-right: 15px">{{$section->order}}</h4>
+                                    <div style="display:inline-block">
+                                        @if($section->order > 1 )
+                                            <a href="{{ $route }}/up/{{$section->id}}" style="display:block;"><i class="iconfa-sort-up" style="color:#33A;font-size:20pt"></i></a>
+                                        @endif
+                                        @if($section->order < count($sections))
+                                            <a href="{{ $route }}/down/{{$section->id}}" style="display:block;margin-top: -30px"><i class="iconfa-sort-down" style="color:#33A;font-size:20pt"></i></a>
+                                        @endif
+                                    </div>
+                                </td>
                                 <td class="center" style="vertical-align:middle;width:10%;"><h4>{{$section->title}}</h4></td>
                                 <td class="description" style="vertical-align:middle;width:40%;">{{$section->description}}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$section->file}}</h4></td>

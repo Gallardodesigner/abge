@@ -15,6 +15,7 @@ class SectionController extends \BaseController {
 
 		return View::make('backend.sections.index', array(
 			'sections' => $sections,
+			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
 			));
@@ -29,22 +30,110 @@ class SectionController extends \BaseController {
 
 	public function postCreate(){
 
-			$section = new Sections();
-			$section->title = Input::get('title');
-			$section->description = Input::get('description');
-			$section->type = 'section';
-			$section->status = 'draft';
-			$section->file = Input::get('file') == 'true' ? true : false ;
-			if($section->save()):
+		$all = Sections::all();
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.sections_create', array( 'title' => $section->title , 'description' => $section->description, 'file'=>$section->file )));
 
+		$section = new Sections();
+		$section->title = Input::get('title');
+		$section->description = Input::get('description');
+		$section->type = 'section';
+		$section->status = 'draft';
+		$section->order = (count($all)+1);
+		$section->file = Input::get('file') == 'true' ? true : false ;
+		if($section->save()):
+
+			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.sections_create', array( 'title' => $section->title , 'description' => $section->description, 'file'=>$section->file )));
+
+		else:
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.sections_create_err', array( 'title' => $section->title , 'description' => $section->description, 'file'=>$section->file)));
+
+		endif;
+
+	}
+
+	public function getUp( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route);
+		
+		else:
+
+			$section = Sections::find($id);
+			$downer = Sections::findByPosition($section->order-1);
+
+			if($downer):
+		
+				$section->order = $section->order-1;
+				$section->save();
+
+				$downer->order = $downer->order+1;
+				$downer->save();
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.sections_updated'));
+				
 			else:
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.sections_create_err', array( 'title' => $section->title , 'description' => $section->description, 'file'=>$section->file)));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.sections_display_err'));
 
 			endif;
 
+
+			if(!$section):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.sections_display_err'));
+
+			else:
+
+				return View::make('backend.sections.update', array('section' => $section));
+
+			endif;
+
+
+		endif;
+	}
+
+	public function getDown( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route);
+		
+		else:
+
+			$section = Sections::find($id);
+			$upper = Sections::findByPosition($section->order+1);
+
+			if($upper):
+		
+				$section->order = $section->order+1;
+				$section->save();
+
+				$upper->order = $upper->order-1;
+				$upper->save();
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.sections_update'));
+				
+			else:
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.sections_display_err'));
+
+			endif;
+
+
+			if(!$section):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.sections_display_err'));
+
+			else:
+
+				return View::make('backend.sections.update', array('section' => $section));
+
+			endif;
+
+
+		endif;
 	}
 
 	public function getUpdate( $id = '' ){
