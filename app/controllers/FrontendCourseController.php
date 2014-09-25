@@ -101,7 +101,7 @@ class FrontendCourseController extends \BaseController {
 
 	public static function getCourseContent( $id, $course, $idContent ){
 
-		$contents = $course->coursesections;
+		$contents = self::getOrderedContent($course->coursesections);
 
 		$array = array( 'course' => $course, 'contents' => $contents );
 
@@ -162,7 +162,7 @@ class FrontendCourseController extends \BaseController {
 
 		$contents = $course->coursesections;
 
-		$array = array( 'course' => $course, 'contents' => $course->coursesections );
+		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
 		return View::make('frontend.courses.inscription')->with( $array );
 
@@ -170,7 +170,7 @@ class FrontendCourseController extends \BaseController {
 
 	public static function getCourseSignin( $id, $course, $idContent ){
 
-		$array = array( 'course' => $course, 'contents' => $course->coursesections );
+		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
 		if($course->event->upload):
 
@@ -186,7 +186,7 @@ class FrontendCourseController extends \BaseController {
 
 	public static function getCourseFiles( $id, $course, $idContent ){
 
-		$array = array( 'course' => $course, 'contents' => $course->coursesections );
+		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
 		return View::make('frontend.courses.files')->with( $array );
 
@@ -216,7 +216,7 @@ class FrontendCourseController extends \BaseController {
 			endif;
 		endforeach;
 
-		$array = array( 'course' => $course, 'contents' => $course->coursesections );
+		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
 		return Redirect::to('courses/'.$course->id.'/payment')->with( $array );
 
@@ -243,13 +243,32 @@ class FrontendCourseController extends \BaseController {
 			$button = $course->min_message;
 		endif;
 
-		$array = array( 'button' => $button,'course' => $course,'contents' => $course->coursesections );
+		$array = array( 'button' => $button,'course' => $course,'contents' => self::getOrderedContent($course->coursesections) );
 
 		return View::make('frontend.courses.payment')->with( $array );
 
+	}
 
+	public static function getOrderedContent( $contents ){
+
+		$sections = Sections::getPublish();
+
+		$array = array();
+		$position = 0;
+
+		foreach( $sections as $section ):
+			foreach( $contents as $content ):
+				if( $content->section->id == $section->id ):
+					$array[$position] = $content;
+					$position++;
+				endif;
+			endforeach;
+		endforeach;
+
+		return $array;
 
 	}
+
 /*
 	public static function getCourseCompany( $id, $course ){
 
