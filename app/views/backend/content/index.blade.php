@@ -86,7 +86,7 @@ Content
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="sections/create" class="btn dropdown-toggle">Add New Content</a>
+                            <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
                         </div>
                         <h4 class="widgettitle">All Contents</h4>
                     </div>

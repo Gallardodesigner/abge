@@ -18,6 +18,7 @@ class CreateFileTable extends Migration {
 			$table->integer('id_user');
 			$table->integer('id_inscription');
 			$table->string('type_user');
+			$table->string('title');
 			$table->string('url');
 			$table->string('size');
 			$table->string('mime');

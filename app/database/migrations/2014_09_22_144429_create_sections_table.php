@@ -20,6 +20,7 @@ class CreateSectionsTable extends Migration {
 			$table->string('file');
 			$table->string('type');
 			$table->string('status');
+			$table->integer('order');
 			$table->timestamps();
 			$table->softDeletes();
 		});
