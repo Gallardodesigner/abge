@@ -414,8 +414,8 @@ class AuthenticationController extends \BaseController {
 				$array = array( 
 					'cpf' => $credentials['cpf'], 
 					'msg_error' => Lang::get('messages.login_not_participant'), 
-					'course' => $course,
-					'usertype' => $usertype
+					'course' => $course->id,
+					'usertype' => $usertype->id
 					);
 
 				return Redirect::to('/auth/register')->with( $array );
