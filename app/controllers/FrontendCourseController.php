@@ -203,15 +203,16 @@ class FrontendCourseController extends \BaseController {
 				$size  = $file->getSize();
 				$mime  = $file->getMimeType();
 				$file->move(public_path('uploads/files/'), $name);
-
+				$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 				$my_file = new Files();
 				$my_file->id_course = $course->id;
 				$my_file->id_user = Auth::user()->id;
-				$my_file->id_inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
-				$my_file->title = 
+
+				$my_file->id_inscription = $inscription->id;
 				$my_file->url = '/uploads/files/'.$name;
 				$my_file->size = $size;
 				$my_file->mime = $mime;
+				$my_file->status = 'draft';
 				$my_file->save();
 			endif;
 		endforeach;
@@ -223,6 +224,8 @@ class FrontendCourseController extends \BaseController {
 	}
 
 	public static function getCoursePayment( $id, $course, $idContent ){
+
+		if(count($course->inscriptions) > $course->min ):
 
 		$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 		$button = '';
@@ -236,9 +239,16 @@ class FrontendCourseController extends \BaseController {
 				$button = $date->button;
 			endif;	
 		endforeach;
+		
+		else:
+			$button = $course->min_message;
+		endif;
+
 		$array = array( 'button' => $button,'course' => $course,'contents' => $course->coursesections );
 
 		return View::make('frontend.courses.payment')->with( $array );
+
+
 
 	}
 /*

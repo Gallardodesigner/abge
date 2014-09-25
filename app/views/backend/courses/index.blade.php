@@ -112,18 +112,19 @@ Courses
                                             {{Lang::get('display.inscriptions_paid')}}: {{$count}}
                                         </td>
                                         <td class="center">
-                                             <a href="/dashboard/courses/{{$course->id}}/content/" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>Sections</a>
-                                             <a href="/dashboard/courses/{{$course->id}}/usertypes/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>User Types</a>
-                                             <a href="/dashboard/courses/update/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
+                                             <a href="/dashboard/courses/{{$course->id}}/content/" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.sections')}}</a>
+                                             <a href="/dashboard/courses/{{$course->id}}/usertypes/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.usertypes')}}</a>
+                                             <a href="/dashboard/courses/{{$course->id}}/inscriptions/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-star" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.inscriptions')}}</a>
+                                             <a href="/dashboard/courses/update/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
                                    
                                             @if($course->status == 'publish')
 
-                                                <a data-id="{{$course->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
+                                                <a data-id="{{$course->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.draft')}}</a>
                                             
                                             @else
                                             
-                                                <a data-id="{{$course->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
-                                                <a data-id="{{$course->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
+                                                <a data-id="{{$course->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.publish')}}</a>
+                                                <a data-id="{{$course->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.trash')}}</a>
 
                                             @endif
                                         </td>
