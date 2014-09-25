@@ -64,6 +64,34 @@ class InscriptionController extends \BaseController {
 		endif;
 	}
 
+	public function getExcelcourse( $idCourse, $id = '' ){
+
+		if( $id != '' ):
+
+			$inscription = Inscriptions::find( $id );
+
+			Excel::create('Inscriptions_'.$inscription->course->title, function($excel) use ($inscription) {
+
+			    $excel->sheet('Participants', function($sheet) {
+
+			        $sheet->fromArray(array(
+			            array('data1', 'data2'),
+			            array('data3', 'data4')
+			        ));
+
+			    });
+
+			})->export('xls');
+
+			return Redirect::to(self::parseRoute($idCourse))->with( 'msg_success', Lang::get('messages.notpayment_success'));
+
+		else:
+
+			return Redirect::to( self::parseRoute($idCourse) );
+
+		endif;
+	}
+
 	public static function parseRoute( $idCourse ){
 
 		return str_replace('{idCourse}', $idCourse, self::$route );
