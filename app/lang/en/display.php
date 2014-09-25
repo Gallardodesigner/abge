@@ -53,8 +53,12 @@ return array(
 
 	'decline_payment' => 'Decline Payment',
 
-	'files' => 'Files'
+	'files' => 'Files',
 
+	'void' => 'Void',
 
+	'verify_file' => 'Verify File',
+	
+	'decline_file' => 'Decline File',	
 
 );

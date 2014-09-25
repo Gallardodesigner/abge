@@ -21,9 +21,9 @@ class FileController extends \BaseController {
 			'course' => $course,
 			'inscription' => $inscription,
 			'files' => $files,
-			'route' => self::parseRoute($course->id, ),
+			'route' => self::parseRoute($course->id, $idInscription ),
 			'parent' => self::parseParent($course->id),
-			'parent' => self::$parent,
+			'ancestor' => self::$ancestor,
 			'msg_success' => Session::get('msg_success'),
 			'msg_error' => Session::get('msg_error')
 			);
@@ -32,40 +32,40 @@ class FileController extends \BaseController {
 
 	}
 
-	public function getPaid( $idCourse, $id = '' ){
+	public function getPublish($idCourse, $idInscription, $id = '' ){
 
 		if( $id != '' ):
 
-			$inscription = Inscriptions::find( $id );
+			$file = Files::find( $id );
 
-			$inscription->paid = true;
+			$file->status = 'publish';
 
-			$inscription->save();
+			$file->save();
 
-			return Redirect::to(self::parseRoute($idCourse))->with( 'msg_success', Lang::get('messages.payment_success'));
+			return Redirect::to(self::parseRoute($idCourse, $idInscription))->with( 'msg_success', Lang::get('messages.file_publish_success'));
 
 		else:
 
-			return Redirect::to( self::parseRoute($idCourse) );
+			return Redirect::to( self::parseRoute($idCourse, $idInscription) );
 
 		endif;
 	}
 
-	public function getNotpaid( $idCourse, $id = '' ){
+	public function getTrash($idCourse, $idInscription, $id = '' ){
 
 		if( $id != '' ):
 
-			$inscription = Inscriptions::find( $id );
+			$file = Files::find( $id );
 
-			$inscription->paid = false;
+			$file->status = 'trash';
 
-			$inscription->save();
+			$file->save();
 
-			return Redirect::to(self::parseRoute($idCourse))->with( 'msg_success', Lang::get('messages.notpayment_success'));
+			return Redirect::to(self::parseRoute($idCourse, $idInscription))->with( 'msg_success', Lang::get('messages.file_trash_success'));
 
 		else:
 
-			return Redirect::to( self::parseRoute($idCourse) );
+			return Redirect::to( self::parseRoute($idCourse, $idInscription) );
 
 		endif;
 	}

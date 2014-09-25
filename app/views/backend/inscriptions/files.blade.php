@@ -41,7 +41,7 @@
 @stop
 
 @section("title")
-Inscriptions
+Files
 @stop
 
 @section("iconpage")
@@ -49,11 +49,11 @@ Inscriptions
 @stop
 
 @section("maintitle")
-Inscriptions
+Files
 @stop
 
 @section("nameview")
-    All Inscriptions
+    All Files {{ $inscription->user->name}}
 @stop
 
 @section("MainContent")
@@ -66,7 +66,7 @@ Inscriptions
                         <div class="btn-group">
                             <a href="{{ $parent }}" class="btn dropdown-toggle">Back</a>
                         </div>
-                        <h4 class="widgettitle">All Inscriptions</h4>
+                        <h4 class="widgettitle">All Files {{ $inscription->user->name}}</h4>
                     </div>
                     <table id="dyntable" class="table table-bordered responsive">
                         <colgroup>
@@ -80,7 +80,7 @@ Inscriptions
                         <thead>
                             <tr>
                                 <th class="head0 nosort" style="width:10%"><input type="checkbox" class="checkall" /></th>
-                                <th style="width:45%">Title</th>
+                                <th style="width:55%">Title</th>
                                 <th class="head0" style="width:10%">URL</th>
                                 <th class="head1" style="width:10%">Status</th>
                                 <th class="head0" style="width:25%">Actions</th>
@@ -94,18 +94,18 @@ Inscriptions
                                         <input type="checkbox" />
                                       </span></td>
                                         <td style="width:30%">
-											<h4>{{ $file->title}}</h4>
+											<h4>{{ $file->title != '' ? $file->title : Lang::get('display.void')}}</h4>
 										</td>
                                         <td>
-                                            <a href="URL::to($file->url)" target="_blank">{{ $file->mime }}</a>
+                                            <a href="{{URL::to($file->url)}}" target="_blank">{{ $file->mime }}</a>
 										</td>
-                                        <td>{{ Lang::get('display.'$file->status)}}</td>
+                                        <td>{{ Lang::get('display.'.$file->status)}}</td>
                                         <td class="center">
                                         	@if($file->status == 'draft' OR $file->status == 'trash')
-                                             <a href="{{ $route }}/publish/{{$file->id}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.verify_payment')}}</a>
+                                             <a href="{{ $route }}/publish/{{$file->id}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.verify_file')}}</a>
                                              @endif
                                              @if($file->status == 'draft' OR $file->status == 'publish')
-                                             <a href="{{ $route }}/trash/{{$file->id}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.decline_payment')}}</a>
+                                             <a href="{{ $route }}/trash/{{$file->id}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.decline_file')}}</a>
                                              @endif
                                         </td>
                                     </tr>

@@ -115,7 +115,7 @@ Inscriptions
                                              <a href="{{ $route }}/notpaid/{{$inscription->id}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.decline_payment')}}</a>
                                              @endif
                                              @if(count($inscription->files) > 0)
-                                             <a href="{{ $route }}/files/{{$inscription->id}}" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.files')}}</a>
+                                             <a href="{{ $route }}/{{$inscription->id}}/files/" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.files')}}</a>
                                              @endif
                                         </td>
                                     </tr>
