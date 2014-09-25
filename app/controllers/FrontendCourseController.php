@@ -193,7 +193,6 @@ class FrontendCourseController extends \BaseController {
 	}
 
 	public static function postCourseFiles( $id, $course, $idContent ){
-		dd(Input::get('title'));
 		foreach(Input::file('files') as $file):
 
 			if ($file != null):
