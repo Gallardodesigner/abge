@@ -271,7 +271,7 @@ Courses
                     </div>
                     </div>
                     <h4 class="widgettitle">Add Courses</h4>
-                        <form id="course" class="stdform " method="POST" action="">
+                        <form id="course" class="stdform " method="POST" action="" enctype="multipart/form-data">
                             <div id="wizard" class="wizard">
                                 <ul class="hormenu">
                                     <li>
