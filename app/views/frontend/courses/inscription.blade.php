@@ -45,10 +45,7 @@
             </table>
           @endif
       </div>
-      <div>
-        <a href="/auth/associate/{{$course->id}}">Inscribirse como asociado</a>
-        <a href="/auth/participant/{{$course->id}}">Inscribirse como participante</a></div>
-    </div>
+      
     </div>
 	</div>
 
