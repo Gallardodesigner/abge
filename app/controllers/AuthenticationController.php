@@ -95,7 +95,7 @@ class AuthenticationController extends \BaseController {
 					'inscription' => $inscription
 					);
 
-				return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+				return Redirect::to('/auth/updateassociate')->with( $array );
 
 			else:
 
@@ -109,7 +109,7 @@ class AuthenticationController extends \BaseController {
 					'inscription' => $inscription
 					);
 
-				return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+				return Redirect::to('/auth/updateassociate')->with( $array );
 
 			endif;
 
@@ -148,7 +148,7 @@ class AuthenticationController extends \BaseController {
 							'inscription' => $inscription
 							);
 
-						return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+						return Redirect::to('/auth/updateassociate')->with( $array );
 
 					else:
 
@@ -162,7 +162,7 @@ class AuthenticationController extends \BaseController {
 							'inscription' => $inscription
 							);
 
-						return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+						return Redirect::to('/auth/updateassociate')->with( $array );
 
 					endif;
 
@@ -219,7 +219,7 @@ class AuthenticationController extends \BaseController {
 								'inscription' => $inscription
 								);
 
-							return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+							return Redirect::to('/auth/updateassociate')->with( $array );
 
 						else:
 
@@ -233,7 +233,7 @@ class AuthenticationController extends \BaseController {
 								'inscription' => $inscription
 								);
 
-							return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+							return Redirect::to('/auth/updateassociate')->with( $array );
 
 						endif;
 
@@ -302,7 +302,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+					return Redirect::to('/auth/updateparticipant')->with( $array );
 
 				else:
 
@@ -318,7 +318,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+					return Redirect::to('/auth/updateparticipant')->with( $array );
 
 				endif;
 
@@ -348,7 +348,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+					return Redirect::to('/auth/updateparticipant')->with( $array );
 
 				else:
 
@@ -364,7 +364,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+					return Redirect::to('/auth/updateparticipant')->with( $array );
 
 				endif;
 
@@ -413,7 +413,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+					return Redirect::to('/auth/updateparticipant')->with( $array );
 
 				else:
 
@@ -429,7 +429,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+					return Redirect::to('/auth/updateparticipant')->with( $array );
 
 				endif;
 
@@ -530,6 +530,187 @@ class AuthenticationController extends \BaseController {
 		$part->save();
 
 		Auth::login($user);
+
+		if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+
+			$array = array(
+				'msg_success' => Lang::get('messages.login_welcome'),
+				'usertype' => $usertype,
+				'inscription' => $inscription
+				);
+
+			return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+
+		else:
+
+			$inscription = new Inscriptions();
+			$inscription->id_course = $course->id;
+			$inscription->id_user = Auth::user()->id;
+			$inscription->id_usertype = $usertype->id;
+			$inscription->save();
+
+			$array = array(
+				'usertype' => $usertype,
+				'inscription' => $inscription
+				);
+
+		endif;
+
+		return Redirect::to('/courses/'.$course.'/signin')->with( $array );
+
+	}
+
+	public function getUpdateparticipant(){
+
+		$estados = ORGStates::all();
+		$cpf = Session::get('cpf');
+
+		$msg_error = Session::get('msg_error');
+
+		$inscription = Session::get('inscription');
+
+		$usertype = $inscription->usertype;
+
+		$participant = $inscription->user->participant->participante;
+
+		$course = $inscription->course;
+		$contents = $course->coursesections;
+
+		$array = array(
+			'cpf' => $cpf,
+			'estados' => $estados,
+			'usertype' => $usertype,
+			'course' => $course,
+			'contents' => $contents,
+			'inscription' => $inscription,
+			'participant' => $participant
+			);
+
+		return View::make('auth.update_participant')->with( $array );
+
+	}
+
+	public function postUpdateparticipant(){
+
+		$course = Input::get('course');
+
+		$usertype = Input::get('usertype');
+
+		$inscription = Inscriptions::find(Input::get('inscription'));
+		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
+		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
+
+		$participant = ORGParticipants::find(Input::get('id'));
+
+		$participant->nome = Input::get('nome');
+		$participant->rg = Input::get('rg');
+		$participant->cpf = Input::get('cpf');
+		$participant->endereco = Input::get('endereco');
+		$participant->numero = Input::get('numero');
+		$participant->complemento = Input::get('complemento');
+		$participant->cep = Input::get('cep');
+		$participant->cidade = Input::get('cidade');
+		$participant->estado = $estado[0]->name_estado;
+		$participant->empresa = Input::get('empresa');
+		$participant->cnpj = Input::get('cnpj_empresa');
+		$participant->endereco_empresa = Input::get('endereco_empresa');
+		$participant->numero_empresa = Input::get('nome');
+		$participant->complemento_empresa = Input::get('complemento_empresa');
+		$participant->cep_empresa = Input::get('cep_empresa');
+		$participant->cidade_empresa = Input::get('cidade_empresa');
+		$participant->estado_empresa = $estado_empresa[0]->name_estado;
+		$participant->telefone = Input::get('telefone_empresa');
+		$participant->celular = Input::get('celular_empresa');
+		$participant->email = Input::get('email');
+		$participant->save();
+
+		Auth::login($participant->participant->getuser);
+
+		$array = array(
+			'msg_success' => Lang::get('messages.login_welcome'),
+			'usertype' => $usertype,
+			'inscription' => $inscription
+			);
+
+		return Redirect::to('/courses/'.$inscription->course->id.'/signin')->with( $array );
+
+	}
+
+	public function getUpdateassociate(){
+
+		$estados = ORGStates::all();
+		$cpf = Session::get('cpf');
+
+		$msg_error = Session::get('msg_error');
+
+		$inscription = Session::get('inscription');
+
+		$usertype = $inscription->usertype;
+
+		$participant = $inscription->user->associate->asociado;
+
+		$course = $inscription->course;
+		$contents = $course->coursesections;
+
+		$array = array(
+			'cpf' => $cpf,
+			'estados' => $estados,
+			'usertype' => $usertype,
+			'course' => $course,
+			'contents' => $contents,
+			'inscription' => $inscription,
+			'participant' => $participant
+			);
+
+		return View::make('auth.update_associate')->with( $array );
+
+	}
+
+	public function postUpdateassociate(){
+
+		$course = Input::get('course');
+
+		$usertype = Input::get('usertype');
+
+		$inscription = Inscriptions::find(Input::get('inscription'));
+		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
+		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
+		
+		$participant = ORGAssociates::find(Input::get('id'));
+
+		$participant->nombre_completo = Input::get('nombre_completo');
+		$participant->razon_social = Input::get('razon_social');
+		$participant->inscription_estadual = Input::get('inscription_estadual');
+		$participant->inscription_municipal = Input::get('inscription_municipal');
+		$participant->tipo_pessoa = Input::get('tipo_pessoa');
+		$participant->formacao = Input::get('formacao');
+		$participant->categoria = Input::get('categoria');
+		$participant->cpf = Input::get('cpf');
+		$participant->cnpj = Input::get('cnpj');
+		$participant->passaporte = Input::get('passaporte');
+		$participant->email = Input::get('email');
+		$participant->web_site = Input::get('web_site');
+		$participant->responsavel = Input::get('responsavel');
+		$participant->observacao = Input::get('observacao');
+		$participant->nombre_completo = Input::get('nombre_completo');
+		$participant->rg = Input::get('rg');
+		$participant->dir_res = Input::get('dir_res');
+		$participant->numero_res = Input::get('numero_res');
+		$participant->complemento_res = Input::get('complemento_res');
+		$participant->empresa = Input::get('empresa');
+		$participant->cnpj = Input::get('cnpj_empresa');
+		$participant->endereco_empresa = Input::get('endereco_empresa');
+		$participant->numero_empresa = Input::get('nome');
+		$participant->complemento_empresa = Input::get('complemento_empresa');
+		$participant->cep_empresa = Input::get('cep_empresa');
+		$participant->cidade_empresa = Input::get('cidade_empresa');
+		$participant->estado_empresa = $estado_empresa[0]->name_estado;
+		$participant->telefone = Input::get('telefone_empresa');
+		$participant->celular = Input::get('celular_empresa');
+		$participant->email = Input::get('email');
+		$participant->save();
+
+		Auth::login($participant->participant->user);
 
 		if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 

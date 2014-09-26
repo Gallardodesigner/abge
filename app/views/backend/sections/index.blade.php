@@ -114,10 +114,10 @@ Teacher
                                     <h4 style="display:inline-block; margin-right: 15px">{{$section->order}}</h4>
                                     <div style="display:inline-block">
                                         @if($section->order > 1 )
-                                            <a href="{{ $route }}/up/{{$section->id}}" style="display:block;"><i class="iconfa-sort-up" style="color:#33A;font-size:20pt"></i></a>
+                                            <a href="{{ $route }}/up/{{$section->id}}" style="display:block;padding:0;height:10px;text-decoration:none;z-index:999"><i class="iconfa-sort-up" style="color:#33A;font-size:20pt;padding:0;overflow:hidden;"></i></a>
                                         @endif
                                         @if($section->order < count($sections))
-                                            <a href="{{ $route }}/down/{{$section->id}}" style="display:block;margin-top: -30px"><i class="iconfa-sort-down" style="color:#33A;font-size:20pt"></i></a>
+                                            <a href="{{ $route }}/down/{{$section->id}}" style="display:block;margin-top: -10px;height:10px;text-decoration:none"><i class="iconfa-sort-down" style="color:#33A;font-size:20pt"></i></a>
                                         @endif
                                     </div>
                                 </td>

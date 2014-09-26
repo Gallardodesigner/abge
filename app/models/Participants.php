@@ -6,6 +6,14 @@ class Participants extends Eloquent {
 
 	protected $table = 'participants';
 
+	public function participante(){
+		return $this->belongsTo('ORGParticipants', 'participant', 'id_participante');
+	}
+	
+	public function getuser(){
+		return $this->belongsTo('User', 'user', 'id');
+	}
+
 /* --------------------------- */
 
 	public static function getByEmail( $email ){

@@ -6,9 +6,15 @@ class ORGParticipants extends Eloquent {
 		return $this->hasMany('Courses', 'category_id', 'id');
 	}
 
+	public function participant(){
+		return $this->hasOne('Participants', 'participant', 'id_participante');
+	}
+
 	protected $connection = 'mysql_2';
 
 	protected $table = 'participantes';
+
+	public $primaryKey  = 'id_participante';
 
     public $timestamps = false;
 

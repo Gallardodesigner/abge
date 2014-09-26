@@ -2,13 +2,17 @@
 
 class Associates extends Eloquent {
 
-	public function courses(){
-		return $this->hasMany('Courses', 'category_id', 'id');
-	}
-
 	protected $connection = 'mysql';
 
 	protected $table = 'associates';
+	
+	public function asociado(){
+		return $this->belongsTo('ORGAssociates', 'associate', 'id_asociado');
+	}
+	
+	public function getuser(){
+		return $this->belongsTo('User', 'user', 'id');
+	}
 
 /* --------------------------- */
 
