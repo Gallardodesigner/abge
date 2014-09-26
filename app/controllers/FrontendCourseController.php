@@ -206,7 +206,6 @@ class FrontendCourseController extends \BaseController {
 				$my_file = new Files();
 				$my_file->id_course = $course->id;
 				$my_file->id_user = Auth::user()->id;
-
 				$my_file->id_inscription = $inscription->id;
 				$my_file->url = '/uploads/files/'.$name;
 				$my_file->size = $size;
