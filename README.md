@@ -3,4 +3,12 @@ abge
 
 Cursos
 
-Prueba de commit AlexanderZon desde SSH
+Modulo de cursos adaptado al sistema de abge.org.br
+
+Eventos
+Secciones
+Profesores
+Compañias
+Patrocinadores
+Apoyo Institucional
+Promoción
