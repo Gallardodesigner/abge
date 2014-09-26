@@ -59,6 +59,8 @@ return array(
 
 	'verify_file' => 'Verify File',
 	
-	'decline_file' => 'Decline File',	
+	'decline_file' => 'Decline File',
+	
+	'submit_your_work' => 'Submit your work',	
 
 );

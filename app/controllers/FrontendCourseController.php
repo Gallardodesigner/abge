@@ -51,11 +51,17 @@ class FrontendCourseController extends \BaseController {
 					case 'inscriptions':
 						return self::getCourseInscription( $id, $course, $idContent );
 						break;
+					case 'works':
+						return self::getCourseWorks( $id, $course, $idContent );
+						break;
 					case 'signin':
 						return self::getCourseSignin( $id, $course, $idContent );
 						break;
 					case 'files':
 						return self::getCourseFiles( $id, $course, $idContent );
+						break;
+					case 'filesuploaded':
+						return self::getCourseFilesUploaded( $id, $course, $idContent );
 						break;
 					case 'payment':
 						return self::getCoursePayment( $id, $course, $idContent );
@@ -168,6 +174,16 @@ class FrontendCourseController extends \BaseController {
 
 	}
 
+	public static function getCourseWorks( $id, $course, $idContent ){
+
+		$contents = $course->coursesections;
+
+		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
+
+		return View::make('frontend.courses.works')->with( $array );
+
+	}
+
 	public static function getCourseSignin( $id, $course, $idContent ){
 
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
@@ -189,6 +205,14 @@ class FrontendCourseController extends \BaseController {
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
 		return View::make('frontend.courses.files')->with( $array );
+
+	}
+
+	public static function getCourseFilesUploaded( $id, $course, $idContent ){
+
+		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
+
+		return View::make('frontend.courses.filesupload')->with( $array );
 
 	}
 
@@ -217,7 +241,7 @@ class FrontendCourseController extends \BaseController {
 
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
-		return Redirect::to('courses/'.$course->id.'/payment')->with( $array );
+		return Redirect::to('courses/'.$course->id.'/filesuploaded')->with( $array );
 
 	}
 
