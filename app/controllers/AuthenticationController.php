@@ -680,8 +680,8 @@ class AuthenticationController extends \BaseController {
 
 		$participant->nombre_completo = Input::get('nombre_completo');
 		$participant->razon_social = Input::get('razon_social');
-		$participant->inscription_estadual = Input::get('inscription_estadual');
-		$participant->inscription_municipal = Input::get('inscription_municipal');
+		$participant->inscripcion_estadual = Input::get('inscription_estadual');
+		$participant->inscripcion_municipal = Input::get('inscription_municipal');
 		$participant->tipo_pessoa = Input::get('tipo_pessoa');
 		$participant->cpf = Input::get('cpf');
 		$participant->cnpj = Input::get('cnpj');
@@ -730,34 +730,15 @@ class AuthenticationController extends \BaseController {
 		$participant->celular_com = Input::get('celular_com');
 		$participant->save();
 
-		Auth::login($participant->participant->user);
+		Auth::login($participant->associate->getuser);
 
-		if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+		$array = array(
+			'msg_success' => Lang::get('messages.login_welcome'),
+			'usertype' => $usertype,
+			'inscription' => $inscription
+			);
 
-			$array = array(
-				'msg_success' => Lang::get('messages.login_welcome'),
-				'usertype' => $usertype,
-				'inscription' => $inscription
-				);
-
-			return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
-
-		else:
-
-			$inscription = new Inscriptions();
-			$inscription->id_course = $course->id;
-			$inscription->id_user = Auth::user()->id;
-			$inscription->id_usertype = $usertype->id;
-			$inscription->save();
-
-			$array = array(
-				'usertype' => $usertype,
-				'inscription' => $inscription
-				);
-
-		endif;
-
-		return Redirect::to('/courses/'.$course.'/signin')->with( $array );
+		return Redirect::to('/courses/'.$inscription->course->id.'/signin')->with( $array );
 
 	}
 

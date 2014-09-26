@@ -239,6 +239,9 @@ table{
             @if(count($course->usertypes) > 0)
               <li><a href="{{URL::to('courses/'.$course->id.'/inscriptions/')}}">INSCRIÇÕES</a></li>
             @endif
+            @if($course->event->upload AND Auth::check())
+              <li><a href="{{URL::to('courses/'.$course->id.'/files/')}}">SUBMETA SEU TRABALHO</a></li>
+            @endif
           </ul>
         </div>
       </div>

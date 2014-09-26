@@ -172,16 +172,16 @@ class FrontendCourseController extends \BaseController {
 
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
-		if($course->event->upload):
+		/*if($course->event->upload):
 
 			return Redirect::to('/courses/'.$course->id.'/files')->with( $array );
 
-		else:
+		else:*/
 
 			return Redirect::to('/courses/'.$course->id.'/payment')->with( $array );
-
+/*
 		endif;
-
+*/
 	}
 
 	public static function getCourseFiles( $id, $course, $idContent ){

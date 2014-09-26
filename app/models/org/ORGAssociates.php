@@ -16,6 +16,8 @@ class ORGAssociates extends Eloquent {
 
 	protected $table = 'asociados';
 
+    public $timestamps = false;
+
 /* --------------------------- */
 
 	public static function _get( $arg = 'all' ){
