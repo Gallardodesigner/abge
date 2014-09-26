@@ -81,9 +81,30 @@ class CourseController extends \BaseController {
 				)
 			);
 			*/
+		$image = Input::file('header');
+		$validator = Validator::make(
+			array(
+				'image' => $image
+				), 
+			array(
+				'image' => 'required|mimes:png,jpeg,gif'
+				),
+			array(
+				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+				)
+			);
+		if($validator->fails()):
+
+			return Redirect::to($this->route.'/create')->with('msg_succes', Lang::get('messages.companies_create_img_err'));
+
+		else:
+
+		$filename = $this->uploadImage($image);
+
 		$course = new Courses();
 		$course->title = Input::get('title');
-		$course->description = Input::get('description');/*
+		$course->description = Input::get('description');
+		$course->header = $filename;/*
 		$course->description = Input::get('description');
 		$course->inscription = Input::get('inscription');
 		$course->associates_payment = Input::get('associates_payment');
@@ -120,14 +141,17 @@ class CourseController extends \BaseController {
 			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $course->title )));
 
 		endif;
+		endif;
 
 	}
+
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
+
 	public function getUpdate( $id = '' )
 	{
 		//
@@ -178,9 +202,30 @@ class CourseController extends \BaseController {
 	public function postUpdate( $id = '' )
 	{
 
+		$image = Input::file('header');
+		$validator = Validator::make(
+			array(
+				'image' => $image
+				), 
+			array(
+				'image' => 'required|mimes:png,jpeg,gif'
+				),
+			array(
+				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+				)
+			);
+		if($validator->fails()):
+
+			return Redirect::to($this->route.'/create')->with('msg_succes', Lang::get('messages.companies_create_img_err'));
+
+		else:
+
+		$filename = $this->uploadImage($image);
+
 		$course = Courses::find($id);
 		$course->title = Input::get('title');
 		$course->description = Input::get('description');
+		$course->header = $filename;
 		$course->category_id = Input::get('category_id');
 		$course->company_id = Input::get('company_id');
 		$course->event_id = Input::get('event_id');
@@ -202,6 +247,7 @@ class CourseController extends \BaseController {
 
 			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $course->title )));
 
+		endif;
 		endif;
 
 	}
@@ -417,6 +463,29 @@ class CourseController extends \BaseController {
 
 		endif;
 
+	}
+
+	public function uploadImage($image){
+
+		//dd(storage_path('uploads/'));
+
+		$info_image = getimagesize($image);
+		$ratio = $info_image[0] / $info_image[1];
+		$newheight=array();
+		$width=array("1000");
+		#$filename = "prueba.".$image->getClientOriginalExtension();
+		$filename = str_replace('/', '!', Hash::make($image->getClientOriginalName().date('Y-m-d H:i:s'))).".".$image->getClientOriginalExtension();
+		$nombres=[$filename];
+
+		for ($i=0; $i <count($width) ; $i++):
+
+			$path = public_path('uploads/headers/'.$nombres[$i]);
+			Image::make($image->getRealPath())->resize($width[$i],null,function ($constraint) {$constraint->aspectRatio();})->save($path);
+		
+		endfor;
+
+		return $filename;
+		
 	}
 
 

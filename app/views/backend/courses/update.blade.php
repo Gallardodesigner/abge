@@ -271,7 +271,7 @@ Courses
                     </div>
                     </div>
                     <h4 class="widgettitle">Add Courses</h4>
-                        <form id="course" class="stdform " method="POST" action="">
+                        <form id="course" class="stdform " method="POST" action="" enctype="multipart/form-data">
                             <div id="wizard" class="wizard">
                                 <ul class="hormenu">
                                     <li>
@@ -315,6 +315,9 @@ Courses
                                         <label>Description</label>
                                         <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" value="{{$course->description}}" /></span>
                                     </p>
+                                    <p>
+                                        <label>Header</label>
+                                        <span class="field"><input type="file" name="header" id="header" class="btn btn-primary" /></span>
                                     </p>
                                     <p>
                                         <label>Company</label>
