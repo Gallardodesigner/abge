@@ -315,6 +315,9 @@ Courses
                                         <label>Description</label>
                                         <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" /></span>
                                     </p>
+                                    <p>
+                                        <label>Header</label>
+                                        <span class="field"><input type="file" name="header" id="header" class="btn btn-information" /></span>
                                     </p>
                                     <p>
                                         <label>Company</label>
