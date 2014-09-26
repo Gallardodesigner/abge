@@ -70,7 +70,7 @@ Courses
                     </div>
                     <table id="dyntable" class="table table-bordered responsive">
                         <colgroup>
-                            <col class="con0" style="align: center; width: 4%" />
+                            <col class="con0" />
                             <col class="con1" />
                             <col class="con0" />
                             <col class="con1" />
@@ -79,14 +79,14 @@ Courses
                         </colgroup>
                         <thead>
                             <tr>
-                                <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0">Title</th>
-                                <th class="head1">Description</th>
-                                <th class="head0">Event</th>
-                                <th class="head1" style="width:10%">Start at</th>
-                                <th class="head0" style="width:10%">End at</th>
+                                <th class="head0 nosort" style="width:15%"><input type="checkbox" class="checkall" /></th>
+                                <th class="head0" width="15%">Title</th>
+                                <th class="head1"style="width:25%">Description</th>
+                                <th class="head0" style="width:8%">Event</th>
+                                <th class="head1" style="width:8%">Start at</th>
+                                <th class="head0" style="width:8%">End at</th>
                                 <th class="head1" style="width:10%">Participants</th>
-                                <th class="head0">Actions</th>
+                                <th class="head0" style="width:10%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
