@@ -16,7 +16,7 @@
       <h5 class="data-adress">Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5>
     </div>
     <div id="content">	
-        {{$section->section->title}}
+        <!-- {{$section->section->title}} -->
         {{$section->content}}
     </div>
     </div>
