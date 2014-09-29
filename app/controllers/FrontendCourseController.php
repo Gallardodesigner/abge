@@ -29,6 +29,11 @@ class FrontendCourseController extends \BaseController {
 
 			$courses = Courses::getPublish();
 
+			foreach ($courses as $course) {
+				$course->start = date("d-m-Y", strtotime($course->start));
+				$course->end = date("d-m-Y", strtotime($course->end));
+			}
+
 			return View::make('frontend.courses.index')->with( array( 'courses' => $courses ) );
 
 		elseif( $id != '' ):
