@@ -23,19 +23,14 @@
               
             @foreach($course->usertypes as $user)
               <tr>
-                <td>{{$user->title}}</td>
-                
-                <td>
-                <td>
-                  
-                </td>
-                <td></td>
-                @if($user->associate)
-                  <a href="{{ URL::to('/auth/workassociate/'.$user->id) }}">{{Lang::get('display.submit_your_work')}}</a>
-                @else
-                  <a href="{{ URL::to('/auth/workparticipant/'.$user->id) }}">{{Lang::get('display.submit_your_work')}}</a>
-                @endif
-                </td>
+              @if($user->associate)
+                  <td><a href="{{ URL::to('/auth/workassociate/'.$user->id) }}">{{$user->title}}</a>
+                  </td>
+              @else
+                  <td>
+                    <a href="{{ URL::to('/auth/workparticipant/'.$user->id) }}">{{$user->title}}</a>
+                  </td>
+              @endif
               </tr>
             @endforeach
             </table>
