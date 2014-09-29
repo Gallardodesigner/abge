@@ -107,6 +107,10 @@ class ContentController extends \BaseController {
 						$array['teachers'] = Teachers::getPublish();
 						$view = 'backend.content.teachers';
 						break;
+					case 'helpers':
+						$array['helpers'] = Companies::getPublish();
+						$view = 'backend.content.helpers';
+						break;
 					case 'promotioners':
 						$array['promotioners'] = Companies::getPublish();
 						$view = 'backend.content.promotioners';
@@ -152,6 +156,9 @@ class ContentController extends \BaseController {
 				elseif(Input::get('promotioners') != null ):
 					$promotioners = Input::get('promotioners');
 					$course->promotioners()->sync($promotioners);
+				elseif(Input::get('helpers') != null ):
+					$promotioners = Input::get('helpers');
+					$course->helpers()->sync($helpers);
 				elseif(Input::get('supporters') != null ):
 					$supporters = Input::get('supporters');
 					$course->supporters()->sync($supporters);

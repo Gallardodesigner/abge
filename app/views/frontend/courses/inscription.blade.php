@@ -5,6 +5,11 @@
 @section("title");
 	Cursos
 @stop
+<style>
+  table, th, td{
+    border: 1px solid #00366c !important;
+  }
+</style>
 
 <!-- Contenido principal -->
 @section("maincontent")
@@ -13,7 +18,7 @@
 		<div class="course" data-id="{{$course->id}}">
     <div class="course_title">
       <h1>{{$course->event->title}} : {{$course->title}}</h1>
-      <h5 class="data-adress">Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5>
+      <!-- <h5 class="data-adress">Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5> -->
     </div>
     <div id="content">
       <div>
@@ -23,9 +28,9 @@
               <tr>
                 <th>{{Lang::get('display.usertype')}}</th>
                 @foreach($course->usertypes[0]->dates as $date)
-                  <th>{{Lang::get('display.until')}} {{date("d-m-Y", strtotime($date->end))}}</th>
+                  <th>ATÉ {{date("d-m-Y", strtotime($date->end))}}</th>
                 @endforeach
-                  <th>{{Lang::get('inscription_link')}}</th>
+                  <th>INSCRIÇÕES</th>
               </tr>
             @foreach($course->usertypes as $user)
               <tr>
@@ -35,9 +40,9 @@
                 @endforeach
                 <td>
                 @if($user->associate)
-                  <a href="{{ URL::to('/auth/associate/'.$user->id) }}">{{Lang::get('display.signin')}}</a>
+                  <a href="{{ URL::to('/auth/associate/'.$user->id) }}">CLIQUE AQUI</a>
                 @else
-                  <a href="{{ URL::to('/auth/participant/'.$user->id) }}">{{Lang::get('display.signin')}}</a>
+                  <a href="{{ URL::to('/auth/participant/'.$user->id) }}">CLIQUE AQUI</a>
                 @endif
                 </td>
               </tr>
@@ -47,7 +52,8 @@
       </div>
       
     </div>
-	</div>
+  </div>
+  </div>
 
 
 @stop

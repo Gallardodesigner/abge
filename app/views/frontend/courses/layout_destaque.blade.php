@@ -32,8 +32,10 @@
   margin-top: 30px;
 }
 .content{
+  width:720px;/*
   margin-left: -10px;
-  padding-right: 10px;
+  padding-right: 10px;*/
+  float: right;
 }
 .content p{
   text-align: justify;

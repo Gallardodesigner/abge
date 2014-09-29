@@ -119,7 +119,6 @@ class FrontendCourseController extends \BaseController {
 		if($idContent != ''):
 
 			$array['section'] = CoursesSection::find($idContent);
-
 			switch($array['section']->section->type){
 				case 'section':
 					return View::make('frontend.courses.content')->with( $array );
@@ -132,17 +131,22 @@ class FrontendCourseController extends \BaseController {
 					$array['promotioners'] = $course->promotioners;
 					return View::make('frontend.courses.promotioners')->with( $array );
 					break;
+				case 'helpers':
+					$array['helpers'] = $course->helpers;
+					return View::make('frontend.courses.helpers')->with( $array );
+					break;
 				case 'supporters':
 					$array['supporters'] = $course->supporters;
 					return View::make('frontend.courses.supporters')->with( $array );
 					break;
 				default:
+					
 					return View::make('frontend.courses.content')->with( $array );
 					break;
 			}
 
 		else:
-
+			
 		return View::make('frontend.courses.stand')->with( $array );
 
 		endif;

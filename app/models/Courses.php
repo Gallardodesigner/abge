@@ -23,6 +23,10 @@ class Courses extends Eloquent {
 	public function supporters(){
 		return $this->belongsToMany('Companies', 'supporters', 'course_id', 'company_id');
 	}
+	
+	public function helpers(){
+		return $this->belongsToMany('Companies', 'helpers', 'course_id', 'company_id');
+	}
 
 	public function category(){
 		return $this->belongsTo('Categories', 'category_id');
