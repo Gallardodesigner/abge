@@ -99,7 +99,11 @@ class CourseController extends \BaseController {
 
 		else:
 
-		$filename = $this->uploadImage($image);
+			if($image!=""):
+				$filename = $this->uploadHeader($image);
+			else:
+				$filename = "";
+			endif;
 
 		$course = new Courses();
 		$course->title = Input::get('title');
@@ -165,7 +169,6 @@ class CourseController extends \BaseController {
 			$companies = Companies::getPublish();
 			$sections = Sections::getPublish();
 			$content = $course->sections;
-		
 			$course->start = date("d-m-Y", strtotime($course->start));
 			$course->end = date("d-m-Y", strtotime($course->end));
 
@@ -202,27 +205,14 @@ class CourseController extends \BaseController {
 	public function postUpdate( $id = '' )
 	{
 
-		$image = Input::file('header');
-		$validator = Validator::make(
-			array(
-				'image' => $image
-				), 
-			array(
-				'image' => 'required|mimes:png,jpeg,gif'
-				),
-			array(
-				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
-				)
-			);
-		if($validator->fails()):
-
-			return Redirect::to($this->route.'/create')->with('msg_succes', Lang::get('messages.companies_create_img_err'));
-
-		else:
-
-		$filename = $this->uploadImage($image);
-
 		$course = Courses::find($id);
+		$image = Input::file('header');
+		
+		if($image!=""):
+			$filename = $this->uploadHeader($image);
+		else:
+			$filename = Input::get('imghidden');
+		endif;
 		$course->title = Input::get('title');
 		$course->description = Input::get('description');
 		$course->header = $filename;
@@ -247,7 +237,6 @@ class CourseController extends \BaseController {
 
 			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $course->title )));
 
-		endif;
 		endif;
 
 	}
@@ -465,7 +454,7 @@ class CourseController extends \BaseController {
 
 	}
 
-	public function uploadImage($image){
+	public function uploadHeader($image){
 
 		//dd(storage_path('uploads/'));
 

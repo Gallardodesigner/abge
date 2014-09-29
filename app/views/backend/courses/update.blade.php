@@ -316,6 +316,7 @@ Courses
                                         <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" value="{{$course->description}}" /></span>
                                     </p>
                                     <p>
+                                        <input name="imghidden" type="hidden" value="{{$course->header}}" />
                                         <label>Header</label>
                                         <span class="field"><input type="file" name="header" id="header" class="btn btn-primary" /></span>
                                     </p>

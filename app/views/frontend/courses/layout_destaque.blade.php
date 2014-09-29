@@ -230,9 +230,11 @@ table{
       </div>
     </div>
     <div id="page" class="container" style="padding-top: 15px;">
-      <div style="width:100%; ">
+      <div style="width:100%; margin-bottom:20px;">
         @if ($course->header!="")
-        <img src="{{$course->header}}" alt="">
+        <div style="overflow:hidden;height: 190px;">
+          <img src="/uploads/headers/{{$course->header}}" alt="">
+        </div>
         @endif
       </div>
       <div class="columna_lateral_home">
