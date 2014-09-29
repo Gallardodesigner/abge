@@ -24,12 +24,23 @@ return array(
 
 	'connections' => array(
 
-		'mysql' => array(
+		/*'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => 'abgecom',
 			'username'  => 'root',
 			'password'  => '',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),*/
+
+		'mysql' => array(
+			'driver'    => 'mysql',
+			'host'      => '186.202.152.19',
+			'database'  => 'abge',
+			'username'  => 'abge',
+			'password'  => 'egba4102',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

@@ -157,7 +157,7 @@ class ContentController extends \BaseController {
 					$promotioners = Input::get('promotioners');
 					$course->promotioners()->sync($promotioners);
 				elseif(Input::get('helpers') != null ):
-					$promotioners = Input::get('helpers');
+					$helpers = Input::get('helpers');
 					$course->helpers()->sync($helpers);
 				elseif(Input::get('supporters') != null ):
 					$supporters = Input::get('supporters');
