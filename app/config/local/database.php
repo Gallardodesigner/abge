@@ -35,9 +35,8 @@ return array(
 			'prefix'    => '',
 		),
 
-		/*
-		NO DESCOMENTAR ESTA LINEA
-		'mysql' => array(
+		
+		/*'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => '186.202.152.19',
 			'database'  => 'abge',

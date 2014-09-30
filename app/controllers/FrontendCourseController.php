@@ -39,7 +39,7 @@ class FrontendCourseController extends \BaseController {
 		elseif( $route != '' ):
 
 			$course = Courses::findRoute($route);
-		
+
 			$course->start = date("d-m-Y", strtotime($course->start));
 			$course->end = date("d-m-Y", strtotime($course->end));
 
@@ -149,13 +149,7 @@ class FrontendCourseController extends \BaseController {
 
 			$section = Sections::findByPosition(1);
 
-			$sections = $course->coursesections;
-
-			foreach( $sections as $sec ):
-				if($sec->section_id == $section->id):
-					$array['section'] = $sec;
-				endif;
-			endforeach;
+			$array['section'] = $contents[0];
 
 			return View::make('frontend.courses.content')->with( $array );
 
