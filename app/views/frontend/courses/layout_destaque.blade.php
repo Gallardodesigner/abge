@@ -243,13 +243,13 @@ table{
         <div class="menu_lat">
           <ul>
             @foreach($contents as $link)
-              <li><a href="{{URL::to('courses/'.$course->route.'/content/'.$link->id)}}">{{$link->section->title}}</a></li>
+              <li><a href="{{URL::to('/'.$course->route.'/content/'.$link->id)}}">{{$link->section->title}}</a></li>
             @endforeach
             @if(count($course->usertypes) > 0)
-              <li><a href="{{URL::to('courses/'.$course->route.'/inscriptions/')}}">INSCRIÇÕES</a></li>
+              <li><a href="{{URL::to('/'.$course->route.'/inscriptions/')}}">INSCRIÇÕES</a></li>
             @endif
             @if($course->event->upload)
-              <li><a href="{{URL::to('courses/'.$course->route.'/works/')}}">SUBMETA SEU TRABALHO</a></li>
+              <li><a href="{{URL::to('/'.$course->route.'/works/')}}">SUBMETA SEU TRABALHO</a></li>
             @endif
           </ul>
         </div>

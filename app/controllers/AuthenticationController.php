@@ -540,7 +540,7 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
-			return Redirect::to('/courses/'.$course->route.'/signin')->with( $array );
+			return Redirect::to($course->route.'/signin')->with( $array );
 
 		else:
 
@@ -555,7 +555,7 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
-			return Redirect::to('/courses/'.$course->route.'/signin')->with( $array );
+			return Redirect::to($course->route.'/signin')->with( $array );
 		
 		endif;
 
@@ -633,7 +633,7 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to('/courses/'.$inscription->course->route.'/signin')->with( $array );
+		return Redirect::to($inscription->course->route.'/signin')->with( $array );
 
 	}
 
@@ -739,7 +739,7 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to('/courses/'.$inscription->course->route.'/signin')->with( $array );
+		return Redirect::to($inscription->course->route.'/signin')->with( $array );
 
 	}
 
@@ -1228,7 +1228,7 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
-			return Redirect::to('/courses/'.$course->route.'/files')->with( $array );
+			return Redirect::to($course->route.'/files')->with( $array );
 
 		else:
 
@@ -1243,7 +1243,7 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 		
-			return Redirect::to('/courses/'.$course->route.'/files')->with( $array );
+			return Redirect::to($course->route.'/files')->with( $array );
 
 		endif;
 
@@ -1321,7 +1321,7 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to('/courses/'.$inscription->course->route.'/files')->with( $array );
+		return Redirect::to($inscription->course->route.'/files')->with( $array );
 
 	}
 
@@ -1427,7 +1427,7 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to('/courses/'.$inscription->course->route.'/files')->with( $array );
+		return Redirect::to($inscription->course->route.'/files')->with( $array );
 
 	}
 

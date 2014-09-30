@@ -40,6 +40,7 @@
 	// });
 	Route::controller('/auth', 'AuthenticationController');
 	Route::controller('/courses/{id?}/{content?}/{idContent?}', 'FrontendCourseController');
+	Route::controller('/{id}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/', 'FrontendController');
 
 

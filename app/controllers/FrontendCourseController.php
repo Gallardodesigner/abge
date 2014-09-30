@@ -203,11 +203,11 @@ class FrontendCourseController extends \BaseController {
 
 		/*if($course->event->upload):
 
-			return Redirect::to('/courses/'.$course->id.'/files')->with( $array );
+			return Redirect::to($course->id.'/files')->with( $array );
 
 		else:*/
 
-			return Redirect::to('/courses/'.$course->route.'/payment')->with( $array );
+			return Redirect::to($course->route.'/payment')->with( $array );
 /*
 		endif;
 */
@@ -263,7 +263,7 @@ class FrontendCourseController extends \BaseController {
 
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
-		return Redirect::to('courses/'.$course->route.'/filesuploaded')->with( $array );
+		return Redirect::to($course->route.'/filesuploaded')->with( $array );
 
 	}
 
