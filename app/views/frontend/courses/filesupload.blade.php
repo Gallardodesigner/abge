@@ -18,7 +18,7 @@
     <div id="content">	
         Sus archivos han sido subidos exitosamente y serán revisados por un moderador.
 
-              <a href="{{URL::to('courses/'.$course->id.'/')}}">volver a la informacion del curso</a>
+              <a href="{{URL::to('courses/'.$course->route.'/')}}">volver a la informacion del curso</a>
     </div>
     </div>
 	</div>

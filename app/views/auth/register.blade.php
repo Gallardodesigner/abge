@@ -21,7 +21,7 @@
 		<label>Nome: </label><input type="text" name="nome"/><br>
 		<label>Email: </label><input type="email" name="email"/><br>
 		<label>RG: </label><input type="text" name="rg"/><br>
-		<label>CPF: </label><input type="text" name="cpf"/><br>
+		<label>CPF: </label><input type="text" name="cpf" value="{{ $cpf }}"/><br>
 		<label>Endereço: </label><input type="text" name="endereco"/><br>
 		<label>N°: </label><input type="text" name="numero"/><br>
 		<label>Complemento: </label><input type="text" name="complemento"/><br>
