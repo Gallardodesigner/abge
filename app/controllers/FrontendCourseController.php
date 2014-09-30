@@ -157,13 +157,7 @@ class FrontendCourseController extends \BaseController {
 				endif;
 			endforeach;
 
-
-			
-<<<<<<< HEAD
-		return View::make('frontend.courses.stand')->with( $array );
-=======
 			return View::make('frontend.courses.content')->with( $array );
->>>>>>> ed7ded799c31bad025f085ccef3af13f93707807
 
 		endif;
 
