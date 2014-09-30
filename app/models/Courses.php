@@ -77,6 +77,22 @@ class Courses extends Eloquent {
 		return self::where( 'status', $operator, $status )->orderBy('created_at', 'desc')->get();
 	}
 
+	public static function findRoute( $route ){
+
+		$has = self::where( 'route', '=', $route )->orderBy('created_at', 'asc')->take(1)->get();
+
+		if(count($has) > 0): 
+
+			return $has[0];
+
+		else:
+
+			return false;
+
+		endif;
+
+	}
+
 	public static function getPublish(){
 		return self::_get('publish');
 	}

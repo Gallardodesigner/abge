@@ -23,9 +23,9 @@ class FrontendCourseController extends \BaseController {
 
 	*/
 
-	public function getIndex( $id = '', $content = '', $idContent = '' ){
+	public function getIndex( $route = '', $content = '', $idContent = '' ){
 
-		if( $id == '' ):
+		if( $route == '' ):
 
 			$courses = Courses::getPublish();
 
@@ -36,9 +36,9 @@ class FrontendCourseController extends \BaseController {
 
 			return View::make('frontend.courses.index')->with( array( 'courses' => $courses ) );
 
-		elseif( $id != '' ):
+		elseif( $route != '' ):
 
-			$course = Courses::find($id);
+			$course = Courses::find($route);
 		
 			$course->start = date("d-m-Y", strtotime($course->start));
 			$course->end = date("d-m-Y", strtotime($course->end));
@@ -48,31 +48,31 @@ class FrontendCourseController extends \BaseController {
 				switch($content){
 
 					case '':
-						return self::getCourseContent( $id, $course, $idContent );
+						return self::getCourseContent( $route, $course, $idContent );
 						break;
 					case 'content':
-						return self::getCourseContent( $id, $course, $idContent );
+						return self::getCourseContent( $route, $course, $idContent );
 						break;
 					case 'inscriptions':
-						return self::getCourseInscription( $id, $course, $idContent );
+						return self::getCourseInscription( $route, $course, $idContent );
 						break;
 					case 'works':
-						return self::getCourseWorks( $id, $course, $idContent );
+						return self::getCourseWorks( $route, $course, $idContent );
 						break;
 					case 'signin':
-						return self::getCourseSignin( $id, $course, $idContent );
+						return self::getCourseSignin( $route, $course, $idContent );
 						break;
 					case 'files':
-						return self::getCourseFiles( $id, $course, $idContent );
+						return self::getCourseFiles( $route, $course, $idContent );
 						break;
 					case 'filesuploaded':
-						return self::getCourseFilesUploaded( $id, $course, $idContent );
+						return self::getCourseFilesUploaded( $route, $course, $idContent );
 						break;
 					case 'payment':
-						return self::getCoursePayment( $id, $course, $idContent );
+						return self::getCoursePayment( $route, $course, $idContent );
 						break;
 					default:
-						return self::getCourseContent( $id, $course, $idContent );
+						return self::getCourseContent( $route, $course, $idContent );
 						break;
 
 				}
@@ -87,9 +87,9 @@ class FrontendCourseController extends \BaseController {
 
 	}
 
-	public function postIndex( $id = '', $content = '', $idContent = '' ){
+	public function postIndex( $route = '', $content = '', $idContent = '' ){
 
-		$course = Courses::find($id);
+		$course = Courses::find($route);
 	
 		$course->start = date("d-m-Y", strtotime($course->start));
 		$course->end = date("d-m-Y", strtotime($course->end));
@@ -98,7 +98,7 @@ class FrontendCourseController extends \BaseController {
 
 			switch($content){
 				case 'files':
-					return self::postCourseFiles( $id, $course, $idContent );
+					return self::postCourseFiles( $course->id, $course, $idContent );
 					break;
 			}
 
@@ -262,7 +262,7 @@ class FrontendCourseController extends \BaseController {
 
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
-		return Redirect::to('courses/'.$course->id.'/filesuploaded')->with( $array );
+		return Redirect::to('courses/'.$course->route.'/filesuploaded')->with( $array );
 
 	}
 
