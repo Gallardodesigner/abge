@@ -147,7 +147,7 @@ class FrontendCourseController extends \BaseController {
 
 		else:
 			
-		return View::make('frontend.courses.stand')->with( $array );
+		return View::make('frontend.courses.content')->with( $array );
 
 		endif;
 
