@@ -15,8 +15,7 @@
 			 	<a href="{{ URL::to('courses/'.$course->route) }}" >{{$course->title}}</a>
 			 	<div class="spec">
 			 		<p>{{$course->event->title}}</p>
-			 		<p>Inicio: {{$course->start}}</p>
-			 		<p>Fin: {{$course->end}}</p>
+			 		
 			 	</div>
 			 	<p>{{$course->event->title}} : {{$course->title}}, nos dias {{$course->start}} a {{$course->end}} em {{$course->address}}</p>
 			</div>
