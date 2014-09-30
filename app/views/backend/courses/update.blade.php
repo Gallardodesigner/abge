@@ -315,6 +315,10 @@ Courses
                                         <label>Description</label>
                                         <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" value="{{$course->description}}" /></span>
                                     </p>
+                                     <p>
+                                        <label>Route</label>
+                                        <span class="field"><input type="text" name="route" id="route" class="input-xxlarge" value="{{$course->route}}" /></span>
+                                    </p>
                                     <p>
                                         <input name="imghidden" type="hidden" value="{{$course->header}}" />
                                         <label>Header</label>
