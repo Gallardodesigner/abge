@@ -146,8 +146,20 @@ class FrontendCourseController extends \BaseController {
 			}
 
 		else:
+
+			$section = Sections::findByPosition(1);
+
+			$sections = $course->coursesections;
+
+			foreach( $sections as $sec ):
+				if($sec->section_id == $section->id):
+					$array['section'] = $sec;
+				endif;
+			endforeach;
+
+
 			
-		return View::make('frontend.courses.content')->with( $array );
+			return View::make('frontend.courses.content')->with( $array );
 
 		endif;
 
