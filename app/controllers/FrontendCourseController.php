@@ -38,7 +38,7 @@ class FrontendCourseController extends \BaseController {
 
 		elseif( $route != '' ):
 
-			$course = Courses::find($route);
+			$course = Courses::findRoute($route);
 		
 			$course->start = date("d-m-Y", strtotime($course->start));
 			$course->end = date("d-m-Y", strtotime($course->end));
@@ -89,7 +89,7 @@ class FrontendCourseController extends \BaseController {
 
 	public function postIndex( $route = '', $content = '', $idContent = '' ){
 
-		$course = Courses::find($route);
+		$course = Courses::findRoute($route);
 	
 		$course->start = date("d-m-Y", strtotime($course->start));
 		$course->end = date("d-m-Y", strtotime($course->end));
@@ -213,7 +213,7 @@ class FrontendCourseController extends \BaseController {
 
 		else:*/
 
-			return Redirect::to('/courses/'.$course->id.'/payment')->with( $array );
+			return Redirect::to('/courses/'.$course->route.'/payment')->with( $array );
 /*
 		endif;
 */
@@ -236,17 +236,23 @@ class FrontendCourseController extends \BaseController {
 	}
 
 	public static function postCourseFiles( $id, $course, $idContent ){
+
+		$titles = Input::get('titles');
+
+		$count = 0;
+
 		foreach(Input::file('files') as $file):
 
 			if ($file != null):
 				$url = $file->getRealPath();
 				$extension = $file->getClientOriginalExtension();
-				$name = Auth::user()->name.$file->getClientOriginalName().date('Y-m-d H:i:s').'.'.$extension;
+				$name = str_replace(' ', '', strtolower(Auth::user()->name)).str_replace(' ', '', strtolower($titles[$count])).date('YmdHis').'.'.$extension;
 				$size  = $file->getSize();
 				$mime  = $file->getMimeType();
 				$file->move(public_path('uploads/files/'), $name);
 				$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 				$my_file = new Files();
+				$my_file->title = $titles[$count];
 				$my_file->id_course = $course->id;
 				$my_file->id_user = Auth::user()->id;
 				$my_file->id_inscription = $inscription->id;
@@ -256,6 +262,9 @@ class FrontendCourseController extends \BaseController {
 				$my_file->status = 'draft';
 				$my_file->save();
 			endif;
+
+			$count++;
+
 		endforeach;
 
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );

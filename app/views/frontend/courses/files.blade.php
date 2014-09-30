@@ -17,11 +17,11 @@
     </div>
     <div id="content">	
         <form method="post" enctype="multipart/form-data">
-          <input type="file" name="files[]" ><br>
-          <input type="file" name="files[]" ><br>
-          <input type="file" name="files[]" ><br>
-          <input type="file" name="files[]" ><br>
-          <input type="file" name="files[]" ><br>
+          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
+          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
+          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
+          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
+          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
           <input type="submit" value="Enviar"/><br>
         </form>
     </div>

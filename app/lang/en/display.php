@@ -63,4 +63,6 @@ return array(
 	
 	'submit_your_work' => 'Submit your work',	
 
+	'name' => 'Name',
+
 );

@@ -380,8 +380,8 @@ class AuthenticationController extends \BaseController {
 
 				$user = new User();
 				$user->email = $participant->email;
-				if($participant->name != null):
-					$user->name = $participant->name;
+				if($participant->nome != null):
+					$user->name = $participant->nome;
 				else:
 					$user->name = "User without name";
 				endif;
@@ -393,8 +393,8 @@ class AuthenticationController extends \BaseController {
 				$part->participant = $participant->id_participante;
 				$part->user = $user->id;
 				$part->email = $participant->email;
-				if($participant->name != null):
-					$part->name = $participant->name;
+				if($participant->nome != null):
+					$part->name = $participant->nome;
 				else:
 					$part->name = "User without name";
 				endif;
@@ -460,6 +460,7 @@ class AuthenticationController extends \BaseController {
 		$usertype = UserTypes::find(Session::get('usertype'));
 
 		$course = Courses::find(Session::get('course'));
+
 		$contents = $course->coursesections;
 
 		$array = array(
@@ -476,9 +477,9 @@ class AuthenticationController extends \BaseController {
 
 	public function postRegister(){
 
-		$course = Input::get('course');
+		$course = Courses::find(Input::get('course'));
 
-		$usertype = Input::get('usertype');
+		$usertype = UserTypes::find(Input::get('usertype'));
 
 		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
 		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
@@ -508,8 +509,8 @@ class AuthenticationController extends \BaseController {
 
 		$user = new User();
 		$user->email = $participant->email;
-		if($participant->name != null):
-			$user->name = $participant->name;
+		if($participant->nome != null):
+			$user->name = $participant->nome;
 		else:
 			$user->name = "User without name";
 		endif;
@@ -539,7 +540,7 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
-			return Redirect::to('/courses/'.$course->id.'/signin')->with( $array );
+			return Redirect::to('/courses/'.$course->route.'/signin')->with( $array );
 
 		else:
 
@@ -554,9 +555,9 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
+			return Redirect::to('/courses/'.$course->route.'/signin')->with( $array );
+		
 		endif;
-
-		return Redirect::to('/courses/'.$course.'/signin')->with( $array );
 
 	}
 
@@ -632,7 +633,7 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to('/courses/'.$inscription->course->id.'/signin')->with( $array );
+		return Redirect::to('/courses/'.$inscription->course->route.'/signin')->with( $array );
 
 	}
 
@@ -738,7 +739,7 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to('/courses/'.$inscription->course->id.'/signin')->with( $array );
+		return Redirect::to('/courses/'.$inscription->course->route.'/signin')->with( $array );
 
 	}
 
@@ -1068,8 +1069,8 @@ class AuthenticationController extends \BaseController {
 
 				$user = new User();
 				$user->email = $participant->email;
-				if($participant->name != null):
-					$user->name = $participant->name;
+				if($participant->nome != null):
+					$user->name = $participant->nome;
 				else:
 					$user->name = "User without name";
 				endif;
@@ -1081,8 +1082,8 @@ class AuthenticationController extends \BaseController {
 				$part->participant = $participant->id_participante;
 				$part->user = $user->id;
 				$part->email = $participant->email;
-				if($participant->name != null):
-					$part->name = $participant->name;
+				if($participant->nome != null):
+					$part->name = $participant->nome;
 				else:
 					$part->name = "User without name";
 				endif;
@@ -1164,9 +1165,9 @@ class AuthenticationController extends \BaseController {
 
 	public function postWorkregister(){
 
-		$course = Input::get('course');
+		$course = Courses::find(Input::get('course'));
 
-		$usertype = Input::get('usertype');
+		$usertype = UserTypes::find(Input::get('usertype'));
 
 		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
 		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
@@ -1196,8 +1197,8 @@ class AuthenticationController extends \BaseController {
 
 		$user = new User();
 		$user->email = $participant->email;
-		if($participant->name != null):
-			$user->name = $participant->name;
+		if($participant->nome != null):
+			$user->name = $participant->nome;
 		else:
 			$user->name = "User without name";
 		endif;
@@ -1227,7 +1228,7 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
-			return Redirect::to('/courses/'.$course->id.'/files')->with( $array );
+			return Redirect::to('/courses/'.$course->route.'/files')->with( $array );
 
 		else:
 
@@ -1241,10 +1242,10 @@ class AuthenticationController extends \BaseController {
 				'usertype' => $usertype,
 				'inscription' => $inscription
 				);
+		
+			return Redirect::to('/courses/'.$course->route.'/files')->with( $array );
 
 		endif;
-
-		return Redirect::to('/courses/'.$course.'/files')->with( $array );
 
 	}
 
@@ -1320,7 +1321,7 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to('/courses/'.$inscription->course->id.'/files')->with( $array );
+		return Redirect::to('/courses/'.$inscription->course->route.'/files')->with( $array );
 
 	}
 
@@ -1426,7 +1427,7 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to('/courses/'.$inscription->course->id.'/files')->with( $array );
+		return Redirect::to('/courses/'.$inscription->course->route.'/files')->with( $array );
 
 	}
 
