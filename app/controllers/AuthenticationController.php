@@ -168,7 +168,12 @@ class AuthenticationController extends \BaseController {
 
 				else:
 
-					return View::make('auth.error')->with( 'msg_error', Lang::get('messages.login_error'));
+					$array = array(
+						'course' => $course,
+						'contents' => $course->coursesections
+						);
+
+					return View::make('auth.error')->with( $array );
 
 				endif;
 
@@ -239,13 +244,23 @@ class AuthenticationController extends \BaseController {
 
 					else:
 
-						return View::make('auth.error')->with( 'msg_error', Lang::get('messages.login_error'));
+						$array = array(
+							'course' => $course,
+							'contents' => $course->coursesections
+							);
+
+						return View::make('auth.error')->with( $array );
 
 					endif;
 
 				else:
 
-					return View::make('auth.error');
+					$array = array(
+						'course' => $course,
+						'contents' => $course->coursesections
+						);
+
+					return View::make('auth.error')->with($array);
 
 				endif;
 
@@ -859,7 +874,12 @@ class AuthenticationController extends \BaseController {
 
 				else:
 
-					return View::make('auth.error')->with( 'msg_error', Lang::get('messages.login_error'));
+					$array = array(
+						'course' => $course,
+						'contents' => $course->coursesections
+						);
+
+					return View::make('auth.error')->with( $array );
 
 				endif;
 
@@ -930,13 +950,23 @@ class AuthenticationController extends \BaseController {
 
 					else:
 
-						return View::make('auth.error')->with( 'msg_error', Lang::get('messages.login_error'));
+						$array = array(
+							'course' => $course,
+							'contents' => $course->coursesections
+							);
+
+						return View::make('auth.error')->with( $array );
 
 					endif;
 
 				else:
 
-					return View::make('auth.error');
+					$array = array(
+						'course' => $course,
+						'contents' => $course->coursesections
+						);
+
+					return View::make('auth.error')->with( $array );
 
 				endif;
 
