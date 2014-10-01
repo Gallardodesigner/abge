@@ -24,7 +24,7 @@
     		<input type="hidden" name="id" value="{{$participant->id_participante}}"/>
     	@endif
     	<input type="hidden" name="inscription" value="{{$inscription->id}}"/>
-		<label>Nome: </label><input type="text" name="nombre_completo" value="{{ $participant->nombre_completo }}"/><br>
+		<!--<label>Nome: </label><input type="text" name="nombre_completo" value="{{ $participant->nombre_completo }}"/><br>
 		<label>Razon Social: </label><input type="text" name="razon_social" value="{{ $participant->razon_social }}"/><br>
 		<label>Inscripcion Estaduak: </label><input type="text" name="inscription_estadual" value="{{ $participant->inscription_estadual }}"/><br>
 		<label>Inscripcion Municipal: </label><input type="text" name="inscription_municipal" value="{{ $participant->inscription_municipal }}"/><br>
@@ -78,7 +78,58 @@
 		<label>Telefone Res 2: </label><input type="text" name="telefone_seg_res" value="{{ $participant->telefone_seg_res }}"/><br>
 		<label>Telefone Com 2: </label><input type="text" name="telefone_seg_com" value="{{ $participant->telefone_seg_com }}"/><br>
 		<label>Celular Res: </label><input type="text" name="celular_res" value="{{ $participant->celular_res }}"/><br>
-		<label>Celular Com: </label><input type="text" name="celular_com" value="{{ $participant->celular_com }}"/><br>
+		<label>Celular Com: </label><input type="text" name="celular_com" value="{{ $participant->celular_com }}"/><br>-->
+		<label>Nome: </label><input type="text" name="nombre_completo" value="{{ $participant->nombre_completo }}"/><br>
+		<label>Email: </label><input type="email" name="email" value="{{ $participant->email }}"/><br>
+		<label>RG: </label><input type="text" name="rg" value="{{ $participant->rg }}"/><br>
+		<label>CPF: </label><input type="text" name="cpf" value="{{ $participant->cpf }}"/><br>
+		<label>Endereço: </label><input type="text" name="dir_res" value="{{ $participant->dir_res }}"/><br>
+		<label>N°: </label><input type="text" name="numero_res" value="{{ $participant->numero_res }}"/><br>
+		<label>Complemento: </label><input type="text" name="complemento_res" value="{{ $participant->complemento_res }}"/><br>
+		<label>CEP: </label><input type="text" name="cep_res" value="{{ $participant->cep_res }}"/><br>
+		<label>Estado: </label>
+			<select name="uf_res">
+				<option value="0" selected>Seleccione um estado</option>
+				@foreach($estados as $state)
+					@if($participant->uf_res == $state->id_estado)
+						<option value="{{$state->id_estado}}" selected>{{$state->name_estado}}</option>
+					@else
+						<option value="{{$state->id_estado}}">{{$state->name_estado}}</option>
+					@endif
+				@endforeach
+			</select>
+			<br>
+		<label>Cidade: </label><input type="text" name="municipio_res" value="{{ $participant->municipio_res }}"/><br>
+		<div><h3>Informações de Empresa</h3></div>
+		<label>Empresa: </label><input type="text" name="razon_social" value="{{ $participant->razon_social }}"/><br>
+		<label>CNPJ: </label><input type="text" name="cnpj" value="{{ $participant->cnpj }}"/><br>
+		<label>Endereço: </label><input type="text" name="dir_com" value="{{ $participant->dir_com }}"/><br>
+		<label>N°: </label><input type="text" name="numero_com" value="{{ $participant->numero_com }}"/><br>
+		<label>Complemento: </label><input type="text" name="complemento_com" value="{{ $participant->complemento_com }}"/><br>
+		<label>CEP: </label><input type="text" name="cep_com" value="{{ $participant->cep_com }}"/><br>
+		<label>Estado: </label>
+			<select name="uf_com">
+				<option value="0" selected>Seleccione um estado</option>
+				@foreach($estados as $state)
+					@if($participant->uf_com == $state->id_estado)
+						<option value="{{$state->id_estado}}" selected>{{$state->name_estado}}</option>
+					@else
+						<option value="{{$state->id_estado}}">{{$state->name_estado}}</option>
+					@endif
+				@endforeach
+			</select>
+			<br>
+		<label>Cidade: </label><input type="text" name="municipio_com" value="{{ $participant->municipio_com }}"/><br>
+		<label>Telefone: </label><input type="text" name="telefone_com" value="{{ $participant->telefone_com }}"/><br>
+		<label>Celular: </label><input type="text" name="celular_com" value="{{ $participant->celular_com }}"/><br>
+		<label>Tipo de participante: </label><select name="type">
+			<option value="0" selected>Seleccione um tipo</option>
+			@foreach($course->usertypes as $user)
+				@if(!$user->associate)
+					<option value="{{ $user->id }}">{{$user->title}}</option>
+				@endif
+			@endforeach
+		</select><br>
 		<input type="submit" value="Enviar"/>
 	</form>
     </div>
