@@ -15,7 +15,7 @@
       <!-- <h5>Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5> -->
     </div>
     <div id="content">
-    <form method="post">
+    <form class="updateform" method="post">
     	<input type="hidden" name="usertype" value="{{$usertype->id}}"/>
     	<input type="hidden" name="course" value="{{$course->id}}"/>
     	@if($inscription->user->type == 'associate')
@@ -24,7 +24,10 @@
     		<input type="hidden" name="id" value="{{$participant->id_participante}}"/>
     	@endif
     	<input type="hidden" name="inscription" value="{{$inscription->id}}"/>
-		<label>Nome: </label><input type="text" name="nome" value="{{ $participant->nome }}"/><br>
+		<div class="control-box">
+			<label>Nome: </label>
+			<input type="text" name="nome" value="{{ $participant->nome }}"/><br>
+		</div>
 		<label>Email: </label><input type="email" name="email" value="{{ $participant->email }}"/><br>
 		<label>RG: </label><input type="text" name="rg" value="{{ $participant->rg }}"/><br>
 		<label>CPF: </label><input type="text" name="cpf" value="{{ $participant->cpf }}"/><br>
