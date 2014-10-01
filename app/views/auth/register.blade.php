@@ -8,7 +8,7 @@
 
 <!-- Contenido principal -->
 @section("maincontent")
-	<div class="columna_central_home">
+	<div class="content">
 		<div class="course" data-id="{{$course->id}}">
     <div class="course_title">
       <h1>{{$course->event->title}} : {{$course->title}}</h1>
