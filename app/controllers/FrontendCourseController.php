@@ -50,13 +50,13 @@ class FrontendCourseController extends \BaseController {
 					case '':
 						return self::getCourseContent( $route, $course, $idContent );
 						break;
-					case 'content':
+					case 'conteudo':
 						return self::getCourseContent( $route, $course, $idContent );
 						break;
-					case 'inscriptions':
+					case 'inscricoes':
 						return self::getCourseInscription( $route, $course, $idContent );
 						break;
-					case 'works':
+					case 'trabalhos':
 						return self::getCourseWorks( $route, $course, $idContent );
 						break;
 					case 'signin':
@@ -240,7 +240,7 @@ class FrontendCourseController extends \BaseController {
 			if ($file != null):
 				$url = $file->getRealPath();
 				$extension = $file->getClientOriginalExtension();
-				$name = str_replace(' ', '', strtolower(Auth::user()->name)).str_replace(' ', '', strtolower($titles[$count])).date('YmdHis').'.'.$extension;
+				$name = str_replace(' ', '', strtolower(Auth::user()->name)).str_replace(' ', '', strtolower($titles[$counttitle])).date('YmdHis').'.'.$extension;
 				$size  = $file->getSize();
 				$mime  = $file->getMimeType();
 				$file->move(public_path('uploads/files/'), $name);
@@ -257,10 +257,11 @@ class FrontendCourseController extends \BaseController {
 				$my_file->save();
 			endif;
 
-			$count++;
 			if (($count % 2)!=0):
 				$counttitle++;
 			endif;
+			
+			$count++;
 
 		endforeach;
 

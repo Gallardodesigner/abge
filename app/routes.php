@@ -38,7 +38,8 @@
 	// Route::get('/dashboard/', function(){
 	// 	return Redirect::to('/');
 	// });
-	Route::controller('/auth', 'AuthenticationController');
+	//Route::controller('/auth', 'AuthenticationController');
+	Route::controller('/autenticacao', 'AuthenticationController');
 	Route::controller('/courses/{id?}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/{id}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/', 'FrontendController');
