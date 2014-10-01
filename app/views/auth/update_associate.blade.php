@@ -132,6 +132,14 @@
 		<div class="titulo_empresa"><h3>Informações de Empresa</h3></div>
 		<br>-->
 		<div class="control-box">
+			<label>Telefone: </label>
+			<input type="text" name="telefone_com" value="{{ $participant->telefone_com }}"/>
+		</div>
+		<div class="control-box">
+			<label>Celular: </label>
+			<input type="text" name="celular_com" value="{{ $participant->celular_com }}"/>
+		</div>
+		<div class="control-box">
 			<label>Empresa: </label>
 			<input type="text" name="razon_social" value="{{ $participant->razon_social }}"/>
 		</div>
@@ -172,14 +180,6 @@
 			<label>Cidade: </label>
 			<input type="text" name="municipio_com" value="{{ $participant->municipio_com }}"/>
 		</div> -->
-		<div class="control-box">
-			<label>Telefone: </label>
-			<input type="text" name="telefone_com" value="{{ $participant->telefone_com }}"/>
-		</div>
-		<div class="control-box">
-			<label>Celular: </label>
-			<input type="text" name="celular_com" value="{{ $participant->celular_com }}"/>
-		</div>
 		<!-- <div class="control-box">
 		<label>Tipo de participante: </label>
 			<select name="type">
@@ -191,7 +191,9 @@
 				@endforeach
 			</select>
 		</div> -->
-		<input type="submit" value="Enviar"/>
+		<div class="control-box">
+			<input type="submit" value="Enviar"/>
+		</div>
 	</form>
     </div>
     </div>

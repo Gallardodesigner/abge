@@ -93,6 +93,21 @@ table{
   width: 80%;
   float:right;
 }
+
+.updateform input[type="submit"]{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance:none;
+  padding: 15px 10px;
+  color: white;
+  background: #0066CC;
+  border: none;
+  text-transform: uppercase;
+  display: block;
+  float: right;
+  cursor: pointer;
+}
+
 .submitwork input[type="text"]{
   padding:5px 20px !important;
 }
