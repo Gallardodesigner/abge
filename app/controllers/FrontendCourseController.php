@@ -40,10 +40,10 @@ class FrontendCourseController extends \BaseController {
 
 			$course = Courses::findRoute($route);
 
-			$course->start = date("d-m-Y", strtotime($course->start));
-			$course->end = date("d-m-Y", strtotime($course->end));
-
 			if($course):
+
+				$course->start = date("d-m-Y", strtotime($course->start));
+				$course->end = date("d-m-Y", strtotime($course->end));
 
 				switch($content){
 

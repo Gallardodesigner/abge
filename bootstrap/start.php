@@ -26,10 +26,10 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('Magicmedia','BACKEND-PC'),
+	'local' => array('Magicmedia','BACKEND-PC','homestead'),
 	'production'=> array('homestead'),
 
-	// 'local' => array('homestead'),
+	//'local' => array('homestead'),
 
 ));
 
