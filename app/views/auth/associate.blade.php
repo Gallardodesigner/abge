@@ -16,7 +16,7 @@
       <!-- <h5>Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5> -->
     </div>
     <div id="content">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
     	<input type="hidden" name="course" value="{{$course->id}}"/>
     	<input type="hidden" name="usertype" value="{{$usertype->id}}"/>
 		<label>Email: </label><input type="text" name="email"/><br>

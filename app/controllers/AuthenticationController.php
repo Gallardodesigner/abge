@@ -95,7 +95,7 @@ class AuthenticationController extends \BaseController {
 					'inscription' => $inscription
 					);
 
-				return Redirect::to('/autenticacao/updateassociate')->with( $array );
+				return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 			else:
 
@@ -109,7 +109,7 @@ class AuthenticationController extends \BaseController {
 					'inscription' => $inscription
 					);
 
-				return Redirect::to('/autenticacao/updateassociate')->with( $array );
+				return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 			endif;
 
@@ -148,7 +148,7 @@ class AuthenticationController extends \BaseController {
 							'inscription' => $inscription
 							);
 
-						return Redirect::to('/autenticacao/updateassociate')->with( $array );
+						return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 					else:
 
@@ -162,7 +162,7 @@ class AuthenticationController extends \BaseController {
 							'inscription' => $inscription
 							);
 
-						return Redirect::to('/autenticacao/updateassociate')->with( $array );
+						return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 					endif;
 
@@ -224,7 +224,7 @@ class AuthenticationController extends \BaseController {
 								'inscription' => $inscription
 								);
 
-							return Redirect::to('/autenticacao/updateassociate')->with( $array );
+							return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 						else:
 
@@ -238,7 +238,7 @@ class AuthenticationController extends \BaseController {
 								'inscription' => $inscription
 								);
 
-							return Redirect::to('/autenticacao/updateassociate')->with( $array );
+							return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 						endif;
 
@@ -317,7 +317,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/updateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
 				else:
 
@@ -333,7 +333,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/updateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
 				endif;
 
@@ -363,7 +363,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/updateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
 				else:
 
@@ -379,7 +379,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/updateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
 				endif;
 
@@ -428,7 +428,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/updateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
 				else:
 
@@ -444,7 +444,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/updateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
 				endif;
 
@@ -457,7 +457,7 @@ class AuthenticationController extends \BaseController {
 					'usertype' => $usertype->id
 					);
 
-				return Redirect::to('/autenticacao/register')->with( $array );
+				return Redirect::to('/autenticacao/cadastro')->with( $array );
 
 			endif;
 
@@ -465,7 +465,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function getRegister(){
+	public function getCadastro(){
 
 		$estados = ORGStates::all();
 		$cpf = Session::get('cpf');
@@ -490,7 +490,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function postRegister(){
+	public function postCadastro(){
 
 		$course = Courses::find(Input::get('course'));
 
@@ -555,7 +555,7 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
-			return Redirect::to($course->route.'/signin')->with( $array );
+			return Redirect::to($course->route.'/acesso')->with( $array );
 
 		else:
 
@@ -570,13 +570,13 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
-			return Redirect::to($course->route.'/signin')->with( $array );
+			return Redirect::to($course->route.'/acesso')->with( $array );
 		
 		endif;
 
 	}
 
-	public function getUpdateparticipant(){
+	public function getActualizacaoparticipante(){
 
 		$estados = ORGStates::all();
 		$cpf = Session::get('cpf');
@@ -606,7 +606,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function postUpdateparticipant(){
+	public function postActualizacaoparticipante(){
 
 		$course = Input::get('course');
 
@@ -618,26 +618,26 @@ class AuthenticationController extends \BaseController {
 
 		$participant = ORGParticipants::find(Input::get('id'));
 
-		$participant->nome = Input::get('nome');
-		$participant->rg = Input::get('rg');
-		$participant->cpf = Input::get('cpf');
-		$participant->endereco = Input::get('endereco');
-		$participant->numero = Input::get('numero');
-		$participant->complemento = Input::get('complemento');
-		$participant->cep = Input::get('cep');
-		$participant->cidade = Input::get('cidade');
-		$participant->estado = $estado[0]->name_estado;
-		$participant->empresa = Input::get('empresa');
-		$participant->cnpj = Input::get('cnpj_empresa');
-		$participant->endereco_empresa = Input::get('endereco_empresa');
-		$participant->numero_empresa = Input::get('nome');
-		$participant->complemento_empresa = Input::get('complemento_empresa');
-		$participant->cep_empresa = Input::get('cep_empresa');
-		$participant->cidade_empresa = Input::get('cidade_empresa');
-		$participant->estado_empresa = $estado_empresa[0]->name_estado;
-		$participant->telefone = Input::get('telefone_empresa');
-		$participant->celular = Input::get('celular_empresa');
-		$participant->email = Input::get('email');
+		$participant->nome = Input::get('nome') != null ? Input::get('nome') : $participant->nome;
+		$participant->rg = Input::get('rg') != null ? Input::get('rg') : $participant->rg;
+		$participant->cpf = Input::get('cpf') != null ? Input::get('cpf') : $participant->cpf;
+		$participant->endereco = Input::get('endereco') != null ? Input::get('endereco') : $participant->endereco;
+		$participant->numero = Input::get('numero') != null ? Input::get('numero') : $participant->numero;
+		$participant->complemento = Input::get('complemento') != null ? Input::get('complemento') : $participant->complemento;
+		$participant->cep = Input::get('cep') != null ? Input::get('cep') : $participant->cep;
+		$participant->cidade = Input::get('cidade') != null ? Input::get('cidade') : $participant->cidade;
+		$participant->estado = isset($estado[0]->name_estado) ? $estado[0]->name_estado : $participant->estado;
+		$participant->empresa = Input::get('empresa') != null ? Input::get('empresa') : $participant->empresa;
+		$participant->cnpj = Input::get('cnpj_empresa') != null ? Input::get('cnpj_empresa') : $participant->cnpj;
+		$participant->endereco_empresa = Input::get('endereco_empresa') != null ? Input::get('endereco_empresa') : $participant->endereco_empresa;
+		$participant->numero_empresa = Input::get('nome') != null ? Input::get('nome') : $participant->numero_empresa;
+		$participant->complemento_empresa = Input::get('complemento_empresa') != null ? Input::get('complemento_empresa') : $participant->complemento_empresa;
+		$participant->cep_empresa = Input::get('cep_empresa') != null ? Input::get('cep_empresa') : $participant->cep_empresa;
+		$participant->cidade_empresa = Input::get('cidade_empresa') != null ? Input::get('cidade_empresa') : $participant->cidade_empresa;
+		$participant->estado_empresa = isset($estado_empresa[0]->name_estado) ? $estado_empresa[0]->name_estado : $participant->estado_empresa;
+		$participant->telefone = Input::get('telefone_empresa') != null ? Input::get('telefone_empresa') : $participant->telefone;
+		$participant->celular = Input::get('celular_empresa') != null ? Input::get('celular_empresa') : $participant->celular;
+		$participant->email = Input::get('email') != null ? Input::get('email') : $participant->email;
 		$participant->save();
 
 		Auth::login($participant->participant->getuser);
@@ -648,11 +648,11 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to($inscription->course->route.'/signin')->with( $array );
+		return Redirect::to($inscription->course->route.'/acesso')->with( $array );
 
 	}
 
-	public function getUpdateassociate(){
+	public function getActualizacaoassociado(){
 
 		$estados = ORGStates::all();
 		$cpf = Session::get('cpf');
@@ -682,7 +682,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function postUpdateassociate(){
+	public function postActualizacaoassociado(){
 
 		$course = Input::get('course');
 
@@ -755,13 +755,15 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to($inscription->course->route.'/signin')->with( $array );
+		return Redirect::to($inscription->course->route.'/acesso')->with( $array );
 
 	}
 
 	/* ----------------------------------------------- */
 
-	public function getWorkassociate( $usertype ){
+	public function getTrabalhoassociado ( $usertype = '' ){
+
+		//dd(Input::all());
 
 		$msg_error = Session::get('msg_error');
 		$usertype = UserTypes::find( $usertype );
@@ -779,7 +781,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function postWorkassociate(){
+	public function postTrabalhoassociado (){
 
 		$credentials = array(
 			'email' => Input::get('email'),
@@ -800,7 +802,7 @@ class AuthenticationController extends \BaseController {
 					'inscription' => $inscription
 					);
 
-				return Redirect::to('/autenticacao/workupdateassociate')->with( $array );
+				return Redirect::to('/autenticacao/trabalhoactualizacaoassociado/')->with( $array );
 
 			else:
 
@@ -814,7 +816,7 @@ class AuthenticationController extends \BaseController {
 					'inscription' => $inscription
 					);
 
-				return Redirect::to('/autenticacao/workupdateassociate')->with( $array );
+				return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
 
 			endif;
 
@@ -853,7 +855,7 @@ class AuthenticationController extends \BaseController {
 							'inscription' => $inscription
 							);
 
-						return Redirect::to('/autenticacao/workupdateassociate')->with( $array );
+						return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
 
 					else:
 
@@ -867,7 +869,7 @@ class AuthenticationController extends \BaseController {
 							'inscription' => $inscription
 							);
 
-						return Redirect::to('/autenticacao/workupdateassociate')->with( $array );
+						return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
 
 					endif;
 
@@ -929,7 +931,7 @@ class AuthenticationController extends \BaseController {
 								'inscription' => $inscription
 								);
 
-							return Redirect::to('/autenticacao/workupdateassociate')->with( $array );
+							return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
 
 						else:
 
@@ -943,7 +945,7 @@ class AuthenticationController extends \BaseController {
 								'inscription' => $inscription
 								);
 
-							return Redirect::to('/autenticacao/workupdateassociate')->with( $array );
+							return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
 
 						endif;
 
@@ -975,7 +977,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function getWorkparticipant( $usertype ){
+	public function getTrabalhoparticipante( $usertype ){
 
 		$msg_error = Session::get('msg_error');
 		$usertype = UserTypes::find($usertype);
@@ -993,7 +995,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function postWorkparticipant(){
+	public function postTrabalhoparticipante(){
 
 		$credentials = array(
 			'cpf' => Input::get('cpf')
@@ -1022,7 +1024,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/workupdateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/trabalhoactualizacaoparticipante')->with( $array );
 
 				else:
 
@@ -1038,7 +1040,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/workupdateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/trabalhoactualizacaoparticipante')->with( $array );
 
 				endif;
 
@@ -1068,7 +1070,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/workupdateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/trabalhoactualizacaoparticipante')->with( $array );
 
 				else:
 
@@ -1084,7 +1086,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/workupdateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/trabalhoactualizacaoparticipante')->with( $array );
 
 				endif;
 
@@ -1133,7 +1135,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/workupdateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/trabalhoactualizacaoparticipante')->with( $array );
 
 				else:
 
@@ -1149,7 +1151,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 
-					return Redirect::to('/autenticacao/workupdateparticipant')->with( $array );
+					return Redirect::to('/autenticacao/trabalhoactualizacaoparticipante')->with( $array );
 
 				endif;
 
@@ -1162,7 +1164,7 @@ class AuthenticationController extends \BaseController {
 					'usertype' => $usertype->id
 					);
 
-				return Redirect::to('/autenticacao/workregister')->with( $array );
+				return Redirect::to('/autenticacao/trabalhocadastro')->with( $array );
 
 			endif;
 
@@ -1170,7 +1172,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function getWorkregister(){
+	public function getTrabalhocadastro(){
 
 		$estados = ORGStates::all();
 		$cpf = Session::get('cpf');
@@ -1194,7 +1196,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function postWorkregister(){
+	public function postTrabalhocadastro(){
 
 		$course = Courses::find(Input::get('course'));
 
@@ -1203,27 +1205,29 @@ class AuthenticationController extends \BaseController {
 		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
 		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
 
+		//dd(Input::all());
+
 		$participant = new ORGParticipants();
-		$participant->nome = Input::get('nome');
-		$participant->rg = Input::get('rg');
-		$participant->cpf = Input::get('cpf');
-		$participant->endereco = Input::get('endereco');
-		$participant->numero = Input::get('numero');
-		$participant->complemento = Input::get('complemento');
-		$participant->cep = Input::get('cep');
-		$participant->cidade = Input::get('cidade');
-		$participant->estado = $estado[0]->name_estado;
-		$participant->empresa = Input::get('empresa');
-		$participant->cnpj = Input::get('cnpj_empresa');
-		$participant->endereco_empresa = Input::get('endereco_empresa');
-		$participant->numero_empresa = Input::get('nome');
-		$participant->complemento_empresa = Input::get('complemento_empresa');
-		$participant->cep_empresa = Input::get('cep_empresa');
-		$participant->cidade_empresa = Input::get('cidade_empresa');
-		$participant->estado_empresa = $estado_empresa[0]->name_estado;
-		$participant->telefone = Input::get('telefone_empresa');
-		$participant->celular = Input::get('celular_empresa');
-		$participant->email = Input::get('email');
+		$participant->nome = Input::get('nome') != null ? Input::get('nome') : '';
+		$participant->rg = Input::get('rg') != null ? Input::get('rg') : '';
+		$participant->cpf = Input::get('cpf') != null ? Input::get('cpf') : '';
+		$participant->endereco = Input::get('endereco') != null ? Input::get('endereco') : '';
+		$participant->numero = Input::get('numero') != null ? Input::get('numero') : '';
+		$participant->complemento = Input::get('complemento') != null ? Input::get('complemento') : '';
+		$participant->cep = Input::get('cep') != null ? Input::get('cep') : '';
+		$participant->cidade = Input::get('cidade') != null ? Input::get('cidade') : '';
+		$participant->estado = isset($estado[0]->name_estado) ? $estado[0]->name_estado : '';
+		$participant->empresa = Input::get('empresa') != null ? Input::get('empresa') : '';
+		$participant->cnpj = Input::get('cnpj_empresa') != null ? Input::get('cnpj_empresa') : '';
+		$participant->endereco_empresa = Input::get('endereco_empresa') != null ? Input::get('endereco_empresa') : '';
+		$participant->numero_empresa = Input::get('nome') != null ? Input::get('nome') : '';
+		$participant->complemento_empresa = Input::get('complemento_empresa') != null ? Input::get('complemento_empresa') : '';
+		$participant->cep_empresa = Input::get('cep_empresa') != null ? Input::get('cep_empresa') : '';
+		$participant->cidade_empresa = Input::get('cidade_empresa') != null ? Input::get('cidade_empresa') : '';
+		$participant->estado_empresa = isset($estado_empresa[0]->name_estado) ? $estado_empresa[0]->name_estado : '';
+		$participant->telefone = Input::get('telefone_empresa') != null ? Input::get('telefone_empresa') : '';
+		$participant->celular = Input::get('celular_empresa') != null ? Input::get('celular_empresa') : '';
+		$participant->email = Input::get('email') != null ? Input::get('email') : '';
 		$participant->save();
 
 		$user = new User();
@@ -1259,7 +1263,7 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
-			return Redirect::to($course->route.'/files')->with( $array );
+			return Redirect::to($course->route.'/arquivos')->with( $array );
 
 		else:
 
@@ -1274,13 +1278,13 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 		
-			return Redirect::to($course->route.'/files')->with( $array );
+			return Redirect::to($course->route.'/arquivos')->with( $array );
 
 		endif;
 
 	}
 
-	public function getWorkupdateparticipant(){
+	public function getTrabalhoactualizacaoparticipante(){
 
 		$estados = ORGStates::all();
 		$cpf = Session::get('cpf');
@@ -1310,7 +1314,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function postWorkupdateparticipant(){
+	public function postTrabalhoactualizacaoparticipante(){
 
 		$course = Input::get('course');
 
@@ -1352,11 +1356,11 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to($inscription->course->route.'/files')->with( $array );
+		return Redirect::to($inscription->course->route.'/arquivos')->with( $array );
 
 	}
 
-	public function getWorkupdateassociate(){
+	public function getTrabalhoactualizacaoassociado(){
 
 		$estados = ORGStates::all();
 		$cpf = Session::get('cpf');
@@ -1386,7 +1390,7 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function postWorkupdateassociate(){
+	public function postTrabalhoactualizacaoassociado(){
 
 		$course = Input::get('course');
 
@@ -1459,7 +1463,7 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription
 			);
 
-		return Redirect::to($inscription->course->route.'/files')->with( $array );
+		return Redirect::to($inscription->course->route.'/arquivos')->with( $array );
 
 	}
 

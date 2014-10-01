@@ -59,16 +59,16 @@ class FrontendCourseController extends \BaseController {
 					case 'trabalhos':
 						return self::getCourseWorks( $route, $course, $idContent );
 						break;
-					case 'signin':
+					case 'acesso':
 						return self::getCourseSignin( $route, $course, $idContent );
 						break;
-					case 'files':
+					case 'arquivos':
 						return self::getCourseFiles( $route, $course, $idContent );
 						break;
-					case 'filesuploaded':
+					case 'trabalhosactualizacao':
 						return self::getCourseFilesUploaded( $route, $course, $idContent );
 						break;
-					case 'payment':
+					case 'pagamento':
 						return self::getCoursePayment( $route, $course, $idContent );
 						break;
 					default:
@@ -97,7 +97,7 @@ class FrontendCourseController extends \BaseController {
 		if($course):
 
 			switch($content){
-				case 'files':
+				case 'arquivos':
 					return self::postCourseFiles( $course->id, $course, $idContent );
 					break;
 			}
@@ -207,7 +207,7 @@ class FrontendCourseController extends \BaseController {
 
 		else:*/
 
-			return Redirect::to($course->route.'/payment')->with( $array );
+			return Redirect::to($course->route.'/pagamento')->with( $array );
 /*
 		endif;
 */
@@ -267,7 +267,7 @@ class FrontendCourseController extends \BaseController {
 
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
-		return Redirect::to($course->route.'/filesuploaded')->with( $array );
+		return Redirect::to($course->route.'/trabalhosactualizacao')->with( $array );
 
 	}
 

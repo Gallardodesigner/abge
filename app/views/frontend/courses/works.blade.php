@@ -23,11 +23,11 @@
             @foreach($course->usertypes as $user)
               <tr>
               @if($user->associate)
-                  <td><a href="{{ URL::to('/autenticacao/workassociate/'.$user->id) }}">{{$user->title}}</a>
+                  <td><a href="{{ URL::to('/autenticacao/trabalhoassociado/'.$user->id) }}">{{$user->title}}</a>
                   </td>
               @else
                   <td>
-                    <a href="{{ URL::to('/autenticacao/workparticipant/'.$user->id) }}">{{$user->title}}</a>
+                    <a href="{{ URL::to('/autenticacao/trabalhoparticipante/'.$user->id) }}">{{$user->title}}</a>
                   </td>
               @endif
               </tr>
