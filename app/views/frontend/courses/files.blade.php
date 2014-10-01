@@ -17,11 +17,50 @@
     </div>
     <div id="content">	
         <form method="post" enctype="multipart/form-data">
-          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
-          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
-          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
-          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
-          {{ Lang::get('display.name') }}: <input type="text" name="titles[]"/><input type="file" name="files[]" ><br>
+        <fieldset class="submitwork">
+          <legend>Trabalho 1</legend>
+          
+          
+          <input type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
+          <div class="file">
+            <input type="file" name="files[]" />
+            <label for="file">Submeta o Arquivo 1
+          </div>
+          <div class="file">
+            <input type="file" name="files[]" />
+            <label for="file">Submeta o Arquivo 2</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="submitwork">
+          <legend>Trabalho 2</legend>
+          
+          
+          <input type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
+          <div class="file">
+            <input type="file" name="files[]" />
+            <label for="file">Submeta o Arquivo 1
+          </div>
+          <div class="file">
+            <input type="file" name="files[]" />
+            <label for="file">Submeta o Arquivo 2</label>
+          </div>
+        </fieldset>
+        
+          <fieldset class="submitwork">
+          <legend>Trabalho 3</legend>
+          
+          
+          <input type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
+          <div class="file">
+            <input type="file" name="files[]" />
+            <label for="file">Submeta o Arquivo 1
+          </div>
+          <div class="file">
+            <input type="file" name="files[]" />
+            <label for="file">Submeta o Arquivo 2</label>
+          </div>
+        </fieldset>
           <input type="submit" value="Enviar"/><br>
         </form>
     </div>

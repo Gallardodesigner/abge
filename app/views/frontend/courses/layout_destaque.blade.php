@@ -60,6 +60,34 @@ table{
     width: 100%;
     background: #00366c;
   }
+.submitwork input[type="text"]{
+  padding:5px 20px !important;
+}
+  .file {
+  position: relative;
+  display: inline-block;
+}
+.file label {
+  background: #39D2B4;
+  padding: 10px 20px;
+  color: #fff;
+  font-weight: bold;
+  font-size: .9em;
+  transition: all .4s;
+}
+.file input {
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  top: 0;
+  opacity: 0.01;
+  cursor: pointer;
+}
+.file input:hover + label,
+.file input:focus + label {
+  background: #34495E;
+  color: #39D2B4;
+}
 </style>
     <!--[if lte IE 6]>
       <div align="center" style="border: 1px solid #ccc;padding:10px;">

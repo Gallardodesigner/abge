@@ -21,6 +21,7 @@
         jQuery('#dyntable').dataTable({
             "sPaginationType": "full_numbers",
             "aaSortingFixed": [[0,'asc']],
+            "iDisplayLength" : 20,
             "fnDrawCallback": function(oSettings) {
                 jQuery.uniform.update();
             }
@@ -33,7 +34,7 @@
     			jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
     				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
     				if(r==true){
-    					window.location.assign("/dashboard/sections/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+    					window.location.assign("{{ $route }}/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
     				}
     			});
     		});
@@ -50,12 +51,14 @@
                 jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
                      // jAlert('Confirmed: ' + r, 'Confirmation Results');
                     if(r==true){
-                        window.location.assign("/dashboard/sections/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+                        window.location.assign("{{ $route }}/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
                     }
                 });
             });
         }
     });
+
+    
 </script>
 @stop
 

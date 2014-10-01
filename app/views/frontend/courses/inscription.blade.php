@@ -26,7 +26,7 @@
           @if(count($course->usertypes) > 0)
             <table>
               <tr>
-                <th>{{Lang::get('display.usertype')}}</th>
+                <th>CATEGORIAS</th>
                 @foreach($course->usertypes[0]->dates as $date)
                   <th>ATÉ {{date("d-m-Y", strtotime($date->end))}}</th>
                 @endforeach

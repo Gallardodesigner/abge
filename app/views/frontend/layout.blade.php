@@ -27,6 +27,9 @@
   table, tr, td{
   border:1px solid;
 }
+
+
+
 </style>
     <!--[if lte IE 6]>
       <div align="center" style="border: 1px solid #ccc;padding:10px;">

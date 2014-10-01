@@ -234,7 +234,7 @@ class FrontendCourseController extends \BaseController {
 		$titles = Input::get('titles');
 
 		$count = 0;
-
+		$counttitle = 0;
 		foreach(Input::file('files') as $file):
 
 			if ($file != null):
@@ -246,7 +246,7 @@ class FrontendCourseController extends \BaseController {
 				$file->move(public_path('uploads/files/'), $name);
 				$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 				$my_file = new Files();
-				$my_file->title = $titles[$count];
+				$my_file->title = $titles[$counttitle];
 				$my_file->id_course = $course->id;
 				$my_file->id_user = Auth::user()->id;
 				$my_file->id_inscription = $inscription->id;
@@ -258,6 +258,9 @@ class FrontendCourseController extends \BaseController {
 			endif;
 
 			$count++;
+			if (($count % 2)!=0):
+				$counttitle++;
+			endif;
 
 		endforeach;
 
