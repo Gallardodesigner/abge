@@ -22,7 +22,6 @@
     </div>
     <div id="content">
       <div>
-          <p>Para submeter seu trabalho, escolha uma categoria abaixo</p>
           <div></div>
           @if(count($course->usertypes) > 0)
             <table>
