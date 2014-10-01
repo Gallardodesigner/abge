@@ -40,9 +40,9 @@
                 @endforeach
                 <td>
                 @if($user->associate)
-                  <a href="{{ URL::to('/auth/associate/'.$user->id) }}">CLIQUE AQUI</a>
+                  <a href="{{ URL::to('/autenticacao/associado/'.$user->id) }}">CLIQUE AQUI</a>
                 @else
-                  <a href="{{ URL::to('/auth/participant/'.$user->id) }}">CLIQUE AQUI</a>
+                  <a href="{{ URL::to('/autenticacao/participante/'.$user->id) }}">CLIQUE AQUI</a>
                 @endif
                 </td>
               </tr>
