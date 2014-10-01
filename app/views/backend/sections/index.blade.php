@@ -26,20 +26,35 @@
             }
         });
 
+        if(jQuery('.confirmbutton').length > 0) {
+		    jQuery('.confirmbutton').on("click",function(e){
+                e.preventDefault();
+    			var elem=jQuery(this);
+    			jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
+    				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
+    				if(r==true){
+    					window.location.assign("/dashboard/sections/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+    				}
+    			});
+    		});
+    	}
+        
+    });
+
+    jQuery(document).change(function(){
 
         if(jQuery('.confirmbutton').length > 0) {
-		  jQuery('.confirmbutton').on("click",function(e){
-            e.preventDefault();
-			var elem=jQuery(this);
-			jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
-				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
-				if(r==true){
-					window.location.assign("/dashboard/sections/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
-				}
-			});
-		});
-	}
-        
+            jQuery('.confirmbutton').on("click",function(e){
+                e.preventDefault();
+                var elem=jQuery(this);
+                jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
+                     // jAlert('Confirmed: ' + r, 'Confirmation Results');
+                    if(r==true){
+                        window.location.assign("/dashboard/sections/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+                    }
+                });
+            });
+        }
     });
 </script>
 @stop
