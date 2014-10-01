@@ -60,6 +60,39 @@ table{
     width: 100%;
     background: #00366c;
   }
+.updateform{
+  position: relative;
+}
+.updateform .control-box{
+  display: block;
+  width: 100%;
+  clear: both;
+}
+.updateform label {
+  float: left;
+  vertical-align: middle;
+  display: inline-block;
+  margin-top: 15px;
+}
+.titulo_empresa{
+  display: block;
+  text-align: center;
+  margin: 15px auto;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #0066CC;
+}
+.titulo_empresa h3{
+  color: #0066CC;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+}
+.updateform input[type="text"],.updateform input[type="email"],
+.updateform select{
+  display: inline-block;
+  padding: 5px 20px;
+  width: 80%;
+  float:right;
+}
 .submitwork input[type="text"]{
   padding:5px 20px !important;
 }
