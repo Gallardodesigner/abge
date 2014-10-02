@@ -17,7 +17,7 @@
 			 		<p>{{$course->event->title}}</p>
 			 		<p>{{$course->start}} {{$course->end}}</p>
 			 	</div>
-			 	<p>{{$course->event->title}} : {{$course->title}}, nos dias {{$course->start}} a {{$course->end}} em {{$course->address}}</p>
+			 	<p>{{$course->title}}, nos dias {{$course->start}} a {{$course->end}} em {{$course->address}}</p>
 			</div>
 		@endforeach
 	</div>

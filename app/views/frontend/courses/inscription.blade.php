@@ -11,8 +11,7 @@
   }
   .texto_inscriptions{
     margin-bottom: 30px;
-    font-size: 11pt;
-    font-family: "Trebuchet MS";
+
   }
   .texto_inscriptions ul{
     margin-left: 20px;
@@ -30,13 +29,16 @@
 	<div class="content">
 		<div class="course" data-id="{{$course->id}}">
     <div class="course_title">
-      <h1>{{$course->event->title}} : {{$course->title}}</h1>
+      <h1>{{$course->title}}</h1>
       <!-- <h5 class="data-adress">Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5> -->
     </div>
     <div id="content">
       <div>
-      
+
           <div class="content">
+
+          <div class="texto_inscriptions">
+ 
             {{ $section->content }}
 
           </div>
