@@ -85,11 +85,23 @@
                         <li class="viewmore"><a href="messages.html">View More Messages</a></li>
                     </ul>
                 </li> -->
+                <style type="text/css">
+                    .dropdown-toggle {
+                        text-align: center;
+                    }
+                    .dropdown-toggle .iconfa-book{
+                        font-size: 24pt;
+                        text-align: center;
+                    }
+                    .dropdown-active{
+                        color: #FFF !important;
+                    }
+                </style>
                 <li>
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">
-                    <span class="count">0</span>
-                    <span class="head-icon head-users"></span>
-                    <span class="headmenu-label">New Users</span>
+                    <a href="/dashboard/courses" class="dropdown-toggle dropdown-active">
+                    <!--<span class="count">{{ Route::getCurrentRoute()->getUri() }}</span>-->
+                    <span class="iconfa-book"></span>
+                    <span class="headmenu-label">{{ Lang::get('titles.courses')}}</span>
                     </a>
                    <!--  <ul class="dropdown-menu newusers">
                         <li class="nav-header">New Users</li>
@@ -150,11 +162,11 @@
                     <div class="userloggedinfo">
                         {{HTML::image("assetsadmin/images/photos/thumb1.png")}}
                         <div class="userinfo">
-                            <h5>Username <small>- username@gallardodesigner.com.br</small></h5>
+                            <h5>{{ Lang::get('nav.username')}} <small>- username@gallardodesigner.com.br</small></h5>
                             <ul>
-                                <li><a href="editprofile.html">Edit Profile</a></li>
-                                <li><a href="">Account Settings</a></li>
-                                <li><a href="index.html">Sign Out</a></li>
+                                <li><a href="editprofile.html">{{ Lang::get('nav.edit_profile') }}</a></li>
+                                <li><a href="">{{ Lang::get('nav.account_settings')}}</a></li>
+                                <li><a href="index.html">{{ LAng::get('nav.sign_out')}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -167,45 +179,45 @@
         
         <div class="leftmenu">        
             <ul class="nav nav-tabs nav-stacked">
-            	<li class="nav-header">Navigation</li>
-                <li class="{{{ (Request::is('/dashboard') ? 'active' : '') }}}"><a href="{{{ URL::to('/dashboard') }}}"><span class="iconfa-laptop"></span> Dashboard</a></li>
-                <li class="dropdown {{{ (Request::is('/dashboard/courses') ? 'active' : '') }}}{{{ (Request::is('/dashboard/courses/*') ? 'active' : '') }}}"><a href=""><span class="iconfa-book"></span>Courses</a>
-                	<ul>
-                    	<li class="dropdown"><a href="">Course</a>
+            	<li class="nav-header">{{ Lang::get('nav.navigation') }}</li>
+                <li class="{{ (Request::is('/dashboard') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard') }}"><span class="iconfa-laptop"></span> {{ Lang::get('nav.dashboard') }}</a></li>
+                <li class="dropdown {{ (Request::is('/dashboard/courses') ? 'active' : 'active') }}{{ (Request::is('/dashboard/courses/*') ? 'active' : '') }}"><a href=""><span class="iconfa-book"></span>{{ Lang::get('nav.courses') }}</a>
+                	<ul style="display: block">
+                    	<li class="dropdown"><a href="">{{ Lang::get('nav.course') }}</a>
                         <ul>
-                            <li><a href="{{{ URL::to('/dashboard/courses') }}}">All</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/courses/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/courses/trash') }}}">Trashed</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/courses') }}}">{{ Lang::get('nav.all') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/courses/create') }}}">{{ Lang::get('nav.add') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/courses/trash') }}}">{{ Lang::get('nav.trashed') }}</a></li>
                         </ul>
-                        <li class="dropdown"><a href="">Teacher</a>
+                        <li class="dropdown"><a href="">{{ Lang::get('nav.teacher') }}</a>
                         <ul>
-                             <li><a href="{{{ URL::to('/dashboard/teachers') }}}">All</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/teachers/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/teachers/trash') }}}">Trashed</a></li>
+                             <li><a href="{{{ URL::to('/dashboard/teachers') }}}">{{ Lang::get('nav.all') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/teachers/create') }}}">{{ Lang::get('nav.add') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/teachers/trash') }}}">{{ Lang::get('nav.trashed') }}</a></li>
                         </ul>
-                        <li class="dropdown"><a href="">Company</a>
+                        <li class="dropdown"><a href="">{{ Lang::get('nav.company') }}</a>
                         <ul>
-                           <li><a href="{{{ URL::to('/dashboard/companies') }}}">All</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/companies/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/companies/trash') }}}">Trashed</a></li>
+                           <li><a href="{{{ URL::to('/dashboard/companies') }}}">{{ Lang::get('nav.all') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/companies/create') }}}">{{ Lang::get('nav.add') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/companies/trash') }}}">{{ Lang::get('nav.trashed') }}</a></li>
                         </ul>
-                        <li class="dropdown"><a href="">Category</a>
+                        <li class="dropdown"><a href="">{{ Lang::get('nav.category') }}</a>
                         <ul>
-                            <li><a href="{{{ URL::to('/dashboard/categories') }}}">All</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/categories/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/categories/trash') }}}">Trashed</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/categories') }}}">{{ Lang::get('nav.all') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/categories/create') }}}">{{ Lang::get('nav.add') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/categories/trash') }}}">{{ Lang::get('nav.trashed') }}</a></li>
                         </ul>
-                        <li class="dropdown"><a href="">Event</a>
+                        <li class="dropdown"><a href="">{{ Lang::get('nav.event') }}</a>
                         <ul>
-                            <li><a href="{{{ URL::to('/dashboard/events') }}}">All</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/events/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/events/trash') }}}">Trashed</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/events') }}}">{{ Lang::get('nav.all') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/events/create') }}}">{{ Lang::get('nav.add') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/events/trash') }}}">{{ Lang::get('nav.trashed') }}</a></li>
                         </ul>
-                        <li class="dropdown"><a href="">Section</a>
+                        <li class="dropdown"><a href="">{{ Lang::get('nav.section') }}</a>
                         <ul>
-                            <li><a href="{{{ URL::to('/dashboard/sections') }}}">All</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/sections/create') }}}">Add</a></li>
-                            <li><a href="{{{ URL::to('/dashboard/sections/trash') }}}">Trashed</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/sections') }}}">{{ Lang::get('nav.all') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/sections/create') }}}">{{ Lang::get('nav.add') }}</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/sections/trash') }}}">{{ Lang::get('nav.trashed') }}</a></li>
                         </ul>
                      </li>
                     </ul>
@@ -221,21 +233,21 @@
             <li><a href="/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
             <li>@yield("title")</li>
             <li class="right">
-                    <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                    <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i>{{ Lang::get('nav.color_skin')}}</a>
                     <ul class="dropdown-menu pull-right skin-color">
-                        <li><a href="default">Default</a></li>
-                        <li><a href="navyblue">Navy Blue</a></li>
-                        <li><a href="palegreen">Pale Green</a></li>
-                        <li><a href="red">Red</a></li>
-                        <li><a href="green">Green</a></li>
-                        <li><a href="brown">Brown</a></li>
+                        <li><a href="default">{{ Lang::get('nav.default') }}</a></li>
+                        <li><a href="navyblue">{{ Lang::get('nav.navy_blue') }}</a></li>
+                        <li><a href="palegreen">{{ Lang::get('nav.pale_green') }}</a></li>
+                        <li><a href="red">{{ Lang::get('nav.red') }}</a></li>
+                        <li><a href="green">{{ Lang::get('nav.green') }}</a></li>
+                        <li><a href="brown">{{ Lang::get('nav.brown') }}</a></li>
                     </ul>
             </li>
         </ul>
         
         <div class="pageheader">
             <form action="results.html" method="post" class="searchbar">
-                <input type="text" name="keyword" placeholder="To search type and hit enter..." />
+                <input type="text" name="keyword" placeholder="{{ Lang::get('display.to_search_type')}}" />
             </form>
             <div class="pageicon">@yield("iconpage",'<span class="iconfa-laptop"></span>')</div>
             <div class="pagetitle">

@@ -63,6 +63,35 @@ return array(
 	
 	'submit_your_work' => 'Submit your work',	
 
+	'name' => 'Name',	
+
+	'color_skin' => 'Color Skins',
+
+	'to_search_type' => 'To search type and hit enter...',
+
+	'back' => 'Back',
+
+	'add_category' => 'Add Category',
+
+	'all_categories' => 'All Categories',
+
+	'title' => 'Title',
+
+	'description' => 'Description',
+
+	'content' => 'Content',
+
 	'name' => 'Name',
+
+	'submit' => 'Submit',
+
+	'reset' => 'Reset',
+
+	'success' => 'Success',
+
+	'error' => 'Error',
+	
+
+	
 
 );

@@ -108,7 +108,7 @@ Associate
                               <td class="aligncenter"><span class="center">
                                 <input type="checkbox" />
                               </span></td>
-                                <td><h4>{{$associate->nome}}</h4></td>
+                                <td><h4>{{$associate->nombre_completo}}</h4></td>
                                 <td>{{$associate->cpf}}</td>
                                 <td>{{ $associate->email }}</td>
                                 <td>{{ $associate->des_cat_ppal }}</td>
