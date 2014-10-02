@@ -18,6 +18,26 @@
     <div id="content">
       E-mail ou senha incorrectos
     </div>
+    
+    <form class="updateform" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="course" value="{{$course->id}}"/>
+      <input type="hidden" name="usertype" value="{{$usertype->id}}"/>
+        <div class="control-box">
+        <label>Email: </label>
+            <input type="text" name="email"/>
+        </div>
+        <div class="control-box">
+        <label>Senha: </label>
+            <input type="password" name="password"/>
+        </div>
+        <div class="control-box">
+            <a href="http://www.abge.org.br/index.php/abge/cadastro">Associe-se</a>
+            <a class="right" href="http://www.abge.org.br/index.php/abge/esqueci-minha-senha">Esqueci minha senha</a>
+        </div>
+        <div class="control-box">
+        <input type="submit" value="Enviar"/>
+        </div>
+  </form>
     </div>
 	</div>
 
