@@ -24,6 +24,12 @@
 </head>
 <body>
 <style>
+.course_title{
+  margin-bottom: 40px;
+}
+.thumb{
+  display: inline-block;
+}
 .data-adress, .data-adress p
 {
   display: inline-block;
@@ -86,8 +92,7 @@ table{
   text-transform: uppercase;
   margin-bottom: 0px;
 }
-.updateform input[type="text"],.updateform input[type="email"],
-.updateform select{
+.updateform input[type="text"],.updateform input[type="email"],.updateform input[type="password"],.updateform select{
   display: inline-block;
   padding: 5px 20px;
   width: 80%;
@@ -110,6 +115,9 @@ table{
 
 .submitwork input[type="text"]{
   padding:5px 20px !important;
+  display: block;
+  width: 100%;
+  margin-bottom:20px;
 }
   .file {
   position: relative;
