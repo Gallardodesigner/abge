@@ -79,7 +79,11 @@ User Types
                                     </select>
                                 @endif
                             </span>
-                        </p>                         
+                        </p>    
+                        <p>
+                            <label>{{ Lang::get('display.content') }}</label>
+                            <span class="field"><textarea type="text" name="content" id="content" class="input-xxlarge">{{ $content->content }}</textarea></span>
+                        </p>                      
                         <p class="pull-right">
                             <button class="btn btn-primary">Submit</button>
                             <button type="reset" class="btn">Reset</button>

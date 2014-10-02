@@ -15,6 +15,10 @@
       <h1>{{$course->title}}</h1>
       
     </div>
+    <div id="content">  
+        <!-- {{$section->section->title}} -->
+        {{$section->content}}
+    </div>
     <div id="content">
       <div>
       @foreach($supporters as $supporter)
