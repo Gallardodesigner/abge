@@ -65,8 +65,6 @@ return array(
 
 	'name' => 'Name',	
 
-	'color_skin' => 'Color Skins',
-
 	'to_search_type' => 'To search type and hit enter...',
 
 	'back' => 'Back',
