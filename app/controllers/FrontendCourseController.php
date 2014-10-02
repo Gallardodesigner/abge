@@ -287,6 +287,7 @@ class FrontendCourseController extends \BaseController {
 
 		$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 		$button = '';
+		$message = '';
 		foreach($inscription->usertype->dates as $date):
 			$datetime1 = date_create($date->start);
 			$datetime2 = date_create(date('Y-m-d'));
@@ -295,6 +296,7 @@ class FrontendCourseController extends \BaseController {
 			$interval2 = date_diff($datetime2, $datetime3);
 			if(($interval1->format('%R') == '+') AND ($interval2->format('%R') == '-')):
 				$button = $date->button;
+				$message = $date->message;
 			endif;	
 		endforeach;
 		
@@ -302,7 +304,7 @@ class FrontendCourseController extends \BaseController {
 			$button = $course->min_message;
 		endif;
 
-		$array = array( 'button' => $button,'course' => $course,'contents' => self::getOrderedContent($course->coursesections) );
+		$array = array( 'button' => $button, 'message' => $message,'course' => $course,'contents' => self::getOrderedContent($course->coursesections) );
 
 		return View::make('frontend.courses.payment')->with( $array );
 
