@@ -73,6 +73,17 @@ table{
   display: block;
   width: 100%;
   clear: both;
+  text-align: left;
+}
+.updateform .control-box a{
+  text-decoration: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  text-align: right;
+}
+.updateform .control-box a .right{
+  float: right;
 }
 .updateform label {
   float: left;

@@ -116,6 +116,8 @@ class FrontendCourseController extends \BaseController {
 
 		$contents = self::getOrderedContent($course->coursesections);
 
+		// dd($contents);
+
 		$array = array( 'course' => $course, 'contents' => $contents );
 
 		if($idContent != ''):

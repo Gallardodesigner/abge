@@ -61,7 +61,7 @@ class AuthenticationController extends \BaseController {
 		$msg_error = Session::get('msg_error');
 		$usertype = UserTypes::find( $usertype );
 		$course = $usertype->course;
-		$contents = $course->coursesections;
+		$contents = FrontendCourseController::getOrderedContent($course->coursesections);
 
 		$array = array( 
 			'msg_error' => $msg_error, 
@@ -170,7 +170,7 @@ class AuthenticationController extends \BaseController {
 
 					$array = array(
 						'course' => $course,
-						'contents' => $course->coursesections
+						'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 						);
 
 					return View::make('auth.error')->with( $array );
@@ -246,7 +246,7 @@ class AuthenticationController extends \BaseController {
 
 						$array = array(
 							'course' => $course,
-							'contents' => $course->coursesections
+							'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 							);
 
 						return View::make('auth.error')->with( $array );
@@ -257,7 +257,7 @@ class AuthenticationController extends \BaseController {
 
 					$array = array(
 						'course' => $course,
-						'contents' => $course->coursesections
+						'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 						);
 
 					return View::make('auth.error')->with($array);
@@ -275,7 +275,7 @@ class AuthenticationController extends \BaseController {
 		$msg_error = Session::get('msg_error');
 		$usertype = UserTypes::find($usertype);
 		$course = $usertype->course;
-		$contents = $course->coursesections;
+		$contents = FrontendCourseController::getOrderedContent($course->coursesections);
 
 		$array =  array( 
 			'msg_error' => $msg_error, 
@@ -476,14 +476,14 @@ class AuthenticationController extends \BaseController {
 
 		$course = Courses::find(Session::get('course'));
 
-		$contents = $course->coursesections;
+		$contents = FrontendCourseController::getOrderedContent($course->coursesections);
 
 		$array = array(
 			'cpf' => $cpf,
 			'estados' => $estados,
 			'usertype' => $usertype,
 			'course' => $course,
-			'contents' => $contents
+			'contents' => FrontendCourseController::getOrderedContent($contents)
 			);
 
 		return View::make('auth.register')->with( $array );
@@ -590,14 +590,13 @@ class AuthenticationController extends \BaseController {
 		$participant = $inscription->user->participant->participante;
 
 		$course = $inscription->course;
-		$contents = $course->coursesections;
 
 		$array = array(
 			'cpf' => $cpf,
 			'estados' => $estados,
 			'usertype' => $usertype,
 			'course' => $course,
-			'contents' => $contents,
+			'contents' => FrontendCourseController::getOrderedContent($course->coursesections),
 			'inscription' => $inscription,
 			'participant' => $participant
 			);
@@ -666,14 +665,13 @@ class AuthenticationController extends \BaseController {
 		$participant = $inscription->user->associate->asociado;
 
 		$course = $inscription->course;
-		$contents = $course->coursesections;
 
 		$array = array(
 			'cpf' => $cpf,
 			'estados' => $estados,
 			'usertype' => $usertype,
 			'course' => $course,
-			'contents' => $contents,
+			'contents' => FrontendCourseController::getOrderedContent($course->coursesections),
 			'inscription' => $inscription,
 			'participant' => $participant
 			);
@@ -768,13 +766,12 @@ class AuthenticationController extends \BaseController {
 		$msg_error = Session::get('msg_error');
 		$usertype = UserTypes::find( $usertype );
 		$course = $usertype->course;
-		$contents = $course->coursesections;
 
 		$array = array( 
 			'msg_error' => $msg_error, 
 			'course' => $course, 
 			'usertype' => $usertype, 
-			'contents' => $contents 
+			'contents' => FrontendCourseController::getOrderedContent($course->coursesections) 
 			);
 
 		return View::make('auth.associate')->with( $array );
@@ -877,7 +874,7 @@ class AuthenticationController extends \BaseController {
 
 					$array = array(
 						'course' => $course,
-						'contents' => $course->coursesections
+						'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 						);
 
 					return View::make('auth.error')->with( $array );
@@ -953,7 +950,7 @@ class AuthenticationController extends \BaseController {
 
 						$array = array(
 							'course' => $course,
-							'contents' => $course->coursesections
+							'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 							);
 
 						return View::make('auth.error')->with( $array );
@@ -964,7 +961,7 @@ class AuthenticationController extends \BaseController {
 
 					$array = array(
 						'course' => $course,
-						'contents' => $course->coursesections
+						'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 						);
 
 					return View::make('auth.error')->with( $array );
@@ -982,7 +979,7 @@ class AuthenticationController extends \BaseController {
 		$msg_error = Session::get('msg_error');
 		$usertype = UserTypes::find($usertype);
 		$course = $usertype->course;
-		$contents = $course->coursesections;
+		$contents = FrontendCourseController::getOrderedContent($course->coursesections);
 
 		$array =  array( 
 			'msg_error' => $msg_error, 
@@ -1182,7 +1179,7 @@ class AuthenticationController extends \BaseController {
 		$usertype = UserTypes::find(Session::get('usertype'));
 
 		$course = Courses::find(Session::get('course'));
-		$contents = $course->coursesections;
+		$contents = FrontendCourseController::getOrderedContent($course->coursesections);
 
 		$array = array(
 			'cpf' => $cpf,
@@ -1298,7 +1295,7 @@ class AuthenticationController extends \BaseController {
 		$participant = $inscription->user->participant->participante;
 
 		$course = $inscription->course;
-		$contents = $course->coursesections;
+		$contents = FrontendCourseController::getOrderedContent($course->coursesections);
 
 		$array = array(
 			'cpf' => $cpf,
@@ -1374,7 +1371,7 @@ class AuthenticationController extends \BaseController {
 		$participant = $inscription->user->associate->asociado;
 
 		$course = $inscription->course;
-		$contents = $course->coursesections;
+		$contents = FrontendCourseController::getOrderedContent($course->coursesections);
 
 		$array = array(
 			'cpf' => $cpf,
