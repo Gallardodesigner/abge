@@ -92,7 +92,7 @@ table{
   text-transform: uppercase;
   margin-bottom: 0px;
 }
-.updateform input[type="text"],.updateform input[type="email"],.updateform input[type="password"],.updateform select{
+.updateform input[type="text"],.updateform input[type="email"],.updateform input[type="password"], .updateform input[type="number"], .updateform select{
   display: inline-block;
   padding: 5px 20px;
   width: 80%;
@@ -105,7 +105,7 @@ table{
   appearance:none;
   padding: 15px 10px;
   color: white;
-  background: #0066CC;
+  background: #00366c;
   border: none;
   text-transform: uppercase;
   display: block;

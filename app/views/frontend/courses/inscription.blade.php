@@ -9,6 +9,19 @@
   table, th, td{
     border: 1px solid #00366c !important;
   }
+  .texto_inscriptions{
+    margin-bottom: 30px;
+    font-size: 11pt;
+    font-family: "Trebuchet MS";
+  }
+  .texto_inscriptions ul{
+    margin-left: 20px;
+  }
+  .texto_inscriptions ul li{
+
+    line-height: 1.5;
+  }
+
 </style>
 
 <!-- Contenido principal -->
@@ -22,8 +35,8 @@
     </div>
     <div id="content">
       <div>
-          <div style="margin-bottom:30px;">
-            <p>As inscrições para o 9o SBCGG deverão ser efetuadas para efetivar a aceitação do Artigo e sua 
+          <div class="texto_inscriptions">
+            <p >As inscrições para o 9o SBCGG deverão ser efetuadas para efetivar a aceitação do Artigo e sua 
 
 publicação nos anais do evento.</p>
 

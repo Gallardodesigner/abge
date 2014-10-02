@@ -23,7 +23,7 @@
       <input type="hidden" name="usertype" value="{{$usertype->id}}"/>
 		<div class="control-box">
       <label>CPF: </label>
-      <input type="text" name="cpf" pattern=".{11,11}" required title="{{Lang::get('frontend_messages.cpf_validator',array('value'=>'11'))}}" maxlength="11" /><br>
+      <input type="number" name="cpf" min="11" required  max="11" maxlength="11" /><br>
 		</div>
     <div class="control-box">
       <input type="submit" value="Enviar"/>
