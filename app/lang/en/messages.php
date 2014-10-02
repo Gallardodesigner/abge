@@ -220,5 +220,4 @@ return array(
 	'sections_delete_err' => 'Oops, we had a problem deleting the section type :title',
 
 	'sections_display_err' => 'Oops, we could not find the section type',
-
 );

@@ -82,7 +82,7 @@ h4, h5{
 
 .footer_container{
   color: white;
-  height: 107px;
+  height: 60px !important;
   background-image: url(../../../assets/frontend/img/background_footer.png);
 }
 

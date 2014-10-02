@@ -8,7 +8,6 @@
 
 <!-- Contenido principal -->
 @section("maincontent")
-	
 	<div class="content">
 		<div class="course" data-id="{{$course->id}}">
     <div class="course_title">
@@ -16,17 +15,13 @@
       <!-- <h5 class="data-adress">Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5> -->
     </div>
     <div id="content">
-      @foreach($helpers as $helper)
       <div>
-        <div class="thumb">
-          <img src="/uploads/thumb_{{$helper->url}}" />
+      @foreach($helpers as $helper)
+       <div class="thumb" style="width:33.33333333333%">
+          <img src="/uploads/small_{{$helper->url}}" />
         </div>
-        <div class="org_desc">
-          <p>{{$helper->title}}</p>
-          <p>{{$helper->address}}</p>
-        </div>
-      </div>
       @endforeach
+      </div>
     </div>
     </div>
 	</div>

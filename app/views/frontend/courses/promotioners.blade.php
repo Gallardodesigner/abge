@@ -16,17 +16,13 @@
       <!-- <h5 class="data-adress">Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5> -->
     </div>
     <div id="content">
-      @foreach($promotioners as $promotioner)
       <div>
-        <div class="thumb">
-          <img src="/uploads/thumb_{{$promotioner->url}}" />
+      @foreach($promotioners as $promotioner)
+        <div class="thumb" style="width:33.33333333333%">
+          <img src="/uploads/small_{{$promotioner->url}}" />
         </div>
-        <div class="org_desc">
-          <p>{{$promotioner->title}}</p>
-          <p>{{$promotioner->address}}</p>
-        </div>
-      </div>
       @endforeach
+      </div>
     </div>
     </div>
 	</div>
