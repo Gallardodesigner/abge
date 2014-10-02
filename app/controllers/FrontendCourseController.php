@@ -53,12 +53,14 @@ class FrontendCourseController extends \BaseController {
 					case 'conteudo':
 						return self::getCourseContent( $route, $course, $idContent );
 						break;
+						/*
 					case 'inscricoes':
 						return self::getCourseInscription( $route, $course, $idContent );
 						break;
 					case 'trabalhos':
 						return self::getCourseWorks( $route, $course, $idContent );
 						break;
+						*/
 					case 'acesso':
 						return self::getCourseSignin( $route, $course, $idContent );
 						break;
@@ -134,6 +136,12 @@ class FrontendCourseController extends \BaseController {
 				case 'helpers':
 					$array['helpers'] = $course->helpers;
 					return View::make('frontend.courses.helpers')->with( $array );
+					break;
+				case 'inscriptions':
+					return View::make('frontend.courses.inscription')->with( $array );
+					break;
+				case 'works':
+					return View::make('frontend.courses.works')->with( $array );
 					break;
 				case 'supporters':
 					$array['supporters'] = $course->supporters;

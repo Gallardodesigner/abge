@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,9 +182,9 @@
         <div class="leftmenu">        
             <ul class="nav nav-tabs nav-stacked">
             	<li class="nav-header">{{ Lang::get('nav.navigation') }}</li>
-                <li class="{{ (Request::is('/dashboard') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard') }}"><span class="iconfa-laptop"></span> {{ Lang::get('nav.dashboard') }}</a></li>
-                <li class="dropdown {{ (Request::is('/dashboard/courses') ? 'active' : 'active') }}{{ (Request::is('/dashboard/courses/*') ? 'active' : '') }}"><a href=""><span class="iconfa-book"></span>{{ Lang::get('nav.courses') }}</a>
-                	<ul style="display: block">
+                <li class="{{ (Request::is('dashboard') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard') }}"><span class="iconfa-laptop"></span> {{ Lang::get('nav.dashboard') }}</a></li>
+                <li class="dropdown {{ (Request::is('dashboard/courses') ? 'active' : '') }}{{ (Request::is('dashboard/courses/*') ? 'active' : '') }}"><a href=""><span class="iconfa-book"></span>{{ Lang::get('nav.courses') }}</a>
+                	<ul {{ (Request::is('dashboard/courses') ? 'style="display: block"' : '') }}{{ (Request::is('dashboard/courses/*') ? 'style="display: block"' : '') }}>
                     	<li class="dropdown"><a href="">{{ Lang::get('nav.course') }}</a>
                         <ul>
                             <li><a href="{{{ URL::to('/dashboard/courses') }}}">{{ Lang::get('nav.all') }}</a></li>

@@ -16,7 +16,11 @@
     </div>
     <div id="content">
       <div>
-          <p>Para submeter seu trabalho, escolha uma categoria abaixo</p>
+          
+          <div class="content">
+            {{ $section->content }}
+          </div>
+      
         
           @if(count($course->usertypes) > 0)
             <table>

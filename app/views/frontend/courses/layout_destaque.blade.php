@@ -329,12 +329,14 @@ table{
             @foreach($contents as $link)
               <li><a href="{{URL::to('/'.$course->route.'/conteudo/'.$link->id)}}">{{$link->section->title}}</a></li>
             @endforeach
+            <!--
             @if(count($course->usertypes) > 0)
               <li><a href="{{URL::to('/'.$course->route.'/inscricoes/')}}">INSCRIÇÕES</a></li>
             @endif
             @if($course->event->upload)
               <li><a href="{{URL::to('/'.$course->route.'/trabalhos/')}}">SUBMETA SEU TRABALHO</a></li>
             @endif
+            -->
           </ul>
         </div>
       </div>

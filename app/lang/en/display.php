@@ -62,6 +62,8 @@ return array(
 	'decline_file' => 'Decline File',
 	
 	'submit_your_work' => 'Submit your work',	
+	
+	'works' => 'Works',	
 
 	'name' => 'Name',	
 
@@ -88,7 +90,7 @@ return array(
 	'success' => 'Success',
 
 	'error' => 'Error',
-	
+
 
 	
 
