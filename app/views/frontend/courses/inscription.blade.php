@@ -9,6 +9,19 @@
   table, th, td{
     border: 1px solid #00366c !important;
   }
+  .texto_inscriptions{
+    margin-bottom: 30px;
+    font-size: 11pt;
+    font-family: "Trebuchet MS";
+  }
+  .texto_inscriptions ul{
+    margin-left: 20px;
+  }
+  .texto_inscriptions ul li{
+
+    line-height: 1.5;
+  }
+
 </style>
 
 <!-- Contenido principal -->
@@ -22,8 +35,40 @@
     </div>
     <div id="content">
       <div>
+<<<<<<< HEAD
           <div class="content">
             {{ $section->content }}
+=======
+          <div class="texto_inscriptions">
+            <p >As inscrições para o 9o SBCGG deverão ser efetuadas para efetivar a aceitação do Artigo e sua 
+
+publicação nos anais do evento.</p>
+
+<p>Observações Importantes</p>
+<ul>
+<li>Serão considerados sócios aqueles que estiverem com a anuidade de 2014 quitada no 
+
+ato da inscrição.</li>
+
+<li>Os estudantes de graduação e pós graduação deverão comprovar essa situação
+
+através de documento oficial, encaminhado por e-mail ou apresentado no ato da 
+
+retirada do material.</li>
+
+<li>Após o dia 16/03/2015 as inscrições somente poderão ser feitas no local do Congresso.</li> 
+
+<li>Cancelamentos de inscrição somente serão aceitos até 30 dias antes do início do 
+
+Congresso e a devolução corresponderá a 80% do valor pago.</li>
+
+<li>Notas de empenhos somente serão aceitas até 06/03/2015, quando deverão ser 
+
+substituídas pelo pagamento efetivo. O não pagamento até esta data implicará no 
+
+cancelamento da inscrição.</li>
+</ul>
+>>>>>>> cdc6fdafd7ef3f75b2a1a922bbf2fbf22030846d
           </div>
       
           @if(count($course->usertypes) > 0)
