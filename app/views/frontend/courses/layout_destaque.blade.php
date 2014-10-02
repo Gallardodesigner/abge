@@ -8,7 +8,7 @@
   <meta name="keywords" content="ABGE">
   <meta name="language" content="en">
   <meta name="robots" content="index, follow">
-  <title>Cursos - ABGE</title>
+  <title>Eventos - ABGE</title>
   <link rel="shortcut icon" href="http://abge.org.br/favicon.ico">
   {{HTML::style("assets/frontend/css/screen.css")}}
   {{HTML::style("assets/frontend/css/print.css")}}
