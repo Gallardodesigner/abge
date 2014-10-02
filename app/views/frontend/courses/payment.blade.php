@@ -14,9 +14,13 @@
       <h1>{{$course->title}}</h1>
      <!--  <h5 class="data-adress">Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5> -->
     </div>
-    <div id="content">	
-        
-{{ $button }}
+    <div id="content" class="updateform">
+    <div class="control-box">
+      {{$message}}
+    </div>	
+    <div class="control-box">
+      {{ $button }}
+    </div>    
     </div>
     </div>
 	</div>
