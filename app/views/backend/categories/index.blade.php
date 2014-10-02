@@ -31,7 +31,7 @@
 		  jQuery('.confirmbutton').on("click",function(e){
             e.preventDefault();
 			var elem=jQuery(this);
-			jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
+			jConfirm('{{ Lang::get("messages.are_you_sure") }} '+elem.attr("data-action")+' {{ Lang::get("messages.this_element") }}', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
 					window.location.assign("/dashboard/categories/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
@@ -45,7 +45,7 @@
 @stop
 
 @section("title")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("iconpage")
@@ -53,11 +53,11 @@ Courses
 @stop
 
 @section("maintitle")
-Category
+{{ Lang::get('titles.categories') }}
 @stop
 
 @section("nameview")
-    All Categories
+    {{ Lang::get('display.all_categories') }}
 @stop
 
 @section("MainContent")
@@ -67,7 +67,7 @@ Category
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 @if($msg_success!=null)
 						<div class="widgetbox box-success">
-                            <h4 class="widgettitle">Success <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{ Lang::get('display.success') }} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_success}}
                             </div>
@@ -76,7 +76,7 @@ Category
                 <!-- @if(isset($msg_error)) -->
                 @if($msg_error!=null)
 						<div class="widgetbox box-danger">
-                            <h4 class="widgettitle">Error <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{ Lang::get('display.error') }} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_error}}
                             </div>
@@ -86,9 +86,9 @@ Category
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="categories/create" class="btn dropdown-toggle">Add New Category</a>
+                            <a href="categories/create" class="btn dropdown-toggle">{{ Lang::get('display.add_category')}}</a>
                         </div>
-                        <h4 class="widgettitle">All Categories</h4>
+                        <h4 class="widgettitle">{{ Lang::get('display.all_categories') }}</h4>
                     </div>
 
                     
@@ -97,10 +97,10 @@ Category
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;width:10%">Title</th>
-                                <th class="head1" style="text-align:center;width:60%">Description</th>
-                                <th class="head1" style="text-align:center;width;10%">Status</th>
-                                <th class="head0" style="text-align:center;width:20%">Actions</th>
+                                <th class="head0" style="text-align:center;width:10%">{{ Lang::get('display.title') }}</th>
+                                <th class="head1" style="text-align:center;width:60%">{{ Lang::get('display.description') }}</th>
+                                <th class="head1" style="text-align:center;width;10%">{{ Lang::get('display.status') }}</th>
+                                <th class="head0" style="text-align:center;width:20%">{{ Lang::get('display.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -149,6 +149,10 @@ return array(
 
 	'course_not_found' => 'Oops, we could not find the course',
 
+	'are_you_sure' => 'Are you sure to',
+
+	'this_element' => 'this element?',
+
 	# User Types
 
 	'usertypes_create' => 'The user type :title was created successfully',
