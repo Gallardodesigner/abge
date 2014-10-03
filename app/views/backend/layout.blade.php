@@ -168,7 +168,7 @@
                             <ul>
                                 <li><a href="editprofile.html">{{ Lang::get('nav.edit_profile') }}</a></li>
                                 <li><a href="">{{ Lang::get('nav.account_settings')}}</a></li>
-                                <li><a href="index.html">{{ LAng::get('nav.sign_out')}}</a></li>
+                                <li><a href="/logout">{{ Lang::get('nav.sign_out')}}</a></li>
                             </ul>
                         </div>
                     </div>

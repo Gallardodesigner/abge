@@ -18,7 +18,7 @@
     <div class="control-box">
       {{$message}}
     </div>	
-    <div class="control-box">
+    <div class="control-box" style="text-align:right;">
       {{ $button }}
     </div>    
     </div>
