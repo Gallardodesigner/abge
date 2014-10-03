@@ -11,7 +11,6 @@ class DashboardController extends \BaseController {
 	{
 
 
-
 		if(Auth::check() && Auth::user()->type=="superadmin"):
 
 			return View::make("backend.dashboard");
@@ -19,7 +18,7 @@ class DashboardController extends \BaseController {
 		elseif(Auth::check() && Auth::user()->type!="superadmin"):
 
 			Auth::logout();
-			return Redirect::to('/gd-admin')->with(array('msg_error'=>'Usuario o Contraseña Inválidos'));
+			return Redirect::to('/gd-admin')->with(array('msg_error'=>'A conta ingresada não e admin'));
 
 		endif;
 

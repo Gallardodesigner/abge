@@ -28,7 +28,7 @@
                 </div>
             @endif
             <div class="inputwrapper animate1 bounceIn">
-                <input type="text" name="login" id="login" placeholder="Digite aqui seu login" required/>
+                <input type="text" name="login" id="login" placeholder="Digite aqui seu email" required/>
             </div>
             <div class="inputwrapper animate2 bounceIn">
                 <input type="password" name="password" id="password" placeholder="Digite aqui seu senha" required/>
@@ -45,7 +45,7 @@
 </div><!--loginpanel-->
 
 <div class="loginfooter">
-    <p>&copy; 2014. ABGE. All Rights Reserved. - Design by <a href="http://www.gallardodesigner.com.br" style="color: #FFF !important;">GallardoDesigner</a></p>
+    <p>&copy; 2014. ABGE. All Rights Reserved. - Design by <a href="http://www.gallardodesign.com.br/" style="color: #FFF !important;" target="_new">GallardoDesigner</a></p>
 </div>
 
 </body>
