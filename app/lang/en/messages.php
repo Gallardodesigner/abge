@@ -153,6 +153,14 @@ return array(
 
 	'this_element' => 'this element?',
 
+	'delete' => 'delete',
+
+	'trash' => 'trash',
+
+	'publish' => 'publish',
+
+	'draft' => 'draft',
+
 	# User Types
 
 	'usertypes_create' => 'The user type :title was created successfully',

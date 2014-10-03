@@ -31,7 +31,25 @@
 		  jQuery('.confirmbutton').on("click",function(e){
             e.preventDefault();
 			var elem=jQuery(this);
-			jConfirm('{{ Lang::get("messages.are_you_sure") }} '+elem.attr("data-action")+' {{ Lang::get("messages.this_element") }}', 'Confirmation Dialog', function(r) {
+            var action = null;
+            switch(elem.attr("data-action")){
+                case 'publish':
+                    action = '{{Lang::get("messages.publish")}}';
+                    break;
+                case 'draft':
+                    action = '{{Lang::get("messages.draft")}}';
+                    break;
+                case 'trash':
+                    action = '{{Lang::get("messages.trash")}}';
+                    break;
+                case 'delete':
+                    action = '{{Lang::get("messages.delete")}}';
+                    break;
+                default
+                    action = '{{Lang::get("messages.draft")}}';
+                    break;
+            }
+			jConfirm('{{ Lang::get("messages.are_you_sure") }} '+action+' {{ Lang::get("messages.this_element") }}', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
 					window.location.assign("/dashboard/categories/"+elem.attr("data-action")+"/"+elem.attr("data-id"));

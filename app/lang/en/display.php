@@ -75,6 +75,8 @@ return array(
 
 	'all_categories' => 'All Categories',
 
+	'edit_categories' => 'Edit Categories',
+
 	'title' => 'Title',
 
 	'description' => 'Description',

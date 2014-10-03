@@ -21,7 +21,7 @@
 @stop
 
 @section("title")
-Courses
+{{Lang::get('titles.courses')}}
 @stop
 
 @section("iconpage")

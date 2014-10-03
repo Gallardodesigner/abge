@@ -31,7 +31,7 @@
 		  jQuery('.confirmbutton').on("click",function(e){
             e.preventDefault();
 			var elem=jQuery(this);
-			jConfirm('Are you sure to delete this element?', 'Confirmation Dialog', function(r) {
+			jConfirm('{{ Lang::get("messages.are_you_sure") }} {{ Lang::get("messages.delete") }} {{ Lang::get("messages.this_element") }}', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
 					window.location.assign("/dashboard/categories/delete/"+elem.attr("data-id"));
