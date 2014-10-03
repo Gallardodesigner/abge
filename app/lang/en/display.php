@@ -93,7 +93,7 @@ return array(
 
 	'all_companies' => 'All Companies',
 
-	'edit_companies' => 'Edit Companies',
+	'edit_company' => 'Edit Companies',
 
 	'trashed_companies' => 'All Companies Trashed',
 
@@ -148,6 +148,14 @@ return array(
 	'last' => 'Last',
 
 	'search' => 'Search',
+
+	'logo' => 'Logo',
+
+	'address' => 'Address',
+
+	'contact' => 'Contact',
+
+	'thumb' => 'Thumb'
 
 
 );

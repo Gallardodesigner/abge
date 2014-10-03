@@ -19,6 +19,24 @@
      jQuery(document).ready(function(){
         // dynamic table
         jQuery('#dyntable').dataTable({
+             "oLanguage": {
+                "sProcessing":     "{{ Lang::get('display.processing')}}",
+                "sSearch":         "{{ Lang::get('display.search')}}&nbsp;:",
+                "sLengthMenu":     "{{ Lang::get('display.show_entries')}}",
+                "sInfo":           "{{ Lang::get('display.showing_to_of_entries')}}",
+                "sInfoEmpty":      "{{ Lang::get('display.showing_0_to_0_of_0_entries')}}",
+                "sInfoFiltered":   "{{ Lang::get('display.filtered_from_total_entries)')}}",
+                "sInfoPostFix":    "",
+                "sLoadingRecords": "{{ Lang::get('display.loading')}}",
+                "sZeroRecords":    "{{ Lang::get('display.no_matching_records_found')}}",
+                "sEmptyTable":     "{{ Lang::get('display.no_data_available_in_table')}}",
+                "oPaginate": {
+                    "sFirst":      "{{ Lang::get('display.first')}}",
+                    "sPrevious":   "{{ Lang::get('display.previous')}}",
+                    "sNext":       "{{ Lang::get('display.next')}}",
+                    "sLast":       "{{ Lang::get('display.last')}}"
+                }
+            },
             "sPaginationType": "full_numbers",
             "aaSortingFixed": [[0,'asc']],
             "fnDrawCallback": function(oSettings) {
