@@ -12,14 +12,12 @@
 */
 
 
-//if(Auth::check()):
 	//Route::controller('/dashboard/promotioners', 'PromotionerController');
 	//Route::controller('/dashboard/supporters', 'SupporterController');
 	//Route::controller('/dashboard/', 'DashboardController');
 	//Route::controller('/', 'FrontendController');
 	//Route::controller('/auth', 'AuthenticationController');
-// else:
-//endif;
+if(Auth::check() && Auth::user()->type=="superadmin"):
 	Route::controller('/dashboard/org/participants', 'ORGParticipantController');
 	Route::controller('/dashboard/org/associates', 'ORGAssociateController');
 	Route::controller('/dashboard/teachers', 'TeacherController');
@@ -33,8 +31,16 @@
 	Route::controller('/dashboard/courses/{idCourse}/inscriptions', 'InscriptionController');
 	Route::controller('/dashboard/courses/{idCourse}/content', 'ContentController');
 	Route::controller('/dashboard/courses', 'CourseController');
+else:
+	Route::controller("/gd-admin","AuthenticationController");
+endif;
+	
+	Route::get('/logout', function(){
+		Auth::logout();
+		return Redirect::to("/gd-admin");
+	});
+	
 	Route::controller('/dashboard', 'DashboardController');
-
 	// Route::get('/dashboard/', function(){
 	// 	return Redirect::to('/');
 	// });

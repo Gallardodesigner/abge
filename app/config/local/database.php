@@ -24,7 +24,7 @@ return array(
 
 	'connections' => array(
 
-		'mysql' => array(
+		/*'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 			'database'  => 'abgecom',
@@ -33,9 +33,9 @@ return array(
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-		),
+		),*/
 
-		/*
+		
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => '186.202.152.19',
@@ -45,7 +45,7 @@ return array(
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-		),*/
+		),
 
 		'mysql_2' => array(
 			'driver'    => 'mysql',

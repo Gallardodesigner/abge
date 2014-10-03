@@ -12,7 +12,7 @@ class AuthenticationController extends \BaseController {
 	public function postIndex(){
 
 		$credentials = array(
-			'email' => Input::get('email'),
+			'email' => Input::get('login'),
 			'password' => Input::get('password')
 			);
 
@@ -22,7 +22,7 @@ class AuthenticationController extends \BaseController {
 
 		else:
 
-			return View::make('auth.login')->with('err', 'Usuario o Contraseña Inválidos');
+			return Redirect::to('/gd-admin')->with(array('msg_error'=>'Usuario o Contraseña Inválidos'));
 
 		endif;
 
@@ -1463,5 +1463,28 @@ class AuthenticationController extends \BaseController {
 		return Redirect::to($inscription->course->route.'/arquivos')->with( $array );
 
 	}
+
+	/*public function getLogin(){
+
+		return View::make('auth.login');
+
+	}
+
+	public function postLogin(){
+
+		$credentials = array(
+			'login' => Input::get('login'),
+			'password' => Input::get('password')
+			);
+
+		if(Auth::attempt($credentials)):
+			return Redirect::to('/dashboard');
+			//return Redirect::to('/ingreso');
+
+		else:
+			return View::make('auth.login')->with('err', 'Usuario o Contraseña Inválidos');
+		endif;
+
+	}*/
 
 }

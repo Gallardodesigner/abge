@@ -9,8 +9,19 @@ class DashboardController extends \BaseController {
 	 */
 	public function getIndex()
 	{
-		//
-		return View::make("backend.dashboard");
+
+
+		if(Auth::check() && Auth::user()->type=="superadmin"):
+
+			return View::make("backend.dashboard");
+
+		elseif(Auth::check() && Auth::user()->type!="superadmin"):
+
+			Auth::logout();
+			return Redirect::to('/gd-admin')->with(array('msg_error'=>'A conta ingresada não e admin'));
+
+		endif;
+
 	}
 
 
