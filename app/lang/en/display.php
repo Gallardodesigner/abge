@@ -15,11 +15,21 @@ return array(
 
 	# Category Messages
 
-	'publish' => 'Published',
+	'publish' => 'Publish',
 
-	'draft' => 'Drafted',
+	'draft' => 'Draft',
 
-	'trash' => 'Trashed',
+	'trash' => 'Trash',
+
+	'untrash' => 'Untrash',
+
+	'published' => 'Published',
+
+	'drafted' => 'Drafted',
+
+	'trashed' => 'Trashed',
+
+	'untrashed' => 'Untrashed',
 
 	'teachers' => 'Teachers',
 
@@ -73,9 +83,19 @@ return array(
 
 	'add_category' => 'Add Category',
 
+	'edit_category' => 'Edit Category',
+
 	'all_categories' => 'All Categories',
 
-	'edit_categories' => 'Edit Categories',
+	'trashed_categories' => 'All Categories Trashed',
+
+	'add_company' => 'Add Company',
+
+	'all_companies' => 'All Companies',
+
+	'edit_companies' => 'Edit Companies',
+
+	'trashed_companies' => 'All Companies Trashed',
 
 	'title' => 'Title',
 
@@ -93,7 +113,41 @@ return array(
 
 	'error' => 'Error',
 
+	'actions' => 'Actions',
 
-	
+	'status' => 'Status',
+
+	'confirmation_dialog' => 'Confirmation Dialog',
+
+	'ok' => 'OK',
+
+	'cancel' => 'Cancel',
+
+	'processing' => 'Processing...',
+
+	'show_entries' => 'Show _MENU_ entries',
+
+	'showing_to_of_entries' => 'Showing _START_ to _END_ of _TOTAL_ entries',
+
+	'showing_0_to_0_of_0_entries' => 'Showing 0 to 0 of 0 entries',
+
+	'filtered_from_total_entries' => '(filtered from _MAX_ total entries)',
+
+	'no_matching_records_found' => 'No matching records found',
+
+	'loading' => 'Loading...',
+
+	'no_data_available_in_table' => 'No data available in table',
+
+	'first' => 'First',
+
+	'previous' => 'Previous',
+
+	'next' => 'Next',
+
+	'last' => 'Last',
+
+	'search' => 'Search',
+
 
 );

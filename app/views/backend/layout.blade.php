@@ -233,7 +233,7 @@
         
         <ul class="breadcrumbs">
             <li><a href="/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
-            <li>@yield("title")</li>
+            <li> @yield("title") </li>
             <li class="right">
                     <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i>{{ Lang::get('nav.color_skin')}}</a>
                     <ul class="dropdown-menu pull-right skin-color">
@@ -251,10 +251,10 @@
             <form action="results.html" method="post" class="searchbar">
                 <input type="text" name="keyword" placeholder="{{ Lang::get('display.to_search_type')}}" />
             </form>
-            <div class="pageicon">@yield("iconpage",'<span class="iconfa-laptop"></span>')</div>
+            <div class="pageicon"> @yield("iconpage",'<span class="iconfa-laptop"></span>')</div>
             <div class="pagetitle">
-                <h5>@yield("maintitle","Dashboard")</h5>
-                <h1>@yield("nameview","Dashboard")</h1>
+                <h5> @yield("maintitle","Dashboard")</h5>
+                <h1> @yield("nameview","Dashboard")</h1>
             </div>
         </div><!--pageheader-->
         

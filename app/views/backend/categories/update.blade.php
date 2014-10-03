@@ -29,11 +29,11 @@
 @stop
 
 @section("maintitle")
-Category
+{{Lang::get('titles.categories')}}
 @stop
 
 @section("nameview")
-    Edit Category
+    {{Lang::get('display.edit_category')}}
 @stop
 
 
@@ -45,26 +45,26 @@ Category
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/categories" class="btn dropdown-toggle">Back</a>
+                        <a href="/dashboard/categories" class="btn dropdown-toggle">{{Lang::get('display.back')}}</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Edit Category</h4>
+                <h4 class="widgettitle">{{Lang::get('display.edit_category')}}</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" action="/dashboard/categories/update/{{$category->id}}">
                             <p>
-                                <label>Title</label>
+                                <label>{{Lang::get('display.title')}}</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" value="{{$category->title}}"></span>
                             </p>
                             
                             <p>
-                                <label>Description</label>
+                                <label>{{Lang::get('display.description')}}</label>
                                 <span class="field"><textarea cols="80" rows="5" name="content" id="content" class="span6">
                                 	{{$category->content}}
                                 </textarea></span>
                             </p>                        
                             <p class="pull-right">
-                                <button class="btn btn-primary">Submit</button>
-                                <button type="reset" class="btn">Reset</button>
+                                <button class="btn btn-primary">{{Lang::get('display.submit')}}</button>
+                                <button type="reset" class="btn">{{Lang::get('display.reset')}}</button>
                             </p>
                             <div class="clearfix"></div>
                     </form>

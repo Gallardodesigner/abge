@@ -25,4 +25,8 @@ return array(
 
 	'categories' => 'Categories',
 
+	'companies' => 'Companies',
+
+	
+
 );
