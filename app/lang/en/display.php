@@ -195,6 +195,14 @@ return array(
 
 	'trashed_sections' => 'All Sections Trashed',
 
+	'add_supporter' => 'Add Supporter',
+
+	'all_supporters' => 'All Supporters',
+
+	'edit_supporter' => 'Edit Supporter',
+
+	'trashed_supporters' => 'All Supporters Trashed',
+
 	'add_user_type' => 'Add User Type',
 
 	'all_user_types' => 'All User Types',

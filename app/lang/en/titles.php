@@ -37,4 +37,6 @@ return array(
 
 	'sections' => 'Sections',
 
+	'supporters' => 'Supporters',
+
 );

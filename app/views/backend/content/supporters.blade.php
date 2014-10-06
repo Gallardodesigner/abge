@@ -31,11 +31,11 @@
 @stop
 
 @section("maintitle")
-User Types
+{{ Lang::get('titles.supporters')}}
 @stop
 
 @section("nameview")
-    Add User Types
+    {{ Lang::get('display.add_supporter')}}
 @stop
 
 
@@ -43,7 +43,7 @@ User Types
 
 <script type="text/javascript">
     jQuery(document).on('ready', function(){
-        jQuery('.chosen-select').chosen({no_results_text: "Oops, nothing found!"});
+        jQuery('.chosen-select').chosen({no_results_text: "{{ Lang::get('display.nothing_found')}}"});
     });
 </script>
 <div class="maincontent">
@@ -56,7 +56,7 @@ User Types
                         <a href="{{ $route }}" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Edit Supporters</h4>
+                <h4 class="widgettitle">{{ Lang::get('display.edit_supporter')}}</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                         <p>
