@@ -28,7 +28,13 @@ return array(
 	'companies' => 'Companies',
 
 	'user_types' => 'User Types',
-	
+
 	'helpers' => 'Helpers',
+
+	'contents' => 'Contents',
+
+	'promotioner' => 'Promotioners',
+
+	
 
 );

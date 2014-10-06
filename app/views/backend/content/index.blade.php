@@ -53,11 +53,11 @@
 @stop
 
 @section("maintitle")
-Content
+{{ Lang::get('titles.contents') }}
 @stop
 
 @section("nameview")
-    All Contents
+    {{ Lang::get('display.all_contents')}}
 @stop
 
 @section("MainContent")
@@ -67,7 +67,7 @@ Content
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 @if($msg_success!=null)
 						<div class="widgetbox box-success">
-                            <h4 class="widgettitle">Success <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{ Lang::get('display.success')}} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_success}}
                             </div>
@@ -76,7 +76,7 @@ Content
                 <!-- @if(isset($msg_error)) -->
                 @if($msg_error!=null)
 						<div class="widgetbox box-danger">
-                            <h4 class="widgettitle">Error <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{Lang::get('display.errors')}} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_error}}
                             </div>
@@ -88,7 +88,7 @@ Content
                         <div class="btn-group">
                             <a href="/dashboard/courses" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
                         </div>
-                        <h4 class="widgettitle">All Contents</h4>
+                        <h4 class="widgettitle">{{ Lang::get('display.all_contents')}}</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -96,9 +96,9 @@ Content
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;width:20%">Name</th>
-                                <th class="head1" style="text-align:center;width:40%">Description</th>
-                                <th class="head0" style="text-align:center;width:20%">Actions</th>
+                                <th class="head0" style="text-align:center;width:20%">{{Lang::get('display.name')}}</th>
+                                <th class="head1" style="text-align:center;width:40%">{{Lang::get('display.description')}}</th>
+                                <th class="head0" style="text-align:center;width:20%">{{Lang::get('display.actions')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,9 +111,9 @@ Content
                                 <td class="description" style="vertical-align:middle;width:40%;">{{$content->content}}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 
-                                    <a href="{{ $route }}update/{{$content->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
+                                    <a href="{{ $route }}update/{{$content->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
 
-                                    <a data-id="{{$content->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; "><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Delete</a>
+                                    <a data-id="{{$content->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; "><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
 
                                </td>
                             </tr>

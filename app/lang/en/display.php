@@ -171,6 +171,22 @@ return array(
 
 	'trashed_helpers' => 'All Helpers Trashed',
 
+	'add_content' => 'Add Content',
+
+	'all_contents' => 'All Contents',
+
+	'edit_content' => 'Edit Content',
+
+	'trashed_contents' => 'All Contents Trashed',
+
+	'add_promotioner' => 'Add Promotioner',
+
+	'all_promotioners' => 'All Promotioners',
+
+	'edit_promotioner' => 'Edit Promotioner',
+
+	'trashed_promotioners' => 'All Promotioners Trashed',
+
 	'add_user_type' => 'Add User Type',
 
 	'all_user_types' => 'All User Types',
