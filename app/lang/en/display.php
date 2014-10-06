@@ -81,22 +81,6 @@ return array(
 
 	'back' => 'Back',
 
-	'add_category' => 'Add Category',
-
-	'edit_category' => 'Edit Category',
-
-	'all_categories' => 'All Categories',
-
-	'trashed_categories' => 'All Categories Trashed',
-
-	'add_company' => 'Add Company',
-
-	'all_companies' => 'All Companies',
-
-	'edit_company' => 'Edit Companies',
-
-	'trashed_companies' => 'All Companies Trashed',
-
 	'title' => 'Title',
 
 	'description' => 'Description',
@@ -155,7 +139,45 @@ return array(
 
 	'contact' => 'Contact',
 
-	'thumb' => 'Thumb'
+	'thumb' => 'Thumb',
+
+	'is_associate' => 'Is Associate?',
+
+	'check_this_if_is_associate' => 'Check this input to indicate that this user type is an associate',
+
+	/* --------------------------- */
+
+	'add_category' => 'Add Category',
+
+	'edit_category' => 'Edit Category',
+
+	'all_categories' => 'All Categories',
+
+	'trashed_categories' => 'All Categories Trashed',
+
+	'add_company' => 'Add Company',
+
+	'all_companies' => 'All Companies',
+
+	'edit_company' => 'Edit Company',
+
+	'trashed_companies' => 'All Companies Trashed',
+
+	'add_helper' => 'Add Helper',
+
+	'all_helpers' => 'All Helpers',
+
+	'edit_helper' => 'Edit Helper',
+
+	'trashed_helpers' => 'All Helpers Trashed',
+
+	'add_user_type' => 'Add User Type',
+
+	'all_user_types' => 'All User Types',
+
+	'edit_user_type' => 'Edit User Type',
+
+	'trashed_user_types' => 'All User Types Trashed',
 
 
 );

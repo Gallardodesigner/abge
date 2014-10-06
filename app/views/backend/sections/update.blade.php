@@ -45,7 +45,7 @@ Section
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/sections" class="btn dropdown-toggle">Back</a>
+                        <a href="/dashboard/sections" class="btn dropdown-toggle"{{ Lang::get('display.back') }}/a>
                     </div>
                     </div>
                 <h4 class="widgettitle">Edit Section</h4>
@@ -53,11 +53,11 @@ Section
                     <form class="stdform stdform2" method="post">
                             
                             <p>
-                                <label>Title</label>
+                                <label>{{ Lang::get('display.title')}}</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" value="{{$section->title}}"></span>
                             </p>
                             <p>
-                                <label>Description</label>
+                                <label>{{ Lang::get('display.description')}}</label>
                                 <span class="field"><textarea cols="40" rows="5" name="description" id="description" class="span6">{{$section->description}}</textarea></span>
                             </p>    
                              <p>
@@ -65,8 +65,8 @@ Section
                                 <span class="field"><input type="checkbox" name="file" <?php ($section->file) ? "checked value='true'" : "value='false'";?>></span>
                             </p>                            
                             <p class="pull-right">
-                                <button class="btn btn-primary">Submit</button>
-                                <button type="reset" class="btn">Reset</button>
+                                <button class="btn btn-primary">{{ Lang::get('display.submit') }}</button>
+                                <button type="reset" class="btn">{{ Lang::get('display.reset') }}</button>
                             </p>
                             <div class="clearfix"></div>
                     </form>
