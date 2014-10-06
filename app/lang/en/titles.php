@@ -35,6 +35,6 @@ return array(
 
 	'promotioner' => 'Promotioners',
 
-	
+	'sections' => 'Sections',
 
 );

@@ -187,6 +187,14 @@ return array(
 
 	'trashed_promotioners' => 'All Promotioners Trashed',
 
+	'add_section' => 'Add Section',
+
+	'all_sections' => 'All Sections',
+
+	'edit_section' => 'Edit Section',
+
+	'trashed_sections' => 'All Sections Trashed',
+
 	'add_user_type' => 'Add User Type',
 
 	'all_user_types' => 'All User Types',
