@@ -34,13 +34,13 @@ if(Auth::check() && Auth::user()->type=="superadmin"):
 else:
 	Route::controller("/gd-admin","AuthenticationController");
 endif;
-	
 	Route::get('/logout', function(){
 		Auth::logout();
 		return Redirect::to("/gd-admin");
 	});
 	
 	Route::controller('/dashboard', 'DashboardController');
+	
 	// Route::get('/dashboard/', function(){
 	// 	return Redirect::to('/');
 	// });

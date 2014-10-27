@@ -31,4 +31,14 @@ return array(
 	
 	'helpers' => 'Helpers',
 
+	'allcourses' => 'All Courses',
+
+	'addnewcourse' => 'Add New Course',
+
+	'allcoursestrash' => 'All Courses Trashed',
+
+	'nothingfound' => 'Oops, nothing found!',
+
+	'editcourses' => 'Edit Courses'
+
 );

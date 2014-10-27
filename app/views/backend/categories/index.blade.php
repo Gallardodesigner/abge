@@ -18,33 +18,12 @@
 
      jQuery(document).ready(function(){
         // dynamic table
-        jQuery.alerts.okButton = '{{Lang::get("display.ok")}}';
-        jQuery.alerts.cancelButton = '{{Lang::get("display.cancel")}}';
-
         jQuery('#dyntable').dataTable({
-            "oLanguage": {
-                "sProcessing":     "{{ Lang::get('display.processing')}}",
-                "sSearch":         "{{ Lang::get('display.search')}}&nbsp;:",
-                "sLengthMenu":     "{{ Lang::get('display.show_entries')}}",
-                "sInfo":           "{{ Lang::get('display.showing_to_of_entries')}}",
-                "sInfoEmpty":      "{{ Lang::get('display.showing_0_to_0_of_0_entries')}}",
-                "sInfoFiltered":   "{{ Lang::get('display.filtered_from_total_entries)')}}",
-                "sInfoPostFix":    "",
-                "sLoadingRecords": "{{ Lang::get('display.loading')}}",
-                "sZeroRecords":    "{{ Lang::get('display.no_matching_records_found')}}",
-                "sEmptyTable":     "{{ Lang::get('display.no_data_available_in_table')}}",
-                "oPaginate": {
-                    "sFirst":      "{{ Lang::get('display.first')}}",
-                    "sPrevious":   "{{ Lang::get('display.previous')}}",
-                    "sNext":       "{{ Lang::get('display.next')}}",
-                    "sLast":       "{{ Lang::get('display.last')}}"
-                }
-            },
             "sPaginationType": "full_numbers",
             "aaSortingFixed": [[0,'asc']],
             "fnDrawCallback": function(oSettings) {
                 jQuery.uniform.update();
-            },
+            }
         });
 
 
@@ -66,11 +45,11 @@
                 case 'delete':
                     action = '{{Lang::get("messages.delete")}}';
                     break;
-                default:
+                default
                     action = '{{Lang::get("messages.draft")}}';
                     break;
             }
-			jConfirm('{{ Lang::get("messages.are_you_sure") }} '+action+' {{ Lang::get("messages.this_element") }}', '{{ Lang::get("display.confirmation_dialog")}}', function(r) {
+			jConfirm('{{ Lang::get("messages.are_you_sure") }} '+action+' {{ Lang::get("messages.this_element") }}', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
 					window.location.assign("/dashboard/categories/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
@@ -150,19 +129,19 @@
                               </span></td>
                                 <td><h4>{{$category->title}}</h4></td>
                                 <td class="description">{{$category->content}}</td>
-                                <td>{{ Lang::get('display.'.$category->status.'ed') }}</td>
+                                <td>{{ Lang::get('display.'.$category->status) }}</td>
                                 <td class="center">
 
-                                    <a href="/dashboard/categories/update/{{$category->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
+                                    <a href="/dashboard/categories/update/{{$category->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    
                                     @if($category->status == 'publish')
 
-                                        <a data-id="{{$category->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.draft') }}</a>
+                                        <a data-id="{{$category->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
                                     
                                     @else
                                     
-                                        <a data-id="{{$category->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.publish') }}</a>
-                                        <a data-id="{{$category->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.trash') }}</a>
+                                        <a data-id="{{$category->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
+                                        <a data-id="{{$category->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
 
                                     @endif
 
