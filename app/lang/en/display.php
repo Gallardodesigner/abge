@@ -203,6 +203,14 @@ return array(
 
 	'trashed_supporters' => 'All Supporters Trashed',
 
+	'add_teacher' => 'Add Teacher',
+
+	'all_teachers' => 'All Teachers',
+
+	'edit_teacher' => 'Edit Teacher',
+
+	'trashed_teachers' => 'All Teachers Trashed',
+
 	'add_user_type' => 'Add User Type',
 
 	'all_user_types' => 'All User Types',

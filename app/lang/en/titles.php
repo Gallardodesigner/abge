@@ -33,10 +33,12 @@ return array(
 
 	'contents' => 'Contents',
 
-	'promotioner' => 'Promotioners',
+	'promotioners' => 'Promotioners',
 
 	'sections' => 'Sections',
 
 	'supporters' => 'Supporters',
+
+	'teachers' => 'Teachers'
 
 );
