@@ -31,7 +31,7 @@
 		  jQuery('.confirmbutton').on("click",function(e){
             e.preventDefault();
 			var elem=jQuery(this);
-			jConfirm('{{ Lang::get("messages.are_you_sure") }} '+elem.attr("data-action")+'  {{ Lang::get("messages.this_element") }}', 'Confirmation Dialog', function(r) {
+			jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
 				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
 				if(r==true){
 					window.location.assign("/dashboard/associates/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
@@ -45,7 +45,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.courses') }}
+Courses
 @stop
 
 @section("iconpage")

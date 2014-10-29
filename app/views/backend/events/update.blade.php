@@ -21,7 +21,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.courses') }}
+Courses
 @stop
 
 @section("iconpage")
@@ -45,26 +45,26 @@ Event
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/events" class="btn dropdown-toggle"{{ Lang::get('display.back') }}/a>
+                        <a href="/dashboard/events" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
                 <h4 class="widgettitle">Edit Event</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" action="/dashboard/events/update/{{$event->id}}">
                             <p>
-                                <label>{{ Lang::get('display.title')}}</label>
+                                <label>Title</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" value="{{$event->title}}"></span>
                             </p>
                             
                             <p>
-                                <label>{{ Lang::get('display.description')}}</label>
+                                <label>Description</label>
                                 <span class="field"><textarea cols="80" rows="5" name="content" id="content" class="span6">
                                 	{{$event->content}}
                                 </textarea></span>
                             </p>                        
                             <p class="pull-right">
-                                <button class="btn btn-primary">{{ Lang::get('display.submit') }}</button>
-                                <button type="reset" class="btn">{{ Lang::get('display.reset') }}</button>
+                                <button class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn">Reset</button>
                             </p>
                             <div class="clearfix"></div>
                     </form>

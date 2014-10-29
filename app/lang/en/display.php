@@ -219,5 +219,29 @@ return array(
 
 	'trashed_user_types' => 'All User Types Trashed',
 
+	'event' => 'Event',
+
+	'startat' => ' Start at',
+
+	'endat' => 'End at',
+
+	'step' => 'Step',
+
+	'basicinformation' => 'Basic Information',
+
+	'datalocation' => 'Data and Location',
+
+	'sections' => 'Sections',
+
+	'route' => 'Route',
+
+	'header' => 'Header',
+
+	'company' => 'Company',
+
+	'category' => 'Category',
+
+	'message' => 'Message'
+
 
 );

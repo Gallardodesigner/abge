@@ -21,7 +21,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.courses')}}
+Courses
 @stop
 
 @section("iconpage")
@@ -29,11 +29,11 @@
 @stop
 
 @section("maintitle")
-{{ Lang::get('titles.user_types')}}
+User Types
 @stop
 
 @section("nameview")
-    {{ Lang::get('display.add_user_type') }}
+    Add User Types
 @stop
 
 
@@ -45,27 +45,27 @@
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="{{ $route }}" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
+                        <a href="{{ $route }}" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">{{ Lang::get('display.add_user_type') }}</h4>
+                <h4 class="widgettitle">Add User Types</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
-                                <label>{{ Lang::get('display.title') }}</label>
+                                <label>Title</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge"></span>
                             </p>
                             <p>
-                                <label>{{ Lang::get('display.description')}}</label>
+                                <label>Description</label>
                                 <span class="field"><input type="text" name="content" id="content" class="input-xxlarge"></span>
                             </p>
                             <p>
-                                <label>{{ Lang::get('display.is_associate') }}</label>
-                                <span class="field"><input type="checkbox" name="associate" id="associate" value="true" class="input-xxlarge"><em>{{ Lang::get('display.check_this_if_is_associate') }}</em></span>
+                                <label>Is Associate?</label>
+                                <span class="field"><input type="checkbox" name="associate" id="associate" value="true" class="input-xxlarge"><em>Check this input to indicate that this user type is an associate</em></span>
                             </p>                           
                             <p class="pull-right">
-                                <button class="btn btn-primary">{{ Lang::get('display.submit') }}</button>
-                                <button type="reset" class="btn">{{ Lang::get('display.reset') }}</button>
+                                <button class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn">Reset</button>
                             </p>
                             <div class="clearfix"></div>
                     </form>

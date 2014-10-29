@@ -19,24 +19,6 @@
      jQuery(document).ready(function(){
         // dynamic table
         jQuery('#dyntable').dataTable({
-             "oLanguage": {
-                "sProcessing":     "{{ Lang::get('display.processing')}}",
-                "sSearch":         "{{ Lang::get('display.search')}}&nbsp;:",
-                "sLengthMenu":     "{{ Lang::get('display.show_entries')}}",
-                "sInfo":           "{{ Lang::get('display.showing_to_of_entries')}}",
-                "sInfoEmpty":      "{{ Lang::get('display.showing_0_to_0_of_0_entries')}}",
-                "sInfoFiltered":   "{{ Lang::get('display.filtered_from_total_entries)')}}",
-                "sInfoPostFix":    "",
-                "sLoadingRecords": "{{ Lang::get('display.loading')}}",
-                "sZeroRecords":    "{{ Lang::get('display.no_matching_records_found')}}",
-                "sEmptyTable":     "{{ Lang::get('display.no_data_available_in_table')}}",
-                "oPaginate": {
-                    "sFirst":      "{{ Lang::get('display.first')}}",
-                    "sPrevious":   "{{ Lang::get('display.previous')}}",
-                    "sNext":       "{{ Lang::get('display.next')}}",
-                    "sLast":       "{{ Lang::get('display.last')}}"
-                }
-            },
             "sPaginationType": "full_numbers",
             "aaSortingFixed": [[0,'asc']],
             "fnDrawCallback": function(oSettings) {
@@ -63,7 +45,7 @@
 @stop
 
 @section("title")
-{{Lang::get('titles.courses')}}
+Courses
 @stop
 
 @section("iconpage")
@@ -71,11 +53,11 @@
 @stop
 
 @section("maintitle")
-{{Lang::get('titles.categories')}}
+Category
 @stop
 
 @section("nameview")
-    {{Lang::get('display.trashed_categories')}}
+    All Categories Trashed
 @stop
 
 @section("MainContent")
@@ -85,7 +67,7 @@
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 @if($msg_success!=null)
 						<div class="widgetbox box-success">
-                            <h4 class="widgettitle">{{Lang::get('display.success')}} <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">Success <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_success}}
                             </div>
@@ -94,7 +76,7 @@
                 <!-- @if(isset($msg_error)) -->
                 @if($msg_error!=null)
 						<div class="widgetbox box-danger">
-                            <h4 class="widgettitle">{{Lang::get('display.error')}} <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">Error <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_error}}
                             </div>
@@ -104,9 +86,9 @@
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                             <a href="/dashboard/categories" class="btn dropdown-toggle">{{Lang::get('display.back')}}</a>
+                             <a href="/dashboard/categories" class="btn dropdown-toggle">Back</a>
                         </div>
-                        <h4 class="widgettitle">{{Lang::get('display.trashed_categories')}}</h4>
+                        <h4 class="widgettitle">All Categories Trashed</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -114,9 +96,9 @@
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;">{{Lang::get('display.title')}}</th>
-                                <th class="head1" style="text-align:center;width:60%">{{Lang::get('display.description')}}</th>
-                                <th class="head0" style="text-align:center;">{{Lang::get('display.actions')}}</th>
+                                <th class="head0" style="text-align:center;">Title</th>
+                                <th class="head1" style="text-align:center;width:60%">Description</th>
+                                <th class="head0" style="text-align:center;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,8 +113,8 @@
 
 
 
-                                <a href="/dashboard/categories/untrash/{{$category->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.untrash')}}</a>
-								<a data-id="{{$category->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
+                                <a href="/dashboard/categories/untrash/{{$category->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>Untrash</a>
+								<a data-id="{{$category->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>Delete</a>
 
                                </td>
                             </tr>

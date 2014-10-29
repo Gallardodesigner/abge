@@ -16,9 +16,9 @@
       <!-- <h5 class="data-adress">Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5> -->
     </div>
     <div id="content">	
-        Sus archivos han sido subidos exitosamente y serán revisados por un moderador.
+        Os arquivos foram submetidos com sucesso e serão encaminhados para a Comissão para avaliação. 
 
-              <a href="{{URL::to($course->route.'/')}}">volver a la informacion del curso</a>
+              <a href="{{URL::to($course->route.'/')}}">Clique aqui para voltar ao evento.</a>
     </div>
     </div>
 	</div>
