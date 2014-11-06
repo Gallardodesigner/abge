@@ -14,6 +14,7 @@ class EventController extends \BaseController {
 
 		return View::make('backend.events.index', array(
 			'events' => $events,
+			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
 			));

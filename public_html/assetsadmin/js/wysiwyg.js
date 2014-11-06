@@ -13,10 +13,10 @@ jQuery().ready(function() {
 		plugins :[
 		"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker emoticons",
 		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-		"save table contextmenu directionality template paste textcolor colorpicker"
+		"save table contextmenu directionality template paste textcolor colorpicker jbimages"
 	],
 		fontsize_formats: "8pt 9pt 10pt 11pt 12pt 14pt 16pt 18pt 20pt 26pt 36pt",
-	    toolbar: "insertfile undo redo | copy cut paste | styleselect | fontselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | emoticons forecolor backcolor table",
+	    toolbar: "insertfile undo redo | copy cut paste | styleselect | fontselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages | print preview media fullpage | emoticons forecolor backcolor table",
 	    //toolbar: "hr,link,image,charmap,paste,print,preview,anchor,pagebreak,spellchecker,searchreplace,visualblocks,visualchars,code,fullscreen,insertdatetime,media,nonbreaking,save cancel,table,directionality,,textcolor,emoticons,template,forecolor backcolor,insertfile",
     	insertdatetime_formats: ["%Y.%m.%d", "%H:%M"],
 	    link_list: [

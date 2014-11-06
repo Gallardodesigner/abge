@@ -27,10 +27,28 @@
           jQuery('.confirmbutton').on("click",function(e){
             e.preventDefault();
             var elem=jQuery(this);
-            jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
+            var action = null;
+            switch(elem.attr("data-action")){
+                case 'publish':
+                    action = '{{Lang::get("messages.publish")}}';
+                    break;
+                case 'draft':
+                    action = '{{Lang::get("messages.draft")}}';
+                    break;
+                case 'trash':
+                    action = '{{Lang::get("messages.trash")}}';
+                    break;
+                case 'delete':
+                    action = '{{Lang::get("messages.delete")}}';
+                    break;
+                default:
+                    action = '{{Lang::get("messages.draft")}}';
+                    break;
+            }
+            jConfirm('{{ Lang::get("messages.are_you_sure") }} '+action+' {{ Lang::get("messages.this_element") }}', '{{ Lang::get("display.confirmation_dialog")}}', function(r) {
                  // jAlert('Confirmed: ' + r, 'Confirmation Results');
                 if(r==true){
-                    window.location.assign("/dashboard/courses/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+                    window.location.assign("{{ $route }}/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
                 }
             });
         });
@@ -41,7 +59,7 @@
 @stop
 
 @section("title")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("iconpage")
@@ -49,11 +67,11 @@ Courses
 @stop
 
 @section("maintitle")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("nameview")
-    All Courses
+    {{ Lang::get('display.all_courses') }}
 @stop
 
 @section("MainContent")
@@ -64,9 +82,9 @@ Courses
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="courses/create" class="btn dropdown-toggle">Add New Course</a>
+                            <a href="{{ $route }}/create" class="btn dropdown-toggle">{{ Lang::get('display.add_course')}}</a>
                         </div>
-                        <h4 class="widgettitle">All Courses</h4>
+                        <h4 class="widgettitle">{{ Lang::get('display.all_courses') }}</h4>
                     </div>
                     <table id="dyntable" class="table table-bordered responsive">
                         <colgroup>
@@ -80,13 +98,13 @@ Courses
                         <thead>
                             <tr>
                                 <th class="head0 nosort" style="width:15%"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" width="15%">Title</th>
-                                <th class="head1"style="width:25%">Description</th>
-                                <th class="head0" style="width:8%">Event</th>
-                                <th class="head1" style="width:8%">Start at</th>
-                                <th class="head0" style="width:8%">End at</th>
-                                <th class="head1" style="width:10%">Participants</th>
-                                <th class="head0" style="width:10%">Actions</th>
+                                <th class="head0" width="15%">{{ Lang::get('display.title')}}</th>
+                                <th class="head1"style="width:25%">{{ Lang::get('display.description')}}</th>
+                                <th class="head0" style="width:8%">{{ Lang::get('display.event')}}</th>
+                                <th class="head1" style="width:8%">{{ Lang::get('display.start_at')}}</th>
+                                <th class="head0" style="width:8%">{{ Lang::get('display.end_at')}}</th>
+                                <th class="head1" style="width:10%">{{ Lang::get('display.participants')}}</th>
+                                <th class="head0" style="width:10%">{{ Lang::get('display.actions')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,10 +130,10 @@ Courses
                                             {{Lang::get('display.inscriptions_paid')}}: {{$count}}
                                         </td>
                                         <td class="center">
-                                             <a href="/dashboard/courses/{{$course->id}}/content/" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.sections')}}</a>
-                                             <a href="/dashboard/courses/{{$course->id}}/usertypes/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.usertypes')}}</a>
-                                             <a href="/dashboard/courses/{{$course->id}}/inscriptions/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-star" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.inscriptions')}}</a>
-                                             <a href="/dashboard/courses/update/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
+                                             <a href="{{ $route }}/{{$course->id}}/content/" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.sections')}}</a>
+                                             <a href="{{ $route }}/{{$course->id}}/usertypes/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.usertypes')}}</a>
+                                             <a href="{{ $route }}/{{$course->id}}/inscriptions/" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-star" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.inscriptions')}}</a>
+                                             <a href="{{ $route }}/update/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
                                    
                                             @if($course->status == 'publish')
 

@@ -14,6 +14,7 @@ class CategoryController extends \BaseController {
 
 		return View::make('backend.categories.index', array(
 			'categories' => $categories,
+			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
 			));

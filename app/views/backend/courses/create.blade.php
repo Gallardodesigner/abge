@@ -243,7 +243,7 @@
 @stop
 
 @section("title")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("iconpage")
@@ -251,11 +251,11 @@ Courses
 @stop
 
 @section("maintitle")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("nameview")
-    Add Course
+    {{ Lang::get('display.add_course')}}
 @stop
 
 
@@ -270,7 +270,7 @@ Courses
                         <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                    <h4 class="widgettitle">Add Courses</h4>
+                    <h4 class="widgettitle">{{ Lang::get('display.add_course')}}</h4>
                         <form id="course" class="stdform " method="POST" action="" enctype="multipart/form-data">
                             <div id="wizard" class="wizard">
                                 <ul class="hormenu">

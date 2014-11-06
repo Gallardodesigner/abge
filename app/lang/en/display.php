@@ -145,6 +145,10 @@ return array(
 
 	'check_this_if_is_associate' => 'Check this input to indicate that this user type is an associate',
 
+	'start_at' => 'Start at',
+
+	'end_at' => 'End at',
+
 	/* --------------------------- */
 
 	'add_category' => 'Add Category',
@@ -154,6 +158,14 @@ return array(
 	'all_categories' => 'All Categories',
 
 	'trashed_categories' => 'All Categories Trashed',
+
+	'add_course' => 'Add Course',
+
+	'edit_course' => 'Edit Course',
+
+	'all_courses' => 'All Courses',
+
+	'trashed_courses' => 'All Courses Trashed',
 
 	'add_company' => 'Add Company',
 

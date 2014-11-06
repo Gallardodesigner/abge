@@ -15,6 +15,7 @@ class TeacherController extends \BaseController {
 
 		return View::make('backend.teachers.index', array(
 			'teachers' => $teachers,
+			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
 			));
@@ -56,6 +57,7 @@ class TeacherController extends \BaseController {
 			$teacher->firstName = Input::get('firstName');
 			$teacher->lastName = Input::get('lastName');
 			$teacher->contact = Input::get('contact');
+			$teacher->status = 'draft';
 			$teacher->url = $filename;
 
 			if($teacher->save()):

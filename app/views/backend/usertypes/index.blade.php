@@ -27,17 +27,36 @@
         });
 
 
+        
         if(jQuery('.confirmbutton').length > 0) {
-		  jQuery('.confirmbutton').on("click",function(e){
+          jQuery('.confirmbutton').on("click",function(e){
             e.preventDefault();
-			var elem=jQuery(this);
-			jConfirm('Are you sure to '+elem.attr("data-action")+' this element?', 'Confirmation Dialog', function(r) {
-				 // jAlert('Confirmed: ' + r, 'Confirmation Results');
-				if(r==true){
-					window.location.assign("{{ $route }}"+elem.attr("data-action")+"/"+elem.attr("data-id"));
-				}
-			});
-		});
+            var elem=jQuery(this);
+            var action = null;
+            switch(elem.attr("data-action")){
+                case 'publish':
+                    action = '{{Lang::get("messages.publish")}}';
+                    break;
+                case 'draft':
+                    action = '{{Lang::get("messages.draft")}}';
+                    break;
+                case 'trash':
+                    action = '{{Lang::get("messages.trash")}}';
+                    break;
+                case 'delete':
+                    action = '{{Lang::get("messages.delete")}}';
+                    break;
+                default:
+                    action = '{{Lang::get("messages.draft")}}';
+                    break;
+            }
+            jConfirm('{{ Lang::get("messages.are_you_sure") }} '+action+' {{ Lang::get("messages.this_element") }}', '{{ Lang::get("display.confirmation_dialog")}}', function(r) {
+                 // jAlert('Confirmed: ' + r, 'Confirmation Results');
+                if(r==true){
+                    window.location.assign("{{ $route }}/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+                }
+            });
+        });
 	}
         
     });

@@ -509,7 +509,7 @@ class AuthenticationController extends \BaseController {
 		$participant->cep = Input::get('cep');
 		$participant->cidade = Input::get('cidade');
 		$participant->estado = $estado[0]->name_estado;
-		$participant->empresa = Input::get('empresa');
+		/*$participant->empresa = Input::get('empresa');
 		$participant->cnpj = Input::get('cnpj_empresa');
 		$participant->endereco_empresa = Input::get('endereco_empresa');
 		$participant->numero_empresa = Input::get('nome');
@@ -518,7 +518,7 @@ class AuthenticationController extends \BaseController {
 		$participant->cidade_empresa = Input::get('cidade_empresa');
 		$participant->estado_empresa = $estado_empresa[0]->name_estado;
 		$participant->telefone = Input::get('telefone_empresa');
-		$participant->celular = Input::get('celular_empresa');
+		$participant->celular = Input::get('celular_empresa');*/
 		$participant->email = Input::get('email');
 		$participant->save();
 
@@ -542,7 +542,7 @@ class AuthenticationController extends \BaseController {
 		$part->name = $participant[0]->nome;
 		$part->cpf = $participant[0]->cpf;
 		$part->status = 'publish';
-		$part->type = Input::get('type');
+		$part->type = 'participant';
 		$part->save();
 
 		Auth::login($user);

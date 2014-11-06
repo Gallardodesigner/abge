@@ -13,7 +13,7 @@ class CourseController extends \BaseController {
 	{
 		//
 		$courses = Courses::getUntrash();
-		return View::make("backend.courses.index", array( 'courses' => $courses ) );
+		return View::make("backend.courses.index", array( 'courses' => $courses, 'route' => $this->route ) );
 		
 	}
 
@@ -38,7 +38,8 @@ class CourseController extends \BaseController {
 			'companies' => $companies,
 			'promotioners' => $companies,
 			'supporters' => $companies,
-			'sections' => $sections
+			'sections' => $sections,
+			'route' => $this->route,
 			);
 		//
 		$courses = Courses::getUntrash();

@@ -14,6 +14,7 @@ class CompanyController extends \BaseController {
 
 		return View::make('backend.companies.index', array(
 			'companies' => $companies,
+			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
 			));
