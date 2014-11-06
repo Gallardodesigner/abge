@@ -28,8 +28,18 @@ return array(
 	'companies' => 'Companies',
 
 	'user_types' => 'User Types',
-	
+
 	'helpers' => 'Helpers',
+
+	'contents' => 'Contents',
+
+	'promotioners' => 'Promotioners',
+
+	'sections' => 'Sections',
+
+	'supporters' => 'Supporters',
+
+	'teachers' => 'Teachers',
 
 	'allcourses' => 'All Courses',
 
@@ -39,6 +49,6 @@ return array(
 
 	'nothingfound' => 'Oops, nothing found!',
 
-	'editcourses' => 'Edit Courses'
+	'editcourses' => 'Edit Courses',
 
 );

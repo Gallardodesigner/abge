@@ -32,18 +32,18 @@ Courses
 @stop
 
 @section("maintitle")
-User Types
+{{ Lang::get('titles.promotioners')}}
 @stop
 
 @section("nameview")
-    Add User Types
+    {{ Lang::get('display.add_promotioner') }}
 @stop
 
 
 @section("MainContent")
 <script type="text/javascript">
     jQuery(document).on('ready', function(){
-        jQuery('.chosen-select').chosen({no_results_text: "Oops, nothing found!"});
+        jQuery('.chosen-select').chosen({no_results_text: "{{ Lang::get('display.nothing_found')}}"});
     });
 </script>
 <div class="maincontent">
@@ -56,7 +56,7 @@ User Types
                         <a href="{{ $route }}" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Edit Promotioners</h4>
+                <h4 class="widgettitle">{{Edit Promotioners}}</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                         <p>
