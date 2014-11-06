@@ -4,16 +4,77 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ABGE - Administration Panel</title>
-<link rel="stylesheet" href="/assetsadmin/css/style.default.css" type="text/css" />
-<link rel="stylesheet" href="/assetsadmin/css/style.shinyblue.css" type="text/css" />
+<!-- <link rel="stylesheet" href="/assetsadmin/css/style.default.css" type="text/css" /> -->
+<!-- <link rel="stylesheet" href="/assetsadmin/css/style.shinyblue.css" type="text/css" /> -->
 
-<script type="text/javascript" src="/assetsadmin/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/assetsadmin/js/jquery-migrate-1.1.1.min.js"></script>
-<script type="text/javascript" src="/assetsadmin/js/jquery-ui-1.9.2.min.js"></script>
-<script type="text/javascript" src="/assetsadmin/js/modernizr.min.js"></script>
-<script type="text/javascript" src="/assetsadmin/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/assetsadmin/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="/assetsadmin/js/custom.js"></script>
+<!--  -->
+
+<style>
+.loginpanelinner .logo {
+text-align: center;
+padding: 20px 0;
+}
+.inputwrapper button:focus, .inputwrapper button:active, .inputwrapper button:hover {
+background: #1e82e8;
+}
+.inputwrapper button {
+display: block;
+border: 1px solid #0c57a3;
+padding: 10px;
+background: #0972dd;
+width: 100%;
+color: #fff;
+text-transform: uppercase;
+}
+body.loginpage {
+background: #0866c6;
+}
+.loginfooter {
+font-size: 11px;
+color: rgba(255,255,255,0.5);
+position: absolute;
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+text-align: center;
+font-family: arial, sans-serif !important;
+padding: 5px 0;
+}
+.loginpanel {
+position: absolute;
+top: 50%;
+left: 50%;
+height: 300px;
+}
+.loginpanelinner {
+position: relative;
+top: -150px;
+left: -50%;
+}
+
+.inputwrapper input {
+border: 0;
+padding: 10px;
+background: #fff;
+width: 250px;
+}
+
+input[type="text"],input[type="password"]{
+    display: inline-block;
+    height: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555555;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    vertical-align: middle;
+}
+</style>
 </head>
 
 <body class="loginpage">
@@ -36,10 +97,7 @@
             <div class="inputwrapper animate3 bounceIn">
                 <button name="submit">Sign In</button>
             </div>
-            <!-- <div class="inputwrapper animate4 bounceIn">
-                <label><input type="checkbox" class="remember" name="signin" /> Keep me sign in</label>
-            </div> -->
-            
+           
         </form>
     </div><!--loginpanelinner-->
 </div><!--loginpanel-->
