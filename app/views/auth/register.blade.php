@@ -52,7 +52,7 @@
 		</div>
     	<div class="control-box">
 			<label>Estado: </label>
-				<select name="estado">
+				<select name="estado" required>
 					<option value="0" selected>Seleccione um estado</option>
 					@foreach($estados as $state)
 						<option value="{{$state->id_estado}}">{{$state->name_estado}}</option>
