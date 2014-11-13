@@ -15,16 +15,18 @@
       <!-- <h5>Data : {{$course->start}} a {{$course->end}} - Local : {{$course->address}}</h5> -->
     </div>
     <div id="content">
-    <form class="updateform" method="post">
+    <form class="updateform" id="register-form" method="post">
     	<input type="hidden" name="usertype" value="{{$usertype->id}}"/>
     	<input type="hidden" name="course" value="{{$course->id}}"/>
     	<div class="control-box">
 			<label>Nome: </label>
-			<input type="text" name="nome"/>
+			<input type="text" name="nome"/><!-- 
+			<input type="text" name="nome" required/> -->
 		</div>
     	<div class="control-box">
 			<label>Email: </label>
-			<input type="email" name="email"/>
+			<input type="email" name="email"/><!-- 
+			<input type="email" name="email" required/> -->
 		</div>
     	<div class="control-box">
 			<label>RG: </label>
@@ -32,7 +34,8 @@
 		</div>
     	<div class="control-box">
 			<label>CPF: </label>
-			<input type="text" name="cpf" value="{{ $cpf }}"/>
+			<input type="text" name="cpf" value="{{ $cpf }}"/><!-- 
+			<input type="text" name="cpf" value="{{ $cpf }}" required/> -->
 		</div>
     	<div class="control-box">
 			<label>Endereço: </label>
@@ -53,7 +56,7 @@
     	<div class="control-box">
 			<label>Estado: </label>
 				<select name="estado" required>
-					<option value="0" selected>Seleccione um estado</option>
+					<option value="0" selected>Selecione um estado</option>
 					@foreach($estados as $state)
 						<option value="{{$state->id_estado}}">{{$state->name_estado}}</option>
 					@endforeach
@@ -78,6 +81,21 @@
     	<div class="control-box">
 			<input type="submit" value="Enviar"/>
 		</div>
+		<script>
+		$(document).bind('ready', function(){
+			$('#register-form').bind('submit', function(e){
+				e.preventDefault();
+				if($('select[name=estado]').val() == 0){
+					alert($('select[name=estado]').val());//alert('Deve selecionar um estado');
+					$('select[name=estado]').focus();
+					return false;
+				}
+				else{
+					this.submit();
+				}
+			});
+		});
+		</script>
 	</form>
     </div>
     </div>

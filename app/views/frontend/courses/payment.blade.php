@@ -16,7 +16,7 @@
     </div>
     <div id="content" class="updateform">
     <div class="control-box">
-      {{$message}}
+      <h3>{{$message}}</h3>
     </div>	
     <div class="control-box" style="text-align:right;">
       {{ $button }}
