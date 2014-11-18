@@ -51,4 +51,9 @@ return array(
 
 	'editcourses' => 'Edit Courses',
 
+	'dates' => 'Dates',
+
+	'events' => 'Events',
+	
+
 );

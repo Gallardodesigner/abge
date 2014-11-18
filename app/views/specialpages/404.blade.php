@@ -34,7 +34,7 @@
 		<div id="space" class="stage"></div>
 		<div id="astronaut" class="stage">
 			<div id="text_1">Houston,<br />we have a<br />problem!</div>
-			<div id="text_2">Error 404!</div>
+			<div id="text_2">{{ Lang::get('display.error') }} 404!</div>
 			<div id="text_3">The universe<br />you are looking for<br />doesn't exist</div>
 			<!-- <div id="text_4">Try to visit another dimension</div>
 			<div id="text_5">

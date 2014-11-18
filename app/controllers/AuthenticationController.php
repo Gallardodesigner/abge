@@ -626,7 +626,7 @@ class AuthenticationController extends \BaseController {
 		$participant->cep = Input::get('cep') != null ? Input::get('cep') : $participant->cep;
 		$participant->cidade = Input::get('cidade') != null ? Input::get('cidade') : $participant->cidade;
 		$participant->estado = isset($estado[0]->name_estado) ? $estado[0]->name_estado : $participant->estado;
-		$participant->empresa = Input::get('empresa') != null ? Input::get('empresa') : $participant->empresa;
+		/*$participant->empresa = Input::get('empresa') != null ? Input::get('empresa') : $participant->empresa;
 		$participant->cnpj = Input::get('cnpj_empresa') != null ? Input::get('cnpj_empresa') : $participant->cnpj;
 		$participant->endereco_empresa = Input::get('endereco_empresa') != null ? Input::get('endereco_empresa') : $participant->endereco_empresa;
 		$participant->numero_empresa = Input::get('nome') != null ? Input::get('nome') : $participant->numero_empresa;
@@ -635,7 +635,7 @@ class AuthenticationController extends \BaseController {
 		$participant->cidade_empresa = Input::get('cidade_empresa') != null ? Input::get('cidade_empresa') : $participant->cidade_empresa;
 		$participant->estado_empresa = isset($estado_empresa[0]->name_estado) ? $estado_empresa[0]->name_estado : $participant->estado_empresa;
 		$participant->telefone = Input::get('telefone_empresa') != null ? Input::get('telefone_empresa') : $participant->telefone;
-		$participant->celular = Input::get('celular_empresa') != null ? Input::get('celular_empresa') : $participant->celular;
+		$participant->celular = Input::get('celular_empresa') != null ? Input::get('celular_empresa') : $participant->celular;*/
 		$participant->email = Input::get('email') != null ? Input::get('email') : $participant->email;
 		$participant->save();
 
@@ -1333,7 +1333,7 @@ class AuthenticationController extends \BaseController {
 		$participant->cidade = Input::get('cidade');
 		$participant->estado = $estado[0]->name_estado;
 		$participant->empresa = Input::get('empresa');
-		$participant->cnpj = Input::get('cnpj_empresa');
+		/*$participant->cnpj = Input::get('cnpj_empresa');
 		$participant->endereco_empresa = Input::get('endereco_empresa');
 		$participant->numero_empresa = Input::get('nome');
 		$participant->complemento_empresa = Input::get('complemento_empresa');
@@ -1341,7 +1341,7 @@ class AuthenticationController extends \BaseController {
 		$participant->cidade_empresa = Input::get('cidade_empresa');
 		$participant->estado_empresa = $estado_empresa[0]->name_estado;
 		$participant->telefone = Input::get('telefone_empresa');
-		$participant->celular = Input::get('celular_empresa');
+		$participant->celular = Input::get('celular_empresa');*/
 		$participant->email = Input::get('email');
 		$participant->save();
 

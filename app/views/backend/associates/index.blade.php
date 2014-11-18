@@ -63,7 +63,7 @@
 @stop
 
 @section("title")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("iconpage")
@@ -85,7 +85,7 @@ Associate
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 @if($msg_success!=null)
 						<div class="widgetbox box-success">
-                            <h4 class="widgettitle">Success <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{ Lang::get('display.success') }} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_success}}
                             </div>
@@ -94,7 +94,7 @@ Associate
                 <!-- @if(isset($msg_error)) -->
                 @if($msg_error!=null)
 						<div class="widgetbox box-danger">
-                            <h4 class="widgettitle">Error <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{ Lang::get('display.error') }} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_error}}
                             </div>
@@ -114,7 +114,7 @@ Associate
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;">Name</th>
+                                <th class="head0" style="text-align:center;">{{ Lang::get('display.name') }}</th>
                                 <th class="head1" style="text-align:center;">CPF</th>
                                 <th class="head1" style="text-align:center;">E-mail</th>
                                 <th class="head1" style="text-align:center;">Principal Category</th>

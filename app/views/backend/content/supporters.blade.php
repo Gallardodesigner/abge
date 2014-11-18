@@ -23,7 +23,7 @@
 @stop
 
 @section("title")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("iconpage")
@@ -53,7 +53,7 @@ Courses
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="{{ $route }}" class="btn dropdown-toggle">Back</a>
+                        <a href="{{ $route }}" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
                     </div>
                     </div>
                 <h4 class="widgettitle">{{ Lang::get('display.edit_supporter')}}</h4>
@@ -87,8 +87,8 @@ Courses
                             <span class="field"><textarea type="text" name="content" id="content" class="input-xxlarge">{{ $content->content }}</textarea></span>
                         </p>                       
                         <p class="pull-right">
-                            <button class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn">Reset</button>
+                            <button class="btn btn-primary">{{ Lang::get('display.submit') }}</button>
+                            <button type="reset" class="btn">{{ Lang::get('display.reset') }}</button>
                         </p>
                         <div class="clearfix"></div>
                     </form>

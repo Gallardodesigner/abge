@@ -21,7 +21,7 @@
 @stop
 
 @section("title")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("iconpage")
@@ -29,11 +29,11 @@ Courses
 @stop
 
 @section("maintitle")
-Section
+{{ Lang::get('titles.sections')}}
 @stop
 
 @section("nameview")
-    Add Section
+    {{Lang::get('display.add_section')}}
 @stop
 
 
@@ -45,27 +45,27 @@ Section
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/sections" class="btn dropdown-toggle">Back</a>
+                        <a href="/dashboard/sections" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Add Section</h4>
+                <h4 class="widgettitle">{{Lang::get('display.add_section')}}</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post">
                             <p>
-                                <label>Title</label>
+                                <label>{{ Lang::get('display.title') }}</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge"></span>
                             </p>
                             <p>
-                                <label>Description</label>
+                                <label>{{ Lang::get('display.description') }}</label>
                                 <span class="field"><textarea cols="80" rows="5" name="description" id="description" class="span6"></textarea></span>
                             </p>
                             <p>
-                                <label>File to download?</label>
+                                <label>{{Lang::get('display.file_to_download')}}</label>
                                 <span class="field"><input type="checkbox" name="file" value="true"></span>
                             </p>                        
                             <p class="pull-right">
-                                <button class="btn btn-primary">Submit</button>
-                                <button type="reset" class="btn">Reset</button>
+                                <button class="btn btn-primary">{{ Lang::get('display.submit') }}</button>
+                                <button type="reset" class="btn">{{ Lang::get('display.reset') }}</button>
                             </p>
                             <div class="clearfix"></div>
                     </form>

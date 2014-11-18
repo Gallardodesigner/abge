@@ -21,4 +21,6 @@ return array(
 
 	"sent" => "Password reminder sent!",
 
+	'check' => "Check/Uncheck this button to enable/disable the files upload",
+
 );

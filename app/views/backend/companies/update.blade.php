@@ -21,7 +21,7 @@
 @stop
 
 @section("title")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("iconpage")
@@ -29,11 +29,11 @@ Courses
 @stop
 
 @section("maintitle")
-Company
+{{ Lang::get('titles.companies') }}
 @stop
 
 @section("nameview")
-    Add Company
+    {{ Lang::get('display.update_company') }}
 @stop
 
 
@@ -45,36 +45,36 @@ Company
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/companies" class="btn dropdown-toggle">Back</a>
+                        <a href="/dashboard/companies" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Add Company</h4>
+                <h4 class="widgettitle">{{ Lang::get('display.update_company') }}</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
-                                <label>Logo</label>
+                                <label>{{ Lang::get('display.logo')}}</label>
                                 <span class="field"><img class="rounded" src="/uploads/thumb_{{$company->url}}"/><input type="file" name="url" id="url" class="btn btn-primary"></span>
                             </p>
                             <p>
-                                <label>Title</label>
+                                <label>{{ Lang::get('display.title') }}</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" value="{{$company->title}}"></span>
                             </p>
                             
                             <p>
-                                <label>Description</label>
+                                <label>{{ Lang::get('display.description') }}</label>
                                 <span class="field"><textarea cols="40" rows="5" name="content" id="content" class="span6">{{$company->content}}</textarea></span>
                             </p>    
                              <p>
-                                <label>Address</label>
+                                <label>{{ Lang::get('display.address')}}</label>
                                 <span class="field"><textarea cols="40" rows="5" name="address" id="address" class="span6">{{$company->address}}</textarea></span>
                             </p>
                              <p>
-                                <label>Contact</label>
+                                <label>{{ Lang::get('display.contact')}}</label>
                                 <span class="field"><textarea cols="40" rows="5" name="contact" id="contact" class="span6">{{$company->contact}}</textarea></span>
                             </p>                            
                             <p class="pull-right">
-                                <button class="btn btn-primary">Submit</button>
-                                <button type="reset" class="btn">Reset</button>
+                                <button class="btn btn-primary">{{ Lang::get('display.submit') }}</button>
+                                <button type="reset" class="btn">{{ Lang::get('display.reset') }}</button>
                             </p>
                             <div class="clearfix"></div>
                     </form>

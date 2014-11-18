@@ -41,6 +41,10 @@ return array(
 
 	'inscriptions_paid' => 'Paids',
 
+	'inscriptions_date' => 'Inscription Date',
+
+	'paid' => 'Paid',
+
 	'usertype' => 'Panticipant Type',
 
 	'usertypes' => 'Panticipant Types',
@@ -51,11 +55,11 @@ return array(
 
 	'participants' => 'Participants',
 
-	'inscriptions' => 'Inscriptions',
-
 	'edit' => 'Edit',
 
 	'delete' => 'Delete',
+
+	'url' => 'URL',
 
 	'sections' => 'Sections',
 
@@ -86,8 +90,6 @@ return array(
 	'description' => 'Description',
 
 	'content' => 'Content',
-
-	'name' => 'Name',
 
 	'submit' => 'Submit',
 
@@ -148,6 +150,16 @@ return array(
 	'start_at' => 'Start at',
 
 	'end_at' => 'End at',
+
+	'event_title' => 'Event Title',
+
+	'price' => 'Price',
+
+	'button_code' => 'Button Code',
+
+	'uploads' => 'Uploads',
+
+	'files_to_download' => 'File to download?',
 
 	/* --------------------------- */
 
@@ -223,6 +235,22 @@ return array(
 
 	'trashed_teachers' => 'All Teachers Trashed',
 
+	'add_date' => 'Add Date',
+
+	'all_dates' => 'All Dates',
+
+	'edit_date' => 'Edit Date',
+
+	'trashed_dates' => 'All Dates Trashed',
+
+	'add_event' => 'Add Event',
+
+	'all_events' => 'All Events',
+
+	'edit_event' => 'Edit Event',
+
+	'trashed_events' => 'All Events Trashed',
+
 	'add_user_type' => 'Add User Type',
 
 	'all_user_types' => 'All User Types',
@@ -230,6 +258,10 @@ return array(
 	'edit_user_type' => 'Edit User Type',
 
 	'trashed_user_types' => 'All User Types Trashed',
+
+	'all_files' => 'All Files',
+
+	'all_inscriptions' => 'All Inscription',
 
 	'event' => 'Event',
 
@@ -244,6 +276,24 @@ return array(
 	'datalocation' => 'Data and Location',
 
 	'sections' => 'Sections',
+
+	'payment' => 'Payment',
+
+	'max_participants' => 'Max Participants',
+
+	'min_participants' => 'Min Participants',
+
+	'data_start' => 'Data Start',
+
+	'data_end' => 'Data End',
+
+	'associate_payment' => 'Associates Payment',
+
+	'associate_message' => 'Associates Message',
+
+	'participant_payment' => 'Participants Payment',
+
+	'participant_message' => 'Participants Message',
 
 	'route' => 'Route',
 

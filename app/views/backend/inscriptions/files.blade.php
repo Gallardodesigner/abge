@@ -59,7 +59,7 @@
 @stop
 
 @section("title")
-Files
+{{ Lang::get('titles.courses')}}
 @stop
 
 @section("iconpage")
@@ -67,11 +67,11 @@ Files
 @stop
 
 @section("maintitle")
-Files
+{{Lang::get('titles.files')}}
 @stop
 
 @section("nameview")
-    All Files {{ $inscription->user->name}}
+    {{Lang::get('display.all_files')}} {{ $inscription->user->name}}
 @stop
 
 @section("MainContent")
@@ -82,9 +82,9 @@ Files
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="{{ $parent }}" class="btn dropdown-toggle">Back</a>
+                            <a href="{{ $parent }}" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
                         </div>
-                        <h4 class="widgettitle">All Files {{ $inscription->user->name}}</h4>
+                        <h4 class="widgettitle">{{Lang::get('display.all_files')}} {{ $inscription->user->name}}</h4>
                     </div>
                     <table id="dyntable" class="table table-bordered responsive">
                         <colgroup>
@@ -98,10 +98,10 @@ Files
                         <thead>
                             <tr>
                                 <th class="head0 nosort" style="width:10%"><input type="checkbox" class="checkall" /></th>
-                                <th style="width:55%">Title</th>
-                                <th class="head0" style="width:10%">URL</th>
-                                <th class="head1" style="width:10%">Status</th>
-                                <th class="head0" style="width:25%">Actions</th>
+                                <th style="width:55%">{{ Lang::get('display.title') }}</th>
+                                <th class="head0" style="width:10%">{{ Lang::get('display.url') }}</th>
+                                <th class="head1" style="width:10%">{{ Lang::get('display.status') }}</th>
+                                <th class="head0" style="width:25%">{{ Lang::get('display.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -21,7 +21,7 @@
 @stop
 
 @section("title")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("iconpage")
@@ -29,11 +29,11 @@ Courses
 @stop
 
 @section("maintitle")
-Teacher
+{{ Lang::get('titles.dates')}}
 @stop
 
 @section("nameview")
-    Add Teacher
+    {{ Lang::get('display.add_date')}}
 @stop
 
 
@@ -67,36 +67,36 @@ Teacher
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="{{ $route }}" class="btn dropdown-toggle">Back</a>
+                        <a href="{{ $route }}" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Add Teacher</h4>
+                <h4 class="widgettitle">{{ Lang::get('display.add_date')}}</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
-                                <label>Price</label>
+                                <label>{{ Lang::get('display.price')}}</label>
                                 <span class="field"><input type="number" name="price" id="price"></span>
                             </p>
                             <p>
-                                <label>Start date</label>
+                                <label>{{Lang::get('display.data_start')}}</label>
                                 <span class="field"><input type="input" name="start" id="start" class="datepicker"></span>
                             </p>
                             <p>
-                                <label>End Date</label>
+                                <label>{{Lang::get('display.data_end')}}</label>
                                 <span class="field"><input type="input" name="end" id="end" class="datepicker"></span>
                             </p>
                             
                             <p>
-                                <label>Message</label>
+                                <label>{{Lang::get('display.message')}}</label>
                                 <span class="field"><textarea cols="80" rows="5" name="message" id="message" class="span6"></textarea></span>
                             </p>    
                              <p>
-                                <label>Button Code</label>
+                                <label>{{ Lang::get('display.button_code')}}</label>
                                 <span class="field"><textarea cols="80" rows="5" name="button" id="button" class="span6"></textarea></span>
                             </p>
                             <p class="pull-right">
-                                <button class="btn btn-primary">Submit</button>
-                                <button type="reset" class="btn">Reset</button>
+                                <button class="btn btn-primary">{{ Lang::get('display.submit') }}</button>
+                                <button type="reset" class="btn">{{ Lang::get('display.reset') }}</button>
                             </p>
                             <div class="clearfix"></div>
                     </form>

@@ -86,7 +86,7 @@
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 @if($msg_success!=null)
 						<div class="widgetbox box-success">
-                            <h4 class="widgettitle">Success <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{ Lang::get('display.success') }} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_success}}
                             </div>
@@ -95,7 +95,7 @@
                 <!-- @if(isset($msg_error)) -->
                 @if($msg_error!=null)
 						<div class="widgetbox box-danger">
-                            <h4 class="widgettitle">Error <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{ Lang::get('display.error') }} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_error}}
                             </div>
@@ -115,11 +115,11 @@
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;width:10%">Thumb</th>
-                                <th class="head0" style="text-align:center;width:20%">Name</th>
-                                <th class="head1" style="text-align:center;width:40%">Description</th>
-                                <th class="head1" style="text-align:center;width:10%">Status</th>
-                                <th class="head0" style="text-align:center;width:20%">Actions</th>
+                                <th class="head0" style="text-align:center;width:10%">{{ Lang::get('display.thumb') }}</th>
+                                <th class="head0" style="text-align:center;width:20%">{{ Lang::get('display.name') }}</th>
+                                <th class="head1" style="text-align:center;width:40%">{{ Lang::get('display.description') }}</th>
+                                <th class="head1" style="text-align:center;width:10%">{{ Lang::get('display.status') }}</th>
+                                <th class="head0" style="text-align:center;width:20%">{{ Lang::get('display.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -134,19 +134,19 @@
                                 <td class="center" style="vertical-align:middle;width:10%;">{{ Lang::get('display.'.$teacher->status) }}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 
-                                    <a href="/dashboard/teachers/update/{{$teacher->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
+                                    <a href="/dashboard/teachers/update/{{$teacher->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.edit') }}</a>
                                    
                                     @if($teacher->status == 'publish')
 
-                                        <a data-id="{{$teacher->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
+                                        <a data-id="{{$teacher->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.draft') }}</a>
                                     
                                     @else
                                     
-                                        <a data-id="{{$teacher->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
+                                        <a data-id="{{$teacher->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.publish') }}</a>
 
                                     @endif
 
-                                    <a data-id="{{$teacher->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
+                                    <a data-id="{{$teacher->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.trash') }}</a>
 
                                </td>
                             </tr>

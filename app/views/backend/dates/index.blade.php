@@ -62,7 +62,7 @@
 @stop
 
 @section("title")
-Courses
+{{ Lang::get('titles.courses') }}
 @stop
 
 @section("iconpage")
@@ -70,11 +70,11 @@ Courses
 @stop
 
 @section("maintitle")
-Date
+{{ Lang::get('titles.dates')}}
 @stop
 
 @section("nameview")
-    All Dates
+    {{ Lang::get('display.all_dates')}}
 @stop
 
 @section("MainContent")
@@ -84,7 +84,7 @@ Date
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 @if($msg_success!=null)
 						<div class="widgetbox box-success">
-                            <h4 class="widgettitle">Success <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{ Lang::get('display.success') }} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_success}}
                             </div>
@@ -93,7 +93,7 @@ Date
                 <!-- @if(isset($msg_error)) -->
                 @if($msg_error!=null)
 						<div class="widgetbox box-danger">
-                            <h4 class="widgettitle">Error <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">{{ Lang::get('display.error') }} <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_error}}
                             </div>
@@ -103,10 +103,10 @@ Date
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="{{ $parent }}" class="btn dropdown-toggle">Back</a>
-                            <a href="dates/create" class="btn dropdown-toggle" style="padding-left:20px">Add New Date</a>
+                            <a href="{{ $parent }}" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
+                            <a href="dates/create" class="btn dropdown-toggle" style="padding-left:20px">{{ Lang::get('display.add_date')}}</a>
                         </div>
-                        <h4 class="widgettitle">All Dates</h4>
+                        <h4 class="widgettitle">{{Lang::get('display.all_dates')}}</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -114,10 +114,10 @@ Date
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;width:10%">Start Date</th>
-                                <th class="head0" style="text-align:center;width:20%">End Date</th>
-                                <th class="head1" style="text-align:center;width:40%">Message</th>
-                                <th class="head0" style="text-align:center;width:20%">Actions</th>
+                                <th class="head0" style="text-align:center;width:10%">{{Lang::get('display.data_start')}}</th>
+                                <th class="head0" style="text-align:center;width:20%">{{Lang::get('display.data_end')}}</th>
+                                <th class="head1" style="text-align:center;width:40%">{{Lang::get('display.message')}}</th>
+                                <th class="head0" style="text-align:center;width:20%">{{ Lang::get('display.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,9 +131,9 @@ Date
                                 <td class="description" style="vertical-align:middle;width:40%;">{{$date->message}}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 
-                                    <a href="{{ $route }}/update/{{$date->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
+                                    <a href="{{ $route }}/update/{{$date->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.edit') }}</a>
                                    
-                                    <a data-id="{{$date->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Delete</a>
+                                    <a data-id="{{$date->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.delete') }}</a>
 
                                </td>
                             </tr>
