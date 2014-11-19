@@ -95,7 +95,7 @@
                                         <input type="checkbox" />
                                       </span></td>
                                         <td style="width:30%">
-											<h4>{{ $inscription->user->name}}</h4>
+											<h4><a href="{{ $route }}/description/{{ $inscription->user->id }}">{{ $inscription->user->name}}</a></h4>
 										</td>
                                         <td>
 											@if($inscription->paid)

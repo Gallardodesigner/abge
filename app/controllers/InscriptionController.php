@@ -92,6 +92,25 @@ class InscriptionController extends \BaseController {
 		endif;
 	}
 
+	public function getDescription( $idCourse, $idUser){
+
+		$user = User::find($idUser);
+
+		$args = array(
+			'route' => self::parseRoute($idCourse),
+			'user' => $user,
+			'estados' => ORGStates::all()
+			);
+
+		if( $user->type == 'associate' ){
+			return View::make('backend.inscriptions.associate')->with($args);
+			}
+		else{
+			return View::make('backend.inscriptions.participant')->with($args);
+		}
+
+	}
+
 	public static function parseRoute( $idCourse ){
 
 		return str_replace('{idCourse}', $idCourse, self::$route );

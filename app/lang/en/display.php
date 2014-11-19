@@ -31,6 +31,14 @@ return array(
 
 	'untrashed' => 'Untrashed',
 
+	'email' => 'E-mail',
+
+	'cpf' => 'CPF',
+
+	'phone' => 'Phone',
+
+	'state' => 'Estado',
+
 	'teachers' => 'Teachers',
 
 	'promotioners' => 'Promotioners',

@@ -17,7 +17,16 @@
 	//Route::controller('/dashboard/', 'DashboardController');
 	//Route::controller('/', 'FrontendController');
 	//Route::controller('/auth', 'AuthenticationController');
+
+Route::get('/hashing/{pass}', function( $pass ){
+	echo Hash::make($pass);
+	echo "<br>";
+	echo md5($pass);
+});
 if(Auth::check() && Auth::user()->type=="superadmin"):
+	Route::get("/gd-admin", function(){
+		return Redirect::to('/dashboard');
+	});
 	Route::controller('/dashboard/org/participants', 'ORGParticipantController');
 	Route::controller('/dashboard/org/associates', 'ORGAssociateController');
 	Route::controller('/dashboard/teachers', 'TeacherController');

@@ -123,20 +123,34 @@ class AuthenticationController extends \BaseController {
 
 				if($associate->password == md5($credentials['password']) ):
 
-					$user = new User();
-					$user->email = $associate->email;
-					if($associate->nombre_completo != null):
-						$user->name = $associate->nombre_completo;
-					else:
-						$user->name = "User without name";
-					endif;
-					$user->status = 'publish';
-					$user->type = 'associate';
-					$user->password = Hash::make($credentials['password']);
-					$user->save();
+					$user_finded = User::where('email','=', $credentials['email'])->take(1)->get();
 
-					$associate->user = $user->id;
-					$associate->save();
+					$user = null;
+
+					if(!empty($user_finded[0])):
+
+						$user = $user_finded[0];					
+						$user->password = Hash::make($credentials['password']);
+						$user->save();
+
+					else:
+
+						$user = new User();
+						$user->email = $associate->email;
+						if($associate->nombre_completo != null):
+							$user->name = $associate->nombre_completo;
+						else:
+							$user->name = "User without name";
+						endif;
+						$user->status = 'publish';
+						$user->type = 'associate';
+						$user->password = Hash::make($credentials['password']);
+						$user->save();
+
+						$associate->user = $user->id;
+						$associate->save();
+
+					endif;
 
 					Auth::login($user);
 
@@ -168,8 +182,94 @@ class AuthenticationController extends \BaseController {
 
 				else:
 
+					$associate = ORGAssociates::getByEmail($credentials['email']);
+
+					if(!empty($associate[0])):
+
+						$associate = $associate[0];
+
+						if($associate->senha == md5($credentials['password']) ):
+
+							$user = new User();
+							$user->email = $associate->email;
+							if($associate->nombre_completo != null):
+								$user->name = $associate->nombre_completo;
+							else:
+								$user->name = "User without name";
+							endif;
+							$user->status = 'publish';
+							$user->type = 'associate';
+							$user->password = Hash::make($credentials['password']);
+							$user->save();
+
+							$assoc = new Associates();
+							$assoc->associate = $associate->id_asociado;
+							$assoc->user = $user->id;
+							$assoc->email = $associate->email;
+							if($associate->nombre_completo != null):
+								$assoc->name = $associate->nombre_completo;
+							else:
+								$assoc->name = "User without name";
+							endif;
+							$assoc->cpf = $associate->cpf;
+							$assoc->password = $associate->senha;
+							$assoc->status = 'publish';
+							$assoc->type = 'associate';
+							$assoc->save();
+
+							Auth::login($user);
+
+							if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+
+								$array = array(
+									'msg_success' => Lang::get('messages.login_welcome'),
+									'usertype' => $usertype,
+									'inscription' => $inscription
+									);
+
+								return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
+
+							else:
+
+								$inscription = new Inscriptions();
+								$inscription->id_course = $course->id;
+								$inscription->id_user = Auth::user()->id;
+								$inscription->id_usertype = $usertype->id;
+								$inscription->save();
+
+								$array = array(
+									'inscription' => $inscription
+									);
+
+								return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
+
+							endif;
+
+						else:
+
+							$array = array(
+								'course' => $course,
+								'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
+								);
+
+							return View::make('auth.error')->with( $array );
+
+						endif;
+
+					else:
+
+						$array = array(
+							'course' => $course,
+							'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
+							);
+
+						return View::make('auth.error')->with( $array );
+
+					endif;
+
 					$array = array(
 						'course' => $course,
+						'usertype' => $usertype,
 						'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 						);
 
@@ -517,9 +617,9 @@ class AuthenticationController extends \BaseController {
 		$participant->cep_empresa = Input::get('cep_empresa');
 		$participant->cidade_empresa = Input::get('cidade_empresa');
 		$participant->estado_empresa = $estado_empresa[0]->name_estado;
-		$participant->telefone = Input::get('telefone_empresa');
 		$participant->celular = Input::get('celular_empresa');*/
 		$participant->email = Input::get('email');
+		$participant->telefone = Input::get('telefone_empresa');
 		$participant->save();
 
 		$user = new User();
@@ -634,8 +734,8 @@ class AuthenticationController extends \BaseController {
 		$participant->cep_empresa = Input::get('cep_empresa') != null ? Input::get('cep_empresa') : $participant->cep_empresa;
 		$participant->cidade_empresa = Input::get('cidade_empresa') != null ? Input::get('cidade_empresa') : $participant->cidade_empresa;
 		$participant->estado_empresa = isset($estado_empresa[0]->name_estado) ? $estado_empresa[0]->name_estado : $participant->estado_empresa;
-		$participant->telefone = Input::get('telefone_empresa') != null ? Input::get('telefone_empresa') : $participant->telefone;
 		$participant->celular = Input::get('celular_empresa') != null ? Input::get('celular_empresa') : $participant->celular;*/
+		$participant->telefone = Input::get('telefone_empresa') != null ? Input::get('telefone_empresa') : $participant->telefone;
 		$participant->email = Input::get('email') != null ? Input::get('email') : $participant->email;
 		$participant->save();
 
@@ -821,23 +921,43 @@ class AuthenticationController extends \BaseController {
 
 			$associate = Associates::getByEmail($credentials['email']);
 
+			//var_dump($associate[0]);
+			/*
+			echo "Tipeado: " . $credentials['password'] . '<br>';
+
+			die(md5($credentials['password']) . '<br>'. $associate[0]->password);*/
+
 			if(!empty($associate[0])):
 
 				$associate = $associate[0];
 
 				if($associate->password == md5($credentials['password']) ):
 
-					$user = new User();
-					$user->email = $associate->email;
-					if($associate->nombre_completo != null):
-						$user->name = $associate->nombre_completo;
+					$user_finded = User::where('email','=', $credentials['email'])->take(1)->get();
+
+					$user = null;
+
+					if(!empty($user_finded[0])):
+
+						$user = $user_finded[0];					
+						$user->password = Hash::make($credentials['password']);
+						$user->save();
+
 					else:
-						$user->name = "User without name";
+
+						$user = new User();
+						$user->email = $associate->email;
+						if($associate->nombre_completo != null):
+							$user->name = $associate->nombre_completo;
+						else:
+							$user->name = "User without name";
+						endif;
+						$user->status = 'publish';
+						$user->type = 'associate';
+						$user->password = Hash::make($credentials['password']);
+						$user->save();
+
 					endif;
-					$user->status = 'publish';
-					$user->type = 'associate';
-					$user->password = Hash::make($credentials['password']);
-					$user->save();
 
 					$associate->user = $user->id;
 					$associate->save();
@@ -872,8 +992,94 @@ class AuthenticationController extends \BaseController {
 
 				else:
 
+					$associate = ORGAssociates::getByEmail($credentials['email']);
+
+					if(!empty($associate[0])):
+
+						$associate = $associate[0];
+
+						if($associate->senha == md5($credentials['password']) ):
+
+							$user = new User();
+							$user->email = $associate->email;
+							if($associate->nombre_completo != null):
+								$user->name = $associate->nombre_completo;
+							else:
+								$user->name = "User without name";
+							endif;
+							$user->status = 'publish';
+							$user->type = 'associate';
+							$user->password = Hash::make($credentials['password']);
+							$user->save();
+
+							$assoc = new Associates();
+							$assoc->associate = $associate->id_asociado;
+							$assoc->user = $user->id;
+							$assoc->email = $associate->email;
+							if($associate->nombre_completo != null):
+								$assoc->name = $associate->nombre_completo;
+							else:
+								$assoc->name = "User without name";
+							endif;
+							$assoc->cpf = $associate->cpf;
+							$assoc->password = $associate->senha;
+							$assoc->status = 'publish';
+							$assoc->type = 'associate';
+							$assoc->save();
+
+							Auth::login($user);
+
+							if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+
+								$array = array(
+									'msg_success' => Lang::get('messages.login_welcome'),
+									'usertype' => $usertype,
+									'inscription' => $inscription
+									);
+
+								return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
+
+							else:
+
+								$inscription = new Inscriptions();
+								$inscription->id_course = $course->id;
+								$inscription->id_user = Auth::user()->id;
+								$inscription->id_usertype = $usertype->id;
+								$inscription->save();
+
+								$array = array(
+									'inscription' => $inscription
+									);
+
+								return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
+
+							endif;
+
+						else:
+
+							$array = array(
+								'course' => $course,
+								'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
+								);
+
+							return View::make('auth.error')->with( $array );
+
+						endif;
+
+					else:
+
+						$array = array(
+							'course' => $course,
+							'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
+							);
+
+						return View::make('auth.error')->with( $array );
+
+					endif;
+
 					$array = array(
 						'course' => $course,
+						'usertype' => $usertype,
 						'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 						);
 
@@ -1222,8 +1428,8 @@ class AuthenticationController extends \BaseController {
 		$participant->cep_empresa = Input::get('cep_empresa') != null ? Input::get('cep_empresa') : '';
 		$participant->cidade_empresa = Input::get('cidade_empresa') != null ? Input::get('cidade_empresa') : '';
 		$participant->estado_empresa = isset($estado_empresa[0]->name_estado) ? $estado_empresa[0]->name_estado : '';
-		$participant->telefone = Input::get('telefone_empresa') != null ? Input::get('telefone_empresa') : '';
 		$participant->celular = Input::get('celular_empresa') != null ? Input::get('celular_empresa') : '';*/
+		$participant->telefone = Input::get('telefone_empresa') != null ? Input::get('telefone_empresa') : '';
 		$participant->email = Input::get('email') != null ? Input::get('email') : '';
 		$participant->save();
 
@@ -1340,8 +1546,8 @@ class AuthenticationController extends \BaseController {
 		$participant->cep_empresa = Input::get('cep_empresa');
 		$participant->cidade_empresa = Input::get('cidade_empresa');
 		$participant->estado_empresa = $estado_empresa[0]->name_estado;
-		$participant->telefone = Input::get('telefone_empresa');
 		$participant->celular = Input::get('celular_empresa');*/
+		$participant->telefone = Input::get('telefone_empresa');
 		$participant->email = Input::get('email');
 		$participant->save();
 
