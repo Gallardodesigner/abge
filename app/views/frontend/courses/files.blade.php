@@ -8,22 +8,39 @@
 
 <!-- Contenido principal -->
 @section("maincontent")
-<? 
+<style type="text/css">
+  .file:nth-child(even){
+    margin-left: 30px;
+  }
+  .file{
+    display:inline-block;
+    width: 45%;
+    text-align: center;
+  }
+  .file img{
+    width: 75px;
+    height: auto;
+  }
+  .file p{
+    padding-top: 10px;
+  }
+</style>
+<?php 
 function iconito( $url ){
   $ext = strstr($url,'.');
   $url = null;
   switch($ext){
     case '.pdf':
-      $url = '';
+      $url = 'http://www.illorem.com/wp-content/uploads/2011/12/pdf-icon.png';
       break;
     case '.doc':
-      $url = '';
+      $url = 'http://www.xnergic.org/wp-content/uploads/2014/09/word-doc-icon.png';
       break;
     case '.docx':
-      $url = '';
+      $url = 'http://www.xnergic.org/wp-content/uploads/2014/09/word-doc-icon.png';
       break;
     default:
-      $url = '';
+      $url = 'http://forums.watchuseek.com/attachments/f21/1809442d1414115865-classic-seiko-missing-link-5-sarb-x-grand-seiko-question2.png';
       break;
   }
 
@@ -44,26 +61,22 @@ function iconito( $url ){
             @if(count($files)==0)
               <input type="text" name="titles[]" placeholder="Nome do seu trabalho" required/>
             @else
-              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ strreplace(substr($files[0]->title, -4), '', $files[0]->title) }}" readonly/>
+              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ str_replace(substr($files[0]->title, -4), '', $files[0]->title) }}" readonly/>
             @endif
             <div class="file">
               @if(count($files) >= 1)
-              <div>
-                <img src="{{ iconito($file[0]->url) }}">
-                <p>{{$files[0]->title}}</p>
-              </div>
+                <img src="{{ iconito($files[0]->url) }}">
+                <p>Arquivo 1 - {{$files[0]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
-                <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/>
+                <input type="file" disabled data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/>
                 <label for="file">Submeta o Arquivo 1</label>
               @endif
             </div>
             <div class="file">
               @if(count($files) >= 2)
-              <div>
-                <img src="{{ iconito($file[0]->url) }}">
-                <p>{{$files[1]->title}}</p>
-              </div>
+                <img src="{{ iconito($files[0]->url) }}">
+                <p>Arquivo 2 - {{$files[1]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
                 <input type="file" disabled data-nome="Arquivo-2" data-display=1 data-number=2 name="files[]" accept=".pdf,.doc,.docx" required/>
@@ -79,14 +92,12 @@ function iconito( $url ){
             @if(count($files)<=2)
               <input type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
             @else
-              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ strreplace(substr($files[2]->title, -4), '', $files[2]->title) }}" readonly/>
+              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ str_replace(substr($files[2]->title, -4), '', $files[2]->title) }}" readonly/>
             @endif
             <div class="file">
               @if(count($files) >= 3)
-              <div>
-                <img src="{{ iconito($file[2]->url) }}">
-                <p>{{$files[2]->title}}</p>
-              </div>
+                <img src="{{ iconito($files[2]->url) }}">
+                <p>Arquivo 3 - {{$files[2]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
                 <input type="file" disabled name="files[]" data-nome="Arquivo-3" data-display=2 data-number=3 accept=".pdf,.doc,.docx" />
@@ -95,10 +106,8 @@ function iconito( $url ){
             </div>
             <div class="file">
               @if(count($files) >= 4)
-              <div>
-                <img src="{{ iconito($file[3]->url) }}">
-                <p>{{$files[3]->title}}</p>
-              </div>
+                <img src="{{ iconito($files[3]->url) }}">
+                <p>Arquivo 4 - {{$files[3]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
                 <input type="file" disabled name="files[]" data-nome="Arquivo-4" data-display=2 data-number=4 accept=".pdf,.doc,.docx" /> 
@@ -114,14 +123,12 @@ function iconito( $url ){
             @if(count($files)<=4)
               <input type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
             @else
-              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ strreplace(substr($files[4]->title, -4), '', $files[4]->title) }}" readonly/>
+              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ str_replace(substr($files[4]->title, -4), '', $files[4]->title) }}" readonly/>
             @endif
             <div class="file">
               @if(count($files) >= 5)
-              <div>
-                <img src="{{ iconito($file[4]->url) }}">
-                <p>{{$files[4]->title}}</p>
-              </div>
+                <img src="{{ iconito($files[4]->url) }}">
+                <p>Arquivo 5 - {{$files[4]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
                 <input type="file" disabled name="files[]" data-nome="Arquivo-5" data-display=3 data-number=5 accept=".pdf,.doc,.docx" />
@@ -130,10 +137,8 @@ function iconito( $url ){
             </div>
             <div class="file">
               @if(count($files) >= 6)
-              <div>
-                <img src="{{ iconito($file[5]->url) }}">
-                <p>{{$files[5]->title}}</p>
-              </div>
+                <img src="{{ iconito($files[5]->url) }}">
+                <p>Arquivo 6 - {{$files[5]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
                 <input type="file" disabled name="files[]" data-nome="Arquivo-6" data-display=3 data-number=6 accept=".pdf,.doc,.docx" />
@@ -179,7 +184,11 @@ function iconito( $url ){
 
 
 
-    $('input[type=file]').each(function(){
+    $('input[type=file]').each(function(index){
+      console.log(index + " "+ $(this).attr("data-number"));
+      if(index==0){
+        $('input[data-number='+(parseInt(($(this).attr("data-number"))))+']').removeAttr("disabled");
+      }
         $(this).bind("change",function(){
           inputFileValidation($(this),$(this).attr("data-number"));
           console.log($('input[data-number='+(1 + parseInt(($(this).attr("data-number"))))+']'));

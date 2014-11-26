@@ -265,36 +265,37 @@ class FrontendCourseController extends \BaseController {
 			$counttitle = 2;
 		endif;
 		
-		foreach(Input::file('files') as $file):
+		if(Input::file('files')!= null):
+			foreach(Input::file('files') as $file):
 
-			if ($file != null):
-				$url = $file->getRealPath();
-				$extension = $file->getClientOriginalExtension();
-				$name = str_replace(' ', '', strtolower(Auth::user()->name)).str_replace(' ', '', strtolower($titles[$counttitle])).date('YmdHis').'.'.$extension;
-				$size  = $file->getSize();
-				$mime  = $file->getMimeType();
-				$file->move(public_path('uploads/files/'), $name);
-				$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
-				$my_file = new Files();
-				$my_file->title = $titles[$counttitle] . ' - ' . (++$filenumber);
-				$my_file->id_course = $course->id;
-				$my_file->id_user = Auth::user()->id;
-				$my_file->id_inscription = $inscription->id;
-				$my_file->url = '/uploads/files/'.$name;
-				$my_file->size = $size;
-				$my_file->mime = $mime;
-				$my_file->status = 'draft';
-				$my_file->save();
-			endif;
+				if ($file != null):
+					$url = $file->getRealPath();
+					$extension = $file->getClientOriginalExtension();
+					$name = str_replace(' ', '', strtolower(Auth::user()->name)).str_replace(' ', '', strtolower($titles[$counttitle])).date('YmdHis').'.'.$extension;
+					$size  = $file->getSize();
+					$mime  = $file->getMimeType();
+					$file->move(public_path('uploads/files/'), $name);
+					$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+					$my_file = new Files();
+					$my_file->title = $titles[$counttitle] . ' - ' . (++$filenumber);
+					$my_file->id_course = $course->id;
+					$my_file->id_user = Auth::user()->id;
+					$my_file->id_inscription = $inscription->id;
+					$my_file->url = '/uploads/files/'.$name;
+					$my_file->size = $size;
+					$my_file->mime = $mime;
+					$my_file->status = 'draft';
+					$my_file->save();
+				endif;
 
-			if (($filenumber % 2)!=0):
-				$counttitle++;
-			endif;
-			
-			$count++;
+				if (($filenumber % 2)!=0):
+					$counttitle++;
+				endif;
+				
+				$count++;
 
-		endforeach;
-
+			endforeach;
+		endif;
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
 		return Redirect::to($course->route.'/trabalhosactualizacao')->with( $array );
