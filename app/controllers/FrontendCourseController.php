@@ -256,7 +256,15 @@ class FrontendCourseController extends \BaseController {
 		$filenumber = count($inscription->files);
 
 		$count = 0;
-		$counttitle = 0;
+
+		if($filenumber<=2):
+			$counttitle = 0;
+		elseif($filenumber <=4):
+			$counttitle = 1;
+		else:
+			$counttitle = 2;
+		endif;
+		
 		foreach(Input::file('files') as $file):
 
 			if ($file != null):
@@ -279,7 +287,7 @@ class FrontendCourseController extends \BaseController {
 				$my_file->save();
 			endif;
 
-			if (($count % 2)!=0):
+			if (($filenumber % 2)!=0):
 				$counttitle++;
 			endif;
 			
