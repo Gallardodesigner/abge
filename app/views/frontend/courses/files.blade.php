@@ -173,6 +173,7 @@ function iconito( $url ){
   }
 
   $(document).ready( function(){
+
     
 
 
@@ -233,6 +234,7 @@ function iconito( $url ){
     //     $('#arquivo-form').submit();
 
     //   }
+
 
     // });
   }); 

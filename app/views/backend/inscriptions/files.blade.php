@@ -14,45 +14,57 @@
 
 <script type='text/javascript'>
 
-     jQuery(document).ready(function(){
+    var confirmButtons = function(){
+        if(jQuery('.confirmbutton').length > 0) {
+            jQuery('.confirmbutton').on("click",function(e){
+                e.preventDefault();
+                var elem=jQuery(this);
+                jConfirm('{{ Lang::get("messages.are_you_sure") }} '+elem.attr("data-action")+' {{ Lang::get("messages.this_element") }}', '{{ Lang::get("display.confirmation_dialog")}}', function(r) {
+                     // jAlert('Confirmed: ' + r, 'Confirmation Results');
+                    if(r==true){
+                        window.location.assign("{{ $route }}/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+                    }
+                });
+            });
+        }
+        if(jQuery('.delete-inscription').length > 0){
+            console.log("delete");
+            jQuery('.delete-inscription').on("click",function(e){
+                console.log("click");
+                e.preventDefault();
+                var elem=jQuery(this);
+                jConfirm('{{ Lang::get("messages.are_you_sure") }} {{ Lang::get("display.delete") }} {{ Lang::get("messages.this_element") }}', '{{ Lang::get("display.confirmation_dialog")}}', function(r) {
+                     // jAlert('Confirmed: ' + r, 'Confirmation Results');
+                    if(r==true){
+                        window.location.assign("{{ $route }}/delete/"+elem.attr("data-id"));
+                    }
+                });
+            });
+        }
+    }
+
+     jQuery(document).on('ready', function(){
         // dynamic table
-        jQuery('#dyntable').dataTable({
+        console.log("ready");
+        var table = jQuery('#dyntable').dataTable({
             "sPaginationType": "full_numbers",
             "aaSortingFixed": [[0,'asc']],
             "fnDrawCallback": function(oSettings) {
                 jQuery.uniform.update();
             }
         });
-        if(jQuery('.confirmbutton').length > 0) {
-          jQuery('.confirmbutton').on("click",function(e){
-            e.preventDefault();
-            var elem=jQuery(this);
-            var action = null;
-            switch(elem.attr("data-action")){
-                case 'publish':
-                    action = '{{Lang::get("messages.publish")}}';
-                    break;
-                case 'draft':
-                    action = '{{Lang::get("messages.draft")}}';
-                    break;
-                case 'trash':
-                    action = '{{Lang::get("messages.trash")}}';
-                    break;
-                case 'delete':
-                    action = '{{Lang::get("messages.delete")}}';
-                    break;
-                default
-                    action = '{{Lang::get("messages.draft")}}';
-                    break;
-            }
-            jConfirm('{{ Lang::get("messages.are_you_sure") }} '+action+' {{ Lang::get("messages.this_element") }}', '{{ Lang::get("display.confirmation_dialog")}}', function(r) {
-                 // jAlert('Confirmed: ' + r, 'Confirmation Results');
-                if(r==true){
-                    window.location.assign("{{ $route }}/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
-                }
-            });
+
+        confirmButtons();
+
+        table.on('page.dt', function(e){
+            console.log("page");
+            confirmButtons();
         });
-      }
+
+        table.on('draw.dt', function(e){
+            console.log("draw");
+            confirmButtons();
+        });
         
     });
 </script>
@@ -120,12 +132,12 @@
                                         <td>{{ Lang::get('display.'.$file->status)}}</td>
                                         <td class="center">
                                         	@if($file->status == 'draft' OR $file->status == 'trash')
-                                             <a href="{{ $route }}/publish/{{$file->id}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.verify_file')}}</a>
-                                             @endif
-                                             @if($file->status == 'draft' OR $file->status == 'publish')
-                                             <a href="{{ $route }}/trash/{{$file->id}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.decline_file')}}</a>
-                                             @endif
-                                             <a href="{{ $route }}/delete/{{$file->id}}/" class="btn btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
+                                                <a href="{{ $route }}/publish/{{$file->id}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.verify_file')}}</a>
+                                            @endif
+                                            @if($file->status == 'draft' OR $file->status == 'publish')
+                                                <a href="{{ $route }}/trash/{{$file->id}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.decline_file')}}</a>
+                                            @endif
+                                                <a data-id="{{$file->id}}" data-action="delete" class="btn delete-inscription btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
                                         </td>
                                     </tr>
                                 @endforeach
