@@ -257,6 +257,7 @@ class FrontendCourseController extends \BaseController {
 
 		$count = 0;
 		$counttitle = 0;
+		if(Input::file('files')!= null):
 		foreach(Input::file('files') as $file):
 
 			if ($file != null):
@@ -286,7 +287,7 @@ class FrontendCourseController extends \BaseController {
 			$count++;
 
 		endforeach;
-
+		endif;
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
 		return Redirect::to($course->route.'/trabalhosactualizacao')->with( $array );
