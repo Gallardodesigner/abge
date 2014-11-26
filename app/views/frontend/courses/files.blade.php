@@ -70,54 +70,54 @@
   <script type="text/javascript">
 
   $(document).ready( function(){
-    $('#arquivo-form').submit(function(e) {
+    // $('#arquivo-form').submit(function(e) {
 
-      e.preventDefault();
-      var extensiones_permitidas = new Array(".docx", ".doc", ".pdf");
+    //   e.preventDefault();
+    //   var extensiones_permitidas = new Array(".docx", ".doc", ".pdf");
 
-      var band = true;
+    //   var band = true;
 
-      $('input[type=file]').each(function(){
+    //   $('input[type=file]').each(function(){
 
-        var elem = $(this);
-        // console.log(elem.files);
-        var archivo = elem.val();
-        var extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase(); 
+    //     var elem = $(this);
+    //     console.log(elem.files);
+    //     var archivo = elem.val();
+    //     var extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase(); 
 
-        if( archivo != '' ){
+    //     if( archivo != '' ){
 
-          permitida = false;
+    //       permitida = false;
 
-          for (var i = 0; i < extensiones_permitidas.length; i++) { 
-            if (extensiones_permitidas[i] == extension) { 
-              
-              permitida = true; 
-              break; 
-            } 
-          } 
+    //       for (var i = 0; i < extensiones_permitidas.length; i++) { 
+    //         if (extensiones_permitidas[i] == extension) { 
 
-          if( !permitida ){
-            band = false;
-          }
+    //           permitida = true; 
+    //           break; 
+    //         } 
+    //       } 
 
-        }
+    //       if( !permitida ){
+    //         band = false;
+    //       }
 
-      });
+    //     }
 
-      if(!band){
+    //   });
 
-        alert("Os arquivos permitidos são PDF, DOC e DOCX");
+    //   if(!band){
 
-        return false;
+    //     alert("Os arquivos permitidos são PDF, DOC e DOCX");
 
-      }
-      else{
+    //     return false;
 
-        $('#arquivo-form').submit();
+    //   }
+    //   else{
 
-      }
+    //     $('#arquivo-form').submit();
 
-    });
+    //   }
+
+    // });
   }); 
 
   </script>

@@ -225,7 +225,13 @@ class FrontendCourseController extends \BaseController {
 
 	public static function getCourseFiles( $id, $course, $idContent ){
 
-		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
+		$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+
+		$array = array( 
+			'course' => $course, 
+			'contents' => self::getOrderedContent($course->coursesections) ,
+			'files' => $inscription->files,
+			);
 
 		return View::make('frontend.courses.files')->with( $array );
 
@@ -233,7 +239,10 @@ class FrontendCourseController extends \BaseController {
 
 	public static function getCourseFilesUploaded( $id, $course, $idContent ){
 
-		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
+		$array = array(
+			'course' => $course, 
+			'contents' => self::getOrderedContent($course->coursesections) 
+			);
 
 		return View::make('frontend.courses.filesupload')->with( $array );
 
@@ -242,6 +251,9 @@ class FrontendCourseController extends \BaseController {
 	public static function postCourseFiles( $id, $course, $idContent ){
 
 		$titles = Input::get('titles');
+
+		$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+		$filenumber = count($inscription->files);
 
 		$count = 0;
 		$counttitle = 0;
@@ -256,7 +268,7 @@ class FrontendCourseController extends \BaseController {
 				$file->move(public_path('uploads/files/'), $name);
 				$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 				$my_file = new Files();
-				$my_file->title = $titles[$counttitle] . ' - ' . ($count % 2 + 1);
+				$my_file->title = $titles[$counttitle] . ' - ' . (++$filenumber);
 				$my_file->id_course = $course->id;
 				$my_file->id_user = Auth::user()->id;
 				$my_file->id_inscription = $inscription->id;
