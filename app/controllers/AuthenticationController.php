@@ -88,7 +88,8 @@ class AuthenticationController extends \BaseController {
 		if(Auth::attempt($credentials)):
 
 			if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
-
+				// dd($inscription->id);
+				$inscription = Inscriptions::find($inscription->id);
 				$array = array(
 					'msg_success' => Lang::get('messages.login_welcome'),
 					'usertype' => $usertype,
@@ -249,6 +250,7 @@ class AuthenticationController extends \BaseController {
 
 							$array = array(
 								'course' => $course,
+								'usertype' => $usertype,
 								'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 								);
 

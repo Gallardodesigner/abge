@@ -82,8 +82,9 @@
                                 <th class="head0 nosort" style="width:10%"><input type="checkbox" class="checkall" /></th>
                                 <th style="width:45%">{{ Lang::get('display.name') }}</th>
                                 <th class="head1" style="width:10%">{{Lang::get('display.paid')}}</th>
-                                <th class="head0" style="width:10%">{{Lang::get('display.inscription_date')}}</th>
+                                <th class="head0" style="width:10%">{{Lang::get('display.inscriptions_date')}}</th>
                                 <th class="head1" style="width:10%">{{Lang::get('display.files')}}</th>
+                                <th class="head1" style="width:10%">{{Lang::get('display.usertype')}}</th>
                                 <th class="head0" style="width:25%">{{ Lang::get('display.actions') }}</th>
                             </tr>
                         </thead>
@@ -109,6 +110,9 @@
                                             {{Lang::get('display.files')}}: {{count($inscription->files)}}
                                         </td>
                                         <td class="center">
+                                            {{ $inscription->usertype->title }}
+                                        </td>
+                                        <td class="center">
                                         	@if(!$inscription->paid)
                                              <a href="{{ $route }}/paid/{{$inscription->id}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.verify_payment')}}</a>
                                              @else
@@ -117,6 +121,7 @@
                                              @if(count($inscription->files) > 0)
                                              <a href="{{ $route }}/{{$inscription->id}}/files/" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.files')}}</a>
                                              @endif
+                                             <a href="{{ $route }}/delete/{{$inscription->id}}/" class="btn btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
                                         </td>
                                     </tr>
                                 @endforeach

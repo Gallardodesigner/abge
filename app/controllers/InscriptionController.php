@@ -99,7 +99,11 @@ class InscriptionController extends \BaseController {
 		$args = array(
 			'route' => self::parseRoute($idCourse),
 			'user' => $user,
-			'estados' => ORGStates::all()
+			'trainings' => ORGTrainings::all(),
+			'estados' => ORGStates::all(),
+			'backyards' => ORGBackyards::all(),
+			'towns' => ORGTowns::all(),
+			'categories' => ORGAssociateCategories::all(),
 			);
 
 		if( $user->type == 'associate' ){
@@ -108,6 +112,36 @@ class InscriptionController extends \BaseController {
 		else{
 			return View::make('backend.inscriptions.participant')->with($args);
 		}
+
+	}
+
+	public function getDelete( $idCourse, $id ){
+
+		$inscription = Inscriptions::find( $id );
+
+		if( $inscription ):
+
+			foreach( $inscription->files as $file ):
+
+				if( file_exists(str_replace( '//', '/', public_path($file->url) ) ) ):
+
+					unlink(public_path($file->url));
+
+					Files::destroy($file->id);
+					
+				else:
+
+					Files::destroy($file->id);
+
+				endif;
+
+			endforeach;
+
+			Inscriptions::destroy( $inscription->id );
+
+		endif;
+
+		return Redirect::to(self::parseRoute($idCourse));
 
 	}
 

@@ -70,6 +70,33 @@ class FileController extends \BaseController {
 		endif;
 	}
 
+	public function getDelete($idCourse, $idInscription, $id = '' ){
+
+		if( $id != '' ):
+
+			$file = Files::find( $id );
+
+			if( file_exists(str_replace( '//', '/', public_path($file->url) ) ) ):
+
+				unlink(public_path($file->url));
+
+				Files::destroy($file->id);
+					
+			else:
+
+				Files::destroy($file->id);
+
+			endif;
+
+			return Redirect::to(self::parseRoute($idCourse, $idInscription));
+
+		else:
+
+			return Redirect::to( self::parseRoute($idCourse, $idInscription) );
+
+		endif;
+	}
+
 	public static function parseRoute( $idCourse, $idInscription ){
 
 		$route = str_replace('{idInscription}', $idInscription, self::$route );

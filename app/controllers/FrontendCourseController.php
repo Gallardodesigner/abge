@@ -256,7 +256,7 @@ class FrontendCourseController extends \BaseController {
 				$file->move(public_path('uploads/files/'), $name);
 				$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 				$my_file = new Files();
-				$my_file->title = $titles[$counttitle];
+				$my_file->title = $titles[$counttitle] . ' - ' . ($count % 2 + 1);
 				$my_file->id_course = $course->id;
 				$my_file->id_user = Auth::user()->id;
 				$my_file->id_inscription = $inscription->id;

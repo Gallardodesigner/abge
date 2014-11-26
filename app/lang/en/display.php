@@ -169,6 +169,160 @@ return array(
 
 	'files_to_download' => 'File to download?',
 
+	'associate_code' => 'Associate Code',
+
+	'business_name' => 'Business Name',
+
+	'type_of_person' => 'Type of Person',
+
+	'training' => 'Training',
+
+	'statal_inscription' => 'Statal Inscription',
+
+	'municipal_inscription' => 'Municipal Inscription',
+
+	'cnpj' => 'CNPJ',
+
+	'passport' => 'Passport',
+
+	'rg' => 'RG',
+
+	'born_date' => 'Born Date',
+
+	'sex' => 'Sex',
+
+	'type_of_person' => 'Type of Person',
+
+	'web_site' => 'Web Site',
+
+	'responsible' => 'Responsible',
+
+	'observation' => 'Observation',
+
+	'publications' => 'Publications',
+
+	'institution' => 'Institution',
+
+	'registration_date' => 'Registration Date',
+
+	'business' => 'Business',
+
+	'office' => 'Office',
+
+	'scientific_name' => 'Scientific Name',
+
+	'cep_res' => 'CEP Res.',
+
+	'cep_com' => 'CEP Com.',
+
+	'logradouro_res' => 'Backyard Res.',
+
+	'logradouro_com' => 'Backyard Com.',
+
+	'dir_res' => 'Address Res.',
+
+	'dir_com' => 'Address Com.',
+
+	'complemento_res' => 'Complement Res.',
+
+	'complemento_com' => 'Complement Com.',
+
+	'numero_res' => 'Number Res.',
+
+	'numero_com' => 'Number Com.',
+
+	'bairro_res' => 'Neighborhood Res.',
+
+	'bairro_com' => 'Neighborhood Com.',
+
+	'pais_res' => 'Country Res.',
+
+	'pais_com' => 'Country Com.',
+
+	'municipio_res' => 'Town Res.',
+
+	'municipio_com' => 'Town Com.',
+
+	'uf_res' => 'State Res.',
+
+	'uf_com' => 'State Com.',
+
+	'ddi_res' => 'DDI Res.',
+
+	'ddd_res' => 'DDD Res.',
+
+	'ddd_com' => 'DDD Com.',
+
+	'ddi_com' => 'DDI Com.',
+
+	'ddd_two_res' => 'DDD 2 Res.',
+
+	'ddi_two_res' => 'DDI 2 Res.',
+
+	'ddd_two_com' => 'DDD 2 Com.',
+
+	'ddi_two_com' => 'DDI 2 Com.',
+
+	'ddi_cel_res' => 'DDI Movil Phone Res.',
+
+	'ddi_cel_com' => 'DDI Movil Phone Com.',
+
+	'telefone_res' => 'Phone Res.',
+
+	'telefone_com' => 'Phone Com.',
+
+	'telefone_seg_res' => 'Phone 2 Res.',
+
+	'telefone_seg_com' => 'Phone 2 Com.',
+
+	'ddd_cel_res' => 'DDD Movil Phone Res.',
+
+	'celular_res' => 'Movil Phone Res.',
+
+	'ddd_cel_com' => 'DDD Movil Phone Com.',
+
+	'celular_com' => 'Movil Phone Com.',
+
+	'status_asso' => 'Associate Status',
+
+	'area_de_especializacion' => 'Area of Specialization',
+
+	'area_de_especializacion_otro' => 'Another Area of Specialization',
+
+	'ciudad_internacional_res' => 'International City Res.',
+
+	'ciudad_internacional_com' => 'International City Com.',
+
+	'tipo_correspondencia' => 'Correspondence Type',
+
+	'voto_candidato' => 'Cadidate Vote',
+
+	'number' => 'Number',
+
+	'complement' => 'Complement',
+
+	'cep' => 'CEP',
+
+	'city' => 'City',
+
+	'movil_phone' => 'Movil Phone',
+
+	'' => '',
+
+	'' => '',
+
+	'' => '',
+
+	'' => '',
+
+	'' => '',
+
+	'' => '',
+
+	'' => '',
+
+	'' => '',
+
 	/* --------------------------- */
 
 	'add_category' => 'Add Category',
