@@ -257,18 +257,30 @@ class FrontendCourseController extends \BaseController {
 
 		$count = 0;
 
-		if($filenumber<=2):
+		if($filenumber<=0):
+			$filenumber = 0;
+			$counttitle = -1;
+		elseif($filenumber<=2):
 			$counttitle = 0;
 		elseif($filenumber <=4):
 			$counttitle = 1;
 		else:
 			$counttitle = 2;
 		endif;
+
+		var_dump(Input::file('files'));
+		var_dump($filenumber.' - '.$counttitle );
 		
 		if(Input::file('files')!= null):
 			foreach(Input::file('files') as $file):
 
 				if ($file != null):
+
+					if ((++$filenumber % 2)!=0):
+						$counttitle++;
+					endif;
+					var_dump($file);
+					//dd($filenumber.' - '.$counttitle);
 					$url = $file->getRealPath();
 					$extension = $file->getClientOriginalExtension();
 					$name = str_replace(' ', '', strtolower(Auth::user()->name)).str_replace(' ', '', strtolower($titles[$counttitle])).date('YmdHis').'.'.$extension;
@@ -277,7 +289,7 @@ class FrontendCourseController extends \BaseController {
 					$file->move(public_path('uploads/files/'), $name);
 					$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 					$my_file = new Files();
-					$my_file->title = $titles[$counttitle] . ' - ' . (++$filenumber);
+					$my_file->title = $titles[$counttitle] . ' - ' . ($filenumber);
 					$my_file->id_course = $course->id;
 					$my_file->id_user = Auth::user()->id;
 					$my_file->id_inscription = $inscription->id;
@@ -286,10 +298,6 @@ class FrontendCourseController extends \BaseController {
 					$my_file->mime = $mime;
 					$my_file->status = 'draft';
 					$my_file->save();
-				endif;
-
-				if (($filenumber % 2)!=0):
-					$counttitle++;
 				endif;
 				
 				$count++;

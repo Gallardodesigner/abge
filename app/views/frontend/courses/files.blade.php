@@ -26,21 +26,22 @@
   }
 </style>
 <?php 
-function iconito( $url ){
-  $ext = strstr($url,'.');
+function iconito( $mime ){
   $url = null;
-  switch($ext){
-    case '.pdf':
+  /*return $mime;*/
+  switch($mime){
+    case 'application/pdf':
       $url = 'http://www.illorem.com/wp-content/uploads/2011/12/pdf-icon.png';
       break;
-    case '.doc':
+    case 'application/msword':
       $url = 'http://www.xnergic.org/wp-content/uploads/2014/09/word-doc-icon.png';
       break;
-    case '.docx':
+    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
       $url = 'http://www.xnergic.org/wp-content/uploads/2014/09/word-doc-icon.png';
       break;
     default:
-      $url = 'http://forums.watchuseek.com/attachments/f21/1809442d1414115865-classic-seiko-missing-link-5-sarb-x-grand-seiko-question2.png';
+      /*$url = 'http://forums.watchuseek.com/attachments/f21/1809442d1414115865-classic-seiko-missing-link-5-sarb-x-grand-seiko-question2.png';*/
+      $url = $mime;
       break;
   }
 
@@ -65,7 +66,7 @@ function iconito( $url ){
             @endif
             <div class="file">
               @if(count($files) >= 1)
-                <img src="{{ iconito($files[0]->url) }}">
+                <img src="{{ iconito($files[0]->mime) }}">
                 <p>Arquivo 1 - {{$files[0]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
@@ -75,11 +76,11 @@ function iconito( $url ){
             </div>
             <div class="file">
               @if(count($files) >= 2)
-                <img src="{{ iconito($files[0]->url) }}">
+                <img src="{{ iconito($files[1]->mime) }}">
                 <p>Arquivo 2 - {{$files[1]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
-                <input type="file" disabled data-nome="Arquivo-2" data-display=1 data-number=2 name="files[]" accept=".pdf,.doc,.docx" required/>
+                <input type="file" disabled data-nome="Arquivo-2" data-display=1 data-number=2 name="files[]" accept=".pdf,.doc,.docx"/>
                 <label for="file">Submeta o Arquivo 2</label>
               @endif
             </div>
@@ -96,7 +97,7 @@ function iconito( $url ){
             @endif
             <div class="file">
               @if(count($files) >= 3)
-                <img src="{{ iconito($files[2]->url) }}">
+                <img src="{{ iconito($files[2]->mime) }}">
                 <p>Arquivo 3 - {{$files[2]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
@@ -106,7 +107,7 @@ function iconito( $url ){
             </div>
             <div class="file">
               @if(count($files) >= 4)
-                <img src="{{ iconito($files[3]->url) }}">
+                <img src="{{ iconito($files[3]->mime) }}">
                 <p>Arquivo 4 - {{$files[3]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
@@ -127,7 +128,7 @@ function iconito( $url ){
             @endif
             <div class="file">
               @if(count($files) >= 5)
-                <img src="{{ iconito($files[4]->url) }}">
+                <img src="{{ iconito($files[4]->mime) }}">
                 <p>Arquivo 5 - {{$files[4]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
@@ -137,7 +138,7 @@ function iconito( $url ){
             </div>
             <div class="file">
               @if(count($files) >= 6)
-                <img src="{{ iconito($files[5]->url) }}">
+                <img src="{{ iconito($files[5]->mime) }}">
                 <p>Arquivo 6 - {{$files[5]->title}}</p>
               <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
