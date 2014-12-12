@@ -60,27 +60,31 @@ function iconito( $mime ){
           <fieldset class="submitwork">
             <legend>Trabalho 1</legend>
             @if(count($files)==0)
-              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" required/>
-            @else
+              <input id="title-1" type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
+            @elseif( $files[0] != null )
               <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ str_replace(substr($files[0]->title, -4), '', $files[0]->title) }}" readonly/>
+            @elseif( $files[1] != null )
+              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ str_replace(substr($files[1]->title, -4), '', $files[1]->title) }}" readonly/>
+            @else
+              <input id="title-1" type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
             @endif
             <div class="file">
-              @if(count($files) >= 1)
+              @if(count($files) >= 1 && $files[0] != null )
                 <img src="{{ iconito($files[0]->mime) }}">
                 <p>Arquivo 1 - {{$files[0]->title}}</p>
-              <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
+              <!-- <input class="ar" type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
-                <input type="file" disabled data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/>
+                <input class="ar" type="file" disabled data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/>
                 <label for="file">Submeta o Arquivo 1</label>
               @endif
             </div>
             <div class="file">
-              @if(count($files) >= 2)
+              @if(count($files) >= 2 && $files[1] != null )
                 <img src="{{ iconito($files[1]->mime) }}">
                 <p>Arquivo 2 - {{$files[1]->title}}</p>
-              <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
+              <!-- <input class="ar" type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
-                <input type="file" disabled data-nome="Arquivo-2" data-display=1 data-number=2 name="files[]" accept=".pdf,.doc,.docx"/>
+                <input class="ar" type="file" disabled data-nome="Arquivo-2" data-display=1 data-number=2 name="files[]" accept=".pdf,.doc,.docx"/>
                 <label for="file">Submeta o Arquivo 2</label>
               @endif
             </div>
@@ -91,27 +95,31 @@ function iconito( $mime ){
           <fieldset class="submitwork">
             <legend>Trabalho 2</legend>
             @if(count($files)<=2)
-              <input type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
-            @else
+              <input id="title-2" type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
+            @elseif( $files[2] != null )
               <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ str_replace(substr($files[2]->title, -4), '', $files[2]->title) }}" readonly/>
+            @elseif( $files[3] != null )
+              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ str_replace(substr($files[3]->title, -4), '', $files[3]->title) }}" readonly/>
+            @else
+              <input id="title-1" type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
             @endif
             <div class="file">
-              @if(count($files) >= 3)
+              @if(count($files) >= 3 && $files[2] != null )
                 <img src="{{ iconito($files[2]->mime) }}">
                 <p>Arquivo 3 - {{$files[2]->title}}</p>
-              <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
+              <!-- <input class="ar" type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
-                <input type="file" disabled name="files[]" data-nome="Arquivo-3" data-display=2 data-number=3 accept=".pdf,.doc,.docx" />
+                <input class="ar" type="file" disabled name="files[]" data-nome="Arquivo-3" data-display=2 data-number=3 accept=".pdf,.doc,.docx" />
                 <label for="file">Submeta o Arquivo 1</label>
               @endif
             </div>
             <div class="file">
-              @if(count($files) >= 4)
+              @if(count($files) >= 4 && $files[3] != null )
                 <img src="{{ iconito($files[3]->mime) }}">
                 <p>Arquivo 4 - {{$files[3]->title}}</p>
-              <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
+              <!-- <input class="ar" type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
-                <input type="file" disabled name="files[]" data-nome="Arquivo-4" data-display=2 data-number=4 accept=".pdf,.doc,.docx" /> 
+                <input class="ar" type="file" disabled name="files[]" data-nome="Arquivo-4" data-display=2 data-number=4 accept=".pdf,.doc,.docx" /> 
                 <label for="file">Submeta o Arquivo 2</label>
               @endif                
             </div>
@@ -122,27 +130,31 @@ function iconito( $mime ){
           <fieldset class="submitwork">
             <legend>Trabalho 3</legend>
             @if(count($files)<=4)
-              <input type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
-            @else
+              <input id="title-3" type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
+            @elseif( $files[4] != null )
               <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ str_replace(substr($files[4]->title, -4), '', $files[4]->title) }}" readonly/>
+            @elseif( $files[5] != null )
+              <input type="text" name="titles[]" placeholder="Nome do seu trabalho" value="{{ str_replace(substr($files[5]->title, -4), '', $files[5]->title) }}" readonly/>
+            @else
+              <input id="title-3" type="text" name="titles[]" placeholder="Nome do seu trabalho"/>
             @endif
             <div class="file">
-              @if(count($files) >= 5)
+              @if(count($files) >= 5 && $files[4] != null )
                 <img src="{{ iconito($files[4]->mime) }}">
                 <p>Arquivo 5 - {{$files[4]->title}}</p>
-              <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
+              <!-- <input class="ar" type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
-                <input type="file" disabled name="files[]" data-nome="Arquivo-5" data-display=3 data-number=5 accept=".pdf,.doc,.docx" />
+                <input class="ar" type="file" disabled name="files[]" data-nome="Arquivo-5" data-display=3 data-number=5 accept=".pdf,.doc,.docx" />
                 <label for="file">Submeta o Arquivo 1</label>
               @endif
             </div>
             <div class="file">
-              @if(count($files) >= 6)
+              @if(count($files) >= 6 && $files[5] != null )
                 <img src="{{ iconito($files[5]->mime) }}">
                 <p>Arquivo 6 - {{$files[5]->title}}</p>
-              <!-- <input type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
+              <!-- <input class="ar" type="file" data-nome="Arquivo-1" data-display=1 data-number=1 name="files[]" accept=".pdf,.doc,.docx" required/> -->
               @else
-                <input type="file" disabled name="files[]" data-nome="Arquivo-6" data-display=3 data-number=6 accept=".pdf,.doc,.docx" />
+                <input class="ar" type="file" disabled name="files[]" data-nome="Arquivo-6" data-display=3 data-number=6 accept=".pdf,.doc,.docx" />
                 <label for="file">Submeta o Arquivo 2</label>
               @endif
             </div>
@@ -166,8 +178,8 @@ function iconito( $mime ){
       if($("#"+element.attr("data-nome")).length==0){
 
         $("#display-"+element.attr("data-display")).append("<p id='"+element.attr("data-nome")+"'>"+element.attr("data-nome") + " - " +element.attr("value")+"</p>");
-
         // console.log("Mamá no existe")
+
       }else{
         console.log($("#"+element.attr("data-nome")).length);
         $("#"+element.attr("data-nome")).html(element.attr("data-nome") + " - " +element.attr("value"))
@@ -188,12 +200,34 @@ function iconito( $mime ){
     $('input[type=file]').each(function(index){
       console.log(index + " "+ $(this).attr("data-number"));
       if(index==0){
+        // $(this).next().removeAttr("disabled");
         $('input[data-number='+(parseInt(($(this).attr("data-number"))))+']').removeAttr("disabled");
       }
         $(this).bind("change",function(){
+          inputs=$("body").find("input[type=file]");
+          console.log(inputs.length);
           inputFileValidation($(this),$(this).attr("data-number"));
-          console.log($('input[data-number='+(1 + parseInt(($(this).attr("data-number"))))+']'));
-          $('input[data-number='+(1 + parseInt(($(this).attr("data-number"))))+']').removeAttr("disabled");
+          for (var i = 0; i < inputs.length; i++) {
+            if($(this).attr("data-number")==$(inputs[i]).attr("data-number")){
+              // alert($(inputs[i]).attr("data-number"));
+              $(inputs[i+1]).removeAttr("disabled");
+              if($(this).attr("data-number")==1 || $(this).attr("data-number")==2){
+                $("#title-1").attr("required",true);
+              }
+              if($(this).attr("data-number")==3 || $(this).attr("data-number")==4){
+                $("#title-2").attr("required",true);
+              }
+              if($(this).attr("data-number")==5 || $(this).attr("data-number")==6){
+                $("#title-3").attr("required",true);
+              }
+            
+            }
+            // }
+            
+          };
+
+          // console.log($('input[data-number='+(1 + parseInt(($(this).attr("data-number"))))+']'));
+          // $('input[data-number='+(1 + parseInt(($(this).attr("data-number"))))+']').removeAttr("disabled");
           // alert($(this).attr("data-number"))
         })
     });
