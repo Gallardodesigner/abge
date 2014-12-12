@@ -230,7 +230,7 @@ class FrontendCourseController extends \BaseController {
 		$array = array( 
 			'course' => $course, 
 			'contents' => self::getOrderedContent($course->coursesections) ,
-			'files' => $inscription->files,
+			'files' => $inscription->listedFiles(),
 			);
 
 		return View::make('frontend.courses.files')->with( $array );
@@ -248,16 +248,33 @@ class FrontendCourseController extends \BaseController {
 
 	}
 
+	public static function positionNulled( $list ){
+
+		$postitions = array();
+
+		for( $i = 0 ; $i < 100 ; $i++ ):
+			if(!isset($list[$i]) or $list[$i] == null):
+				$positions[] = $i;
+			endif;
+		endfor;
+
+		return $positions;
+
+	}
+
 	public static function postCourseFiles( $id, $course, $idContent ){
 
 		$titles = Input::get('titles');
 
 		$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 		$filenumber = count($inscription->files);
+		$listedFiles = $inscription->listedFiles();
+		$positions = self::positionNulled($listedFiles);
 
 		$count = 0;
+		$listedCounter = 0;
 
-		if($filenumber<=0):
+		/*if($filenumber<=0):
 			$filenumber = 0;
 			$counttitle = -1;
 		elseif($filenumber<=2):
@@ -266,30 +283,80 @@ class FrontendCourseController extends \BaseController {
 			$counttitle = 1;
 		else:
 			$counttitle = 2;
-		endif;
+		endif;*/
 
-		var_dump(Input::file('files'));
-		var_dump($filenumber.' - '.$counttitle );
+		/*var_dump(Input::file('files'));
+		var_dump($filenumber.' - '.$counttitle );*/
 		
 		if(Input::file('files')!= null):
 			foreach(Input::file('files') as $file):
-
+				
+				// var_dump("File: ".$count);
 				if ($file != null):
 
-					if ((++$filenumber % 2)!=0):
-						$counttitle++;
-					endif;
-					var_dump($file);
+					// $counttitle = null;
+					// $position = null;
+					/*var_dump('count: '.$count);
+					if(count($listedFiles) > $filenumber ):
+						var_dump('listedFiles '.count($listedFiles).' > '.$filenumber.' filenumber');
+						$temp = -1;
+						for($i = 0 ; $i <= count($listedFiles) ; $i++):
+							var_dump("FOR i: ".$i.' to '.(count($listedFiles)-1));
+							if($listedFiles[$i] == null):
+								$temp++;
+								var_dump(" - IF1 temp: ".$temp.' and listedCounter: '.$listedCounter);
+								if($listedCounter==$temp):
+									var_dump(" - - IF2 :O listedCounter ".$listedCounter.' == '. $temp.' temp');
+									$position = $i;
+								endif;
+							endif;
+						endfor;
+					else:
+						$position = $filenumber;
+					endif;*/
+
+
+
+					// var_dump('position: '.$positions[$count]);
+
+					/*for($i = 0 ; $i <= $count ; $i++):
+						if($i==$count):
+							if($listedFiles[$i] == null ):
+								$filenumber = $count;
+							endif;
+							$filenumber = $count;
+						endif;
+					endfor;*/
+
+					switch($positions[$count]){
+						case 0:
+						case 1:
+							$counttitle = 0;
+							break;
+						case 2:
+						case 3:
+							$counttitle = 1;
+							break;
+						case 4:
+						case 5:
+							$counttitle = 2;
+							break;
+						default:
+							$counttitle = 2;
+							break;
+						}
+
+					// var_dump($file);
 					//dd($filenumber.' - '.$counttitle);
 					$url = $file->getRealPath();
 					$extension = $file->getClientOriginalExtension();
-					$name = str_replace(' ', '', strtolower(Auth::user()->name)).str_replace(' ', '', strtolower($titles[$counttitle])).date('YmdHis').'.'.$extension;
+					$name = str_replace(' ', '', strtolower(Auth::user()->name)).str_replace(' ', '', strtolower($titles[$counttitle])).date('YmdHis').rand(2,500*287).'.'.$extension;
 					$size  = $file->getSize();
 					$mime  = $file->getMimeType();
 					$file->move(public_path('uploads/files/'), $name);
 					$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
 					$my_file = new Files();
-					$my_file->title = $titles[$counttitle] . ' - ' . ($filenumber);
+					$my_file->title = $titles[$counttitle] . ' - ' . ($positions[$count]+1);
 					$my_file->id_course = $course->id;
 					$my_file->id_user = Auth::user()->id;
 					$my_file->id_inscription = $inscription->id;
@@ -298,12 +365,15 @@ class FrontendCourseController extends \BaseController {
 					$my_file->mime = $mime;
 					$my_file->status = 'draft';
 					$my_file->save();
+					// var_dump($my_file);
 				endif;
 				
 				$count++;
+				$listedCounter++;
 
 			endforeach;
 		endif;
+		// dd($listedFiles);
 		$array = array( 'course' => $course, 'contents' => self::getOrderedContent($course->coursesections) );
 
 		return Redirect::to($course->route.'/trabalhosactualizacao')->with( $array );

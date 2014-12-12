@@ -18,8 +18,8 @@
     <div id="content">
       <div>
           
-          <div class="content">
             {{ $section->content }}
+          <div class="content">
           </div>
               
           @if(count($course->usertypes) > 0)
