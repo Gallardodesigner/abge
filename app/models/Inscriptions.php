@@ -15,7 +15,7 @@ class Inscriptions extends Eloquent {
 	}
 
 	public function files(){
-		return $this->hasMany('Files', 'id_inscription', 'id')->orderBy('created_at','ASC');
+		return $this->hasMany('Files', 'id_inscription', 'id')->orderBy('created_at','asc');
 	}
 
 	public static function hasInscription( $idUser, $idCourse ){

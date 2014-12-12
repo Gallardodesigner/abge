@@ -262,6 +262,7 @@ class AuthenticationController extends \BaseController {
 
 						$array = array(
 							'course' => $course,
+							'usertype' => $usertype,
 							'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 							);
 
@@ -1061,6 +1062,7 @@ class AuthenticationController extends \BaseController {
 
 							$array = array(
 								'course' => $course,
+								'usertype' => $usertype,
 								'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 								);
 
@@ -1072,6 +1074,7 @@ class AuthenticationController extends \BaseController {
 
 						$array = array(
 							'course' => $course,
+							'usertype' => $usertype,
 							'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 							);
 
@@ -1158,6 +1161,7 @@ class AuthenticationController extends \BaseController {
 
 						$array = array(
 							'course' => $course,
+							'usertype' => $usertype,
 							'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 							);
 
@@ -1169,6 +1173,7 @@ class AuthenticationController extends \BaseController {
 
 					$array = array(
 						'course' => $course,
+						'usertype' => $usertype,
 						'contents' => FrontendCourseController::getOrderedContent($course->coursesections)
 						);
 
