@@ -45,7 +45,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.courses') }}
+Courses
 @stop
 
 @section("iconpage")
@@ -53,11 +53,11 @@
 @stop
 
 @section("maintitle")
-{{Lang::get('titles.courses')}}
+Course
 @stop
 
 @section("nameview")
-    {{ Lang::get('display.trashed_courses') }}
+    All Courses Trashed
 @stop
 
 @section("MainContent")
@@ -67,7 +67,7 @@
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 @if($msg_success!=null)
 						<div class="widgetbox box-success">
-                            <h4 class="widgettitle">{{ Lang::get('display.success') }} <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">Success <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_success}}
                             </div>
@@ -76,7 +76,7 @@
                 <!-- @if(isset($msg_error)) -->
                 @if($msg_error!=null)
 						<div class="widgetbox box-danger">
-                            <h4 class="widgettitle">{{ Lang::get('display.error') }} <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">Error <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_error}}
                             </div>
@@ -86,9 +86,9 @@
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                             <a href="/dashboard/courses" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
+                             <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
                         </div>
-                        <h4 class="widgettitle">{{ Lang::get('display.trashed_courses') }}</h4>
+                        <h4 class="widgettitle">All Courses Trashed</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -96,13 +96,13 @@
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0">{{ Lang::get('display.title') }}</th>
-                                <th class="head1">{{ Lang::get('display.description') }}</th>
-                                <th class="head0">{{ Lang::get('display.event')}}</th>
-                                <th class="head1">{{ Lang::get('display.data_start')}}</th>
-                                <th class="head0">{{ Lang::get('display.data_end')}}</th>
-                                <th class="head1">{{ Lang::get('display.participants')}}</th>
-                                <th class="head0">{{ Lang::get('display.actions') }}</th>
+                                <th class="head0">Title</th>
+                                <th class="head1">Description</th>
+                                <th class="head0">Event</th>
+                                <th class="head1">Start at</th>
+                                <th class="head0">End at</th>
+                                <th class="head1">Participants</th>
+                                <th class="head0">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -122,8 +122,8 @@
 
 
 
-                                        <a href="/dashboard/courses/untrash/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.untrash') }}</a>
-        								<a data-id="{{$course->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.delete') }}</a>
+                                        <a href="/dashboard/courses/untrash/{{$course->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>Untrash</a>
+        								<a data-id="{{$course->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>Delete</a>
 
                                        </td>
                                     </tr>

@@ -88,7 +88,7 @@ class CourseController extends \BaseController {
 				'image' => $image
 				), 
 			array(
-				'image' => 'required|mimes:png,jpeg,gif'
+				'image' => 'mimes:png,jpeg,gif'
 				),
 			array(
 				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'

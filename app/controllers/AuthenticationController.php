@@ -96,7 +96,13 @@ class AuthenticationController extends \BaseController {
 					'inscription' => $inscription
 					);
 
-				return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
+				if($inscription->paid()):
+					return Redirect::to($inscription->course->route.'/pago')->with( $array );
+				else:
+					return Redirect::to($inscription->course->route.'/acesso')->with( $array );
+				endif;
+
+				// return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 			else:
 
@@ -419,8 +425,14 @@ class AuthenticationController extends \BaseController {
 						'usertype' => $usertype,
 						'inscription' => $inscription
 						);
+				
+					if($inscription->paid()):
+						return Redirect::to($inscription->course->route.'/pago')->with( $array );
+					else:
+						return Redirect::to($inscription->course->route.'/acesso')->with( $array );
+					endif;
 
-					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
+					// return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
 				else:
 

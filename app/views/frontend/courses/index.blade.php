@@ -1,8 +1,8 @@
 <!-- Layout principal -->
-@extends("frontend.layout");
+@extends("frontend.layout")
 
 <!-- Titulo de la pagina -->
-@section("title");
+@section("title")
 	Cursos
 @stop
 

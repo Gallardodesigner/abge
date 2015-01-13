@@ -191,7 +191,7 @@
             selectHelper: true,
 
             select: function(start, end, allDay) {
-                var title = prompt('{{ Lang::get('display.event_title') }}:');
+                var title = prompt('Event Title:');
                 if (title) {
                     calendar.fullCalendar('renderEvent',
                         {
@@ -243,7 +243,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.courses') }}
+Courses
 @stop
 
 @section("iconpage")
@@ -267,7 +267,7 @@ Courses
                 <div class="widget">
                     <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/courses" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
+                        <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
                     <h4 class="widgettitle">Add Courses</h4>
@@ -319,12 +319,12 @@ Courses
                                 <h4 class="widgettitle">Step 1: Basic Information</h4>
                                 
                                     <p>
-                                        <label>{{ Lang::get('display.title') }}</label>
+                                        <label>Title</label>
                                         <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" /></span>
                                     </p>
                                     
                                     <p>
-                                        <label>{{ Lang::get('display.description') }}</label>
+                                        <label>Description</label>
                                         <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" /></span>
                                     </p>
                                     <p>
