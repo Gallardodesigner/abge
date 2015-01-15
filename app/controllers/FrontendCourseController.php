@@ -350,7 +350,8 @@ class FrontendCourseController extends \BaseController {
 					//dd($filenumber.' - '.$counttitle);
 					$url = $file->getRealPath();
 					$extension = $file->getClientOriginalExtension();
-					$name = str_replace(' ', '', strtolower(Auth::user()->name)).str_replace(' ', '', strtolower($titles[$counttitle])).date('YmdHis').rand(2,500*287).'.'.$extension;
+					// str_replace(' ', '',str_replace('/', '-', strtolower($titles[$counttitle])))
+					$name = str_replace(' ', '', strtolower(Auth::user()->id)).'-'.($positions[$count]+1).'-'.date('YmdHis').rand(2,1024*512).'.'.$extension;
 					$size  = $file->getSize();
 					$mime  = $file->getMimeType();
 					$file->move(public_path('uploads/files/'), $name);

@@ -1,8 +1,8 @@
 <!-- Layout principal -->
-@extends("frontend.courses.layout_destaque");
+@extends("frontend.courses.layout_destaque")
 
 <!-- Titulo de la pagina -->
-@section("title");
+@section("title")
 	Cursos
 @stop
 <style>
