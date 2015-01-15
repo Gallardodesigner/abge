@@ -64,7 +64,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.courses') }}
+Courses
 @stop
 
 @section("iconpage")
@@ -105,7 +105,7 @@
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="/dashboard/courses" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
+                            <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
                         </div>
                         <h4 class="widgettitle">{{ Lang::get('display.all_contents')}}</h4>
                     </div>

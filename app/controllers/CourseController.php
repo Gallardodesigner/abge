@@ -85,10 +85,10 @@ class CourseController extends \BaseController {
 		$image = Input::file('header');
 		$validator = Validator::make(
 			array(
-				'image' => $image
+				'image' => $image,
 				), 
 			array(
-				'image' => 'required|mimes:png,jpeg,gif'
+				'image' => 'mimes:png,jpeg,gif'
 				),
 			array(
 				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'

@@ -99,7 +99,7 @@
         jQuery('#course').submit(function(e){
             //e.preventDefault()
             var elem = jQuery(this);
-            // console.log(elem.serialize());
+            console.log(elem.serialize());
         });
 ///Lista sortable
         jQuery('.chosen-select').chosen({no_results_text: "Oops, nothing found!"});
@@ -113,27 +113,27 @@
                 'id': ui.item.attr("id")
             };
             start_position = data.index;
-            // console.log("Arrastrando el Video " + data.id + " en la posicion " + data.index);
+            console.log("Arrastrando el Video " + data.id + " en la posicion " + data.index);
         },
         stop: function(event, ui){
-            // console.log("Stop");
+            //console.log("Stop");
             var data = {
                 'index': ui.item.index(),
                 'id': ui.item.attr("id"),
                 'start': start_position
             };
             if (jQuery(ui.item).parent().attr("id")=="to-save"){
-                // console.log("Agregando el Video " + data.id + " en la posicion " + data.index );
-                // console.log(ui);
+                console.log("Agregando el Video " + data.id + " en la posicion " + data.index );
+                console.log(ui);
                 jQuery("#to-save").append("<input id='teacher_"+data.id+"' type='hidden' name='teachers[]' value='"+data.id+"'>");
-                // console.log( jQuery("#teacher_"+data.id).val());
+                console.log( jQuery("#teacher_"+data.id).val());
               
             }
             if (jQuery(ui.item).parent().attr("id")=="to-remove"){
-                // console.log("Borrando el Video " + data.id + " en la posicion " + data.index );
-                // console.log(ui);
+                console.log("Borrando el Video " + data.id + " en la posicion " + data.index );
+                console.log(ui);
                 jQuery("#to-save > #teacher_"+data.id).remove();
-                // console.log( jQuery("#teacher_"+data.id).val());
+                console.log( jQuery("#teacher_"+data.id).val());
 
             }
         }
@@ -191,7 +191,7 @@
             selectHelper: true,
 
             select: function(start, end, allDay) {
-                var title = prompt('{{ Lang::get('display.event_title') }}:');
+                var title = prompt('Event Title:');
                 if (title) {
                     calendar.fullCalendar('renderEvent',
                         {
@@ -243,7 +243,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.courses') }}
+Courses
 @stop
 
 @section("iconpage")
@@ -251,11 +251,11 @@
 @stop
 
 @section("maintitle")
-{{ Lang::get('titles.courses') }}
+Courses
 @stop
 
 @section("nameview")
-    {{ Lang::get('display.edit_course')}}
+    Edit Course
 @stop
 
 
@@ -267,36 +267,35 @@
                 <div class="widget">
                     <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/courses" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
+                        <a href="/dashboard/courses" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                    <h4 class="widgettitle">{{ Lang::get('display.edit_course')}}</h4>
+                    <h4 class="widgettitle">Add Courses</h4>
                         <form id="course" class="stdform " method="POST" action="" enctype="multipart/form-data">
                             <div id="wizard" class="wizard">
                                 <ul class="hormenu">
-                                <ul class="hormenu">
                                     <li>
                                         <a href="#wiz1step1">
-                                            <span class="h2">{{ Lang::get('display.step')}} 1</span>
-                                            <span class="label">{{Lang::get('display.basicinformation')}}</span>
+                                            <span class="h2">Step 1</span>
+                                            <span class="label">Basic Information</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#wiz1step2">
-                                            <span class="h2">{{ Lang::get('display.step')}} 2</span>
-                                            <span class="label">{{Lang::get('display.datalocation')}}</span>
+                                            <span class="h2">Step 2</span>
+                                            <span class="label">Data and Location</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#wiz1step3">
-                                            <span class="h2">{{ Lang::get('display.step')}} 3</span>
-                                            <span class="label">{{Lang::get('display.sections')}}</span>
+                                            <span class="h2">Step 3</span>
+                                            <span class="label">Sections</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#wiz1step4">
-                                            <span class="h2">{{ Lang::get('display.step')}} 4</span>
-                                            <span class="label">{{Lang::get('display.participant')}}</span>
+                                            <span class="h2">Step 4</span>
+                                            <span class="label">Participants</span>
                                         </a>
                                     </li>
                                   
@@ -305,28 +304,28 @@
                                 
 
                                 <div id="wiz1step1" class="formwiz">
-                                <h4 class="widgettitle">{{ Lang::get('display.step')}} 1: {{Lang::get('display.basicinformation')}}</h4>
+                                <h4 class="widgettitle">Step 1: Basic Information</h4>
                                 
                                     <p>
-                                        <label>{{ Lang::get('display.title') }}</label>
+                                        <label>Title</label>
                                         <span class="field"><input type="text" name="title" id="title" class="input-xxlarge" value="{{$course->title}}" /></span>
                                     </p>
                                     
                                     <p>
-                                        <label>{{ Lang::get('display.description') }}</label>
+                                        <label>Description</label>
                                         <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" value="{{$course->description}}" /></span>
                                     </p>
                                      <p>
-                                        <label>{{Lang::get('display.route')}}</label>
+                                        <label>Route</label>
                                         <span class="field"><input type="text" name="route" id="route" class="input-xxlarge" value="{{$course->route}}" /></span>
                                     </p>
                                     <p>
                                         <input name="imghidden" type="hidden" value="{{$course->header}}" />
-                                        <label>{{Lang::get('display.event')}}</label>
+                                        <label>Header</label>
                                         <span class="field"><input type="file" name="header" id="header" class="btn btn-primary" /></span>
                                     </p>
                                     <p>
-                                        <label>{{Lang::get('company')}}</label>
+                                        <label>Company</label>
                                         <span class="field">
                                             @if (isset($companies))
 
@@ -343,7 +342,7 @@
                                         </span>
                                     </p>                                
                                     <p>
-                                        <label>{{Lang::get('display.category')}}</label>
+                                        <label>Category</label>
                                         <span class="field">
                                             @if (isset($categories))
 
@@ -360,7 +359,7 @@
                                             @endif
                                         </span>
                                     <p>
-                                        <label>{{Lang::get('display.event')}}</label>
+                                        <label>Event</label>
                                         <span class="field">
                                             @if (isset($events))
                                                 <select class="chosen-select" name="event_id" >
@@ -377,33 +376,33 @@
                                     </p>
                                 </div>
                                 <div id="wiz1step2" class="formwiz">
-                                    <h4 class="widgettitle">{{ Lang::get('display.step')}} 2: {{Lang::get('display.datalocation')}}</h4>
+                                    <h4 class="widgettitle">Step 2: Data and Location</h4>
                                     
                                         <p>
-                                            <label>{{Lang::get('display.data_start')}}</label>
+                                            <label>Data Start</label>
                                             <span class="field">
                                                <input id="start" type="input" name="start" value="{{$course->start}}">
                                                     <!-- <input type="hidden" id="finish" name="finish"> -->
                                             </span>
                                         </p>
                                         <p>
-                                            <label>{{Lang::get('display.data_end')}}</label>
+                                            <label>Data End</label>
                                             <span class="field">
                                                <input id="end" type="input" name="end" value="{{$course->end}}">
                                                     <!-- <input type="hidden" id="finish" name="finish"> -->
                                             </span>
                                         </p>
                                         <p>
-                                            <label>{{Lang::get('display.address')}}</label>
+                                            <label>Address</label>
                                             <span class="field"><textarea cols="30" rows="10" name="address" class="span3">{{$course->address}}</textarea></span>
                                         </p>
                                                                                                        
                                 </div>
                                 <div id="wiz1step3" class="formwiz">
-                                    <h4 class="widgettitle">{{ Lang::get('display.step')}} 3: {{Lang::get('display.sections')}}</h4>
+                                    <h4 class="widgettitle">Step 3: Sections</h4>
                                     
                                         <p>
-                                            <label>{{Lang::get('display.sections')}}</label>
+                                            <label>Sections</label>
                                             <span class="field">
                                                 @foreach ($sections as $section)
                                                     <?php $bandera = false; ?>
@@ -423,29 +422,29 @@
                                                                                                        
                                 </div>
                                 <div id="wiz1step4" class="formwiz">
-                                    <h4 class="widgettitle">{{ Lang::get('display.step')}} 4: {{Lang::get('display.participant')}}</h4>
+                                    <h4 class="widgettitle">Step 4: Participants</h4>
                                        
                                         <p>
-                                            <label>{{Lang::get('display.min_participants')}}</label>
+                                            <label>Min Participants</label>
                                             <span class="field"> <input type="number" name="min" value="{{$course->min}}"> </span>
                                         </p>
                                         <p>
-                                            <label>{{Lang::get('display.message')}}</label>
+                                            <label>Message</label>
                                             <span class="field"><textarea cols="50" rows="10" name="min_message" class="span6">{{$course->min_message}}</textarea></span>
                                         </p>
                                         <p>
-                                            <label>{{ Lang::get('display.max_participants')}}</label>
+                                            <label>Max Participants</label>
                                             <span class="field"> <input type="number" name="max" value="{{$course->max}}"> </span>
                                         </p>   
                                         <p>
-                                            <label>{{Lang::get('display.message')}}</label>
+                                            <label>Message</label>
                                             <span class="field"><textarea cols="50" rows="10" name="max_message" class="span6">{{$course->max_message}}</textarea></span>
                                             
                                         </p>
                                                                                                        
                                 </div>
                     <!--            <div id="wiz1step4" class="formwiz">
-                                    <h4 class="widgettitle">{{ Lang::get('display.step')}} 4: Payment</h4>
+                                    <h4 class="widgettitle">Step 4: Payment</h4>
                                        
                                         <p>
                                             <label>Inscription</label>

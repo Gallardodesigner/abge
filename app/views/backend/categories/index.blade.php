@@ -131,16 +131,16 @@
                                 <td>{{ Lang::get('display.'.$category->status) }}</td>
                                 <td class="center">
 
-                                    <a href="/dashboard/categories/update/{{$category->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.edit')}}</a>
+                                    <a href="/dashboard/categories/update/{{$category->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
                                    
                                     @if($category->status == 'publish')
 
-                                        <a data-id="{{$category->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.draft')}}</a>
+                                        <a data-id="{{$category->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
                                     
                                     @else
                                     
-                                        <a data-id="{{$category->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.publish')}}</a>
-                                        <a data-id="{{$category->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.trash')}}</a>
+                                        <a data-id="{{$category->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
+                                        <a data-id="{{$category->id}}" data-action="trash" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Trash</a>
 
                                     @endif
 

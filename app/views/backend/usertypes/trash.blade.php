@@ -45,7 +45,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.courses') }}
+Courses
 @stop
 
 @section("iconpage")
@@ -57,7 +57,7 @@ Teacher
 @stop
 
 @section("nameview")
-    {{ Lang::get('display.trashed_teachers') }}
+    All Teachers Trashed
 @stop
 
 @section("MainContent")
@@ -67,7 +67,7 @@ Teacher
                 <!-- Gets replaced with TinyMCE, remember HTML in a textarea should be encoded -->
                 @if($msg_success!=null)
 						<div class="widgetbox box-success">
-                            <h4 class="widgettitle">{{ Lang::get('display.success') }} <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">Success <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_success}}
                             </div>
@@ -76,7 +76,7 @@ Teacher
                 <!-- @if(isset($msg_error)) -->
                 @if($msg_error!=null)
 						<div class="widgetbox box-danger">
-                            <h4 class="widgettitle">{{ Lang::get('display.error') }} <a class="close">×</a> <a class="minimize">–</a></h4>
+                            <h4 class="widgettitle">Error <a class="close">×</a> <a class="minimize">–</a></h4>
                             <div class="widgetcontent">
                                 {{$msg_error}}
                             </div>
@@ -86,9 +86,9 @@ Teacher
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                             <a href="/dashboard/teachers" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
+                             <a href="/dashboard/teachers" class="btn dropdown-toggle">Back</a>
                         </div>
-                        <h4 class="widgettitle">{{ Lang::get('display.trashed_teachers') }}</h4>
+                        <h4 class="widgettitle">All Teachers Trashed</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -96,10 +96,10 @@ Teacher
                         <thead>
                             <tr>
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" style="text-align:center;">{{ Lang::get('display.thumb') }}</th>
-                                <th class="head0" style="text-align:center;">{{ Lang::get('display.name') }}</th>
-                                <th class="head1" style="text-align:center;">{{ Lang::get('display.description') }}</th>
-                                <th class="head0" style="text-align:center;">{{ Lang::get('display.actions') }}</th>
+                                <th class="head0" style="text-align:center;">Thumb</th>
+                                <th class="head0" style="text-align:center;">Name</th>
+                                <th class="head1" style="text-align:center;">Description</th>
+                                <th class="head0" style="text-align:center;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,8 +115,8 @@ Teacher
 
 
 
-                                <a href="/dashboard/teachers/untrash/{{$teacher->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.untrash') }}</a>
-								<a data-id="{{$teacher->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>{{ Lang::get('display.delete') }}</a>
+                                <a href="/dashboard/teachers/untrash/{{$teacher->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-undo" style="color:#FFF;margin-right:10px;"></i>Untrash</a>
+								<a data-id="{{$teacher->id}}" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-remove" style="color:#FFF;margin-right:10px;"></i>Delete</a>
 
                                </td>
                             </tr>

@@ -21,7 +21,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.courses') }}
+Courses
 @stop
 
 @section("iconpage")
@@ -33,7 +33,7 @@ Teacher
 @stop
 
 @section("nameview")
-    {{ Lang::get('display.edit_teacher') }}
+    Edit Teacher
 @stop
 
 
@@ -45,10 +45,10 @@ Teacher
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="/dashboard/teachers" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
+                        <a href="/dashboard/teachers" class="btn dropdown-toggle">Back</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">{{ Lang::get('display.edit_teacher') }}</h4>
+                <h4 class="widgettitle">Edit Teacher</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
@@ -56,7 +56,7 @@ Teacher
                                 <span class="field"><img class="rounded" src="/uploads/thumb_{{$teacher->url}}"/><input type="file" name="url" id="url" class="btn btn-primary"></span>
                             </p>
                             <p>
-                                <label>{{ Lang::get('display.name') }}</label>
+                                <label>Name</label>
                                 <span class="field"><input type="text" name="firstName" id="firstName" class="input-xxlarge" value="{{$teacher->firstName}}"></span>
                             </p>
                             <p>
@@ -65,7 +65,7 @@ Teacher
                             </p>
                             
                             <p>
-                                <label>{{ Lang::get('display.description') }}</label>
+                                <label>Description</label>
                                 <span class="field"><textarea cols="40" rows="5" name="content" id="content" class="span6">{{$teacher->content}}</textarea></span>
                             </p>    
                              <p>
@@ -73,8 +73,8 @@ Teacher
                                 <span class="field"><textarea cols="40" rows="5" name="contact" id="contact" class="span6">{{$teacher->contact}}</textarea></span>
                             </p>                            
                             <p class="pull-right">
-                                <button class="btn btn-primary">{{ Lang::get('display.submit') }}</button>
-                                <button type="reset" class="btn">{{ Lang::get('display.reset') }}</button>
+                                <button class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn">Reset</button>
                             </p>
                             <div class="clearfix"></div>
                     </form>

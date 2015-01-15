@@ -20,6 +20,8 @@ class Inscriptions extends Eloquent {
 
 	}
 
+
+
 	public function listedFiles(){
 		$files = Files::where( 'id_inscription', '=', $this->id )->orderBy('created_at', 'asc')->get();
 		// dd($files);
@@ -69,7 +71,6 @@ class Inscriptions extends Eloquent {
 		// dd(new Illuminate\Database\Eloquent\Collection($archivitos));
 
 		return new Illuminate\Database\Eloquent\Collection($archivitos);
-
 	}
 
 	public static function hasInscription( $idUser, $idCourse ){

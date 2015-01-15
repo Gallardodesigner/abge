@@ -384,24 +384,28 @@ class FrontendCourseController extends \BaseController {
 	public static function getCoursePayment( $id, $course, $idContent ){
 
 		if(count($course->inscriptions) > $course->min ):
-
-		$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
-		$button = '';
-		$message = '';
-		foreach($inscription->usertype->dates as $date):
-			$datetime1 = date_create($date->start);
-			$datetime2 = date_create(date('Y-m-d'));
-			$datetime3 = date_create($date->start);
-			$interval1 = date_diff($datetime1, $datetime2);
-			$interval2 = date_diff($datetime2, $datetime3);
-			if(($interval1->format('%R') == '+') AND ($interval2->format('%R') == '-')):
-				$button = $date->button;
-				$message = $date->message;
-			endif;	
-		endforeach;
-		
+			$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+			$button = '';
+			$message = '';
+			foreach($inscription->usertype->dates as $date):
+				$datetime1 = date_create($date->start);
+				$datetime2 = date_create(date('Y-m-d'));
+				$datetime3 = date_create($date->end);
+				$interval1 = date_diff($datetime1, $datetime2);
+				$interval2 = date_diff($datetime3, $datetime2);
+				if(($interval1->format('%R') == '+') AND ($interval2->format('%R') == '-')):
+					$button = $date->button;
+					$message = $date->message;
+				endif;	
+			endforeach;
+		elseif(count($course->inscriptions) >= $course->max ):
+			$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+			$button = '';
+			$message = $course->max_message;
 		else:
-			$button = $course->min_message;
+			$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+			$button = '';
+			$message = $course->min_message;
 		endif;
 
 		$array = array( 'button' => $button, 'message' => $message,'course' => $course,'contents' => self::getOrderedContent($course->coursesections) );

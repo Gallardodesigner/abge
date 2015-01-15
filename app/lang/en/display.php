@@ -307,21 +307,25 @@ return array(
 
 	'movil_phone' => 'Movil Phone',
 
-	'' => '',
+	'image' => 'Image',
 
-	'' => '',
+	'sub_title' => 'Sub-Title',
 
-	'' => '',
+	'date' => 'Date',
 
-	'' => '',
+	'videos' => 'Videos',
 
-	'' => '',
+	'albums' => 'Albums',
 
-	'' => '',
+	'main_image' => 'Main Image',
 
-	'' => '',
+	'home_title' => 'Home Title',
 
-	'' => '',
+	'summary' => 'Summary',
+
+	'body' => 'Body',
+
+	'file' => 'Arquivo',
 
 	/* --------------------------- */
 
@@ -332,6 +336,22 @@ return array(
 	'all_categories' => 'All Categories',
 
 	'trashed_categories' => 'All Categories Trashed',
+
+	'add_arquivo' => 'Añadir Arquivo',
+
+	'edit_arquivo' => 'Editar Arquivo',
+
+	'all_arquivos' => 'Todos os Arquivos',
+
+	'trashed_arquivos' => 'Todos os Arquivos Trashed',
+
+	'add_new' => 'Add News',
+
+	'edit_new' => 'Edit News',
+
+	'all_news' => 'All News',
+
+	'trashed_news' => 'All News Trashed',
 
 	'add_course' => 'Add Course',
 

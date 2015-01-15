@@ -11,10 +11,10 @@
 <!-- <script src="http://tinymce.cachefly.net/4.1/jquery.tinymce.min.js"></script>
 <script src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 
+ -->
  {{HTML::script("assetsadmin/js/tiny_mce/jquery.tinymce.min.js")}}
 {{HTML::script("assetsadmin/js/tiny_mce/tinymce.js")}}
 {{HTML::script("assetsadmin/js/wysiwyg.js")}}
- -->
 <script>
  
 </script>
@@ -91,7 +91,7 @@
                             </p>    
                              <p>
                                 <label>{{Lang::get('display.button_code')}}</label>
-                                <span class="field"><textarea cols="80" rows="5" name="button" id="button" class="span6">{{ $date->button }}</textarea></span>
+                                <span class="field"><input type="text" name="button" id="button" value="{{ $date->button }}" style="width:100%"/></span>
                             </p>                         
                             <p class="pull-right">
                                 <button class="btn btn-primary">{{ Lang::get('display.submit') }}</button>
