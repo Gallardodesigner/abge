@@ -226,7 +226,7 @@
                 </li>
                 <li class="{{ (Request::is('dashboard/news') ? 'active' : '') }}{{ (Request::is('dashboard/news/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/news/') }}"><span class="iconfa-comments-alt"></span> {{ Lang::get('nav.news') }}</a></li>
                 <li class="{{ (Request::is('dashboard/arquivos') ? 'active' : '') }}{{ (Request::is('dashboard/arquivos/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/arquivos/') }}"><span class="iconfa-file"></span> {{ Lang::get('nav.arquivos') }}</a></li>
-                <li class="{{ (Request::is('dashboard/videos') ? 'active' : '') }}{{ (Request::is('dashboard/videos/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/videos/') }}"><span class="iconfa-file"></span> {{ Lang::get('nav.videos') }}</a></li>
+                <li class="{{ (Request::is('dashboard/videos') ? 'active' : '') }}{{ (Request::is('dashboard/videos/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/videos/') }}"><span class="iconfa-facetime-video"></span> {{ Lang::get('nav.videos') }}</a></li>
             </ul>
         </div><!--leftmenu-->
         

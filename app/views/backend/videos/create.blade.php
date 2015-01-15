@@ -62,7 +62,7 @@
                             </p>  
                             <p>
                                 <label>Embed Video Youtube</label>
-                                <span class="field"><input type="file" name="url_video" value="true"></span></span>
+                                <span class="field"><input type="text" name="url_video" class="input-xxlarge"></span></span>
                             </p>
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>

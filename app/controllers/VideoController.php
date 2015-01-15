@@ -31,11 +31,11 @@ class VideoController extends \BaseController {
 	public function postCreate(){
 
 		$video = new SFVideos();
-		$video->titulo_archivo = Input::get('titulo_archivo');
-		$video->id_categoria = Input::get('id_categoria');
-		$video->resumem = Input::get('resumem');
-		$video->tipo_archivo = Input::get('tipo_archivo');
-		$video->fecha = date('Y-m-d');
+		$video->titulo_video = Input::get('titulo_video');
+		$video->url_video = Input::get('url_video');
+		$video->id_profile = 1;
+		$video->status = 0;
+		$video->position = 0;
 
 		$video->save();
 
@@ -59,11 +59,8 @@ class VideoController extends \BaseController {
 	public function postUpdate($id){
 
 		$video = SFVideos::find($id);
-		$video->titulo_archivo = Input::get('titulo_archivo');
-		$video->id_categoria = Input::get('id_categoria');
-		$video->resumem = Input::get('resumem');
-		$video->tipo_archivo = Input::get('tipo_archivo');
-
+		$video->titulo_video = Input::get('titulo_video');
+		$video->url_video = Input::get('url_video');
 		$video->save();
 
 		return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $video->title )));

@@ -117,9 +117,9 @@
                         <thead>
                             <tr>
                                 <th class="head0 nosort" style="width:15%"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" width="30%">Titulo</th>
-                                <th class="head1"style="width:25%">URL</th>
-                                <th class="head0" style="width:20%">{{ Lang::get('display.actions')}}</th>
+                                <th class="head0" width="35%">Titulo</th>
+                                <th class="head1"style="width:35%">URL</th>
+                                <th class="head0" style="width:30%">{{ Lang::get('display.actions')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -132,8 +132,8 @@
                                         <td>{{$video->titulo_video}}</td>
                                         <td>{{$video->url_video}}</td>
                                         <td class="center">
-                                            <a href="{{ $route }}/update/{{$video->id_archivo_seccion}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
-                                            <a data-id="{{$video->id_archivo_seccion}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
+                                            <a href="{{ $route }}/update/{{$video->id_video}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
+                                            <a data-id="{{$video->id_video}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
                                         </td>
                                     </tr>
                                 @endforeach
