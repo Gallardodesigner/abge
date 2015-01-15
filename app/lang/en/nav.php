@@ -63,4 +63,8 @@ return array(
 
 	'brown' => 'Brown',
 
+	'news' => 'News',
+
+	'arquivos' => 'Arquivos'
+
 );

@@ -184,8 +184,8 @@
             	<li class="nav-header">{{ Lang::get('nav.navigation') }}</li>
                 <li class="{{ (Request::is('dashboard') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard') }}"><span class="iconfa-laptop"></span> {{ Lang::get('nav.dashboard') }}</a></li>
                 <li class="dropdown {{ (Request::is('dashboard/courses') ? 'active' : '') }}{{ (Request::is('dashboard/courses/*') ? 'active' : '') }}"><a href=""><span class="iconfa-book"></span>{{ Lang::get('nav.courses') }}</a>
-                	<ul {{ (Request::is('dashboard/courses') ? 'style="display: block"' : '') }}{{ (Request::is('dashboard/courses/*') ? 'style="display: block"' : '') }}>
-                    	<li class="dropdown"><a href="">{{ Lang::get('nav.course') }}</a>
+                    <ul {{ (Request::is('dashboard/courses') ? 'style="display: block"' : '') }}{{ (Request::is('dashboard/courses/*') ? 'style="display: block"' : '') }}>
+                        <li class="dropdown"><a href="">{{ Lang::get('nav.course') }}</a>
                         <ul>
                             <li><a href="{{{ URL::to('/dashboard/courses') }}}">{{ Lang::get('nav.all') }}</a></li>
                             <li><a href="{{{ URL::to('/dashboard/courses/create') }}}">{{ Lang::get('nav.add') }}</a></li>
@@ -224,6 +224,9 @@
                      </li>
                     </ul>
                 </li>
+                <li class="{{ (Request::is('dashboard/news') ? 'active' : '') }}{{ (Request::is('dashboard/news/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/news/') }}"><span class="iconfa-comments-alt"></span> {{ Lang::get('nav.news') }}</a></li>
+                <li class="{{ (Request::is('dashboard/arquivos') ? 'active' : '') }}{{ (Request::is('dashboard/arquivos/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/arquivos/') }}"><span class="iconfa-file"></span> {{ Lang::get('nav.arquivos') }}</a></li>
+                <li class="{{ (Request::is('dashboard/videos') ? 'active' : '') }}{{ (Request::is('dashboard/videos/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/videos/') }}"><span class="iconfa-file"></span> {{ Lang::get('nav.videos') }}</a></li>
             </ul>
         </div><!--leftmenu-->
         

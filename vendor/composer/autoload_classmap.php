@@ -1329,6 +1329,7 @@ return array(
     'Sections' => $baseDir . '/app/models/Sections.php',
     'SectionsTableSeeder' => $baseDir . '/app/database/seeds/SectionsTableSeeder.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
+    'SFNews' => $baseDir . '/app/models/SFNews.php',
     'Stack\\Builder' => $vendorDir . '/stack/builder/src/Stack/Builder.php',
     'Stack\\StackedHttpKernel' => $vendorDir . '/stack/builder/src/Stack/StackedHttpKernel.php',
     'SupporterController' => $baseDir . '/app/controllers/SupporterController.php',

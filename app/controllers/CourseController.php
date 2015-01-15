@@ -85,7 +85,7 @@ class CourseController extends \BaseController {
 		$image = Input::file('header');
 		$validator = Validator::make(
 			array(
-				'image' => $image
+				'image' => $image,
 				), 
 			array(
 				'image' => 'mimes:png,jpeg,gif'

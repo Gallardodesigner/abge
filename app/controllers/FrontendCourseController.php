@@ -64,9 +64,6 @@ class FrontendCourseController extends \BaseController {
 					case 'acesso':
 						return self::getCourseSignin( $route, $course, $idContent );
 						break;
-					case 'pago':
-						return self::getCoursePaid( $route, $course, $idContent );
-						break;
 					case 'arquivos':
 						return self::getCourseFiles( $route, $course, $idContent );
 						break;
@@ -112,16 +109,6 @@ class FrontendCourseController extends \BaseController {
 			return View::make('specialpages.404');
 
 		endif;
-
-	}
-
-	public static function getCoursePaid( $id, $course, $idContent ){
-
-		$array = array(
-			'course' => $course
-			);
-
-		return View::make('frontend.courses.paid')->with( $array );
 
 	}
 

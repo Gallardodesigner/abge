@@ -54,6 +54,11 @@ return array(
 	'dates' => 'Dates',
 
 	'events' => 'Events',
+
+	'news' => 'News',
+
+	'arquivos' => 'Arquivos',
+	
 	
 
 );
