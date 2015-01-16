@@ -78,7 +78,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.news') }}
+Associadow
 @stop
 
 @section("iconpage")
@@ -86,11 +86,11 @@
 @stop
 
 @section("maintitle")
-{{ Lang::get('titles.news') }}
+Associados
 @stop
 
 @section("nameview")
-    {{ Lang::get('display.all_news') }}
+Todos os Associados
 @stop
 
 @section("MainContent")
@@ -101,9 +101,9 @@
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="{{ $route }}/create" class="btn dropdown-toggle">{{ Lang::get('display.add_new')}}</a>
+                            <a href="{{ $route }}/create" class="btn dropdown-toggle">Adicionar Associado</a>
                         </div>
-                        <h4 class="widgettitle">{{ Lang::get('display.all_news') }}</h4>
+                        <h4 class="widgettitle">Todos os Associados</h4>
                     </div>
                     <table id="dyntable" class="table table-bordered responsive">
                         <colgroup>
@@ -117,30 +117,27 @@
                         <thead>
                             <tr>
                                 <th class="head0 nosort" style="width:15%"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" width="30%">{{ Lang::get('display.title')}}</th>
-                                <th class="head1"style="width:25%">{{ Lang::get('display.sub_title')}}</th>
-                                <th class="head0" style="width:10%">{{ Lang::get('display.date')}}</th>
-                                <th class="head1" style="width:15%">{{ Lang::get('display.image')}}</th>
-                                <th class="head0" style="width:20%">{{ Lang::get('display.actions')}}</th>
+                                <th class="head0" width="30%">Nome</th>
+                                <th class="head1"style="width:25%">Email</th>
+                                <th class="head0" style="width:10%">Nome Da Empresa</th>
+                                <th class="head1" style="width:15%">Tipo de Pessoa</th>
+                                <th class="head0" style="width:20%">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($news))
-                                @foreach($news as $new)
+                            @if(isset($associates))
+                                @foreach($associates as $associate)
                                     <tr class="gradeX">
                                       <td class="aligncenter"><span class="center">
                                         <input type="checkbox" />
                                       </span></td>
-                                        <td>{{$new->title}}</td>
-                                        <td>{{$new->sub_title}}</td>
-                                        <td>{{date("d-m-Y", strtotime($new->date))}}</td>
-                                        <td><img src="/uploads/news/small_{{$new->image}}"/></td>
+                                        <td>{{$associate->nombre_completo}}</td>
+                                        <td>{{$associate->email}}</td>
+                                        <td>{{$associate->razon_social}}</td>
+                                        <td>{{$associate->tipo_pessoa}}</td>
                                         <td class="center">
-                                            <a href="{{ $route }}/update/{{$new->id_news}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
-                                            <a data-id="{{$new->id_news}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
-                                            <a href="{{ $route }}/arquivos/{{$new->id_news}}" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.arquivos')}}</a>
-                                            <a href="{{ $route }}/albums/{{$new->id_news}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-picture" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.albums')}}</a>
-                                            <a href="{{ $route }}/videos/{{$new->id_news}}" class="btn btn-inverse alertwarning" style="color:#FFF !important;"><i class="iconfa-facetime-video" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.videos')}}</a>
+                                            <a href="{{ $route }}/update/{{$associate->id_asociado}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
+                                            <a data-id="{{$associate->id_asociado}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
                                         </td>
                                     </tr>
                                 @endforeach

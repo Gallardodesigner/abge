@@ -6,14 +6,15 @@ class ORGParticipantController extends \BaseController {
 
 	public function getIndex(){
 
-		$companies = Companies::getUntrash();
+		$participants = ORGParticipants::all();
 
 		$msg_success = Session::get('msg_success');
 
 		$msg_error = Session::get('msg_error');
 
-		return View::make('backend.companies.index', array(
-			'companies' => $companies,
+		return View::make('backend.clients.participants.index', array(
+			'participants' => $participants,
+			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
 			));
@@ -22,7 +23,7 @@ class ORGParticipantController extends \BaseController {
 
 	public function getCreate(){
 
-		return View::make('backend.companies.create');
+		return View::make('backend.participants.create');
 
 	}
 
@@ -44,13 +45,13 @@ class ORGParticipantController extends \BaseController {
 
 		if($validator->fails()):
 
-			return Redirect::to($this->route.'/create')->with('msg_succes', Lang::get('messages.companies_create_img_err'));
+			return Redirect::to($this->route.'/create')->with('msg_succes', Lang::get('messages.participants_create_img_err'));
 
 		else:
 
 			$filename = $this->uploadImage($image);
 
-			$company = new Companies();
+			$company = new ORGParticipants();
 			$company->title = Input::get('title');
 			$company->content = Input::get('content');
 			$company->address = Input::get('address');
@@ -61,11 +62,11 @@ class ORGParticipantController extends \BaseController {
 
 			if($company->save()):
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $company->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.participants_create', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $company->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_create_err', array( 'title' => $company->title )));
 
 			endif;
 
@@ -80,15 +81,15 @@ class ORGParticipantController extends \BaseController {
 		
 		else:
 
-			$company = Companies::find($id);
+			$company = ORGParticipants::find($id);
 
 			if(!$company):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_display_err'));
 
 			else:
 
-				return View::make('backend.companies.update', array('company' => $company));
+				return View::make('backend.participants.update', array('company' => $company));
 
 			endif;
 
@@ -104,7 +105,7 @@ class ORGParticipantController extends \BaseController {
 		
 		else:
 
-			$company = Companies::find($id);
+			$company = ORGParticipants::find($id);
 
 			if(!$company):
 
@@ -135,7 +136,7 @@ class ORGParticipantController extends \BaseController {
 
 					if($validator->fails()):
 
-						return Redirect::to($this->route.'/update/'.$id)->with('msg_succes', Lang::get('messages.companies_update_err', array( 'title' => $company->title )));
+						return Redirect::to($this->route.'/update/'.$id)->with('msg_succes', Lang::get('messages.participants_update_err', array( 'title' => $company->title )));
 
 					else:
 
@@ -149,11 +150,11 @@ class ORGParticipantController extends \BaseController {
 
 				if($company->save()):
 
-					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.companies_update', array( 'title' => $company->title )));
+					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.participants_update', array( 'title' => $company->title )));
 
 				else:
 
-					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_update_err', array( 'title' => $company->title )));
+					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_update_err', array( 'title' => $company->title )));
 
 				endif;
 
@@ -167,21 +168,21 @@ class ORGParticipantController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_display_err'));
 		
 		else:
 
-			$company = Companies::find($id);
+			$company = ORGParticipants::find($id);
 
-			$publish = Companies::publish($id);
+			$publish = ORGParticipants::publish($id);
 
 			if(!$publish):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_publish_err', array( 'title' => $company->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_publish_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_publish', array( 'title' => $company->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.participants_publish', array( 'title' => $company->title )));
 
 			endif;
 
@@ -193,21 +194,21 @@ class ORGParticipantController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_display_err'));
 		
 		else:
 
-			$company = Companies::find($id);
+			$company = ORGParticipants::find($id);
 
-			$draft = Companies::draft($id);
+			$draft = ORGParticipants::draft($id);
 
 			if(!$draft):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_draft_err', array( 'title' => $company->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_draft_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_draft', array( 'title' => $company->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.participants_draft', array( 'title' => $company->title )));
 
 			endif;
 
@@ -219,31 +220,31 @@ class ORGParticipantController extends \BaseController {
 
 		if( $id == '' ):
 
-			$companies = Companies::getTrash();
+			$participants = ORGParticipants::getTrash();
 
 			$msg_success = Session::get('msg_success');
 
 			$msg_error = Session::get('msg_error');
 
-			return View::make('backend.companies.trash', array(
-				'companies' => $companies,
+			return View::make('backend.participants.trash', array(
+				'participants' => $participants,
 				'msg_success' => $msg_success,
 				'msg_error' => $msg_error
 				));
 		
 		else:
 
-			$company = Companies::find($id);
+			$company = ORGParticipants::find($id);
 
-			$trash = Companies::trash($id);
+			$trash = ORGParticipants::trash($id);
 
 			if(!$trash):
 
-				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_trash_err', array( 'title' => $company->title )));
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_trash_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_trash', array( 'title' => $company->title )));
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.participants_trash', array( 'title' => $company->title )));
 
 			endif;
 
@@ -255,21 +256,21 @@ class ORGParticipantController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_display_err'));
 		
 		else:
 
-			$company = Companies::find($id);
+			$company = ORGParticipants::find($id);
 
-			$draft = Companies::draft($id);
+			$draft = ORGParticipants::draft($id);
 
 			if(!$draft):
 
-				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.companies_untrash_err', array( 'title' => $company->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.participants_untrash_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.companies_untrash', array( 'title' => $company->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.participants_untrash', array( 'title' => $company->title )));
 
 			endif;
 
@@ -281,21 +282,21 @@ class ORGParticipantController extends \BaseController {
 
 		if( $id == '' ):
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_display_err'));
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.participants_display_err'));
 
 		else:
 
-			$company = Companies::find($id);
+			$company = ORGParticipants::find($id);
 
-			$delete = Companies::destroy($id);
+			$delete = ORGParticipants::destroy($id);
 
 			if(!$delete):
 
-				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.companies_delete_err', array( 'title' => $company->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_error', Lang::get('messages.participants_delete_err', array( 'title' => $company->title )));
 
 			else:
 
-				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.companies_delete', array( 'title' => $company->title )));
+				return Redirect::to($this->route.'/trash')->with('msg_success', Lang::get('messages.participants_delete', array( 'title' => $company->title )));
 
 			endif;
 

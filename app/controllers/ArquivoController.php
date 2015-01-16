@@ -191,8 +191,12 @@ class ArquivoController extends \BaseController {
 		$width=array("1000","1000","400","96");
 		$names = array("banner_","big_","medium_", "small_");
 		$name = strtolower(str_replace(".","_",str_replace($image->getClientOriginalExtension(), "", $image->getClientOriginalName())));
-		$filename = $name.date('YmdHis').rand(1000,1000*1000).".".$image->getClientOriginalExtension();
-		$nombres=[$filename];
+		$filename = $name.date('YmdHis').rand(1000,1000*1000);
+		if(strlen($filename) > 45 ):
+			$filename = substr($filename, 0, 45).".".$image->getClientOriginalExtension();
+		else:
+			$filename .= ".".$image->getClientOriginalExtension();
+		endif;
 
 		for ($i=0; $i <count($width) ; $i++):
 

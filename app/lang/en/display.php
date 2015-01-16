@@ -327,6 +327,8 @@ return array(
 
 	'file' => 'Arquivo',
 
+	'arquivos' => 'Arquivos',
+
 	/* --------------------------- */
 
 	'add_category' => 'Add Category',

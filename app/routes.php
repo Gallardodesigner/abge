@@ -30,8 +30,8 @@ if(Auth::check() && Auth::user()->type=="superadmin"):
 	Route::controller('/dashboard/news', 'NewsController');
 	Route::controller('/dashboard/arquivos', 'ArquivoController');
 	Route::controller('/dashboard/videos', 'VideoController');
-	Route::controller('/dashboard/org/participants', 'ORGParticipantController');
-	Route::controller('/dashboard/org/associates', 'ORGAssociateController');
+	Route::controller('/dashboard/clients/participants', 'ORGParticipantController');
+	Route::controller('/dashboard/clients/associates', 'ORGAssociateController');
 	Route::controller('/dashboard/teachers', 'TeacherController');
 	Route::controller('/dashboard/sections', 'SectionController');
 	Route::controller('/dashboard/companies', 'CompanyController');

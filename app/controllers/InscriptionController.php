@@ -26,6 +26,12 @@ class InscriptionController extends \BaseController {
 
 	}
 
+	public function getCreate( $idCourse ){
+
+		$course = Courses::find($idCourse);
+
+	}
+
 	public function getPaid( $idCourse, $id = '' ){
 
 		if( $id != '' ):
