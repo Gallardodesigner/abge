@@ -26,12 +26,6 @@ class InscriptionController extends \BaseController {
 
 	}
 
-	public function getCreate( $idCourse ){
-
-		$course = Courses::find($idCourse);
-
-	}
-
 	public function getPaid( $idCourse, $id = '' ){
 
 		if( $id != '' ):
@@ -149,6 +143,42 @@ class InscriptionController extends \BaseController {
 
 		return Redirect::to(self::parseRoute($idCourse));
 
+	}
+
+	public function getAddparticipant($idCourse){
+
+		$args = array(
+			'route' => self::parseRoute($idCourse),
+			'course' => Courses::find($idCourse),
+			'participants' => ORGParticipants::all()
+			);
+
+		return View::make('backend.inscriptions.addparticipant')->with($args);
+
+	}
+
+	public function postAddparticipant($idCourse){
+
+		
+
+	}
+
+	public function getAddassociate($idCourse){
+
+		$args = array(
+			'route' => self::parseRoute($idCourse),
+			'course' => Courses::find($idCourse),
+			'associates' => ORGAssociates::all()
+			);
+
+		return View::make('backend.inscriptions.addassociate')->with($args);
+
+	}
+
+	public function postAddAssociate($idCourse){
+
+		
+		
 	}
 
 	public static function parseRoute( $idCourse ){

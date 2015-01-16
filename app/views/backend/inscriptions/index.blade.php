@@ -94,7 +94,9 @@
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="{{ $parent }}" class="btn dropdown-toggle">{{ Lang::get('display.back') }}</a>
+                            <a href="{{ $route }}/addparticipant" class="btn">Add Participant</a>
+                            <a href="{{ $route }}/addassociate" class="btn">Add Associate</a>
+                            <a href="{{ $parent }}" class="btn">{{ Lang::get('display.back') }}</a>
                         </div>
                         <h4 class="widgettitle">{{Lang::get('display.all_inscriptions')}}</h4>
                     </div>
