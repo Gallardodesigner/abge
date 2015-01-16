@@ -136,8 +136,8 @@ Todos os Participantes
                                         <td>{{$participant->cpf}}</td>
                                         <td>{{$participant->telefone}}</td>
                                         <td class="center">
-                                            <a href="{{ $route }}/update/{{$participant->id_news}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
-                                            <a data-id="{{$participant->id_news}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
+                                            <a href="{{ $route }}/update/{{$participant->id_participante}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
+                                            <a data-id="{{$participant->id_participante}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
                                         </td>
                                     </tr>
                                 @endforeach
