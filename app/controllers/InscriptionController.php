@@ -147,9 +147,12 @@ class InscriptionController extends \BaseController {
 
 	public function getAddparticipant($idCourse){
 
+		$course = Courses::find($idCourse);
+			
 		$args = array(
 			'route' => self::parseRoute($idCourse),
-			'course' => Courses::find($idCourse),
+			'course' => $course,
+			'usertypes' => $course->usertypes,
 			'participants' => ORGParticipants::all()
 			);
 
@@ -159,15 +162,73 @@ class InscriptionController extends \BaseController {
 
 	public function postAddparticipant($idCourse){
 
-		
+		$course = Courses::find($idCourse);
+
+		$usertype = UserTypes::find(Input::get('usertype'));
+
+		$participant = ORGParticipants::find(Input::get('participante'));
+
+		if($participant->participant == null):
+
+			$user = new User();
+			$user->name = $participant->nome;
+			$user->email = $participant->email;
+			$user->type = 'participant';
+			$user->save();
+
+			$new_participant = new Participants();
+			$new_participant->participant = $participant->id_participante;
+			$new_participant->user = $user->id;
+			$new_participant->name = $participant->nome;
+			$new_participant->email = $participant->email;
+			$new_participant->cpf = $participant->cpf;
+			$new_participant->type = 'participant';
+			$new_participant->status = 'publish';
+			$new_participant->save();
+
+			$inscription = new Inscriptions();
+			$inscription->id_course = $course->id;
+			$inscription->id_user = $user->id;
+			$inscription->id_usertype = $usertype->id;
+			$inscription->save();
+
+		else:
+
+			$this_participant = $participant->participant;
+
+			if($this_participant->user == null):
+
+				$user = new User();
+				$user->name = $participant->nome;
+				$user->email = $participant->email;
+				$user->type = 'participant';
+				$user->save();
+
+				$this_participant->user = $user->id;
+				$this_participant->save();
+
+			endif;
+
+			$inscription = new Inscriptions();
+			$inscription->id_course = $course->id;
+			$inscription->id_user = $this_participant->user;
+			$inscription->id_usertype = $usertype->id;
+			$inscription->save();
+
+		endif;
+
+		return Redirect::to(self::parseRoute($idCourse));
 
 	}
 
 	public function getAddassociate($idCourse){
 
+		$course = Courses::find($idCourse);
+
 		$args = array(
 			'route' => self::parseRoute($idCourse),
-			'course' => Courses::find($idCourse),
+			'course' => $course,
+			'usertypes' => $course->usertypes,
 			'associates' => ORGAssociates::all()
 			);
 
@@ -175,10 +236,69 @@ class InscriptionController extends \BaseController {
 
 	}
 
-	public function postAddAssociate($idCourse){
+	public function postAddassociate($idCourse){
 
-		
-		
+		// dd(Input::get('usertype'));
+
+		$course = Courses::find($idCourse);
+
+		$usertype = UserTypes::find(Input::get('usertype'));
+
+		$associate = ORGAssociates::find(Input::get('associado'));
+
+		// dd($usertype);
+
+		if($associate->associate == null):
+
+			$user = new User();
+			$user->name = $associate->nombre_completo;
+			$user->email = $associate->email;
+			$user->type = 'associate';
+			$user->save();
+
+			$new_associate = new Associates();
+			$new_associate->associate = $associate->id_asociado;
+			$new_associate->user = $user->id;
+			$new_associate->name = $associate->nombre_completo;
+			$new_associate->email = $associate->email;
+			$new_associate->password = $associate->senha;
+			$new_associate->cpf = $associate->cpf;
+			$new_associate->type = 'associate';
+			$new_associate->save();
+
+			$inscription = new Inscriptions();
+			$inscription->id_course = $course->id;
+			$inscription->id_user = $user->id;
+			$inscription->id_usertype = $usertype->id;
+			$inscription->save();
+
+		else:
+
+			$this_associate = $associate->associate;
+
+			if($this_associate->user == null):
+
+				$user = new User();
+				$user->name = $associate->nombre_completo;
+				$user->email = $associate->email;
+				$user->type = 'associate';
+				$user->save();
+
+				$this_associate->user = $user->id;
+				$this_associate->save();
+
+			endif;
+
+			$inscription = new Inscriptions();
+			$inscription->id_course = $course->id;
+			$inscription->id_user = $this_associate->user;
+			$inscription->id_usertype = $usertype->id;
+			$inscription->save();
+
+		endif;
+
+		return Redirect::to(self::parseRoute($idCourse));
+
 	}
 
 	public static function parseRoute( $idCourse ){

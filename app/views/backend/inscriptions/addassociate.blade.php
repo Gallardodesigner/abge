@@ -67,6 +67,19 @@ Associados
 									</select>
 								</span>
 							</p>
+					    	<p>
+								<label>Tipo: </label>
+								<span class="field">
+									<select name="usertype" required>
+										<option value="0" selected>Selecione um tipo de inscrição</option>
+										@foreach($usertypes as $usertype)
+											@if($usertype->associate == 1)
+												<option value="{{$usertype->id}}">{{$usertype->title}}</option>
+											@endif
+										@endforeach
+									</select>
+								</span>
+							</p>
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn">Reset</button>
