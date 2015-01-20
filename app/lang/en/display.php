@@ -327,6 +327,8 @@ return array(
 
 	'file' => 'Arquivo',
 
+	'arquivos' => 'Arquivos',
+
 	/* --------------------------- */
 
 	'add_category' => 'Add Category',
@@ -337,13 +339,21 @@ return array(
 
 	'trashed_categories' => 'All Categories Trashed',
 
-	'add_arquivo' => 'Añadir Arquivo',
+	'add_video' => 'Adicionar Video',
+
+	'edit_video' => 'Editar Video',
+
+	'all_videos' => 'Todos os Videos',
+
+	'trashed_videos' => 'Todos os Videos Excluidos',
+
+	'add_arquivo' => 'Adicionar Arquivo',
 
 	'edit_arquivo' => 'Editar Arquivo',
 
 	'all_arquivos' => 'Todos os Arquivos',
 
-	'trashed_arquivos' => 'Todos os Arquivos Trashed',
+	'trashed_arquivos' => 'Todos os Arquivos Excluidos',
 
 	'add_new' => 'Add News',
 

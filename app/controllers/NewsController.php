@@ -36,7 +36,8 @@ class NewsController extends \BaseController {
 		$validator = Validator::make(
 			array(
 				'image' => $image,
-				'image_principal' => $image_principal				), 
+				'image_principal' => $image_principal				
+				), 
 			array(
 				'image' => 'mimes:png,jpeg,gif',
 				'image_principal' => 'mimes:png,jpeg,gif'
@@ -52,12 +53,16 @@ class NewsController extends \BaseController {
 
 		else:
 
-			if($image!="" AND $image_principal!=""):
+			if($image!=""):
 				$image = $this->uploadHeader($image);
+			else:
+				$image = $news->image;
+			endif;
+
+			if($image_principal!=""):
 				$image_principal = $this->uploadHeader($image_principal);
 			else:
-				$image = "";
-				$image_principal = "";
+				$image_principal = $news->image_principal;
 			endif;
 
 			$news = new SFNews();
@@ -109,7 +114,8 @@ class NewsController extends \BaseController {
 		$validator = Validator::make(
 			array(
 				'image' => $image,
-				'image_principal' => $image_principal				), 
+				'image_principal' => $image_principal				
+				), 
 			array(
 				'image' => 'mimes:png,jpeg,gif',
 				'image_principal' => 'mimes:png,jpeg,gif'
@@ -125,11 +131,15 @@ class NewsController extends \BaseController {
 
 		else:
 
-			if($image!="" AND $image_principal!=""):
+			if($image!=""):
 				$image = $this->uploadHeader($image);
-				$image_principal = $this->uploadHeader($image_principal);
 			else:
 				$image = $news->image;
+			endif;
+
+			if($image_principal!=""):
+				$image_principal = $this->uploadHeader($image_principal);
+			else:
 				$image_principal = $news->image_principal;
 			endif;
 
@@ -182,21 +192,67 @@ class NewsController extends \BaseController {
 
 	}
 
-	public function uploadHeader($image){
+	public function getArquivos( $id ){
 
+		$args = array(
+			'news' => SFNews::find($id),
+			'arquivos' => SFArquivos::all(),
+			'route' => $this->route
+			);
+
+		return View::make('backend.news.arquivos')->with($args);
+
+	}
+
+	public function postArquivos( $id ){
+
+		$news = SFNews::find($id);
+
+		$news->arquivos()->sync(Input::get('arquivos'));
+
+		return Redirect::to($this->route);
+	}
+
+	public function getVideos( $id ){
+
+		$args = array(
+			'news' => SFNews::find($id),
+			'videos' => SFVideos::all(),
+			'route' => $this->route
+			);
+
+		return View::make('backend.news.videos')->with($args);
+
+	}
+
+	public function postVideos( $id ){
+
+		$news = SFNews::find($id);
+
+		$news->videos()->sync(Input::get('videos'));
+
+		return Redirect::to($this->route);
+		
+	}
+
+	public function uploadHeader($image){
 		$info_image = getimagesize($image);
 		$ratio = $info_image[0] / $info_image[1];
 		$height=array("300","300","195","72");
 		$width=array("1000","1000","400","96");
 		$names = array("banner_","big_","medium_", "small_");
 		$name = strtolower(str_replace(".","_",str_replace($image->getClientOriginalExtension(), "", $image->getClientOriginalName())));
-		$filename = $name.date('YmdHis').rand(1000,1000*1000).".".$image->getClientOriginalExtension();
-		$nombres=[$filename];
-
+		$filename = $name.date('YmdHis').rand(1000,1000*1000);
+		if(strlen($filename) > 45 ):
+			$filename = substr($filename, 0, 45).".".$image->getClientOriginalExtension();
+		else:
+			$filename .= ".".$image->getClientOriginalExtension();
+		endif;
 		for ($i=0; $i <count($width) ; $i++):
 
 			$path = public_path('uploads/news/'.$names[$i].$filename);
 			// Image::make($image->getRealPath())->resize($width[$i],$height[$i],function ($constraint) {$constraint->aspectRatio();})->save($path);
+			// dd($path);
 			Image::make($image->getRealPath())->resize($width[$i],$height[$i])->save($path);
 		
 		endfor;

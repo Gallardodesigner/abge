@@ -27,7 +27,7 @@
 @stop
 
 @section("title")
-{{ Lang::get('titles.videos') }}
+Participantes
 @stop
 
 @section("iconpage")
@@ -35,11 +35,11 @@
 @stop
 
 @section("maintitle")
-{{ Lang::get('titles.videos') }}
+Participantes
 @stop
 
 @section("nameview")
-    {{ Lang::get('display.add_video') }}
+    Inscrever Participante
 @stop
 
 @section("MainContent")
@@ -50,20 +50,36 @@
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="{{ $route }}" class="btn dropdown-toggle">Back</a>
+                        <a href="{{ $route }}" class="btn dropdown-toggle">Atrás</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">{{ Lang::get('display.add_video') }}</h4>
+                <h4 class="widgettitle">Inscrever Participante</h4>
                 <div class="widgetcontent">
-                    <form class="stdform stdform2" method="post" enctype="multipart/form-data">
-                            <p>
-                                <label>Titulo de Video</label>
-                                <span class="field"><input type="text" name="titulo_video" id="title" class="input-xxlarge"></span>
-                            </p>  
-                            <p>
-                                <label>Embed Video Youtube</label>
-                                <span class="field"><input type="text" name="url_video" class="input-xxlarge"></span></span>
-                            </p>
+                    <form class="stdform stdform2" id="register-form" method="post" enctype="multipart/form-data">
+					    	<p>
+								<label>Participantes: </label>
+								<span class="field">
+									<select name="participante" required>
+										<option value="0" selected>Selecione um participante</option>
+										@foreach($participants as $participant)
+											<option value="{{$participant->id_participante}}">{{$participant->nome}}</option>
+										@endforeach
+									</select>
+								</span>
+							</p>
+					    	<p>
+								<label>Tipo: </label>
+								<span class="field">
+									<select name="usertype" required>
+										<option value="0" selected>Selecione um tipo de inscrição</option>
+										@foreach($usertypes as $usertype)
+											@if($usertype->associate == 0)
+												<option value="{{$usertype->id}}">{{$usertype->title}}</option>
+											@endif
+										@endforeach
+									</select>
+								</span>
+							</p>
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn">Reset</button>

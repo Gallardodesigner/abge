@@ -13,6 +13,7 @@ class AssociateController extends \BaseController {
 		$msg_error = Session::get('msg_error');
 
 		return View::make('backend.associates.index', array(
+			'route' => $this->route,
 			'associates' => $associates,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error

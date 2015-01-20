@@ -138,9 +138,9 @@
                                         <td class="center">
                                             <a href="{{ $route }}/update/{{$new->id_news}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
                                             <a data-id="{{$new->id_news}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
-                                            <a href="{{ $route }}/files/{{$new->id_news}}" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.files')}}</a>
-                                            <a href="{{ $route }}/album/{{$new->id_news}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-picture" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.albums')}}</a>
-                                            <a href="{{ $route }}/video/{{$new->id_news}}" class="btn btn-inverse alertwarning" style="color:#FFF !important;"><i class="iconfa-facetime-video" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.videos')}}</a>
+                                            <a href="{{ $route }}/arquivos/{{$new->id_news}}" class="btn btn-info alertwarning" style="color:#FFF !important;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.arquivos')}}</a>
+                                            <a href="{{ $route }}/albums/{{$new->id_news}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-picture" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.albums')}}</a>
+                                            <a href="{{ $route }}/videos/{{$new->id_news}}" class="btn btn-inverse alertwarning" style="color:#FFF !important;"><i class="iconfa-facetime-video" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.videos')}}</a>
                                         </td>
                                     </tr>
                                 @endforeach

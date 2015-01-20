@@ -183,6 +183,21 @@
             <ul class="nav nav-tabs nav-stacked">
             	<li class="nav-header">{{ Lang::get('nav.navigation') }}</li>
                 <li class="{{ (Request::is('dashboard') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard') }}"><span class="iconfa-laptop"></span> {{ Lang::get('nav.dashboard') }}</a></li>
+                <li class="dropdown {{ (Request::is('dashboard/clients') ? 'active' : '') }}{{ (Request::is('dashboard/clients/*') ? 'active' : '') }}"><a href=""><span class="iconfa-group"></span>Clientes</a>
+                    <ul {{ (Request::is('dashboard/clients') ? 'style="display: block"' : '') }}{{ (Request::is('dashboard/clients/*') ? 'style="display: block"' : '') }}>
+                        <li class="dropdown"><a href="">Associados</a>
+                        <ul>
+                            <li><a href="{{{ URL::to('/dashboard/clients/associates') }}}">Tudo</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/clients/associates/create') }}}">Adicionar</a></li>
+                        </ul>
+                        <li class="dropdown"><a href="">Participantes</a>
+                        <ul>
+                             <li><a href="{{{ URL::to('/dashboard/clients/participants') }}}">Tudo</a></li>
+                            <li><a href="{{{ URL::to('/dashboard/clients/participants/create') }}}">Adicionar</a></li>
+                        </ul>
+                     </li>
+                    </ul>
+                </li>
                 <li class="dropdown {{ (Request::is('dashboard/courses') ? 'active' : '') }}{{ (Request::is('dashboard/courses/*') ? 'active' : '') }}"><a href=""><span class="iconfa-book"></span>{{ Lang::get('nav.courses') }}</a>
                     <ul {{ (Request::is('dashboard/courses') ? 'style="display: block"' : '') }}{{ (Request::is('dashboard/courses/*') ? 'style="display: block"' : '') }}>
                         <li class="dropdown"><a href="">{{ Lang::get('nav.course') }}</a>
@@ -226,7 +241,7 @@
                 </li>
                 <li class="{{ (Request::is('dashboard/news') ? 'active' : '') }}{{ (Request::is('dashboard/news/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/news/') }}"><span class="iconfa-comments-alt"></span> {{ Lang::get('nav.news') }}</a></li>
                 <li class="{{ (Request::is('dashboard/arquivos') ? 'active' : '') }}{{ (Request::is('dashboard/arquivos/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/arquivos/') }}"><span class="iconfa-file"></span> {{ Lang::get('nav.arquivos') }}</a></li>
-                <li class="{{ (Request::is('dashboard/videos') ? 'active' : '') }}{{ (Request::is('dashboard/videos/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/videos/') }}"><span class="iconfa-file"></span> {{ Lang::get('nav.videos') }}</a></li>
+                <li class="{{ (Request::is('dashboard/videos') ? 'active' : '') }}{{ (Request::is('dashboard/videos/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/videos/') }}"><span class="iconfa-facetime-video"></span> {{ Lang::get('nav.videos') }}</a></li>
             </ul>
         </div><!--leftmenu-->
         

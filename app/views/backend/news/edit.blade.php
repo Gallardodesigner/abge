@@ -56,7 +56,7 @@
                     </div>
                 <h4 class="widgettitle">{{ Lang::get('display.edit_new') }}</h4>
                 <div class="widgetcontent">
-                    <form class="stdform stdform2" method="post">
+                    <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
                                 <label>{{ Lang::get('display.category') }}</label>
                                 <span class="field">

@@ -58,7 +58,8 @@ return array(
 	'news' => 'News',
 
 	'arquivos' => 'Arquivos',
-	
+
+	'videos' => 'Videos',
 	
 
 );
