@@ -96,7 +96,7 @@ class AuthenticationController extends \BaseController {
 					'inscription' => $inscription
 					);
 
-				if($inscription->paid()):
+				if($inscription->paid):
 					return Redirect::to($inscription->course->route.'/pago')->with( $array );
 				else:
 					return Redirect::to($inscription->course->route.'/acesso')->with( $array );
@@ -426,7 +426,7 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 				
-					if($inscription->paid()):
+					if($inscription->paid):
 						return Redirect::to($inscription->course->route.'/pago')->with( $array );
 					else:
 						return Redirect::to($inscription->course->route.'/acesso')->with( $array );
