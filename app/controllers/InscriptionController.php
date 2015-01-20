@@ -307,4 +307,74 @@ class InscriptionController extends \BaseController {
 
 	}
 
+	public function getExportinscriptions($idCourse){
+		$course = Courses::find($idCourse);
+
+		$inscriptions = $course->inscriptions;
+
+		    // foreach($inscriptions as $inscription):
+		    // 	// $total["name"] = $inscription->user->name;
+		    // 	// $total["email"] = $inscription->user->email;
+		    // 	// $total["paid"] = $inscription->paid;
+		    // 	// $total["date"] = date_format(date_create($inscription->created_at), 'd-m-Y');
+		    // 	// $total["type"] = $inscription->usertype->title;
+		    // 	$total= ["nome" => $inscription->user->name,
+		    // 			 "email" => $inscription->user->email,
+		    // 			 "paid" => $inscription->paid,
+		    // 			 "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
+		    // 			 "type" => $inscription->usertype->title
+		    // 			 ];
+		    // 	// break;
+		    // 	// array_push($total,$inscription->user->name,$inscription->user->email);
+		    // endforeach;
+		        // dd($inscriptions);
+
+		Excel::create('Export Inscriptions '. $course->title ."-". rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($inscriptions){
+
+		    $excel->sheet('Excel sheet', function($sheet) use ($inscriptions){
+				
+		        $sheet->setOrientation('portrait');
+		    $n=2;
+		    $sheet->appendRow(1,array("Nome","Email","Pagamento", "Fecha", "User Type" ));
+			// $inscriptions = $inscriptions;
+			foreach($inscriptions as $inscription):
+		    	// $total["name"] = $inscription->user->name;
+		    	// $total["email"] = $inscription->user->email;
+		    	// $total["paid"] = $inscription->paid;
+		    	// $total["date"] = date_format(date_create($inscription->created_at), 'd-m-Y');
+		    	// $total["type"] = $inscription->usertype->title;
+		    	if($inscription->paid == 0):
+		    		$paid="Não";
+		    	else:
+		    		$paid="Sim";
+		    	endif;
+		    	$total= ["nome" => $inscription->user->name,
+		    			 "email" => $inscription->user->email,
+		    			 "paid" => $paid,
+		    			 "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
+		    			 "type" => $inscription->usertype->title
+		    			 ];
+		        	$sheet->appendRow($n,$total);
+
+		    	// break;
+		        	$n++;
+		    	// array_push($total,$inscription->user->name,$inscription->user->email);
+		    endforeach;
+
+		    });
+
+		})->export('xlsx');
+		// Excel::create('Export Inscriptions '. $course->title ."-". rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($total){
+
+		//     $excel->sheet('Excel sheet', function($sheet) use ($total){
+				
+		//         $sheet->setOrientation('portrait');
+		//         	// dd($total);
+		//         	$sheet->fromArray($total, null, 'A1', true);
+
+		//     });
+
+		// })->export('xlsx');
+	}
+
 }

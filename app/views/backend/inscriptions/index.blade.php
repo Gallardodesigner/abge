@@ -96,6 +96,7 @@
                         <div class="btn-group">
                             <a href="{{ $route }}/addparticipant" class="btn">Add Participant</a>
                             <a href="{{ $route }}/addassociate" class="btn">Add Associate</a>
+                            <a href="{{ $route }}/exportinscriptions" class="btn"><i class="iconsweets-excel"></i>Excel</a>
                             <a href="{{ $parent }}" class="btn">{{ Lang::get('display.back') }}</a>
                         </div>
                         <h4 class="widgettitle">{{Lang::get('display.all_inscriptions')}}</h4>
