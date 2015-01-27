@@ -350,6 +350,7 @@
                                                 </select>
                                             @endif
                                         </span>
+                                    </p>
                                     <p>
                                         <label>Event</label>
                                         <span class="field">
@@ -360,6 +361,16 @@
                                                 @endforeach
                                                 </select>
                                             @endif
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <label>Payment</label>
+                                        <span class="field">
+                                            <select class="chosen-select" name="type" >
+                                                <option value="pago">Pago</option>
+                                                <option value="gratuito">Gratuito</option>
+                                                <option value="pagseguro">PagSeguro</option>
+                                            </select>
                                         </span>
                                     </p>
                                 </div>

@@ -307,4 +307,296 @@ class InscriptionController extends \BaseController {
 
 	}
 
+	public function getExportinscriptions($idCourse){
+		$course = Courses::find($idCourse);
+
+		$inscriptions = $course->inscriptions;
+		$users = array();
+
+
+		$trainings = ORGTrainings::all();
+		$states = ORGStates::all();
+		
+		$towns = ORGTowns::all();
+
+		foreach ($inscriptions as $ins) {
+			# code...
+			// var_dump($ins->id);
+			if ($ins->user->type =="associate"):
+				// var_dump($ins->user->id);
+				// var_dump($ins->user->type);
+				$tempuser=Associates::where('user', '=', $ins->user->id)->take(1)->get();
+				$users[$ins->id]=$tempuser[0]->asociado;
+			elseif($ins->user->type =="participant"):
+				$tempuser=Participants::where('user', '=', $ins->user->id)->take(1)->get();
+				$users[$ins->id]=$tempuser[0]->participante;
+			endif;
+		}
+		    // foreach($inscriptions as $inscription):
+		    // 	// $total["name"] = $inscription->user->name;
+		    // 	// $total["email"] = $inscription->user->email;
+		    // 	// $total["paid"] = $inscription->paid;
+		    // 	// $total["date"] = date_format(date_create($inscription->created_at), 'd-m-Y');
+		    // 	// $total["type"] = $inscription->usertype->title;
+		    // 	$total= ["nome" => $inscription->user->name,
+		    // 			 "email" => $inscription->user->email,
+		    // 			 "paid" => $inscription->paid,
+		    // 			 "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
+		    // 			 "type" => $inscription->usertype->title
+		    // 			 ];
+		    // 	// break;
+		    // 	// array_push($total,$inscription->user->name,$inscription->user->email);
+		    // endforeach;
+		        // dd($inscriptions);
+
+		Excel::create('Export Inscriptions '. $course->title ."-". rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($inscriptions, $users){
+
+		    $excel->sheet('Excel sheet', function($sheet) use ($inscriptions, $users){
+				
+		        $sheet->setOrientation('portrait');
+		    $n=2;
+
+		    // $sheet->appendRow(1,array("Codigo Asociado","Nome","RG","Email", "Telefone", "Celular", "CPF", "Tipo Pessoa","Pagamento", "Fecha", "User Type", "Endereço", "Complemento", "CEP", "Cidade", "Estado", "Empresa", "Endereço Empresa", "Complemento Empresa", "Telefone Empresa", "CNPJ", "Cargo" ));
+			// $inscriptions = $inscriptions;
+			foreach($inscriptions as $inscription):
+		    	// $total["name"] = $inscription->user->name;
+		    	// $total["email"] = $inscription->user->email;
+		    	// $total["paid"] = $inscription->paid;
+		    	// $total["date"] = date_format(date_create($inscription->created_at), 'd-m-Y');
+		    	// $total["type"] = $inscription->usertype->title;
+		    	if($inscription->paid == 0):
+		    		$paid="Não";
+		    	else:
+		    		$paid="Sim";
+		    	endif;
+
+		    	if($inscription->user->type == 'associate'):
+		    		$cod_aso = $users[$inscription->id]->codigo_asoc;
+		    		$nome = $users[$inscription->id]->nombre_completo;
+		    		$rg = "";
+		    		//No agregados
+		    		$incripcion_estadual = $users[$inscription->id]->inscripcion_estadual;
+		    		$incripcion_municipal = $users[$inscription->id]->inscripcion_municipal;
+		    		$data_nascimento = $users[$inscription->id]->data_nascimento;
+		    		$training = ORGTrainings::find($users[$inscription->id]->formacao);
+		    			if($training):
+		    				$training = $training->nome;
+		    			else:
+		    				$training = "";
+		    			endif;
+		    		$categoria_titulo = ORGAssociateCategories::all();
+			    		foreach($categoria_titulo as $cat):
+	                        if($users[$inscription->id]->categoria == $cat->id_categoria_asociado):
+	                            $categoria_titulo = $cat->nombre_categoria;
+	                            break;
+	                        endif;
+	                    endforeach;
+	                $logradouro_res ="";
+	                $backyards = ORGBackyards::all();
+			    		foreach($backyards as $backyard):
+	                        if($users[$inscription->id]->logradouro_res == $backyard->id_logradouro):
+	                            $logradouro_res=$backyard->nombre;
+	                        break;
+	                        endif;
+	                    endforeach;
+	                $logradouro_com ="";
+			    		foreach($backyards as $backyard):
+	                        if($users[$inscription->id]->logradouro_com == $backyard->id_logradouro):
+	                            $logradouro_res=$backyard->nombre;
+	                        break;
+	                        endif;
+	                    endforeach;
+
+	                $barrio_res = $users[$inscription->id]->bairro_res;
+	                $barrio_com = $users[$inscription->id]->bairro_com;
+		    		$pasaporte =  $users[$inscription->id]->passaporte;
+		    		$website =  $users[$inscription->id]->web_site;
+		    		$responsable =  $users[$inscription->id]->responsavel;
+		    		$publicaciones =  $users[$inscription->id]->publicacoes;
+		    		$nombre_cientifico =  $users[$inscription->id]->nome_cientifico;
+		    		//Fin de no agregados
+		    		//Campos participants no agregados
+
+		    		$cidade_empresa = "";
+		    		$estado_empresa = "";
+		    		$cep_empresa =  "";
+		    		$state = "";
+		    			
+		    		//Fin de campos participants no agregados
+		    		$cpf = $users[$inscription->id]->cpf;
+		    		$razon_social = $users[$inscription->id]->razon_social;
+		    		$celular = $users[$inscription->id]->celular_res;
+		    		$tipo_pessoa = $users[$inscription->id]->tipo_pessoa;
+		    		$data_nascimento = $users[$inscription->id]->data_nascimento;
+		    		$email = $users[$inscription->id]->email;
+		    		$data_cadastro = $users[$inscription->id]->data_cadastro;
+		    		$empresa = $users[$inscription->id]->empresa;
+		    		$empresa_dir = $users[$inscription->id]->dir_com;
+		    		$empresa_com = $users[$inscription->id]->complemento_com;
+		    		$empresa_tel = $users[$inscription->id]->ddd_com . ' ' . $users[$inscription->id]->ddi_com . ' ' . $users[$inscription->id]->telefone_com;
+		    		$cnpj = $users[$inscription->id]->cnpj;
+		    		$cargo = $users[$inscription->id]->cargo;
+		    		$dir = $users[$inscription->id]->dir_res;
+		    		$cep = $users[$inscription->id]->cep_res;
+		    		$complemento = $users[$inscription->id]->complemento_res;
+		    		$telefone = $users[$inscription->id]->ddd_res . ' ' . $users[$inscription->id]->ddi_res . ' ' . $users[$inscription->id]->telefone_res;
+ 		    		$estado = '';
+		    		$cidade = '';
+		    	elseif($inscription->user->type == 'participant'):
+		    		$cod_aso = "";
+		    		$nome = $users[$inscription->id]->nome;
+		    		// Campos de asociados obligatorio
+		    		$incripcion_estadual = "";
+		    		$incripcion_municipal = "";
+		    		$data_nascimento = "";
+		    		$training = "";
+		    		$categoria_titulo = "";
+	                $logradouro_res ="";
+	                $logradouro_com ="";
+	                $barrio_res = "";
+	                $barrio_com = "";
+		    		$pasaporte =  "";
+		    		$website =  "";
+		    		$responsable =  "";
+		    		$publicaciones =  "";
+		    		$nombre_cientifico =  "";
+		    		//fin de campos asociados obligatorios
+
+		    		//Campos participants no agregados
+
+		    		$cidade_empresa = $users[$inscription->id]->cidade_empresa;
+		    		$estado_empresa = $users[$inscription->id]->estado_empresa;
+		    		$cep_empresa =  $users[$inscription->id]->cep_empresa;
+
+		    		$state = ORGStates::all();
+		    			foreach($state as $sta):
+		    				if($users[$inscription->id]->estado==$sta->name_estado):
+		    					$state=$sta->name_estado;
+		    					break;
+		    				endif;
+		    			endforeach;
+		    			
+		    		//Fin de campos participants no agregados
+		    		$cpf = $users[$inscription->id]->cpf;
+		    		$rg = $users[$inscription->id]->rg;
+		    		$razon_social = '';
+		    		$celular = $users[$inscription->id]->celular ;
+		    		$tipo_pessoa = 'F';
+		    		$data_nascimento = $users[$inscription->id]->data_nascimento;
+		    		$email = $users[$inscription->id]->email;
+		    		$data_cadastro = $users[$inscription->id]->data_cadastro;
+		    		$empresa = $users[$inscription->id]->empresa;
+		    		$empresa_dir = $users[$inscription->id]->endereco_empresa;
+		    		$empresa_com = $users[$inscription->id]->complemento_empresa;
+		    		$empresa_tel = "";
+		    		$cnpj = $users[$inscription->id]->cnpj;
+		    		$cargo = "";
+		    		$dir = $users[$inscription->id]->dir_res;
+		    		$cep = $users[$inscription->id]->cep;
+		    		$complemento = $users[$inscription->id]->complemento;
+		    		$telefone = $users[$inscription->id]->telefone;
+		    		$estado = $state;
+		    		$cidade = $users[$inscription->id]->cidade;
+		    	endif;
+		    $sheet->appendRow(1,array("Codigo Asociado",
+		    						  "Nome",
+		    						  "RG",
+		    						  "Email",
+		    						  "Telefone",
+		    						  "Celular",
+		    						  "CPF",
+		    						  "Tipo Pessoa",
+		    						  "Pagamento",
+		    						  "Fecha",
+		    						  "User Type",
+		    						  "Inscription estadual",
+		    						  "Inscription municipal",
+		    						  "Data Nascimento",
+		    						  "Training",
+		    						  "Category Title",
+		    						  "Logradouro Residencia",
+		    						  "Endereço",
+		    						  "Complemento",
+		    						  "Barrio Res",
+		    						  "CEP",
+		    						  "Cidade",
+		    						  "Estado",
+		    						  "Empresa",
+		    						  "Logradouro Empresa",
+		    						  "Endereço Empresa",
+		    						  "Cidade Empresa",
+		    						  "Estado Empresa",
+		    						  "CEP Empresa",
+		    						  "Complemento Empresa",
+		    						  "Barrio Empresa",
+		    						  "Telefone Empresa",
+		    						  "CNPJ",
+		    						  "Cargo",
+		    						  "Pasaporte",
+		    						  "Website",
+		    						  "Responsavel",
+		    						  "Nome Cientifico",
+		    						  "Publicacoes" ));
+
+		    	$total= ["codigo"=>$cod_aso,
+		    			 "nome" => $nome,
+		    			 "rg" => $rg,  
+		    			 "email" => $email,
+		    			 "telefone" => $telefone,
+		    			 "celular" => $celular,
+		    			 "cpf" => $cpf,
+		    			 "tipo_pessoa" => $tipo_pessoa,
+		    			 "paid" => $paid,
+		    			 "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
+		    			 "type" => $inscription->usertype->title,
+		    			 "inscription_est" => $incripcion_estadual,
+		    			 "incripcion_municipal" => $incripcion_municipal,
+		    			 "data_nascimento" => $data_nascimento,
+		    			 "training" => $training,
+		    			 "categoria_titulo" => $categoria_titulo,
+		    			 "logradouro_res" => $logradouro_res, 
+		    			 "dir" => $dir,
+		    			 "complemento" => $complemento,
+		    			 "barrio_res" => $barrio_res,
+		    			 "cep" => $cep,
+		    			 "cidade" => $cidade,
+		    			 "estado" => $estado,
+		    			 "empresa" => $empresa,
+		    			 "logradouro_com" => $logradouro_com,
+		    			 "empresa_dir" => $empresa_dir,
+		    			 "cep_empresa" => $cep_empresa,
+		    			 "empresa_com" => $empresa_com,
+		    			 "barrio_com" => $barrio_com,
+		    			 "empresa_tel" => $empresa_tel,
+		    			 "cnpj" => $cnpj,
+		    			 "cargo" => $cargo,
+		    			 "pasaporte" => $pasaporte,
+		    			 "website" => $website,
+		    			 "responsable" => $responsable,
+		    			 "nome_cientifico" => $nombre_cientifico,
+		    			 "publicaciones" => $publicaciones
+		    			 ];
+		        	$sheet->appendRow($n,$total);
+
+		    	// break;
+		        	$n++;
+		    	// array_push($total,$inscription->user->name,$inscription->user->email);
+		    endforeach;
+
+		    });
+
+		})->export('xlsx');
+		// Excel::create('Export Inscriptions '. $course->title ."-". rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($total){
+
+		//     $excel->sheet('Excel sheet', function($sheet) use ($total){
+				
+		//         $sheet->setOrientation('portrait');
+		//         	// dd($total);
+		//         	$sheet->fromArray($total, null, 'A1', true);
+
+		//     });
+
+		// })->export('xlsx');
+	}
+
 }

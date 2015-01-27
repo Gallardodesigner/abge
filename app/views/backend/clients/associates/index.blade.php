@@ -137,7 +137,7 @@ Todos os Associados
                                         <td>{{$associate->tipo_pessoa}}</td>
                                         <td class="center">
                                             <a href="{{ $route }}/update/{{$associate->id_asociado}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
-                                            <a data-id="{{$associate->id_asociado}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a>
+                                            <!-- <a data-id="{{$associate->id_asociado}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a> -->
                                         </td>
                                     </tr>
                                 @endforeach
