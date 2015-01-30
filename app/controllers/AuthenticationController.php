@@ -118,7 +118,7 @@ class AuthenticationController extends \BaseController {
 
 				return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
-			endif;
+			/*endif;*/
 
 		else:
 
@@ -234,7 +234,7 @@ class AuthenticationController extends \BaseController {
 									'inscription' => $inscription
 									);
 
-								return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
+								return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 							else:
 
@@ -248,7 +248,7 @@ class AuthenticationController extends \BaseController {
 									'inscription' => $inscription
 									);
 
-								return Redirect::to('/autenticacao/trabalhoactualizacaoassociado')->with( $array );
+								return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 							endif;
 
@@ -418,7 +418,9 @@ class AuthenticationController extends \BaseController {
 
 				Auth::login($user);
 
-				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+				/*if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+
+					dd("hasInscription");
 
 					$array = array(
 						'msg_success' => Lang::get('messages.login_welcome'),
@@ -434,7 +436,7 @@ class AuthenticationController extends \BaseController {
 
 					// return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
-				else:
+				else:*/
 
 					$inscription = new Inscriptions();
 					$inscription->id_course = $course->id;
@@ -445,12 +447,13 @@ class AuthenticationController extends \BaseController {
 					$array = array(
 						'msg_success' => Lang::get('messages.login_welcome'),
 						'usertype' => $usertype,
-						'inscription' => $inscription
+						'inscription' => $inscription,
+						'participant' => $participant
 						);
 
 					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
-				endif;
+				/*endif;*/
 
 			else:
 
