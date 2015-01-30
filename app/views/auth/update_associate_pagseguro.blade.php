@@ -105,16 +105,16 @@
 		<div class="titulo_empresa"><h3>Informações de Empresa</h3></div>
 		<br>-->
 		<div class="control-box">
-			<label>Telefone: </label>
-			<input type="text" name="ddi_res" value="{{ $participant->ddi_res }}" placeholder="DDI"/>
-			<input type="text" name="ddd_res" value="{{ $participant->ddd_res }}" placeholder="DDD"/>
-			<input type="text" name="telefone_res" value="{{ $participant->telefone_res }}" placeholder="NUMERO"/>
+			<label style="margin-right:86px">Telefone: </label>
+			<input type="text" name="ddi_res" value="{{ $participant->ddi_res }}" placeholder="DDI" style="display:inline-block;width:80px;float:none !important;"/>
+			<input type="text" name="ddd_res" value="{{ $participant->ddd_res }}" placeholder="DDD" style="display:inline-block;width:80px;float:none !important;"/>
+			<input type="text" name="telefone_res" value="{{ $participant->telefone_res }}" placeholder="NUMERO" style="display:inline-block;width:150px;float:none !important;"/>
 		</div>
-		<div class="control-box">
-			<label>Celular: </label>
-			<input type="text" name="ddi_cel_res" value="{{ $participant->ddi_cel_res }}" placeholder="DDI"/>
-			<input type="text" name="ddd_cel_res" value="{{ $participant->ddd_cel_res }}" placeholder="DDD"/>
-			<input type="text" name="celular_res" value="{{ $participant->celular_res }}" placeholder="NUMERO"/>
+		<div class="control-box" style="text-align:left">
+			<label style="margin-right:95px">Celular: </label>
+			<input type="text" name="ddi_cel_res" value="{{ $participant->ddi_cel_res }}" placeholder="DDI" style="display:inline-block;width:80px;float:none !important;"/>
+			<input type="text" name="ddd_cel_res" value="{{ $participant->ddd_cel_res }}" placeholder="DDD" style="display:inline-block;width:80px;float:none !important;"/>
+			<input type="text" name="celular_res" value="{{ $participant->celular_res }}" placeholder="NUMERO" style="display:inline-block;width:150px;float:none !important;"/>
 		</div>
 		<div class="control-box">
 			<label>Email: </label>

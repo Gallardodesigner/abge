@@ -58,7 +58,7 @@
 				<select name="estado" required>
 					<option value="0" selected>Selecione um estado</option>
 					@foreach($estados as $state)
-						<option value="{{$state->id_estado}}">{{$state->name_estado}}</option>
+						<option value="{{$state->name_estado}}">{{$state->name_estado}}</option>
 					@endforeach
 				</select>
 		</div>
@@ -86,7 +86,8 @@
 			$('#register-form').bind('submit', function(e){
 				e.preventDefault();
 				if($('select[name=estado]').val() == 0){
-					alert($('select[name=estado]').val());//alert('Deve selecionar um estado');
+					// alert($('select[name=estado]').val());
+					alert('Deve selecionar um estado');
 					$('select[name=estado]').focus();
 					return false;
 				}
