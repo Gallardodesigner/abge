@@ -120,6 +120,7 @@ class CourseController extends \BaseController {
 		$course->category_id = Input::get('category_id');
 		$course->company_id = Input::get('company_id');
 		$course->event_id = Input::get('event_id');
+		$course->type = Input::get('type');
 		$course->route = Input::get('route');
 		$course->min = Input::get('min');
 		$course->max = Input::get('max');
@@ -222,6 +223,7 @@ class CourseController extends \BaseController {
 		$course->company_id = Input::get('company_id');
 		$course->event_id = Input::get('event_id');
 		$course->route = Input::get('route');
+		$course->type = Input::get('type');
 		$course->min = Input::get('min');
 		$course->max = Input::get('max');
 		$course->min_message = Input::get('min_message');

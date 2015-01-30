@@ -304,7 +304,7 @@ Courses
                                 
 
                                 <div id="wiz1step1" class="formwiz">
-                                <h4 class="widgettitle">Step 1: Basic Information</h4>
+                                    <h4 class="widgettitle">Step 1: Basic Information</h4>
                                 
                                     <p>
                                         <label>Title</label>
@@ -315,7 +315,7 @@ Courses
                                         <label>Description</label>
                                         <span class="field"><input type="text" name="description" id="description" class="input-xxlarge" value="{{$course->description}}" /></span>
                                     </p>
-                                     <p>
+                                    <p>
                                         <label>Route</label>
                                         <span class="field"><input type="text" name="route" id="route" class="input-xxlarge" value="{{$course->route}}" /></span>
                                     </p>
@@ -358,6 +358,7 @@ Courses
                                                 </select>
                                             @endif
                                         </span>
+                                    </p>
                                     <p>
                                         <label>Event</label>
                                         <span class="field">
@@ -374,6 +375,16 @@ Courses
                                             @endif
                                         </span>
                                     </p>
+                                    <p>
+                                        <label>Payment</label>
+                                        <span class="field">
+                                            <select class="chosen-select" name="type" >
+                                                <option value="pago" {{ $course->type == 'pago' ? 'selected' : '' }}>Pago</option>
+                                                <option value="gratuito" {{ $course->type == 'gratuito' ? 'selected' : '' }}>Gratuito</option>
+                                                <option value="pagseguro" {{ $course->type == 'pagseguro' ? 'selected' : '' }}>PagSeguro</option>
+                                            </select>
+                                        </span>
+                                    </p>
                                 </div>
                                 <div id="wiz1step2" class="formwiz">
                                     <h4 class="widgettitle">Step 2: Data and Location</h4>
@@ -381,14 +392,14 @@ Courses
                                         <p>
                                             <label>Data Start</label>
                                             <span class="field">
-                                               <input id="start" type="input" name="start" value="{{$course->start}}">
+                                               <input id="start" type="input" name="start" value="{{$course->start}}"/>
                                                     <!-- <input type="hidden" id="finish" name="finish"> -->
                                             </span>
                                         </p>
                                         <p>
                                             <label>Data End</label>
                                             <span class="field">
-                                               <input id="end" type="input" name="end" value="{{$course->end}}">
+                                               <input id="end" type="input" name="end" value="{{$course->end}}"/>
                                                     <!-- <input type="hidden" id="finish" name="finish"> -->
                                             </span>
                                         </p>

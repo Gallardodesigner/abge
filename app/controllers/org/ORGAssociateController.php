@@ -26,8 +26,9 @@ class ORGAssociateController extends \BaseController {
 		$args = array(
 			'route' => $this->route,
 			'estados' => ORGStates::all(),
-			'formacaos' => ORGTrainings::all(),
+			'formacoes' => ORGTrainings::all(),
 			'logradouros' => ORGBackyards::all(),
+			'categorias' => ORGAssociateCategories::all(),
 			);
 
 		return View::make('backend.clients.associates.create')->with($args);
@@ -37,39 +38,49 @@ class ORGAssociateController extends \BaseController {
 	public function postCreate(){
 
 		$associate = new ORGAssociates();
+		$category = ORGAssociateCategories::find(Input::get('categoria'));
 		
+		$associate->nombre_completo = Input::get('nombre_completo');
+		$associate->email = Input::get('email');
+		$associate->edo_civil = Input::get('edo_civil');
+		$associate->passaporte = Input::get('passaporte');
+		$associate->institucion = Input::get('institucion');
+		$associate->empresa = Input::get('empresa');
+		$associate->rg = Input::get('rg');
+		$associate->tipo_correspondencia = Input::get('tipo_correspondencia');
+		$associate->data_nascimento = date('Y-m-d', strtotime(Input::get('data_nascimento')));
+		$associate->sexo = Input::get('sexo');
+		$associate->senha = md5(Input::get('senha'));
+		$associate->web_site = Input::get('web_site');
+		$associate->categoria = Input::get('categoria');
+		$associate->tipo_pessoa = $category->tipo_usuario;
+		$associate->cargo = Input::get('cargo');
+		$associate->cpf = Input::get('cpf');
+
+		$associate->data_cadastro = date('Y-m-d');
+		/*		
 		$associate->status_asso = Input::get('status_asso');
 		$associate->es_associado = 1;
 		$associate->estado_matricula = Input::get('estado_matricula');
 		$associate->codigo_matricula = Input::get('codigo_matricula');
-		$associate->nombre_completo = Input::get('nombre_completo');
 		$associate->tipo_pessoa = Input::get('tipo_pessoa');
 		$associate->formacao = Input::get('formacao');
-		$associate->cpf = Input::get('cpf');
-		$associate->data_cadastro = Input::get('data_cadastro');
-		$associate->edo_civil = Input::get('edo_civil');
-		$associate->senha = md5(Input::get('senha'));
-		$associate->web_site = Input::get('web_site');
-		$associate->rg = Input::get('rg');
 		$associate->razon_social = Input::get('razon_social');
-		$associate->sexo = Input::get('sexo');
 		$associate->cpf = Input::get('cpf');
 		$associate->cnpj = Input::get('cnpj');
-		$associate->passaporte = Input::get('passaporte');
-		$associate->email = Input::get('email');
 		$associate->web_site = Input::get('web_site');
 		$associate->responsavel = Input::get('responsavel');
 		$associate->observacao = Input::get('observacao');
-		$associate->empresa = Input::get('empresa');
-		$associate->cargo = Input::get('cargo');
+		*/
 
 		$associate->cep_res = Input::get('cep_res');
+		$associate->numero_res = Input::get('numero_res');
+		$associate->complemento_res = Input::get('complemento_res');
+		$associate->pais_res = Input::get('pais_res');
 		$associate->logradouro_res = Input::get('logradouro_res');
 		$associate->dir_res = Input::get('dir_res');
-		$associate->complemento_res = Input::get('complemento_res');
-		$associate->numero_res = Input::get('numero_res');
 		$associate->bairro_res = Input::get('bairro_res');
-		$associate->pais_res = Input::get('pais_res');
+		$associate->ciudad_internacional_res = Input::get('ciudad_internacional_res');
 		$associate->ddd_res = Input::get('ddd_res');
 		$associate->ddi_res = Input::get('ddi_res');
 		$associate->telefone_res = Input::get('telefone_res');
@@ -81,12 +92,13 @@ class ORGAssociateController extends \BaseController {
 		$associate->celular_res = Input::get('celular_res');
 		
 		$associate->cep_com = Input::get('cep_com');
+		$associate->numero_com = Input::get('numero_com');
+		$associate->complemento_com = Input::get('complemento_com');
+		$associate->pais_com = Input::get('pais_com');
 		$associate->logradouro_com = Input::get('logradouro_com');
 		$associate->dir_com = Input::get('dir_com');
-		$associate->complemento_com = Input::get('complemento_com');
-		$associate->numero_com = Input::get('numero_com');
 		$associate->bairro_com = Input::get('bairro_com');
-		$associate->pais_com = Input::get('pais_com');
+		$associate->ciudad_internacional_com = Input::get('ciudad_internacional_com');
 		$associate->ddd_com = Input::get('ddd_com');
 		$associate->ddi_com = Input::get('ddi_com');
 		$associate->telefone_com = Input::get('telefone_com');
@@ -98,6 +110,16 @@ class ORGAssociateController extends \BaseController {
 		$associate->celular_com = Input::get('celular_com');
 
 		if($associate->save()):
+
+			$academic = new ORGAcademics();
+			$academic->tipo_graduacion = Input::get('tipo_graduacion');
+			$academic->institucion = Input::get('institucion');
+			$academic->facultad = Input::get('facultad');
+			$academic->curso_realizado = Input::get('curso_realizado');
+			$academic->ano_inicio = Input::get('ano_inicio');
+			$academic->ano_finalizacion = Input::get('ano_finalizacion');
+			$academic->id_asociado = $associate->id_asociado;
+			$academic->save();
 
 			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.associates_create', array( 'title' => $associate->nombre_completo )));
 
@@ -128,9 +150,10 @@ class ORGAssociateController extends \BaseController {
 				$args = array(
 					'route' => $this->route,
 					'estados' => ORGStates::all(),
-					'formacaos' => ORGTrainings::all(),
+					'formacoes' => ORGTrainings::all(),
 					'logradouros' => ORGBackyards::all(),
-					'associate' => $associate
+					'categorias' => ORGAssociateCategories::all(),
+					'associate' => $associate,
 					);
 
 				return View::make('backend.clients.associates.update')->with($args);

@@ -682,6 +682,7 @@ return array(
     'ORGBackyards' => $baseDir . '/app/models/org/ORGBackyards.php',
     'ORGAssociateCategories' => $baseDir . '/app/models/org/ORGAssociateCategories.php',
     'ORGTowns' => $baseDir . '/app/models/org/ORGTowns.php',
+    'ORGAcademics' => $baseDir . '/app/models/org/ORGAcademics.php',
     'PHPExcel' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel.php',
     'PHPExcel_Autoloader' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel/Autoloader.php',
     'PHPExcel_Best_Fit' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel/Shared/trend/bestFitClass.php',

@@ -10,6 +10,14 @@ class ORGAssociates extends Eloquent {
 		return $this->hasOne('Associates', 'associate', 'id_asociado');
 	}
 
+	public function category(){
+		return $this->hasOne('ORGAssociateCategories', 'id_categoria_asociado', 'categoria');
+	}
+
+	public function academics(){
+		return $this->hasMany('ORGAcademics', 'id_asociado', 'id_asociado');
+	}
+
 	protected $connection = 'mysql_2';
 
 	public $primaryKey  = 'id_asociado';

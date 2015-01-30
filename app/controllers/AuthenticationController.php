@@ -601,10 +601,28 @@ class AuthenticationController extends \BaseController {
 			'estados' => $estados,
 			'usertype' => $usertype,
 			'course' => $course,
-			'contents' => FrontendCourseController::getOrderedContent($contents)
+			'contents' => FrontendCourseController::getOrderedContent($contents),
+			'formacoes' => ORGTrainings::all(),
 			);
 
-		return View::make('auth.register')->with( $array );
+		switch ($course->type) {
+			case 'gratuito':
+				# code...
+				return View::make('auth.register_gratuito')->with( $array );
+				break;
+			case 'pago':
+				# code...
+				return View::make('auth.register_pago')->with( $array );
+				break;
+			case 'pagseguro':
+				# code...
+				return View::make('auth.register_pagseguro')->with( $array );
+				break;
+			default:
+				# code...
+				return View::make('auth.register')->with( $array );
+				break;
+		}
 
 	}
 
@@ -614,30 +632,33 @@ class AuthenticationController extends \BaseController {
 
 		$usertype = UserTypes::find(Input::get('usertype'));
 
-		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
-		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
-
 		$participant = new ORGParticipants();
-		$participant->nome = Input::get('nome');
-		$participant->rg = Input::get('rg');
-		$participant->cpf = Input::get('cpf');
-		$participant->endereco = Input::get('endereco');
-		$participant->numero = Input::get('numero');
-		$participant->complemento = Input::get('complemento');
-		$participant->cep = Input::get('cep');
-		$participant->cidade = Input::get('cidade');
-		$participant->estado = $estado[0]->name_estado;
-		/*$participant->empresa = Input::get('empresa');
-		$participant->cnpj = Input::get('cnpj_empresa');
-		$participant->endereco_empresa = Input::get('endereco_empresa');
-		$participant->numero_empresa = Input::get('nome');
-		$participant->complemento_empresa = Input::get('complemento_empresa');
-		$participant->cep_empresa = Input::get('cep_empresa');
-		$participant->cidade_empresa = Input::get('cidade_empresa');
-		$participant->estado_empresa = $estado_empresa[0]->name_estado;
-		$participant->celular = Input::get('celular_empresa');*/
-		$participant->email = Input::get('email');
-		$participant->telefone = Input::get('telefone_empresa');
+
+		$participant->nome = Input::get('nome') != null ? Input::get('nome') : '';
+		$participant->rg = Input::get('rg') != null ? Input::get('rg') : '';
+		$participant->cpf = Input::get('cpf') != null ? Input::get('cpf') : '';
+		$participant->formacao = Input::get('formacao') != null ? Input::get('formacao') : '';
+		$participant->endereco = Input::get('endereco') != null ? Input::get('endereco') : '';
+		$participant->numero = Input::get('numero') != null ? Input::get('numero') : '';
+		$participant->complemento = Input::get('complemento') != null ? Input::get('complemento') : '';
+		$participant->bairro = Input::get('bairro') != null ? Input::get('bairro') : '';
+		$participant->cidade = Input::get('cidade') != null ? Input::get('cidade') : '';
+		$participant->estado = Input::get('estado') != null ? Input::get('estado') : '';
+		$participant->cep = Input::get('cep') != null ? Input::get('cep') : '';
+		$participant->empresa = Input::get('empresa') != null ? Input::get('empresa') : '';
+		$participant->cnpj = Input::get('cnpj_empresa') != null ? Input::get('cnpj_empresa') : '';
+		$participant->endereco_empresa = Input::get('endereco_empresa') != null ? Input::get('endereco_empresa') : '';
+		$participant->numero_empresa = Input::get('nome') != null ? Input::get('nome') : '';
+		$participant->complemento_empresa = Input::get('complemento_empresa') != null ? Input::get('complemento_empresa') : '';
+		$participant->bairro_empresa = Input::get('bairro_empresa') != null ? Input::get('bairro_empresa') : '';
+		$participant->cidade_empresa = Input::get('cidade_empresa') != null ? Input::get('cidade_empresa') : '';
+		$participant->estado_empresa = Input::get('estado_empresa') != null ? Input::get('estado_empresa') : '';
+		$participant->cep_empresa = Input::get('cep_empresa') != null ? Input::get('cep_empresa') : '';
+		$participant->telefone = Input::get('telefone') != null ? Input::get('telefone') : '';
+		$participant->celular = Input::get('celular') != null ? Input::get('celular') : '';
+		$participant->email = Input::get('email') != null ? Input::get('email') : '';
+		$participant->pagamento_empresa = Input::get('pagamento_empresa') != null ? Input::get('pagamento_empresa') : '';
+		$participant->pagamento_participante = Input::get('pagamento_participante') != null ? Input::get('pagamento_participante') : '';
 		$participant->save();
 
 		$user = new User();
@@ -715,11 +736,30 @@ class AuthenticationController extends \BaseController {
 			'usertype' => $usertype,
 			'course' => $course,
 			'contents' => FrontendCourseController::getOrderedContent($course->coursesections),
+			'formacoes' => ORGTrainings::all(),
 			'inscription' => $inscription,
 			'participant' => $participant
 			);
 
-		return View::make('auth.update_participant')->with( $array );
+		switch ($course->type) {
+			case 'gratuito':
+				# code...
+				return View::make('auth.update_participant_gratuito')->with( $array );
+				break;
+			case 'pago':
+				# code...
+				return View::make('auth.update_participant_pago')->with( $array );
+				break;
+			case 'pagseguro':
+				# code...
+				return View::make('auth.update_participant_pagseguro')->with( $array );
+				break;
+			default:
+				# code...
+				return View::make('auth.update_participant')->with( $array );
+				break;
+		}
+
 
 	}
 
@@ -730,31 +770,34 @@ class AuthenticationController extends \BaseController {
 		$usertype = Input::get('usertype');
 
 		$inscription = Inscriptions::find(Input::get('inscription'));
-		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
-		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
 
 		$participant = ORGParticipants::find(Input::get('id'));
 
 		$participant->nome = Input::get('nome') != null ? Input::get('nome') : $participant->nome;
 		$participant->rg = Input::get('rg') != null ? Input::get('rg') : $participant->rg;
 		$participant->cpf = Input::get('cpf') != null ? Input::get('cpf') : $participant->cpf;
+		$participant->formacao = Input::get('formacao') != null ? Input::get('formacao') : $participant->formacao;
 		$participant->endereco = Input::get('endereco') != null ? Input::get('endereco') : $participant->endereco;
 		$participant->numero = Input::get('numero') != null ? Input::get('numero') : $participant->numero;
 		$participant->complemento = Input::get('complemento') != null ? Input::get('complemento') : $participant->complemento;
-		$participant->cep = Input::get('cep') != null ? Input::get('cep') : $participant->cep;
+		$participant->bairro = Input::get('bairro') != null ? Input::get('bairro') : $participant->bairro;
 		$participant->cidade = Input::get('cidade') != null ? Input::get('cidade') : $participant->cidade;
-		$participant->estado = isset($estado[0]->name_estado) ? $estado[0]->name_estado : $participant->estado;
-		/*$participant->empresa = Input::get('empresa') != null ? Input::get('empresa') : $participant->empresa;
+		$participant->estado = Input::get('estado') != null ? Input::get('estado') : $participant->estado;
+		$participant->cep = Input::get('cep') != null ? Input::get('cep') : $participant->cep;
+		$participant->empresa = Input::get('empresa') != null ? Input::get('empresa') : $participant->empresa;
 		$participant->cnpj = Input::get('cnpj_empresa') != null ? Input::get('cnpj_empresa') : $participant->cnpj;
 		$participant->endereco_empresa = Input::get('endereco_empresa') != null ? Input::get('endereco_empresa') : $participant->endereco_empresa;
 		$participant->numero_empresa = Input::get('nome') != null ? Input::get('nome') : $participant->numero_empresa;
 		$participant->complemento_empresa = Input::get('complemento_empresa') != null ? Input::get('complemento_empresa') : $participant->complemento_empresa;
-		$participant->cep_empresa = Input::get('cep_empresa') != null ? Input::get('cep_empresa') : $participant->cep_empresa;
+		$participant->bairro_empresa = Input::get('bairro_empresa') != null ? Input::get('bairro_empresa') : $participant->bairro_empresa;
 		$participant->cidade_empresa = Input::get('cidade_empresa') != null ? Input::get('cidade_empresa') : $participant->cidade_empresa;
-		$participant->estado_empresa = isset($estado_empresa[0]->name_estado) ? $estado_empresa[0]->name_estado : $participant->estado_empresa;
-		$participant->celular = Input::get('celular_empresa') != null ? Input::get('celular_empresa') : $participant->celular;*/
-		$participant->telefone = Input::get('telefone_empresa') != null ? Input::get('telefone_empresa') : $participant->telefone;
+		$participant->estado_empresa = Input::get('estado_empresa') != null ? Input::get('estado_empresa') : $participant->estado_empresa;
+		$participant->cep_empresa = Input::get('cep_empresa') != null ? Input::get('cep_empresa') : $participant->cep_empresa;
+		$participant->telefone = Input::get('telefone') != null ? Input::get('telefone') : $participant->telefone;
+		$participant->celular = Input::get('celular') != null ? Input::get('celular') : $participant->celular;
 		$participant->email = Input::get('email') != null ? Input::get('email') : $participant->email;
+		$participant->pagamento_empresa = Input::get('pagamento_empresa') != null ? Input::get('pagamento_empresa') : $participant->pagamento_empresa;
+		$participant->pagamento_participante = Input::get('pagamento_participante') != null ? Input::get('pagamento_participante') : $participant->pagamento_participante;
 		$participant->save();
 
 		Auth::login($participant->participant->getuser);
@@ -790,11 +833,30 @@ class AuthenticationController extends \BaseController {
 			'usertype' => $usertype,
 			'course' => $course,
 			'contents' => FrontendCourseController::getOrderedContent($course->coursesections),
+			'formacoes' => ORGTrainings::all(),
+			'logradouros' => ORGBackyards::all(),
 			'inscription' => $inscription,
 			'participant' => $participant
 			);
 
-		return View::make('auth.update_associate')->with( $array );
+		switch ($course->type) {
+			case 'gratuito':
+				# code...
+				return View::make('auth.update_associate_gratuito')->with( $array );
+				break;
+			case 'pago':
+				# code...
+				return View::make('auth.update_associate_pago')->with( $array );
+				break;
+			case 'pagseguro':
+				# code...
+				return View::make('auth.update_associate_pagseguro')->with( $array );
+				break;
+			default:
+				# code...
+				return View::make('auth.update_associate')->with( $array );
+				break;
+		}
 
 	}
 
@@ -805,61 +867,63 @@ class AuthenticationController extends \BaseController {
 		$usertype = Input::get('usertype');
 
 		$inscription = Inscriptions::find(Input::get('inscription'));
-		$estado = ORGStates::where('id_estado', '=', Input::get('estado'))->take(1)->get();
-		$estado_empresa = ORGStates::where('id_estado', '=', Input::get('estado_empresa'))->take(1)->get();
 		
 		$participant = ORGAssociates::find(Input::get('id'));
 		
 		$participant->nombre_completo = Input::get('nombre_completo') != null ?  Input::get('nombre_completo') : $participant->nombre_completo;
 		$participant->rg = Input::get('rg') != null ? Input::get('rg') : $participant->rg;
+		$participant->cpf = Input::get('cpf') != null ?  Input::get('cpf') : $participant->cpf;
+		$participant->formacao = Input::get('formacao') != null ? Input::get('formacao') : $participant->formacao;
+		$participant->dir_res = Input::get('dir_res') != null ?  Input::get('dir_res') : $participant->dir_res;
+		$participant->numero_res = Input::get('numero_res') != null ?  Input::get('numero_res') : $participant->numero_res;
+		$participant->complemento_res = Input::get('complemento_res') != null ?  Input::get('complemento_res') : $participant->complemento_res;
+		$participant->bairro_res = Input::get('bairro_res') != null ?  Input::get('bairro_res') : $participant->bairro_res;
+		$participant->logradouro_res = Input::get('logradouro_res') != null ?  Input::get('logradouro_res') : $participant->logradouro_res;
+		$participant->uf_res = Input::get('uf_res') != null ?  Input::get('uf_res') : $participant->uf_res;
+		$participant->cep_res = Input::get('cep_res') != null ?  Input::get('cep_res') : $participant->cep_res;
+		$participant->empresa = Input::get('empresa') != null ?  Input::get('empresa') : $participant->empresa;
+		$participant->cnpj = Input::get('cnpj') != null ?  Input::get('cnpj') : $participant->cnpj;
+		$participant->dir_com = Input::get('dir_com') != null ?  Input::get('dir_com') : $participant->dir_com;
+		$participant->numero_com = Input::get('numero_com') != null ?  Input::get('numero_com') : $participant->numero_com;
+		$participant->complemento_com = Input::get('complemento_com') != null ?  Input::get('complemento_com') : $participant->complemento_com;
+		$participant->bairro_com = Input::get('bairro_com') != null ?  Input::get('bairro_com') : $participant->bairro_com;
+		$participant->logradouro_com = Input::get('logradouro_com') != null ?  Input::get('logradouro_com') : $participant->logradouro_com;
+		$participant->uf_com = Input::get('uf_com') != null ?  Input::get('uf_com') : $participant->uf_com;
+		$participant->cep_com = Input::get('cep_com') != null ?  Input::get('cep_com') : $participant->cep_com;
+		$participant->ddi_res = Input::get('ddi_res') != null ?  Input::get('ddi_res') : $participant->ddi_res;
+		$participant->ddd_res = Input::get('ddd_res') != null ?  Input::get('ddd_res') : $participant->ddd_res;
+		$participant->telefone_res = Input::get('telefone_res') != null ?  Input::get('telefone_res') : $participant->telefone_res;
+		$participant->ddi_cel_res = Input::get('ddi_cel_res') != null ?  Input::get('ddi_cel_res') : $participant->ddi_cel_res;
+		$participant->ddd_cel_res = Input::get('ddd_cel_res') != null ?  Input::get('ddd_cel_res') : $participant->ddd_cel_res;
+		$participant->celular_res = Input::get('celular_res') != null ?  Input::get('celular_res') : $participant->celular_res;
+		$participant->email = Input::get('email') != null ?  Input::get('email') : $participant->email;
+		$participant->pagamento_empresa = Input::get('pagamento_empresa') != null ? Input::get('pagamento_empresa') : $participant->pagamento_empresa;
+		$participant->pagamento_participante = Input::get('pagamento_participante') != null ? Input::get('pagamento_participante') : $participant->pagamento_participante;
+		
 		$participant->razon_social = Input::get('razon_social') != null ?  Input::get('razon_social') : $participant->razon_social;
 		$participant->inscripcion_estadual = Input::get('inscription_estadual') != null ?  Input::get('inscription_estadual') : $participant->inscripcion_estadual;
 		$participant->inscripcion_municipal = Input::get('inscription_municipal') != null ?  Input::get('inscription_municipal') : $participant->inscripcion_municipal;
 		$participant->tipo_pessoa = Input::get('tipo_pessoa') != null ?  Input::get('tipo_pessoa') : $participant->tipo_pessoa;
-		$participant->cpf = Input::get('cpf') != null ?  Input::get('cpf') : $participant->cpf;
-		$participant->cnpj = Input::get('cnpj') != null ?  Input::get('cnpj') : $participant->cnpj;
 		$participant->passaporte = Input::get('passaporte') != null ?  Input::get('passaporte') : $participant->passaporte;
-		$participant->email = Input::get('email') != null ?  Input::get('email') : $participant->email;
 		$participant->web_site = Input::get('web_site') != null ?  Input::get('web_site') : $participant->web_site;
 		$participant->responsavel = Input::get('responsavel') != null ?  Input::get('responsavel') : $participant->responsavel;
 		$participant->observacao = Input::get('observacao') != null ?  Input::get('observacao') : $participant->observacao;
-		$participant->empresa = Input::get('empresa') != null ?  Input::get('empresa') : $participant->empresa;
 		$participant->cargo = Input::get('cargo') != null ?  Input::get('cargo') : $participant->cargo;
-		$participant->cep_res = Input::get('cep_res') != null ?  Input::get('cep_res') : $participant->cep_res;
-		$participant->cep_com = Input::get('cep_com') != null ?  Input::get('cep_com') : $participant->cep_com;
-		$participant->logradouro_res = Input::get('logradouro_res') != null ?  Input::get('logradouro_res') : $participant->logradouro_res;
-		$participant->logradouro_com = Input::get('logradouro_com') != null ?  Input::get('logradouro_com') : $participant->logradouro_com;
-		$participant->dir_res = Input::get('dir_res') != null ?  Input::get('dir_res') : $participant->dir_res;
-		$participant->dir_com = Input::get('dir_com') != null ?  Input::get('dir_com') : $participant->dir_com;
-		$participant->complemento_res = Input::get('complemento_res') != null ?  Input::get('complemento_res') : $participant->complemento_res;
-		$participant->complemento_com = Input::get('complemento_com') != null ?  Input::get('complemento_com') : $participant->complemento_com;
-		$participant->numero_res = Input::get('numero_res') != null ?  Input::get('numero_res') : $participant->numero_res;
-		$participant->numero_com = Input::get('numero_com') != null ?  Input::get('numero_com') : $participant->numero_com;
-		$participant->bairro_res = Input::get('bairro_res') != null ?  Input::get('bairro_res') : $participant->bairro_res;
-		$participant->bairro_com = Input::get('bairro_com') != null ?  Input::get('bairro_com') : $participant->bairro_com;
 		$participant->pais_res = Input::get('pais_res') != null ?  Input::get('pais_res') : $participant->pais_res;
 		$participant->pais_com = Input::get('pais_com') != null ?  Input::get('pais_com') : $participant->pais_com;
 		$participant->municipio_res = Input::get('municipio_res') != null ?  Input::get('municipio_res') : $participant->municipio_res;
 		$participant->municipio_com = Input::get('municipio_com') != null ?  Input::get('municipio_com') : $participant->municipio_com;
-		$participant->uf_res = Input::get('uf_res') != null ?  Input::get('uf_res') : $participant->uf_res;
-		$participant->uf_com = Input::get('uf_com') != null ?  Input::get('uf_com') : $participant->uf_com;
-		$participant->ddi_res = Input::get('ddi_res') != null ?  Input::get('ddi_res') : $participant->ddi_res;
 		$participant->ddi_com = Input::get('ddi_com') != null ?  Input::get('ddi_com') : $participant->ddi_com;
-		$participant->ddd_res = Input::get('ddd_res') != null ?  Input::get('ddd_res') : $participant->ddd_res;
 		$participant->ddd_com = Input::get('ddd_com') != null ?  Input::get('ddd_com') : $participant->ddd_com;
 		$participant->ddi_two_res = Input::get('ddi_two_res') != null ?  Input::get('ddi_two_res') : $participant->ddi_two_res;
 		$participant->ddi_two_com = Input::get('ddi_two_com') != null ?  Input::get('ddi_two_com') : $participant->ddi_two_com;
 		$participant->ddd_two_res = Input::get('ddd_two_res') != null ?  Input::get('ddd_two_res') : $participant->ddd_two_res;
 		$participant->ddd_two_com = Input::get('ddd_two_com') != null ?  Input::get('ddd_two_com') : $participant->ddd_two_com;
-		$participant->ddi_cel_res = Input::get('ddi_cel_res') != null ?  Input::get('ddi_cel_res') : $participant->ddi_cel_res;
 		$participant->ddi_cel_com = Input::get('ddi_cel_com') != null ?  Input::get('ddi_cel_com') : $participant->ddi_cel_com;
-		$participant->telefone_res = Input::get('telefone_res') != null ?  Input::get('telefone_res') : $participant->telefone_res;
 		$participant->telefone_com = Input::get('telefone_com') != null ?  Input::get('telefone_com') : $participant->telefone_com;
 		$participant->telefone_seg_res = Input::get('telefone_seg_res') != null ?  Input::get('telefone_seg_res') : $participant->telefone_seg_res;
 		$participant->telefone_seg_com = Input::get('telefone_seg_com') != null ?  Input::get('telefone_seg_com') : $participant->telefone_seg_com;
-		$participant->ddd_cel_res = Input::get('ddd_cel_res') != null ?  Input::get('ddd_cel_res') : $participant->ddd_cel_res;
 		$participant->ddd_cel_com = Input::get('ddd_cel_com') != null ?  Input::get('ddd_cel_com') : $participant->ddd_cel_com;
-		$participant->celular_res = Input::get('celular_res') != null ?  Input::get('celular_res') : $participant->celular_res;
 		$participant->celular_com = Input::get('celular_com') != null ?  Input::get('celular_com') : $participant->celular_com;
 		$participant->save();
 
