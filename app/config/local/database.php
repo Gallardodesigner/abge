@@ -24,51 +24,51 @@ return array(
 
 	'connections' => array(
 
-		'mysql' => array(
-			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'abgecom',
-			'username'  => 'root',
-			'password'  => '',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-		),
-		
-		'mysql_2' => array(
-			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'abge13',
-			'username'  => 'root',
-			'password'  => '',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-		),
-		
-
 		// 'mysql' => array(
 		// 	'driver'    => 'mysql',
-		// 	'host'      => '186.202.152.19',
-		// 	'database'  => 'abge',
-		// 	'username'  => 'abge',
-		// 	'password'  => 'egba4102',
+		// 	'host'      => 'localhost',
+		// 	'database'  => 'abgecom',
+		// 	'username'  => 'root',
+		// 	'password'  => '',
+		// 	'charset'   => 'utf8',
+		// 	'collation' => 'utf8_unicode_ci',
+		// 	'prefix'    => '',
+		// ),
+		
+		// 'mysql_2' => array(
+		// 	'driver'    => 'mysql',
+		// 	'host'      => 'localhost',
+		// 	'database'  => 'abge13',
+		// 	'username'  => 'root',
+		// 	'password'  => '',
 		// 	'charset'   => 'utf8',
 		// 	'collation' => 'utf8_unicode_ci',
 		// 	'prefix'    => '',
 		// ),
 		
 
-		// 'mysql_2' => array(
-		// 	'driver'    => 'mysql',
-		// 	'host'      => '186.202.152.54',
-		// 	'database'  => 'abge13',
-		// 	'username'  => 'abge13',
-		// 	'password'  => 'Abge3280743',
-		// 	'charset'   => 'utf8',
-		// 	'collation' => 'utf8_unicode_ci',
-		// 	'prefix'    => '',
-		// ),
+		'mysql' => array(
+			'driver'    => 'mysql',
+			'host'      => '186.202.152.19',
+			'database'  => 'abge',
+			'username'  => 'abge',
+			'password'  => 'egba4102',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+		
+
+		'mysql_2' => array(
+			'driver'    => 'mysql',
+			'host'      => '186.202.152.54',
+			'database'  => 'abge13',
+			'username'  => 'abge13',
+			'password'  => 'Abge3280743',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',

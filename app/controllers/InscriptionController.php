@@ -311,7 +311,20 @@ class InscriptionController extends \BaseController {
 		$course = Courses::find($idCourse);
 
 		$inscriptions = $course->inscriptions;
-
+		$users = array();
+		foreach ($inscriptions as $ins) {
+			# code...
+			// var_dump($ins->id);
+			if ($ins->user->type =="associate"):
+				// var_dump($ins->user->id);
+				// var_dump($ins->user->type);
+				$tempuser=Associates::where('user', '=', $ins->user->id)->take(1)->get();
+				$users[$ins->id]=$tempuser[0]->asociado;
+			elseif($ins->user->type =="participant"):
+				$tempuser=Participants::where('user', '=', $ins->user->id)->take(1)->get();
+				$users[$ins->id]=$tempuser[0]->participante;
+			endif;
+		}
 		    // foreach($inscriptions as $inscription):
 		    // 	// $total["name"] = $inscription->user->name;
 		    // 	// $total["email"] = $inscription->user->email;
@@ -329,13 +342,14 @@ class InscriptionController extends \BaseController {
 		    // endforeach;
 		        // dd($inscriptions);
 
-		Excel::create('Export Inscriptions '. $course->title ."-". rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($inscriptions){
+		Excel::create('Export Inscriptions '. $course->title ."-". rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($inscriptions, $users){
 
-		    $excel->sheet('Excel sheet', function($sheet) use ($inscriptions){
+		    $excel->sheet('Excel sheet', function($sheet) use ($inscriptions, $users){
 				
 		        $sheet->setOrientation('portrait');
 		    $n=2;
-		    $sheet->appendRow(1,array("Nome","Email","Pagamento", "Fecha", "User Type" ));
+
+		    $sheet->appendRow(1,array("Nome","Email", "Telefone", "CPF", "Tipo Pessoa","Pagamento", "Fecha", "User Type", "Endereço", "Complemento", "CEP", "Cidade", "Estado", "Empresa", "Endereço Empresa", "Complemento Empresa", "Telefone Empresa", "CNPJ", "Cargo" ));
 			// $inscriptions = $inscriptions;
 			foreach($inscriptions as $inscription):
 		    	// $total["name"] = $inscription->user->name;
@@ -348,11 +362,68 @@ class InscriptionController extends \BaseController {
 		    	else:
 		    		$paid="Sim";
 		    	endif;
-		    	$total= ["nome" => $inscription->user->name,
-		    			 "email" => $inscription->user->email,
+
+		    	if($inscription->user->type == 'associate'):
+		    		$nome = $users[$inscription->id]->nombre_completo;
+		    		$cpf = $users[$inscription->id]->cpf;
+		    		$razon_social = $users[$inscription->id]->razon_social;
+		    		$tipo_pessoa = $users[$inscription->id]->tipo_pessoa;
+		    		$data_nascimento = $users[$inscription->id]->data_nascimento;
+		    		$email = $users[$inscription->id]->email;
+		    		$data_cadastro = $users[$inscription->id]->data_cadastro;
+		    		$empresa = $users[$inscription->id]->empresa;
+		    		$empresa_dir = $users[$inscription->id]->dir_com;
+		    		$empresa_com = $users[$inscription->id]->complemento_com;
+		    		$empresa_tel = $users[$inscription->id]->ddd_com . ' ' . $users[$inscription->id]->ddi_com . ' ' . $users[$inscription->id]->telefone_com;
+		    		$cnpj = $users[$inscription->id]->cnpj;
+		    		$cargo = $users[$inscription->id]->cargo;
+		    		$dir = $users[$inscription->id]->dir_res;
+		    		$cep = $users[$inscription->id]->cep_res;
+		    		$complemento = $users[$inscription->id]->complemento_res;
+		    		$telefone = $users[$inscription->id]->ddd_res . ' ' . $users[$inscription->id]->ddi_res . ' ' . $users[$inscription->id]->telefone_res;
+ 		    		$estado = '';
+		    		$cidade = '';
+		    	elseif($inscription->user->type == 'participant'):
+		    		$nome = $users[$inscription->id]->nome;
+		    		$cpf = $users[$inscription->id]->cpf;
+		    		$razon_social = '';
+		    		$tipo_pessoa = 'F';
+		    		$data_nascimento = $users[$inscription->id]->data_nascimento;
+		    		$email = $users[$inscription->id]->email;
+		    		$data_cadastro = $users[$inscription->id]->data_cadastro;
+		    		$empresa = $users[$inscription->id]->empresa;
+		    		$empresa_dir = $users[$inscription->id]->endereco_empresa;
+		    		$empresa_com = $users[$inscription->id]->complemento_empresa;
+		    		$empresa_tel = "";
+		    		$cnpj = $users[$inscription->id]->cnpj;
+		    		$cargo = "";
+		    		$dir = $users[$inscription->id]->dir_res;
+		    		$cep = $users[$inscription->id]->cep;
+		    		$complemento = $users[$inscription->id]->complemento;
+		    		$telefone = $users[$inscription->id]->telefone;
+		    		$estado = $users[$inscription->id]->estado;
+		    		$cidade = $users[$inscription->id]->cidade;
+		    	endif;
+
+		    	$total= ["nome" => $nome,
+		    			 "email" => $email,
+		    			 "telefone" => $telefone,
+		    			 "cpf" => $cpf,
+		    			 "tipo_pessoa" => $tipo_pessoa,
 		    			 "paid" => $paid,
 		    			 "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
-		    			 "type" => $inscription->usertype->title
+		    			 "type" => $inscription->usertype->title,
+		    			 "dir" => $dir,
+		    			 "complemento" => $complemento,
+		    			 "cep" => $cep,
+		    			 "cidade" => $cidade,
+		    			 "estado" => $estado,
+		    			 "empresa" => $empresa,
+		    			 "empresa_dir" => $empresa_dir,
+		    			 "empresa_com" => $empresa_com,
+		    			 "empresa_tel" => $empresa_tel,
+		    			 "cnpj" => $cnpj,
+		    			 "cargo" => $cargo
 		    			 ];
 		        	$sheet->appendRow($n,$total);
 

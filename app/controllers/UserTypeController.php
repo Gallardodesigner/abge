@@ -165,4 +165,56 @@ class UserTypeController extends \BaseController {
 
 	}
 
+	public function getPublish( $idCourse = '' , $id = ''){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_display_err'));
+		
+		else:
+
+			$usertype = UserTypes::find($id);
+			// dd($usertype);
+			$publish = UserTypes::publish($id);
+
+			if(!$publish):
+
+				return Redirect::to($this->parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_publish_err', array( 'title' => $usertype->title )));
+
+			else:
+
+				return Redirect::to($this->parseRoute($idCourse))->with('msg_success', Lang::get('messages.usertypes_publish', array( 'title' => $usertype->title )));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getDraft( $idCourse = '' , $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_display_err'));
+		
+		else:
+
+			$usertype = UserTypes::find($id);
+
+			$draft = UserTypes::draft($id);
+
+			if(!$draft):
+
+				return Redirect::to($this->parseRoute($idCourse))->with('msg_error', Lang::get('messages.usertypes_draft_err', array( 'title' => $usertype->title )));
+
+			else:
+
+				return Redirect::to($this->parseRoute($idCourse))->with('msg_success', Lang::get('messages.usertypes_draft', array( 'title' => $usertype->title )));
+
+			endif;
+
+		endif;
+
+	}
+
 }

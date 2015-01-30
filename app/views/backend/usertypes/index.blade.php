@@ -53,7 +53,7 @@
             jConfirm('{{ Lang::get("messages.are_you_sure") }} '+action+' {{ Lang::get("messages.this_element") }}', '{{ Lang::get("display.confirmation_dialog")}}', function(r) {
                  // jAlert('Confirmed: ' + r, 'Confirmation Results');
                 if(r==true){
-                    window.location.assign("{{ $route }}/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+                    window.location.assign("{{ $route }}"+elem.attr("data-action")+"/"+elem.attr("data-id"));
                 }
             });
         });
@@ -134,7 +134,14 @@ User Type
                                 <td class="center" style="vertical-align:middle;width:20%;">
 
                                     <a href="{{ $route }}{{$usertype->id}}/dates" class="btn btn-primary alertwarning" style="color:#FFF !important;"><i class="iconfa-calendar" style="color:#FFF;margin-right:10px;"></i>Dates</a>
+                                     @if($usertype->status == 'publish')
+                                                <a data-id="{{$usertype->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.draft')}}</a>
+                                            
+                                            @else
 
+                                            <a data-id="{{$usertype->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.publish')}}</a>
+
+                                    @endif
                                     <a href="{{ $route }}update/{{$usertype->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Edit</a>
 
                                     <a data-id="{{$usertype->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; "><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Delete</a>

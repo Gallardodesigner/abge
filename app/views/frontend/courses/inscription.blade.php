@@ -42,8 +42,8 @@
             {{ $section->content }}
 
           </div>
-      
-          @if(count($course->usertypes) > 0)
+          <?php //dd($course->usertypes[1]) ?>
+          @if(count($course->usertypes) > 0 && $course->usertypes[0]->status != 'draft')
             <table>
               <tr>
                 <th>CATEGORIAS</th>
@@ -53,6 +53,7 @@
                   <th>INSCRIÇÕES</th>
               </tr>
             @foreach($course->usertypes as $user)
+            @if($user->status != 'draft')
               <tr>
                 <td>{{$user->title}}</td>
                 @foreach($user->dates as $date)
@@ -66,6 +67,7 @@
                 @endif
                 </td>
               </tr>
+            @endif
             @endforeach
             </table>
           @endif
