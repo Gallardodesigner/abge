@@ -118,7 +118,7 @@ class AuthenticationController extends \BaseController {
 
 				return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
-			/*endif;*/
+			endif;
 
 		else:
 
@@ -418,7 +418,7 @@ class AuthenticationController extends \BaseController {
 
 				Auth::login($user);
 
-				/*if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 
 					dd("hasInscription");
 
@@ -436,7 +436,7 @@ class AuthenticationController extends \BaseController {
 
 					// return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
-				else:*/
+				else:
 
 					$inscription = new Inscriptions();
 					$inscription->id_course = $course->id;
@@ -453,7 +453,7 @@ class AuthenticationController extends \BaseController {
 
 					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
-				/*endif;*/
+				endif;
 
 			else:
 

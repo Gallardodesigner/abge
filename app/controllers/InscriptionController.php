@@ -312,8 +312,6 @@ class InscriptionController extends \BaseController {
 
 		$inscriptions = $course->inscriptions;
 		$users = array();
-<<<<<<< HEAD
-=======
 
 
 		$trainings = ORGTrainings::all();
@@ -321,7 +319,6 @@ class InscriptionController extends \BaseController {
 		
 		$towns = ORGTowns::all();
 
->>>>>>> a929d4a2f7893fa8d5551f180d06d5120056ad5a
 		foreach ($inscriptions as $ins) {
 			# code...
 			// var_dump($ins->id);
@@ -359,11 +356,7 @@ class InscriptionController extends \BaseController {
 		        $sheet->setOrientation('portrait');
 		    $n=2;
 
-<<<<<<< HEAD
-		    $sheet->appendRow(1,array("Nome","Email", "Telefone", "CPF", "Tipo Pessoa","Pagamento", "Fecha", "User Type", "Endereço", "Complemento", "CEP", "Cidade", "Estado", "Empresa", "Endereço Empresa", "Complemento Empresa", "Telefone Empresa", "CNPJ", "Cargo" ));
-=======
 		    // $sheet->appendRow(1,array("Codigo Asociado","Nome","RG","Email", "Telefone", "Celular", "CPF", "Tipo Pessoa","Pagamento", "Fecha", "User Type", "Endereço", "Complemento", "CEP", "Cidade", "Estado", "Empresa", "Endereço Empresa", "Complemento Empresa", "Telefone Empresa", "CNPJ", "Cargo" ));
->>>>>>> a929d4a2f7893fa8d5551f180d06d5120056ad5a
 			// $inscriptions = $inscriptions;
 			foreach($inscriptions as $inscription):
 		    	// $total["name"] = $inscription->user->name;
@@ -378,11 +371,6 @@ class InscriptionController extends \BaseController {
 		    	endif;
 
 		    	if($inscription->user->type == 'associate'):
-<<<<<<< HEAD
-		    		$nome = $users[$inscription->id]->nombre_completo;
-		    		$cpf = $users[$inscription->id]->cpf;
-		    		$razon_social = $users[$inscription->id]->razon_social;
-=======
 		    		$cod_aso = $users[$inscription->id]->codigo_asoc;
 		    		$nome = $users[$inscription->id]->nombre_completo;
 		    		$rg = "";
@@ -438,7 +426,6 @@ class InscriptionController extends \BaseController {
 		    		$cpf = $users[$inscription->id]->cpf;
 		    		$razon_social = $users[$inscription->id]->razon_social;
 		    		$celular = $users[$inscription->id]->celular_res;
->>>>>>> a929d4a2f7893fa8d5551f180d06d5120056ad5a
 		    		$tipo_pessoa = $users[$inscription->id]->tipo_pessoa;
 		    		$data_nascimento = $users[$inscription->id]->data_nascimento;
 		    		$email = $users[$inscription->id]->email;
@@ -456,11 +443,6 @@ class InscriptionController extends \BaseController {
  		    		$estado = '';
 		    		$cidade = '';
 		    	elseif($inscription->user->type == 'participant'):
-<<<<<<< HEAD
-		    		$nome = $users[$inscription->id]->nome;
-		    		$cpf = $users[$inscription->id]->cpf;
-		    		$razon_social = '';
-=======
 		    		$cod_aso = "";
 		    		$nome = $users[$inscription->id]->nome;
 		    		// Campos de asociados obligatorio
@@ -499,7 +481,6 @@ class InscriptionController extends \BaseController {
 		    		$rg = $users[$inscription->id]->rg;
 		    		$razon_social = '';
 		    		$celular = $users[$inscription->id]->celular ;
->>>>>>> a929d4a2f7893fa8d5551f180d06d5120056ad5a
 		    		$tipo_pessoa = 'F';
 		    		$data_nascimento = $users[$inscription->id]->data_nascimento;
 		    		$email = $users[$inscription->id]->email;
@@ -514,15 +495,6 @@ class InscriptionController extends \BaseController {
 		    		$cep = $users[$inscription->id]->cep;
 		    		$complemento = $users[$inscription->id]->complemento;
 		    		$telefone = $users[$inscription->id]->telefone;
-<<<<<<< HEAD
-		    		$estado = $users[$inscription->id]->estado;
-		    		$cidade = $users[$inscription->id]->cidade;
-		    	endif;
-
-		    	$total= ["nome" => $nome,
-		    			 "email" => $email,
-		    			 "telefone" => $telefone,
-=======
 		    		$estado = $state;
 		    		$cidade = $users[$inscription->id]->cidade;
 		    	endif;
@@ -572,16 +544,11 @@ class InscriptionController extends \BaseController {
 		    			 "email" => $email,
 		    			 "telefone" => $telefone,
 		    			 "celular" => $celular,
->>>>>>> a929d4a2f7893fa8d5551f180d06d5120056ad5a
 		    			 "cpf" => $cpf,
 		    			 "tipo_pessoa" => $tipo_pessoa,
 		    			 "paid" => $paid,
 		    			 "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
 		    			 "type" => $inscription->usertype->title,
-<<<<<<< HEAD
-		    			 "dir" => $dir,
-		    			 "complemento" => $complemento,
-=======
 		    			 "inscription_est" => $incripcion_estadual,
 		    			 "incripcion_municipal" => $incripcion_municipal,
 		    			 "data_nascimento" => $data_nascimento,
@@ -591,18 +558,10 @@ class InscriptionController extends \BaseController {
 		    			 "dir" => $dir,
 		    			 "complemento" => $complemento,
 		    			 "barrio_res" => $barrio_res,
->>>>>>> a929d4a2f7893fa8d5551f180d06d5120056ad5a
 		    			 "cep" => $cep,
 		    			 "cidade" => $cidade,
 		    			 "estado" => $estado,
 		    			 "empresa" => $empresa,
-<<<<<<< HEAD
-		    			 "empresa_dir" => $empresa_dir,
-		    			 "empresa_com" => $empresa_com,
-		    			 "empresa_tel" => $empresa_tel,
-		    			 "cnpj" => $cnpj,
-		    			 "cargo" => $cargo
-=======
 		    			 "logradouro_com" => $logradouro_com,
 		    			 "empresa_dir" => $empresa_dir,
 		    			 "cep_empresa" => $cep_empresa,
@@ -616,7 +575,6 @@ class InscriptionController extends \BaseController {
 		    			 "responsable" => $responsable,
 		    			 "nome_cientifico" => $nombre_cientifico,
 		    			 "publicaciones" => $publicaciones
->>>>>>> a929d4a2f7893fa8d5551f180d06d5120056ad5a
 		    			 ];
 		        	$sheet->appendRow($n,$total);
 
