@@ -301,16 +301,22 @@ Associados
                                             <span class="h2">Passo 3</span>
                                             <span class="label">End. Comercial</span>
                                         </a>
-                                    </li>  
+                                    </li> 
                                     <li>
                                         <a href="#wiz1step4">
-                                            <span class="h2">Passo 4</span>
-                                            <span class="label">Dados Acadêmicos</span>
+                                            <span class="h2">Passo 3</span>
+                                            <span class="label">Matrícula</span>
                                         </a>
                                     </li>  
                                     <li>
                                         <a href="#wiz1step5">
                                             <span class="h2">Passo 5</span>
+                                            <span class="label">Dados Acadêmicos</span>
+                                        </a>
+                                    </li>  
+                                    <li>
+                                        <a href="#wiz1step6">
+                                            <span class="h2">Passo 6</span>
                                             <span class="label">Área de Atuação</span>
                                         </a>
                                     </li>  
@@ -1131,10 +1137,28 @@ Associados
                                     </p>
                                     <p>
                                         <label>Celular</label>
-                                        <span class="field"><input type="text" name="ddd_cel_com" id="ddd_cel_com" class="input-small" /><input type="text" name="ddi_cel_com" id="ddi_cel_com" class="input-small" /><input type="text" name="cel_com" id="cel_com" class="input-xlarge" /></span>
+                                        <span class="field"><input type="text" name="ddd_cel_com" id="ddd_cel_com" class="input-small" /><input type="text" name="ddi_cel_com" id="ddi_cel_com" class="input-small" /><input type="text" name="celular_com" id="celular_com" class="input-xlarge" /></span>
                                     </p>                                                           
                                 </div>
                                 <div id="wiz1step4" class="formwiz">
+                                    <h4 class="widgettitle">Passo 3: Matrícula</h4>
+                                    <p>
+                                        <label>Código da Matrícula</label>
+                                        <span class="field">
+                                            <input type="text" name="codigo_matricula" value="" id="codigo_matricula">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <label>Status do Associado</label>
+                                        <span class="field">
+                                            <select style="width: 215px; margin-left: 2px;" name="status_asso" id="status_asso">
+                                                <option value="0">Desabilitado</option>
+                                                <option value="1" selected="selected">Habilitado</option>
+                                            </select>
+                                        </span>
+                                    </p>                                                           
+                                </div>
+                                <div id="wiz1step5" class="formwiz">
                                     <h4 class="widgettitle">Passo 4: Dados Acadêmicos</h4>
                                     <p>
                                         <label>Tipo de graduação</label>
@@ -1177,7 +1201,7 @@ Associados
                                         <span class="field"><input type="text" name="ano_finalizacion" id="ano_finalizacion" class="input-xxlarge" /></span>
                                     </p>                                                  
                                 </div>
-                                <div id="wiz1step5" class="formwiz">
+                                <div id="wiz1step6" class="formwiz">
                                     <h4 class="widgettitle">Passo 5: Área de Atuação</h4>
                                     <p>
                                         <label>Área de Atuação</label>

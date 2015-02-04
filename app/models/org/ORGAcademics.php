@@ -8,4 +8,6 @@ class ORGAcademics extends \Eloquent {
 
     public $timestamps = false;
 
+	public $primaryKey  = 'id_datos_acad';
+
 }

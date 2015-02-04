@@ -14,11 +14,44 @@ class ORGAssociateController extends \BaseController {
 
 		return View::make('backend.clients.associates.index', array(
 			'associates' => $associates,
+			'categories' => ORGAssociateCategories::all(),
 			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
 			));
 
+	}
+
+	public function postIndex(){
+
+		$associates = ORGAssociates::where('nombre_completo','LIKE', '%'.Input::get('nombre_completo').'%');
+
+		$categoria = Input::get('categoria');
+
+		if(Input::get('categoria') != null):
+			$associates = $associates->where('categoria', '=',Input::get('categoria'));
+		endif;
+
+		if(Input::get('tipo_usuario') != null):
+			$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_usuario'))->get();
+			foreach($categories as $category):
+				$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
+			endforeach;
+		endif;
+
+		$associates = $associates->get();
+
+		$msg_success = Session::get('msg_success');
+
+		$msg_error = Session::get('msg_error');
+
+		return View::make('backend.clients.associates.index', array(
+			'associates' => $associates,
+			'categories' => ORGAssociateCategories::all(),
+			'route' => $this->route,
+			'msg_success' => $msg_success,
+			'msg_error' => $msg_error
+			));
 	}
 
 	public function getCreate(){
@@ -57,7 +90,6 @@ class ORGAssociateController extends \BaseController {
 		$associate->cargo = Input::get('cargo');
 		$associate->cpf = Input::get('cpf');
 
-		$associate->data_cadastro = date('Y-m-d');
 		/*		
 		$associate->status_asso = Input::get('status_asso');
 		$associate->es_associado = 1;
@@ -107,7 +139,11 @@ class ORGAssociateController extends \BaseController {
 		$associate->telefone_seg_com = Input::get('telefone_seg_com');
 		$associate->ddd_cel_com = Input::get('ddd_cel_com');
 		$associate->ddi_cel_com = Input::get('ddi_cel_com');
-		$associate->celular_com = Input::get('celular_com');
+		$associate->celular_com = Input::get('cel_com');
+
+		$associate->data_cadastro = date('Y-m-d');
+		$associate->codigo_matricula = Input::get('codigo_matricula');
+		$associate->status_asso = Input::get('status_asso');
 
 		if($associate->save()):
 
@@ -274,6 +310,62 @@ class ORGAssociateController extends \BaseController {
 				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.associates_delete', array( 'title' => $associate->title )));
 
 			endif;
+
+		endif;
+
+	}
+
+	public function getEs( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.associates_display_err'));
+
+		else:
+
+			$associate = ORGAssociates::find($id);
+
+			if( $associate->es_asociado == 1 ):
+
+				$associate->es_asociado = 0;
+
+			else:
+
+				$associate->es_asociado = 1;
+
+			endif;
+
+			$associate->save();
+
+			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.associates_delete', array( 'title' => $associate->title )));
+
+		endif;
+		
+	}
+
+	public function getStatus( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.associates_display_err'));
+
+		else:
+
+			$associate = ORGAssociates::find($id);
+
+			if( $associate->status_asso == 1 ):
+
+				$associate->status_asso = 0;
+
+			else:
+
+				$associate->status_asso = 1;
+
+			endif;
+
+			$associate->save();
+
+			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.associates_delete', array( 'title' => $associate->title )));
 
 		endif;
 

@@ -330,6 +330,12 @@ class InscriptionController extends \BaseController {
 			elseif($ins->user->type =="participant"):
 				$tempuser=Participants::where('user', '=', $ins->user->id)->take(1)->get();
 				$users[$ins->id]=$tempuser[0]->participante;
+				/*if(isset($tempuser[0])):
+					$users[$ins->id]=$tempuser[0]->participante;
+				else:
+					var_dump($ins->user->type);
+					dd($ins->user->id);
+				endif;*/
 			endif;
 		}
 		    // foreach($inscriptions as $inscription):
