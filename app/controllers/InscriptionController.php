@@ -106,7 +106,7 @@ class InscriptionController extends \BaseController {
 			'categories' => ORGAssociateCategories::all(),
 			);
 
-		if( $user->type == 'associate' ){
+		if( $user->type == 'associate' || $user->id==127 ){
 			return View::make('backend.inscriptions.associate')->with($args);
 			}
 		else{
@@ -322,12 +322,12 @@ class InscriptionController extends \BaseController {
 		foreach ($inscriptions as $ins) {
 			# code...
 			// var_dump($ins->id);
-			if ($ins->user->type =="associate"):
+			if ($ins->user->type =="associate" || $ins->user->id==127):
 				// var_dump($ins->user->id);
 				// var_dump($ins->user->type);
 				$tempuser=Associates::where('user', '=', $ins->user->id)->take(1)->get();
 				$users[$ins->id]=$tempuser[0]->asociado;
-			elseif($ins->user->type =="participant"):
+			elseif($ins->user->type =="participant" && $ins->user->id!=127):
 				$tempuser=Participants::where('user', '=', $ins->user->id)->take(1)->get();
 				$users[$ins->id]=$tempuser[0]->participante;
 			endif;
@@ -370,7 +370,12 @@ class InscriptionController extends \BaseController {
 		    		$paid="Sim";
 		    	endif;
 
-		    	if($inscription->user->type == 'associate'):
+		    	if($inscription->user->type == 'associate' || $inscription->user->id == 127):
+		    		// if(isset($users[$inscription->id]->codigo_asoc)){
+		    		// 	var_dump($users[$inscription->id]->nombre_completo);
+		    		// }else{
+		    		// 	dd($inscription->user->id);
+		    		// }
 		    		$cod_aso = $users[$inscription->id]->codigo_asoc;
 		    		$nome = $users[$inscription->id]->nombre_completo;
 		    		$rg = "";

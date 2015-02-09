@@ -46,7 +46,7 @@ class AuthenticationController extends \BaseController {
 
 	public function getCheck(){
 
-		return dd(Auth::check());
+		//return dd(Auth::check());
 
 	}
 
@@ -62,7 +62,7 @@ class AuthenticationController extends \BaseController {
 		$usertype = UserTypes::find( $usertype );
 		$course = $usertype->course;
 		$contents = FrontendCourseController::getOrderedContent($course->coursesections);
-
+		// dd($contents);
 		$array = array( 
 			'msg_error' => $msg_error, 
 			'course' => $course, 
@@ -74,21 +74,21 @@ class AuthenticationController extends \BaseController {
 
 	}
 
-	public function postAssociado(){
+	public function postAssociado($usertype ){
 
+		// dd($usertype);
 		$credentials = array(
 			'email' => Input::get('email'),
 			'password' => Input::get('password')
 			);
 
 		$usertype = UserTypes::find(Input::get('usertype'));
-
 		$course = Courses::find(Input::get('course'));
-
+		// var_dump($credentials);
 		if(Auth::attempt($credentials)):
-
+			// var_dump("Si autentico");
 			if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
-				// dd($inscription->id);
+			// var_dump("If");
 				$inscription = Inscriptions::find($inscription->id);
 				$array = array(
 					'msg_success' => Lang::get('messages.login_welcome'),
@@ -97,15 +97,21 @@ class AuthenticationController extends \BaseController {
 					);
 
 				if($inscription->paid):
-					return Redirect::to($inscription->course->route.'/pago')->with( $array );
+					// var_dump("pagamento");
+					// dd($inscription->id);
+					return Redirect::to($inscription->course->route.'/pagamento')->with( $array );
 				else:
-					return Redirect::to($inscription->course->route.'/acesso')->with( $array );
+					var_dump("actualizacion");
+					// dd($inscription->id);
+					return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
+					// return Redirect::to($inscription->course->route.'/acesso')->with( $array );
 				endif;
 
-				// return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 
 			else:
 
+			// var_dump("Else");
+				// dd($usertype->id);
 				$inscription = new Inscriptions();
 				$inscription->id_course = $course->id;
 				$inscription->id_user = Auth::user()->id;
@@ -123,7 +129,15 @@ class AuthenticationController extends \BaseController {
 		else:
 
 			$associate = Associates::getByEmail($credentials['email']);
-
+			// $user_finded = User::where('email','=', $credentials['email'])->take(1)->get();
+			// var_dump($user_finded[0]->id);
+			// // dd(Hash::make('8842cf'));
+			// // dd(Hash::make('123456'));
+			// // var_dump($user_finded[0]->password);
+			// $temp =  Hash::make('123456');
+			// var_dump($temp);
+			// var_dump(Hash::check('123456', $temp));
+			// dd(Hash::check($credentials["password"], $user_finded[0]->password));
 			if(!empty($associate[0])):
 
 				$associate = $associate[0];
@@ -131,6 +145,7 @@ class AuthenticationController extends \BaseController {
 				if($associate->password == md5($credentials['password']) ):
 
 					$user_finded = User::where('email','=', $credentials['email'])->take(1)->get();
+					//dd($user_finded);
 
 					$user = null;
 
@@ -420,7 +435,7 @@ class AuthenticationController extends \BaseController {
 
 				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
 
-					dd("hasInscription");
+					//dd("hasInscription");
 
 					$array = array(
 						'msg_success' => Lang::get('messages.login_welcome'),
@@ -429,7 +444,7 @@ class AuthenticationController extends \BaseController {
 						);
 				
 					if($inscription->paid):
-						return Redirect::to($inscription->course->route.'/pago')->with( $array );
+						return Redirect::to($inscription->course->route.'/pagamento')->with( $array );
 					else:
 						return Redirect::to($inscription->course->route.'/acesso')->with( $array );
 					endif;
@@ -838,22 +853,29 @@ class AuthenticationController extends \BaseController {
 			'inscription' => $inscription,
 			'participant' => $participant
 			);
-
 		switch ($course->type) {
 			case 'gratuito':
 				# code...
+				// var_dump($course->type);
+				// dd($array);
 				return View::make('auth.update_associate_gratuito')->with( $array );
 				break;
 			case 'pago':
 				# code...
+				// var_dump($course->type);
+				// dd($array);
 				return View::make('auth.update_associate_pago')->with( $array );
 				break;
 			case 'pagseguro':
 				# code...
+				// var_dump($course->type);
+				// dd($array);
 				return View::make('auth.update_associate_pagseguro')->with( $array );
 				break;
 			default:
 				# code...
+				// var_dump($course->type);
+				// dd($array);
 				return View::make('auth.update_associate')->with( $array );
 				break;
 		}
