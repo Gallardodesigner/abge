@@ -1,0 +1,1 @@
+C:\wamp\www\gdp\abge\app/views/backend/gallery/create.blade.php
