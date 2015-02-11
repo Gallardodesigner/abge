@@ -104,6 +104,7 @@ Associate
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
+                            
                             <a href="associates/create" class="btn dropdown-toggle">Add New Associate</a>
                         </div>
                         <h4 class="widgettitle">All Associates</h4>

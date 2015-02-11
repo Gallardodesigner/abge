@@ -8,6 +8,7 @@
 <title>ABGE - Admin Painel</title>
 {{HTML::style("assetsadmin/css/style.default.css")}}
 {{HTML::style("assetsadmin/css/responsive-tables.css")}}
+{{HTML::style("assets/fancybox/jquery.fancybox.css")}}
 @yield("css")
 
 {{HTML::script("assetsadmin/js/jquery-1.9.1.min.js")}}
@@ -21,6 +22,7 @@
 <!-- {{HTML::script("assetsadmin/js/flot/jquery.flot.resize.min.js")}} -->
 {{HTML::script("assetsadmin/js/responsive-tables.js")}}
 {{HTML::script("assetsadmin/js/custom.js")}}
+{{HTML::script("assets/fancybox/jquery.fancybox.js")}}
 @yield("js")
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assetsadmin/js/excanvas.min.js"></script><![endif]-->
 </head>

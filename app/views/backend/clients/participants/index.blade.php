@@ -101,6 +101,7 @@ Todos os Participantes
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
+                            <a href="{{ $route }}/exportparticipantes" class="btn"><i class="iconsweets-excel"></i>Excel</a>
                             <a href="{{ $route }}/create" class="btn dropdown-toggle">Adicionar Participante</a>
                         </div>
                         <h4 class="widgettitle">Todos os Participantes</h4>

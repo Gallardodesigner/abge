@@ -318,7 +318,7 @@ class InscriptionController extends \BaseController {
 		$states = ORGStates::all();
 		
 		$towns = ORGTowns::all();
-
+		$h=0;
 		foreach ($inscriptions as $ins) {
 			# code...
 			// var_dump($ins->id);
@@ -329,8 +329,20 @@ class InscriptionController extends \BaseController {
 				$users[$ins->id]=$tempuser[0]->asociado;
 			elseif($ins->user->type =="participant" && $ins->user->id!=127):
 				$tempuser=Participants::where('user', '=', $ins->user->id)->take(1)->get();
-				$users[$ins->id]=$tempuser[0]->participante;
+				// if($h==8){
+				// 	dd($ins->id);
+				// }else{
+				// 	var_dump($tempuser[0]->participante->nome);
+					$users[$ins->id]=$tempuser[0]->participante;
+				// }
+				/*if(isset($tempuser[0])):
+					$users[$ins->id]=$tempuser[0]->participante;
+				else:
+					var_dump($ins->user->type);
+					dd($ins->user->id);
+				endif;*/
 			endif;
+			$h++;
 		}
 		    // foreach($inscriptions as $inscription):
 		    // 	// $total["name"] = $inscription->user->name;
@@ -476,6 +488,9 @@ class InscriptionController extends \BaseController {
 		    		$state = ORGStates::all();
 		    			foreach($state as $sta):
 		    				if($users[$inscription->id]->estado==$sta->name_estado):
+		    					$state=$users[$inscription->id]->estado;
+		    					break;
+		    				elseif($users[$inscription->id]->estado==$sta->id_estado):
 		    					$state=$sta->name_estado;
 		    					break;
 		    				endif;

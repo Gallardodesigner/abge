@@ -7,5 +7,7 @@ class ORGAssociateCategories extends Eloquent {
 	protected $table = 'categoria_asociado';
 
     public $timestamps = false;
+
+	public $primaryKey  = 'id_categoria_asociado';
 	
 }

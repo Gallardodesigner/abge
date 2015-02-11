@@ -14,11 +14,264 @@ class ORGAssociateController extends \BaseController {
 
 		return View::make('backend.clients.associates.index', array(
 			'associates' => $associates,
+			'categories' => ORGAssociateCategories::all(),
 			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
 			));
 
+	}
+	public function getExportasociados(){
+
+		$associates = ORGAssociates::all();
+		
+		Excel::create('Export Asociados - '. rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($associates){
+
+		    $excel->sheet('Excel sheet', function($sheet) use ($associates){
+				
+		        $sheet->setOrientation('portrait');
+		   $n=2;
+			foreach($associates as $aso):
+		    	
+		    	
+		    		$cod_aso = $aso->id_asociado;
+		    		$nome = $aso->nombre_completo;
+		    		$rg = "";
+		    		//No agregados
+		    		$incripcion_estadual = $aso->inscripcion_estadual;
+		    		$incripcion_municipal = $aso->inscripcion_municipal;
+		    		$data_nascimento = $aso->data_nascimento;
+
+		    		//anuidades
+		    		// dd($aso->anuidade[0]->ano);
+		    		// $anos_anuidade= $aso->anuidade[0]->ano;
+		    		// $valor_anuidade = $aso->anuidade[0]->valor;
+		    		// $valor_pago = $aso->anuidade[0]->valor_pago;
+		    		// $data_anuidade= $aso->anuidade[0]->data;
+
+		    		
+		    		$training = ORGTrainings::find($aso->formacao);
+		    			if($training):
+		    				$training = $training->nome;
+		    			else:
+		    				$training = "";
+		    			endif;
+		    		$categoria_titulo = ORGAssociateCategories::all();
+			    		foreach($categoria_titulo as $cat):
+	                        if($aso->categoria == $cat->id_categoria_asociado):
+	                            $categoria_titulo = $cat->nombre_categoria;
+	                            break;
+	                        endif;
+	                    endforeach;
+	                $logradouro_res ="";
+	                $backyards = ORGBackyards::all();
+			    		foreach($backyards as $backyard):
+	                        if($aso->logradouro_res == $backyard->id_logradouro):
+	                            $logradouro_res=$backyard->nombre;
+	                        break;
+	                        endif;
+	                    endforeach;
+	                $logradouro_com ="";
+			    		foreach($backyards as $backyard):
+	                        if($aso->logradouro_com == $backyard->id_logradouro):
+	                            $logradouro_res=$backyard->nombre;
+	                        break;
+	                        endif;
+	                    endforeach;
+
+	                $barrio_res = $aso->bairro_res;
+	                $barrio_com = $aso->bairro_com;
+		    		$pasaporte =  $aso->passaporte;
+		    		$website =  $aso->web_site;
+		    		$responsable =  $aso->responsavel;
+		    		$publicaciones =  $aso->publicacoes;
+		    		$nombre_cientifico =  $aso->nome_cientifico;
+		    		//Fin de no agregados
+		    		//Campos participants no agregados
+
+		    		$cidade_empresa = "";
+		    		$estado_empresa = "";
+		    		$cep_empresa =  "";
+		    		$state = "";
+		    			
+		    		//Fin de campos participants no agregados
+		    		$cpf = $aso->cpf;
+		    		$razon_social = $aso->razon_social;
+		    		$celular = $aso->celular_res;
+		    		$tipo_pessoa = $aso->tipo_pessoa;
+		    		$data_nascimento = $aso->data_nascimento;
+		    		$email = $aso->email;
+		    		$data_cadastro = $aso->data_cadastro;
+		    		$empresa = $aso->empresa;
+		    		$empresa_dir = $aso->dir_com;
+		    		$empresa_com = $aso->complemento_com;
+		    		$empresa_tel = $aso->ddd_com . ' ' . $aso->ddi_com . ' ' . $aso->telefone_com;
+		    		$cnpj = $aso->cnpj;
+		    		$cargo = $aso->cargo;
+		    		$dir = $aso->dir_res;
+		    		$cep = $aso->cep_res;
+		    		$complemento = $aso->complemento_res;
+		    		$telefone = $aso->ddd_res . ' ' . $aso->ddi_res . ' ' . $aso->telefone_res;
+ 		    		$estado = '';
+		    		$cidade = '';
+		    	
+		    $sheet->appendRow(1,array("Codigo Asociado",
+		    						  "Nome",
+		    						  "RG",
+		    						  "Email",
+		    						  "Telefone",
+		    						  "Celular",
+		    						  "CPF",
+		    						  "Tipo Pessoa",
+
+		    						  "anuidade_2013",
+		    						  "valor_anuidade_2013",
+		    						  "valor_pago_2013",
+		    						  "data_anuidade_2013",
+		    						  "anuidade_2014",
+		    						  "valor_anuidade_2014",
+		    						  "valor_pago_2014",
+		    						  "data_anuidade_2014",
+		    						  "anuidade_2015",
+		    						  "valor_anuidade_2015",
+		    						  "valor_pago_2015",
+		    						  "data_anuidade_2015",
+		    						  // "Pagamento",
+		    						  // "Fecha",
+		    						  // "User Type",
+		    						  "Inscription estadual",
+		    						  "Inscription municipal",
+		    						  "Data Nascimento",
+		    						  "Training",
+		    						  "Category Title",
+		    						  "Logradouro Residencia",
+		    						  "Endereço",
+		    						  "Complemento",
+		    						  "Barrio Res",
+		    						  "CEP",
+		    						  "Cidade",
+		    						  "Estado",
+		    						  "Empresa",
+		    						  "Logradouro Empresa",
+		    						  "Endereço Empresa",
+		    						  "Cidade Empresa",
+		    						  "Estado Empresa",
+		    						  "CEP Empresa",
+		    						  "Complemento Empresa",
+		    						  "Barrio Empresa",
+		    						  "Telefone Empresa",
+		    						  "CNPJ",
+		    						  "Cargo",
+		    						  "Pasaporte",
+		    						  "Website",
+		    						  "Responsavel",
+		    						  "Nome Cientifico",
+		    						  "Publicacoes" ));
+
+		    	$total= ["codigo"=>$cod_aso,
+		    			 "nome" => $nome,
+		    			 "rg" => $rg,  
+		    			 "email" => $email,
+		    			 "telefone" => $telefone,
+		    			 "celular" => $celular,
+		    			 "cpf" => $cpf,
+		    			 "tipo_pessoa" => $tipo_pessoa,
+		    			  
+						 "anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->ano : "Não tem anuidade" ,
+						 "valor_anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->valor : "Não tem anuidade" ,
+						 "valor_pago_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->valor_pago : "Não tem anuidade" ,
+						 "data_anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->data : "Não tem anuidade",
+						 "anuidade_2014" => isset($aso->anuidade[1]) ? $aso->anuidade[1]->ano : "Não tem anuidade" ,
+						 "valor_anuidade_2014" => isset($aso->anuidade[1]) ? $aso->anuidade[1]->valor : "Não tem anuidade" ,
+						 "valor_pago_2014" => isset($aso->anuidade[1]) ? $aso->anuidade[1]->valor_pago : "Não tem anuidade" ,
+						 "data_anuidade_2014" => isset($aso->anuidade[1]) ? $aso->anuidade[1]->data : "Não tem anuidade",
+						  "anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->ano : "Não tem anuidade" ,
+						 "valor_anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->valor : "Não tem anuidade" ,
+						 "valor_pago_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->valor_pago : "Não tem anuidade" ,
+						 "data_anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->data : "Não tem anuidade",
+			 			 // "paid" => $paid,
+		    			 // "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
+		    			 // "type" => $inscription->usertype->title,
+		    			 "inscription_est" => $incripcion_estadual,
+		    			 "incripcion_municipal" => $incripcion_municipal,
+		    			 "data_nascimento" => $data_nascimento,
+		    			 "training" => $training,
+		    			 "categoria_titulo" => $categoria_titulo,
+		    			 "logradouro_res" => $logradouro_res, 
+		    			 "dir" => $dir,
+		    			 "complemento" => $complemento,
+		    			 "barrio_res" => $barrio_res,
+		    			 "cep" => $cep,
+		    			 "cidade" => $cidade,
+		    			 "estado" => $estado,
+		    			 "empresa" => $empresa,
+		    			 "logradouro_com" => $logradouro_com,
+		    			 "empresa_dir" => $empresa_dir,
+		    			 "cep_empresa" => $cep_empresa,
+		    			 "empresa_com" => $empresa_com,
+		    			 "barrio_com" => $barrio_com,
+		    			 "empresa_tel" => $empresa_tel,
+		    			 "cnpj" => $cnpj,
+		    			 "cargo" => $cargo,
+		    			 "pasaporte" => $pasaporte,
+		    			 "website" => $website,
+		    			 "responsable" => $responsable,
+		    			 "nome_cientifico" => $nombre_cientifico,
+		    			 "publicaciones" => $publicaciones
+		    			 ];
+		        	$sheet->appendRow($n,$total);
+
+		    	// break;
+		        	$n++;
+		    	// array_push($total,$inscription->user->name,$inscription->user->email);
+		    endforeach;
+
+		    });
+
+		})->export('xlsx');
+		// Excel::create('Export Inscriptions '. $course->title ."-". rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($total){
+
+		//     $excel->sheet('Excel sheet', function($sheet) use ($total){
+				
+		//         $sheet->setOrientation('portrait');
+		//         	// dd($total);
+		//         	$sheet->fromArray($total, null, 'A1', true);
+
+		//     });
+
+		// })->export('xlsx');
+	}
+
+	public function postIndex(){
+
+		$associates = ORGAssociates::where('nombre_completo','LIKE', '%'.Input::get('nombre_completo').'%');
+
+		$categoria = Input::get('categoria');
+
+		if(Input::get('categoria') != null):
+			$associates = $associates->where('categoria', '=',Input::get('categoria'));
+		endif;
+
+		if(Input::get('tipo_usuario') != null):
+			$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_usuario'))->get();
+			foreach($categories as $category):
+				$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
+			endforeach;
+		endif;
+
+		$associates = $associates->get();
+
+		$msg_success = Session::get('msg_success');
+
+		$msg_error = Session::get('msg_error');
+
+		return View::make('backend.clients.associates.index', array(
+			'associates' => $associates,
+			'categories' => ORGAssociateCategories::all(),
+			'route' => $this->route,
+			'msg_success' => $msg_success,
+			'msg_error' => $msg_error
+			));
 	}
 
 	public function getCreate(){
@@ -57,7 +310,6 @@ class ORGAssociateController extends \BaseController {
 		$associate->cargo = Input::get('cargo');
 		$associate->cpf = Input::get('cpf');
 
-		$associate->data_cadastro = date('Y-m-d');
 		/*		
 		$associate->status_asso = Input::get('status_asso');
 		$associate->es_associado = 1;
@@ -107,7 +359,11 @@ class ORGAssociateController extends \BaseController {
 		$associate->telefone_seg_com = Input::get('telefone_seg_com');
 		$associate->ddd_cel_com = Input::get('ddd_cel_com');
 		$associate->ddi_cel_com = Input::get('ddi_cel_com');
-		$associate->celular_com = Input::get('celular_com');
+		$associate->celular_com = Input::get('cel_com');
+
+		$associate->data_cadastro = date('Y-m-d');
+		$associate->codigo_matricula = Input::get('codigo_matricula');
+		$associate->status_asso = Input::get('status_asso');
 
 		if($associate->save()):
 
@@ -274,6 +530,62 @@ class ORGAssociateController extends \BaseController {
 				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.associates_delete', array( 'title' => $associate->title )));
 
 			endif;
+
+		endif;
+
+	}
+
+	public function getEs( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.associates_display_err'));
+
+		else:
+
+			$associate = ORGAssociates::find($id);
+
+			if( $associate->es_asociado == 1 ):
+
+				$associate->es_asociado = 0;
+
+			else:
+
+				$associate->es_asociado = 1;
+
+			endif;
+
+			$associate->save();
+
+			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.associates_delete', array( 'title' => $associate->title )));
+
+		endif;
+		
+	}
+
+	public function getStatus( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.associates_display_err'));
+
+		else:
+
+			$associate = ORGAssociates::find($id);
+
+			if( $associate->status_asso == 1 ):
+
+				$associate->status_asso = 0;
+
+			else:
+
+				$associate->status_asso = 1;
+
+			endif;
+
+			$associate->save();
+
+			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.associates_delete', array( 'title' => $associate->title )));
 
 		endif;
 

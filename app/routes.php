@@ -23,10 +23,23 @@ Route::get('/hashing/{pass}', function( $pass ){
 	echo "<br>";
 	echo md5($pass);
 });
+Route::get('formacoes', function(){
+	$formacoes = ORGTrainings::all();
+	$json = array();
+	foreach($formacoes as $formacao):
+		$temp = array(
+			'id' => $formacao->id,
+			'nome' => $formacao->nome
+			);
+		$json[] = $temp;
+	endforeach;
+	return Response::json($json);
+});
 if(Auth::check() && Auth::user()->type=="superadmin"):
 	Route::get("/gd-admin", function(){
 		return Redirect::to('/dashboard');
 	});
+	Route::controller('/ajax', 'AjaxController');
 	Route::controller('/dashboard/news', 'NewsController');
 	Route::controller('/dashboard/arquivos', 'ArquivoController');
 	Route::controller('/dashboard/videos', 'VideoController');

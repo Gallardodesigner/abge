@@ -46,6 +46,29 @@ return array(
 		// 	'prefix'    => '',
 		// ),
 		
+		// 'mysql' => array(
+		// 	'driver'    => 'mysql',
+		// 	'host'      => 'localhost',
+		// 	'database'  => 'abge',
+		// 	'username'  => 'root',
+		// 	'password'  => '',
+		// 	'charset'   => 'utf8',
+		// 	'collation' => 'utf8_unicode_ci',
+		// 	'prefix'    => '',
+		// ),
+		
+		// 'mysql_2' => array(
+		// 	'driver'    => 'mysql',
+		// 	'host'      => 'localhost',
+		// 	'database'  => 'abge13',
+		// 	'username'  => 'root',
+		// 	'password'  => '',
+		// 	'charset'   => 'utf8',
+		// 	'collation' => 'utf8_unicode_ci',
+		// 	'prefix'    => '',
+		// ),
+
+
 
 		'mysql' => array(
 			'driver'    => 'mysql',

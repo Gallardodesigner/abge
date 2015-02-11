@@ -18,6 +18,9 @@ class ORGAssociates extends Eloquent {
 		return $this->hasMany('ORGAcademics', 'id_asociado', 'id_asociado');
 	}
 
+	public function anuidade(){
+		return $this->hasMany('ORGAssociatesAnuidade', 'id_asociado', 'id_asociado');
+	}
 	protected $connection = 'mysql_2';
 
 	public $primaryKey  = 'id_asociado';
