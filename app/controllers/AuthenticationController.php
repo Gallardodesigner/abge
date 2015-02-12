@@ -79,7 +79,8 @@ class AuthenticationController extends \BaseController {
 		// dd($usertype);
 		$credentials = array(
 			'email' => Input::get('email'),
-			'password' => Input::get('password')
+			'password' => Input::get('password'),
+			'type' => 'associate'
 			);
 
 		$usertype = UserTypes::find(Input::get('usertype'));
@@ -96,16 +97,16 @@ class AuthenticationController extends \BaseController {
 					'inscription' => $inscription
 					);
 
-				if($inscription->paid):
+				/*if($inscription->paid):
 					// var_dump("pagamento");
 					// dd($inscription->id);
 					return Redirect::to($inscription->course->route.'/pagamento')->with( $array );
 				else:
-					var_dump("actualizacion");
+					var_dump("actualizacion");*/
 					// dd($inscription->id);
 					return Redirect::to('/autenticacao/actualizacaoassociado')->with( $array );
 					// return Redirect::to($inscription->course->route.'/acesso')->with( $array );
-				endif;
+				/*endif;*/
 
 
 			else:
@@ -443,13 +444,13 @@ class AuthenticationController extends \BaseController {
 						'inscription' => $inscription
 						);
 				
-					if($inscription->paid):
+					/*if($inscription->paid):
 						return Redirect::to($inscription->course->route.'/pagamento')->with( $array );
 					else:
 						return Redirect::to($inscription->course->route.'/acesso')->with( $array );
-					endif;
+					endif;*/
 
-					// return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
+					return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
 				else:
 
@@ -709,7 +710,7 @@ class AuthenticationController extends \BaseController {
 				'inscription' => $inscription
 				);
 
-			return Redirect::to($course->route.'/acesso')->with( $array );
+			return Redirect::to('/autenticacao/actualizacaoparticipante')->with( $array );
 
 		else:
 

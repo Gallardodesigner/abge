@@ -106,7 +106,7 @@ class InscriptionController extends \BaseController {
 			'categories' => ORGAssociateCategories::all(),
 			);
 
-		if( $user->type == 'associate' || $user->id==127 ){
+		if( $user->type == 'associate'){
 			return View::make('backend.inscriptions.associate')->with($args);
 			}
 		else{

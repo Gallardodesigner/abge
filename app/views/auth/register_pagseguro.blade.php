@@ -92,54 +92,7 @@
 			<label>Email: </label>
 			<input type="email" name="email"/>
 		</div>
-		<!--<div class="control-box">
-			<label>CNPJ: </label>
-			<input type="text" name="cnpj" value="{{ $participant->cnpj }}"/>
-		</div>
-		<div class="control-box">
-			<label>Endereço: </label>
-			<input type="text" name="dir_com" value="{{ $participant->dir_com }}"/>
-		</div>
-		<div class="control-box">
-			<label>N°: </label>
-			<input type="text" name="numero_com" value="{{ $participant->numero_com }}"/>
-		</div>
-		<div class="control-box">
-			<label>Complemento: </label>
-			<input type="text" name="complemento_com" value="{{ $participant->complemento_com }}"/>
-		</div>
-		<div class="control-box">
-			<label>CEP: </label>
-			<input type="text" name="cep_com" value="{{ $participant->cep_com }}"/>
-		</div>
-		<div class="control-box">
-			<label>Estado: </label>
-				<select name="uf_com">
-					<option value="0" selected>Seleccione um estado</option>
-					@foreach($estados as $state)
-						@if($participant->uf_com == $state->id_estado)
-							<option value="{{$state->id_estado}}" selected>{{$state->name_estado}}</option>
-						@else
-							<option value="{{$state->id_estado}}">{{$state->name_estado}}</option>
-						@endif
-					@endforeach
-				</select>
-		</div>
-		<div class="control-box">
-			<label>Cidade: </label>
-			<input type="text" name="municipio_com" value="{{ $participant->municipio_com }}"/>
-		</div> -->
-		<!-- <div class="control-box">
-		<label>Tipo de participante: </label>
-			<select name="type">
-				<option value="0" selected>Seleccione um tipo</option>
-				@foreach($course->usertypes as $user)
-					@if(!$user->associate)
-						<option value="{{ $user->id }}">{{$user->title}}</option>
-					@endif
-				@endforeach
-			</select>
-		</div> -->
+		
 		<div class="control-box">
 			<input type="submit" value="Enviar"/>
 		</div>
