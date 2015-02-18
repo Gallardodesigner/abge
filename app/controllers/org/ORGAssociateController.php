@@ -248,11 +248,11 @@ class ORGAssociateController extends \BaseController {
 
 		$categoria = Input::get('categoria');
 
-		if(Input::get('categoria') != null):
+		if(Input::get('categoria') != '0'):
 			$associates = $associates->where('categoria', '=',Input::get('categoria'));
 		endif;
 
-		if(Input::get('tipo_usuario') != null):
+		if(Input::get('tipo_usuario') != '0'):
 			$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_usuario'))->get();
 			foreach($categories as $category):
 				$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);

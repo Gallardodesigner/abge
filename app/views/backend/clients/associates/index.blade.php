@@ -114,7 +114,7 @@ Todos os Associados
                                 <span style="display:inline-block;">
                                     <label>Categoria: </label>
                                     <select name="categoria">
-                                        <option value=null>Selecione</option>
+                                        <option value="0">Selecione</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id_categoria_asociado}}">{{$category->nombre_categoria}}</option>
                                         @endforeach
@@ -123,7 +123,7 @@ Todos os Associados
                                 <span style="display:inline-block;">
                                     <label>Tipo Pessoa: </label>
                                     <select name="tipo_usuario">
-                                        <option value=null>Selecione</option>
+                                        <option value="0">Selecione</option>
                                         <option value="F">Pessoa Fisica</option>
                                         <option value="J">Pessoa Juridica</option>
                                     </select>
