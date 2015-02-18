@@ -33,7 +33,6 @@
     line-height: 0;
 }
 
-
 /*
     Example specifics
 ------------------------------------------------------------------- /
@@ -81,11 +80,11 @@
 <!-- <script src="http://tinymce.cachefly.net/4.1/jquery.tinymce.min.js"></script>
 <script src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 
- -->
 {{HTML::script("assetsadmin/js/tiny_mce/jquery.tinymce.min.js")}}
 {{HTML::script("assetsadmin/js/tiny_mce/tinymce.js")}}
 
 {{HTML::script("assetsadmin/js/wysiwyg.js")}}
+ -->
 {{HTML::script("assetsadmin/js/jquery.smartWizard.min.js")}}
 {{HTML::script("assetsadmin/js/fullcalendar.min.js")}}
 {{HTML::script("assetsadmin/js/chosen/chosen.jquery.min.js")}}
@@ -140,8 +139,6 @@
     });
 
     /// Fin Lista sortable
-
-
    
     jQuery('#wizard').smartWizard({onFinish: onFinishCallback});
 
@@ -267,7 +264,6 @@ Associados
     Adicionar Associado
 @stop
 
-
 @section("MainContent")
 <div class="maincontent">
             <div class="maincontentinner">
@@ -316,7 +312,7 @@ Associados
                                     <li>
                                         <a href="#wiz1step6">
                                             <span class="h2">Passo 6</span>
-                                            <span class="label">Área de Atuação</span>
+                                            <span class="label">Área de Atuação - Curriculum</span>
                                         </a>
                                     </li>  
                                 </ul>
@@ -1161,7 +1157,7 @@ Associados
                                 </div>
                                 <div id="wiz1step5" class="formwiz"> 
 
-                                    <h4 class="widgettitle">Passo 4: Dados Acadêmicos</h4>
+                                    <h4 class="widgettitle">Passo 5: Dados Acadêmicos</h4>
                                     @foreach($associate->academics as $academic)
                                         <!-- 
                                         <fieldset>
@@ -1265,7 +1261,7 @@ Associados
                                 </div>
                                                                                
                                 <div id="wiz1step6" class="formwiz">
-                                    <h4 class="widgettitle">Passo 6: Área de Atuação</h4>
+                                    <h4 class="widgettitle">Passo 6: Área de Atuação - Curriculum</h4>
                                     <p>
                                         <label>Área de Atuação</label>
                                         <span class="field">
@@ -1284,7 +1280,56 @@ Associados
 												<option {{ $associate->area_especializacion == '11' ? 'selected' : '' }} value="11">Gerenciamento de Empreendimentos</option>
 											</select>
                                         </span>
-                                    </p>                                                           
+                                    </p>    
+                                    <p>
+                                        <label>Mini CV</label>
+                                        <script language=JavaScript>
+                                          <!--
+
+                                          function countCharacters(){
+                                            console.log("load");
+                                            var textarea = document.getElementById('classificados_conteudo');
+                                            var characters = document.getElementById('characters');
+                                            characters.innerHTML = (textarea.value.length);
+                                          }
+
+                                          function check_length()
+                                            {
+                                              var textarea = document.getElementById('classificados_conteudo');
+                                              var characters = document.getElementById('characters');
+                                              console.log(textarea.value);
+                                              maxLen = 500; // max number of characters allowed
+                                              if (textarea.value.length > maxLen) {
+                                                // Alert message if maximum limit is reached. 
+                                                // If required Alert can be removed. 
+                                                var msg = "Você atingiu seu limite máximo de caracteres permitido";
+                                                alert(msg);
+                                                // Reached the Maximum length so trim the textarea
+                                                textarea.value = textarea.value.substring(0, maxLen);
+                                               }
+                                              else{ // Maximum length not reached so update the value of my_text counter
+                                                characters.innerHTML = maxLen - textarea.value.length;
+                                                }
+                                              }
+                                            //-->
+                                        </script>
+                                        <span>
+                                            <textarea name="classificados_conteudo" id="classificados_conteudo" style="width:60%;height:150px" onkeypress="check_length(this.form);" onkeydown="check_length(this.form)">{{ $associate->classificados_conteudo }}</textarea>
+                                            <em style="display:inline-block;" id="characters" onload="countCharacters();">500</em><em> Caracteres de 500</em>                                                     
+                                        </span>
+                                    </p>  
+
+                                    <p>
+                                        <label>Imagem</label>
+                                        <img src="http://abge.org.br/uploads/classificados/{{$associate->classificados_imagem}}">
+                                    </p>                                                     
+                                    <p>
+                                        <label>Publicar Curriculum</label>
+                                        <span>
+                                            <input name="classificados_view" type="radio" value="1" id="asociados_classificados_view_1" {{$associate->classificados_view === "1" ? 'checked="checked"' : ''}}>&nbsp;<span for="asociados_classificados_view_1">Sim</span> <br>
+                                            <input name="classificados_view" type="radio" value="0" id="asociados_classificados_view_0" {{$associate->classificados_view === "0" ? 'checked="checked"' : ''}}>&nbsp;<span for="asociados_classificados_view_0">Não</span>
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
@@ -1300,5 +1345,4 @@ Associados
                 });
                 </script>
 
-                
 @stop

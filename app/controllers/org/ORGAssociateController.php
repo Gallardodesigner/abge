@@ -492,6 +492,8 @@ class ORGAssociateController extends \BaseController {
 				$associate->ddd_cel_com = Input::get('ddd_cel_com') != null ? Input::get('ddd_cel_com') : $associate->ddd_cel_com;
 				$associate->ddi_cel_com = Input::get('ddi_cel_com') != null ? Input::get('ddi_cel_com') : $associate->ddi_cel_com;
 				$associate->celular_com = Input::get('celular_com') != null ? Input::get('celular_com') : $associate->celular_com;
+				$associate->classificados_conteudo = Input::get('classificados_conteudo') != null ? Input::get('classificados_conteudo') : $associate->classificados_conteudo;
+				$associate->classificados_view = Input::get('classificados_view') != null ? Input::get('classificados_view') : $associate->classificados_view;
 
 				if($associate->save()):
 
