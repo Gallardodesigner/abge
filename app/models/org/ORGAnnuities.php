@@ -6,4 +6,8 @@ class ORGAnnuities extends \Eloquent {
 
 	protected $table = 'anuidades';
 
+	public function categories(){
+		return $this->hasMany('ORGAnnuityCategories', 'id_anuidade', 'id');
+	}
+
 }

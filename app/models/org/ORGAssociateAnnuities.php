@@ -6,8 +6,6 @@ class ORGAnnuityCategories extends Eloquent {
 
 	protected $table = 'anuidade_asociado';
 
-    public $timestamps = false;
-
 	public function associate(){
 		return $this->belongsTo('ORGAssociates', 'id_asociado', 'id');
 	}

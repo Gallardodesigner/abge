@@ -6,14 +6,12 @@ class ORGAnnuityCategories extends Eloquent {
 
 	protected $table = 'anuidade_categoria';
 
-    public $timestamps = false;
-
 	public function payments(){
 		return $this->hasMany('ORGAssociateAnnuities', 'id_anuidade_categoria', 'id');
 	}
 
 	public function category(){
-		return $this->hasOne('ORGAssociateCategories', 'id_categoria_asociado', 'id');
+		return $this->belongsTo('ORGAssociateCategories', 'id_categoria_asociado', 'id_categoria_asociado');
 	}
 
 	public function dates(){

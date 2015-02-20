@@ -6,8 +6,6 @@ class ORGAnnuityDates extends Eloquent {
 
 	protected $table = 'anuidade_data';
 
-    public $timestamps = false;
-
 	public function annuityCategory(){
 		return $this->belongsTo('ORGAnnuityCategories', 'id_anuidade_categoria', 'id');
 	}

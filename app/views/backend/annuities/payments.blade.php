@@ -133,13 +133,13 @@ Todas os Pagamentos
                                         <input type="checkbox" />
                                       </span></td>
                                         <td>{{$payment->associate->nombre_completo}}</td>
-                                        <td>{{$payment->payment->payment->nombre_categoria}}</td>
+                                        <td>{{$payment->category->category->nombre_categoria}}</td>
                                         <td>{{$payment->data}}</td>
                                         <td>{{$payment->preco}}</td>
                                         <td>{{$payment->status}}</td>
                                         <td class="center">
-                                            <a href="{{ $route }}/update/{{$payment->id_categoria_asociado}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-pencil" style="color:#FFF;margin-right:10px;"></i>Editar</a>
-                                            <a href="{{ $route }}/delete/{{$payment->id_categoria_asociado}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Deletar</a>
+                                            <a href="{{ $route }}/{{$payment->id_anuidade_categoria}}/payments/update/{{$payment->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-pencil" style="color:#FFF;margin-right:10px;"></i>Editar</a>
+                                            <a href="{{ $route }}/{{$payment->id_anuidade_categoria}}/payments/delete/{{$payment->id}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Eliminar</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -2,85 +2,51 @@
 
 class AnnuityCategoryController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /annuitycategory
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
+	protected static $parent = '/dashboard/annuities';
+
+	public function getIndex( $idAnnuity ){
+
+		$annuity = ORGAnnuities::find( $idAnnuity );
+		$categories = ORGAssociateCategories::all();
+
+		if( count($annuity->categories) < count($categories)):
+
+			foreach($categories as $category):
+		
+				$annuity_category = ORGAnnuityCategories::where('id_categoria_asociado', '=', $category->id_categoria_asociado)->take(1)->get();
+		
+				if( !isset($annuity_category[0])):
+
+					$annuity_category = new ORGAnnuityCategories();
+					$annuity_category->id_anuidade = $annuity->id;
+					$annuity_category->id_categoria_asociado = $category->id_categoria_asociado;
+					$annuity_category->save();
+		
+				endif;
+
+			endforeach;
+
+			return Redirect::to(self::parseRoute($idAnnuity));
+
+		else:
+
+			$args = array(
+				'annuity' => $annuity,
+				'categories' => $annuity->categories,
+				'route' => self::parseRoute( $idAnnuity ),
+				'parent' => self::$parent
+				);
+
+			return View::make('backend.annuities.categories')->with( $args );
+
+		endif;
+
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /annuitycategory/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+	public static function parseRoute( $idAnnuity ){
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /annuitycategory
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+		return self::$parent.'/'.$idAnnuity.'/categories';
 
-	/**
-	 * Display the specified resource.
-	 * GET /annuitycategory/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /annuitycategory/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /annuitycategory/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /annuitycategory/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }
