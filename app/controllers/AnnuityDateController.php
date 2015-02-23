@@ -2,85 +2,127 @@
 
 class AnnuityDateController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /annuitydate
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
+	protected static $ancestor = '/dashboard/annuities';
+
+	public function getIndex( $idAnnuity, $idCategory ){
+
+		$annuity = ORGAnnuities::find( $idAnnuity );
+		$category = ORGAnnuityCategories::find( $idCategory );
+
+		$args = array(
+			'category' => $category,
+			'dates' => $category->dates,
+			'route' => self::parseRoute( $idAnnuity, $idCategory ),
+			'parent' => self::parseParent( $idAnnuity )
+			);
+
+		return View::make('backend.annuities.dates.index')->with( $args );
+
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /annuitydate/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+	public function getCreate( $idAnnuity, $idCategory ){
+
+		$annuity = ORGAnnuities::find( $idAnnuity );
+		$category = ORGAnnuityCategories::find( $idCategory );
+
+		$args = array(
+			'category' => $category,
+			'route' => self::parseRoute( $idAnnuity, $idCategory ),
+			'parent' => self::parseParent( $idAnnuity )
+			);
+
+		return View::make('backend.annuities.dates.create')->with( $args );
+
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /annuitydate
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
+	public function postCreate( $idAnnuity, $idCategory ){
+
+		$annuity = ORGAnnuities::find( $idAnnuity );
+		$category = ORGAnnuityCategories::find( $idCategory );
+
+		$date = new ORGAnnuityDates();
+		$date->nome = Input::get('nome');
+		$date->preco = Input::get('preco');
+		$date->id_anuidade_categoria = $idCategory;
+		$date->pagseguro = Input::get('pagseguro');
+		$date->data_inicio = date('Y-m-d', strtotime(Input::get('data_inicio')));
+		$date->data_final = date('Y-m-d', strtotime(Input::get('data_final')));
+		$date->save();
+
+		return Redirect::to( self::parseRoute( $idAnnuity, $idCategory ));
+
 	}
 
-	/**
-	 * Display the specified resource.
-	 * GET /annuitydate/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+	public function getUpdate( $idAnnuity, $idCategory, $id ){
+
+		$annuity = ORGAnnuities::find( $idAnnuity );
+		$category = ORGAnnuityCategories::find( $idCategory );
+
+		$args = array(
+			'data' => ORGAnnuityDates::find( $id ),
+			'category' => $category,
+			'route' => self::parseRoute( $idAnnuity, $idCategory ),
+			'parent' => self::parseParent( $idAnnuity )
+			);
+
+		return View::make('backend.annuities.dates.edit')->with( $args );
+
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /annuitydate/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+	public function postUpdate( $idAnnuity, $idCategory, $id ){
+
+		$annuity = ORGAnnuities::find( $idAnnuity );
+		$category = ORGAnnuityCategories::find( $idCategory );
+
+		$date = ORGAnnuityDates::find( $id );
+		$date->nome = Input::get('nome');
+		$date->preco = Input::get('preco');
+		$date->id_anuidade_categoria = $idCategory;
+		$date->pagseguro = Input::get('pagseguro');
+		$date->data_inicio = date('Y-m-d', strtotime(Input::get('data_inicio')));
+		$date->data_final = date('Y-m-d', strtotime(Input::get('data_final')));
+		$date->save();
+
+		return Redirect::to( self::parseRoute( $idAnnuity, $idCategory ));
+
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /annuitydate/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
+	public function getDelete( $idAnnuity, $idCategory, $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.annuities_display_err'));
+
+		else:
+
+			$date = ORGAnnuityDates::find($id);
+
+			$delete = ORGAnnuityDates::destroy($id);
+
+			if(!$delete):
+
+				return Redirect::to(self::parseRoute($idAnnuity,$idCategory))->with('msg_error', Lang::get('messages.annuities_delete_err', array( 'title' => $date->nome )));
+
+			else:
+
+				return Redirect::to(self::parseRoute($idAnnuity,$idCategory))->with('msg_success', Lang::get('messages.annuities_delete', array( 'title' => $date->nome )));
+
+			endif;
+
+		endif;
+
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /annuitydate/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+	public static function parseParent( $idAnnuity ){
+
+		return self::$ancestor.'/'.$idAnnuity.'/categories';
+
+	}
+
+	public static function parseRoute( $idAnnuity, $idCategory ){
+
+		return self::parseParent( $idAnnuity ).'/'.$idCategory.'/dates';
+
 	}
 
 }

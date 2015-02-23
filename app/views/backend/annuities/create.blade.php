@@ -27,7 +27,7 @@
 @stop
 
 @section("title")
-Adiocionar Anuidades
+Adicionar Anuidades
 @stop
 
 @section("iconpage")

@@ -13,9 +13,7 @@ class AnnuityCategoryController extends \BaseController {
 
 			foreach($categories as $category):
 		
-				$annuity_category = ORGAnnuityCategories::where('id_categoria_asociado', '=', $category->id_categoria_asociado)->take(1)->get();
-		
-				if( !isset($annuity_category[0])):
+				if( !$annuity->hasCategory($category) ):
 
 					$annuity_category = new ORGAnnuityCategories();
 					$annuity_category->id_anuidade = $annuity->id;

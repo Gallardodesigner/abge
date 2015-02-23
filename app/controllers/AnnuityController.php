@@ -7,7 +7,7 @@ class AnnuityController extends \BaseController {
 	public function getIndex(){
 
 		return View::make('backend.annuities.index', array(
-			'annuities' => ORGAnnuities::all(),
+			'annuities' => ORGAnnuities::where('id','!=',0)->orderBy('ano','DESC')->get(),
 			'route' => $this->route,
 			'msg_success' => Session::get('msg_success'),
 			'msg_error' => Session::get('msg_error')

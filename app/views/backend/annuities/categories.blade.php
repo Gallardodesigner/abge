@@ -130,8 +130,8 @@ Todas as Categorias
                                       </span></td>
                                         <td>{{$category->category->nombre_categoria}}</td>
                                         <td class="center">
-                                            <a href="{{ $route }}/{{$category->id_categoria_asociado}}/payments" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-money" style="color:#FFF;margin-right:10px;"></i>Pagamentos</a>
-                                            <a href="{{ $route }}/{{$category->id_categoria_asociado}}/dates" class="btn btn-primary alertwarning" style="color:#FFF !important;"><i class="iconfa-calendar" style="color:#FFF;margin-right:10px;"></i>Datas</a>
+                                            <a href="{{ $route }}/{{$category->id}}/payments" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-money" style="color:#FFF;margin-right:10px;"></i>Pagamentos</a>
+                                            <a href="{{ $route }}/{{$category->id}}/dates" class="btn btn-primary alertwarning" style="color:#FFF !important;"><i class="iconfa-calendar" style="color:#FFF;margin-right:10px;"></i>Datas</a>
                                         </td>
                                     </tr>
                                 @endforeach

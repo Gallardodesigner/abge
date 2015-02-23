@@ -101,7 +101,7 @@
             var elem = jQuery(this);
             console.log(elem.serialize());
         });
-///Lista sortable
+        ///Lista sortable
         jQuery('.chosen-select').chosen({no_results_text: "Oops, nothing found!"});
      elementos=[];
         jQuery('#containment .sortable-list').sortable({
