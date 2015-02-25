@@ -439,6 +439,7 @@ class ORGAssociateController extends \BaseController {
 				$associate->status_asso = Input::get('status_asso') != null ? Input::get('status_asso') : $associate->status_asso;
 				// $associate->es_associado = 1 != null ? Input::get('es_associado') : $associate->es_associado;
 				$associate->estado_matricula = Input::get('estado_matricula') != null ? Input::get('estado_matricula') : $associate->estado_matricula;
+				$associate->institucion = Input::get('institucion') != null ? Input::get('institucion') : $associate->institucion;
 				$associate->codigo_matricula = Input::get('codigo_matricula') != null ? Input::get('codigo_matricula') : $associate->codigo_matricula;
 				$associate->nombre_completo = Input::get('nombre_completo') != null ? Input::get('nombre_completo') : $associate->nombre_completo;
 				$associate->tipo_pessoa = Input::get('tipo_pessoa') != null ? Input::get('tipo_pessoa') : $associate->tipo_pessoa;

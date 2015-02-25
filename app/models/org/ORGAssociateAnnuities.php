@@ -1,13 +1,17 @@
 <?php
 
-class ORGAnnuityCategories extends Eloquent {
+class ORGAssociateAnnuities extends Eloquent {
 
 	protected $connection = 'mysql_2';
 
 	protected $table = 'anuidade_asociado';
 
 	public function associate(){
-		return $this->belongsTo('ORGAssociates', 'id_asociado', 'id');
+		return $this->belongsTo('ORGAssociates', 'id_asociado', 'id_asociado');
+	}
+
+	public function category(){
+		return $this->belongsTo('ORGAnnuityCategories', 'id_anuidade_categoria', 'id');
 	}
 
 	public function annuityCategory(){

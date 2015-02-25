@@ -19,7 +19,7 @@ class ORGAnnuityCategories extends Eloquent {
 	}
 
 	public function annuity(){
-		return $this->belongsTo('ORGAnnuity', 'id_anuidade', 'id');
+		return $this->belongsTo('ORGAnnuities', 'id_anuidade', 'id');
 	}
 
 /* --------------------------- */

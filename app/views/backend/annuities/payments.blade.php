@@ -134,8 +134,8 @@ Todas os Pagamentos
                                       </span></td>
                                         <td>{{$payment->associate->nombre_completo}}</td>
                                         <td>{{$payment->category->category->nombre_categoria}}</td>
-                                        <td>{{$payment->data}}</td>
-                                        <td>{{$payment->preco}}</td>
+                                        <td>{{date('d-m-Y',strtotime($payment->data_pagamento))}}</td>
+                                        <td>{{$payment->pagamento}}</td>
                                         <td>{{$payment->status}}</td>
                                         <td class="center">
                                             <a href="{{ $route }}/{{$payment->id_anuidade_categoria}}/payments/update/{{$payment->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-pencil" style="color:#FFF;margin-right:10px;"></i>Editar</a>

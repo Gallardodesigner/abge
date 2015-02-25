@@ -90,7 +90,7 @@ Pagamentos
 @stop
 
 @section("nameview")
-Todas os Pagamentos
+Todos os Pagamentos
 @stop
 
 @section("MainContent")
@@ -102,8 +102,9 @@ Todas os Pagamentos
                     <div class="headtitle">
                         <div class="btn-group">
                             <a href="{{ $parent }}" class="btn dropdown-toggle">Voltar</a>
+                            <a href="{{ $route }}/create" class="btn dropdown-toggle" style="padding-left: 20px;">Adicionar Nuevo</a>
                         </div>
-                        <h4 class="widgettitle">Todas os Pagamentos</h4>
+                        <h4 class="widgettitle">Todos os Pagamentos do categoria {{ $category->category->nombre_categoria }} en anuidade {{ $category->annuity->ano }}</h4>
                     </div>
                     <table id="dyntable" class="table table-bordered responsive">
                         <colgroup>
@@ -118,10 +119,9 @@ Todas os Pagamentos
                             <tr>
                                 <th class="head0 nosort" style="width:15%"><input type="checkbox" class="checkall" /></th>
                                 <th class="head0" width="60%">Nome do Associado</th>
-                                <th class="head0" width="60%">Categoria</th>
-                                <th class="head0" width="60%">Data</th>
-                                <th class="head0" width="60%">Quantidade</th>
-                                <th class="head0" width="60%">Pago</th>
+                                <th class="head0" width="60%">Data de pagamento</th>
+                                <th class="head0" width="60%">Monto do Pagamento</th>
+                                <th class="head0" width="60%">Status do Pagamento</th>
                                 <th class="head0" style="width:40%">Ações</th>
                             </tr>
                         </thead>
@@ -133,13 +133,23 @@ Todas os Pagamentos
                                         <input type="checkbox" />
                                       </span></td>
                                         <td>{{$payment->associate->nombre_completo}}</td>
-                                        <td>{{$payment->payment->payment->nombre_categoria}}</td>
-                                        <td>{{$payment->data}}</td>
-                                        <td>{{$payment->preco}}</td>
-                                        <td>{{$payment->status}}</td>
+                                        <td>{{date('d-m-Y',strtotime($payment->data_pagamento))}}</td>
+                                        <td> R$ {{$payment->pagamento}}</td>
+                                        <td>
+                                            @if($payment->status)
+                                                <i class="iconfa-ok" style="color:#9F9;margin-right:10px;font-size:20pt"></i>
+                                            @else
+                                                <i class="iconfa-remove" style="color:#F99;margin-right:10px;font-size:20pt"></i>
+                                            @endif
+                                        </td>
                                         <td class="center">
-                                            <a href="{{ $route }}/update/{{$payment->id_categoria_asociado}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-pencil" style="color:#FFF;margin-right:10px;"></i>Editar</a>
-                                            <a href="{{ $route }}/delete/{{$payment->id_categoria_asociado}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Deletar</a>
+                                            @if(!$payment->status)
+                                                <a href="{{ $route }}/paid/{{$payment->id}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.verify_payment')}}</a>
+                                            @else
+                                                <a href="{{ $route }}/notpaid/{{$payment->id}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.decline_payment')}}</a>
+                                            @endif
+                                            <a href="{{ $route }}/update/{{$payment->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Editar</a>
+                                            <a data-id="{{$payment->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Eliminar</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -101,26 +101,4 @@ class AnnuityController extends \BaseController {
 
 	}
 
-	public function getPayments( $idAnnuity = '' ){
-
-		if( $idAnnuity == '' ):
-
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.annuities_display_err'));
-
-		else:
-
-			$annuity = ORGAnnuities::find($idAnnuity);
-
-			return View::make('backend.annuities.payments', array(
-				'parent' => $this->route,
-				'route' => $this->route.'/'.$idAnnuity.'/',
-				'annuity' => $annuity,
-				'msg_success' => Session::get('msg_success'),
-				'msg_error' => Session::get('msg_error')
-				));
-
-		endif;
-
-	}
-
 }

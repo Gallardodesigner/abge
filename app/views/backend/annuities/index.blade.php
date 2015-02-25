@@ -130,7 +130,7 @@ Todas as Anuidades
                                       </span></td>
                                         <td>{{$annuity->ano}}</td>
                                         <td class="center">
-                                            <a href="{{ $route }}/payments/{{$annuity->id}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-money" style="color:#FFF;margin-right:10px;"></i>Pagamentos</a>
+                                            <a href="{{ $route }}/{{$annuity->id}}/payments" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-money" style="color:#FFF;margin-right:10px;"></i>Pagamentos</a>
                                             <a href="{{ $route }}/{{$annuity->id}}/categories" class="btn btn-primary alertwarning" style="color:#FFF !important;"><i class="iconfa-sitemap" style="color:#FFF;margin-right:10px;"></i>Categorias</a>
                                             <a href="{{ $route }}/update/{{$annuity->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Editar</a>
                                             <a data-id="{{$annuity->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Eliminar</a>

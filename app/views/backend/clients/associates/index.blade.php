@@ -78,7 +78,7 @@
 @stop
 
 @section("title")
-Associadow
+Associados
 @stop
 
 @section("iconpage")

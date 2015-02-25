@@ -78,7 +78,7 @@
 @stop
 
 @section("title")
-Categorias
+Datas
 @stop
 
 @section("iconpage")
@@ -86,11 +86,11 @@ Categorias
 @stop
 
 @section("maintitle")
-Categorias
+Datas
 @stop
 
 @section("nameview")
-Todas as Categorias
+Todas as Datas
 @stop
 
 @section("MainContent")
@@ -104,7 +104,7 @@ Todas as Categorias
                             <a href="{{ $parent }}" class="btn dropdown-toggle">Voltar</a>
                             <a href="{{ $route }}/create" class="btn dropdown-toggle" style="padding-left: 20px;">Adicionar Nuevo</a>
                         </div>
-                        <h4 class="widgettitle">Todas as Categorias</h4>
+                        <h4 class="widgettitle">Todas as Datas de {{ $category->category->nombre_categoria }} en anuidade {{ $category->annuity->ano }}</h4>
                     </div>
                     <table id="dyntable" class="table table-bordered responsive">
                         <colgroup>
@@ -134,8 +134,8 @@ Todas as Categorias
                                         <input type="checkbox" />
                                       </span></td>
                                         <td>{{$date->nome}}</td>
-                                        <td>{{$date->data_inicio}}</td>
-                                        <td>{{$date->data_final}}</td>
+                                        <td>{{date('d-m-Y',strtotime($date->data_inicio))}}</td>
+                                        <td>{{date('d-m-Y',strtotime($date->data_final))}}</td>
                                         <td> R$ {{$date->preco}}</td>
                                         <td>{{$date->pagseguro}}</td>
                                         <td class="center">

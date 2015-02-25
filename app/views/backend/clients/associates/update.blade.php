@@ -349,7 +349,7 @@ Associados
                                         </span>
                                     </p>
                                     <p>
-                                        <label>Estado matricula</label>
+                                        <label>Estado matricula {{ var_dump($associate->estado_matricula) }}</label>
                                         <span class="field">
                                             @if (isset($estados))
                                                 <select class="chosen-select" name="estado_matricula" >

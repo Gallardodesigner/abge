@@ -44,8 +44,9 @@ if(Auth::check() && Auth::user()->type=="superadmin"):
 	Route::controller('/dashboard/arquivos', 'ArquivoController');
 	Route::controller('/dashboard/videos', 'VideoController');
 	Route::controller('/dashboard/annuities/{idAnnuity}/categories/{idCategory}/dates', 'AnnuityDateController');
-	Route::controller('/dashboard/annuities/{idAnnuity}/categories/{idCategory}/payments', 'AnnuityPaymentController');
+	Route::controller('/dashboard/annuities/{idAnnuity}/categories/{idCategory}/payments', 'AnnuityCategoryPaymentController');
 	Route::controller('/dashboard/annuities/{idAnnuity}/categories', 'AnnuityCategoryController');
+	Route::controller('/dashboard/annuities/{idAnnuity}/payments', 'AnnuityPaymentController');
 	Route::controller('/dashboard/annuities', 'AnnuityController');
 	Route::controller('/dashboard/clients/participants', 'ORGParticipantController');
 	Route::controller('/dashboard/clients/associates', 'ORGAssociateController');
