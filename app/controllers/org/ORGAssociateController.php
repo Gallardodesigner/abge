@@ -6,7 +6,7 @@ class ORGAssociateController extends \BaseController {
 
 	public function getIndex(){
 
-		$associates = ORGAssociates::all();
+		$associates = ORGAssociates::paginate(30);
 
 		$msg_success = Session::get('msg_success');
 
@@ -259,7 +259,7 @@ class ORGAssociateController extends \BaseController {
 			endforeach;
 		endif;
 
-		$associates = $associates->get();
+		$associates = $associates->paginate(30);
 
 		$msg_success = Session::get('msg_success');
 
@@ -447,7 +447,7 @@ class ORGAssociateController extends \BaseController {
 				$associate->cpf = Input::get('cpf') != null ? Input::get('cpf') : $associate->cpf;
 				$associate->data_cadastro = Input::get('data_cadastro') != null ? Input::get('data_cadastro') : $associate->data_cadastro;
 				$associate->edo_civil = Input::get('edo_civil') != null ? Input::get('edo_civil') : $associate->edo_civil;
-				$associate->senha = md5(Input::get('senha')) != null ? Input::get('senha') : $associate->senha;
+				$associate->senha = Input::get('senha') != null ? md5(Input::get('senha')) : $associate->senha;
 				$associate->web_site = Input::get('web_site') != null ? Input::get('web_site') : $associate->web_site;
 				$associate->rg = Input::get('rg') != null ? Input::get('rg') : $associate->rg;
 				$associate->razon_social = Input::get('razon_social') != null ? Input::get('razon_social') : $associate->razon_social;
@@ -495,6 +495,7 @@ class ORGAssociateController extends \BaseController {
 				$associate->celular_com = Input::get('celular_com') != null ? Input::get('celular_com') : $associate->celular_com;
 				$associate->classificados_conteudo = Input::get('classificados_conteudo') != null ? Input::get('classificados_conteudo') : $associate->classificados_conteudo;
 				$associate->classificados_view = Input::get('classificados_view') != null ? Input::get('classificados_view') : $associate->classificados_view;
+				$associate->area_de_especializacion = Input::get('area_de_especializacion') != null ? Input::get('area_de_especializacion') : $associate->area_de_especializacion;
 
 				if($associate->save()):
 

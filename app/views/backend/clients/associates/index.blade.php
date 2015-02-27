@@ -53,25 +53,7 @@
      jQuery(document).ready(function(){
         // dynamic table
 
-        var table = jQuery('#dyntable').dataTable({
-            "sPaginationType": "full_numbers",
-            "aaSortingFixed": [[0,'asc']],
-            "fnDrawCallback": function(oSettings) {
-                jQuery.uniform.update();
-            }
-        });
-
-        confirmButtons();
-
-        table.on('page.dt', function(e){
-            console.log("page");
-            confirmButtons();
-        });
-
-        table.on('draw.dt', function(e){
-            console.log("draw");
-            confirmButtons();
-        });
+        
         
     });
 </script>
@@ -198,6 +180,20 @@ Todos os Associados
                             @endif
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        
+                        {{ $associates->links() }}
+                        
+                    </div>
+                    <style type="text/css">
+                        .pagination ul{
+                            list-style: none;
+                            display: inline-block;
+                        }
+                        .pagination{
+                            text-align: right;
+                        }
+                    </style>
                 </div>
 
                 

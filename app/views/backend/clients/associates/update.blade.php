@@ -140,7 +140,7 @@
 
     /// Fin Lista sortable
    
-    jQuery('#wizard').smartWizard({onFinish: onFinishCallback});
+    jQuery('#wizard').smartWizard({onFinish: onFinishCallback,enableAllSteps: 1,enableFinishButton: 1,});
 
     function onFinishCallback(){
       jQuery("#associate").submit();  
@@ -280,37 +280,37 @@ Associados
                             <div id="wizard" class="wizard">
                                 <ul class="hormenu">
                                     <li>
-                                        <a href="#wiz1step1">
+                                        <a href="#wiz1step1" class="done" isdone="1">
                                             <span class="h2">Passo 1</span>
                                             <span class="label">Dados Pessoais</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#wiz1step2">
+                                        <a href="#wiz1step2" class="done" isdone="1">
                                             <span class="h2">Passo 2</span>
                                             <span class="label">Endereços Residencial</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#wiz1step3">
+                                        <a href="#wiz1step3" class="done" isdone="1">
                                             <span class="h2">Passo 3</span>
                                             <span class="label">Endereços Comercial</span>
                                         </a>
                                     </li>  
                                     <li>
-                                        <a href="#wiz1step4">
+                                        <a href="#wiz1step4" class="done" isdone="1">
                                             <span class="h2">Passo 4</span>
                                             <span class="label">Matrícula</span>
                                         </a>
                                     </li>  
                                     <li>
-                                        <a href="#wiz1step5">
+                                        <a href="#wiz1step5" class="done" isdone="1">
                                             <span class="h2">Passo 5</span>
                                             <span class="label">Dados Acadêmicos</span>
                                         </a>
                                     </li>  
                                     <li>
-                                        <a href="#wiz1step6">
+                                        <a href="#wiz1step6" class="done" isdone="1">
                                             <span class="h2">Passo 6</span>
                                             <span class="label">Área de Atuação - Curriculum</span>
                                         </a>
@@ -349,7 +349,7 @@ Associados
                                         </span>
                                     </p>
                                     <p>
-                                        <label>Estado matricula {{ var_dump($associate->estado_matricula) }}</label>
+                                        <label>Estado matricula</label>
                                         <span class="field">
                                             @if (isset($estados))
                                                 <select class="chosen-select" name="estado_matricula" >
@@ -1266,18 +1266,25 @@ Associados
                                         <label>Área de Atuação</label>
                                         <span class="field">
 											<select style="width: 215px; margin-left: 2px;" onchange="mostrar_otras()" name="area_de_especializacion" id="asociados_area_de_especializacion">
-												<option {{ $associate->area_especializacion == '0' ? 'selected' : '' }} value="0">Outras</option>
-												<option {{ $associate->area_especializacion == '1' ? 'selected' : '' }} value="1">Obra Civil</option>
-												<option {{ $associate->area_especializacion == '2' ? 'selected' : '' }} value="2">Irrigação</option>
-												<option {{ $associate->area_especializacion == '3' ? 'selected' : '' }} value="3">Mineração</option>
-												<option {{ $associate->area_especializacion == '4' ? 'selected' : '' }} value="4">Projeto / Consultoria</option>
-												<option {{ $associate->area_especializacion == '5' ? 'selected' : '' }} value="5">Planejamento Urbano</option>
-												<option {{ $associate->area_especializacion == '6' ? 'selected' : '' }} value="6">Gestão Ambiental</option>
-												<option {{ $associate->area_especializacion == '7' ? 'selected' : '' }} value="7">Hidrogeologia</option>
-												<option {{ $associate->area_especializacion == '8' ? 'selected' : '' }} value="8">Fundações / Serviços Geotécnicos</option>
-												<option {{ $associate->area_especializacion == '9' ? 'selected' : '' }} value="9" selected="selected">Geofísica</option>
-												<option {{ $associate->area_especializacion == '10' ? 'selected' : '' }} value="10">Ensino / Pesquisa</option>
-												<option {{ $associate->area_especializacion == '11' ? 'selected' : '' }} value="11">Gerenciamento de Empreendimentos</option>
+												<option {{ $associate->area_de_especializacion == '0' ? 'selected' : '' }} value="0">Selecione</option>
+                                                <optgroup label="Obras de Infraestrutura">
+                                                  <option {{ $associate->area_de_especializacion == '14' ? 'selected' : '' }} value="14">Barragens</option>
+                                                  <option {{ $associate->area_de_especializacion == '15' ? 'selected' : '' }} value="15">Subterrâneas</option>
+                                                  <option {{ $associate->area_de_especializacion == '16' ? 'selected' : '' }} value="16">Lineares</option>
+                                                </optgroup>
+												<!-- <option {{ $associate->area_de_especializacion == '1' ? 'selected' : '' }} value="1">Obra Civil</option> -->
+												<option {{ $associate->area_de_especializacion == '5' ? 'selected' : '' }} value="5">Consultoria em Geologia de Engenharia, Geotecnia e Ambiental</option>
+												<option {{ $associate->area_de_especializacion == '8' ? 'selected' : '' }} value="8">Fundações</option>
+												<option {{ $associate->area_de_especializacion == '9' ? 'selected' : '' }} value="9">Geotecnologias, Geoprocessamentos e Sensoriamento remoto</option>
+                                                <option {{ $associate->area_de_especializacion == '6' ? 'selected' : '' }} value="6">Gestão, Planejamento e Licenciamento Ambiental</option>
+                                                <!-- <option {{ $associate->area_de_especializacion == '2' ? 'selected' : '' }} value="2">Irrigação</option> -->
+                                                <option {{ $associate->area_de_especializacion == '3' ? 'selected' : '' }} value="3">Mineração</option>
+                                                <!-- <option {{ $associate->area_de_especializacion == '4' ? 'selected' : '' }} value="4">Projeto / Consultoria</option> -->
+                                                <option {{ $associate->area_de_especializacion == '7' ? 'selected' : '' }} value="7">Recursos Hídricos</option>
+                                                <option {{ $associate->area_de_especializacion == '12' ? 'selected' : '' }} value="12">Resíduos e áreas contaminadas</option>
+                                                <option {{ $associate->area_de_especializacion == '13' ? 'selected' : '' }} value="13">Serviços em Geologia de Engenharia, Geotecnia e Ambiental</option>
+												<!-- <option {{ $associate->area_de_especializacion == '10' ? 'selected' : '' }} value="10">Ensino / Pesquisa</option> -->
+												<!-- <option {{ $associate->area_de_especializacion == '11' ? 'selected' : '' }} value="11">Gerenciamento de Empreendimentos</option> -->
 											</select>
                                         </span>
                                     </p>    
