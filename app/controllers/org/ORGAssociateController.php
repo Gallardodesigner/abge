@@ -36,20 +36,16 @@ class ORGAssociateController extends \BaseController {
 		    	
 		    		$cod_aso = $aso->id_asociado;
 		    		$nome = $aso->nombre_completo;
-		    		$rg = "";
-		    		//No agregados
+		    		$razon_social = $aso->razon_social;
 		    		$incripcion_estadual = $aso->inscripcion_estadual;
 		    		$incripcion_municipal = $aso->inscripcion_municipal;
+		    		$cpf = $aso->cpf;
+		    		$tipo_pessoa = $aso->tipo_pessoa;
+		    		$rg = $aso->rg;
+		    		$celular_residencia = $aso->celular_res;
+		    		$email = $aso->email;
+		    		$telefone_residencia = $aso->ddd_res . ' ' . $aso->ddi_res . ' ' . $aso->telefone_res;
 		    		$data_nascimento = $aso->data_nascimento;
-
-		    		//anuidades
-		    		// dd($aso->anuidade[0]->ano);
-		    		// $anos_anuidade= $aso->anuidade[0]->ano;
-		    		// $valor_anuidade = $aso->anuidade[0]->valor;
-		    		// $valor_pago = $aso->anuidade[0]->valor_pago;
-		    		// $data_anuidade= $aso->anuidade[0]->data;
-
-		    		
 		    		$training = ORGTrainings::find($aso->formacao);
 		    			if($training):
 		    				$training = $training->nome;
@@ -71,59 +67,69 @@ class ORGAssociateController extends \BaseController {
 	                        break;
 	                        endif;
 	                    endforeach;
+		    		$municipio_residencia = $aso->municipio_res;
+		    		$direccion_residencia = $aso->dir_res;
+		    		$complemento_residencia= $aso->complemento_res;
+	                $barrio_residencia = $aso->bairro_res;
+		    		$numero_residencia = $aso->numero_res;
+		    		$cep_residencia = $aso->cep_residencia;
+		    		$uf_residencia ="";
+		    		$ufs = ORGuf::all();
+		    		foreach($ufs as $uf):
+                        if($aso->uf_res == $uf->id_uf):
+                            $uf_residencia=$uf->name_uf;
+                        break;
+                        endif;
+                    endforeach;
+		    		$pais_residencia = $aso->pais_res;
+		    		$empresa = $aso->empresa;
 	                $logradouro_com ="";
 			    		foreach($backyards as $backyard):
 	                        if($aso->logradouro_com == $backyard->id_logradouro):
-	                            $logradouro_res=$backyard->nombre;
+	                            $logradouro_com=$backyard->nombre;
 	                        break;
 	                        endif;
 	                    endforeach;
-
-	                $barrio_res = $aso->bairro_res;
-	                $barrio_com = $aso->bairro_com;
-		    		$pasaporte =  $aso->passaporte;
-		    		$website =  $aso->web_site;
-		    		$responsable =  $aso->responsavel;
-		    		$publicaciones =  $aso->publicacoes;
-		    		$nombre_cientifico =  $aso->nome_cientifico;
-		    		//Fin de no agregados
-		    		//Campos participants no agregados
-
-		    		$cidade_empresa = "";
-		    		$estado_empresa = "";
-		    		$cep_empresa =  "";
-		    		$state = "";
-		    			
-		    		//Fin de campos participants no agregados
-		    		$cpf = $aso->cpf;
-		    		$razon_social = $aso->razon_social;
-		    		$celular = $aso->celular_res;
-		    		$tipo_pessoa = $aso->tipo_pessoa;
-		    		$data_nascimento = $aso->data_nascimento;
-		    		$email = $aso->email;
-		    		$data_cadastro = $aso->data_cadastro;
-		    		$empresa = $aso->empresa;
-		    		$empresa_dir = $aso->dir_com;
-		    		$empresa_com = $aso->complemento_com;
+		    		$municipio_empresa = $aso->municipio_com;
+		    		$direccion_empresa = $aso->dir_com;
+		    		$uf_empresa="";
+                    foreach($ufs as $uf):
+                        if($aso->uf_com == $uf->id_uf):
+                            $uf_empresa=$uf->name_uf;
+                        break;
+                        endif;
+                    endforeach;
+		    		$numero_empresa = $aso->numero_com;
+		    		$cep_empresa = $aso->cep_com;
+	                $barrio_empresa = $aso->bairro_com;
+		    		$complemento_empresa = $aso->complemento_com;
+		    		$pais_empresa = $aso->pais_com;
 		    		$empresa_tel = $aso->ddd_com . ' ' . $aso->ddi_com . ' ' . $aso->telefone_com;
+		    		$celular_empresa = $aso->celular_com;
 		    		$cnpj = $aso->cnpj;
 		    		$cargo = $aso->cargo;
-		    		$dir = $aso->dir_res;
-		    		$cep = $aso->cep_res;
-		    		$complemento = $aso->complemento_res;
-		    		$telefone = $aso->ddd_res . ' ' . $aso->ddi_res . ' ' . $aso->telefone_res;
- 		    		$estado = '';
-		    		$cidade = '';
+		    		$pasaporte = $aso->passaporte;
+		    		$website =  $aso->web_site;
+		    		$responsable =  $aso->responsavel;
+		    		$nombre_cientifico= $aso->nome_cientifico;
+		    		$publicacoes = $aso->publicacoes;
+		    		$observacao = $aso->observacao;
+		    		$institucion = $aso->institucion;
+		    		$data_cadastro = $aso->data_cadastro;
+		    		
+		    		// $area_de_especializacion_empresa=$aso->area_de_especializacion_otro;
 		    	
 		    $sheet->appendRow(1,array("Codigo Asociado",
-		    						  "Nome",
-		    						  "RG",
-		    						  "Email",
-		    						  "Telefone",
-		    						  "Celular",
+		    						  "Nome Completo",
+		    						  "Razon Social",
+		    						  "Inscription estadual",
+		    						  "Inscription municipal",
 		    						  "CPF",
 		    						  "Tipo Pessoa",
-
+		    						  "RG",
+		    						  "Celular",
+		    						  "Email",
+		    						  "Telefone",
 		    						  "anuidade_2013",
 		    						  "valor_anuidade_2013",
 		    						  "valor_pago_2013",
@@ -139,44 +145,53 @@ class ORGAssociateController extends \BaseController {
 		    						  // "Pagamento",
 		    						  // "Fecha",
 		    						  // "User Type",
-		    						  "Inscription estadual",
-		    						  "Inscription municipal",
 		    						  "Data Nascimento",
 		    						  "Training",
 		    						  "Category Title",
-		    						  "Logradouro Residencia",
-		    						  "Endereço",
-		    						  "Complemento",
+		    						  "Logradouro Res",
+		    						  "Municipio Res",
+		    						  "Endereço Res",
+		    						  "Complemento Res",
 		    						  "Barrio Res",
-		    						  "CEP",
-		    						  "Cidade",
-		    						  "Estado",
+		    						  "Numero Res",
+		    						  "CEP Res",
+		    						  // "Cidade",
+		    						  "Estado Res",
+		    						  "Pais Res",
 		    						  "Empresa",
 		    						  "Logradouro Empresa",
+		    						  "Municipio Empresa",
 		    						  "Endereço Empresa",
-		    						  "Cidade Empresa",
+		    						  // "Cidade Empresa",
 		    						  "Estado Empresa",
+		    						  "Numero Empresa",
 		    						  "CEP Empresa",
 		    						  "Complemento Empresa",
 		    						  "Barrio Empresa",
 		    						  "Telefone Empresa",
+		    						  "Celular Empresa",
 		    						  "CNPJ",
 		    						  "Cargo",
 		    						  "Pasaporte",
 		    						  "Website",
 		    						  "Responsavel",
 		    						  "Nome Cientifico",
-		    						  "Publicacoes" ));
+		    						  "Publicacoes",
+		    						  "Observaçoes",
+		    						  "Institucion",
+		    						  "Data Cadastro" ));
 
 		    	$total= ["codigo"=>$cod_aso,
 		    			 "nome" => $nome,
-		    			 "rg" => $rg,  
-		    			 "email" => $email,
-		    			 "telefone" => $telefone,
-		    			 "celular" => $celular,
+		    			 "razon_social"=>$razon_social,
+		    			 "inscription_est" => $incripcion_estadual,
+		    			 "incripcion_municipal" => $incripcion_municipal,
 		    			 "cpf" => $cpf,
 		    			 "tipo_pessoa" => $tipo_pessoa,
-		    			  
+		    			 "rg" => $rg,  
+		    			 "celular" => $celular_residencia,
+		    			 "email" => $email,
+		    			 "telefone" => $telefone_residencia,
 						 "anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->ano : "Não tem anuidade" ,
 						 "valor_anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->valor : "Não tem anuidade" ,
 						 "valor_pago_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->valor_pago : "Não tem anuidade" ,
@@ -189,36 +204,47 @@ class ORGAssociateController extends \BaseController {
 						 "valor_anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->valor : "Não tem anuidade" ,
 						 "valor_pago_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->valor_pago : "Não tem anuidade" ,
 						 "data_anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->data : "Não tem anuidade",
+		    			 "data_nascimento" => $data_nascimento,
+		    			 "training" => $training,
+		    			  
 			 			 // "paid" => $paid,
 		    			 // "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
 		    			 // "type" => $inscription->usertype->title,
-		    			 "inscription_est" => $incripcion_estadual,
-		    			 "incripcion_municipal" => $incripcion_municipal,
-		    			 "data_nascimento" => $data_nascimento,
-		    			 "training" => $training,
 		    			 "categoria_titulo" => $categoria_titulo,
 		    			 "logradouro_res" => $logradouro_res, 
-		    			 "dir" => $dir,
-		    			 "complemento" => $complemento,
-		    			 "barrio_res" => $barrio_res,
-		    			 "cep" => $cep,
-		    			 "cidade" => $cidade,
-		    			 "estado" => $estado,
+		    			 "municipio_residencia" => $municipio_residencia,
+		    			 "direccion_residencia" => $direccion_residencia,
+		    			 "complemento_residencia" => $complemento_residencia,
+		    			 "barrio_residencia" => $barrio_residencia,
+		    			 "numero_residencia" => $numero_residencia,
+		    			 "cep_residencia" => $cep_residencia,
+		    			 // "cidade" => $cidade,
+		    			 "estado_residencia" => $uf_residencia,
+		    			 "pais_residencia" => $pais_residencia,
 		    			 "empresa" => $empresa,
 		    			 "logradouro_com" => $logradouro_com,
-		    			 "empresa_dir" => $empresa_dir,
+		    			 "municipio_empresa" => $municipio_empresa,
+		    			 "direccion_empresa" => $direccion_empresa,
+		    			 "estado_empresa" => $uf_empresa,
+		    			 "numero_empresa" => $numero_empresa,
 		    			 "cep_empresa" => $cep_empresa,
-		    			 "empresa_com" => $empresa_com,
-		    			 "barrio_com" => $barrio_com,
+		    			 "complemento_empresa" => $complemento_empresa,
+		    			 "barrio_empresa" => $barrio_empresa,
+		    			 // "pais_empresa" => $pais_empresa,
 		    			 "empresa_tel" => $empresa_tel,
+		    			 "celular_empresa" => $celular_empresa,
 		    			 "cnpj" => $cnpj,
 		    			 "cargo" => $cargo,
 		    			 "pasaporte" => $pasaporte,
 		    			 "website" => $website,
 		    			 "responsable" => $responsable,
-		    			 "nome_cientifico" => $nombre_cientifico,
-		    			 "publicaciones" => $publicaciones
+		    			 "nombre_cientifico" => $nombre_cientifico,
+		    			 "publicaciones" => $publicacoes,
+		    			 "observaciones" => $observacao,
+		    			 "institucion" => $institucion,
+		    			 "data_cadastro" => $data_cadastro
 		    			 ];
+		    			 // var_dump($total);
 		        	$sheet->appendRow($n,$total);
 
 		    	// break;
