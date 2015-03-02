@@ -83,7 +83,7 @@ Todos os Associados
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="{{ $route }}/exportasociados" class="btn"><i class="iconsweets-excel"></i>Excel</a>
+                            <a href="{{ $route }}/exportasociados/{{ $filter['nombre_completo'] != '' ? $filter['nombre_completo'] : '0' }}/{{ $filter['categoria'] }}/{{ $filter['tipo_usuario'] }}" class="btn"><i class="iconsweets-excel"></i>Excel</a>
                             <a href="{{ $route }}/create" class="btn dropdown-toggle">Adicionar Associado</a>
                         </div>
                         <h4 class="widgettitle">Todos os Associados</h4>
@@ -92,22 +92,22 @@ Todos os Associados
                         <form method="post">
                             <div>                        
                                 <h4 style="display:inline-block;margin-right:1em;">Filtrar por: </h4>
-                                <span style="display:inline-block;"><label>Nome: </label><input type="text" name="nombre_completo"></span>
+                                <span style="display:inline-block;"><label>Nome: </label><input type="text" name="nombre_completo" value="{{ $filter['nombre_completo'] }}"></span>
                                 <span style="display:inline-block;">
                                     <label>Categoria: </label>
                                     <select name="categoria">
                                         <option value="0">Selecione</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id_categoria_asociado}}">{{$category->nombre_categoria}}</option>
+                                            <option value="{{$category->id_categoria_asociado}}" {{ $filter['categoria'] == $category->id_categoria_asociado ? 'selected' : '' }}>{{$category->nombre_categoria}}</option>
                                         @endforeach
                                     </select>
                                 </span>
                                 <span style="display:inline-block;">
                                     <label>Tipo Pessoa: </label>
                                     <select name="tipo_usuario">
-                                        <option value="0">Selecione</option>
-                                        <option value="F">Pessoa Fisica</option>
-                                        <option value="J">Pessoa Juridica</option>
+                                        <option value="0" {{ $filter['tipo_usuario'] == '0' ? 'selected' : '' }}>Selecione</option>
+                                        <option value="F" {{ $filter['tipo_usuario'] === 'F' ? 'selected' : '' }}>Pessoa Fisica</option>
+                                        <option value="J" {{ $filter['tipo_usuario'] === 'J' ? 'selected' : '' }}>Pessoa Juridica</option>
                                     </select>
                                 </span>
                                 <!-- <span style="display:inline-block;">

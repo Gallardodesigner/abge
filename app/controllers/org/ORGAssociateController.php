@@ -13,6 +13,7 @@ class ORGAssociateController extends \BaseController {
 		$msg_error = Session::get('msg_error');
 
 		return View::make('backend.clients.associates.index', array(
+			'filter' => array('nombre_completo' => '', 'categoria' => 0, 'tipo_usuario' => 0),
 			'associates' => $associates,
 			'categories' => ORGAssociateCategories::all(),
 			'route' => $this->route,
@@ -21,9 +22,68 @@ class ORGAssociateController extends \BaseController {
 			));
 
 	}
-	public function getExportasociados(){
 
-		$associates = ORGAssociates::all();
+	public function postIndex(){
+
+		$associates = ORGAssociates::where('nombre_completo','LIKE', '%'.Input::get('nombre_completo').'%');
+
+		$categoria = Input::get('categoria');
+
+		if(Input::get('categoria') != '0'):
+			$associates = $associates->where('categoria', '=',Input::get('categoria'));
+		endif;
+
+		if(Input::get('tipo_usuario') != '0'):
+			$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_usuario'))->get();
+			foreach($categories as $category):
+				$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
+			endforeach;
+		endif;
+
+		$associates = $associates->paginate(30);
+
+		$msg_success = Session::get('msg_success');
+
+		$msg_error = Session::get('msg_error');
+
+		return View::make('backend.clients.associates.index', array(
+			'filter' => array('nombre_completo' => Input::get('nombre_completo'), 'categoria' => Input::get('categoria'), 'tipo_usuario' => Input::get('tipo_usuario')),
+			'associates' => $associates,
+			'categories' => ORGAssociateCategories::all(),
+			'route' => $this->route,
+			'msg_success' => $msg_success,
+			'msg_error' => $msg_error
+			));
+	}
+
+	public function getExportasociados($nome = '', $categoria = '', $tipo_usuario = ''){
+
+		if( $nome == '0' AND $categoria == '0' AND $tipo_usuario == '0'):
+
+			$associates = ORGAssociates::all();
+
+		else:
+
+			$nome = $nome == '0' ? '' : $nome;
+
+			$associates = ORGAssociates::where('nombre_completo','LIKE', '%'.$nome.'%');
+
+			$categoria = Input::get('categoria');
+
+			if(Input::get('categoria') != '0'):
+				$associates = $associates->where('categoria', '=',$categoria);
+			endif;
+
+			if(Input::get('tipo_usuario') != '0'):
+				$categories = ORGAssociateCategories::where('tipo_usuario','=',$tipo_usuario)->get();
+				foreach($categories as $category):
+					$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
+				endforeach;
+			endif;
+
+			$associates = $associates->get();
+
+		endif;
 		
 		Excel::create('Export Asociados - '. rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($associates){
 
@@ -53,8 +113,8 @@ class ORGAssociateController extends \BaseController {
 		    			else:
 		    				$training = "";
 		    			endif;
-		    		$categoria_titulo = ORGAssociateCategories::all();
-			    		foreach($categoria_titulo as $cat):
+		    		$categoria_titulo = "";
+			    		foreach(ORGAssociateCategories::all() as $cat):
 	                        if($aso->categoria == $cat->id_categoria_asociado):
 	                            $categoria_titulo = $cat->nombre_categoria;
 	                            break;
@@ -73,7 +133,7 @@ class ORGAssociateController extends \BaseController {
 		    		$complemento_residencia= $aso->complemento_res;
 	                $barrio_residencia = $aso->bairro_res;
 		    		$numero_residencia = $aso->numero_res;
-		    		$cep_residencia = $aso->cep_residencia;
+		    		$cep_residencia = $aso->cep_res;
 		    		$uf_residencia ="";
 		    		$ufs = ORGuf::all();
 		    		foreach($ufs as $uf):
@@ -177,9 +237,9 @@ class ORGAssociateController extends \BaseController {
 		    						  "Pasaporte",
 		    						  "Website",
 		    						  "Responsavel",
-		    						  "Nome Cientifico",
-		    						  "Publicacoes",
-		    						  "Observaçoes",
+		    						  // "Nome Cientifico",
+		    						  // "Publicacoes",
+		    						  // "Observaçoes",
 		    						  "Institucion",
 		    						  "Data Cadastro" ));
 
@@ -215,7 +275,7 @@ class ORGAssociateController extends \BaseController {
 		    			 "categoria_titulo" => $categoria_titulo,
 		    			 "tipo_correspondencia" => $tipo_correspondencia,
 		    			 "logradouro_res" => $logradouro_res, 
-		    			 "municipio_residencia" => $municipio_residencia->name_municipio,
+		    			 "municipio_residencia" => isset($municipio_residencia->name_municipio) ? $municipio_residencia->name_municipio : '',
 		    			 "direccion_residencia" => $direccion_residencia,
 		    			 "complemento_residencia" => $complemento_residencia,
 		    			 "barrio_residencia" => $barrio_residencia,
@@ -226,7 +286,7 @@ class ORGAssociateController extends \BaseController {
 		    			 "pais_residencia" => $pais_residencia,
 		    			 "empresa" => $empresa,
 		    			 "logradouro_com" => $logradouro_com,
-		    			 "municipio_empresa" => $municipio_empresa->name_municipio,
+		    			 "municipio_empresa" => isset($municipio_empresa->name_municipio) ? $municipio_empresa->name_municipio : '',
 		    			 "direccion_empresa" => $direccion_empresa,
 		    			 "estado_empresa" => $uf_empresa,
 		    			 "numero_empresa" => $numero_empresa,
@@ -241,9 +301,9 @@ class ORGAssociateController extends \BaseController {
 		    			 "pasaporte" => $pasaporte,
 		    			 "website" => $website,
 		    			 "responsable" => $responsable,
-		    			 "nombre_cientifico" => $nombre_cientifico,
-		    			 "publicaciones" => $publicacoes,
-		    			 "observaciones" => $observacao,
+		    			 // "nombre_cientifico" => $nombre_cientifico,
+		    			 // "publicaciones" => $publicacoes,
+		    			 // "observaciones" => $observacao,
 		    			 "institucion" => $institucion,
 		    			 "data_cadastro" => $data_cadastro
 		    			 ];
@@ -269,38 +329,6 @@ class ORGAssociateController extends \BaseController {
 		//     });
 
 		// })->export('xlsx');
-	}
-
-	public function postIndex(){
-
-		$associates = ORGAssociates::where('nombre_completo','LIKE', '%'.Input::get('nombre_completo').'%');
-
-		$categoria = Input::get('categoria');
-
-		if(Input::get('categoria') != '0'):
-			$associates = $associates->where('categoria', '=',Input::get('categoria'));
-		endif;
-
-		if(Input::get('tipo_usuario') != '0'):
-			$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_usuario'))->get();
-			foreach($categories as $category):
-				$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
-			endforeach;
-		endif;
-
-		$associates = $associates->paginate(30);
-
-		$msg_success = Session::get('msg_success');
-
-		$msg_error = Session::get('msg_error');
-
-		return View::make('backend.clients.associates.index', array(
-			'associates' => $associates,
-			'categories' => ORGAssociateCategories::all(),
-			'route' => $this->route,
-			'msg_success' => $msg_success,
-			'msg_error' => $msg_error
-			));
 	}
 
 	public function getCreate(){

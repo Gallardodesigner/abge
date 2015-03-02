@@ -688,6 +688,7 @@ return array(
     'ORGAnnuityCategories' => $baseDir . '/app/models/org/ORGAnnuityCategories.php',
     'ORGAnnuityDates' => $baseDir . '/app/models/org/ORGAnnuityDates.php',
     'ORGAssociateAnnuities' => $baseDir . '/app/models/org/ORGAssociateAnnuities.php',
+    'ORGuf' => $baseDir . '/app/models/org/ORGuf.php',
     'PHPExcel' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel.php',
     'PHPExcel_Autoloader' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel/Autoloader.php',
     'PHPExcel_Best_Fit' => $vendorDir . '/phpoffice/phpexcel/Classes/PHPExcel/Shared/trend/bestFitClass.php',
