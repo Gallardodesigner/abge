@@ -46,6 +46,7 @@ class ORGAssociateController extends \BaseController {
 		    		$email = $aso->email;
 		    		$telefone_residencia = $aso->ddd_res . ' ' . $aso->ddi_res . ' ' . $aso->telefone_res;
 		    		$data_nascimento = $aso->data_nascimento;
+		    		$tipo_correspondencia = $aso->tipo_correspondencia;
 		    		$training = ORGTrainings::find($aso->formacao);
 		    			if($training):
 		    				$training = $training->nome;
@@ -147,7 +148,8 @@ class ORGAssociateController extends \BaseController {
 		    						  // "User Type",
 		    						  "Data Nascimento",
 		    						  "Training",
-		    						  "Category Title",
+		    						  "Tipo de Categoria",
+		    						  "Tipo de Correspondencia",
 		    						  "Logradouro Res",
 		    						  "Municipio Res",
 		    						  "Endereço Res",
