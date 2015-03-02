@@ -30,7 +30,7 @@ class ORGAssociateController extends \BaseController {
 		    $excel->sheet('Excel sheet', function($sheet) use ($associates){
 				
 		        $sheet->setOrientation('portrait');
-		   $n=2;
+		   $n =2;
 			foreach($associates as $aso):
 		    	
 		    	
@@ -68,7 +68,7 @@ class ORGAssociateController extends \BaseController {
 	                        break;
 	                        endif;
 	                    endforeach;
-		    		$municipio_residencia = $aso->municipio_res;
+		    		$municipio_residencia = ORGTowns::find($aso->municipio_res);
 		    		$direccion_residencia = $aso->dir_res;
 		    		$complemento_residencia= $aso->complemento_res;
 	                $barrio_residencia = $aso->bairro_res;
@@ -91,7 +91,7 @@ class ORGAssociateController extends \BaseController {
 	                        break;
 	                        endif;
 	                    endforeach;
-		    		$municipio_empresa = $aso->municipio_com;
+		    		$municipio_empresa = ORGTowns::find($aso->municipio_com);
 		    		$direccion_empresa = $aso->dir_com;
 		    		$uf_empresa="";
                     foreach($ufs as $uf):
@@ -147,7 +147,7 @@ class ORGAssociateController extends \BaseController {
 		    						  // "Fecha",
 		    						  // "User Type",
 		    						  "Data Nascimento",
-		    						  "Training",
+		    						  "Formação",
 		    						  "Tipo de Categoria",
 		    						  "Tipo de Correspondencia",
 		    						  "Logradouro Res",
@@ -213,8 +213,9 @@ class ORGAssociateController extends \BaseController {
 		    			 // "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
 		    			 // "type" => $inscription->usertype->title,
 		    			 "categoria_titulo" => $categoria_titulo,
+		    			 "tipo_correspondencia" => $tipo_correspondencia,
 		    			 "logradouro_res" => $logradouro_res, 
-		    			 "municipio_residencia" => $municipio_residencia,
+		    			 "municipio_residencia" => $municipio_residencia->name_municipio,
 		    			 "direccion_residencia" => $direccion_residencia,
 		    			 "complemento_residencia" => $complemento_residencia,
 		    			 "barrio_residencia" => $barrio_residencia,
@@ -225,7 +226,7 @@ class ORGAssociateController extends \BaseController {
 		    			 "pais_residencia" => $pais_residencia,
 		    			 "empresa" => $empresa,
 		    			 "logradouro_com" => $logradouro_com,
-		    			 "municipio_empresa" => $municipio_empresa,
+		    			 "municipio_empresa" => $municipio_empresa->name_municipio,
 		    			 "direccion_empresa" => $direccion_empresa,
 		    			 "estado_empresa" => $uf_empresa,
 		    			 "numero_empresa" => $numero_empresa,
