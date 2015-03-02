@@ -6,6 +6,8 @@ class ORGTowns extends Eloquent {
 
 	protected $table = 'municipio';
 
+	public $primaryKey  = 'id_municipio';
+
     public $timestamps = false;
 	
 }

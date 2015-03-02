@@ -6,6 +6,8 @@ class ORGStates extends Eloquent {
 
 	protected $table = 'estados';
 
+	public $primaryKey  = 'id_estados';
+
     public $timestamps = false;
 	
 }
