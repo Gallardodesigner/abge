@@ -41,7 +41,6 @@ class ORGAssociateController extends \BaseController {
 		    		$incripcion_estadual = $aso->inscripcion_estadual;
 		    		$incripcion_municipal = $aso->inscripcion_municipal;
 		    		$data_nascimento = $aso->data_nascimento;
-		    		$tipo_correspondencia = $aso->tipo_correspondencia;
 
 		    		//anuidades
 		    		// dd($aso->anuidade[0]->ano);
@@ -171,15 +170,13 @@ class ORGAssociateController extends \BaseController {
 
 		    	$total= ["codigo"=>$cod_aso,
 		    			 "nome" => $nome,
-		    			 "razon_social"=>$razon_social,
-		    			 "inscription_est" => $incripcion_estadual,
-		    			 "incripcion_municipal" => $incripcion_municipal,
+		    			 "rg" => $rg,  
+		    			 "email" => $email,
+		    			 "telefone" => $telefone,
+		    			 "celular" => $celular,
 		    			 "cpf" => $cpf,
 		    			 "tipo_pessoa" => $tipo_pessoa,
-		    			 "rg" => $rg,  
-		    			 "celular" => $celular_residencia,
-		    			 "email" => $email,
-		    			 "telefone" => $telefone_residencia,
+		    			  
 						 "anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->ano : "Não tem anuidade" ,
 						 "valor_anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->valor : "Não tem anuidade" ,
 						 "valor_pago_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->valor_pago : "Não tem anuidade" ,
@@ -192,46 +189,35 @@ class ORGAssociateController extends \BaseController {
 						 "valor_anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->valor : "Não tem anuidade" ,
 						 "valor_pago_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->valor_pago : "Não tem anuidade" ,
 						 "data_anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->data : "Não tem anuidade",
-		    			 "data_nascimento" => $data_nascimento,
-		    			 "training" => $training,
-		    			  
 			 			 // "paid" => $paid,
 		    			 // "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
 		    			 // "type" => $inscription->usertype->title,
+		    			 "inscription_est" => $incripcion_estadual,
+		    			 "incripcion_municipal" => $incripcion_municipal,
+		    			 "data_nascimento" => $data_nascimento,
+		    			 "training" => $training,
 		    			 "categoria_titulo" => $categoria_titulo,
-		    			 "tipo_correspondencia" => $tipo_correspondencia,
 		    			 "logradouro_res" => $logradouro_res, 
-		    			 "municipio_residencia" => $municipio_residencia,
-		    			 "direccion_residencia" => $direccion_residencia,
-		    			 "complemento_residencia" => $complemento_residencia,
-		    			 "barrio_residencia" => $barrio_residencia,
-		    			 "numero_residencia" => $numero_residencia,
-		    			 "cep_residencia" => $cep_residencia,
-		    			 // "cidade" => $cidade,
-		    			 "estado_residencia" => $uf_residencia,
-		    			 "pais_residencia" => $pais_residencia,
+		    			 "dir" => $dir,
+		    			 "complemento" => $complemento,
+		    			 "barrio_res" => $barrio_res,
+		    			 "cep" => $cep,
+		    			 "cidade" => $cidade,
+		    			 "estado" => $estado,
 		    			 "empresa" => $empresa,
 		    			 "logradouro_com" => $logradouro_com,
-		    			 "municipio_empresa" => $municipio_empresa,
-		    			 "direccion_empresa" => $direccion_empresa,
-		    			 "estado_empresa" => $uf_empresa,
-		    			 "numero_empresa" => $numero_empresa,
+		    			 "empresa_dir" => $empresa_dir,
 		    			 "cep_empresa" => $cep_empresa,
-		    			 "complemento_empresa" => $complemento_empresa,
-		    			 "barrio_empresa" => $barrio_empresa,
-		    			 // "pais_empresa" => $pais_empresa,
+		    			 "empresa_com" => $empresa_com,
+		    			 "barrio_com" => $barrio_com,
 		    			 "empresa_tel" => $empresa_tel,
-		    			 "celular_empresa" => $celular_empresa,
 		    			 "cnpj" => $cnpj,
 		    			 "cargo" => $cargo,
 		    			 "pasaporte" => $pasaporte,
 		    			 "website" => $website,
 		    			 "responsable" => $responsable,
-		    			 "nombre_cientifico" => $nombre_cientifico,
-		    			 "publicaciones" => $publicacoes,
-		    			 "observaciones" => $observacao,
-		    			 "institucion" => $institucion,
-		    			 "data_cadastro" => $data_cadastro
+		    			 "nome_cientifico" => $nombre_cientifico,
+		    			 "publicaciones" => $publicaciones
 		    			 ];
 		        	$sheet->appendRow($n,$total);
 
