@@ -9,5 +9,9 @@ class ORGAssociateCategories extends Eloquent {
     public $timestamps = false;
 
 	public $primaryKey  = 'id_categoria_asociado';
+
+	public function associates(){
+		return $this->hasMany('ORGAssociates', 'categoria', 'id_categoria_asociado');
+	}
 	
 }

@@ -22,9 +22,13 @@ class AnnuityCategoryPaymentController extends \BaseController {
 
 	public function getCreate( $idAnnuity, $idCategory ){
 
+		$category = ORGAnnuityCategories::find( $idCategory );
+
+		$associates = $category->category->associates;
+
 		$args = array(
-			'category' => ORGAnnuityCategories::find( $idCategory ),
-			'associates' =>  ORGAssociates::all(),
+			'category' => $category,
+			'associates' => $associates,
 			'route' => self::parseRoute( $idAnnuity, $idCategory ),
 			'parent' => self::parseParent( $idAnnuity )
 			);

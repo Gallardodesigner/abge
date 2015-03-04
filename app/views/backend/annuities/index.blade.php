@@ -118,6 +118,7 @@ Todas as Anuidades
                             <tr>
                                 <th class="head0 nosort" style="width:15%"><input type="checkbox" class="checkall" /></th>
                                 <th class="head0" width="60%">Ano</th>
+                                <th class="head0" width="15%">Número de Pagamentos</th>
                                 <th class="head0" style="width:40%">Ações</th>
                             </tr>
                         </thead>
@@ -129,6 +130,7 @@ Todas as Anuidades
                                         <input type="checkbox" />
                                       </span></td>
                                         <td>{{$annuity->ano}}</td>
+                                        <td>{{count($annuity->payments)}}</td>
                                         <td class="center">
                                             <a href="{{ $route }}/{{$annuity->id}}/payments" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-money" style="color:#FFF;margin-right:10px;"></i>Pagamentos</a>
                                             <a href="{{ $route }}/{{$annuity->id}}/categories" class="btn btn-primary alertwarning" style="color:#FFF !important;"><i class="iconfa-sitemap" style="color:#FFF;margin-right:10px;"></i>Categorias</a>

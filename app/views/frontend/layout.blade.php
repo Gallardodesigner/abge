@@ -8,7 +8,7 @@
   <meta name="keywords" content="ABGE">
   <meta name="language" content="en">
   <meta name="robots" content="index, follow">
-  <title>Cursos - ABGE</title>
+  <title>@yield('title')</title>
   <link rel="shortcut icon" href="http://abge.org.br/favicon.ico">
   {{HTML::style("assets/frontend/css/screen.css")}}
   {{HTML::style("assets/frontend/css/print.css")}}
@@ -123,6 +123,9 @@
                   <li>
                     <a href="http://abge.org.br/index.php/abge/noticias">Notícias</a>
                   </li>
+                  <li>
+                    <a href="/anuidades">Anuidades</a>
+                  </li>
                   <li>Livraria
                     <ul style="top: 31px; visibility: visible; left: 0px; width: 185px; display: none;">
                       <li>
@@ -204,7 +207,7 @@
     <div id="page" class="container" style="padding-top: 15px;">
         @yield("maincontent")
     </div>
-    <div class="div_float footer_container">
+    <div class="div_float footer_container" style="position: absolute;bottom:0px;">
       <div id="page" class="container" style="position: relative; height: 100%">
         <div style="position: absolute; left: 10px; bottom: 10px; width: 814px;">
           Secretaria Executiva ABGE <br> Av. Profº Almeida Prado, 532 - IPT (Prédio 11) - Cidade Universitária- SP 05508-901

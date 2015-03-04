@@ -64,17 +64,15 @@ class ORGAssociateController extends \BaseController {
 
 		else:
 
-			$nome = $nome == '0' ? '' : $nome;
+			$nome = ($nome == '0') ? '' : $nome;
 
 			$associates = ORGAssociates::where('nombre_completo','LIKE', '%'.$nome.'%');
 
-			$categoria = Input::get('categoria');
-
-			if(Input::get('categoria') != '0'):
+			if($categoria != '0'):
 				$associates = $associates->where('categoria', '=',$categoria);
 			endif;
 
-			if(Input::get('tipo_usuario') != '0'):
+			if($tipo_usuario != '0'):
 				$categories = ORGAssociateCategories::where('tipo_usuario','=',$tipo_usuario)->get();
 				foreach($categories as $category):
 					$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
@@ -243,6 +241,28 @@ class ORGAssociateController extends \BaseController {
 		    						  "Institucion",
 		    						  "Data Cadastro" ));
 
+				$anuidade_2013 = null;
+				$anuidade_2014 = null;
+				$anuidade_2015 = null;
+				
+				foreach ($aso->anuidade as $anuidade):
+					
+					switch($anuidade->ano){
+						case "2013":
+							$anuidade_2013 = $anuidade;
+							break;
+						case "2014":
+							$anuidade_2014 = $anuidade;
+							break;
+						case "2015":
+							$anuidade_2015 = $anuidade;
+							break;
+						default:
+							break;
+					} 
+
+				endforeach;
+
 		    	$total= ["codigo"=>$cod_aso,
 		    			 "nome" => $nome,
 		    			 "razon_social"=>$razon_social,
@@ -254,18 +274,18 @@ class ORGAssociateController extends \BaseController {
 		    			 "celular" => $celular_residencia,
 		    			 "email" => $email,
 		    			 "telefone" => $telefone_residencia,
-						 "anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->ano : "Não tem anuidade" ,
-						 "valor_anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->valor : "Não tem anuidade" ,
-						 "valor_pago_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->valor_pago : "Não tem anuidade" ,
-						 "data_anuidade_2013" => isset($aso->anuidade[0]) ? $aso->anuidade[0]->data : "Não tem anuidade",
-						 "anuidade_2014" => isset($aso->anuidade[1]) ? $aso->anuidade[1]->ano : "Não tem anuidade" ,
-						 "valor_anuidade_2014" => isset($aso->anuidade[1]) ? $aso->anuidade[1]->valor : "Não tem anuidade" ,
-						 "valor_pago_2014" => isset($aso->anuidade[1]) ? $aso->anuidade[1]->valor_pago : "Não tem anuidade" ,
-						 "data_anuidade_2014" => isset($aso->anuidade[1]) ? $aso->anuidade[1]->data : "Não tem anuidade",
-						  "anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->ano : "Não tem anuidade" ,
-						 "valor_anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->valor : "Não tem anuidade" ,
-						 "valor_pago_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->valor_pago : "Não tem anuidade" ,
-						 "data_anuidade_2015" => isset($aso->anuidade[2]) ? $aso->anuidade[2]->data : "Não tem anuidade",
+						 "anuidade_2013" => ($anuidade_2013 != null) ? $anuidade_2013->ano : "Não tem anuidade",
+						 "valor_anuidade_2013" => ($anuidade_2013 != null) ? $anuidade_2013->valor : "Não tem anuidade",
+						 "valor_pago_2013" => ($anuidade_2013 != null) ? $anuidade_2013->valor_pago : "Não tem anuidade",
+						 "data_anuidade_2013" => ($anuidade_2013 != null) ? $anuidade_2013->data : "Não tem anuidade",
+						 "anuidade_2014" => ($anuidade_2014 != null) ? $anuidade_2014->ano : "Não tem anuidade" ,
+						 "valor_anuidade_2014" => ($anuidade_2014 != null) ? $anuidade_2014->valor : "Não tem anuidade",
+						 "valor_pago_2014" => ($anuidade_2014 != null) ? $anuidade_2014->valor_pago : "Não tem anuidade",
+						 "data_anuidade_2014" => ($anuidade_2014 != null) ? $anuidade_2014->data : "Não tem anuidade",
+						 "anuidade_2015" => ($anuidade_2015 != null) ? $anuidade_2015->ano : "Não tem anuidade",
+						 "valor_anuidade_2015" => ($anuidade_2015 != null) ? $anuidade_2015->valor : "Não tem anuidade",
+						 "valor_pago_2015" => ($anuidade_2015 != null) ? $anuidade_2015->valor_pago : "Não tem anuidade",
+						 "data_anuidade_2015" => ($anuidade_2015 != null) ? $anuidade_2015->data : "Não tem anuidade",
 		    			 "data_nascimento" => $data_nascimento,
 		    			 "training" => $training,
 		    			  

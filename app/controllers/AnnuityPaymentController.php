@@ -50,9 +50,47 @@ class AnnuityPaymentController extends \BaseController {
 
 	}
 
+	public function getPaid( $idAnnuity, $id = '' ){
+
+		if( $id != '' ):
+
+			$payment = ORGAssociateAnnuities::find( $id );
+
+			$payment->status = 1;
+
+			$payment->save();
+
+			return Redirect::to(self::parseRoute($idAnnuity))->with( 'msg_success', Lang::get('messages.payment_success'));
+
+		else:
+
+			return Redirect::to( self::parseRoute($idAnnuity) );
+
+		endif;
+	}
+
+	public function getNotpaid( $idAnnuity, $id = '' ){
+
+		if( $id != '' ):
+
+			$payment = ORGAssociateAnnuities::find( $id );
+
+			$payment->status = 0;
+
+			$payment->save();
+
+			return Redirect::to(self::parseRoute($idAnnuity))->with( 'msg_success', Lang::get('messages.notpayment_success'));
+
+		else:
+
+			return Redirect::to( self::parseRoute($idAnnuity) );
+
+		endif;
+	}
+
 	public static function parseRoute( $idAnnuity ){
 
-		return self::$parent.'/'.$idAnnuity.'/categories';
+		return self::$parent.'/'.$idAnnuity.'/payments';
 
 	}
 

@@ -76,6 +76,7 @@ endif;
 	// });
 	//Route::controller('/auth', 'AuthenticationController');
 	Route::controller('/autenticacao', 'AuthenticationController');
+	Route::controller('/anuidades', 'FrontendAnnuityController');
 	Route::controller('/courses/{id?}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/{id}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/', 'FrontendController');

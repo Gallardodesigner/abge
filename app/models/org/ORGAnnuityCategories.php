@@ -22,6 +22,56 @@ class ORGAnnuityCategories extends Eloquent {
 		return $this->belongsTo('ORGAnnuities', 'id_anuidade', 'id');
 	}
 
+	public function hasPaid( $associate ){
+
+		foreach( $this->payments as $payment ):
+
+			if($payment->id_asociado == $associate->id_asociado AND $payment->status == 1):
+				return true;
+			endif;
+
+		endforeach;
+
+		return false;
+
+	}
+
+	public function hasPayment( $associate ){
+
+		foreach( $this->payments as $payment ):
+
+			if($payment->id_asociado == $associate->id_asociado):
+				return $payment;
+			endif;
+
+		endforeach;
+
+		return false;
+
+	}
+
+	public function getActualInterval(){
+
+		$actual = false;
+
+		$today = date_create(date('Y-m-d'));
+
+		// dd($this->dates()->get());
+
+		foreach($this->dates()->get() as $date):
+			$datetime1 = date_create($date->data_inicio);
+			$datetime3 = date_create($date->data_final);
+			$interval1 = date_diff($datetime1, $today);
+			$interval2 = date_diff($datetime3, $today);
+			if(($interval1->format('%R') == '+') AND ($interval2->format('%R') == '-')):
+				$actual = $date;
+			endif;	
+		endforeach;
+
+		return $actual;
+
+	}
+
 /* --------------------------- */
 
 	/*public static function _get( $arg = 'all' ){

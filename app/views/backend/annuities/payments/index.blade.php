@@ -132,9 +132,9 @@ Todos os Pagamentos
                                       <td class="aligncenter"><span class="center">
                                         <input type="checkbox" />
                                       </span></td>
-                                        <td>{{$payment->associate->nombre_completo}}</td>
-                                        <td>{{date('d-m-Y',strtotime($payment->data_pagamento))}}</td>
-                                        <td> R$ {{$payment->pagamento}}</td>
+                                        <td>{{ $payment->associate->nombre_completo }}</td>
+                                        <td>{{ date('d-m-Y',strtotime($payment->data_pagamento)) }}</td>
+                                        <td> R$ {{ $payment->pagamento }}</td>
                                         <td>
                                             @if($payment->status)
                                                 <i class="iconfa-ok" style="color:#9F9;margin-right:10px;font-size:20pt"></i>
@@ -144,9 +144,9 @@ Todos os Pagamentos
                                         </td>
                                         <td class="center">
                                             @if(!$payment->status)
-                                                <a href="{{ $route }}/paid/{{$payment->id}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.verify_payment')}}</a>
+                                                <a href="{{ $route }}/paid/{{$payment->id}}" class="btn btn-success alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>Verificar o Pagamento</a>
                                             @else
-                                                <a href="{{ $route }}/notpaid/{{$payment->id}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.decline_payment')}}</a>
+                                                <a href="{{ $route }}/notpaid/{{$payment->id}}" class="btn btn-danger alertwarning" style="color:#FFF !important;"><i class="iconfa-tasks" style="color:#FFF;margin-right:10px;"></i>Negar o Pagamento</a>
                                             @endif
                                             <a href="{{ $route }}/update/{{$payment->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Editar</a>
                                             <a data-id="{{$payment->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Eliminar</a>
