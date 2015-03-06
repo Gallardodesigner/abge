@@ -48,6 +48,7 @@ if(Auth::check() && Auth::user()->type=="superadmin"):
 	Route::controller('/dashboard/annuities/{idAnnuity}/categories', 'AnnuityCategoryController');
 	Route::controller('/dashboard/annuities/{idAnnuity}/payments', 'AnnuityPaymentController');
 	Route::controller('/dashboard/annuities', 'AnnuityController');
+	Route::controller('/dashboard/instructions', 'TicketInstructionController');
 	Route::controller('/dashboard/clients/participants', 'ORGParticipantController');
 	Route::controller('/dashboard/clients/associates/{idAssociate}/payments', 'ORGAssociatePaymentController');
 	Route::controller('/dashboard/clients/associates', 'ORGAssociateController');

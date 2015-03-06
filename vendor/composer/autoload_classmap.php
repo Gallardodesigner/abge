@@ -677,6 +677,7 @@ return array(
     'ORGAssociatePaymentController' => $baseDir . '/app/controllers/org/ORGAssociatePaymentController.php',
     'ORGAssociatesAnuidade' => $baseDir . '/app/models/org/ORGAssociatesAnuidade.php',
     'ORGAssociates' => $baseDir . '/app/models/org/ORGAssociates.php',
+    'ORGInstructions' => $baseDir . '/app/models/org/ORGInstructions.php',
     'ORGParticipantController' => $baseDir . '/app/controllers/org/ORGParticipantController.php',
     'ORGParticipants' => $baseDir . '/app/models/org/ORGParticipants.php',
     'ORGStates' => $baseDir . '/app/models/org/ORGStates.php',

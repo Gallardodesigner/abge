@@ -13,5 +13,9 @@ class ORGAssociateCategories extends Eloquent {
 	public function associates(){
 		return $this->hasMany('ORGAssociates', 'categoria', 'id_categoria_asociado');
 	}
+
+	public function instruction(){
+		return $this->hasOne('ORGInstructions', 'categoria', 'id_categoria_asociado');
+	}
 	
 }

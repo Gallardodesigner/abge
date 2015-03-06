@@ -186,6 +186,7 @@
             	<li class="nav-header">{{ Lang::get('nav.navigation') }}</li>
                 <li class="{{ (Request::is('dashboard') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard') }}"><span class="iconfa-laptop"></span> {{ Lang::get('nav.dashboard') }}</a></li>
                 <li class="{{ (Request::is('dashboard/annuities') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/annuities') }}"><span class="iconfa-money"></span> Anuidade</a></li>
+                <li class="{{ (Request::is('dashboard/instructions') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/instructions') }}"><span class="iconfa-qrcode"></span> Instruções dos Boletos</a></li>
                 <li class="dropdown {{ (Request::is('dashboard/clients') ? 'active' : '') }}{{ (Request::is('dashboard/clients/*') ? 'active' : '') }}"><a href=""><span class="iconfa-group"></span>Clientes</a>
                     <ul {{ (Request::is('dashboard/clients') ? 'style="display: block"' : '') }}{{ (Request::is('dashboard/clients/*') ? 'style="display: block"' : '') }}>
                         <li class="dropdown"><a href="">Associados</a>
