@@ -13,7 +13,7 @@ class ORGAssociateController extends \BaseController {
 		$msg_error = Session::get('msg_error');
 
 		return View::make('backend.clients.associates.index', array(
-			'filter' => array('nombre_completo' => '', 'categoria' => 0, 'tipo_usuario' => 0),
+			'filter' => array('nombre_completo' => '', 'categoria' => 0, 'tipo_usuario' => 0, 'pagamento' => 0),
 			'associates' => $associates,
 			'categories' => ORGAssociateCategories::all(),
 			'annuity' => ORGAnnuities::getLastAnnuity(),
@@ -41,6 +41,42 @@ class ORGAssociateController extends \BaseController {
 			endforeach;
 		endif;
 
+		if(Input::get('pagamento') != '0'):
+			$annuity = ORGAnnuities::getLastAnnuity();
+			$temps = $associates->get();
+			$associates = new ORGAssociates();
+			switch(Input::get('pagamento')){
+				case 'paid':
+					foreach($temps as $temp):
+						if($payment = $temp->getPaymentByAnnuity( $annuity )):
+							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+						endif;
+					endforeach;
+					break;
+				case 'paid_active':
+					foreach($temps as $temp):
+						if($payment = $temp->getPaymentByAnnuity( $annuity ) AND $payment->status):
+							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+						endif;
+					endforeach;
+					break;
+				case 'paid_inactive':
+					foreach($temps as $temp):
+						if($payment = $temp->getPaymentByAnnuity( $annuity ) AND !$payment->status):
+							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+						endif;
+					endforeach;
+					break;
+				case 'notpaid':
+					foreach($temps as $temp):
+						if(!$temp->getPaymentByAnnuity( $annuity )):
+							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+						endif;
+					endforeach;
+					break;
+			}
+		endif;
+
 		$associates = $associates->paginate(30);
 
 		$msg_success = Session::get('msg_success');
@@ -48,7 +84,7 @@ class ORGAssociateController extends \BaseController {
 		$msg_error = Session::get('msg_error');
 
 		return View::make('backend.clients.associates.index', array(
-			'filter' => array('nombre_completo' => Input::get('nombre_completo'), 'categoria' => Input::get('categoria'), 'tipo_usuario' => Input::get('tipo_usuario')),
+			'filter' => array('nombre_completo' => Input::get('nombre_completo'), 'categoria' => Input::get('categoria'), 'tipo_usuario' => Input::get('tipo_usuario'), 'pagamento' => Input::get('pagamento')),
 			'associates' => $associates,
 			'categories' => ORGAssociateCategories::all(),
 			'annuity' => ORGAnnuities::getLastAnnuity(),
@@ -58,7 +94,7 @@ class ORGAssociateController extends \BaseController {
 			));
 	}
 
-	public function getExportasociados($nome = '', $categoria = '', $tipo_usuario = ''){
+	public function getExportasociados($nome = '', $categoria = '', $tipo_usuario = '', $pagamento = ''){
 
 		if( $nome == '0' AND $categoria == '0' AND $tipo_usuario == '0'):
 
@@ -79,6 +115,42 @@ class ORGAssociateController extends \BaseController {
 				foreach($categories as $category):
 					$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
 				endforeach;
+			endif;
+
+			if($pagamento != '0'):
+				$annuity = ORGAnnuities::getLastAnnuity();
+				$temps = $associates->get();
+				$associates = new ORGAssociates();
+				switch($pagamento){
+					case 'paid':
+						foreach($temps as $temp):
+							if($payment = $temp->getPaymentByAnnuity( $annuity )):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+					break;
+					case 'paid_active':
+						foreach($temps as $temp):
+							if($payment = $temp->getPaymentByAnnuity( $annuity ) AND $payment->status):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+					break;
+					case 'paid_inactive':
+						foreach($temps as $temp):
+							if($payment = $temp->getPaymentByAnnuity( $annuity ) AND !$payment->status):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+					break;
+					case 'notpaid':
+						foreach($temps as $temp):
+							if(!$temp->getPaymentByAnnuity( $annuity )):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+					break;
+				}
 			endif;
 
 			$associates = $associates->get();
@@ -672,6 +744,44 @@ class ORGAssociateController extends \BaseController {
 
 		endif;
 
+	}
+
+	public function getPaid( $id = '' ){
+
+		if( $id != '' ):
+
+			$payment = ORGAssociateAnnuities::find( $id );
+
+			$payment->status = 1;
+
+			$payment->save();
+
+			return Redirect::to($this->route)->with( 'msg_success', Lang::get('messages.payment_success'));
+
+		else:
+
+			return Redirect::to($this->route);
+
+		endif;
+	}
+
+	public function getNotpaid( $id = '' ){
+
+		if( $id != '' ):
+
+			$payment = ORGAssociateAnnuities::find( $id );
+
+			$payment->status = 0;
+
+			$payment->save();
+
+			return Redirect::to($this->route)->with( 'msg_success', Lang::get('messages.notpayment_success'));
+
+		else:
+
+			return Redirect::to($this->route);
+
+		endif;
 	}
 
 }

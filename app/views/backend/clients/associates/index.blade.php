@@ -6,7 +6,6 @@
 
 @stop
 
-
 @section("js")
 {{HTML::script("assetsadmin/js/jquery.jgrowl.js")}}
 {{HTML::script("assetsadmin/js/jquery.alerts.js")}}
@@ -83,7 +82,7 @@ Todos os Associados
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="{{ $route }}/exportasociados/{{ $filter['nombre_completo'] != '' ? $filter['nombre_completo'] : '0' }}/{{ $filter['categoria'] }}/{{ $filter['tipo_usuario'] }}" class="btn"><i class="iconsweets-excel"></i>Excel</a>
+                            <a href="{{ $route }}/exportasociados/{{ $filter['nombre_completo'] != '' ? $filter['nombre_completo'] : '0' }}/{{ $filter['categoria'] }}/{{ $filter['tipo_usuario'] }}/{{ $filter['pagamento'] }}" class="btn"><i class="iconsweets-excel"></i>Excel</a>
                             <a href="{{ $route }}/create" class="btn dropdown-toggle">Adicionar Associado</a>
                         </div>
                         <h4 class="widgettitle">Todos os Associados</h4>
@@ -108,6 +107,16 @@ Todos os Associados
                                         <option value="0" {{ $filter['tipo_usuario'] == '0' ? 'selected' : '' }}>Selecione</option>
                                         <option value="F" {{ $filter['tipo_usuario'] === 'F' ? 'selected' : '' }}>Pessoa Fisica</option>
                                         <option value="J" {{ $filter['tipo_usuario'] === 'J' ? 'selected' : '' }}>Pessoa Juridica</option>
+                                    </select>
+                                </span>
+                                <span style="display:inline-block;">
+                                    <label>Pagamento: </label>
+                                    <select name="pagamento">
+                                        <option value="0" {{ $filter['pagamento'] == '0' ? 'selected' : '' }}>Selecione</option>
+                                        <option value="paid" {{ $filter['pagamento'] === 'paid' ? 'selected' : '' }}>Pago</option>
+                                        <option value="paid_active" {{ $filter['pagamento'] === 'paid_active' ? 'selected' : '' }}>Pago ativo</option>
+                                        <option value="paid_inactive" {{ $filter['pagamento'] === 'paid_inactive' ? 'selected' : '' }}>Pago inativo</option>
+                                        <option value="notpaid" {{ $filter['pagamento'] === 'notpaid' ? 'selected' : '' }}>Não Pago</option>
                                     </select>
                                 </span>
                                 <!-- <span style="display:inline-block;">
@@ -137,13 +146,13 @@ Todos os Associados
                         <thead>
                             <tr>
                                 <th class="head0 nosort" style="width:15%"><input type="checkbox" class="checkall" /></th>
-                                <th class="head0" width="30%">Nome</th>
-                                <th class="head1"style="width:25%">Email</th>
-                                <th class="head0" style="width:10%">Nome Da Empresa</th>
-                                <th class="head1" style="width:15%">Tipo de Pessoa</th>
-                                <th class="head1" style="width:15%">Es Associado</th>
-                                <th class="head1" style="width:15%">Estatuto de Associado</th>
-                                <th class="head1" style="width:15%">Pagamento {{ $annuity->ano }}</th>
+                                <th class="head0" width="20%">Nome</th>
+                                <th class="head1"style="width:20%">Email</th>
+                                <th class="head0" style="width:20%">Nome Da Empresa</th>
+                                <th class="head1" style="width:8%">Tipo de Pessoa</th>
+                                <th class="head1" style="width:8%">Es Associado</th>
+                                <th class="head1" style="width:6%">Estatuto</th>
+                                <th class="head1" style="width:10%">Pagamento {{ $annuity->ano }}</th>
                                 <th class="head0" style="width:20%">Ações</th>
                             </tr>
                         </thead>
@@ -174,14 +183,21 @@ Todos os Associados
                                         </td>
                                         <td>
                                             @if( $payment = $associate->getPaymentByAnnuity( $annuity ) )
-                                                    $R {{ number_format($payment->pagamento, 2, '.', ',') }}
+                                                @if( $payment->status )
+                                                    <a href="{{ $route }}/notpaid/{{$payment->id}}" style="color:#6C6;margin-right:10px;font-size:14pt;font-style:none;">$R {{ number_format($payment->pagamento, 2, '.', ',') }}</a>
+                                                @else
+                                                    <a href="{{ $route }}/paid/{{$payment->id}}" style="color:#C66;margin-right:10px;font-size:14pt;font-style:none;">$R {{ number_format($payment->pagamento, 2, '.', ',') }}</a>
+                                                @endif
                                             @else
                                                     $R {{ number_format(0, 2, '.', ',') }}
                                             @endif                                
                                         </td>
                                         <td class="center">
-                                            <a href="{{ $route }}/pagamentos/{{$associate->id_asociado}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
-                                            <a href="{{ $route }}/update/{{$associate->id_asociado}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
+                                            <a href="{{ $route }}/pagamentos/{{$associate->id_asociado}}" class="btn btn-primary" style="color:#FFF !important;"><i class="iconfa-money" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('Pagamentos')}}</a>
+                                            @if( $payment = $associate->getPaymentByAnnuity( $annuity ) )
+                                            @else
+                                            @endif
+                                            <a href="{{ $route }}/update/{{$associate->id_asociado}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('Atualizar')}}</a>
                                             <!-- <a data-id="{{$associate->id_asociado}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a> -->
                                         </td>
                                     </tr>
