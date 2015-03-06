@@ -184,16 +184,16 @@ Todos os Associados
                                         <td>
                                             @if( $payment = $associate->getPaymentByAnnuity( $annuity ) )
                                                 @if( $payment->status )
-                                                    <a href="{{ $route }}/notpaid/{{$payment->id}}" style="color:#6C6;margin-right:10px;font-size:14pt;font-style:none;">$R {{ number_format($payment->pagamento, 2, '.', ',') }}</a>
+                                                    <a href="{{ $route }}/{{$associate->id_asociado}}/payments/update/{{$payment->id}}" style="color:#6C6;margin-right:10px;font-size:12pt;font-style:none;">R$ {{ number_format($payment->pagamento, 2, ',', '.') }}</a>
                                                 @else
-                                                    <a href="{{ $route }}/paid/{{$payment->id}}" style="color:#C66;margin-right:10px;font-size:14pt;font-style:none;">$R {{ number_format($payment->pagamento, 2, '.', ',') }}</a>
+                                                    <a href="{{ $route }}/{{$associate->id_asociado}}/payments/update/{{$payment->id}}" style="color:#C66;margin-right:10px;font-size:12pt;font-style:none;">R$ {{ number_format($payment->pagamento, 2, ',', '.') }}</a>
                                                 @endif
                                             @else
-                                                    $R {{ number_format(0, 2, '.', ',') }}
+                                                    R$ {{ number_format(0, 2, ',', '.') }}
                                             @endif                                
                                         </td>
                                         <td class="center">
-                                            <a href="{{ $route }}/pagamentos/{{$associate->id_asociado}}" class="btn btn-primary" style="color:#FFF !important;"><i class="iconfa-money" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('Pagamentos')}}</a>
+                                            <a href="{{ $route }}/{{$associate->id_asociado}}/payments" class="btn btn-primary" style="color:#FFF !important;"><i class="iconfa-money" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('Anuidades')}}</a>
                                             @if( $payment = $associate->getPaymentByAnnuity( $annuity ) )
                                             @else
                                             @endif

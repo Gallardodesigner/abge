@@ -17,7 +17,7 @@ class ORGAssociateAnnuities extends Eloquent {
 	public function annuityCategory(){
 		return $this->belongsTo('ORGAnnuityCategories', 'id_anuidade_categoria', 'id');
 	}
-
+	
 	public static function hasAnnuity( $user ){
 
 		$user = User::find( $user->id );

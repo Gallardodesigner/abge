@@ -674,6 +674,7 @@ return array(
     'Net_SSH2' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Net/SSH2.php',
     'Normalizer' => $vendorDir . '/patchwork/utf8/class/Normalizer.php',
     'ORGAssociateController' => $baseDir . '/app/controllers/org/ORGAssociateController.php',
+    'ORGAssociatePaymentController' => $baseDir . '/app/controllers/org/ORGAssociatePaymentController.php',
     'ORGAssociatesAnuidade' => $baseDir . '/app/models/org/ORGAssociatesAnuidade.php',
     'ORGAssociates' => $baseDir . '/app/models/org/ORGAssociates.php',
     'ORGParticipantController' => $baseDir . '/app/controllers/org/ORGParticipantController.php',
