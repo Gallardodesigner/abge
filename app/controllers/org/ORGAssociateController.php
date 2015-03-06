@@ -16,6 +16,7 @@ class ORGAssociateController extends \BaseController {
 			'filter' => array('nombre_completo' => '', 'categoria' => 0, 'tipo_usuario' => 0),
 			'associates' => $associates,
 			'categories' => ORGAssociateCategories::all(),
+			'annuity' => ORGAnnuities::getLastAnnuity(),
 			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error
@@ -50,6 +51,7 @@ class ORGAssociateController extends \BaseController {
 			'filter' => array('nombre_completo' => Input::get('nombre_completo'), 'categoria' => Input::get('categoria'), 'tipo_usuario' => Input::get('tipo_usuario')),
 			'associates' => $associates,
 			'categories' => ORGAssociateCategories::all(),
+			'annuity' => ORGAnnuities::getLastAnnuity(),
 			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error

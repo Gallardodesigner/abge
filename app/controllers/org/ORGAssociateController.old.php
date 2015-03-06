@@ -15,6 +15,7 @@ class ORGAssociateController extends \BaseController {
 		return View::make('backend.clients.associates.index', array(
 			'associates' => $associates,
 			'categories' => ORGAssociateCategories::all(),
+			'annuity' => ORGAnnuities::getLastAnnuity(),
 			'route' => $this->route,
 			'msg_success' => $msg_success,
 			'msg_error' => $msg_error

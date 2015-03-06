@@ -143,6 +143,7 @@ Todos os Associados
                                 <th class="head1" style="width:15%">Tipo de Pessoa</th>
                                 <th class="head1" style="width:15%">Es Associado</th>
                                 <th class="head1" style="width:15%">Estatuto de Associado</th>
+                                <th class="head1" style="width:15%">Pagamento {{ $annuity->ano }}</th>
                                 <th class="head0" style="width:20%">Ações</th>
                             </tr>
                         </thead>
@@ -171,7 +172,15 @@ Todos os Associados
                                                 <a href="{{ $route }}/status/{{$associate->id_asociado}}"><i class="iconfa-remove" style="color:#F99;margin-right:10px;font-size:20pt"></i></a>
                                             @endif
                                         </td>
+                                        <td>
+                                            @if( $payment = $associate->getPaymentByAnnuity( $annuity ) )
+                                                    $R {{ number_format($payment->pagamento, 2, '.', ',') }}
+                                            @else
+                                                    $R {{ number_format(0, 2, '.', ',') }}
+                                            @endif                                
+                                        </td>
                                         <td class="center">
+                                            <a href="{{ $route }}/pagamentos/{{$associate->id_asociado}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
                                             <a href="{{ $route }}/update/{{$associate->id_asociado}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.edit')}}</a>
                                             <!-- <a data-id="{{$associate->id_asociado}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('display.delete')}}</a> -->
                                         </td>

@@ -21,6 +21,25 @@ class ORGAssociates extends Eloquent {
 	public function anuidade(){
 		return $this->hasMany('ORGAssociatesAnuidade', 'id_asociado', 'id_asociado');
 	}
+
+	public function payments(){
+		return $this->hasMany('ORGAssociateAnnuities', 'id_asociado', 'id_asociado');
+	}
+
+	public function hasPaymentByAnnuity( $annuity ){
+		foreach( $this->payments as $payment ):
+			if($payment->category->annuity->id == $annuity->id) return true;
+		endforeach;
+		return false;
+	}
+
+	public function getPaymentByAnnuity( $annuity ){
+		foreach( $this->payments as $payment ):
+			if($payment->category->annuity->id == $annuity->id) return $payment;
+		endforeach;
+		return false;
+	}
+
 	protected $connection = 'mysql_2';
 
 	public $primaryKey  = 'id_asociado';
