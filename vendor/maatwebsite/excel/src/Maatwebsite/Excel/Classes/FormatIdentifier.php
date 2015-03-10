@@ -12,7 +12,7 @@ class FormatIdentifier {
      * @var array
      * @access  protected
      */
-    protected $formats = [
+    protected $formats = array(
         'Excel2007',
         'Excel5',
         'Excel2003XML',
@@ -21,7 +21,8 @@ class FormatIdentifier {
         'Gnumeric',
         'CSV',
         'HTML',
-    ];
+        'PDF'
+    );
 
     /**
      * Construct new format identifier
@@ -51,7 +52,7 @@ class FormatIdentifier {
             return $format;
 
         // Do a last try to init the file with all available readers
-        return $this->lastResort($file, $format);
+        return $this->lastResort($file, $format, $ext);
     }
 
     /**
@@ -148,9 +149,9 @@ class FormatIdentifier {
             | PDF
             |--------------------------------------------------------------------------
             */
-            // case 'pdf':
-            //     return 'PDF';
-            //     break;
+             case 'pdf':
+                 return 'PDF';
+                 break;
         }
     }
 
@@ -205,20 +206,21 @@ class FormatIdentifier {
             | PDF
             |--------------------------------------------------------------------------
             */
-            // case 'PDF':
-            //     return'application/pdf; charset=UTF-8';
-            //     break;
+             case 'PDF':
+                 return'application/pdf; charset=UTF-8';
+                 break;
         }
     }
 
     /**
      * Try every reader we have
-     * @param      $file
-     * @param bool $wrongFormat
+     * @param        $file
+     * @param bool   $wrongFormat
+     * @param string $ext
      * @throws LaravelExcelException
      * @return string $format
      */
-    protected function lastResort($file, $wrongFormat = false)
+    protected function lastResort($file, $wrongFormat = false, $ext = 'xls')
     {
         // Loop through all available formats
         foreach ($this->formats as $format)

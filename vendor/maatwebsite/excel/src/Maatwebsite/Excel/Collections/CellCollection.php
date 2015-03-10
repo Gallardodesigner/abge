@@ -17,7 +17,7 @@ class CellCollection extends ExcelCollection {
      * @param  array $items
      * @return \Maatwebsite\Excel\Collections\CellCollection
      */
-    public function __construct(array $items = [])
+    public function __construct(array $items = array())
     {
         $this->setItems($items);
     }
@@ -31,8 +31,16 @@ class CellCollection extends ExcelCollection {
     {
         foreach ($items as $name => $value)
         {
-            if ($name)
-                $this->put($name, $value || is_numeric($value) ? $value : null);
+            $value = !empty($value) || is_numeric($value) ? $value : null;
+
+            if ($name && !is_numeric($name))
+            {
+                $this->put($name, $value);
+            }
+            else
+            {
+                $this->push($value);
+            }
         }
     }
 
@@ -45,5 +53,16 @@ class CellCollection extends ExcelCollection {
     {
         if ($this->has($key))
             return $this->get($key);
+    }
+
+    /**
+     * Determine if an attribute exists on the model.
+     *
+     * @param  string  $key
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        return $this->has($key);
     }
 }

@@ -7,6 +7,7 @@
 		"laravel/framework": "4.2.*",
     	"way/generators": "~2.0",
     	"thujohn/pdf": "dev-master",
+    	"maxxscho/laravel-tcpdf": "0.*",
     	"maatwebsite/excel": "1.*",
     	"intervention/image": "2.*"
 	},

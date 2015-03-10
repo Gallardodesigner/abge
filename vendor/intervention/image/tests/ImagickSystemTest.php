@@ -47,7 +47,20 @@ class ImagickSystemTest extends PHPUnit_Framework_TestCase
 
     public function testMakeFromDataUrl()
     {
-        $str = file_get_contents('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYlWM8c+bMfwYiABMxikYVUk8hAHWzA3cRvs4UAAAAAElFTkSuQmCC');
+        $str = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYlWM8c+bMfwYiABMxikYVUk8hAHWzA3cRvs4UAAAAAElFTkSuQmCC';
+        $img = $this->manager()->make($str);
+        $this->assertInstanceOf('Intervention\Image\Image', $img);
+        $this->assertInstanceOf('Imagick', $img->getCore());
+        $this->assertInternalType('int', $img->getWidth());
+        $this->assertInternalType('int', $img->getHeight());
+        $this->assertEquals(10, $img->getWidth());
+        $this->assertEquals(10, $img->getHeight());
+        $this->assertEquals('image/png', $img->mime);
+    }
+
+    public function testMakeFromBase64()
+    {
+        $str = 'iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYlWM8c+bMfwYiABMxikYVUk8hAHWzA3cRvs4UAAAAAElFTkSuQmCC';
         $img = $this->manager()->make($str);
         $this->assertInstanceOf('Intervention\Image\Image', $img);
         $this->assertInstanceOf('Imagick', $img->getCore());
@@ -1081,6 +1094,29 @@ class ImagickSystemTest extends PHPUnit_Framework_TestCase
         $this->assertTransparentPosition($img, 0, 0);
     }
 
+    public function testResetToNamed()
+    {
+        $img = $this->manager()->make('tests/images/tile.png');
+        $img->backup('original');
+        $img->resize(30, 20);
+        $img->backup('30x20');
+
+        // reset to original
+        $img->reset('original');
+        $this->assertEquals(16, $img->getWidth());
+        $this->assertEquals(16, $img->getHeight());
+
+        // reset to 30x20
+        $img->reset('30x20');
+        $this->assertEquals(30, $img->getWidth());
+        $this->assertEquals(20, $img->getHeight());
+
+        // reset to original again
+        $img->reset('original');
+        $this->assertEquals(16, $img->getWidth());
+        $this->assertEquals(16, $img->getHeight());
+    }
+
     public function testLimitColors()
     {
        $img = $this->manager()->make('tests/images/trim.png');
@@ -1517,6 +1553,17 @@ class ImagickSystemTest extends PHPUnit_Framework_TestCase
         $img = $this->manager()->make('tests/images/trim.png');
         $img->destroy();
         $img->getCore()->getImageWidth(); // try to get width (should throw exception)
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testDestroyWithBackup()
+    {
+        $img = $this->manager()->make('tests/images/trim.png');
+        $img->backup();
+        $img->destroy();
+        $img->getBackup()->getImageWidth(); // try to get width (should throw exception)
     }
 
     public function testStringConversion()

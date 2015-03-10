@@ -51,6 +51,7 @@ if(Auth::check() && Auth::user()->type=="superadmin"):
 	Route::controller('/dashboard/instructions', 'TicketInstructionController');
 	Route::controller('/dashboard/clients/participants', 'ORGParticipantController');
 	Route::controller('/dashboard/clients/associates/{idAssociate}/payments', 'ORGAssociatePaymentController');
+	Route::controller('/dashboard/clients/associates/{idAssociate}/ticket', 'TicketController');
 	Route::controller('/dashboard/clients/associates', 'ORGAssociateController');
 	Route::controller('/dashboard/teachers', 'TeacherController');
 	Route::controller('/dashboard/sections', 'SectionController');

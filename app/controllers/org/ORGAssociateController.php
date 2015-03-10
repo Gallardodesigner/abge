@@ -94,6 +94,27 @@ class ORGAssociateController extends \BaseController {
 			));
 	}
 
+	public function postProcesstickets(){
+
+		$boleto = new Ticket();
+				
+		foreach (Input::get('chk') as $gr => $val):
+	    	$boleto->buildHtml();
+	    	$boleto->setAsociado($val);
+	    	$boleto->inicialize();
+	    	$boleto->printTcPdf();
+	    	$corpo = $boleto->buildHtmlBoleto();
+	    	$boleto->buildHtml($corpo);
+	    	$boleto->addPagePdf();
+	    	$boleto->creaPaginaBoleto();
+	    	$boleto->endPagePdf();
+	    	$boleto->inicializaHtml();
+	    endforeach;
+      	
+      	$boleto->downloadPdf('associados');
+
+	}
+
 	public function getExportasociados($nome = '', $categoria = '', $tipo_usuario = '', $pagamento = ''){
 
 		if( $nome == '0' AND $categoria == '0' AND $tipo_usuario == '0'):

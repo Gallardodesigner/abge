@@ -56,6 +56,17 @@ class GdSystemTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(10, $img->getHeight());
     }
 
+    public function testMakeFromBase64()
+    {
+        $img = $this->manager()->make('iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGElEQVQYlWM8c+bMfwYiABMxikYVUk8hAHWzA3cRvs4UAAAAAElFTkSuQmCC');
+        $this->assertInstanceOf('Intervention\Image\Image', $img);
+        $this->assertInternalType('resource', $img->getCore());
+        $this->assertInternalType('int', $img->getWidth());
+        $this->assertInternalType('int', $img->getHeight());
+        $this->assertEquals(10, $img->getWidth());
+        $this->assertEquals(10, $img->getHeight());
+    }
+
     public function testCanvas()
     {
         $img = $this->manager()->canvas(30, 20);
@@ -1054,14 +1065,14 @@ class GdSystemTest extends PHPUnit_Framework_TestCase
     {
         $img = $this->manager()->canvas(16, 16, 'ffffff');
         $img->ellipse(12, 8, 8, 8, function ($draw) { $draw->background('#ff0000'); $draw->border(1, '#0000ff'); });
-        $this->assertEquals('d56363fd454ad6e25a23c2a4a7c77998', $img->checksum());
+        $this->assertEquals('080d9dd92ebe22f976c3c703cba33510', $img->checksum());
     }
 
     public function testCircleImage()
     {
         $img = $this->manager()->canvas(16, 16, 'ffffff');
         $img->circle(12, 8, 8, function ($draw) { $draw->background('#ff0000'); $draw->border(1, '#0000ff'); });
-        $this->assertEquals('c214f58de03d171f7f278a7b957bab50', $img->checksum());
+        $this->assertEquals('c3bff06c20244ba14e898e39ea0efd76', $img->checksum());
     }
 
     public function testPolygonImage()
@@ -1104,6 +1115,29 @@ class GdSystemTest extends PHPUnit_Framework_TestCase
         $img->backup();
         $img->reset();
         $this->assertTransparentPosition($img, 0, 0);
+    }
+
+    public function testResetToNamed()
+    {
+        $img = $this->manager()->make('tests/images/tile.png');
+        $img->backup('original');
+        $img->resize(30, 20);
+        $img->backup('30x20');
+
+        // reset to original
+        $img->reset('original');
+        $this->assertEquals(16, $img->getWidth());
+        $this->assertEquals(16, $img->getHeight());
+
+        // reset to 30x20
+        // $img->reset('30x20');
+        // $this->assertEquals(30, $img->getWidth());
+        // $this->assertEquals(20, $img->getHeight());
+
+        // reset to original again
+        $img->reset('original');
+        $this->assertEquals(16, $img->getWidth());
+        $this->assertEquals(16, $img->getHeight());
     }
 
     public function testLimitColors()
@@ -1528,8 +1562,12 @@ class GdSystemTest extends PHPUnit_Framework_TestCase
     public function testDestroy()
     {
         $img = $this->manager()->make('tests/images/trim.png');
+        $img->backup();
         $img->destroy();
+        // destroy should affect core
         $this->assertEquals(get_resource_type($img->getCore()), 'Unknown');
+        // destroy should affect backup
+        $this->assertEquals(get_resource_type($img->getBackup()), 'Unknown');
     }
 
     public function testStringConversion()

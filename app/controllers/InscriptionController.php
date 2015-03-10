@@ -329,10 +329,10 @@ class InscriptionController extends \BaseController {
 				$users[$ins->id]=$tempuser[0]->asociado;
 			elseif($ins->user->type =="participant" && $ins->user->id!=127):
 				$tempuser=Participants::where('user', '=', $ins->user->id)->take(1)->get();
-				// if($h==8){
-				// 	dd($ins->id);
-				// }else{
-				// 	var_dump($tempuser[0]->participante->nome);
+				// if($h>30)
+				// 	dd($ins->user->id);
+				// else
+				// 	var_dump($tempuser[0]->id);
 					$users[$ins->id]=$tempuser[0]->participante;
 				// }
 				/*if(isset($tempuser[0])):

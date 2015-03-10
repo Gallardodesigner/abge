@@ -1,8 +1,9 @@
 <?php
 
 use Mockery as m;
-use Maatwebsite\Excel\Writers\LaravelExcelWriter;
+use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Classes;
+use Maatwebsite\Excel\Writers\LaravelExcelWriter;
 
 class ExcelWriterTest extends TestCase {
 
@@ -14,12 +15,11 @@ class ExcelWriterTest extends TestCase {
         parent::setUp();
 
         // Set excel class
-        $this->excel    = App::make('phpexcel');
+        $this->excel = App::make('phpexcel');
 
         // Set writer class
-        $this->writer   = App::make('excel.writer');
+        $this->writer = App::make('excel.writer');
         $this->writer->injectExcel($this->excel);
-
     }
 
     /**
@@ -175,4 +175,64 @@ class ExcelWriterTest extends TestCase {
         }
     }
 
+    public function testCreateFromArray()
+    {
+        $info = Excel::create('test', function ($writer)
+        {
+
+            $writer->sheet('test', function ($sheet)
+            {
+                $sheet->fromArray([
+                    'test data'
+                ]);
+            });
+        })->store('csv', __DIR__ . '/exports', true);
+
+        $this->assertTrue(file_exists($info['full']));
+    }
+
+
+    public function testNumberPrecision()
+    {
+        $info = Excel::create('numbers', function ($writer)
+        {
+            $writer->sheet('test', function ($sheet)
+            {
+                $sheet->fromArray([
+                    ['number' => '1234'],
+                    ['number' => '1234.020'],
+                    ['number' => '01234HelloWorld'],
+                    ['number' => '12345678901234567890'],
+                    ['number' => 1234],
+                    ['number' => 1234.02],
+                    ['number' => 0.0231231234423],
+                    ['number' => 4195.99253472222],
+                    ['number' => '= A6 + A6'],
+                ]);
+            });
+        })->store('xls', __DIR__ . '/exports', true);
+
+        $this->assertTrue(file_exists($info['full']));
+
+        $results = Excel::load($info['full'], null, false, true)->calculate()->toArray();
+
+        $this->assertEquals('1234', $results[0]['number']);
+        $this->assertEquals('1234.020', $results[1]['number']);
+        $this->assertEquals('01234HelloWorld', $results[2]['number']);
+        $this->assertEquals('12345678901234567890', $results[3]['number']);
+
+        $this->assertTrue(is_double($results[4]['number']));
+        $this->assertEquals((double) 1234, $results[4]['number']);
+
+        $this->assertTrue(is_double($results[5]['number']));
+        $this->assertEquals('1234.02', $results[5]['number']);
+
+        $this->assertTrue(is_double($results[6]['number']));
+        $this->assertEquals('0.0231231234423', $results[6]['number']);
+
+        $this->assertTrue(is_double($results[7]['number']));
+        $this->assertEquals(4195.99253472222, $results[7]['number']);
+
+        $this->assertEquals(1234 + 1234, $results[8]['number']);
+    }
 }

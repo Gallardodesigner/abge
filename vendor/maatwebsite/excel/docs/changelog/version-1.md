@@ -1,18 +1,77 @@
 # Version 1
 
+### 1.3.2
+- Custom value binders
+- Html reader update
+
+### 1.3.1
+- Fix short array syntax
+
+### 1.3.0
+- Additional headers with export() 
+- Float, integer, string, timestamps problems
+- Cell content ending by zeros
+- Images in html
+- Font family bug
+- Setting row number of row with headings
+
+### 1.2.3
+- PDF writer
+- Include charts config
+- Chunk filter with selected sheet
+- Compatibility fix with new PHPExcel release
+- setDateColumns fix
+- Optional dependencies to require-dev
+- Several bugfixes
+
+### 1.2.2
+- Chunk filter fixes
+- Isset() CellCollection fixes
+- PHP 5.3 support
+- Missing border styles
+- Add CSV settings (delimiter, enclosure, lineEnding) to ExcelFile objects
+
+### 1.2.1
+- Fix with() method parameters
+
+### 1.2.0
+- Filters
+- Chunk filter (with chunked importer)
+- ExcelFile (method) injections
+- NewExcelFile (method) injections
+- Edit existing worksheets
+- Converting existing worksheet
+- Laravel 4.* + 5.0 support
+
+### 1.1.9
+- PHP 5.3 fixes
+
+### 1.1.8
+- PHP 5.3 support
+- fromArray bugfix
+
+### 1.1.7
+- Fix heading generation for export with `->fromArray()`
+- Bugfix for non-Unix kernels
+- Enhanced CSS parser (thanks to `tijsverkoyen/CssToInlineStyles`)
+- Support for nested CSS styles
+- Support for multiple css attributes per class
+- Support for internal and external CSS files
+- Support for inline style blocks (`<style>`)
+
 ### 1.1.6
 
 - Provides.json fix
 - DocBlock fixes
 - Define Illuminate dependencies inside composer.json
-- Bettter HTML rowspan handlingin views
-- use new CellCollection() instead of ::make, to support Laravel 4.3
+- Better HTML rowspan handling views
+- use new CellCollection() instead of ::make, to support upcoming Laravel version
 - Workaround for long integers
 - Add support to `wrap-text` in views
 - Fix empty dates parsing
 - Support local stylesheets in view parsing
 - Push tr classes to td-children in views
-- Support for dynamically appending rows to an empty sheet
+- Support for dynamically appending rows to an empty (new) sheet
 - Fix separator typo in config
 
 ### 1.1.5
