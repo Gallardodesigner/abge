@@ -840,7 +840,8 @@ class Ticket{
         );
         
         $numerosBarcode = $this->boleto['codbarra_dv'];
-        
+
+        // die($numerosBarcode);        
         // PRINT BARCODE
         PDF::Cell(0, 0, 'Ficha de Compensação - Autenticação Mecânica', 0, 1);
         
