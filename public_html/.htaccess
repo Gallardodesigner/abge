@@ -1,3 +1,8 @@
+
+AddHandler php55-script .php
+
+suPHP_ConfigPath /home/storage/0/63/0c/abge/
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews
@@ -12,4 +17,8 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /public_html/index.php/$1 [L]
 </IfModule>
