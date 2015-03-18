@@ -12,7 +12,6 @@ class InscriptionController extends \BaseController {
 
 		$inscriptions = $course->inscriptions;
 
-
 		$array = array(
 			'course' => $course,
 			'inscriptions' => $inscriptions,
