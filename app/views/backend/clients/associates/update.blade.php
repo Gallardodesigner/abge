@@ -417,7 +417,7 @@ Associados
                                             @if (isset($categorias))
                                                 <select class="chosen-select" name="categoria">
                                                     @foreach ($categorias as $categoria)
-                                                        <option value="{{$categoria->id_categoria_asociado}}" {{ $associate->categoria == $categoria->id_categoria_asocaido ? 'selected' : '' }}>{{$categoria->nombre_categoria}}</option>
+                                                        <option value="{{$categoria->id_categoria_asociado}}" {{ $associate->categoria == $categoria->id_categoria_asociado ? 'selected' : '' }}>{{$categoria->nombre_categoria}}</option>
                                                     @endforeach
                                                 </select>
                                             @endif
