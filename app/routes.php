@@ -42,6 +42,7 @@ if(Auth::check() && Auth::user()->type=="superadmin"):
 	Route::controller('/ajax', 'AjaxController');
 	Route::controller('/dashboard/news', 'NewsController');
 	Route::controller('/dashboard/arquivos', 'ArquivoController');
+	Route::controller('/dashboard/pages', 'PageController');
 	Route::controller('/dashboard/videos', 'VideoController');
 	Route::controller('/dashboard/annuities/{idAnnuity}/categories/{idCategory}/dates', 'AnnuityDateController');
 	Route::controller('/dashboard/annuities/{idAnnuity}/categories/{idCategory}/payments', 'AnnuityCategoryPaymentController');
