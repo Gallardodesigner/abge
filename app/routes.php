@@ -40,6 +40,9 @@ if(Auth::check() && Auth::user()->type=="superadmin"):
 		return Redirect::to('/dashboard');
 	});
 	Route::controller('/ajax', 'AjaxController');
+	Route::controller('/dashboard/cartography/{idCartography}/authors', 'CartographyAuthorController');
+	Route::controller('/dashboard/cartography/users', 'CartographyUserController');
+	Route::controller('/dashboard/cartography', 'CartographyController');
 	Route::controller('/dashboard/news', 'NewsController');
 	Route::controller('/dashboard/arquivos', 'ArquivoController');
 	Route::controller('/dashboard/pages', 'PageController');

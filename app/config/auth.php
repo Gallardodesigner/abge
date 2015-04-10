@@ -58,6 +58,17 @@ return array(
 	|
 	*/
 
+    /*'multi' => array(
+        'cartography' => array(
+            'driver' => 'eloquent',
+            'model' => 'CartographyUser'
+        ),
+        'user' => array(
+            'driver' => 'database',
+            'table' => 'users'
+        )
+    ),*/
+
 	'reminder' => array(
 
 		'email' => 'emails.auth.reminder',

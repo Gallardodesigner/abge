@@ -1,0 +1,1 @@
+C:\wamp\www\gallardodesignerprojects\abge\app/views/backend/cartographies/authors/create.blade.php

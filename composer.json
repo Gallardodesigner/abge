@@ -9,7 +9,9 @@
     	"thujohn/pdf": "dev-master",
     	"maxxscho/laravel-tcpdf": "0.*",
     	"maatwebsite/excel": "1.*",
-    	"intervention/image": "2.*"
+    	"intervention/image": "2.*",
+    	"ollieread/multiauth": "dev-master",
+    	"alexanderzon/laravel-hashids": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
