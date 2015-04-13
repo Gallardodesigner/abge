@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'eloquent',
+	// 'driver' => 'eloquent',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'model' => 'User',
+	// 'model' => 'User',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'table' => 'users',
+	// 'table' => 'users',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ return array(
 	|
 	*/
 
-    /*'multi' => array(
+    'multi' => array(
         'cartography' => array(
             'driver' => 'eloquent',
             'model' => 'CartographyUser'
@@ -67,7 +67,7 @@ return array(
             'driver' => 'database',
             'table' => 'users'
         )
-    ),*/
+    ),
 
 	'reminder' => array(
 

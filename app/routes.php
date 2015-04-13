@@ -35,7 +35,7 @@ Route::get('formacoes', function(){
 	endforeach;
 	return Response::json($json);
 });
-if(Auth::check() && Auth::user()->type=="superadmin"):
+if(Auth::user()->check() && Auth::user()->user()->type=="superadmin"):
 	Route::get("/gd-admin", function(){
 		return Redirect::to('/dashboard');
 	});
@@ -72,7 +72,7 @@ else:
 	Route::controller("/gd-admin","AuthenticationController");
 endif;
 	Route::get('/logout', function(){
-		Auth::logout();
+		Auth::user()->logout();
 		return Redirect::to("/gd-admin");
 	});
 	

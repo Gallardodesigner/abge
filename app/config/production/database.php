@@ -52,7 +52,7 @@ return array(
 			'prefix'   => '',
 		),
 		
-		'mysql' => array(
+		/*'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => '186.202.152.19',
 			'database'  => 'abge',
@@ -69,6 +69,27 @@ return array(
 			'database'  => 'abge13',
 			'username'  => 'abge13',
 			'password'  => 'Abge3280743',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),*/
+		'mysql' => array(
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'abge',
+			'username'  => 'root',
+			'password'  => '',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+		
+		'mysql_2' => array(
+			'driver'    => 'mysql',
+			'host'      => 'localhost',
+			'database'  => 'abge13',
+			'username'  => 'root',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

@@ -6,4 +6,10 @@ class CartographyUser extends \Eloquent {
 
 	protected $table = 'cartography_users';
 
+	public function cartographies(){
+
+		return $this->hasMany('Cartography', 'user_id', 'id');
+
+	}
+
 }

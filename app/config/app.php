@@ -96,7 +96,7 @@ return array(
 	'providers' => array(
 
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-		'Illuminate\Auth\AuthServiceProvider',					# Replaced for Ollieread\Multiauth\MultiauthServiceProvider
+		// 'Illuminate\Auth\AuthServiceProvider',					# Replaced for Ollieread\Multiauth\MultiauthServiceProvider
 		'Illuminate\Cache\CacheServiceProvider',
 		'Illuminate\Session\CommandsServiceProvider',
 		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
@@ -126,7 +126,7 @@ return array(
 		// 'Thujohn\Pdf\PdfServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 		'Maxxscho\LaravelTcpdf\LaravelTcpdfServiceProvider',
-		// 'Ollieread\Multiauth\MultiauthServiceProvider',
+		'Ollieread\Multiauth\MultiauthServiceProvider',
 		'Alexanderzon\Hashids\HashidsServiceProvider',
 
 	),

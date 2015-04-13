@@ -225,7 +225,7 @@ class FrontendCourseController extends \BaseController {
 
 	public static function getCourseFiles( $id, $course, $idContent ){
 
-		$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+		$inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id);
 
 		$array = array( 
 			'course' => $course, 
@@ -266,7 +266,7 @@ class FrontendCourseController extends \BaseController {
 
 		$titles = Input::get('titles');
 
-		$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+		$inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id);
 		$filenumber = count($inscription->files);
 		$listedFiles = $inscription->listedFiles();
 		$positions = self::positionNulled($listedFiles);
@@ -351,15 +351,15 @@ class FrontendCourseController extends \BaseController {
 					$url = $file->getRealPath();
 					$extension = $file->getClientOriginalExtension();
 					// str_replace(' ', '',str_replace('/', '-', strtolower($titles[$counttitle])))
-					$name = str_replace(' ', '', strtolower(Auth::user()->id)).'-'.($positions[$count]+1).'-'.date('YmdHis').rand(2,1024*512).'.'.$extension;
+					$name = str_replace(' ', '', strtolower(Auth::user()->user()->id)).'-'.($positions[$count]+1).'-'.date('YmdHis').rand(2,1024*512).'.'.$extension;
 					$size  = $file->getSize();
 					$mime  = $file->getMimeType();
 					$file->move(public_path('uploads/files/'), $name);
-					$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+					$inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id);
 					$my_file = new Files();
 					$my_file->title = $titles[$counttitle] . ' - ' . ($positions[$count]+1);
 					$my_file->id_course = $course->id;
-					$my_file->id_user = Auth::user()->id;
+					$my_file->id_user = Auth::user()->user()->id;
 					$my_file->id_inscription = $inscription->id;
 					$my_file->url = '/uploads/files/'.$name;
 					$my_file->size = $size;
@@ -384,7 +384,7 @@ class FrontendCourseController extends \BaseController {
 	public static function getCoursePayment( $id, $course, $idContent ){
 
 		if(count($course->inscriptions) > $course->min ):
-			$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+			$inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id);
 			$button = '';
 			$message = '';
 			foreach($inscription->usertype->dates as $date):
@@ -399,11 +399,11 @@ class FrontendCourseController extends \BaseController {
 				endif;	
 			endforeach;
 		elseif(count($course->inscriptions) >= $course->max ):
-			$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+			$inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id);
 			$button = '';
 			$message = $course->max_message;
 		else:
-			$inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id);
+			$inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id);
 			$button = '';
 			$message = $course->min_message;
 		endif;

@@ -16,7 +16,7 @@ class AuthenticationController extends \BaseController {
 			'password' => Input::get('password')
 			);
 
-		if(Auth::attempt($credentials)):
+		if(Auth::user()->attempt($credentials)):
 
 			return Redirect::to('/dashboard');
 
@@ -35,7 +35,7 @@ class AuthenticationController extends \BaseController {
 		$user->type = 'superadmin';
 		$user->save();
 
-		Auth::login($user);
+		Auth::user()->login($user);
 
 		return Redirect::to('/autenticacao/check');
 
@@ -46,13 +46,13 @@ class AuthenticationController extends \BaseController {
 
 	public function getCheck(){
 
-		//return dd(Auth::check());
+		//return dd(Auth::user()->check());
 
 	}
 
 	public function getCheckout(){
 
-		return Auth::logout();
+		return Auth::user()->logout();
 
 	}
 
@@ -86,9 +86,9 @@ class AuthenticationController extends \BaseController {
 		$usertype = UserTypes::find(Input::get('usertype'));
 		$course = Courses::find(Input::get('course'));
 		// var_dump($credentials);
-		if(Auth::attempt($credentials)):
+		if(Auth::user()->attempt($credentials)):
 			// var_dump("Si autentico");
-			if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+			if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 			// var_dump("If");
 				$inscription = Inscriptions::find($inscription->id);
 				$array = array(
@@ -115,7 +115,7 @@ class AuthenticationController extends \BaseController {
 				// dd($usertype->id);
 				$inscription = new Inscriptions();
 				$inscription->id_course = $course->id;
-				$inscription->id_user = Auth::user()->id;
+				$inscription->id_user = Auth::user()->user()->id;
 				$inscription->id_usertype = $usertype->id;
 				$inscription->save();
 
@@ -175,9 +175,9 @@ class AuthenticationController extends \BaseController {
 
 					endif;
 
-					Auth::login($user);
+					Auth::user()->login($user);
 
-					if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+					if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 						$array = array(
 							'msg_success' => Lang::get('messages.login_welcome'),
@@ -191,7 +191,7 @@ class AuthenticationController extends \BaseController {
 
 						$inscription = new Inscriptions();
 						$inscription->id_course = $course->id;
-						$inscription->id_user = Auth::user()->id;
+						$inscription->id_user = Auth::user()->user()->id;
 						$inscription->id_usertype = $usertype->id;
 						$inscription->save();
 
@@ -240,9 +240,9 @@ class AuthenticationController extends \BaseController {
 							$assoc->type = 'associate';
 							$assoc->save();
 
-							Auth::login($user);
+							Auth::user()->login($user);
 
-							if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+							if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 								$array = array(
 									'msg_success' => Lang::get('messages.login_welcome'),
@@ -256,7 +256,7 @@ class AuthenticationController extends \BaseController {
 
 								$inscription = new Inscriptions();
 								$inscription->id_course = $course->id;
-								$inscription->id_user = Auth::user()->id;
+								$inscription->id_user = Auth::user()->user()->id;
 								$inscription->id_usertype = $usertype->id;
 								$inscription->save();
 
@@ -339,9 +339,9 @@ class AuthenticationController extends \BaseController {
 						$assoc->type = 'associate';
 						$assoc->save();
 
-						Auth::login($user);
+						Auth::user()->login($user);
 
-						if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+						if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 							$array = array(
 								'msg_success' => Lang::get('messages.login_welcome'),
@@ -355,7 +355,7 @@ class AuthenticationController extends \BaseController {
 
 							$inscription = new Inscriptions();
 							$inscription->id_course = $course->id;
-							$inscription->id_user = Auth::user()->id;
+							$inscription->id_user = Auth::user()->user()->id;
 							$inscription->id_usertype = $usertype->id;
 							$inscription->save();
 
@@ -432,9 +432,9 @@ class AuthenticationController extends \BaseController {
 
 			if($user):
 
-				Auth::login($user);
+				Auth::user()->login($user);
 
-				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+				if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 					//dd("hasInscription");
 
@@ -456,7 +456,7 @@ class AuthenticationController extends \BaseController {
 
 					$inscription = new Inscriptions();
 					$inscription->id_course = $course->id;
-					$inscription->id_user = Auth::user()->id;
+					$inscription->id_user = Auth::user()->user()->id;
 					$inscription->id_usertype = $usertype->id;
 					$inscription->save();
 
@@ -487,9 +487,9 @@ class AuthenticationController extends \BaseController {
 				$participant->user = $user->id;
 				$participant->save();
 
-				Auth::login($user);
+				Auth::user()->login($user);
 
-				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+				if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 					$array = array(
 						'msg_success' => Lang::get('messages.login_welcome'),
@@ -503,7 +503,7 @@ class AuthenticationController extends \BaseController {
 
 					$inscription = new Inscriptions();
 					$inscription->id_course = $course->id;
-					$inscription->id_user = Auth::user()->id;
+					$inscription->id_user = Auth::user()->user()->id;
 					$inscription->id_usertype = $usertype->id;
 					$inscription->save();
 
@@ -552,9 +552,9 @@ class AuthenticationController extends \BaseController {
 				$part->type = 'participant';
 				$part->save();
 
-				Auth::login($user);
+				Auth::user()->login($user);
 
-				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+				if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 					$array = array(
 						'msg_success' => Lang::get('messages.login_welcome'),
@@ -568,7 +568,7 @@ class AuthenticationController extends \BaseController {
 
 					$inscription = new Inscriptions();
 					$inscription->id_course = $course->id;
-					$inscription->id_user = Auth::user()->id;
+					$inscription->id_user = Auth::user()->user()->id;
 					$inscription->id_usertype = $usertype->id;
 					$inscription->save();
 
@@ -700,9 +700,9 @@ class AuthenticationController extends \BaseController {
 		$part->type = 'participant';
 		$part->save();
 
-		Auth::login($user);
+		Auth::user()->login($user);
 
-		if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+		if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 			$array = array(
 				'msg_success' => Lang::get('messages.login_welcome'),
@@ -716,7 +716,7 @@ class AuthenticationController extends \BaseController {
 
 			$inscription = new Inscriptions();
 			$inscription->id_course = $course->id;
-			$inscription->id_user = Auth::user()->id;
+			$inscription->id_user = Auth::user()->user()->id;
 			$inscription->id_usertype = $usertype->id;
 			$inscription->save();
 
@@ -816,7 +816,7 @@ class AuthenticationController extends \BaseController {
 		$participant->pagamento_participante = Input::get('pagamento_participante') != null ? Input::get('pagamento_participante') : $participant->pagamento_participante;
 		$participant->save();
 
-		Auth::login($participant->participant->getuser);
+		Auth::user()->login($participant->participant->getuser);
 
 		$array = array(
 			'msg_success' => Lang::get('messages.login_welcome'),
@@ -950,7 +950,7 @@ class AuthenticationController extends \BaseController {
 		$participant->celular_com = Input::get('celular_com') != null ?  Input::get('celular_com') : $participant->celular_com;
 		$participant->save();
 
-		Auth::login($participant->associate->getuser);
+		Auth::user()->login($participant->associate->getuser);
 
 		$array = array(
 			'msg_success' => Lang::get('messages.login_welcome'),
@@ -994,9 +994,9 @@ class AuthenticationController extends \BaseController {
 
 		$course = Courses::find(Input::get('course'));
 
-		if(Auth::attempt($credentials)):
+		if(Auth::user()->attempt($credentials)):
 
-			if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+			if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 				$array = array(
 					'msg_success' => Lang::get('messages.login_welcome'),
@@ -1010,7 +1010,7 @@ class AuthenticationController extends \BaseController {
 
 				$inscription = new Inscriptions();
 				$inscription->id_course = $course->id;
-				$inscription->id_user = Auth::user()->id;
+				$inscription->id_user = Auth::user()->user()->id;
 				$inscription->id_usertype = $usertype->id;
 				$inscription->save();
 
@@ -1067,9 +1067,9 @@ class AuthenticationController extends \BaseController {
 					$associate->user = $user->id;
 					$associate->save();
 
-					Auth::login($user);
+					Auth::user()->login($user);
 
-					if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+					if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 						$array = array(
 							'msg_success' => Lang::get('messages.login_welcome'),
@@ -1083,7 +1083,7 @@ class AuthenticationController extends \BaseController {
 
 						$inscription = new Inscriptions();
 						$inscription->id_course = $course->id;
-						$inscription->id_user = Auth::user()->id;
+						$inscription->id_user = Auth::user()->user()->id;
 						$inscription->id_usertype = $usertype->id;
 						$inscription->save();
 
@@ -1132,9 +1132,9 @@ class AuthenticationController extends \BaseController {
 							$assoc->type = 'associate';
 							$assoc->save();
 
-							Auth::login($user);
+							Auth::user()->login($user);
 
-							if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+							if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 								$array = array(
 									'msg_success' => Lang::get('messages.login_welcome'),
@@ -1148,7 +1148,7 @@ class AuthenticationController extends \BaseController {
 
 								$inscription = new Inscriptions();
 								$inscription->id_course = $course->id;
-								$inscription->id_user = Auth::user()->id;
+								$inscription->id_user = Auth::user()->user()->id;
 								$inscription->id_usertype = $usertype->id;
 								$inscription->save();
 
@@ -1231,9 +1231,9 @@ class AuthenticationController extends \BaseController {
 						$assoc->type = 'associate';
 						$assoc->save();
 
-						Auth::login($user);
+						Auth::user()->login($user);
 
-						if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+						if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 							$array = array(
 								'msg_success' => Lang::get('messages.login_welcome'),
@@ -1247,7 +1247,7 @@ class AuthenticationController extends \BaseController {
 
 							$inscription = new Inscriptions();
 							$inscription->id_course = $course->id;
-							$inscription->id_user = Auth::user()->id;
+							$inscription->id_user = Auth::user()->user()->id;
 							$inscription->id_usertype = $usertype->id;
 							$inscription->save();
 
@@ -1326,9 +1326,9 @@ class AuthenticationController extends \BaseController {
 
 			if($user):
 
-				Auth::login($user);
+				Auth::user()->login($user);
 
-				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+				if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 					$array = array(
 						'msg_success' => Lang::get('messages.login_welcome'),
@@ -1342,7 +1342,7 @@ class AuthenticationController extends \BaseController {
 
 					$inscription = new Inscriptions();
 					$inscription->id_course = $course->id;
-					$inscription->id_user = Auth::user()->id;
+					$inscription->id_user = Auth::user()->user()->id;
 					$inscription->id_usertype = $usertype->id;
 					$inscription->save();
 
@@ -1372,9 +1372,9 @@ class AuthenticationController extends \BaseController {
 				$participant->user = $user->id;
 				$participant->save();
 
-				Auth::login($user);
+				Auth::user()->login($user);
 
-				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+				if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 					$array = array(
 						'msg_success' => Lang::get('messages.login_welcome'),
@@ -1388,7 +1388,7 @@ class AuthenticationController extends \BaseController {
 
 					$inscription = new Inscriptions();
 					$inscription->id_course = $course->id;
-					$inscription->id_user = Auth::user()->id;
+					$inscription->id_user = Auth::user()->user()->id;
 					$inscription->id_usertype = $usertype->id;
 					$inscription->save();
 
@@ -1437,9 +1437,9 @@ class AuthenticationController extends \BaseController {
 				$part->type = 'participant';
 				$part->save();
 
-				Auth::login($user);
+				Auth::user()->login($user);
 
-				if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+				if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 					$array = array(
 						'msg_success' => Lang::get('messages.login_welcome'),
@@ -1453,7 +1453,7 @@ class AuthenticationController extends \BaseController {
 
 					$inscription = new Inscriptions();
 					$inscription->id_course = $course->id;
-					$inscription->id_user = Auth::user()->id;
+					$inscription->id_user = Auth::user()->user()->id;
 					$inscription->id_usertype = $usertype->id;
 					$inscription->save();
 
@@ -1565,9 +1565,9 @@ class AuthenticationController extends \BaseController {
 		$part->type = 'participant';
 		$part->save();
 
-		Auth::login($user);
+		Auth::user()->login($user);
 
-		if($inscription = Inscriptions::hasInscription(Auth::user()->id, $course->id )):
+		if($inscription = Inscriptions::hasInscription(Auth::user()->user()->id, $course->id )):
 
 			$array = array(
 				'msg_success' => Lang::get('messages.login_welcome'),
@@ -1581,7 +1581,7 @@ class AuthenticationController extends \BaseController {
 
 			$inscription = new Inscriptions();
 			$inscription->id_course = $course->id;
-			$inscription->id_user = Auth::user()->id;
+			$inscription->id_user = Auth::user()->user()->id;
 			$inscription->id_usertype = $usertype->id;
 			$inscription->save();
 
@@ -1660,7 +1660,7 @@ class AuthenticationController extends \BaseController {
 		$participant->email = Input::get('email');
 		$participant->save();
 
-		Auth::login($participant->participant->getuser);
+		Auth::user()->login($participant->participant->getuser);
 
 		$array = array(
 			'msg_success' => Lang::get('messages.login_welcome'),
@@ -1767,7 +1767,7 @@ class AuthenticationController extends \BaseController {
 		$participant->celular_com = Input::get('celular_com') != null ?  Input::get('celular_com') : $participant->celular_com;
 		$participant->save();
 
-		Auth::login($participant->associate->getuser);
+		Auth::user()->login($participant->associate->getuser);
 
 		$array = array(
 			'msg_success' => Lang::get('messages.login_welcome'),
@@ -1792,7 +1792,7 @@ class AuthenticationController extends \BaseController {
 			'password' => Input::get('password')
 			);
 
-		if(Auth::attempt($credentials)):
+		if(Auth::user()->attempt($credentials)):
 			return Redirect::to('/dashboard');
 			//return Redirect::to('/ingreso');
 

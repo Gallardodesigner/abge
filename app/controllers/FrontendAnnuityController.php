@@ -6,11 +6,11 @@ class FrontendAnnuityController extends \BaseController {
 
 	public function getIndex(){
 
-		if(Auth::check()):
+		if(Auth::user()->check()):
 
-			if(Auth::user()->type == 'associate'):
+			if(Auth::user()->user()->type == 'associate'):
 
-				if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user())):
+				if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user()->user())):
 
 					return Redirect::to( self::$route . '/acusado' );
 
@@ -22,7 +22,7 @@ class FrontendAnnuityController extends \BaseController {
 
 			else:
 
-				Auth::logout();
+				Auth::user()->logout();
 				return Redirect::to(self::$route);
 
 			endif;
@@ -41,7 +41,7 @@ class FrontendAnnuityController extends \BaseController {
 
 	public function getAuth(){
 
-		if( Auth::check() ) Auth::logout();
+		if( Auth::user()->check() ) Auth::user()->logout();
 
 		$args = array(
 			'route' => self::$route,
@@ -61,9 +61,9 @@ class FrontendAnnuityController extends \BaseController {
 
 		$course = Courses::find(Input::get('course'));
 
-		if(Auth::attempt($credentials)):
+		if(Auth::user()->attempt($credentials)):
 
-			if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user())):
+			if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user()->user())):
 
 				return Redirect::to( self::$route . '/acusado' );
 
@@ -112,9 +112,9 @@ class FrontendAnnuityController extends \BaseController {
 
 					endif;
 
-					Auth::login($user);
+					Auth::user()->login($user);
 
-					if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user())):
+					if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user()->user())):
 
 						return Redirect::to( self::$route . '/acusado' );
 
@@ -161,9 +161,9 @@ class FrontendAnnuityController extends \BaseController {
 							$assoc->type = 'associate';
 							$assoc->save();
 
-							Auth::login($user);
+							Auth::user()->login($user);
 
-							if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user())):
+							if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user()->user())):
 
 								return Redirect::to( self::$route . '/acusado' );
 
@@ -226,9 +226,9 @@ class FrontendAnnuityController extends \BaseController {
 						$assoc->type = 'associate';
 						$assoc->save();
 
-						Auth::login($user);
+						Auth::user()->login($user);
 
-						if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user())):
+						if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user()->user())):
 
 							return Redirect::to( self::$route . '/acusado' );
 
@@ -258,7 +258,7 @@ class FrontendAnnuityController extends \BaseController {
 
 	public function getCheckout(){
 
-		Auth::logout();
+		Auth::user()->logout();
 
 		return Redirect::to( self::$route );
 
@@ -267,8 +267,8 @@ class FrontendAnnuityController extends \BaseController {
 	public function getAcusado(){
 
 		$args = array(
-			'associate' => Auth::user()->associate->associate,
-			'user' => Auth::user(),
+			'associate' => Auth::user()->user()->associate->associate,
+			'user' => Auth::user()->user(),
 			'route' => self::$route
 			);
 
@@ -278,7 +278,7 @@ class FrontendAnnuityController extends \BaseController {
 
 	public function getPagamento(){
 
-		$user = Auth::user();
+		$user = Auth::user()->user();
 		$associate = $user->associate->asociado;
 		$associateCategory = $associate->category;
 
