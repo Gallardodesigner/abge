@@ -64,8 +64,8 @@ return array(
             'model' => 'CartographyUser'
         ),
         'user' => array(
-            'driver' => 'database',
-            'table' => 'users'
+            'driver' => 'eloquent',
+            'model' => 'User'
         )
     ),
 

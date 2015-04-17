@@ -18,6 +18,7 @@ class CartographyController extends \BaseController {
 	public function getCreate(){
 
 		return View::make('backend.cartographies.create', array(
+			'cartography_users' => CartographyUser::all(),
 			'route' => $this->route,
 			'msg_success' => Session::get('msg_success'),
 			'msg_error' => Session::get('msg_error')

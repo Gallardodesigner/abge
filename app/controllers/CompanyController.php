@@ -51,12 +51,21 @@ class CompanyController extends \BaseController {
 
 			$filename = $this->uploadImage($image);
 
+			$type = '';
+
+			if( Input::get('type') != null ):
+				foreach (Input::get('type') as $_t):
+					# code...
+					$type .= $_t;
+				endforeach;
+			endif;
+
 			$company = new Companies();
 			$company->title = Input::get('title');
 			$company->content = Input::get('content');
 			$company->address = Input::get('address');
 			$company->contact = Input::get('contact');
-			$company->type = 'company';
+			$company->type = $type;
 			$company->status = 'draft';
 			$company->url = $filename;
 
@@ -113,9 +122,19 @@ class CompanyController extends \BaseController {
 
 			else:
 
+				$type = '';
+
+				if( Input::get('type') != null ):
+					foreach (Input::get('type') as $_t):
+						# code...
+						$type .= $_t;
+					endforeach;
+				endif;
+
 				$company->title = Input::get('title');
 				$company->content = Input::get('content');
 				$company->address = Input::get('address');
+				$company->type = $type;
 				$company->contact = Input::get('contact');
 
 				$image = Input::file('url');

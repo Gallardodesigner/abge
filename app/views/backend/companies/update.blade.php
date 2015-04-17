@@ -71,6 +71,14 @@ Company
                              <p>
                                 <label>Contact</label>
                                 <span class="field"><textarea cols="40" rows="5" name="contact" id="contact" class="span6">{{$company->contact}}</textarea></span>
+                            </p>  
+                            <p>
+                                <label>Banner</label>
+                                <span class="field">
+                                    Patrocinadores <input type="checkbox" name="type[]" value="patrocinadores" {{ Str::contains($company->type, 'patrocinadores' ) ? 'checked' : '' }} />
+                                    Apoio <input type="checkbox" name="type[]" value="apoio"{{ Str::contains($company->type, 'apoio' ) ? 'checked' : '' }}/>
+                                    Parceiros <input type="checkbox" name="type[]" value="parceiros"{{ Str::contains($company->type, 'parceiros' ) ? 'checked' : '' }}/>
+                                </span>
                             </p>                            
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>

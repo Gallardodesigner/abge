@@ -18,7 +18,15 @@ class AuthenticationController extends \BaseController {
 
 		if(Auth::user()->attempt($credentials)):
 
-			return Redirect::to('/dashboard');
+			if( Auth::user()->user()->type == 'superadmin' ):
+				
+				return Redirect::to('/dashboard');
+
+			else:
+
+				return Redirect::to('/entrar');
+
+			endif;
 
 		else:
 

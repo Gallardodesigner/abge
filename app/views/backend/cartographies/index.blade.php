@@ -132,9 +132,16 @@ Todas as Cartografias
                                         <input type="checkbox" />
                                       </span></td>
                                         <td>{{$cartography->work_title}}</td>
-                                        <td>{{ $cartography->user }}</td>
-                                        <td>{{count($cartography->authors)}}</td>
+                                        <td>{{ $cartography->user->username }}</td>
+                                        <td><a href="{{ $route }}/{{$cartography->id}}/authors">
+                                            @if(count($cartography->authors) > 0)
+                                                @foreach($cartography->authors as $author)
+                                                    {{ $author->first_name }} {{ $author->last_name }} ({{ $author->institution}}) <br>
+                                                @endforeach
+                                            @endif
+                                        </td>
                                         <td class="center">
+                                            <a href="{{ $route }}/{{$cartography->id}}/authors" class="btn btn-info alertinfo" style="color:#FFF !important;"><i class="iconfa-user" style="color:#FFF;margin-right:10px;"></i>Autores</a>
                                             <a href="{{ $route }}/update/{{$cartography->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Editar</a>
                                             <a data-id="{{$cartography->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Eliminar</a>
                                         </td>

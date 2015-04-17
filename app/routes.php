@@ -83,6 +83,8 @@ endif;
 	// });
 	//Route::controller('/auth', 'AuthenticationController');
 	Route::controller('/autenticacao', 'AuthenticationController');
+	Route::controller('/associados', 'FrontendAssociateController');
+	Route::controller('/entrar', 'FrontendAuthenticationController');
 	Route::controller('/anuidades', 'FrontendAnnuityController');
 	Route::controller('/courses/{id?}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/{id}/{content?}/{idContent?}', 'FrontendCourseController');
@@ -118,3 +120,4 @@ endif;
 // 	//
 // //	dd($course->teachers);
 // });
+

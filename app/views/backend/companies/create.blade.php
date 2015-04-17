@@ -69,8 +69,12 @@ Company
                                 <span class="field"><textarea cols="80" rows="5" name="address" id="address" class="span6"></textarea></span>
                             </p>
                              <p>
-                                <label>Contact</label>
-                                <span class="field"><textarea cols="80" rows="5" name="contact" id="contact" class="span6"></textarea></span>
+                                <label>Banner</label>
+                                <span class="field">
+                                    Patrocinadores <input type="checkbox" name="type[]" value="patrocinadores"/>
+                                    Apoio <input type="checkbox" name="type[]" value="apoio"/>
+                                    Parceiros <input type="checkbox" name="type[]" value="parceiros"/>
+                                </span>
                             </p>                            
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>

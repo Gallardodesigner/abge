@@ -61,6 +61,11 @@ Adicionar Cartografía
                                 <span class="field">
                                 	<select name="user_id" required>
                                 		<option value="1">---SELECIONE UM USUARIO---</option>
+                                        @if($cartography_users)
+                                            @foreach($cartography_users as $user)
+                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                            @endforeach
+                                        @endif
                                 	</select>
                                 </span>
                             </p>
