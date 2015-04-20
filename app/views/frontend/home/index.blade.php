@@ -1,0 +1,1 @@
+C:\wamp\www\gallardodesignerprojects\abge\app/views/frontend/index/index.blade.php
