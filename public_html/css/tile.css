@@ -1,0 +1,21 @@
+.tile{
+   border: dashed 1px #DDD;
+   border-radius: 5px;
+   text-align: justify;
+   padding: 1em;
+}
+.tile > .title{
+   font-size: 16pt;
+   font-weight: bold;
+   display:block;
+   color: #666;
+}
+.tile > .title > span{
+   color: #C66;
+}
+.tile > .content{
+   font-size: 10pt;
+   display:block;
+   color:#888;
+   cursor: pointer;
+}
