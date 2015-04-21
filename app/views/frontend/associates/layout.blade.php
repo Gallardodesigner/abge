@@ -81,6 +81,12 @@
 		.left{
 			text-align: left;
 		}
+		.bold{
+			font-weight: bold;
+		}
+		.italic{
+			font-style: italic;
+		}
 	</style>
 	<link rel="shortcut icon" href="favicon.ico"/>
 
@@ -89,11 +95,10 @@
 <body>
 
 	<header class="row">
-		<div class="col-md-1"></div>
+		<div class="col-md-2"><img class="col-md-10" src="/images/logo_abge45.png" style="margin-top:.5em" /></div>
 		<div class="col-md-10">
 			<h3>ASSOCIAÇÃO BRASILEIRA DE GEOLOGIA DE ENGENHARIA E AMBIENTAL</h3>		
 		</div>
-		<div class="col-md-1"></div>
 	</header>
 
 	<div class="row">

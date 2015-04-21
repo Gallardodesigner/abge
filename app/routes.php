@@ -68,6 +68,8 @@ if(Auth::user()->check() && Auth::user()->user()->type=="superadmin"):
 	Route::controller('/dashboard/courses/{idCourse}/inscriptions', 'InscriptionController');
 	Route::controller('/dashboard/courses/{idCourse}/content', 'ContentController');
 	Route::controller('/dashboard/courses', 'CourseController');
+elseif(Auth::user()->check() && Auth::user()->user()->type=="associate"):
+	Route::controller('/associados', 'FrontendAssociateController');
 else:
 	Route::controller("/gd-admin","AuthenticationController");
 endif;
@@ -78,12 +80,11 @@ endif;
 	
 	Route::controller('/dashboard', 'DashboardController');
 	
-	// Route::get('/dashboard/', function(){
-	// 	return Redirect::to('/');
-	// });
+	Route::get('/associados/{one?}/{two?}/{three?}/{four?}/{five?}', function(){
+	 	return Redirect::to('/entrar');
+	});
 	//Route::controller('/auth', 'AuthenticationController');
 	Route::controller('/autenticacao', 'AuthenticationController');
-	Route::controller('/associados', 'FrontendAssociateController');
 	Route::controller('/entrar', 'FrontendAuthenticationController');
 	Route::controller('/anuidades', 'FrontendAnnuityController');
 	Route::controller('/courses/{id?}/{content?}/{idContent?}', 'FrontendCourseController');

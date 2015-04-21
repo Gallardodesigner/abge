@@ -32,7 +32,7 @@ class FrontendAssociateController extends \BaseController {
 			'module' => self::$module,
 			);
 
-		return View::make('frontend.associate.anuidades')->with($args);
+		return View::make('frontend.associates.anuidades')->with($args);
 
 	}
 
@@ -48,7 +48,46 @@ class FrontendAssociateController extends \BaseController {
 			'module' => self::$module,
 			);
 
-		return View::make('frontend.associate.ajuda')->with($args);
+		return View::make('frontend.associates.ajuda')->with($args);
+
+	}
+
+	public function getCadastro(){
+
+		$associate = Auth::user()->user()->associate->asociado;
+		$categories = ORGAssociateCategories::all();
+		$logradouros = ORGBackyards::all();
+		$ufs = ORGuf::all();
+
+		$args = array(
+			'associate' => $associate,
+			'categories' => $categories,
+			'logradouros' => $logradouros,
+			'ufs' => $ufs,
+			'route' => self::$route,
+			'module' => 'associados_cadastro',
+			);
+
+		return View::make('frontend.associates.cadastro')->with($args);
+
+	}
+
+	public function postCadastro(){
+
+		dd(Input::all());
+
+	}
+
+	public function postMunicipios(){
+
+		$uf = ORGuf::find(Input::get('id'));
+		$html = '';
+
+		foreach ($uf->towns as $municipio):
+			$html .= "<option value='".$municipio->id_municipio."'>". $municipio->name_municipio ."</option>";
+		endforeach;
+
+		return $html;
 
 	}
 

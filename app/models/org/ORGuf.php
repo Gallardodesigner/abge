@@ -10,4 +10,10 @@ class ORGuf extends \Eloquent {
 
 	public $primaryKey  = 'id_uf';
 
+	public function towns(){
+
+		return $this->hasMany('ORGTowns', 'id_uf', 'id_uf');
+		
+	}
+
 }
