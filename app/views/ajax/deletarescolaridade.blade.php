@@ -1,6 +1,6 @@
 <form id="deletarescolaridade">
     <div>
-        <h4 class="widgettitle">Atualizar Escolaridade</h4>
+        <h4 class="widgettitle">Deletar Escolaridade</h4>
         <p>
             <label>Tipo de graduação</label>
             <span class="field">
@@ -9,7 +9,7 @@
         </p>
         <p>
             
-            <span class="right"><input type="submit" class="input-xxlarge btn" value="Atualizar"/></span>
+            <span class="right"><input type="submit" class="input-xxlarge btn" value="Deletar"/></span>
         </p> 
     </div>
 </form>

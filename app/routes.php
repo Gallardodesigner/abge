@@ -69,6 +69,7 @@ if(Auth::user()->check() && Auth::user()->user()->type=="superadmin"):
 	Route::controller('/dashboard/courses/{idCourse}/content', 'ContentController');
 	Route::controller('/dashboard/courses', 'CourseController');
 elseif(Auth::user()->check() && Auth::user()->user()->type=="associate"):
+	Route::controller('/ajax', 'FrontendAjaxController');
 	Route::controller('/associados', 'FrontendAssociateController');
 else:
 	Route::controller("/gd-admin","AuthenticationController");

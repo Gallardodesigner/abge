@@ -10,4 +10,10 @@ class ORGAcademics extends \Eloquent {
 
 	public $primaryKey  = 'id_datos_acad';
 
+	public function training(){
+
+		return $this->belongsTo('ORGTrainings', 'curso_realizado', 'id');
+
+	}
+
 }

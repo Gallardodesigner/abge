@@ -23,6 +23,7 @@
 	<!-- END GLOBAL MANDATORY STYLES -->
 	<!-- BEGIN PAGE LEVEL STYLES -->
 	<link href="/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
+	<link href="/plugins/bootstrap-fileinput/css/fileinput.css" rel="stylesheet" type="text/css"/>
 	<!-- <link href="/assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/> -->
 	<!-- <link href="/assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/> -->
 	<!-- END PAGE LEVEL STYLES -->
@@ -211,6 +212,9 @@
 	<script src="/plugins/bootstrap-editable/inputs-ext/address/address.js" type="text/javascript"></script>
 	<script src="/plugins/bootstrap-editable/inputs-ext/wysihtml5/wysihtml5.js" type="text/javascript"></script>
 	<script src="/plugins/bootstrap-navbar-dropdowns/js/navbar.js" type="text/javascript"></script>
+	<script src="/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+	<script src="/plugins/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+	<script src="/plugins/bootstrap-fileinput/js/fileinput_locale_pt.js" type="text/javascript"></script>
 
 	<script type="text/javascript" charset="utf8" src="/plugins/DataTables-1.10.6/media/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" charset="utf8" src="/plugins/DataTables-1.10.6/extensions/Responsive/js/dataTables.responsive.js"></script>

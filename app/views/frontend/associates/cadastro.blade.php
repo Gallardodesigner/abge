@@ -136,7 +136,7 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label class="control-label">Tipo de Logradouro</label>
-										<select class="form-control selectpicker" name="categoria">
+										<select class="form-control selectpicker" name="logradouro_res">
 											@foreach($logradouros as $logradouro)
 												<option value="{{ $logradouro->id_logradouro }}" {{ $associate->logradouro_res == 	$logradouro->id_logradouro ? 'selected' : '' }}>{{ $logradouro->nombre }}</option>
 											@endforeach
@@ -166,7 +166,7 @@
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">País</label>
-										<select class="form-control selectpicker" name="pais_res" id="asociados_pais_res">
+										<select class="form-control selectpicker" name="pais_res" id="pais_res">
 											<option {{ $associate->pais_res == '0' ? 'selected' : '' }} value="0">Selecione o País</option>
 											<option {{ $associate->pais_res == 'AF' ? 'selected' : '' }} value="AF">Afghanistan</option>
 											<option {{ $associate->pais_res == 'AX' ? 'selected' : '' }} value="AX">Åland Islands</option>
@@ -461,7 +461,7 @@
 								</div>						    	
 								<div class="row">
 									<div class="form-group col-md-6">
-										<label class="control-label">Tipo de Logradouro</label>
+										<label class="control-label">Municipio</label>
 										<select id="municipio_res" class="form-control selectpicker" name="municipio_res">
 											@foreach($ufs as $uf)
 												@if($associate->uf_res == 	$uf->id_uf)
@@ -484,7 +484,7 @@
 									</div>
 									<div class="form-group col-md-6">
 										<label class="control-label">Tipo de Logradouro</label>
-										<select class="form-control selectpicker" name="categoria">
+										<select class="form-control selectpicker" name="logradouro_com">
 											@foreach($logradouros as $logradouro)
 												<option value="{{ $logradouro->id_logradouro }}" {{ $associate->logradouro_com == 	$logradouro->id_logradouro ? 'selected' : '' }}>{{ $logradouro->nombre }}</option>
 											@endforeach
@@ -514,7 +514,7 @@
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">País</label>
-										<select class="form-control selectpicker" name="pais_com" id="asociados_pais_com">
+										<select class="form-control selectpicker" name="pais_com" id="pais_com">
 											<option {{ $associate->pais_com == '0' ? 'selected' : '' }} value="0">Selecione o País</option>
 											<option {{ $associate->pais_com == 'AF' ? 'selected' : '' }} value="AF">Afghanistan</option>
 											<option {{ $associate->pais_com == 'AX' ? 'selected' : '' }} value="AX">Åland Islands</option>
@@ -809,7 +809,7 @@
 								</div>						    	
 								<div class="row">
 									<div class="form-group col-md-6">
-										<label class="control-label">Tipo de Logradouro</label>
+										<label class="control-label">Municipio</label>
 										<select id="municipio_com" class="form-control selectpicker" name="municipio_com">
 											@foreach($ufs as $uf)
 												@if($associate->uf_com == 	$uf->id_uf)
@@ -834,12 +834,98 @@
 									</div>
 								</div>	
 							</div>
-						    <div role="tabpanel" class="tab-pane" id="DadosAcademicos">DadosAcademicos...</div>
-						    <div role="tabpanel" class="tab-pane" id="PainelConsultores">PainelConsultores...</div>
+						    <div role="tabpanel" class="tab-pane" id="DadosAcademicos">
+                                @foreach($associate->academics as $academic)
+                                    <div id="escolaridade_{{$academic->id_datos_acad}}" style="margin-left: 5em;display:inline-block">
+                                        <p>
+                                            <b>Tipo de graduação:</b> 
+                                            <span id="tipo_graduacion_{{$academic->id_datos_acad}}">
+                                                {{ $academic->tipo_graduacion == 0 ? 'DOUTORADO' : ''}}
+                                                {{ $academic->tipo_graduacion == 1 ? 'ESPECIALIZAÇÃO' : ''}}
+                                                {{ $academic->tipo_graduacion == 2 ? 'GRADUAÇÃO' : ''}}
+                                                {{ $academic->tipo_graduacion == 3 ? 'MESTRADO' : ''}}
+                                                {{ $academic->tipo_graduacion == 4 ? 'PÓS-GRADUAÇÃO' : ''}}
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <b>Instituição:</b> 
+                                            <span id="institucion_{{ $academic->id_datos_acad }}">
+                                                {{ $academic->institucion }}
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <b>Faculdade:</b> 
+                                            <span id="facultad_{{ $academic->id_datos_acad }}">
+                                                {{ $academic->facultad }}
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <b>Formação:</b> 
+                                            <span id="curso_realizado_{{$academic->id_datos_acad}}">
+                                                
+                                            {{ $academic->training->nome }}
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <b>Ano de início:</b> 
+                                            <span id="ano_inicio_{{$academic->id_datos_acad}}">
+                                                {{ $academic->ano_inicio }}
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <b>Ano de finalização:</b> 
+                                            <span id="ano_finalizacion_{{$academic->id_datos_acad}}">
+                                                {{ $academic->ano_finalizacion }}
+                                            </span>
+                                        </p>
+                                        <p>
+                                            <span>
+                                                <a href="/ajax/atualizarescolaridade/{{ $academic->id_datos_acad }}" class="fancybox fancybox.ajax btn" id="adicionar_escolaridade" >Atualizar</a>
+                                                <a href="/ajax/deletarescolaridade/{{ $academic->id_datos_acad }}" class="fancybox fancybox.ajax btn" id="adicionar_escolaridade" >Deletar</a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                @endforeach  
+                                <p id="adicionarbutton" style="margin-bottom:10px" class="right"><label><a href="/ajax/adicionarescolaridade/{{ $associate->id_asociado}}" class="fancybox fancybox.ajax btn" id="adicionar_escolaridade" >Adicionar Escolaridade</a></label></p> 
+                            </div>
+						    <div role="tabpanel" class="tab-pane" id="PainelConsultores">
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label class="control-label">Área de Atuação</label>
+										<select class="form-control selectpicker" name="area_de_especializacion" id="area_de_especializacion">
+											<option value="0">SELECIONE</option>
+											<optgroup label="OBRAS DE INFRAESTRUTURA">
+												<option value="14" {{ $associate->area_de_especializacion == 14 ? 'selected' : '' }} >BARRAGENS</option>
+												<option value="15" {{ $associate->area_de_especializacion == 15 ? 'selected' : '' }} >SUBTERRÂNEAS</option>
+												<option value="16" {{ $associate->area_de_especializacion == 16 ? 'selected' : '' }} >LINEARES</option>
+											</optgroup>
+											<option value="5" {{ $associate->area_de_especializacion == 5 ? 'selected' : '' }}  >CONSULTORIA EM GEOLOGIA DE ENGENHARIA, GEOTECNIA E AMBIENTAL</option>
+											<option value="8" {{ $associate->area_de_especializacion == 8 ? 'selected' : '' }} >FUNDAÇÕES</option>
+											<option value="9" {{ $associate->area_de_especializacion == 9 ? 'selected' : '' }} >GEOTECNOLOGIAS, GEOPROCESSAMENTOS E SENSORIAMENTO REMOTO</option>
+											<option value="6" {{ $associate->area_de_especializacion == 6 ? 'selected' : '' }} >GESTÃO, PLANEJAMENTO E LICENCIAMENTO AMBIENTAL</option>
+											<option value="3" {{ $associate->area_de_especializacion == 3 ? 'selected' : '' }} >MINERAÇÃO</option>
+											<option value="7" {{ $associate->area_de_especializacion == 7 ? 'selected' : '' }} >RECURSOS HIDRICOS</option>
+											<option value="12" {{ $associate->area_de_especializacion == 12 ? 'selected' : '' }} >RESÍDUOS E ÁREAS CONTAMINADAS</option>
+											<option value="13" {{ $associate->area_de_especializacion == 13 ? 'selected' : '' }} >SERVIÇOS EM GEOLOGIA DE ENGENHARIA, GEOTECNIA E AMBIENTAL</option>
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label class="control-label">Mini CV</label>
+										<textarea class="form-control" rows="8" cols="70" id="classificados_conteudo" name="classificados_conteudo">{{ $associate->classificados_conteudo }}</textarea>
+										<span id="display_count">{{ strlen($associate->classificados_conteudo) }}/500</span>
+									</div>
+									<div class="form-group col-md-12">
+										<label class="control-label">Imagem CV</label>
+										<input class="fileinput" type="file" name="classificados_imagem" value="" id="classificados_imagem">
+									</div>
+								</div>
+							</div>
 					  	</div>		
 				  		<div class="row">
 							<div class="form-group col-md-6">
-								<input type="submit" class="btn btn-primary">
+								<input type="submit" class="btn btn-primary" value="Gravar">
 							</div>
 							<div class="form-group col-md-6">
 								<em>* Campos de preenchimento obrigatório.</em>
@@ -887,11 +973,49 @@
 @section('javascripts')
 
 	<script type="text/javascript">
+        function init_contadorTa(idtextarea, idcontador,max)
+	    {
+	        $("#"+idtextarea).keyup(function()
+	                {
+	                    updateContadorTa(idtextarea, idcontador,max);
+	                });
+	        
+	        $("#"+idtextarea).change(function()
+	        {
+	                updateContadorTa(idtextarea, idcontador,max);
+	        });
+	        
+	    }
+
+	    function updateContadorTa(idtextarea, idcontador,max)
+	    {
+	        var contador = $("#"+idcontador);
+	        var ta =     $("#"+idtextarea);
+	    	console.log(ta.val().length);
+	        contador.html("0/"+max);
+	        
+	        contador.html(ta.val().length+"/"+max);
+	        if(parseInt(ta.val().length)>max)
+	        {
+	            ta.val(ta.val().substring(0,max-1));
+	            contador.html(max+"/"+max);
+	        }
+
+	    }
 		$(document).ready(function() {
 			$('.datepicker').datepicker({
 				format: 'dd-mm-yyyy',
 			});
 			$('.selectpicker').selectpicker();
+			$('.fancybox').fancybox();
+			$('.fileinput').fileinput({
+    			maxFileSize: 2048,
+				initialPreview: [
+			        "<img src='/uploads/classificados/{{ $associate->classificados_imagem }}' class='file-preview-image'>",
+			    ],
+				overwriteInitial: true,
+			});
+			init_contadorTa("classificados_conteudo","display_count", 500);
 		});
 	</script>
 
