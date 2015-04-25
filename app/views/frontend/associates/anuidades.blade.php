@@ -32,13 +32,16 @@
 								{{ $anuidade->ano }}
 							</td>
 							<td>
-								{{ $anuidade->valor }}
+								R$ {{ number_format($anuidade->valor, 2, ',', '.') }}
 							</td>
 							<td>
-								{{ $anuidade->valor_pago }}
+								R$ {{ number_format($anuidade->valor_pago, 2, ',', '.') }}
 							</td>
 							<td>
-								{{ $anuidade->ano }}
+								<!-- {{ $anuidade->ano }} -->
+							</td>
+							<td>
+								<!-- {{ $anuidade->ano }} -->
 							</td>
 						</tr>
 					@endforeach

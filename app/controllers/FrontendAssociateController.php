@@ -23,7 +23,7 @@ class FrontendAssociateController extends \BaseController {
 	public function getAnuidades(){
 
 		$associate = Auth::user()->user()->associate->asociado;
-		$annuities = $associate->payments;
+		$annuities = $associate->anuidades;
 
 		$args = array(
 			'associate' => $associate,
@@ -148,6 +148,97 @@ class FrontendAssociateController extends \BaseController {
 		endforeach;
 
 		return $html;
+
+	}
+
+	public function getAnnuities(){
+
+		$anuidades = ORGAssociatesAnuidade::where('valor_pago','!=',0)->paginate(50);
+
+		$counter = 0;
+
+		foreach($anuidades as $anuidade):
+
+			$counter++;
+
+			$id_anuidade = null;
+
+			switch($anuidade->ano){
+				case '2013': $id_anuidade = 1; break;
+				case '2014': $id_anuidade = 2; break;
+				case '2015': $id_anuidade = 3; break;
+				default: $id_anuidade = null; break;
+			}
+
+			$annuity_category = ORGAnnuityCategories::where('id_anuidade', '=', $id_anuidade)->where('id_categoria_asociado','=',$anuidade->id_categoria_asociado)->take(1)->get();
+
+			if(isset($annuity_category[0])):
+
+				$annuity_category = $annuity_category[0];
+
+			else:
+
+				$annuity_category = new ORGAnnuityCategories();
+				$annuity_category->id_anuidade = $id_anuidade;
+				$annuity_category->id_categoria_asociado = $anuidade->id_categoria_asociado;
+				$annuity_category->save();
+
+			endif;
+
+			$annuity_date = null;
+
+			if(count($annuity_category->dates) > 0):
+
+				$bool = false;
+
+				# Busqueda de Datas Mediante Intervalos
+				foreach($annuity_category->dates as $date):
+					$datetime1 = date_create($date->data_inicio);
+					$datetime3 = date_create($date->data_final);
+					$interval1 = date_diff($datetime1, date_create(date('Y-m-d',strtotime($anuidade->data))));
+					$interval2 = date_diff($datetime3, date_create(date('Y-m-d',strtotime($anuidade->data))));
+					if(($interval1->format('%R') == '+') AND ($interval2->format('%R') == '-')):
+						$bool = true;
+							$counter > 50 ? dd('bwiubxiquw'): true;
+						$annuity_date = $date;
+					endif;	
+				endforeach;
+
+				if(!$bool):
+					$counter > 50 ? dd('lsoaxksoam'): true;
+					$annuity_date = new ORGAnnuityDates();
+					$annuity_date->id_anuidade_categoria = $annuity_category->id;
+					$annuity_date->nome = $anuidade->nome;
+					$annuity_date->data_inicio = date('Y-01-01', strtotime($anuidade->ano));
+					$annuity_date->data_final = date('Y-12-31', strtotime($anuidade->ano));
+					$annuity_date->save();
+
+				endif;
+
+			else:
+				$counter > 50 ? dd('qweqwrefrqw'): true;
+				$annuity_date = new ORGAnnuityDates();
+				$annuity_date->id_anuidade_categoria = $annuity_category->id;
+				$annuity_date->nome = $anuidade->nome;
+				$annuity_date->data_inicio = date('Y-01-01', strtotime($anuidade->ano));
+				$annuity_date->data_final = date('Y-12-31', strtotime($anuidade->ano));
+				$annuity_date->save();
+
+			endif;
+
+
+
+			$anuidade_asociado = new ORGAssociateAnnuities();
+			$anuidade_asociado->id_asociado = $anuidade->id_asociado;
+			$anuidade_asociado->id_anuidade_categoria = $annuity_date->id_anuidade_categoria;
+			$anuidade_asociado->pagamento = $anuidade->valor_pago;
+			$anuidade_asociado->data_pagamento = $anuidade->data;
+			$anuidade_asociado->status = $anuidade->status;
+			$anuidade_asociado->save();
+
+		endforeach;
+
+		return $anuidades->links();
 
 	}
 

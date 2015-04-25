@@ -18,7 +18,7 @@ class ORGAssociates extends Eloquent {
 		return $this->hasMany('ORGAcademics', 'id_asociado', 'id_asociado');
 	}
 
-	public function anuidade(){
+	public function anuidades(){
 		return $this->hasMany('ORGAssociatesAnuidade', 'id_asociado', 'id_asociado');
 	}
 
