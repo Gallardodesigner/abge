@@ -18,7 +18,7 @@ class FrontendAuthenticationController extends \BaseController {
 				return Redirect::to('/');
 			endif;
 		else:
-			return View::make('auth.index')->with( array( 'msg_error' => $msg_error ) );
+			return View::make('auth.associates')->with( array( 'msg_error' => $msg_error, 'route' => self::$route ) );
 		endif;
 
 	}
@@ -44,8 +44,13 @@ class FrontendAuthenticationController extends \BaseController {
 
 	public function getCadastro(){
 
+		$page = Pages::where('name','=','cadastro')->take(1)->get();
+		if(isset($page[0])) $page = $page[0];
+		else $page = false;
+
 		$args = array(
 			'route' => self::$route,
+			'page' => $page,
 			);
 
 		return View::make('auth.cadastro')->with($args);

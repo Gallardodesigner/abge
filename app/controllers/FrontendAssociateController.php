@@ -244,7 +244,7 @@ class FrontendAssociateController extends \BaseController {
 
 	public function getSalir(){
 
-		Auth::logout();
+		Auth::user()->logout();
 
 		return Redirect::to( self::$route );
 		

@@ -26,11 +26,22 @@ width: 100%;
 color: #fff;
 text-transform: uppercase;
 }
+a.cadastro{
+text-decoration: none;
+font-size: 11px;
+font-family: arial, sans-serif !important;
+text-align: right;
+font-style: none;
+display: block;
+padding: 10px;
+width: 100%;
+color: #fff;
+text-transform: uppercase;
+}
 body.loginpage {
 background: #0866c6;
 }
 .loginfooter {
-background: #0866c6;
 font-size: 11px;
 color: rgba(255,255,255,0.5);
 position: absolute;
@@ -44,7 +55,7 @@ padding: 5px 0;
 }
 .loginpanel {
 position: absolute;
-top: 30%;
+top: 50%;
 left: 50%;
 height: 300px;
 }
@@ -80,30 +91,33 @@ input[type="text"],input[type="password"]{
 
 <body class="loginpage">
 
+<script type="text/javascript">
+	var gotoCadastro = function(elem){
+		window.location.href = '{{ $route }}/cadastro';
+	}
+</script>
+
 <div class="loginpanel">
     <div class="loginpanelinner">
         <div class="logo animate0 bounceIn"><img src="/assetsadmin/images/logo.png" alt="" /></div>
-        <p align="center">
-        <strong>
-            <a href="{{ $route }}/cadastrofisica" style="color:rgb(220,220,220);font-family: Verdana;">PESSOA FÍSICA</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
-            <a href="{{ $route }}/cadastrojuridica" style="color:rgb(220,220,220);font-family: Verdana;">PESSOA JURÍDICA</a>
-        </strong>
-        </p>
-        <p align="center"> </p>
-        <p align="center"> </p>
-		<div align="justify">
-			@if($page)
-				{{ $page->content }}
-			@endif
-		    
-
-            <p align="center">&nbsp; </p>
-            <p align="center">&nbsp; </p>
-            <p align="center">&nbsp; </p>
-    	
-    	</div>
-
+        <form id="login" method="post">
+            @if(isset($msg_error))
+                <div class="inputwrapper">
+                    <div class="alert alert-error">{{$msg_error}}</div>
+                </div>
+            @endif
+            <div class="inputwrapper animate1 bounceIn">
+                <input type="text" name="login" id="login" placeholder="Digite aqui seu email" required/>
+            </div>
+            <div class="inputwrapper animate2 bounceIn">
+                <input type="password" name="password" id="password" placeholder="Digite aqui seu senha" required/>
+            </div>
+            <div class="inputwrapper animate3 bounceIn">
+                <button name="submit">Sign In</button>
+                <a class="cadastro" href="{{$route}}/cadastro">Cadastrar</a>
+            </div>
+           
+        </form>
     </div><!--loginpanelinner-->
 </div><!--loginpanel-->
 
@@ -113,7 +127,3 @@ input[type="text"],input[type="password"]{
 
 </body>
 </html>
-
-
-<!------------ -->
-
