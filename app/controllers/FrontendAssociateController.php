@@ -242,6 +242,14 @@ class FrontendAssociateController extends \BaseController {
 
 	}
 
+	public function getSalir(){
+
+		Auth::logout();
+
+		return Redirect::to( self::$route );
+		
+	}
+
 	public function uploadImage($image){
 
 		//dd(storage_path('uploads/'));
