@@ -12,8 +12,8 @@
 			<div class="panel panel-default">
 			  <div class="panel-heading">Olá {{ Auth::user()->user()->name }}</div>
 			  <div class="panel-body">
-			    <p class="bold">Seja bem vindo ao Espaço do Associado. ASSOCIAÇÃO BRASILEIRA DE GEOLOGIA DE ENGENHARIA E AMBIENTAL</p>
-				<p>Aqui você poderá atualizar seu cadastro pessoal, reemitir seu boleto e tirar dúvidas via e-mail. Faça bom proveito!</p>
+			    <p class="bold">Seja bem vindo ao Espaço do Associado!</p>
+				  <p>Aqui você poderá atualizar seus dados cadastrais, bem como verificar e realizar o pagamento de sua anuidade.</p>
 			  </div>
 			  <div class="panel-footer">
 			    <p class="bold">ASSOCIAÇÃO BRASILEIRA DE GEOLOGIA DE ENGENHARIA E AMBIENTAL</p>

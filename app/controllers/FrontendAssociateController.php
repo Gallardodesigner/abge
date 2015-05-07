@@ -23,16 +23,18 @@ class FrontendAssociateController extends \BaseController {
 	public function getAnuidades(){
 
 		$associate = Auth::user()->user()->associate->asociado;
-		$annuities = $associate->anuidades;
+
+		$annuities = ORGAnnuities::all();
 
 		$args = array(
 			'associate' => $associate,
+			'payments' => $associate->payments,
 			'annuities' => $annuities,
 			'route' => self::$route,
 			'module' => self::$module,
 			);
 
-		return View::make('frontend.associates.anuidades')->with($args);
+		return View::make('frontend.associates.annuities')->with($args);
 
 	}
 
@@ -77,11 +79,11 @@ class FrontendAssociateController extends \BaseController {
 		$associate = Auth::user()->user()->associate->asociado;
 
 		$associate->nombre_completo = Input::get('nombre_completo');
-		$associate->data_nascimento = Input::get('data_nascimento');
+		$associate->data_nascimento = date('Y-m-d', strtotime(Input::get('data_nascimento')));
 		$associate->email = Input::get('email');
 		$associate->sexo = Input::get('sexo');
 		$associate->edo_civil = Input::get('edo_civil');
-		$associate->senha = Input::get('senha');
+		$associate->senha = Input::get('senha') != '' ? md5(Input::get('senha')) : $associate->senha;
 		$associate->passaporte = Input::get('passaporte');
 		$associate->web_site = Input::get('web_site');
 		$associate->institucion = Input::get('institucion');
@@ -187,12 +189,14 @@ class FrontendAssociateController extends \BaseController {
 
 			$annuity_date = null;
 
-			if(count($annuity_category->dates) > 0):
+			$annuity_dates = $annuity_category->dates()->get();
+
+			if(count($annuity_dates) > 0):
 
 				$bool = false;
 
 				# Busqueda de Datas Mediante Intervalos
-				foreach($annuity_category->dates as $date):
+				foreach($annuity_dates as $date):
 					$datetime1 = date_create($date->data_inicio);
 					$datetime3 = date_create($date->data_final);
 					$interval1 = date_diff($datetime1, date_create(date('Y-m-d',strtotime($anuidade->data))));
@@ -209,8 +213,9 @@ class FrontendAssociateController extends \BaseController {
 					$annuity_date = new ORGAnnuityDates();
 					$annuity_date->id_anuidade_categoria = $annuity_category->id;
 					$annuity_date->nome = $anuidade->nome;
-					$annuity_date->data_inicio = date('Y-01-01', strtotime($anuidade->ano));
-					$annuity_date->data_final = date('Y-12-31', strtotime($anuidade->ano));
+					$annuity_date->data_inicio = date($anuidade->ano.'-01-01');
+					$annuity_date->data_final = date($anuidade->ano.'-12-31');
+					$annuity_date->preco = $anuidade->valor;
 					$annuity_date->save();
 
 				endif;
@@ -220,8 +225,9 @@ class FrontendAssociateController extends \BaseController {
 				$annuity_date = new ORGAnnuityDates();
 				$annuity_date->id_anuidade_categoria = $annuity_category->id;
 				$annuity_date->nome = $anuidade->nome;
-				$annuity_date->data_inicio = date('Y-01-01', strtotime($anuidade->ano));
-				$annuity_date->data_final = date('Y-12-31', strtotime($anuidade->ano));
+				$annuity_date->data_inicio = date($anuidade->ano.'-01-01');
+				$annuity_date->data_final = date($anuidade->ano.'-12-31');
+				$annuity_date->preco = $anuidade->valor;
 				$annuity_date->save();
 
 			endif;

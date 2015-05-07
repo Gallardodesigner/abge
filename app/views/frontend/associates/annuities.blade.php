@@ -19,30 +19,145 @@
 					<th>2ª via da anuidade</th>
 					<th>Formas de Pagamento</th>
 				</tr>
-				@if(count($associate->anuidades) > 0)
-					@foreach($associate->anuidades as $anuidade)
-						<tr>
+				@if(count($annuities) > 0)
+					@foreach($annuities as $annuity)
+						@if($annuity->ano < date('Y'))
+							@if($payment = $associate->getPaymentByAnnuity( $annuity ))
+								<?php $interval = $payment->category->getCustomInterval( $payment->data_pagamento ) ?>
+								<tr>
+									<td>
+										{{ $interval->nome }}
+									</td>
+									<td>
+										{{ $payment->status ? 'Pago' : 'Não Pago' }}
+									</td>
+									<td>
+										{{ $annuity->ano }}
+									</td>
+									<td>
+										{{ BaseController::money_format($interval->preco) }}
+									</td>
+									<td>
+										{{ BaseController::money_format($payment->pagamento) }}
+									</td>
+									<td>
+										---
+									</td>
+									<td>
+										---
+									</td>
+								</tr>
+							@endif
+						@elseif($annuity->ano == date('Y'))
+
+							@if($payment = $associate->getPaymentByAnnuity( $annuity ))
+								<?php $interval = $payment->category->getCustomInterval( $payment->data_pagamento ) ?>
+								@if($payment->status)
+									<tr>
+										<td>
+											{{ $interval->nome }}
+										</td>
+										<td>
+											{{ $payment->status ? 'Pago' : 'Aberto' }}
+										</td>
+										<td>
+											{{ $annuity->ano }}
+										</td>
+										<td>
+											{{ BaseController::money_format($interval->preco) }}
+										</td>
+										<td>
+											{{ BaseController::money_format($payment->pagamento) }}
+										</td>
+										<td>
+											---
+										</td>
+										<td>
+											---
+										</td>
+									</tr>
+								@else
+									<tr>
+										<td>
+											{{ $interval->nome }}
+										</td>
+										<td>
+											{{ $payment->status ? 'Pago' : 'Aberto' }}
+										</td>
+										<td>
+											{{ $annuity->ano }}
+										</td>
+										<td>
+											{{ BaseController::money_format($interval->preco) }}
+										</td>
+										<td>
+											{{ BaseController::money_format($payment->pagamento) }}
+										</td>
+										<td>
+											Codigo de barras
+										</td>
+										<td>
+											{{ $interval->pagseguro }}
+										</td>
+									</tr>
+								@endif
+							@else
+								<?php $category = $annuity->getAnnuityCategoryByAssociateCategory($associate->category) ?>
+								<?php $interval = $category->getCustomInterval( date('Y-m-d') ) ?>
+								<tr>
+									<td>
+										{{ $interval->nome }}
+									</td>
+									<td>
+										{{ 'Aberto' }}
+									</td>
+									<td>
+										{{ $annuity->ano }}
+									</td>
+									<td>
+										{{ BaseController::money_format($interval->preco) }}
+									</td>
+									<td>
+										{{ BaseController::money_format(0) }}
+									</td>
+									<td>
+										Codigo de barras
+									</td>
+									<td>
+										{{ $interval->pagseguro }}
+									</td>
+								</tr>
+							@endif
+						@endif
+						<!-- <tr>
 							<td>
-								{{ $anuidade->nome }}
+								{{ $annuity->nome }}
 							</td>
 							<td>
-								{{ $anuidade->status ? 'Pago' : 'Aberto' }}
+								{{ $annuity->status ? 'Pago' : 'Aberto' }}
 							</td>
 							<td>
-								{{ $anuidade->ano }}
+								{{ $annuity->ano }}
 							</td>
 							<td>
-								{{ $anuidade->valor }}
+								{{ $annuity->valor }}
 							</td>
 							<td>
-								{{ $anuidade->valor_pago }}
+								{{ $annuity->valor_pago }}
 							</td>
 							<td>
-								{{ $anuidade->ano }}
+								@if(!$annuity->status)
+									{{ $annuity->ano }}
+								@endif
 							</td>
-						</tr>
+							<td>
+								@if(!$annuity->status)
+									{{ $annuity->ano }}
+								@endif
+							</td>
+						</tr> -->
 					@endforeach
-				@endforeach
+				@endif
 			</table>
 		</div>
 		<div class="col-md-2"></div>

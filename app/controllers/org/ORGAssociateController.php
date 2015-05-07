@@ -463,7 +463,7 @@ class ORGAssociateController extends \BaseController {
 	public function postCreate(){
 
 		$associate = new ORGAssociates();
-		$category = ORGAssociateCategories::find(Input::get('categoria'));
+		$category = ORGAssociateCategories::find(Input::get('categoria')); 
 		
 		$associate->nombre_completo = Input::get('nombre_completo');
 		$associate->email = Input::get('email');
@@ -628,6 +628,7 @@ class ORGAssociateController extends \BaseController {
 				$associate->cpf = Input::get('cpf') != null ? Input::get('cpf') : $associate->cpf;
 				$associate->cnpj = Input::get('cnpj') != null ? Input::get('cnpj') : $associate->cnpj;
 				$associate->passaporte = Input::get('passaporte') != null ? Input::get('passaporte') : $associate->passaporte;
+				$associate->tipo_correspondencia = Input::get('tipo_correspondencia') != null ? Input::get('tipo_correspondencia') : $associate->tipo_correspondencia;
 				$associate->email = Input::get('email') != null ? Input::get('email') : $associate->email;
 				$associate->web_site = Input::get('web_site') != null ? Input::get('web_site') : $associate->web_site;
 				$associate->responsavel = Input::get('responsavel') != null ? Input::get('responsavel') : $associate->responsavel;
@@ -670,11 +671,33 @@ class ORGAssociateController extends \BaseController {
 				$associate->classificados_view = Input::get('classificados_view') != null ? Input::get('classificados_view') : $associate->classificados_view;
 				$associate->area_de_especializacion = Input::get('area_de_especializacion') != null ? Input::get('area_de_especializacion') : $associate->area_de_especializacion;
 
+				$image = Input::file('classificados_imagem');
+
+				$validator = Validator::make(
+					array(
+						'image' => $image
+						), 
+					array(
+						'image' => 'required|mimes:png,jpeg,gif'
+						),
+					array(
+						'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+						)
+					);
+
+				if(!$validator->fails()):
+
+					$associate->classificados_imagem = $this->uploadImage($image);
+
+				endif;
+
 				if($associate->save()):
 
 					return Redirect::to($this->route)->with('msg_succes', Lang::get('messages.associates_update', array( 'title' => $associate->title )));
 
 				else:
+
+					dd('Error');
 
 					return Redirect::to($this->route)->with('msg_error', Lang::get('messages.associates_update_err', array( 'title' => $associate->title )));
 
@@ -804,6 +827,29 @@ class ORGAssociateController extends \BaseController {
 			return Redirect::to($this->route);
 
 		endif;
+	}
+
+	public function uploadImage($image){
+
+		//dd(storage_path('uploads/'));
+
+		$info_image = getimagesize($image);
+		$ratio = $info_image[0] / $info_image[1];
+		$newheight=array();
+		$width=array("100",$info_image[0]);
+		#$filename = "prueba.".$image->getClientOriginalExtension();
+		$filename = Hashids::encode(idate('U')).".".$image->getClientOriginalExtension();
+		$nombres=["thumb_".$filename,$filename];
+
+		for ($i=0; $i <count($width) ; $i++):
+
+			$path = public_path('uploads/classificados/'.$nombres[$i]);
+			Image::make($image->getRealPath())->resize($width[$i],null,function ($constraint) {$constraint->aspectRatio();})->save($path);
+		
+		endfor;
+
+		return $filename;
+		
 	}
 
 }

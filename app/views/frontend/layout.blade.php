@@ -207,7 +207,7 @@
     <div id="page" class="container" style="padding-top: 15px;">
         @yield("maincontent")
     </div>
-    <div class="div_float footer_container" style="position: absolute;bottom:0px;">
+    <div class="div_float footer_container" style="position: fixed;bottom:0px;">
       <div id="page" class="container" style="position: relative; height: 100%">
         <div style="position: absolute; left: 10px; bottom: 10px; width: 814px;">
           Secretaria Executiva ABGE <br> Av. Profº Almeida Prado, 532 - IPT (Prédio 11) - Cidade Universitária- SP 05508-901

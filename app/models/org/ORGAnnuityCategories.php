@@ -72,6 +72,26 @@ class ORGAnnuityCategories extends Eloquent {
 
 	}
 
+	public function getCustomInterval( $date ){
+
+		$actual = false;
+
+		$today = date_create(date('Y-m-d', strtotime($date)));
+
+		foreach($this->dates()->get() as $date):
+			$datetime1 = date_create($date->data_inicio);
+			$datetime3 = date_create($date->data_final);
+			$interval1 = date_diff($datetime1, $today);
+			$interval2 = date_diff($datetime3, $today);
+			if(($interval1->format('%R') == '+') AND ($interval2->format('%R') == '-')):
+				$actual = $date;
+			endif;	
+		endforeach;
+		
+		return $actual;
+
+	}
+
 /* --------------------------- */
 
 	/*public static function _get( $arg = 'all' ){

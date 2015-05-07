@@ -387,7 +387,7 @@ Associados
                                     </p>  
                                     <p>
                                         <label>Data de nascimento</label>
-                                        <span class="field"><input type="text" name="data_nascimento" id="data_nascimento" class="input-xxlarge"  value="{{$associate->data_nascimento}}"/></span>
+                                        <span class="field"><input type="text" name="data_nascimento" id="data_nascimento" class="input-xxlarge"  value="{{date('d-m-Y', strtotime($associate->data_nascimento))}}"/></span>
                                     </p>  
                                     <p>
                                         <label>Sexo</label>
@@ -1265,7 +1265,7 @@ Associados
                                     <p>
                                         <label>Área de Atuação</label>
                                         <span class="field">
-											<select style="width: 215px; margin-left: 2px;" onchange="mostrar_otras()" name="area_de_especializacion" id="asociados_area_de_especializacion">
+											<select style="width: 400px; margin-left: 2px;" onchange="mostrar_otras()" name="area_de_especializacion" id="asociados_area_de_especializacion">
 												<option {{ $associate->area_de_especializacion == '0' ? 'selected' : '' }} value="0">Selecione</option>
                                                 <optgroup label="Obras de Infraestrutura">
                                                   <option {{ $associate->area_de_especializacion == '14' ? 'selected' : '' }} value="14">Barragens</option>
@@ -1328,7 +1328,8 @@ Associados
 
                                     <p>
                                         <label>Imagem</label>
-                                        <img src="http://abge.org.br/uploads/classificados/{{$associate->classificados_imagem}}">
+                                        <img src="/uploads/classificados/{{$associate->classificados_imagem}}">
+                                        <input type="file" name="classificados_imagem"/>
                                     </p>                                                     
                                     <p>
                                         <label>Publicar Curriculum</label>

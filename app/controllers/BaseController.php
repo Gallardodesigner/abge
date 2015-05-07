@@ -15,4 +15,10 @@ class BaseController extends Controller {
 		}
 	}
 
+	public static function money_format($number){
+
+		return 'R$ '.number_format( (float) $number, 2, ',', '.');
+
+	}
+
 }

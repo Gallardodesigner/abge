@@ -24,7 +24,7 @@
 				    	<li role="presentation" class="active"><a href="#DadosPessoais" aria-controls="DadosPessoais" role="tab" data-toggle="tab">Dados Pessoais</a></li>
 					    <li role="presentation"><a href="#EndResidencial" aria-controls="EndResidencial" role="tab" data-toggle="tab">End. Residencial</a></li>
 					    <li role="presentation"><a href="#EndComercial" aria-controls="EndComercial" role="tab" data-toggle="tab">End. Comercial</a></li>
-					    <li role="presentation"><a href="#Matricula" aria-controls="Matricula" role="tab" data-toggle="tab">Matrícula</a></li>
+					    <!-- <li role="presentation"><a href="#Matricula" aria-controls="Matricula" role="tab" data-toggle="tab">Matrícula</a></li> -->
 					    <li role="presentation"><a href="#DadosAcademicos" aria-controls="DadosAcademicos" role="tab" data-toggle="tab">Dados Acadêmicos</a></li>
 					    <li role="presentation"><a href="#PainelConsultores" aria-controls="PainelConsultores" role="tab" data-toggle="tab">Painel de Consultores</a></li>
 				  	</ul>			  		
@@ -126,14 +126,16 @@
 											<option value="r" {{ $associate->tipo_correspondencia == "r" ? 'selected' : '' }}>Residencial</option>
 										</select>
 									</div>
+									<div class="form-group col-md-6">
+										<label class="control-label">Cód. Matrícula: </label>Nenhum dado
+									</div>
+									<div class="form-group col-md-6">
+										<label class="control-label">Estado: </label>Nenhum dado
+									</div>
 								</div>
 					    	</div>
 						    <div role="tabpanel" class="tab-pane" id="EndResidencial">
 								<div class="row">
-									<div class="form-group col-md-6">
-										<label class="control-label">CEP</label>
-										<input type="text" name="cep_res" value="{{ $associate->cep_res }}" id="cep_res" class="form-control" >
-									</div>
 									<div class="form-group col-md-6">
 										<label class="control-label">Tipo de Logradouro</label>
 										<select class="form-control selectpicker" name="logradouro_res">
@@ -142,6 +144,10 @@
 											@endforeach
 										</select>
 									</div>
+									<div class="form-group col-md-6">
+										<label class="control-label">Endereço</label>
+										<input type="text" name="dir_res" value="{{ $associate->dir_res }}" id="dir_res" class="form-control">
+									</div>
 								</div>	
 								<div class="row">
 									<div class="form-group col-md-6">
@@ -149,21 +155,15 @@
 										<input type="text" name="numero_res" value="{{ $associate->numero_res }}" id="numero_res" class="form-control" >
 									</div>
 									<div class="form-group col-md-6">
-										<label class="control-label">Endereço</label>
-										<input type="text" name="dir_res" value="{{ $associate->dir_res }}" id="dir_res" class="form-control">
+										<label class="control-label">Complemento</label>
+										<input type="text" name="complemento_res" value="{{ $associate->complemento_res }}" id="complemento_res" class="form-control" >
 									</div>
 								</div>				    	
 								<div class="row">
 									<div class="form-group col-md-6">
-										<label class="control-label">Complemento</label>
-										<input type="text" name="complemento_res" value="{{ $associate->complemento_res }}" id="complemento_res" class="form-control" >
-									</div>
-									<div class="form-group col-md-6">
 										<label class="control-label">Bairro</label>
 										<input type="text" name="bairro_res" value="{{ $associate->bairro_res }}" id="bairro_res" class="form-control">
 									</div>
-								</div>
-								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">País</label>
 										<select class="form-control selectpicker" name="pais_res" id="pais_res">
@@ -450,6 +450,8 @@
 											<option {{ $associate->pais_res == 'ZW' ? 'selected' : '' }} value="ZW">Zimbabwe</option>
 										</select>
 									</div>
+								</div>
+								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">UF</label>
 										<select class="form-control selectpicker" name="uf_res" onchange='$("#municipio_res > option").remove();  $("#municipio_res").append("<option>Cargando...</option>");$("#municipio_res").selectpicker("refresh");jQuery.ajax({type:"POST",dataType:"html",data: "id=" + this.value ,success:function(data, textStatus){jQuery("#municipio_res").html(data);console.log(data);$(".selectpicker").selectpicker("refresh");},url:"{{$route}}/municipios"})'>
@@ -458,8 +460,6 @@
 											@endforeach
 										</select>
 									</div>
-								</div>						    	
-								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">Municipio</label>
 										<select id="municipio_res" class="form-control selectpicker" name="municipio_res">
@@ -474,14 +474,16 @@
 											@endforeach
 										</select>
 									</div>
+								</div>						    	
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label class="control-label">CEP</label>
+										<input type="text" name="cep_res" value="{{ $associate->cep_res }}" id="cep_res" class="form-control" >
+									</div>
 								</div>	
 						    </div>
 						    <div role="tabpanel" class="tab-pane" id="EndComercial">
 								<div class="row">
-									<div class="form-group col-md-6">
-										<label class="control-label">CEP</label>
-										<input type="text" name="cep_com" value="{{ $associate->cep_com }}" id="cep_com" class="form-control" >
-									</div>
 									<div class="form-group col-md-6">
 										<label class="control-label">Tipo de Logradouro</label>
 										<select class="form-control selectpicker" name="logradouro_com">
@@ -490,6 +492,10 @@
 											@endforeach
 										</select>
 									</div>
+									<div class="form-group col-md-6">
+										<label class="control-label">Endereço</label>
+										<input type="text" name="dir_com" value="{{ $associate->dir_com }}" id="dir_com" class="form-control">
+									</div>
 								</div>	
 								<div class="row">
 									<div class="form-group col-md-6">
@@ -497,21 +503,15 @@
 										<input type="text" name="numero_com" value="{{ $associate->numero_com }}" id="numero_com" class="form-control" >
 									</div>
 									<div class="form-group col-md-6">
-										<label class="control-label">Endereço</label>
-										<input type="text" name="dir_com" value="{{ $associate->dir_com }}" id="dir_com" class="form-control">
+										<label class="control-label">Complemento</label>
+										<input type="text" name="complemento_com" value="{{ $associate->complemento_com }}" id="complemento_com" class="form-control" >
 									</div>
 								</div>				    	
 								<div class="row">
 									<div class="form-group col-md-6">
-										<label class="control-label">Complemento</label>
-										<input type="text" name="complemento_com" value="{{ $associate->complemento_com }}" id="complemento_com" class="form-control" >
-									</div>
-									<div class="form-group col-md-6">
 										<label class="control-label">Bairro</label>
 										<input type="text" name="bairro_com" value="{{ $associate->bairro_com }}" id="bairro_com" class="form-control">
 									</div>
-								</div>
-								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">País</label>
 										<select class="form-control selectpicker" name="pais_com" id="pais_com">
@@ -798,6 +798,8 @@
 											<option {{ $associate->pais_com == 'ZW' ? 'selected' : '' }} value="ZW">Zimbabwe</option>
 										</select>
 									</div>
+								</div>
+								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">UF</label>
 										<select class="form-control selectpicker" name="uf_com" onchange='$("#municipio_com > option").remove();  $("#municipio_com").append("<option>Cargando...</option>");$("#municipio_com").selectpicker("refresh");jQuery.ajax({type:"POST",dataType:"html",data: "id=" + this.value ,success:function(data, textStatus){jQuery("#municipio_com").html(data);console.log(data);$(".selectpicker").selectpicker("refresh");},url:"{{$route}}/municipios"})'>
@@ -806,8 +808,6 @@
 											@endforeach
 										</select>
 									</div>
-								</div>						    	
-								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">Municipio</label>
 										<select id="municipio_com" class="form-control selectpicker" name="municipio_com">
@@ -822,6 +822,12 @@
 											@endforeach
 										</select>
 									</div>
+								</div>						    	
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label class="control-label">CEP</label>
+										<input type="text" name="cep_com" value="{{ $associate->cep_com }}" id="cep_com" class="form-control" >
+									</div>
 								</div>	
 						    </div>
 						    <div role="tabpanel" class="tab-pane" id="Matricula">
@@ -835,8 +841,13 @@
 								</div>	
 							</div>
 						    <div role="tabpanel" class="tab-pane" id="DadosAcademicos">
+						    	<style type="text/css">
+									.jumbotron p{
+										font-size: 14px !important;
+									}
+						    	</style>
                                 @foreach($associate->academics as $academic)
-                                    <div id="escolaridade_{{$academic->id_datos_acad}}" style="margin-left: 5em;display:inline-block">
+                                    <div id="escolaridade_{{$academic->id_datos_acad}}" style="margin-left: 2em;display:inline-block">
                                         <p>
                                             <b>Tipo de graduação:</b> 
                                             <span id="tipo_graduacion_{{$academic->id_datos_acad}}">
@@ -920,12 +931,15 @@
 										<label class="control-label">Imagem CV</label>
 										<input class="fileinput" type="file" name="classificados_imagem" value="" id="classificados_imagem">
 									</div>
+									<div class="form-group col-md-12">
+										<em>Para liberação do seu currículo entre em contato com a Secretaria ABGE pelo telefone: 11-3767-4361 ou pelo e-mail: atendimento@abge.org.br</em>
+									</div>
 								</div>
 							</div>
 					  	</div>		
 				  		<div class="row">
 							<div class="form-group col-md-6">
-								<input type="submit" class="btn btn-primary" value="Gravar">
+								<input type="submit" class="btn btn-primary" value="Salvar">
 							</div>
 							<div class="form-group col-md-6">
 								<em>* Campos de preenchimento obrigatório.</em>

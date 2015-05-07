@@ -96,9 +96,10 @@
 <body>
 
 	<header class="row">
-		<div class="col-md-2"><img class="col-md-10" src="/images/logo_abge45.png" style="margin-top:.5em" /></div>
-		<div class="col-md-10">
-			<h3>ASSOCIAÇÃO BRASILEIRA DE GEOLOGIA DE ENGENHARIA E AMBIENTAL</h3>		
+		<div class="col-md-2"></div>
+		<div class="col-md-2"><img class="col-md-10" src="/images/logo_abge45.png" style="margin-top:1em;margin-bottom:1em;max-height:60px" /></div>
+		<div class="col-md-8">
+			<h4 style="margin-top:2em">ASSOCIAÇÃO BRASILEIRA DE GEOLOGIA DE ENGENHARIA E AMBIENTAL</h4>		
 		</div>
 	</header>
 
@@ -118,10 +119,10 @@
 	            <div class="collapse navbar-collapse">
 	                <ul class="nav navbar-nav">
 	                    <li class="{{ $module == 'associados_index' ? 'active' : '' }} "><a href="/associados">Principal</a></li>
-	                    <li class="{{ $module == 'associados_anuidade' ? 'active' : '' }} "><a href="/associados/anuidades">Anuidade</a></li>
 	                    <li class="{{ $module == 'associados_cadastro' ? 'active' : '' }} "><a href="/associados/cadastro">Meu Cadastro</a></li>
+	                    <li class="{{ $module == 'associados_anuidade' ? 'active' : '' }} "><a href="/associados/anuidades">Anuidade</a></li>
 	                    <li class="{{ $module == 'associados_ajuda' ? 'active' : '' }} "><a href="/associados/ajuda">Ajuda</a></li>
-	                    <li class="{{ $module == 'associados_logout' ? 'active' : '' }} "><a href="/associados/salir">Salir</a></li>
+	                    <li class="{{ $module == 'associados_logout' ? 'active' : '' }} "><a href="/associados/salir">Sair</a></li>
 	                    <!-- 
 	                    <li>
 	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 2 <b class="caret"></b></a>
@@ -167,6 +168,12 @@
 	        </div>
 	    </div>
 		
+	</div>
+
+	<div class="row center">
+		<div class="col-md-12">
+			<h4>Área exclusiva para associados</h4>
+		</div>
 	</div>
 
 	<div class="row">
