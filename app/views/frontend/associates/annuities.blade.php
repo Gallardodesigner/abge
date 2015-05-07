@@ -94,7 +94,7 @@
 											{{ BaseController::money_format($payment->pagamento) }}
 										</td>
 										<td>
-											Codigo de barras
+											<a href="{{ $route }}/boleto/{{Crypt::encrypt($interval->id)}}"><img src="http://abge.org.br/images/boleto/barcode.png" width="25px"></a>
 										</td>
 										<td>
 											{{ $interval->pagseguro }}
@@ -121,7 +121,7 @@
 										{{ BaseController::money_format(0) }}
 									</td>
 									<td>
-										Codigo de barras
+										<a href="{{ $route }}/boleto/{{Crypt::encrypt($interval->id)}}"><img src="http://abge.org.br/images/boleto/barcode.png" width="25px"></a>
 									</td>
 									<td>
 										{{ $interval->pagseguro }}
