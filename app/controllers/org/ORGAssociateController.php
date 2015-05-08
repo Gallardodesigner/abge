@@ -581,6 +581,7 @@ class ORGAssociateController extends \BaseController {
 					'formacoes' => ORGTrainings::all(),
 					'logradouros' => ORGBackyards::all(),
 					'categorias' => ORGAssociateCategories::all(),
+					'ufs' => ORGuf::all(),
 					'associate' => $associate,
 					);
 
@@ -651,6 +652,9 @@ class ORGAssociateController extends \BaseController {
 				$associate->ddd_cel_res = Input::get('ddd_cel_res') != null ? Input::get('ddd_cel_res') : $associate->ddd_cel_res;
 				$associate->ddi_cel_res = Input::get('ddi_cel_res') != null ? Input::get('ddi_cel_res') : $associate->ddi_cel_res;
 				$associate->celular_res = Input::get('celular_res') != null ? Input::get('celular_res') : $associate->celular_res;
+				$associate->ciudad_internacional_res = Input::get('ciudad_internacional_res') != null ? Input::get('ciudad_internacional_res') : $associate->ciudad_internacional_res;
+				$associate->uf_res = Input::get('uf_res') != null ? Input::get('uf_res') : $associate->uf_res;
+				$associate->municipio_res = Input::get('municipio_res') != null ? Input::get('municipio_res') : $associate->municipio_res;
 				$associate->cep_com = Input::get('cep_com') != null ? Input::get('cep_com') : $associate->cep_com;
 				$associate->logradouro_com = Input::get('logradouro_com') != null ? Input::get('logradouro_com') : $associate->logradouro_com;
 				$associate->dir_com = Input::get('dir_com') != null ? Input::get('dir_com') : $associate->dir_com;
@@ -667,6 +671,9 @@ class ORGAssociateController extends \BaseController {
 				$associate->ddd_cel_com = Input::get('ddd_cel_com') != null ? Input::get('ddd_cel_com') : $associate->ddd_cel_com;
 				$associate->ddi_cel_com = Input::get('ddi_cel_com') != null ? Input::get('ddi_cel_com') : $associate->ddi_cel_com;
 				$associate->celular_com = Input::get('celular_com') != null ? Input::get('celular_com') : $associate->celular_com;
+				$associate->ciudad_internacional_com = Input::get('ciudad_internacional_com') != null ? Input::get('ciudad_internacional_com') : $associate->ciudad_internacional_com;
+				$associate->uf_com = Input::get('uf_com') != null ? Input::get('uf_com') : $associate->uf_com;
+				$associate->municipio_com = Input::get('municipio_com') != null ? Input::get('municipio_com') : $associate->municipio_com;
 				$associate->classificados_conteudo = Input::get('classificados_conteudo') != null ? Input::get('classificados_conteudo') : $associate->classificados_conteudo;
 				$associate->classificados_view = Input::get('classificados_view') != null ? Input::get('classificados_view') : $associate->classificados_view;
 				$associate->area_de_especializacion = Input::get('area_de_especializacion') != null ? Input::get('area_de_especializacion') : $associate->area_de_especializacion;
@@ -827,6 +834,19 @@ class ORGAssociateController extends \BaseController {
 			return Redirect::to($this->route);
 
 		endif;
+	}
+
+	public function postMunicipios(){
+
+		$uf = ORGuf::find(Input::get('id'));
+		$html = '';
+
+		foreach ($uf->towns as $municipio):
+			$html .= "<option value='".$municipio->id_municipio."'>". $municipio->name_municipio ."</option>";
+		endforeach;
+
+		return $html;
+
 	}
 
 	public function uploadImage($image){

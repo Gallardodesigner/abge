@@ -454,7 +454,7 @@
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">UF</label>
-										<select class="form-control selectpicker" name="uf_res" onchange='$("#municipio_res > option").remove();  $("#municipio_res").append("<option>Cargando...</option>");$("#municipio_res").selectpicker("refresh");jQuery.ajax({type:"POST",dataType:"html",data: "id=" + this.value ,success:function(data, textStatus){jQuery("#municipio_res").html(data);console.log(data);$(".selectpicker").selectpicker("refresh");},url:"{{$route}}/municipios"})'>
+										<select class="form-control selectpicker" name="uf_res" onchange='$("#municipio_res > option").remove();  $("#municipio_res").append("<option>Cargando...</option>");$("#municipio_res").selectpicker("refresh");jQuery.ajax({type:"POST",dataType:"html",data: "id=" + this.value ,success:function(data, textStatus){jQuery("#municipio_res").html(data);console.log(data);$("#municipio_res").selectpicker("refresh");},url:"{{$route}}/municipios"})'>
 											@foreach($ufs as $uf)
 												<option value="{{ $uf->id_uf }}" {{ $associate->uf_res == 	$uf->id_uf ? 'selected' : '' }}>{{ $uf->name_uf }}</option>
 											@endforeach
@@ -802,7 +802,7 @@
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label class="control-label">UF</label>
-										<select class="form-control selectpicker" name="uf_com" onchange='$("#municipio_com > option").remove();  $("#municipio_com").append("<option>Cargando...</option>");$("#municipio_com").selectpicker("refresh");jQuery.ajax({type:"POST",dataType:"html",data: "id=" + this.value ,success:function(data, textStatus){jQuery("#municipio_com").html(data);console.log(data);$(".selectpicker").selectpicker("refresh");},url:"{{$route}}/municipios"})'>
+										<select class="form-control selectpicker" name="uf_com" onchange='$("#municipio_com > option").remove();  $("#municipio_com").append("<option>Cargando...</option>");$("#municipio_com").selectpicker("refresh");jQuery.ajax({type:"POST",dataType:"html",data: "id=" + this.value ,success:function(data, textStatus){jQuery("#municipio_com").html(data);console.log(data);$("#municipio_com").selectpicker("refresh");},url:"{{$route}}/municipios"})'>
 											@foreach($ufs as $uf)
 												<option value="{{ $uf->id_uf }}" {{ $associate->uf_com == 	$uf->id_uf ? 'selected' : '' }}>{{ $uf->name_uf }}</option>
 											@endforeach

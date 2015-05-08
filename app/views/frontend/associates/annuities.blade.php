@@ -7,8 +7,8 @@
 @section('content')
 
 	<div class="row"> 
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
 			<table class="table">
 				<tr>
 					<th>Nome</th>
@@ -16,6 +16,7 @@
 					<th>Ano</th>
 					<th>Valor</th>
 					<th>Valor Pago</th>
+					<th>Data de Pagamento</th>
 					<th>2ª via da anuidade</th>
 					<th>Formas de Pagamento</th>
 				</tr>
@@ -39,6 +40,9 @@
 									</td>
 									<td>
 										{{ BaseController::money_format($payment->pagamento) }}
+									</td>
+									<td>
+										{{ date('d-m-Y', strtotime($payment->data_pagamento)) }}
 									</td>
 									<td>
 										---
@@ -70,6 +74,9 @@
 											{{ BaseController::money_format($payment->pagamento) }}
 										</td>
 										<td>
+											{{ date('d-m-Y', strtotime($payment->data_pagamento)) }}
+										</td>
+										<td>
 											---
 										</td>
 										<td>
@@ -94,7 +101,10 @@
 											{{ BaseController::money_format($payment->pagamento) }}
 										</td>
 										<td>
-											<a href="{{ $route }}/boleto/{{Crypt::encrypt($interval->id)}}"><img src="http://abge.org.br/images/boleto/barcode.png" width="25px"></a>
+											{{ date('d-m-Y', strtotime($payment->data_pagamento)) }}
+										</td>
+										<td>
+											<a href="{{ $route }}/boleto/{{Crypt::encrypt($associate->id_asociado)}}"><img src="http://abge.org.br/images/boleto/barcode.png" width="25px"></a>
 										</td>
 										<td>
 											{{ $interval->pagseguro }}
@@ -119,6 +129,9 @@
 									</td>
 									<td>
 										{{ BaseController::money_format(0) }}
+									</td>
+									<td>
+										{{ '---' }}
 									</td>
 									<td>
 										<a href="{{ $route }}/boleto/{{Crypt::encrypt($associate->id_asociado)}}"><img src="http://abge.org.br/images/boleto/barcode.png" width="25px"></a>
@@ -160,7 +173,7 @@
 				@endif
 			</table>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>
 
     <!-- <div class="row center">

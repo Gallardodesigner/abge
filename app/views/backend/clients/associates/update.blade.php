@@ -340,27 +340,6 @@ Associados
                                         </span>
                                     </p>
                                     <p>
-                                        <label>Status do Associado</label>
-                                        <span class="field">
-                                            <select class="chosen-select" name="status_asso">
-                                                <option value="0" {{ $associate->status_asso == '0' ? 'selected' : '' }}>Desabilitado</option>
-                                                <option value="1" {{ $associate->status_asso == '1' ? 'selected' : '' }}>Habilitado</option>
-                                            </select>
-                                        </span>
-                                    </p>
-                                    <p>
-                                        <label>Estado matricula</label>
-                                        <span class="field">
-                                            @if (isset($estados))
-                                                <select class="chosen-select" name="estado_matricula" >
-                                                    @foreach ($estados as $estado)
-                                                        <option value="{{$estado->id_estado}}" {{ $associate->estado_matricula == $estado->id_estado ? 'selected' : '' }}>{{$estado->name_estado}}</option>
-                                                    @endforeach
-                                                </select>
-                                            @endif
-                                        </span>
-                                    </p>                                
-                                    <p>
                                         <label>Passaporte</label>
                                         <span class="field"><input type="text" name="passaporte" id="passaporte" class="input-xxlarge" value="{{$associate->passaporte}}" /></span>
                                     </p>                                
@@ -384,7 +363,7 @@ Associados
                                                 <option value="r" {{ $associate->tipo_correspondencia == 'r' ? 'selected' : '' }}>Residencial</option>
                                             </select>
                                         </span>
-                                    </p>  
+                                    </p>                                 
                                     <p>
                                         <label>Data de nascimento</label>
                                         <span class="field"><input type="text" name="data_nascimento" id="data_nascimento" class="input-xxlarge"  value="{{date('d-m-Y', strtotime($associate->data_nascimento))}}"/></span>
@@ -397,11 +376,6 @@ Associados
                                                 <option value="2" {{ $associate->sexo == '2' ? 'selected' : '' }}>Feminino</option>
                                             </select>
                                         </span>
-                                    </p>
-
-                                    <p>
-                                        <label>Código da Matrícula</label>
-                                        <span class="field"><input type="text" name="codigo_matricula" id="codigo_matricula" class="input-xxlarge" value="{{$associate->codigo_matricula}}" /></span>
                                     </p> 
                                     <p>
                                         <label>Senha</label>
@@ -430,6 +404,31 @@ Associados
                                     <p>
                                         <label>CPF</label>
                                         <span class="field"><input type="text" name="cpf" id="cpf" class="input-xxlarge"  value="{{$associate->cpf}}"/> &nbsp;&nbsp; <em>Só números</em></span>
+                                    </p>
+                                    <p>
+                                        <label>Status do Associado</label>
+                                        <span class="field">
+                                            <select class="chosen-select" name="status_asso">
+                                                <option value="0" {{ $associate->status_asso == '0' ? 'selected' : '' }}>Desabilitado</option>
+                                                <option value="1" {{ $associate->status_asso == '1' ? 'selected' : '' }}>Habilitado</option>
+                                            </select>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <label>Estado matricula</label>
+                                        <span class="field">
+                                            @if (isset($estados))
+                                                <select class="chosen-select" name="estado_matricula" >
+                                                    @foreach ($estados as $estado)
+                                                        <option value="{{$estado->id_estado}}" {{ $associate->estado_matricula == $estado->id_estado ? 'selected' : '' }}>{{$estado->name_estado}}</option>
+                                                    @endforeach
+                                                </select>
+                                            @endif
+                                        </span>
+                                    </p> 
+                                    <p>
+                                        <label>Código da Matrícula</label>
+                                        <span class="field"><input type="text" name="codigo_matricula" id="codigo_matricula" class="input-xxlarge" value="{{$associate->codigo_matricula}}" /></span>
                                     </p>
                                     
                                     <!-- <p>
@@ -463,306 +462,6 @@ Associados
                                     <h4 class="widgettitle">Passo 2: Endereços Residencial</h4>
                                     
                                     <p>
-                                        <label>CEP</label>
-                                        <span class="field"><input type="text" name="cep_res" id="cep_res" class="input-xxlarge" value="{{ $associate->cep_res }}" /></span>
-                                    </p>
-                                    <p>
-                                        <label>Número</label>
-                                        <span class="field"><input type="text" name="numero_res" id="numero_res" class="input-xxlarge" value="{{$associate->numero_res}}" /></span>
-                                    </p>
-                                    <p>
-                                        <label>Complemento</label>
-                                        <span class="field"><input type="text" name="complemento_res" id="complemento_res" class="input-xxlarge" value="{{$associate->complemento_res}}" /></span>
-                                    </p>
-                                    <p>
-                                        <label>Pais</label>
-                                        <span class="field">
-											<select name="pais_res" id="asociados_pais_res">
-												<option {{ $associate->pais_res == '0' ? 'selected' : '' }} value="0">Selecione o País</option>
-												<option {{ $associate->pais_res == 'AF' ? 'selected' : '' }} value="AF">Afghanistan</option>
-												<option {{ $associate->pais_res == 'AX' ? 'selected' : '' }} value="AX">Åland Islands</option>
-												<option {{ $associate->pais_res == 'AL' ? 'selected' : '' }} value="AL">Albania</option>
-												<option {{ $associate->pais_res == 'DZ' ? 'selected' : '' }} value="DZ">Algeria</option>
-												<option {{ $associate->pais_res == 'AS' ? 'selected' : '' }} value="AS">American Samoa</option>
-												<option {{ $associate->pais_res == '1' ? 'selected' : '' }} value="1">Americas</option>
-												<option {{ $associate->pais_res == 'AD' ? 'selected' : '' }} value="AD">Andorra</option>
-												<option {{ $associate->pais_res == 'AO' ? 'selected' : '' }} value="AO">Angola</option>
-												<option {{ $associate->pais_res == 'AI' ? 'selected' : '' }} value="AI">Anguilla</option>
-												<option {{ $associate->pais_res == 'AQ' ? 'selected' : '' }} value="AQ">Antarctica</option>
-												<option {{ $associate->pais_res == 'AG' ? 'selected' : '' }} value="AG">Antigua and Barbuda</option>
-												<option {{ $associate->pais_res == 'AR' ? 'selected' : '' }} value="AR">Argentina</option>
-												<option {{ $associate->pais_res == 'AM' ? 'selected' : '' }} value="AM">Armenia</option>
-												<option {{ $associate->pais_res == 'AW' ? 'selected' : '' }} value="AW">Aruba</option>
-												<option {{ $associate->pais_res == '142' ? 'selected' : '' }} value="142">Asia</option>
-												<option {{ $associate->pais_res == 'AU' ? 'selected' : '' }} value="AU">Australia</option>
-												<option {{ $associate->pais_res == '43' ? 'selected' : '' }} value="43">Australia and New Zealand</option>
-												<option {{ $associate->pais_res == 'AT' ? 'selected' : '' }} value="AT">Austria</option>
-												<option {{ $associate->pais_res == 'AZ' ? 'selected' : '' }} value="AZ">Azerbaijan</option>
-												<option {{ $associate->pais_res == 'BS' ? 'selected' : '' }} value="BS">Bahamas</option>
-												<option {{ $associate->pais_res == 'BH' ? 'selected' : '' }} value="BH">Bahrain</option>
-												<option {{ $associate->pais_res == 'BD' ? 'selected' : '' }} value="BD">Bangladesh</option>
-												<option {{ $associate->pais_res == 'BB' ? 'selected' : '' }} value="BB">Barbados</option>
-												<option {{ $associate->pais_res == 'BY' ? 'selected' : '' }} value="BY">Belarus</option>
-												<option {{ $associate->pais_res == 'BE' ? 'selected' : '' }} value="BE">Belgium</option>
-												<option {{ $associate->pais_res == 'BZ' ? 'selected' : '' }} value="BZ">Belize</option>
-												<option {{ $associate->pais_res == 'BJ' ? 'selected' : '' }} value="BJ">Benin</option>
-												<option {{ $associate->pais_res == 'BM' ? 'selected' : '' }} value="BM">Bermuda</option>
-												<option {{ $associate->pais_res == 'BT' ? 'selected' : '' }} value="BT">Bhutan</option>
-												<option {{ $associate->pais_res == 'BO' ? 'selected' : '' }} value="BO">Bolivia</option>
-												<option {{ $associate->pais_res == 'BA' ? 'selected' : '' }} value="BA">Bosnia and Herzegovina</option>
-												<option {{ $associate->pais_res == 'BW' ? 'selected' : '' }} value="BW">Botswana</option>
-												<option {{ $associate->pais_res == 'BV' ? 'selected' : '' }} value="BV">Bouvet Island</option>
-												<option {{ $associate->pais_res == 'BR' ? 'selected' : '' }} value="BR">Brazil</option>
-												<option {{ $associate->pais_res == 'IO' ? 'selected' : '' }} value="IO">British Indian Ocean Territory</option>
-												<option {{ $associate->pais_res == 'VG' ? 'selected' : '' }} value="VG">British Virgin Islands</option>
-												<option {{ $associate->pais_res == 'BN' ? 'selected' : '' }} value="BN">Brunei</option>
-												<option {{ $associate->pais_res == 'BG' ? 'selected' : '' }} value="BG">Bulgaria</option>
-												<option {{ $associate->pais_res == 'BF' ? 'selected' : '' }} value="BF">Burkina Faso</option>
-												<option {{ $associate->pais_res == 'BI' ? 'selected' : '' }} value="BI">Burundi</option>
-												<option {{ $associate->pais_res == 'KH' ? 'selected' : '' }} value="KH">Cambodia</option>
-												<option {{ $associate->pais_res == 'CM' ? 'selected' : '' }} value="CM">Cameroon</option>
-												<option {{ $associate->pais_res == 'CA' ? 'selected' : '' }} value="CA">Canada</option>
-												<option {{ $associate->pais_res == 'CV' ? 'selected' : '' }} value="CV">Cape Verde</option>
-												<option {{ $associate->pais_res == '2' ? 'selected' : '' }} value="2">Caribbean</option>
-												<option {{ $associate->pais_res == 'KY' ? 'selected' : '' }} value="KY">Cayman Islands</option>
-												<option {{ $associate->pais_res == 'CF' ? 'selected' : '' }} value="CF">Central African Republic</option>
-												<option {{ $associate->pais_res == '11' ? 'selected' : '' }} value="11">Central America</option>
-												<option {{ $associate->pais_res == '143' ? 'selected' : '' }} value="143">Central Asia</option>
-												<option {{ $associate->pais_res == 'TD' ? 'selected' : '' }} value="TD">Chad</option>
-												<option {{ $associate->pais_res == '830' ? 'selected' : '' }} value="830">Channel Islands</option>
-												<option {{ $associate->pais_res == 'CL' ? 'selected' : '' }} value="CL">Chile</option>
-												<option {{ $associate->pais_res == 'CN' ? 'selected' : '' }} value="CN">China</option>
-												<option {{ $associate->pais_res == 'CX' ? 'selected' : '' }} value="CX">Christmas Island</option>
-												<option {{ $associate->pais_res == 'CC' ? 'selected' : '' }} value="CC">Cocos [Keeling] Islands</option>
-												<option {{ $associate->pais_res == 'CO' ? 'selected' : '' }} value="CO">Colombia</option>
-												<option {{ $associate->pais_res == '172' ? 'selected' : '' }} value="172">Commonwealth of Independent States</option>
-												<option {{ $associate->pais_res == 'KM' ? 'selected' : '' }} value="KM">Comoros</option>
-												<option {{ $associate->pais_res == 'CG' ? 'selected' : '' }} value="CG">Congo - Brazzaville</option>
-												<option {{ $associate->pais_res == 'CD' ? 'selected' : '' }} value="CD">Congo - Kinshasa</option>
-												<option {{ $associate->pais_res == 'CK' ? 'selected' : '' }} value="CK">Cook Islands</option>
-												<option {{ $associate->pais_res == 'CR' ? 'selected' : '' }} value="CR">Costa Rica</option>
-												<option {{ $associate->pais_res == 'CI' ? 'selected' : '' }} value="CI">Côte d’Ivoire</option>
-												<option {{ $associate->pais_res == 'HR' ? 'selected' : '' }} value="HR">Croatia</option>
-												<option {{ $associate->pais_res == 'CU' ? 'selected' : '' }} value="CU">Cuba</option>
-												<option {{ $associate->pais_res == 'CY' ? 'selected' : '' }} value="CY">Cyprus</option>
-												<option {{ $associate->pais_res == '200' ? 'selected' : '' }} value="200">Czechoslovakia</option>
-												<option {{ $associate->pais_res == 'CZ' ? 'selected' : '' }} value="CZ">Czech Republic</option>
-												<option {{ $associate->pais_res == 'DK' ? 'selected' : '' }} value="DK">Denmark</option>
-												<option {{ $associate->pais_res == 'DJ' ? 'selected' : '' }} value="DJ">Djibouti</option>
-												<option {{ $associate->pais_res == 'DM' ? 'selected' : '' }} value="DM">Dominica</option>
-												<option {{ $associate->pais_res == 'DO' ? 'selected' : '' }} value="DO">Dominican Republic</option>
-												<option {{ $associate->pais_res == '12' ? 'selected' : '' }} value="12">Eastern Africa</option>
-												<option {{ $associate->pais_res == '24' ? 'selected' : '' }} value="24">Eastern Asia</option>
-												<option {{ $associate->pais_res == '151' ? 'selected' : '' }} value="151">Eastern Europe</option>
-												<option {{ $associate->pais_res == 'EC' ? 'selected' : '' }} value="EC">Ecuador</option>
-												<option {{ $associate->pais_res == 'EG' ? 'selected' : '' }} value="EG">Egypt</option>
-												<option {{ $associate->pais_res == 'SV' ? 'selected' : '' }} value="SV">El Salvador</option>
-												<option {{ $associate->pais_res == 'GQ' ? 'selected' : '' }} value="GQ">Equatorial Guinea</option>
-												<option {{ $associate->pais_res == 'ER' ? 'selected' : '' }} value="ER">Eritrea</option>
-												<option {{ $associate->pais_res == 'EE' ? 'selected' : '' }} value="EE">Estonia</option>
-												<option {{ $associate->pais_res == 'ET' ? 'selected' : '' }} value="ET">Ethiopia</option>
-												<option {{ $associate->pais_res == '150' ? 'selected' : '' }} value="150">Europe</option>
-												<option {{ $associate->pais_res == 'QU' ? 'selected' : '' }} value="QU">European Union</option>
-												<option {{ $associate->pais_res == 'FK' ? 'selected' : '' }} value="FK">Falkland Islands</option>
-												<option {{ $associate->pais_res == 'FO' ? 'selected' : '' }} value="FO">Faroe Islands</option>
-												<option {{ $associate->pais_res == 'FJ' ? 'selected' : '' }} value="FJ">Fiji</option>
-												<option {{ $associate->pais_res == 'FI' ? 'selected' : '' }} value="FI">Finland</option>
-												<option {{ $associate->pais_res == 'FR' ? 'selected' : '' }} value="FR">France</option>
-												<option {{ $associate->pais_res == 'GF' ? 'selected' : '' }} value="GF">French Guiana</option>
-												<option {{ $associate->pais_res == 'PF' ? 'selected' : '' }} value="PF">French Polynesia</option>
-												<option {{ $associate->pais_res == 'TF' ? 'selected' : '' }} value="TF">French Southern Territories</option>
-												<option {{ $associate->pais_res == 'GA' ? 'selected' : '' }} value="GA">Gabon</option>
-												<option {{ $associate->pais_res == 'GM' ? 'selected' : '' }} value="GM">Gambia</option>
-												<option {{ $associate->pais_res == 'GE' ? 'selected' : '' }} value="GE">Georgia</option>
-												<option {{ $associate->pais_res == 'DE' ? 'selected' : '' }} value="DE">Germany</option>
-												<option {{ $associate->pais_res == 'GH' ? 'selected' : '' }} value="GH">Ghana</option>
-												<option {{ $associate->pais_res == 'GI' ? 'selected' : '' }} value="GI">Gibraltar</option>
-												<option {{ $associate->pais_res == 'GR' ? 'selected' : '' }} value="GR">Greece</option>
-												<option {{ $associate->pais_res == 'GL' ? 'selected' : '' }} value="GL">Greenland</option>
-												<option {{ $associate->pais_res == 'GD' ? 'selected' : '' }} value="GD">Grenada</option>
-												<option {{ $associate->pais_res == 'GP' ? 'selected' : '' }} value="GP">Guadeloupe</option>
-												<option {{ $associate->pais_res == 'GU' ? 'selected' : '' }} value="GU">Guam</option>
-												<option {{ $associate->pais_res == 'GT' ? 'selected' : '' }} value="GT">Guatemala</option>
-												<option {{ $associate->pais_res == 'GG' ? 'selected' : '' }} value="GG">Guernsey</option>
-												<option {{ $associate->pais_res == 'GN' ? 'selected' : '' }} value="GN">Guinea</option>
-												<option {{ $associate->pais_res == 'GW' ? 'selected' : '' }} value="GW">Guinea-Bissau</option>
-												<option {{ $associate->pais_res == 'GY' ? 'selected' : '' }} value="GY">Guyana</option>
-												<option {{ $associate->pais_res == 'HT' ? 'selected' : '' }} value="HT">Haiti</option>
-												<option {{ $associate->pais_res == 'HM' ? 'selected' : '' }} value="HM">Heard Island and McDonald Islands</option>
-												<option {{ $associate->pais_res == 'HN' ? 'selected' : '' }} value="HN">Honduras</option>
-												<option {{ $associate->pais_res == 'HK' ? 'selected' : '' }} value="HK">Hong Kong SAR China</option>
-												<option {{ $associate->pais_res == 'HU' ? 'selected' : '' }} value="HU">Hungary</option>
-												<option {{ $associate->pais_res == 'IS' ? 'selected' : '' }} value="IS">Iceland</option>
-												<option {{ $associate->pais_res == 'IN' ? 'selected' : '' }} value="IN">India</option>
-												<option {{ $associate->pais_res == 'ID' ? 'selected' : '' }} value="ID">Indonesia</option>
-												<option {{ $associate->pais_res == 'IR' ? 'selected' : '' }} value="IR">Iran</option>
-												<option {{ $associate->pais_res == 'IQ' ? 'selected' : '' }} value="IQ">Iraq</option>
-												<option {{ $associate->pais_res == 'IE' ? 'selected' : '' }} value="IE">Ireland</option>
-												<option {{ $associate->pais_res == 'IM' ? 'selected' : '' }} value="IM">Isle of Man</option>
-												<option {{ $associate->pais_res == 'IL' ? 'selected' : '' }} value="IL">Israel</option>
-												<option {{ $associate->pais_res == 'IT' ? 'selected' : '' }} value="IT">Italy</option>
-												<option {{ $associate->pais_res == 'JM' ? 'selected' : '' }} value="JM">Jamaica</option>
-												<option {{ $associate->pais_res == 'JP' ? 'selected' : '' }} value="JP">Japan</option>
-												<option {{ $associate->pais_res == 'JE' ? 'selected' : '' }} value="JE">Jersey</option>
-												<option {{ $associate->pais_res == 'JO' ? 'selected' : '' }} value="JO">Jordan</option>
-												<option {{ $associate->pais_res == 'KZ' ? 'selected' : '' }} value="KZ">Kazakhstan</option>
-												<option {{ $associate->pais_res == 'KE' ? 'selected' : '' }} value="KE">Kenya</option>
-												<option {{ $associate->pais_res == 'KI' ? 'selected' : '' }} value="KI">Kiribati</option>
-												<option {{ $associate->pais_res == 'KW' ? 'selected' : '' }} value="KW">Kuwait</option>
-												<option {{ $associate->pais_res == 'KG' ? 'selected' : '' }} value="KG">Kyrgyzstan</option>
-												<option {{ $associate->pais_res == 'LA' ? 'selected' : '' }} value="LA">Laos</option>
-												<option {{ $associate->pais_res == '419' ? 'selected' : '' }} value="419">Latin America and the Caribbean</option>
-												<option {{ $associate->pais_res == 'LV' ? 'selected' : '' }} value="LV">Latvia</option>
-												<option {{ $associate->pais_res == 'LB' ? 'selected' : '' }} value="LB">Lebanon</option>
-												<option {{ $associate->pais_res == 'LS' ? 'selected' : '' }} value="LS">Lesotho</option>
-												<option {{ $associate->pais_res == 'LR' ? 'selected' : '' }} value="LR">Liberia</option>
-												<option {{ $associate->pais_res == 'LY' ? 'selected' : '' }} value="LY">Libya</option>
-												<option {{ $associate->pais_res == 'LI' ? 'selected' : '' }} value="LI">Liechtenstein</option>
-												<option {{ $associate->pais_res == 'LT' ? 'selected' : '' }} value="LT">Lithuania</option>
-												<option {{ $associate->pais_res == 'LU' ? 'selected' : '' }} value="LU">Luxembourg</option>
-												<option {{ $associate->pais_res == 'MO' ? 'selected' : '' }} value="MO">Macau SAR China</option>
-												<option {{ $associate->pais_res == 'MK' ? 'selected' : '' }} value="MK">Macedonia</option>
-												<option {{ $associate->pais_res == 'MG' ? 'selected' : '' }} value="MG">Madagascar</option>
-												<option {{ $associate->pais_res == 'MW' ? 'selected' : '' }} value="MW">Malawi</option>
-												<option {{ $associate->pais_res == 'MY' ? 'selected' : '' }} value="MY">Malaysia</option>
-												<option {{ $associate->pais_res == 'MV' ? 'selected' : '' }} value="MV">Maldives</option>
-												<option {{ $associate->pais_res == 'ML' ? 'selected' : '' }} value="ML">Mali</option>
-												<option {{ $associate->pais_res == 'MT' ? 'selected' : '' }} value="MT">Malta</option>
-												<option {{ $associate->pais_res == 'MH' ? 'selected' : '' }} value="MH">Marshall Islands</option>
-												<option {{ $associate->pais_res == 'MQ' ? 'selected' : '' }} value="MQ">Martinique</option>
-												<option {{ $associate->pais_res == 'MR' ? 'selected' : '' }} value="MR">Mauritania</option>
-												<option {{ $associate->pais_res == 'MU' ? 'selected' : '' }} value="MU">Mauritius</option>
-												<option {{ $associate->pais_res == 'YT' ? 'selected' : '' }} value="YT">Mayotte</option>
-												<option {{ $associate->pais_res == '44' ? 'selected' : '' }} value="44">Melanesia</option>
-												<option {{ $associate->pais_res == 'MX' ? 'selected' : '' }} value="MX">Mexico</option>
-												<option {{ $associate->pais_res == 'FM' ? 'selected' : '' }} value="FM">Micronesia</option>
-												<option {{ $associate->pais_res == '47' ? 'selected' : '' }} value="47">Micronesian Region</option>
-												<option {{ $associate->pais_res == '15' ? 'selected' : '' }} value="15">Middle Africa</option>
-												<option {{ $associate->pais_res == 'MD' ? 'selected' : '' }} value="MD">Moldova</option>
-												<option {{ $associate->pais_res == 'MC' ? 'selected' : '' }} value="MC">Monaco</option>
-												<option {{ $associate->pais_res == 'MN' ? 'selected' : '' }} value="MN">Mongolia</option>
-												<option {{ $associate->pais_res == 'ME' ? 'selected' : '' }} value="ME">Montenegro</option>
-												<option {{ $associate->pais_res == 'MS' ? 'selected' : '' }} value="MS">Montserrat</option>
-												<option {{ $associate->pais_res == 'MA' ? 'selected' : '' }} value="MA">Morocco</option>
-												<option {{ $associate->pais_res == 'MZ' ? 'selected' : '' }} value="MZ">Mozambique</option>
-												<option {{ $associate->pais_res == 'MM' ? 'selected' : '' }} value="MM">Myanmar [Burma]</option>
-												<option {{ $associate->pais_res == 'NA' ? 'selected' : '' }} value="NA">Namibia</option>
-												<option {{ $associate->pais_res == 'NR' ? 'selected' : '' }} value="NR">Nauru</option>
-												<option {{ $associate->pais_res == 'NP' ? 'selected' : '' }} value="NP">Nepal</option>
-												<option {{ $associate->pais_res == 'NL' ? 'selected' : '' }} value="NL">Netherlands</option>
-												<option {{ $associate->pais_res == 'AN' ? 'selected' : '' }} value="AN">Netherlands Antilles</option>
-												<option {{ $associate->pais_res == 'NC' ? 'selected' : '' }} value="NC">New Caledonia</option>
-												<option {{ $associate->pais_res == 'NZ' ? 'selected' : '' }} value="NZ">New Zealand</option>
-												<option {{ $associate->pais_res == 'NI' ? 'selected' : '' }} value="NI">Nicaragua</option>
-												<option {{ $associate->pais_res == 'NE' ? 'selected' : '' }} value="NE">Niger</option>
-												<option {{ $associate->pais_res == 'NG' ? 'selected' : '' }} value="NG">Nigeria</option>
-												<option {{ $associate->pais_res == 'NU' ? 'selected' : '' }} value="NU">Niue</option>
-												<option {{ $associate->pais_res == 'NF' ? 'selected' : '' }} value="NF">Norfolk Island</option>
-												<option {{ $associate->pais_res == '13' ? 'selected' : '' }} value="13">Northern Africa</option>
-												<option {{ $associate->pais_res == '17' ? 'selected' : '' }} value="17">Northern America</option>
-												<option {{ $associate->pais_res == '154' ? 'selected' : '' }} value="154">Northern Europe</option>
-												<option {{ $associate->pais_res == 'MP' ? 'selected' : '' }} value="MP">Northern Mariana Islands</option>
-												<option {{ $associate->pais_res == 'KP' ? 'selected' : '' }} value="KP">North Korea</option>
-												<option {{ $associate->pais_res == 'NO' ? 'selected' : '' }} value="NO">Norway</option>
-												<option {{ $associate->pais_res == '0' ? 'selected' : '' }} value="0">Oceania</option>
-												<option {{ $associate->pais_res == 'OM' ? 'selected' : '' }} value="OM">Oman</option>
-												<option {{ $associate->pais_res == 'QO' ? 'selected' : '' }} value="QO">Outlying Oceania</option>
-												<option {{ $associate->pais_res == 'PK' ? 'selected' : '' }} value="PK">Pakistan</option>
-												<option {{ $associate->pais_res == 'PW' ? 'selected' : '' }} value="PW">Palau</option>
-												<option {{ $associate->pais_res == 'PS' ? 'selected' : '' }} value="PS">Palestinian Territories</option>
-												<option {{ $associate->pais_res == 'PA' ? 'selected' : '' }} value="PA">Panama</option>
-												<option {{ $associate->pais_res == 'PG' ? 'selected' : '' }} value="PG">Papua New Guinea</option>
-												<option {{ $associate->pais_res == 'PY' ? 'selected' : '' }} value="PY">Paraguay</option>
-												<option {{ $associate->pais_res == 'PE' ? 'selected' : '' }} value="PE">Peru</option>
-												<option {{ $associate->pais_res == 'PH' ? 'selected' : '' }} value="PH">Philippines</option>
-												<option {{ $associate->pais_res == 'PN' ? 'selected' : '' }} value="PN">Pitcairn Islands</option>
-												<option {{ $associate->pais_res == 'PL' ? 'selected' : '' }} value="PL">Poland</option>
-												<option {{ $associate->pais_res == '49' ? 'selected' : '' }} value="49">Polynesia</option>
-												<option {{ $associate->pais_res == 'PT' ? 'selected' : '' }} value="PT">Portugal</option>
-												<option {{ $associate->pais_res == 'PR' ? 'selected' : '' }} value="PR">Puerto Rico</option>
-												<option {{ $associate->pais_res == 'QA' ? 'selected' : '' }} value="QA">Qatar</option>
-												<option {{ $associate->pais_res == 'RE' ? 'selected' : '' }} value="RE">Réunion</option>
-												<option {{ $associate->pais_res == 'RO' ? 'selected' : '' }} value="RO">Romania</option>
-												<option {{ $associate->pais_res == 'RU' ? 'selected' : '' }} value="RU">Russia</option>
-												<option {{ $associate->pais_res == 'RW' ? 'selected' : '' }} value="RW">Rwanda</option>
-												<option {{ $associate->pais_res == 'BL' ? 'selected' : '' }} value="BL">Saint Barthélemy</option>
-												<option {{ $associate->pais_res == 'SH' ? 'selected' : '' }} value="SH">Saint Helena</option>
-												<option {{ $associate->pais_res == 'KN' ? 'selected' : '' }} value="KN">Saint Kitts and Nevis</option>
-												<option {{ $associate->pais_res == 'LC' ? 'selected' : '' }} value="LC">Saint Lucia</option>
-												<option {{ $associate->pais_res == 'MF' ? 'selected' : '' }} value="MF">Saint Martin</option>
-												<option {{ $associate->pais_res == 'PM' ? 'selected' : '' }} value="PM">Saint Pierre and Miquelon</option>
-												<option {{ $associate->pais_res == 'VC' ? 'selected' : '' }} value="VC">Saint Vincent and the Grenadines</option>
-												<option {{ $associate->pais_res == 'WS' ? 'selected' : '' }} value="WS">Samoa</option>
-												<option {{ $associate->pais_res == 'SM' ? 'selected' : '' }} value="SM">San Marino</option>
-												<option {{ $associate->pais_res == 'ST' ? 'selected' : '' }} value="ST">São Tomé and Príncipe</option>
-												<option {{ $associate->pais_res == 'SA' ? 'selected' : '' }} value="SA">Saudi Arabia</option>
-												<option {{ $associate->pais_res == 'SN' ? 'selected' : '' }} value="SN">Senegal</option>
-												<option {{ $associate->pais_res == 'RS' ? 'selected' : '' }} value="RS">Serbia</option>
-												<option {{ $associate->pais_res == 'CS' ? 'selected' : '' }} value="CS">Serbia and Montenegro</option>
-												<option {{ $associate->pais_res == 'SC' ? 'selected' : '' }} value="SC">Seychelles</option>
-												<option {{ $associate->pais_res == 'SL' ? 'selected' : '' }} value="SL">Sierra Leone</option>
-												<option {{ $associate->pais_res == 'SG' ? 'selected' : '' }} value="SG">Singapore</option>
-												<option {{ $associate->pais_res == 'SK' ? 'selected' : '' }} value="SK">Slovakia</option>
-												<option {{ $associate->pais_res == 'SI' ? 'selected' : '' }} value="SI">Slovenia</option>
-												<option {{ $associate->pais_res == 'SB' ? 'selected' : '' }} value="SB">Solomon Islands</option>
-												<option {{ $associate->pais_res == 'SO' ? 'selected' : '' }} value="SO">Somalia</option>
-												<option {{ $associate->pais_res == 'ZA' ? 'selected' : '' }} value="ZA">South Africa</option>
-												<option {{ $associate->pais_res == '5' ? 'selected' : '' }} value="5">South America</option>
-												<option {{ $associate->pais_res == '50' ? 'selected' : '' }} value="50">South-Central Asia</option>
-												<option {{ $associate->pais_res == '29' ? 'selected' : '' }} value="29">South-Eastern Asia</option>
-												<option {{ $associate->pais_res == '28' ? 'selected' : '' }} value="28">Southern Asia</option>
-												<option {{ $associate->pais_res == '3' ? 'selected' : '' }} value="3">Southern Europe</option>
-												<option {{ $associate->pais_res == 'GS' ? 'selected' : '' }} value="GS">South Georgia and the South Sandwich Islands</option>
-												<option {{ $associate->pais_res == 'KR' ? 'selected' : '' }} value="KR">South Korea</option>
-												<option {{ $associate->pais_res == 'ES' ? 'selected' : '' }} value="ES">Spain</option>
-												<option {{ $associate->pais_res == 'LK' ? 'selected' : '' }} value="LK">Sri Lanka</option>
-												<option {{ $associate->pais_res == 'SD' ? 'selected' : '' }} value="SD">Sudan</option>
-												<option {{ $associate->pais_res == 'SR' ? 'selected' : '' }} value="SR">Suriname</option>
-												<option {{ $associate->pais_res == 'SJ' ? 'selected' : '' }} value="SJ">Svalbard and Jan Mayen</option>
-												<option {{ $associate->pais_res == 'SZ' ? 'selected' : '' }} value="SZ">Swaziland</option>
-												<option {{ $associate->pais_res == 'SE' ? 'selected' : '' }} value="SE">Sweden</option>
-												<option {{ $associate->pais_res == 'CH' ? 'selected' : '' }} value="CH">Switzerland</option>
-												<option {{ $associate->pais_res == 'SY' ? 'selected' : '' }} value="SY">Syria</option>
-												<option {{ $associate->pais_res == 'TW' ? 'selected' : '' }} value="TW">Taiwan</option>
-												<option {{ $associate->pais_res == 'TJ' ? 'selected' : '' }} value="TJ">Tajikistan</option>
-												<option {{ $associate->pais_res == 'TZ' ? 'selected' : '' }} value="TZ">Tanzania</option>
-												<option {{ $associate->pais_res == 'TH' ? 'selected' : '' }} value="TH">Thailand</option>
-												<option {{ $associate->pais_res == 'TL' ? 'selected' : '' }} value="TL">Timor-Leste</option>
-												<option {{ $associate->pais_res == 'TG' ? 'selected' : '' }} value="TG">Togo</option>
-												<option {{ $associate->pais_res == 'TK' ? 'selected' : '' }} value="TK">Tokelau</option>
-												<option {{ $associate->pais_res == 'TO' ? 'selected' : '' }} value="TO">Tonga</option>
-												<option {{ $associate->pais_res == 'TT' ? 'selected' : '' }} value="TT">Trinidad and Tobago</option>
-												<option {{ $associate->pais_res == 'TN' ? 'selected' : '' }} value="TN">Tunisia</option>
-												<option {{ $associate->pais_res == 'TR' ? 'selected' : '' }} value="TR">Turkey</option>
-												<option {{ $associate->pais_res == 'TM' ? 'selected' : '' }} value="TM">Turkmenistan</option>
-												<option {{ $associate->pais_res == 'TC' ? 'selected' : '' }} value="TC">Turks and Caicos Islands</option>
-												<option {{ $associate->pais_res == 'TV' ? 'selected' : '' }} value="TV">Tuvalu</option>
-												<option {{ $associate->pais_res == 'UG' ? 'selected' : '' }} value="UG">Uganda</option>
-												<option {{ $associate->pais_res == 'UA' ? 'selected' : '' }} value="UA">Ukraine</option>
-												<option {{ $associate->pais_res == 'AE' ? 'selected' : '' }} value="AE">United Arab Emirates</option>
-												<option {{ $associate->pais_res == 'GB' ? 'selected' : '' }} value="GB">United Kingdom</option>
-												<option {{ $associate->pais_res == 'US' ? 'selected' : '' }} value="US">United States</option>
-												<option {{ $associate->pais_res == 'ZZ' ? 'selected' : '' }} value="ZZ">Unknown or Invalid Region</option>
-												<option {{ $associate->pais_res == 'UY' ? 'selected' : '' }} value="UY">Uruguay</option>
-												<option {{ $associate->pais_res == 'UM' ? 'selected' : '' }} value="UM">U.S. Minor Outlying Islands</option>
-												<option {{ $associate->pais_res == 'VI' ? 'selected' : '' }} value="VI">U.S. Virgin Islands</option>
-												<option {{ $associate->pais_res == 'UZ' ? 'selected' : '' }} value="UZ">Uzbekistan</option>
-												<option {{ $associate->pais_res == 'VU' ? 'selected' : '' }} value="VU">Vanuatu</option>
-												<option {{ $associate->pais_res == 'VA' ? 'selected' : '' }} value="VA">Vatican City</option>
-												<option {{ $associate->pais_res == 'VE' ? 'selected' : '' }} value="VE">Venezuela</option>
-												<option {{ $associate->pais_res == 'VN' ? 'selected' : '' }} value="VN">Vietnam</option>
-												<option {{ $associate->pais_res == 'WF' ? 'selected' : '' }} value="WF">Wallis and Futuna</option>
-												<option {{ $associate->pais_res == '9' ? 'selected' : '' }} value="9">Western Africa</option>
-												<option {{ $associate->pais_res == '145' ? 'selected' : '' }} value="145">Western Asia</option>
-												<option {{ $associate->pais_res == '155' ? 'selected' : '' }} value="155">Western Europe</option>
-												<option {{ $associate->pais_res == 'EH' ? 'selected' : '' }} value="EH">Western Sahara</option>
-												<option {{ $associate->pais_res == 'YE' ? 'selected' : '' }} value="YE">Yemen</option>
-												<option {{ $associate->pais_res == 'ZM' ? 'selected' : '' }} value="ZM">Zambia</option>
-												<option {{ $associate->pais_res == 'ZW' ? 'selected' : '' }} value="ZW">Zimbabwe</option>
-											</select>
-                                        </span>
-                                    </p>
-                                    <p>
                                         <label>Tipo de Logradouro:</label>
                                         <span class="field">
                                             @if (isset($logradouros))
@@ -779,12 +478,334 @@ Associados
                                         <span class="field"><input type="text" name="dir_res" id="dir_res" class="input-xxlarge" value="{{$associate->dir_res}}" /></span>
                                     </p>
                                     <p>
+                                        <label>Número</label>
+                                        <span class="field"><input type="text" name="numero_res" id="numero_res" class="input-xxlarge" value="{{$associate->numero_res}}" /></span>
+                                    </p>
+                                    <p>
+                                        <label>Complemento</label>
+                                        <span class="field"><input type="text" name="complemento_res" id="complemento_res" class="input-xxlarge" value="{{$associate->complemento_res}}" /></span>
+                                    </p>
+                                    <p>
                                         <label>Bairro</label>
                                         <span class="field"><input type="text" name="bairro_res" id="bairro_res" class="input-xxlarge" value="{{$associate->bairro_res}}" /></span>
                                     </p>
                                     <p>
+                                        <label>Pais</label>
+                                        <span class="field">
+                                            <select name="pais_res" id="asociados_pais_res" onchange='if(this.value == "BR"){console.log("Brazillian");jQuery(".brazillian-res").removeClass("hidden");jQuery(".not-brazillian-res").addClass("hidden")}else{console.log("NOT Brazillian");jQuery(".brazillian-res").addClass("hidden");jQuery(".not-brazillian-res").removeClass("hidden")}'>
+                                                <option {{ $associate->pais_res == '0' ? 'selected' : '' }} value="0">Selecione o País</option>
+                                                <option {{ $associate->pais_res == 'AF' ? 'selected' : '' }} value="AF">Afghanistan</option>
+                                                <option {{ $associate->pais_res == 'AX' ? 'selected' : '' }} value="AX">Åland Islands</option>
+                                                <option {{ $associate->pais_res == 'AL' ? 'selected' : '' }} value="AL">Albania</option>
+                                                <option {{ $associate->pais_res == 'DZ' ? 'selected' : '' }} value="DZ">Algeria</option>
+                                                <option {{ $associate->pais_res == 'AS' ? 'selected' : '' }} value="AS">American Samoa</option>
+                                                <option {{ $associate->pais_res == '1' ? 'selected' : '' }} value="1">Americas</option>
+                                                <option {{ $associate->pais_res == 'AD' ? 'selected' : '' }} value="AD">Andorra</option>
+                                                <option {{ $associate->pais_res == 'AO' ? 'selected' : '' }} value="AO">Angola</option>
+                                                <option {{ $associate->pais_res == 'AI' ? 'selected' : '' }} value="AI">Anguilla</option>
+                                                <option {{ $associate->pais_res == 'AQ' ? 'selected' : '' }} value="AQ">Antarctica</option>
+                                                <option {{ $associate->pais_res == 'AG' ? 'selected' : '' }} value="AG">Antigua and Barbuda</option>
+                                                <option {{ $associate->pais_res == 'AR' ? 'selected' : '' }} value="AR">Argentina</option>
+                                                <option {{ $associate->pais_res == 'AM' ? 'selected' : '' }} value="AM">Armenia</option>
+                                                <option {{ $associate->pais_res == 'AW' ? 'selected' : '' }} value="AW">Aruba</option>
+                                                <option {{ $associate->pais_res == '142' ? 'selected' : '' }} value="142">Asia</option>
+                                                <option {{ $associate->pais_res == 'AU' ? 'selected' : '' }} value="AU">Australia</option>
+                                                <option {{ $associate->pais_res == '43' ? 'selected' : '' }} value="43">Australia and New Zealand</option>
+                                                <option {{ $associate->pais_res == 'AT' ? 'selected' : '' }} value="AT">Austria</option>
+                                                <option {{ $associate->pais_res == 'AZ' ? 'selected' : '' }} value="AZ">Azerbaijan</option>
+                                                <option {{ $associate->pais_res == 'BS' ? 'selected' : '' }} value="BS">Bahamas</option>
+                                                <option {{ $associate->pais_res == 'BH' ? 'selected' : '' }} value="BH">Bahrain</option>
+                                                <option {{ $associate->pais_res == 'BD' ? 'selected' : '' }} value="BD">Bangladesh</option>
+                                                <option {{ $associate->pais_res == 'BB' ? 'selected' : '' }} value="BB">Barbados</option>
+                                                <option {{ $associate->pais_res == 'BY' ? 'selected' : '' }} value="BY">Belarus</option>
+                                                <option {{ $associate->pais_res == 'BE' ? 'selected' : '' }} value="BE">Belgium</option>
+                                                <option {{ $associate->pais_res == 'BZ' ? 'selected' : '' }} value="BZ">Belize</option>
+                                                <option {{ $associate->pais_res == 'BJ' ? 'selected' : '' }} value="BJ">Benin</option>
+                                                <option {{ $associate->pais_res == 'BM' ? 'selected' : '' }} value="BM">Bermuda</option>
+                                                <option {{ $associate->pais_res == 'BT' ? 'selected' : '' }} value="BT">Bhutan</option>
+                                                <option {{ $associate->pais_res == 'BO' ? 'selected' : '' }} value="BO">Bolivia</option>
+                                                <option {{ $associate->pais_res == 'BA' ? 'selected' : '' }} value="BA">Bosnia and Herzegovina</option>
+                                                <option {{ $associate->pais_res == 'BW' ? 'selected' : '' }} value="BW">Botswana</option>
+                                                <option {{ $associate->pais_res == 'BV' ? 'selected' : '' }} value="BV">Bouvet Island</option>
+                                                <option {{ $associate->pais_res == 'BR' ? 'selected' : '' }} value="BR">Brazil</option>
+                                                <option {{ $associate->pais_res == 'IO' ? 'selected' : '' }} value="IO">British Indian Ocean Territory</option>
+                                                <option {{ $associate->pais_res == 'VG' ? 'selected' : '' }} value="VG">British Virgin Islands</option>
+                                                <option {{ $associate->pais_res == 'BN' ? 'selected' : '' }} value="BN">Brunei</option>
+                                                <option {{ $associate->pais_res == 'BG' ? 'selected' : '' }} value="BG">Bulgaria</option>
+                                                <option {{ $associate->pais_res == 'BF' ? 'selected' : '' }} value="BF">Burkina Faso</option>
+                                                <option {{ $associate->pais_res == 'BI' ? 'selected' : '' }} value="BI">Burundi</option>
+                                                <option {{ $associate->pais_res == 'KH' ? 'selected' : '' }} value="KH">Cambodia</option>
+                                                <option {{ $associate->pais_res == 'CM' ? 'selected' : '' }} value="CM">Cameroon</option>
+                                                <option {{ $associate->pais_res == 'CA' ? 'selected' : '' }} value="CA">Canada</option>
+                                                <option {{ $associate->pais_res == 'CV' ? 'selected' : '' }} value="CV">Cape Verde</option>
+                                                <option {{ $associate->pais_res == '2' ? 'selected' : '' }} value="2">Caribbean</option>
+                                                <option {{ $associate->pais_res == 'KY' ? 'selected' : '' }} value="KY">Cayman Islands</option>
+                                                <option {{ $associate->pais_res == 'CF' ? 'selected' : '' }} value="CF">Central African Republic</option>
+                                                <option {{ $associate->pais_res == '11' ? 'selected' : '' }} value="11">Central America</option>
+                                                <option {{ $associate->pais_res == '143' ? 'selected' : '' }} value="143">Central Asia</option>
+                                                <option {{ $associate->pais_res == 'TD' ? 'selected' : '' }} value="TD">Chad</option>
+                                                <option {{ $associate->pais_res == '830' ? 'selected' : '' }} value="830">Channel Islands</option>
+                                                <option {{ $associate->pais_res == 'CL' ? 'selected' : '' }} value="CL">Chile</option>
+                                                <option {{ $associate->pais_res == 'CN' ? 'selected' : '' }} value="CN">China</option>
+                                                <option {{ $associate->pais_res == 'CX' ? 'selected' : '' }} value="CX">Christmas Island</option>
+                                                <option {{ $associate->pais_res == 'CC' ? 'selected' : '' }} value="CC">Cocos [Keeling] Islands</option>
+                                                <option {{ $associate->pais_res == 'CO' ? 'selected' : '' }} value="CO">Colombia</option>
+                                                <option {{ $associate->pais_res == '172' ? 'selected' : '' }} value="172">Commonwealth of Independent States</option>
+                                                <option {{ $associate->pais_res == 'KM' ? 'selected' : '' }} value="KM">Comoros</option>
+                                                <option {{ $associate->pais_res == 'CG' ? 'selected' : '' }} value="CG">Congo - Brazzaville</option>
+                                                <option {{ $associate->pais_res == 'CD' ? 'selected' : '' }} value="CD">Congo - Kinshasa</option>
+                                                <option {{ $associate->pais_res == 'CK' ? 'selected' : '' }} value="CK">Cook Islands</option>
+                                                <option {{ $associate->pais_res == 'CR' ? 'selected' : '' }} value="CR">Costa Rica</option>
+                                                <option {{ $associate->pais_res == 'CI' ? 'selected' : '' }} value="CI">Côte d’Ivoire</option>
+                                                <option {{ $associate->pais_res == 'HR' ? 'selected' : '' }} value="HR">Croatia</option>
+                                                <option {{ $associate->pais_res == 'CU' ? 'selected' : '' }} value="CU">Cuba</option>
+                                                <option {{ $associate->pais_res == 'CY' ? 'selected' : '' }} value="CY">Cyprus</option>
+                                                <option {{ $associate->pais_res == '200' ? 'selected' : '' }} value="200">Czechoslovakia</option>
+                                                <option {{ $associate->pais_res == 'CZ' ? 'selected' : '' }} value="CZ">Czech Republic</option>
+                                                <option {{ $associate->pais_res == 'DK' ? 'selected' : '' }} value="DK">Denmark</option>
+                                                <option {{ $associate->pais_res == 'DJ' ? 'selected' : '' }} value="DJ">Djibouti</option>
+                                                <option {{ $associate->pais_res == 'DM' ? 'selected' : '' }} value="DM">Dominica</option>
+                                                <option {{ $associate->pais_res == 'DO' ? 'selected' : '' }} value="DO">Dominican Republic</option>
+                                                <option {{ $associate->pais_res == '12' ? 'selected' : '' }} value="12">Eastern Africa</option>
+                                                <option {{ $associate->pais_res == '24' ? 'selected' : '' }} value="24">Eastern Asia</option>
+                                                <option {{ $associate->pais_res == '151' ? 'selected' : '' }} value="151">Eastern Europe</option>
+                                                <option {{ $associate->pais_res == 'EC' ? 'selected' : '' }} value="EC">Ecuador</option>
+                                                <option {{ $associate->pais_res == 'EG' ? 'selected' : '' }} value="EG">Egypt</option>
+                                                <option {{ $associate->pais_res == 'SV' ? 'selected' : '' }} value="SV">El Salvador</option>
+                                                <option {{ $associate->pais_res == 'GQ' ? 'selected' : '' }} value="GQ">Equatorial Guinea</option>
+                                                <option {{ $associate->pais_res == 'ER' ? 'selected' : '' }} value="ER">Eritrea</option>
+                                                <option {{ $associate->pais_res == 'EE' ? 'selected' : '' }} value="EE">Estonia</option>
+                                                <option {{ $associate->pais_res == 'ET' ? 'selected' : '' }} value="ET">Ethiopia</option>
+                                                <option {{ $associate->pais_res == '150' ? 'selected' : '' }} value="150">Europe</option>
+                                                <option {{ $associate->pais_res == 'QU' ? 'selected' : '' }} value="QU">European Union</option>
+                                                <option {{ $associate->pais_res == 'FK' ? 'selected' : '' }} value="FK">Falkland Islands</option>
+                                                <option {{ $associate->pais_res == 'FO' ? 'selected' : '' }} value="FO">Faroe Islands</option>
+                                                <option {{ $associate->pais_res == 'FJ' ? 'selected' : '' }} value="FJ">Fiji</option>
+                                                <option {{ $associate->pais_res == 'FI' ? 'selected' : '' }} value="FI">Finland</option>
+                                                <option {{ $associate->pais_res == 'FR' ? 'selected' : '' }} value="FR">France</option>
+                                                <option {{ $associate->pais_res == 'GF' ? 'selected' : '' }} value="GF">French Guiana</option>
+                                                <option {{ $associate->pais_res == 'PF' ? 'selected' : '' }} value="PF">French Polynesia</option>
+                                                <option {{ $associate->pais_res == 'TF' ? 'selected' : '' }} value="TF">French Southern Territories</option>
+                                                <option {{ $associate->pais_res == 'GA' ? 'selected' : '' }} value="GA">Gabon</option>
+                                                <option {{ $associate->pais_res == 'GM' ? 'selected' : '' }} value="GM">Gambia</option>
+                                                <option {{ $associate->pais_res == 'GE' ? 'selected' : '' }} value="GE">Georgia</option>
+                                                <option {{ $associate->pais_res == 'DE' ? 'selected' : '' }} value="DE">Germany</option>
+                                                <option {{ $associate->pais_res == 'GH' ? 'selected' : '' }} value="GH">Ghana</option>
+                                                <option {{ $associate->pais_res == 'GI' ? 'selected' : '' }} value="GI">Gibraltar</option>
+                                                <option {{ $associate->pais_res == 'GR' ? 'selected' : '' }} value="GR">Greece</option>
+                                                <option {{ $associate->pais_res == 'GL' ? 'selected' : '' }} value="GL">Greenland</option>
+                                                <option {{ $associate->pais_res == 'GD' ? 'selected' : '' }} value="GD">Grenada</option>
+                                                <option {{ $associate->pais_res == 'GP' ? 'selected' : '' }} value="GP">Guadeloupe</option>
+                                                <option {{ $associate->pais_res == 'GU' ? 'selected' : '' }} value="GU">Guam</option>
+                                                <option {{ $associate->pais_res == 'GT' ? 'selected' : '' }} value="GT">Guatemala</option>
+                                                <option {{ $associate->pais_res == 'GG' ? 'selected' : '' }} value="GG">Guernsey</option>
+                                                <option {{ $associate->pais_res == 'GN' ? 'selected' : '' }} value="GN">Guinea</option>
+                                                <option {{ $associate->pais_res == 'GW' ? 'selected' : '' }} value="GW">Guinea-Bissau</option>
+                                                <option {{ $associate->pais_res == 'GY' ? 'selected' : '' }} value="GY">Guyana</option>
+                                                <option {{ $associate->pais_res == 'HT' ? 'selected' : '' }} value="HT">Haiti</option>
+                                                <option {{ $associate->pais_res == 'HM' ? 'selected' : '' }} value="HM">Heard Island and McDonald Islands</option>
+                                                <option {{ $associate->pais_res == 'HN' ? 'selected' : '' }} value="HN">Honduras</option>
+                                                <option {{ $associate->pais_res == 'HK' ? 'selected' : '' }} value="HK">Hong Kong SAR China</option>
+                                                <option {{ $associate->pais_res == 'HU' ? 'selected' : '' }} value="HU">Hungary</option>
+                                                <option {{ $associate->pais_res == 'IS' ? 'selected' : '' }} value="IS">Iceland</option>
+                                                <option {{ $associate->pais_res == 'IN' ? 'selected' : '' }} value="IN">India</option>
+                                                <option {{ $associate->pais_res == 'ID' ? 'selected' : '' }} value="ID">Indonesia</option>
+                                                <option {{ $associate->pais_res == 'IR' ? 'selected' : '' }} value="IR">Iran</option>
+                                                <option {{ $associate->pais_res == 'IQ' ? 'selected' : '' }} value="IQ">Iraq</option>
+                                                <option {{ $associate->pais_res == 'IE' ? 'selected' : '' }} value="IE">Ireland</option>
+                                                <option {{ $associate->pais_res == 'IM' ? 'selected' : '' }} value="IM">Isle of Man</option>
+                                                <option {{ $associate->pais_res == 'IL' ? 'selected' : '' }} value="IL">Israel</option>
+                                                <option {{ $associate->pais_res == 'IT' ? 'selected' : '' }} value="IT">Italy</option>
+                                                <option {{ $associate->pais_res == 'JM' ? 'selected' : '' }} value="JM">Jamaica</option>
+                                                <option {{ $associate->pais_res == 'JP' ? 'selected' : '' }} value="JP">Japan</option>
+                                                <option {{ $associate->pais_res == 'JE' ? 'selected' : '' }} value="JE">Jersey</option>
+                                                <option {{ $associate->pais_res == 'JO' ? 'selected' : '' }} value="JO">Jordan</option>
+                                                <option {{ $associate->pais_res == 'KZ' ? 'selected' : '' }} value="KZ">Kazakhstan</option>
+                                                <option {{ $associate->pais_res == 'KE' ? 'selected' : '' }} value="KE">Kenya</option>
+                                                <option {{ $associate->pais_res == 'KI' ? 'selected' : '' }} value="KI">Kiribati</option>
+                                                <option {{ $associate->pais_res == 'KW' ? 'selected' : '' }} value="KW">Kuwait</option>
+                                                <option {{ $associate->pais_res == 'KG' ? 'selected' : '' }} value="KG">Kyrgyzstan</option>
+                                                <option {{ $associate->pais_res == 'LA' ? 'selected' : '' }} value="LA">Laos</option>
+                                                <option {{ $associate->pais_res == '419' ? 'selected' : '' }} value="419">Latin America and the Caribbean</option>
+                                                <option {{ $associate->pais_res == 'LV' ? 'selected' : '' }} value="LV">Latvia</option>
+                                                <option {{ $associate->pais_res == 'LB' ? 'selected' : '' }} value="LB">Lebanon</option>
+                                                <option {{ $associate->pais_res == 'LS' ? 'selected' : '' }} value="LS">Lesotho</option>
+                                                <option {{ $associate->pais_res == 'LR' ? 'selected' : '' }} value="LR">Liberia</option>
+                                                <option {{ $associate->pais_res == 'LY' ? 'selected' : '' }} value="LY">Libya</option>
+                                                <option {{ $associate->pais_res == 'LI' ? 'selected' : '' }} value="LI">Liechtenstein</option>
+                                                <option {{ $associate->pais_res == 'LT' ? 'selected' : '' }} value="LT">Lithuania</option>
+                                                <option {{ $associate->pais_res == 'LU' ? 'selected' : '' }} value="LU">Luxembourg</option>
+                                                <option {{ $associate->pais_res == 'MO' ? 'selected' : '' }} value="MO">Macau SAR China</option>
+                                                <option {{ $associate->pais_res == 'MK' ? 'selected' : '' }} value="MK">Macedonia</option>
+                                                <option {{ $associate->pais_res == 'MG' ? 'selected' : '' }} value="MG">Madagascar</option>
+                                                <option {{ $associate->pais_res == 'MW' ? 'selected' : '' }} value="MW">Malawi</option>
+                                                <option {{ $associate->pais_res == 'MY' ? 'selected' : '' }} value="MY">Malaysia</option>
+                                                <option {{ $associate->pais_res == 'MV' ? 'selected' : '' }} value="MV">Maldives</option>
+                                                <option {{ $associate->pais_res == 'ML' ? 'selected' : '' }} value="ML">Mali</option>
+                                                <option {{ $associate->pais_res == 'MT' ? 'selected' : '' }} value="MT">Malta</option>
+                                                <option {{ $associate->pais_res == 'MH' ? 'selected' : '' }} value="MH">Marshall Islands</option>
+                                                <option {{ $associate->pais_res == 'MQ' ? 'selected' : '' }} value="MQ">Martinique</option>
+                                                <option {{ $associate->pais_res == 'MR' ? 'selected' : '' }} value="MR">Mauritania</option>
+                                                <option {{ $associate->pais_res == 'MU' ? 'selected' : '' }} value="MU">Mauritius</option>
+                                                <option {{ $associate->pais_res == 'YT' ? 'selected' : '' }} value="YT">Mayotte</option>
+                                                <option {{ $associate->pais_res == '44' ? 'selected' : '' }} value="44">Melanesia</option>
+                                                <option {{ $associate->pais_res == 'MX' ? 'selected' : '' }} value="MX">Mexico</option>
+                                                <option {{ $associate->pais_res == 'FM' ? 'selected' : '' }} value="FM">Micronesia</option>
+                                                <option {{ $associate->pais_res == '47' ? 'selected' : '' }} value="47">Micronesian Region</option>
+                                                <option {{ $associate->pais_res == '15' ? 'selected' : '' }} value="15">Middle Africa</option>
+                                                <option {{ $associate->pais_res == 'MD' ? 'selected' : '' }} value="MD">Moldova</option>
+                                                <option {{ $associate->pais_res == 'MC' ? 'selected' : '' }} value="MC">Monaco</option>
+                                                <option {{ $associate->pais_res == 'MN' ? 'selected' : '' }} value="MN">Mongolia</option>
+                                                <option {{ $associate->pais_res == 'ME' ? 'selected' : '' }} value="ME">Montenegro</option>
+                                                <option {{ $associate->pais_res == 'MS' ? 'selected' : '' }} value="MS">Montserrat</option>
+                                                <option {{ $associate->pais_res == 'MA' ? 'selected' : '' }} value="MA">Morocco</option>
+                                                <option {{ $associate->pais_res == 'MZ' ? 'selected' : '' }} value="MZ">Mozambique</option>
+                                                <option {{ $associate->pais_res == 'MM' ? 'selected' : '' }} value="MM">Myanmar [Burma]</option>
+                                                <option {{ $associate->pais_res == 'NA' ? 'selected' : '' }} value="NA">Namibia</option>
+                                                <option {{ $associate->pais_res == 'NR' ? 'selected' : '' }} value="NR">Nauru</option>
+                                                <option {{ $associate->pais_res == 'NP' ? 'selected' : '' }} value="NP">Nepal</option>
+                                                <option {{ $associate->pais_res == 'NL' ? 'selected' : '' }} value="NL">Netherlands</option>
+                                                <option {{ $associate->pais_res == 'AN' ? 'selected' : '' }} value="AN">Netherlands Antilles</option>
+                                                <option {{ $associate->pais_res == 'NC' ? 'selected' : '' }} value="NC">New Caledonia</option>
+                                                <option {{ $associate->pais_res == 'NZ' ? 'selected' : '' }} value="NZ">New Zealand</option>
+                                                <option {{ $associate->pais_res == 'NI' ? 'selected' : '' }} value="NI">Nicaragua</option>
+                                                <option {{ $associate->pais_res == 'NE' ? 'selected' : '' }} value="NE">Niger</option>
+                                                <option {{ $associate->pais_res == 'NG' ? 'selected' : '' }} value="NG">Nigeria</option>
+                                                <option {{ $associate->pais_res == 'NU' ? 'selected' : '' }} value="NU">Niue</option>
+                                                <option {{ $associate->pais_res == 'NF' ? 'selected' : '' }} value="NF">Norfolk Island</option>
+                                                <option {{ $associate->pais_res == '13' ? 'selected' : '' }} value="13">Northern Africa</option>
+                                                <option {{ $associate->pais_res == '17' ? 'selected' : '' }} value="17">Northern America</option>
+                                                <option {{ $associate->pais_res == '154' ? 'selected' : '' }} value="154">Northern Europe</option>
+                                                <option {{ $associate->pais_res == 'MP' ? 'selected' : '' }} value="MP">Northern Mariana Islands</option>
+                                                <option {{ $associate->pais_res == 'KP' ? 'selected' : '' }} value="KP">North Korea</option>
+                                                <option {{ $associate->pais_res == 'NO' ? 'selected' : '' }} value="NO">Norway</option>
+                                                <option {{ $associate->pais_res == '0' ? 'selected' : '' }} value="0">Oceania</option>
+                                                <option {{ $associate->pais_res == 'OM' ? 'selected' : '' }} value="OM">Oman</option>
+                                                <option {{ $associate->pais_res == 'QO' ? 'selected' : '' }} value="QO">Outlying Oceania</option>
+                                                <option {{ $associate->pais_res == 'PK' ? 'selected' : '' }} value="PK">Pakistan</option>
+                                                <option {{ $associate->pais_res == 'PW' ? 'selected' : '' }} value="PW">Palau</option>
+                                                <option {{ $associate->pais_res == 'PS' ? 'selected' : '' }} value="PS">Palestinian Territories</option>
+                                                <option {{ $associate->pais_res == 'PA' ? 'selected' : '' }} value="PA">Panama</option>
+                                                <option {{ $associate->pais_res == 'PG' ? 'selected' : '' }} value="PG">Papua New Guinea</option>
+                                                <option {{ $associate->pais_res == 'PY' ? 'selected' : '' }} value="PY">Paraguay</option>
+                                                <option {{ $associate->pais_res == 'PE' ? 'selected' : '' }} value="PE">Peru</option>
+                                                <option {{ $associate->pais_res == 'PH' ? 'selected' : '' }} value="PH">Philippines</option>
+                                                <option {{ $associate->pais_res == 'PN' ? 'selected' : '' }} value="PN">Pitcairn Islands</option>
+                                                <option {{ $associate->pais_res == 'PL' ? 'selected' : '' }} value="PL">Poland</option>
+                                                <option {{ $associate->pais_res == '49' ? 'selected' : '' }} value="49">Polynesia</option>
+                                                <option {{ $associate->pais_res == 'PT' ? 'selected' : '' }} value="PT">Portugal</option>
+                                                <option {{ $associate->pais_res == 'PR' ? 'selected' : '' }} value="PR">Puerto Rico</option>
+                                                <option {{ $associate->pais_res == 'QA' ? 'selected' : '' }} value="QA">Qatar</option>
+                                                <option {{ $associate->pais_res == 'RE' ? 'selected' : '' }} value="RE">Réunion</option>
+                                                <option {{ $associate->pais_res == 'RO' ? 'selected' : '' }} value="RO">Romania</option>
+                                                <option {{ $associate->pais_res == 'RU' ? 'selected' : '' }} value="RU">Russia</option>
+                                                <option {{ $associate->pais_res == 'RW' ? 'selected' : '' }} value="RW">Rwanda</option>
+                                                <option {{ $associate->pais_res == 'BL' ? 'selected' : '' }} value="BL">Saint Barthélemy</option>
+                                                <option {{ $associate->pais_res == 'SH' ? 'selected' : '' }} value="SH">Saint Helena</option>
+                                                <option {{ $associate->pais_res == 'KN' ? 'selected' : '' }} value="KN">Saint Kitts and Nevis</option>
+                                                <option {{ $associate->pais_res == 'LC' ? 'selected' : '' }} value="LC">Saint Lucia</option>
+                                                <option {{ $associate->pais_res == 'MF' ? 'selected' : '' }} value="MF">Saint Martin</option>
+                                                <option {{ $associate->pais_res == 'PM' ? 'selected' : '' }} value="PM">Saint Pierre and Miquelon</option>
+                                                <option {{ $associate->pais_res == 'VC' ? 'selected' : '' }} value="VC">Saint Vincent and the Grenadines</option>
+                                                <option {{ $associate->pais_res == 'WS' ? 'selected' : '' }} value="WS">Samoa</option>
+                                                <option {{ $associate->pais_res == 'SM' ? 'selected' : '' }} value="SM">San Marino</option>
+                                                <option {{ $associate->pais_res == 'ST' ? 'selected' : '' }} value="ST">São Tomé and Príncipe</option>
+                                                <option {{ $associate->pais_res == 'SA' ? 'selected' : '' }} value="SA">Saudi Arabia</option>
+                                                <option {{ $associate->pais_res == 'SN' ? 'selected' : '' }} value="SN">Senegal</option>
+                                                <option {{ $associate->pais_res == 'RS' ? 'selected' : '' }} value="RS">Serbia</option>
+                                                <option {{ $associate->pais_res == 'CS' ? 'selected' : '' }} value="CS">Serbia and Montenegro</option>
+                                                <option {{ $associate->pais_res == 'SC' ? 'selected' : '' }} value="SC">Seychelles</option>
+                                                <option {{ $associate->pais_res == 'SL' ? 'selected' : '' }} value="SL">Sierra Leone</option>
+                                                <option {{ $associate->pais_res == 'SG' ? 'selected' : '' }} value="SG">Singapore</option>
+                                                <option {{ $associate->pais_res == 'SK' ? 'selected' : '' }} value="SK">Slovakia</option>
+                                                <option {{ $associate->pais_res == 'SI' ? 'selected' : '' }} value="SI">Slovenia</option>
+                                                <option {{ $associate->pais_res == 'SB' ? 'selected' : '' }} value="SB">Solomon Islands</option>
+                                                <option {{ $associate->pais_res == 'SO' ? 'selected' : '' }} value="SO">Somalia</option>
+                                                <option {{ $associate->pais_res == 'ZA' ? 'selected' : '' }} value="ZA">South Africa</option>
+                                                <option {{ $associate->pais_res == '5' ? 'selected' : '' }} value="5">South America</option>
+                                                <option {{ $associate->pais_res == '50' ? 'selected' : '' }} value="50">South-Central Asia</option>
+                                                <option {{ $associate->pais_res == '29' ? 'selected' : '' }} value="29">South-Eastern Asia</option>
+                                                <option {{ $associate->pais_res == '28' ? 'selected' : '' }} value="28">Southern Asia</option>
+                                                <option {{ $associate->pais_res == '3' ? 'selected' : '' }} value="3">Southern Europe</option>
+                                                <option {{ $associate->pais_res == 'GS' ? 'selected' : '' }} value="GS">South Georgia and the South Sandwich Islands</option>
+                                                <option {{ $associate->pais_res == 'KR' ? 'selected' : '' }} value="KR">South Korea</option>
+                                                <option {{ $associate->pais_res == 'ES' ? 'selected' : '' }} value="ES">Spain</option>
+                                                <option {{ $associate->pais_res == 'LK' ? 'selected' : '' }} value="LK">Sri Lanka</option>
+                                                <option {{ $associate->pais_res == 'SD' ? 'selected' : '' }} value="SD">Sudan</option>
+                                                <option {{ $associate->pais_res == 'SR' ? 'selected' : '' }} value="SR">Suriname</option>
+                                                <option {{ $associate->pais_res == 'SJ' ? 'selected' : '' }} value="SJ">Svalbard and Jan Mayen</option>
+                                                <option {{ $associate->pais_res == 'SZ' ? 'selected' : '' }} value="SZ">Swaziland</option>
+                                                <option {{ $associate->pais_res == 'SE' ? 'selected' : '' }} value="SE">Sweden</option>
+                                                <option {{ $associate->pais_res == 'CH' ? 'selected' : '' }} value="CH">Switzerland</option>
+                                                <option {{ $associate->pais_res == 'SY' ? 'selected' : '' }} value="SY">Syria</option>
+                                                <option {{ $associate->pais_res == 'TW' ? 'selected' : '' }} value="TW">Taiwan</option>
+                                                <option {{ $associate->pais_res == 'TJ' ? 'selected' : '' }} value="TJ">Tajikistan</option>
+                                                <option {{ $associate->pais_res == 'TZ' ? 'selected' : '' }} value="TZ">Tanzania</option>
+                                                <option {{ $associate->pais_res == 'TH' ? 'selected' : '' }} value="TH">Thailand</option>
+                                                <option {{ $associate->pais_res == 'TL' ? 'selected' : '' }} value="TL">Timor-Leste</option>
+                                                <option {{ $associate->pais_res == 'TG' ? 'selected' : '' }} value="TG">Togo</option>
+                                                <option {{ $associate->pais_res == 'TK' ? 'selected' : '' }} value="TK">Tokelau</option>
+                                                <option {{ $associate->pais_res == 'TO' ? 'selected' : '' }} value="TO">Tonga</option>
+                                                <option {{ $associate->pais_res == 'TT' ? 'selected' : '' }} value="TT">Trinidad and Tobago</option>
+                                                <option {{ $associate->pais_res == 'TN' ? 'selected' : '' }} value="TN">Tunisia</option>
+                                                <option {{ $associate->pais_res == 'TR' ? 'selected' : '' }} value="TR">Turkey</option>
+                                                <option {{ $associate->pais_res == 'TM' ? 'selected' : '' }} value="TM">Turkmenistan</option>
+                                                <option {{ $associate->pais_res == 'TC' ? 'selected' : '' }} value="TC">Turks and Caicos Islands</option>
+                                                <option {{ $associate->pais_res == 'TV' ? 'selected' : '' }} value="TV">Tuvalu</option>
+                                                <option {{ $associate->pais_res == 'UG' ? 'selected' : '' }} value="UG">Uganda</option>
+                                                <option {{ $associate->pais_res == 'UA' ? 'selected' : '' }} value="UA">Ukraine</option>
+                                                <option {{ $associate->pais_res == 'AE' ? 'selected' : '' }} value="AE">United Arab Emirates</option>
+                                                <option {{ $associate->pais_res == 'GB' ? 'selected' : '' }} value="GB">United Kingdom</option>
+                                                <option {{ $associate->pais_res == 'US' ? 'selected' : '' }} value="US">United States</option>
+                                                <option {{ $associate->pais_res == 'ZZ' ? 'selected' : '' }} value="ZZ">Unknown or Invalid Region</option>
+                                                <option {{ $associate->pais_res == 'UY' ? 'selected' : '' }} value="UY">Uruguay</option>
+                                                <option {{ $associate->pais_res == 'UM' ? 'selected' : '' }} value="UM">U.S. Minor Outlying Islands</option>
+                                                <option {{ $associate->pais_res == 'VI' ? 'selected' : '' }} value="VI">U.S. Virgin Islands</option>
+                                                <option {{ $associate->pais_res == 'UZ' ? 'selected' : '' }} value="UZ">Uzbekistan</option>
+                                                <option {{ $associate->pais_res == 'VU' ? 'selected' : '' }} value="VU">Vanuatu</option>
+                                                <option {{ $associate->pais_res == 'VA' ? 'selected' : '' }} value="VA">Vatican City</option>
+                                                <option {{ $associate->pais_res == 'VE' ? 'selected' : '' }} value="VE">Venezuela</option>
+                                                <option {{ $associate->pais_res == 'VN' ? 'selected' : '' }} value="VN">Vietnam</option>
+                                                <option {{ $associate->pais_res == 'WF' ? 'selected' : '' }} value="WF">Wallis and Futuna</option>
+                                                <option {{ $associate->pais_res == '9' ? 'selected' : '' }} value="9">Western Africa</option>
+                                                <option {{ $associate->pais_res == '145' ? 'selected' : '' }} value="145">Western Asia</option>
+                                                <option {{ $associate->pais_res == '155' ? 'selected' : '' }} value="155">Western Europe</option>
+                                                <option {{ $associate->pais_res == 'EH' ? 'selected' : '' }} value="EH">Western Sahara</option>
+                                                <option {{ $associate->pais_res == 'YE' ? 'selected' : '' }} value="YE">Yemen</option>
+                                                <option {{ $associate->pais_res == 'ZM' ? 'selected' : '' }} value="ZM">Zambia</option>
+                                                <option {{ $associate->pais_res == 'ZW' ? 'selected' : '' }} value="ZW">Zimbabwe</option>
+                                            </select>
+                                        </span>
+                                    </p>
+                                    <p class="form-group col-md-6 brazillian-res {{ $associate->pais_res != 'BR' ? 'hidden' : '' }}">
+                                        <label class="control-label">UF</label>
+                                        <select class="form-control selectpicker" name="uf_res" onchange='jQuery("#municipio_res > option").remove();  jQuery("#municipio_res").append("<option>Cargando...</option>");jQuery.ajax({type:"POST",dataType:"html",data: "id=" + this.value ,success:function(data, textStatus){jQuery("#municipio_res").html(data);console.log(data);},url:"{{$route}}/municipios"})'>
+                                            @foreach($ufs as $uf)
+                                                <option value="{{ $uf->id_uf }}" {{ $associate->uf_res ==   $uf->id_uf ? 'selected' : '' }}>{{ $uf->name_uf }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
+                                    <p class="form-group col-md-6 brazillian-res {{ $associate->pais_res != 'BR' ? 'hidden' : '' }}">
+                                        <label class="control-label">Municipio</label>
+                                        <select id="municipio_res" class="form-control selectpicker" name="municipio_res">
+                                            @foreach($ufs as $uf)
+                                                @if($associate->uf_res ==   $uf->id_uf)
+                                                    @if(count($uf->towns)>0)
+                                                        @foreach($uf->towns as $municipio)
+                                                            <option value="{{ $municipio->id_municipio }}" {{ $associate->municipio_res ==  $municipio->id_municipio ? 'selected' : '' }}>{{ $municipio->name_municipio }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </p>
+                                    <p class="not-brazillian-res {{ $associate->pais_res == 'BR' ? 'hidden' : '' }}">
                                         <label>Localidade</label>
                                         <span class="field"><input type="text" name="ciudad_internacional_res" id="ciudad_internacional_res" class="input-xxlarge" value="{{ $associate->ciudad_internacional_res }}"/></span>
+                                    </p>
+                                    <p>
+                                        <label>CEP</label>
+                                        <span class="field"><input type="text" name="cep_res" id="cep_res" class="input-xxlarge" value="{{ $associate->cep_res }}" /></span>
                                     </p>
                                     <p>
                                         <label>Telefone</label>
@@ -803,18 +824,6 @@ Associados
                                     <h4 class="widgettitle">Passo 3: Endereços Comercial</h4>
                                     
                                     <p>
-                                        <label>CEP</label>
-                                        <span class="field"><input type="text" name="cep_com" id="cep_com" class="input-xxlarge" value="{{$associate->cep_com}}" /></span>
-                                    </p>
-                                    <p>
-                                        <label>Número</label>
-                                        <span class="field"><input type="text" name="numero_com" id="numero_com" class="input-xxlarge" value="{{ $associate->numero_com }}" /></span>
-                                    </p>
-                                    <p>
-                                        <label>Complemento</label>
-                                        <span class="field"><input type="text" name="complemento_com" id="complemento_com" class="input-xxlarge" value="{{ $associate->complemento_com }}" /></span>
-                                    </p>
-                                    <p>
                                         <label>Tipo de Logradouro:</label>
                                         <span class="field">
                                             @if (isset($logradouros))
@@ -827,9 +836,25 @@ Associados
                                         </span>
                                     </p>
                                     <p>
+                                        <label>Endereço</label>
+                                        <span class="field"><input type="text" name="dir_com" id="dir_com" class="input-xxlarge" value="{{ $associate->dir_com }}" /></span>
+                                    </p>
+                                    <p>
+                                        <label>Número</label>
+                                        <span class="field"><input type="text" name="numero_com" id="numero_com" class="input-xxlarge" value="{{ $associate->numero_com }}" /></span>
+                                    </p>
+                                    <p>
+                                        <label>Complemento</label>
+                                        <span class="field"><input type="text" name="complemento_com" id="complemento_com" class="input-xxlarge" value="{{ $associate->complemento_com }}" /></span>
+                                    </p>
+                                    <p>
+                                        <label>Bairro</label>
+                                        <span class="field"><input type="text" name="bairro_com" id="bairro_com" class="input-xxlarge" value="{{ $associate->bairro_com }}" /></span>
+                                    </p>
+                                    <p>
                                         <label>Pais</label>
                                         <span class="field">
-                                            <select name="pais_com" id="asociados_pais_com">
+                                            <select name="pais_com" id="asociados_pais_com" onchange='if(this.value == "BR"){console.log("Brazillian");jQuery(".brazillian-com").removeClass("hidden");jQuery(".not-brazillian-com").addClass("hidden")}else{console.log("NOT Brazillian");jQuery(".brazillian-com").addClass("hidden");jQuery(".not-brazillian-com").removeClass("hidden")}'>
                                                 <option {{ $associate->pais_com == '0' ? 'selected' : '' }} value="0">Selecione o País</option>
                                                 <option {{ $associate->pais_com == 'AF' ? 'selected' : '' }} value="AF">Afghanistan</option>
                                                 <option {{ $associate->pais_com == 'AX' ? 'selected' : '' }} value="AX">Åland Islands</option>
@@ -1114,17 +1139,35 @@ Associados
                                             </select>
                                         </span>
                                     </p>
-                                    <p>
-                                        <label>Endereço</label>
-                                        <span class="field"><input type="text" name="dir_com" id="dir_com" class="input-xxlarge" value="{{ $associate->dir_com }}" /></span>
+                                    <p class="form-group col-md-6 brazillian-com {{ $associate->pais_com != 'BR' ? 'hidden' : '' }}">
+                                        <label class="control-label">UF</label>
+                                        <select class="form-control selectpicker" name="uf_com" onchange='jQuery("#municipio_com > option").remove();  jQuery("#municipio_com").append("<option>Cargando...</option>");jQuery.ajax({type:"POST",dataType:"html",data: "id=" + this.value ,success:function(data, textStatus){jQuery("#municipio_com").html(data);console.log(data);},url:"{{$route}}/municipios"})'>
+                                            @foreach($ufs as $uf)
+                                                <option value="{{ $uf->id_uf }}" {{ $associate->uf_com ==   $uf->id_uf ? 'selected' : '' }}>{{ $uf->name_uf }}</option>
+                                            @endforeach
+                                        </select>
                                     </p>
-                                    <p>
-                                        <label>Bairro</label>
-                                        <span class="field"><input type="text" name="bairro_com" id="bairro_com" class="input-xxlarge" value="{{ $associate->bairro_com }}" /></span>
+                                    <p class="form-group col-md-6 brazillian-com {{ $associate->pais_com != 'BR' ? 'hidden' : '' }}">
+                                        <label class="control-label">Municipio</label>
+                                        <select id="municipio_com" class="form-control selectpicker" name="municipio_com">
+                                            @foreach($ufs as $uf)
+                                                @if($associate->uf_com ==   $uf->id_uf)
+                                                    @if(count($uf->towns)>0)
+                                                        @foreach($uf->towns as $municipio)
+                                                            <option value="{{ $municipio->id_municipio }}" {{ $associate->municipio_com ==  $municipio->id_municipio ? 'selected' : '' }}>{{ $municipio->name_municipio }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </p>
-                                    <p>
+                                    <p class="not-brazillian-com {{ $associate->pais_com == 'BR' ? 'hidden' : '' }}">
                                         <label>Localidade</label>
                                         <span class="field"><input type="text" name="ciudad_internacional_com" id="ciudad_internacional_com" class="input-xxlarge" value="{{ $associate->ciudad_internacional_com }}"/></span>
+                                    </p>
+                                    <p>
+                                        <label>CEP</label>
+                                        <span class="field"><input type="text" name="cep_com" id="cep_com" class="input-xxlarge" value="{{$associate->cep_com}}" /></span>
                                     </p>
                                     <p>
                                         <label>Telefone</label>

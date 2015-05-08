@@ -232,8 +232,6 @@ class FrontendAssociateController extends \BaseController {
 
 			endif;
 
-
-
 			$anuidade_asociado = new ORGAssociateAnnuities();
 			$anuidade_asociado->id_asociado = $anuidade->id_asociado;
 			$anuidade_asociado->id_anuidade_categoria = $annuity_date->id_anuidade_categoria;
