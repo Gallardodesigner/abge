@@ -121,7 +121,7 @@
 										{{ BaseController::money_format(0) }}
 									</td>
 									<td>
-										<a href="{{ $route }}/boleto/{{Crypt::encrypt($interval->id)}}"><img src="http://abge.org.br/images/boleto/barcode.png" width="25px"></a>
+										<a href="{{ $route }}/boleto/{{Crypt::encrypt($associate->id_asociado)}}"><img src="http://abge.org.br/images/boleto/barcode.png" width="25px"></a>
 									</td>
 									<td>
 										{{ $interval->pagseguro }}

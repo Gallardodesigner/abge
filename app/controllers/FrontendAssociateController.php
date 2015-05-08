@@ -248,6 +248,23 @@ class FrontendAssociateController extends \BaseController {
 
 	}
 
+	public function getBoleto( $idAssociate ){
+      
+      $boleto = new Ticket();
+      $boleto->buildHtml();
+      $boleto->setAsociado(Crypt::decrypt($idAssociate));
+      $boleto->inicialize();
+      $boleto->printTcPdf();
+      $corpo = $boleto->buildHtmlBoleto();
+      $boleto->buildHtml($corpo);
+      $boleto->addPagePdf();
+      $boleto->creaPaginaBoleto();
+      $boleto->endPagePdf();
+      $boleto->inicializaHtml();
+      $boleto->downloadPdf('associados');
+
+	}
+
 	public function getSalir(){
 
 		Auth::user()->logout();
