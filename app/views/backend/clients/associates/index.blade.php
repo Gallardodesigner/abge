@@ -11,6 +11,14 @@
 {{HTML::script("assetsadmin/js/jquery.alerts.js")}}
 {{HTML::script("assetsadmin/js/jquery.dataTables.min.js")}}
 
+<?php 
+
+    function paginatorURI( $filter ){
+        return "&nombre_completo=". ($filter['nombre_completo'] != '' ? $filter['nombre_completo'] : '0') ."&categoria=". ($filter['categoria'] != '' ? $filter['categoria'] : '0') ."&tipo_pessoa=".( $filter['tipo_pessoa'] != '' ? $filter['tipo_pessoa'] : '0') ."&pagamento=".( $filter['pagamento'] != '' ? $filter['pagamento'] : '0') ."";
+    }
+
+?>
+
 <script type='text/javascript'>
 
     var confirmButtons = function(){
@@ -108,16 +116,16 @@ Todos os Associados
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="{{ $route }}/exportasociados/{{ $filter['nombre_completo'] != '' ? $filter['nombre_completo'] : '0' }}/{{ $filter['categoria'] }}/{{ $filter['tipo_usuario'] }}/{{ $filter['pagamento'] }}" class="btn"><i class="iconsweets-excel"></i>Excel</a>
+                            <a href="{{ $route }}/exportasociados/{{ $filter['nombre_completo'] != '' ? $filter['nombre_completo'] : '0' }}/{{ $filter['categoria'] }}/{{ $filter['tipo_pessoa'] }}/{{ $filter['pagamento'] }}" class="btn"><i class="iconsweets-excel"></i>Excel</a>
                             <a href="{{ $route }}/create" class="btn dropdown-toggle">Adicionar Associado</a>
                         </div>
                         <h4 class="widgettitle">Todos os Associados</h4>
                     </div>
                     <div style="margin:1em">
-                        <form method="post">
+                        <form method="get">
                             <div>                        
                                 <h4 style="display:inline-block;margin-right:1em;">Filtrar por: </h4>
-                                <span style="display:inline-block;"><label>Nome: </label><input type="text" name="nombre_completo" value="{{ $filter['nombre_completo'] }}"></span>
+                                <span style="display:inline-block;"><label>Nome: </label><input type="text" name="nombre_completo" value="{{ $filter['nombre_completo'] != '0' ? $filter['nombre_completo'] : '' }}"></span>
                                 <span style="display:inline-block;">
                                     <label>Categoria: </label>
                                     <select name="categoria">
@@ -129,10 +137,10 @@ Todos os Associados
                                 </span>
                                 <span style="display:inline-block;">
                                     <label>Tipo Pessoa: </label>
-                                    <select name="tipo_usuario">
-                                        <option value="0" {{ $filter['tipo_usuario'] == '0' ? 'selected' : '' }}>Selecione</option>
-                                        <option value="F" {{ $filter['tipo_usuario'] === 'F' ? 'selected' : '' }}>Pessoa Fisica</option>
-                                        <option value="J" {{ $filter['tipo_usuario'] === 'J' ? 'selected' : '' }}>Pessoa Juridica</option>
+                                    <select name="tipo_pessoa">
+                                        <option value="0" {{ $filter['tipo_pessoa'] == '0' ? 'selected' : '' }}>Selecione</option>
+                                        <option value="F" {{ $filter['tipo_pessoa'] === 'F' ? 'selected' : '' }}>Pessoa Fisica</option>
+                                        <option value="J" {{ $filter['tipo_pessoa'] === 'J' ? 'selected' : '' }}>Pessoa Juridica</option>
                                     </select>
                                 </span>
                                 <span style="display:inline-block;">
@@ -242,8 +250,62 @@ Todos os Associados
                         </tbody>
                     </table>
                     <div class="pagination">
+
+                        <ul class="pagination"> 
+                            <li>
+                                <a href="{{$route}}?page=1{{paginatorURI( $filter )}}">Primera</a>
+                            </li>
+                            <li {{ $associates->getCurrentPage() == 1 ? 'class=disabled': '' }}>
+                                @if($associates->getCurrentPage() == 1)
+                                    <span>Anterior</span>
+                                @else
+                                    <a href="{{$route}}?page={{ $associates->getCurrentPage() -1 }}{{paginatorURI( $filter )}}">Anterior</a>
+                                @endif
+                            </li>
+                            @if($associates->getCurrentPage() > 8)
+                                <li>
+                                    <a href="{{$route}}?page=1{{paginatorURI( $filter )}}">1</a>
+                                </li>
+                                <li {{ $associates->getCurrentPage() == 1 ? 'class=disabled': '' }}>
+                                    <a href="{{$route}}?page=2{{paginatorURI( $filter )}}">2</a>
+                                </li>
+                                <li class="disabled"><span>...</span></li>
+                            @endif
+                            @for($i = $associates->getCurrentPage() - 3 ; $i <= ($associates->getCurrentPage() + 3) ; $i++)
+                                @if($i > 0 && $i <= $associates->getLastPage())
+                                    @if($i == $associates->getCurrentPage())
+                                        <li class="active">
+                                            <span>{{($i)}}</span>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a href="{{$route}}?page={{($i)}}{{paginatorURI( $filter )}}">{{($i)}}</a>
+                                        </li>
+                                    @endif
+                                @endif
+                            @endfor
+                            @if($associates->getCurrentPage() < ($associates->getLastPage() - 5))
+                                <li class="disabled"><span>...</span></li>
+                                <li>
+                                    <a href="{{$route}}?page={{($associates->getLastPage() - 1)}}{{paginatorURI( $filter )}}">{{($associates->getLastPage() - 1)}}</a>
+                                </li>
+                                <li >
+                                    <a href="{{$route}}?page={{($associates->getLastPage())}}{{paginatorURI( $filter )}}">{{($associates->getLastPage() )}}</a>
+                                </li>
+                            @endif
+                            <li {{ $associates->getCurrentPage() == 1 ? 'class=disabled': '' }}>
+                                @if($associates->getCurrentPage() == $associates->getLastPage())
+                                    <span>Siguiente</span>
+                                @else
+                                    <a href="{{$route}}?page={{$associates->getCurrentPage() + 1}}{{paginatorURI( $filter )}}">Siguiente</a>
+                                @endif
+                            </li>
+                            <li>
+                                <a href="{{$route}}?page={{ $associates->getLastPage() }}{{paginatorURI( $filter )}}">Última</a>
+                            </li>
+                        </ul>   
                         
-                        {{ $associates->links() }}
+                        <!--{{ $associates->links() }}-->
                         
                     </div>
                     <style type="text/css">

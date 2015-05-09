@@ -6,14 +6,70 @@ class ORGAssociateController extends \BaseController {
 
 	public function getIndex(){
 
-		$associates = ORGAssociates::paginate(30);
+		$associates = new ORGAssociates();
+
+		if(Input::get('nombre_completo') != '' AND Input::get('nombre_completo') != '0'):
+			$associates = $associates->where('nombre_completo','LIKE', '%'.Input::get('nombre_completo').'%')->orWhere('id_asociado','=', Input::get('nombre_completo'));
+		endif;
+
+		$categoria = Input::get('categoria');
+
+		if(Input::get('categoria') != '0'):
+			$associates = $associates->where('categoria', '=',Input::get('categoria'));
+		endif;
+
+		if(Input::get('tipo_pessoa') != '0'):
+			$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_pessoa'))->get();
+			foreach($categories as $category):
+				$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
+			endforeach;
+		endif;
+
+		if(Input::get('pagamento') != '0'):
+			$annuity = ORGAnnuities::getLastAnnuity();
+			$temps = $associates->get();
+			switch(Input::get('pagamento')){
+				case 'paid':
+					foreach($temps as $temp):
+						if($payment = $temp->getPaymentByAnnuity( $annuity )):
+							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+						endif;
+					endforeach;
+					break;
+				case 'paid_active':
+					foreach($temps as $temp):
+						if($payment = $temp->getPaymentByAnnuity( $annuity ) AND $payment->status):
+							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+						endif;
+					endforeach;
+					break;
+				case 'paid_inactive':
+					foreach($temps as $temp):
+						if($payment = $temp->getPaymentByAnnuity( $annuity ) AND !$payment->status):
+							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+						endif;
+					endforeach;
+					break;
+				case 'notpaid':
+					foreach($temps as $temp):
+						if(!$temp->getPaymentByAnnuity( $annuity )):
+							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+						endif;
+					endforeach;
+					break;
+			}
+		endif;
+
+		$associates = $associates->paginate(30);
+
+		// $associates = ORGAssociates::paginate(30);
 
 		$msg_success = Session::get('msg_success');
 
 		$msg_error = Session::get('msg_error');
 
 		return View::make('backend.clients.associates.index', array(
-			'filter' => array('nombre_completo' => '', 'categoria' => 0, 'tipo_usuario' => 0, 'pagamento' => 0),
+			'filter' => array('nombre_completo' => Input::get('nombre_completo'), 'categoria' => Input::get('categoria'), 'tipo_pessoa' => Input::get('tipo_pessoa'), 'pagamento' => Input::get('pagamento')),
 			'associates' => $associates,
 			'categories' => ORGAssociateCategories::all(),
 			'annuity' => ORGAnnuities::getLastAnnuity(),
@@ -26,7 +82,13 @@ class ORGAssociateController extends \BaseController {
 
 	public function postIndex(){
 
-		$associates = ORGAssociates::where('nombre_completo','LIKE', '%'.Input::get('nombre_completo').'%');
+		// dd(Input::get('nombre_completo'));
+
+		$associates = new ORGAssociates();
+
+		if(Input::get('nombre_completo') != ''):
+			$associates = $associates->where('nombre_completo','LIKE', '%'.Input::get('nombre_completo').'%');
+		endif;
 
 		$categoria = Input::get('categoria');
 
@@ -34,8 +96,8 @@ class ORGAssociateController extends \BaseController {
 			$associates = $associates->where('categoria', '=',Input::get('categoria'));
 		endif;
 
-		if(Input::get('tipo_usuario') != '0'):
-			$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_usuario'))->get();
+		if(Input::get('tipo_pessoa') != '0'):
+			$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_pessoa'))->get();
 			foreach($categories as $category):
 				$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
 			endforeach;
@@ -84,7 +146,7 @@ class ORGAssociateController extends \BaseController {
 		$msg_error = Session::get('msg_error');
 
 		return View::make('backend.clients.associates.index', array(
-			'filter' => array('nombre_completo' => Input::get('nombre_completo'), 'categoria' => Input::get('categoria'), 'tipo_usuario' => Input::get('tipo_usuario'), 'pagamento' => Input::get('pagamento')),
+			'filter' => array('nombre_completo' => Input::get('nombre_completo'), 'categoria' => Input::get('categoria'), 'tipo_pessoa' => Input::get('tipo_pessoa'), 'pagamento' => Input::get('pagamento')),
 			'associates' => $associates,
 			'categories' => ORGAssociateCategories::all(),
 			'annuity' => ORGAnnuities::getLastAnnuity(),
@@ -115,24 +177,26 @@ class ORGAssociateController extends \BaseController {
 
 	}
 
-	public function getExportasociados($nome = '', $categoria = '', $tipo_usuario = '', $pagamento = ''){
+	public function getExportasociados($nome = '', $categoria = '', $tipo_pessoa = '', $pagamento = ''){
 
-		if( $nome == '0' AND $categoria == '0' AND $tipo_usuario == '0'):
+		if( $nome == '0' AND $categoria == '0' AND $tipo_pessoa == '0'):
 
 			$associates = ORGAssociates::all();
 
 		else:
 
-			$nome = ($nome == '0') ? '' : $nome;
+			$associates = new ORGAssociates();
 
-			$associates = ORGAssociates::where('nombre_completo','LIKE', '%'.$nome.'%');
+			if($nome != '' AND $nome != '0'):
+				$associates = $associates->where('nombre_completo','LIKE', '%'.$nome.'%')->orWhere('id_asociado','=', Input::get('nombre_completo'));
+			endif;
 
 			if($categoria != '0'):
 				$associates = $associates->where('categoria', '=',$categoria);
 			endif;
 
-			if($tipo_usuario != '0'):
-				$categories = ORGAssociateCategories::where('tipo_usuario','=',$tipo_usuario)->get();
+			if($tipo_pessoa != '0'):
+				$categories = ORGAssociateCategories::where('tipo_usuario','=',$tipo_pessoa)->get();
 				foreach($categories as $category):
 					$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
 				endforeach;
@@ -141,7 +205,6 @@ class ORGAssociateController extends \BaseController {
 			if($pagamento != '0'):
 				$annuity = ORGAnnuities::getLastAnnuity();
 				$temps = $associates->get();
-				$associates = new ORGAssociates();
 				switch($pagamento){
 					case 'paid':
 						foreach($temps as $temp):
@@ -149,28 +212,28 @@ class ORGAssociateController extends \BaseController {
 								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
 							endif;
 						endforeach;
-					break;
+						break;
 					case 'paid_active':
 						foreach($temps as $temp):
 							if($payment = $temp->getPaymentByAnnuity( $annuity ) AND $payment->status):
 								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
 							endif;
 						endforeach;
-					break;
+						break;
 					case 'paid_inactive':
 						foreach($temps as $temp):
 							if($payment = $temp->getPaymentByAnnuity( $annuity ) AND !$payment->status):
 								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
 							endif;
 						endforeach;
-					break;
+						break;
 					case 'notpaid':
 						foreach($temps as $temp):
 							if(!$temp->getPaymentByAnnuity( $annuity )):
 								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
 							endif;
 						endforeach;
-					break;
+						break;
 				}
 			endif;
 
@@ -340,7 +403,7 @@ class ORGAssociateController extends \BaseController {
 				$anuidade_2014 = null;
 				$anuidade_2015 = null;
 				
-				foreach ($aso->anuidade as $anuidade):
+				foreach ($aso->anuidades as $anuidade):
 					
 					switch($anuidade->ano){
 						case "2013":

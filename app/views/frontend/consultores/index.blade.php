@@ -28,7 +28,8 @@
 
 		<style type="text/css">
 			p {
-			  margin: 0 0 0.5em !important;
+			  margin: 0 0 0.7em !important;
+			  line-height: 18px;
 			}
 		</style>
 
@@ -60,7 +61,7 @@
 	    <option value="6" {{ ($data == "6") ? 'selected' : '' }}>GESTÃO, PLANEJAMENTO E LICENCIAMENTO AMBIENTAL</option>
 	    <!-- <option value="7">HIDROGEOLOGIA</option> -->
 	    <option value="3" {{ ($data == "3") ? 'selected' : '' }}>MINERAÇÃO</option>
-	    <option value="2" {{ ($data == "2") ? 'selected' : '' }}>RECURSOS HIDRICOS</option>
+	    <option value="7" {{ ($data == "7") ? 'selected' : '' }}>RECURSOS HIDRICOS</option>
 	    <option value="12" {{ ($data == "12") ? 'selected' : '' }}>RESÍDUOS E ÁREAS CONTAMINADAS</option>
 	    <option value="13" {{ ($data == "13") ? 'selected' : '' }}>SERVIÇOS EM GEOLOGIA DE ENGENHARIA, GEOTECNICA E AMBIENTAL</option>
 	    <!-- <option value="1">OBRA CIVIL</option> -->
