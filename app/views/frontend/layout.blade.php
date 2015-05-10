@@ -48,140 +48,53 @@
               <!-- Nav Menu -->
               <div id="myslidemenu" class="jqueryslidemenu">
                 <ul id="menu_top">
-                  <li>
-                    <a href="http://abge.org.br/index.php/">Inicio</a>
-                  </li>
-                  <li>ABGE
-                    <ul style="top: 31px; visibility: visible; left: 0px; width: 185px; display: none;">
+                  @foreach(Pages::where('id_parent','=','0')->get() as $page)
+                    <?php $children = $page->children ?>
+                    @if(count($children) > 0)
                       <li>
-                        <a href="http://abge.org.br/index.php/abge/Institucional">Institucional</a>
-                      </li>
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/Nucleos-Regionais">Núcleos e Rep. Regionais</a>
-                      </li>
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/Expediente">
-                          Expediente
-                          <img src="/assets/frontend/img/right.png" class="rightarrowclass" style="border:0;">
-                        </a>
-                        <ul style="top: 0px; display: none; visibility: visible;">
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/Presidentes">Presidentes</a>
-                          </li>
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/Conselho">Conselho</a>
-                          </li>
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/Secretaria">Secretaria</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/Diretoria-Especial">Diretoria <img src="./Cursos - ABGE_files/right.png" class="rightarrowclass" style="border:0;">
-                        </a>
-                        <ul style="top: 0px; display: none; visibility: visible;">
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/banco-de-ensino">Banco de Ensino <img src="./Cursos - ABGE_files/right.png" class="rightarrowclass" style="border:0;"></a>
-                            <ul style="top: 0px; display: none; visibility: visible;">
+                        <a href="{{ $page->url != '' ? $page->url : '/page/'.$page->name }}">{{ $page->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>
+                        <ul style="top: 31px; display: none; visibility: visible;">
+                          @foreach($children as $child)
+                            <?php $grandchildren = $child->children ?> 
+                            @if(count($grandchildren) > 0)
                               <li>
-                                <a href="http://abge.org.br/index.php/abge/grade-escolas">Informações Curriculares 2012</a>
+                                <a href="{{ $child->url != '' ? $child->url : '/page/'.$child->name }}">{{ $child->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>  
+                                <ul style="top: 0px; left:174px; display: none; visibility: visible;">
+                                  @foreach($grandchildren as $grandchild)
+                                    <?php $bigchildren = $grandchild->children ?>
+                                    @if(count($bigchildren) > 0)
+                                      <li>
+                                        <a href="{{ $grandchild->url != '' ? $grandchild->url : '/page/'.$grandchild->name }}">{{ $grandchild->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>
+                                        <ul style="top: 0px; left:174px; display: none; visibility: visible;">
+                                          @foreach($bigchildren as $bigchild)
+                                            <li>
+                                              <a href="{{ $bigchild->url != '' ? $bigchild->url : '/page/'.$bigchild->name }}">{{ $bigchild->title }}</a>  
+                                            </li>
+                                          @endforeach
+                                        </ul>
+                                      </li>
+                                    @else
+                                      <li>
+                                        <a href="{{ $grandchild->url != '' ? $grandchild->url : '/page/'.$grandchild->name }}">{{ $grandchild->title }}</a>  
+                                      </li>
+                                    @endif
+                                  @endforeach
+                                </ul>
                               </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/reunioes">Memória de Reuniões</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/Estatuto">Estatuto</a>
-                      </li>
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/Premios">Prêmios<img src="./Cursos - ABGE_files/right.png" class="rightarrowclass" style="border:0;"></a>
-                        <ul style="top: 0px; display: none; visibility: visible;">
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/Normas-para-Premios">Normas para Prêmios</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/comites">Comitês<img src="./Cursos - ABGE_files/right.png" class="rightarrowclass" style="border:0;"></a>
-                        <ul style="top: 0px; display: none; visibility: visible;">
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/comite-carto">Comitê de Cartografia</a>
-                          </li>
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/comite-risco">Comitê de Riscos</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/Links">Links</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="http://abge.org.br/index.php/abge/noticias">Notícias</a>
-                  </li>
-                  <li>
-                    <a href="/anuidades">Anuidades</a>
-                  </li>
-                  <li>Livraria
-                    <ul style="top: 31px; visibility: visible; left: 0px; width: 185px; display: none;">
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/glosario">Glossário</a>
-                      </li>
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/Revistas">Revistas<img src="./Cursos - ABGE_files/right.png" class="rightarrowclass" style="border:0;"></a>
-                        <ul style="top: 0px; display: none; visibility: visible;">
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/abgeemrevista">ABGE em Revista</a>
-                          </li>
-                          <li>
-                            <a href="http://abge.org.br/index.php/abge/revista-rbgea">Revista RBGEA<img src="./Cursos - ABGE_files/right.png" class="rightarrowclass" style="border:0;"></a>
-                            <ul style="top: 0px; display: none; visibility: visible;">
+                            @else
                               <li>
-                                <a href="http://abge.org.br/index.php/abge/rbgea-regulamento">Regulamento</a>
+                                <a href="{{ $child->url != '' ? $child->url : '/page/'.$child->name }}">{{ $child->title }}</a>  
                               </li>
-                              <li>
-                                <a href="http://abge.org.br/index.php/abge/rbgea-diretrizes">Diretrizes para Autores</a>
-                              </li>
-                              <li>
-                                <a href="http://abge.org.br/index.php/abge/rbgea-edi-anteriores">Edições Anteriores</a>
-                              </li>
-                              <li>
-                                <a href="http://abge.org.br/index.php/abge/rbgea-edicao-atual">Edição Atual</a>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
+                            @endif                           
+                          @endforeach
+                        </ul> 
                       </li>
+                    @else
                       <li>
-                        <a target="_blank" href="http://www.abge.org.br/magento/">Loja de Publicações</a>
+                        <a href="{{ $page->url != '' ? $page->url : '/page/'.$page->name }}">{{ $page->title }}</a>  
                       </li>
-                      <li>
-                        <a href="http://abge.org.br/index.php/abge/downloads">Downloads</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="http://abge.org.br/index.php/abge/gallery">Galeria de Fotos</a>
-                  </li>
-                  <li>
-                    <a href="./courses">Cursos</a>
-                  </li>
-                  <li>
-                    <a href="http://abge.org.br/index.php/abge/fale-conosco">Fale com a ABGE</a>
-                  </li>
-                  <li>
-                    <a href="http://abge.org.br/index.php/abge/eventos">Eventos</a>
-                  </li>
-                  <li>
-                    <a href="http://abge.org.br/index.php/abge/historico">Banco de Cartografia</a>
-                  </li>
-                  <li>
-                    <a target="_blank" href="http://www.iaeg.info/">IAEG</a>
-                  </li>  
+                    @endif
+                  @endforeach
                 </ul>
               </div>
               <!-- Nav Menu -->
