@@ -6,63 +6,69 @@ class ORGAssociateController extends \BaseController {
 
 	public function getIndex(){
 
-		$associates = new ORGAssociates();
+		if(!empty(Input::all())):
 
-		if(Input::get('nombre_completo') != '' AND Input::get('nombre_completo') != '0'):
-			$associates = $associates->where('nombre_completo','LIKE', '%'.Input::get('nombre_completo').'%')->orWhere('id_asociado','=', Input::get('nombre_completo'));
+			$associates = new ORGAssociates();
+
+			if(Input::get('nombre_completo') != '' AND Input::get('nombre_completo') != '0'):
+				$associates = $associates->where('nombre_completo','LIKE', '%'.Input::get('nombre_completo').'%')->orWhere('id_asociado','=', Input::get('nombre_completo'));
+			endif;
+
+			$categoria = Input::get('categoria');
+
+			if(Input::get('categoria') != '0'):
+				$associates = $associates->where('categoria', '=',Input::get('categoria'));
+			endif;
+
+			if(Input::get('tipo_pessoa') != '0'):
+				$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_pessoa'))->get();
+				foreach($categories as $category):
+					$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
+				endforeach;
+			endif;
+
+			if(Input::get('pagamento') != '0'):
+				$annuity = ORGAnnuities::getLastAnnuity();
+				$temps = $associates->get();
+				switch(Input::get('pagamento')){
+					case 'paid':
+						foreach($temps as $temp):
+							if($payment = $temp->getPaymentByAnnuity( $annuity )):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+						break;
+					case 'paid_active':
+						foreach($temps as $temp):
+							if($payment = $temp->getPaymentByAnnuity( $annuity ) AND $payment->status):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+						break;
+					case 'paid_inactive':
+						foreach($temps as $temp):
+							if($payment = $temp->getPaymentByAnnuity( $annuity ) AND !$payment->status):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+						break;
+					case 'notpaid':
+						foreach($temps as $temp):
+							if(!$temp->getPaymentByAnnuity( $annuity )):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+						break;
+				}
+			endif;
+
+			$associates = $associates->paginate(30);
+
+		else:
+
+			$associates = ORGAssociates::paginate(30);
+
 		endif;
-
-		$categoria = Input::get('categoria');
-
-		if(Input::get('categoria') != '0'):
-			$associates = $associates->where('categoria', '=',Input::get('categoria'));
-		endif;
-
-		if(Input::get('tipo_pessoa') != '0'):
-			$categories = ORGAssociateCategories::where('tipo_usuario','=',Input::get('tipo_pessoa'))->get();
-			foreach($categories as $category):
-				$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
-			endforeach;
-		endif;
-
-		if(Input::get('pagamento') != '0'):
-			$annuity = ORGAnnuities::getLastAnnuity();
-			$temps = $associates->get();
-			switch(Input::get('pagamento')){
-				case 'paid':
-					foreach($temps as $temp):
-						if($payment = $temp->getPaymentByAnnuity( $annuity )):
-							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
-						endif;
-					endforeach;
-					break;
-				case 'paid_active':
-					foreach($temps as $temp):
-						if($payment = $temp->getPaymentByAnnuity( $annuity ) AND $payment->status):
-							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
-						endif;
-					endforeach;
-					break;
-				case 'paid_inactive':
-					foreach($temps as $temp):
-						if($payment = $temp->getPaymentByAnnuity( $annuity ) AND !$payment->status):
-							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
-						endif;
-					endforeach;
-					break;
-				case 'notpaid':
-					foreach($temps as $temp):
-						if(!$temp->getPaymentByAnnuity( $annuity )):
-							$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
-						endif;
-					endforeach;
-					break;
-			}
-		endif;
-
-		$associates = $associates->paginate(30);
-
-		// $associates = ORGAssociates::paginate(30);
 
 		$msg_success = Session::get('msg_success');
 
@@ -246,252 +252,401 @@ class ORGAssociateController extends \BaseController {
 		    $excel->sheet('Excel sheet', function($sheet) use ($associates){
 				
 		        $sheet->setOrientation('portrait');
-		   $n =2;
-			foreach($associates as $aso):
 		    	
-		    	
-		    		$cod_aso = $aso->id_asociado;
-		    		$nome = $aso->nombre_completo;
-		    		$razon_social = $aso->razon_social;
-		    		$incripcion_estadual = $aso->inscripcion_estadual;
-		    		$incripcion_municipal = $aso->inscripcion_municipal;
-		    		$cpf = $aso->cpf;
-		    		$tipo_pessoa = $aso->tipo_pessoa;
-		    		$rg = $aso->rg;
-		    		$celular_residencia = $aso->celular_res;
-		    		$email = $aso->email;
-		    		$telefone_residencia = $aso->ddd_res . ' ' . $aso->ddi_res . ' ' . $aso->telefone_res;
-		    		$data_nascimento = $aso->data_nascimento;
-		    		$tipo_correspondencia = $aso->tipo_correspondencia;
-		    		$training = ORGTrainings::find($aso->formacao);
-		    			if($training):
-		    				$training = $training->nome;
-		    			else:
-		    				$training = "";
-		    			endif;
-		    		$categoria_titulo = "";
-			    		foreach(ORGAssociateCategories::all() as $cat):
-	                        if($aso->categoria == $cat->id_categoria_asociado):
-	                            $categoria_titulo = $cat->nombre_categoria;
-	                            break;
-	                        endif;
-	                    endforeach;
-	                $logradouro_res ="";
-	                $backyards = ORGBackyards::all();
-			    		foreach($backyards as $backyard):
-	                        if($aso->logradouro_res == $backyard->id_logradouro):
-	                            $logradouro_res=$backyard->nombre;
-	                        break;
-	                        endif;
-	                    endforeach;
-		    		$municipio_residencia = ORGTowns::find($aso->municipio_res);
-		    		$direccion_residencia = $aso->dir_res;
-		    		$complemento_residencia= $aso->complemento_res;
-	                $barrio_residencia = $aso->bairro_res;
-		    		$numero_residencia = $aso->numero_res;
-		    		$cep_residencia = $aso->cep_res;
-		    		$uf_residencia ="";
-		    		$ufs = ORGuf::all();
-		    		foreach($ufs as $uf):
-                        if($aso->uf_res == $uf->id_uf):
-                            $uf_residencia=$uf->name_uf;
-                        break;
-                        endif;
-                    endforeach;
-		    		$pais_residencia = $aso->pais_res;
-		    		$empresa = $aso->empresa;
-	                $logradouro_com ="";
-			    		foreach($backyards as $backyard):
-	                        if($aso->logradouro_com == $backyard->id_logradouro):
-	                            $logradouro_com=$backyard->nombre;
-	                        break;
-	                        endif;
-	                    endforeach;
-		    		$municipio_empresa = ORGTowns::find($aso->municipio_com);
-		    		$direccion_empresa = $aso->dir_com;
-		    		$uf_empresa="";
-                    foreach($ufs as $uf):
-                        if($aso->uf_com == $uf->id_uf):
-                            $uf_empresa=$uf->name_uf;
-                        break;
-                        endif;
-                    endforeach;
-		    		$numero_empresa = $aso->numero_com;
-		    		$cep_empresa = $aso->cep_com;
-	                $barrio_empresa = $aso->bairro_com;
-		    		$complemento_empresa = $aso->complemento_com;
-		    		$pais_empresa = $aso->pais_com;
-		    		$empresa_tel = $aso->ddd_com . ' ' . $aso->ddi_com . ' ' . $aso->telefone_com;
-		    		$celular_empresa = $aso->celular_com;
-		    		$cnpj = $aso->cnpj;
-		    		$cargo = $aso->cargo;
-		    		$pasaporte = $aso->passaporte;
-		    		$website =  $aso->web_site;
-		    		$responsable =  $aso->responsavel;
-		    		$nombre_cientifico= $aso->nome_cientifico;
-		    		$publicacoes = $aso->publicacoes;
-		    		$observacao = $aso->observacao;
-		    		$institucion = $aso->institucion;
-		    		$data_cadastro = $aso->data_cadastro;
-		    		
-		    		// $area_de_especializacion_empresa=$aso->area_de_especializacion_otro;
-		    	
-		    $sheet->appendRow(1,array("Codigo Asociado",
-		    						  "Nome Completo",
-		    						  "Razon Social",
-		    						  "Inscription estadual",
-		    						  "Inscription municipal",
-		    						  "CPF",
-		    						  "Tipo Pessoa",
-		    						  "RG",
-		    						  "Celular",
-		    						  "Email",
-		    						  "Telefone",
-		    						  "anuidade_2013",
-		    						  "valor_anuidade_2013",
-		    						  "valor_pago_2013",
-		    						  "data_anuidade_2013",
-		    						  "anuidade_2014",
-		    						  "valor_anuidade_2014",
-		    						  "valor_pago_2014",
-		    						  "data_anuidade_2014",
-		    						  "anuidade_2015",
-		    						  "valor_anuidade_2015",
-		    						  "valor_pago_2015",
-		    						  "data_anuidade_2015",
-		    						  // "Pagamento",
-		    						  // "Fecha",
-		    						  // "User Type",
-		    						  "Data Nascimento",
-		    						  "Formação",
-		    						  "Tipo de Categoria",
-		    						  "Tipo de Correspondencia",
-		    						  "Logradouro Res",
-		    						  "Municipio Res",
-		    						  "Endereço Res",
-		    						  "Complemento Res",
-		    						  "Barrio Res",
-		    						  "Numero Res",
-		    						  "CEP Res",
-		    						  // "Cidade",
-		    						  "Estado Res",
-		    						  "Pais Res",
-		    						  "Empresa",
-		    						  "Logradouro Empresa",
-		    						  "Municipio Empresa",
-		    						  "Endereço Empresa",
-		    						  // "Cidade Empresa",
-		    						  "Estado Empresa",
-		    						  "Numero Empresa",
-		    						  "CEP Empresa",
-		    						  "Complemento Empresa",
-		    						  "Barrio Empresa",
-		    						  "Telefone Empresa",
-		    						  "Celular Empresa",
-		    						  "CNPJ",
-		    						  "Cargo",
-		    						  "Pasaporte",
-		    						  "Website",
-		    						  "Responsavel",
-		    						  // "Nome Cientifico",
-		    						  // "Publicacoes",
-		    						  // "Observaçoes",
-		    						  "Institucion",
-		    						  "Data Cadastro" ));
+		    	$n =2;
+				foreach($associates as $aso):
+			    	
+			    	$cod_aso = $aso->id_asociado;
+			    	$nome = $aso->nombre_completo;
+			    	$razon_social = $aso->razon_social;
+			    	$incripcion_estadual = $aso->inscripcion_estadual;
+			    	$incripcion_municipal = $aso->inscripcion_municipal;
+			    	$cpf = $aso->cpf;
+			    	$tipo_pessoa = $aso->tipo_pessoa;
+			    	$rg = $aso->rg;
+			    	$celular_residencia = $aso->celular_res;
+			    	$email = $aso->email;
+			    	$telefone_residencia = $aso->ddd_res . ' ' . $aso->ddi_res . ' ' . $aso->telefone_res;
+			    	$data_nascimento = date('d-m-Y', strtotime($aso->data_nascimento));
+			    	$tipo_correspondencia = $aso->tipo_correspondencia;
+			    	$training = ORGTrainings::find($aso->formacao);
+			    		if($training):
+			    			$training = $training->nome;
+			    		else:
+			    			$training = "";
+			    		endif;
+			    	$categoria_titulo = "";
+				   		foreach(ORGAssociateCategories::all() as $cat):
+		              	        if($aso->categoria == $cat->id_categoria_asociado):
+		              	            $categoria_titulo = $cat->nombre_categoria;
+		              	            break;
+		              	        endif;
+		              	    endforeach;
+		              	$logradouro_res ="";
+		              	$backyards = ORGBackyards::all();
+				   		foreach($backyards as $backyard):
+		              	        if($aso->logradouro_res == $backyard->id_logradouro):
+		              	            $logradouro_res=$backyard->nombre;
+		              	        break;
+		              	        endif;
+		              	    endforeach;
+			    	$municipio_residencia = ORGTowns::find($aso->municipio_res);
+			    	$direccion_residencia = $aso->dir_res;
+			    	$complemento_residencia= $aso->complemento_res;
+		              	$barrio_residencia = $aso->bairro_res;
+			    	$numero_residencia = $aso->numero_res;
+			    	$cep_residencia = $aso->cep_res;
+			    	$uf_residencia ="";
+			    	$ufs = ORGuf::all();
+			    	foreach($ufs as $uf):
+	                  	    if($aso->uf_res == $uf->id_uf):
+	                  	        $uf_residencia=$uf->name_uf;
+	                  	    break;
+	                  	    endif;
+	                  	endforeach;
+			    	$pais_residencia = $aso->pais_res;
+			    	$empresa = $aso->empresa;
+		              	$logradouro_com ="";
+				   		foreach($backyards as $backyard):
+		              	        if($aso->logradouro_com == $backyard->id_logradouro):
+		              	            $logradouro_com=$backyard->nombre;
+		              	        break;
+		              	        endif;
+		              	    endforeach;
+			    	$municipio_empresa = ORGTowns::find($aso->municipio_com);
+			    	$direccion_empresa = $aso->dir_com;
+			    	$uf_empresa="";
+	                  	foreach($ufs as $uf):
+	                  	    if($aso->uf_com == $uf->id_uf):
+	                  	        $uf_empresa=$uf->name_uf;
+	                  	    break;
+	                  	    endif;
+	                  	endforeach;
+			    	$numero_empresa = $aso->numero_com;
+			    	$cep_empresa = $aso->cep_com;
+		              	$barrio_empresa = $aso->bairro_com;
+			    	$complemento_empresa = $aso->complemento_com;
+			    	$pais_empresa = $aso->pais_com;
+			    	$empresa_tel = $aso->ddd_com . ' ' . $aso->ddi_com . ' ' . $aso->telefone_com;
+			    	$celular_empresa = $aso->celular_com;
+			    	$cnpj = $aso->cnpj;
+			    	$cargo = $aso->cargo;
+			    	$pasaporte = $aso->passaporte;
+			    	$website =  $aso->web_site;
+			    	$responsable =  $aso->responsavel;
+			    	$nombre_cientifico= $aso->nome_cientifico;
+			    	$publicacoes = $aso->publicacoes;
+			    	$observacao = $aso->observacao;
+			    	$institucion = $aso->institucion;
+			    	$data_cadastro = date('d-m-Y', strtotime($aso->data_cadastro));
+			    	
+			    	// $area_de_especializacion_empresa=$aso->area_de_especializacion_otro;
+			    	
 
-				$anuidade_2013 = null;
-				$anuidade_2014 = null;
-				$anuidade_2015 = null;
-				
-				foreach ($aso->anuidades as $anuidade):
+				    $cols = array(
+						"Codigo Asociado",
+						"Nome Completo",
+						"Razon Social",
+						"Inscription estadual",
+						"Inscription municipal",
+						"CPF",
+						"Tipo Pessoa",
+						"RG",
+						"Celular",
+						"Email",
+						"Telefone",
+				    	);
+
+				    $annuities = ORGAnnuities::all();
+
+				    foreach($annuities as $annuity):
+				    	$cols = array_merge($cols, array('anuidade_'.$annuity->ano, 'valor_anuidade_'.$annuity->ano, 'valor_pago_'.$annuity->ano) );
+				    endforeach;
+
+				    $cols = array_merge($cols, array(
+				    	"Data Nascimento",
+						"Formação",
+						"Tipo de Categoria",
+						"Tipo de Correspondencia",
+						"Logradouro Res",
+						"Municipio Res",
+						"Endereço Res",
+						"Complemento Res",
+						"Barrio Res",
+						"Numero Res",
+						"CEP Res",
+						// "Cidade",
+						"Estado Res",
+						"Pais Res",
+						"Empresa",
+						"Logradouro Empresa",
+						"Municipio Empresa",
+						"Endereço Empresa",
+						// "Cidade Empresa",
+						"Estado Empresa",
+						"Numero Empresa",
+						"CEP Empresa",
+						"Complemento Empresa",
+						"Barrio Empresa",
+						"Telefone Empresa",
+						"Celular Empresa",
+						"CNPJ",
+						"Cargo",
+						"Pasaporte",
+						"Website",
+						"Responsavel",
+						// "Nome Cientifico",
+						// "Publicacoes",
+						// "Observaçoes",
+						"Institucion",
+						"Data Cadastro"
+				    ));
+
+				    $sheet->appendRow(1, $cols);
+			    	
+			    	/*$sheet->appendRow(1,array("Codigo Asociado",
+			    						  "Nome Completo",
+			    						  "Razon Social",
+			    						  "Inscription estadual",
+			    						  "Inscription municipal",
+			    						  "CPF",
+			    						  "Tipo Pessoa",
+			    						  "RG",
+			    						  "Celular",
+			    						  "Email",
+			    						  "Telefone",
+			    						  "anuidade_2013",
+			    						  "valor_anuidade_2013",
+			    						  "valor_pago_2013",
+			    						  "data_anuidade_2013",
+			    						  "anuidade_2014",
+			    						  "valor_anuidade_2014",
+			    						  "valor_pago_2014",
+			    						  "data_anuidade_2014",
+			    						  "anuidade_2015",
+			    						  "valor_anuidade_2015",
+			    						  "valor_pago_2015",
+			    						  "data_anuidade_2015",
+			    						  // "Pagamento",
+			    						  // "Fecha",
+			    						  // "User Type",
+			    						  "Data Nascimento",
+			    						  "Formação",
+			    						  "Tipo de Categoria",
+			    						  "Tipo de Correspondencia",
+			    						  "Logradouro Res",
+			    						  "Municipio Res",
+			    						  "Endereço Res",
+			    						  "Complemento Res",
+			    						  "Barrio Res",
+			    						  "Numero Res",
+			    						  "CEP Res",
+			    						  // "Cidade",
+			    						  "Estado Res",
+			    						  "Pais Res",
+			    						  "Empresa",
+			    						  "Logradouro Empresa",
+			    						  "Municipio Empresa",
+			    						  "Endereço Empresa",
+			    						  // "Cidade Empresa",
+			    						  "Estado Empresa",
+			    						  "Numero Empresa",
+			    						  "CEP Empresa",
+			    						  "Complemento Empresa",
+			    						  "Barrio Empresa",
+			    						  "Telefone Empresa",
+			    						  "Celular Empresa",
+			    						  "CNPJ",
+			    						  "Cargo",
+			    						  "Pasaporte",
+			    						  "Website",
+			    						  "Responsavel",
+			    						  // "Nome Cientifico",
+			    						  // "Publicacoes",
+			    						  // "Observaçoes",
+			    						  "Institucion",
+			    						  "Data Cadastro" ));*/
+
+					/*$anuidade_2013 = null;
+					$anuidade_2014 = null;
+					$anuidade_2015 = null;
 					
-					switch($anuidade->ano){
-						case "2013":
-							$anuidade_2013 = $anuidade;
-							break;
-						case "2014":
-							$anuidade_2014 = $anuidade;
-							break;
-						case "2015":
-							$anuidade_2015 = $anuidade;
-							break;
-						default:
-							break;
-					} 
+					foreach ($aso->anuidades as $anuidade):
+						
+						switch($anuidade->ano){
+							case "2013":
+								$anuidade_2013 = $anuidade;
+								break;
+							case "2014":
+								$anuidade_2014 = $anuidade;
+								break;
+							case "2015":
+								$anuidade_2015 = $anuidade;
+								break;
+							default:
+								break;
+						} 
 
-				endforeach;
+					endforeach;*/
 
-		    	$total= ["codigo"=>$cod_aso,
-		    			 "nome" => $nome,
-		    			 "razon_social"=>$razon_social,
-		    			 "inscription_est" => $incripcion_estadual,
-		    			 "incripcion_municipal" => $incripcion_municipal,
-		    			 "cpf" => $cpf,
-		    			 "tipo_pessoa" => $tipo_pessoa,
-		    			 "rg" => $rg,  
-		    			 "celular" => $celular_residencia,
-		    			 "email" => $email,
-		    			 "telefone" => $telefone_residencia,
-						 "anuidade_2013" => ($anuidade_2013 != null) ? $anuidade_2013->ano : "Não tem anuidade",
-						 "valor_anuidade_2013" => ($anuidade_2013 != null) ? $anuidade_2013->valor : "Não tem anuidade",
-						 "valor_pago_2013" => ($anuidade_2013 != null) ? $anuidade_2013->valor_pago : "Não tem anuidade",
-						 "data_anuidade_2013" => ($anuidade_2013 != null) ? $anuidade_2013->data : "Não tem anuidade",
-						 "anuidade_2014" => ($anuidade_2014 != null) ? $anuidade_2014->ano : "Não tem anuidade" ,
-						 "valor_anuidade_2014" => ($anuidade_2014 != null) ? $anuidade_2014->valor : "Não tem anuidade",
-						 "valor_pago_2014" => ($anuidade_2014 != null) ? $anuidade_2014->valor_pago : "Não tem anuidade",
-						 "data_anuidade_2014" => ($anuidade_2014 != null) ? $anuidade_2014->data : "Não tem anuidade",
-						 "anuidade_2015" => ($anuidade_2015 != null) ? $anuidade_2015->ano : "Não tem anuidade",
-						 "valor_anuidade_2015" => ($anuidade_2015 != null) ? $anuidade_2015->valor : "Não tem anuidade",
-						 "valor_pago_2015" => ($anuidade_2015 != null) ? $anuidade_2015->valor_pago : "Não tem anuidade",
-						 "data_anuidade_2015" => ($anuidade_2015 != null) ? $anuidade_2015->data : "Não tem anuidade",
-		    			 "data_nascimento" => $data_nascimento,
-		    			 "training" => $training,
-		    			  
-			 			 // "paid" => $paid,
-		    			 // "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
-		    			 // "type" => $inscription->usertype->title,
-		    			 "categoria_titulo" => $categoria_titulo,
-		    			 "tipo_correspondencia" => $tipo_correspondencia,
-		    			 "logradouro_res" => $logradouro_res, 
-		    			 "municipio_residencia" => isset($municipio_residencia->name_municipio) ? $municipio_residencia->name_municipio : '',
-		    			 "direccion_residencia" => $direccion_residencia,
-		    			 "complemento_residencia" => $complemento_residencia,
-		    			 "barrio_residencia" => $barrio_residencia,
-		    			 "numero_residencia" => $numero_residencia,
-		    			 "cep_residencia" => $cep_residencia,
-		    			 // "cidade" => $cidade,
-		    			 "estado_residencia" => $uf_residencia,
-		    			 "pais_residencia" => $pais_residencia,
-		    			 "empresa" => $empresa,
-		    			 "logradouro_com" => $logradouro_com,
-		    			 "municipio_empresa" => isset($municipio_empresa->name_municipio) ? $municipio_empresa->name_municipio : '',
-		    			 "direccion_empresa" => $direccion_empresa,
-		    			 "estado_empresa" => $uf_empresa,
-		    			 "numero_empresa" => $numero_empresa,
-		    			 "cep_empresa" => $cep_empresa,
-		    			 "complemento_empresa" => $complemento_empresa,
-		    			 "barrio_empresa" => $barrio_empresa,
-		    			 // "pais_empresa" => $pais_empresa,
-		    			 "empresa_tel" => $empresa_tel,
-		    			 "celular_empresa" => $celular_empresa,
-		    			 "cnpj" => $cnpj,
-		    			 "cargo" => $cargo,
-		    			 "pasaporte" => $pasaporte,
-		    			 "website" => $website,
-		    			 "responsable" => $responsable,
-		    			 // "nombre_cientifico" => $nombre_cientifico,
-		    			 // "publicaciones" => $publicacoes,
-		    			 // "observaciones" => $observacao,
-		    			 "institucion" => $institucion,
-		    			 "data_cadastro" => $data_cadastro
-		    			 ];
-		    			 // var_dump($total);
-		        	$sheet->appendRow($n,$total);
+					$total = [
+						"codigo"=>$cod_aso,
+			    		"nome" => $nome,
+			    		"razon_social"=>$razon_social,
+			    		"inscription_est" => $incripcion_estadual,
+			    		"incripcion_municipal" => $incripcion_municipal,
+			    		"cpf" => $cpf,
+			    		"tipo_pessoa" => $tipo_pessoa,
+			    		"rg" => $rg,  
+			    		"celular" => $celular_residencia,
+			    		"email" => $email,
+			    		"telefone" => $telefone_residencia,
+					];
 
-		    	// break;
-		        	$n++;
-		    	// array_push($total,$inscription->user->name,$inscription->user->email);
-		    endforeach;
+					foreach($annuities as $annuity):
+						$payment = $aso->getPaymentByAnnuity($annuity);
+						if($payment):
+							$interval = $annuity->getAnnuityCategoryByAssociateCategory($aso->category)->getCustomInterval($payment->data_pagamento);
+							$total = array_merge($total, array(
+								'anuidade_'.$annuity->ano => $annuity->ano,
+								'valor_anuidade_'.$annuity->ano => $interval->preco,
+								'valor_pago_'.$annuity->ano => $payment->pagamento,
+								)
+							);
+						else:
+							$dates = $annuity->getAnnuityCategoryByAssociateCategory($aso->category)->dates;
+							if(isset($dates[0])):
+								$interval = $dates[0];
+								$total = array_merge($total, array(
+									'anuidade_'.$annuity->ano => $annuity->ano,
+									'valor_anuidade_'.$annuity->ano => $interval->preco,
+									'valor_pago_'.$annuity->ano => 'Não tem anuidade',
+									)
+								);
+							else:
+								$total = array_merge($total, array(
+									'anuidade_'.$annuity->ano => $annuity->ano,
+									'valor_anuidade_'.$annuity->ano => 'Não tem anuidade',
+									'valor_pago_'.$annuity->ano => 'Não tem anuidade',
+									)
+								);
+							endif;
+						endif;
+					endforeach;
+
+					$total = array_merge($total, array(
+						"data_nascimento" => $data_nascimento,
+			    		"training" => $training,
+			    		 
+				 		// "paid" => $paid,
+			    		// "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
+			    		// "type" => $inscription->usertype->title,
+			    		"categoria_titulo" => $categoria_titulo,
+			    		"tipo_correspondencia" => $tipo_correspondencia,
+			    		"logradouro_res" => $logradouro_res, 
+			    		"municipio_residencia" => isset($municipio_residencia->name_municipio) ? $municipio_residencia->name_municipio : '',
+			    		"direccion_residencia" => $direccion_residencia,
+			    		"complemento_residencia" => $complemento_residencia,
+			    		"barrio_residencia" => $barrio_residencia,
+			    		"numero_residencia" => $numero_residencia,
+			    		"cep_residencia" => $cep_residencia,
+			    		// "cidade" => $cidade,
+			    		"estado_residencia" => $uf_residencia,
+			    		"pais_residencia" => $pais_residencia,
+			    		"empresa" => $empresa,
+			    		"logradouro_com" => $logradouro_com,
+			    		"municipio_empresa" => isset($municipio_empresa->name_municipio) ? $municipio_empresa->name_municipio : '',
+			    		"direccion_empresa" => $direccion_empresa,
+			    		"estado_empresa" => $uf_empresa,
+			    		"numero_empresa" => $numero_empresa,
+			    		"cep_empresa" => $cep_empresa,
+			    		"complemento_empresa" => $complemento_empresa,
+			    		"barrio_empresa" => $barrio_empresa,
+			    		// "pais_empresa" => $pais_empresa,
+			    		"empresa_tel" => $empresa_tel,
+			    		"celular_empresa" => $celular_empresa,
+			    		"cnpj" => $cnpj,
+			    		"cargo" => $cargo,
+			    		"pasaporte" => $pasaporte,
+			    		"website" => $website,
+			    		"responsable" => $responsable,
+			    		// "nombre_cientifico" => $nombre_cientifico,
+			    		// "publicaciones" => $publicacoes,
+			    		// "observaciones" => $observacao,
+			    		"institucion" => $institucion,
+			    		"data_cadastro" => $data_cadastro
+					));
+
+			    	/*$total= ["codigo"=>$cod_aso,
+			    			 "nome" => $nome,
+			    			 "razon_social"=>$razon_social,
+			    			 "inscription_est" => $incripcion_estadual,
+			    			 "incripcion_municipal" => $incripcion_municipal,
+			    			 "cpf" => $cpf,
+			    			 "tipo_pessoa" => $tipo_pessoa,
+			    			 "rg" => $rg,  
+			    			 "celular" => $celular_residencia,
+			    			 "email" => $email,
+			    			 "telefone" => $telefone_residencia,
+							 "anuidade_2013" => ($anuidade_2013 != null) ? $anuidade_2013->ano : "Não tem anuidade",
+							 "valor_anuidade_2013" => ($anuidade_2013 != null) ? $anuidade_2013->valor : "Não tem anuidade",
+							 "valor_pago_2013" => ($anuidade_2013 != null) ? $anuidade_2013->valor_pago : "Não tem anuidade",
+							 "data_anuidade_2013" => ($anuidade_2013 != null) ? $anuidade_2013->data : "Não tem anuidade",
+							 "anuidade_2014" => ($anuidade_2014 != null) ? $anuidade_2014->ano : "Não tem anuidade" ,
+							 "valor_anuidade_2014" => ($anuidade_2014 != null) ? $anuidade_2014->valor : "Não tem anuidade",
+							 "valor_pago_2014" => ($anuidade_2014 != null) ? $anuidade_2014->valor_pago : "Não tem anuidade",
+							 "data_anuidade_2014" => ($anuidade_2014 != null) ? $anuidade_2014->data : "Não tem anuidade",
+							 "anuidade_2015" => ($anuidade_2015 != null) ? $anuidade_2015->ano : "Não tem anuidade",
+							 "valor_anuidade_2015" => ($anuidade_2015 != null) ? $anuidade_2015->valor : "Não tem anuidade",
+							 "valor_pago_2015" => ($anuidade_2015 != null) ? $anuidade_2015->valor_pago : "Não tem anuidade",
+							 "data_anuidade_2015" => ($anuidade_2015 != null) ? $anuidade_2015->data : "Não tem anuidade",
+			    			 "data_nascimento" => $data_nascimento,
+			    			 "training" => $training,
+			    			  
+				 			 // "paid" => $paid,
+			    			 // "date" => date_format(date_create($inscription->created_at), 'd-m-Y'),
+			    			 // "type" => $inscription->usertype->title,
+			    			 "categoria_titulo" => $categoria_titulo,
+			    			 "tipo_correspondencia" => $tipo_correspondencia,
+			    			 "logradouro_res" => $logradouro_res, 
+			    			 "municipio_residencia" => isset($municipio_residencia->name_municipio) ? $municipio_residencia->name_municipio : '',
+			    			 "direccion_residencia" => $direccion_residencia,
+			    			 "complemento_residencia" => $complemento_residencia,
+			    			 "barrio_residencia" => $barrio_residencia,
+			    			 "numero_residencia" => $numero_residencia,
+			    			 "cep_residencia" => $cep_residencia,
+			    			 // "cidade" => $cidade,
+			    			 "estado_residencia" => $uf_residencia,
+			    			 "pais_residencia" => $pais_residencia,
+			    			 "empresa" => $empresa,
+			    			 "logradouro_com" => $logradouro_com,
+			    			 "municipio_empresa" => isset($municipio_empresa->name_municipio) ? $municipio_empresa->name_municipio : '',
+			    			 "direccion_empresa" => $direccion_empresa,
+			    			 "estado_empresa" => $uf_empresa,
+			    			 "numero_empresa" => $numero_empresa,
+			    			 "cep_empresa" => $cep_empresa,
+			    			 "complemento_empresa" => $complemento_empresa,
+			    			 "barrio_empresa" => $barrio_empresa,
+			    			 // "pais_empresa" => $pais_empresa,
+			    			 "empresa_tel" => $empresa_tel,
+			    			 "celular_empresa" => $celular_empresa,
+			    			 "cnpj" => $cnpj,
+			    			 "cargo" => $cargo,
+			    			 "pasaporte" => $pasaporte,
+			    			 "website" => $website,
+			    			 "responsable" => $responsable,
+			    			 // "nombre_cientifico" => $nombre_cientifico,
+			    			 // "publicaciones" => $publicacoes,
+			    			 // "observaciones" => $observacao,
+			    			 "institucion" => $institucion,
+			    			 "data_cadastro" => $data_cadastro
+			    			 ];*/
+			    			 // var_dump($total);
+			        $sheet->appendRow($n,$total);
+
+			        $n++;
+			    	// array_push($total,$inscription->user->name,$inscription->user->email);
+			    endforeach;
 
 		    });
 
