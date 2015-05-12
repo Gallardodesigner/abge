@@ -63,6 +63,7 @@ class PageController extends \BaseController {
 		$page->title = Input::get('title');
 		$page->content = Input::get('content');
 		$page->status = Input::get('status');
+		$page->url = Input::get('url');
 		$page->id_parent = 0;
 		$page->order = count(Pages::all());
 
@@ -92,6 +93,7 @@ class PageController extends \BaseController {
 		$page->title = Input::get('title');
 		$page->content = Input::get('content');
 		$page->status = Input::get('status');
+		$page->url = Input::get('url');
 		$page->save();
 
 		return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $page->title )));

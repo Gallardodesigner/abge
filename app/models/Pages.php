@@ -20,4 +20,20 @@ class Pages extends \Eloquent {
 
 	}
 
+	public static function getByName( $name ){
+
+		$page = self::where('name','=',$name)->take(1)->get();
+
+		if(isset($page[0])):
+
+			return $page[0];
+
+		else:
+
+			return false;
+
+		endif;
+
+	}
+
 }

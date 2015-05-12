@@ -48,7 +48,7 @@
               <!-- Nav Menu -->
               <div id="myslidemenu" class="jqueryslidemenu">
                 <ul id="menu_top">
-                  @foreach(Pages::where('id_parent','=','0')->get() as $page)
+                  @foreach(Pages::where('id_parent','=','0')->orderBy('order','ASC')->get() as $page)
                     <?php $children = $page->children ?>
                     @if(count($children) > 0)
                       <li>
@@ -59,13 +59,13 @@
                             @if(count($grandchildren) > 0)
                               <li>
                                 <a href="{{ $child->url != '' ? $child->url : '/page/'.$child->name }}">{{ $child->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>  
-                                <ul style="top: 0px; left:174px; display: none; visibility: visible;">
+                                <ul style="top: 0px; left:174px !important; display: none; visibility: visible;">
                                   @foreach($grandchildren as $grandchild)
                                     <?php $bigchildren = $grandchild->children ?>
                                     @if(count($bigchildren) > 0)
                                       <li>
                                         <a href="{{ $grandchild->url != '' ? $grandchild->url : '/page/'.$grandchild->name }}">{{ $grandchild->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>
-                                        <ul style="top: 0px; left:174px; display: none; visibility: visible;">
+                                        <ul style="top: 0px; left:174px !important; display: none; visibility: visible;">
                                           @foreach($bigchildren as $bigchild)
                                             <li>
                                               <a href="{{ $bigchild->url != '' ? $bigchild->url : '/page/'.$bigchild->name }}">{{ $bigchild->title }}</a>  

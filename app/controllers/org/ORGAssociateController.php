@@ -64,25 +64,40 @@ class ORGAssociateController extends \BaseController {
 
 			$associates = $associates->paginate(30);
 
+			$msg_success = Session::get('msg_success');
+
+			$msg_error = Session::get('msg_error');
+
+			return View::make('backend.clients.associates.index', array(
+				'filter' => array('nombre_completo' => Input::get('nombre_completo'), 'categoria' => Input::get('categoria'), 'tipo_pessoa' => Input::get('tipo_pessoa'), 'pagamento' => Input::get('pagamento')),
+				'associates' => $associates,
+				'categories' => ORGAssociateCategories::all(),
+				'annuity' => ORGAnnuities::getLastAnnuity(),
+				'route' => $this->route,
+				'msg_success' => $msg_success,
+				'msg_error' => $msg_error
+				));
+
 		else:
 
 			$associates = ORGAssociates::paginate(30);
 
+			$msg_success = Session::get('msg_success');
+
+			$msg_error = Session::get('msg_error');
+
+			return View::make('backend.clients.associates.index', array(
+				'filter' => array('nombre_completo' => '0', 'categoria' => '0', 'tipo_pessoa' => '0', 'pagamento' => '0'),
+				'associates' => $associates,
+				'categories' => ORGAssociateCategories::all(),
+				'annuity' => ORGAnnuities::getLastAnnuity(),
+				'route' => $this->route,
+				'msg_success' => $msg_success,
+				'msg_error' => $msg_error
+				));
+
 		endif;
 
-		$msg_success = Session::get('msg_success');
-
-		$msg_error = Session::get('msg_error');
-
-		return View::make('backend.clients.associates.index', array(
-			'filter' => array('nombre_completo' => Input::get('nombre_completo'), 'categoria' => Input::get('categoria'), 'tipo_pessoa' => Input::get('tipo_pessoa'), 'pagamento' => Input::get('pagamento')),
-			'associates' => $associates,
-			'categories' => ORGAssociateCategories::all(),
-			'annuity' => ORGAnnuities::getLastAnnuity(),
-			'route' => $this->route,
-			'msg_success' => $msg_success,
-			'msg_error' => $msg_error
-			));
 
 	}
 
@@ -254,6 +269,16 @@ class ORGAssociateController extends \BaseController {
 		        $sheet->setOrientation('portrait');
 		    	
 		    	$n =2;
+
+				$annuity_categories = array();
+
+				/*foreach(ORGAnnuityCategories::all() as $annuity_category):
+					$annuity_categories[$annuity_category->id] = array(
+						'id_anuidade' => $annuity_category->id_anuidade,
+						'id_categoria_asociado' => $annuity_category->id_categoria_asociado
+						);
+				endforeach;*/
+
 				foreach($associates as $aso):
 			    	
 			    	$cod_aso = $aso->id_asociado;
@@ -270,58 +295,60 @@ class ORGAssociateController extends \BaseController {
 			    	$data_nascimento = date('d-m-Y', strtotime($aso->data_nascimento));
 			    	$tipo_correspondencia = $aso->tipo_correspondencia;
 			    	$training = ORGTrainings::find($aso->formacao);
-			    		if($training):
-			    			$training = $training->nome;
-			    		else:
-			    			$training = "";
-			    		endif;
-			    	$categoria_titulo = "";
-				   		foreach(ORGAssociateCategories::all() as $cat):
-		              	        if($aso->categoria == $cat->id_categoria_asociado):
-		              	            $categoria_titulo = $cat->nombre_categoria;
-		              	            break;
-		              	        endif;
-		              	    endforeach;
-		              	$logradouro_res ="";
-		              	$backyards = ORGBackyards::all();
-				   		foreach($backyards as $backyard):
+			    	$training = $training ? $training->nome : '';
+			    	$categoria_titulo = $aso->categoria != '' ? $aso->category->nombre_categoria : "";
+				   		/*foreach(ORGAssociateCategories::all() as $cat):
+	              	        if($aso->categoria == $cat->id_categoria_asociado):
+	              	            $categoria_titulo = $cat->nombre_categoria;
+	              	            break;
+	              	        endif;
+	              	    endforeach;*/
+		              	// $logradouro_res ="";
+	              	$backyard = ORGBackyards::find($aso->logradouro_res);
+	              	$logradouro_res= $backyard ? $backyard->nombre : '';
+				   		/*foreach($backyards as $backyard):
 		              	        if($aso->logradouro_res == $backyard->id_logradouro):
 		              	            $logradouro_res=$backyard->nombre;
 		              	        break;
 		              	        endif;
-		              	    endforeach;
+		              	    endforeach;*/
 			    	$municipio_residencia = ORGTowns::find($aso->municipio_res);
 			    	$direccion_residencia = $aso->dir_res;
 			    	$complemento_residencia= $aso->complemento_res;
-		              	$barrio_residencia = $aso->bairro_res;
+		            $barrio_residencia = $aso->bairro_res;
 			    	$numero_residencia = $aso->numero_res;
 			    	$cep_residencia = $aso->cep_res;
-			    	$uf_residencia ="";
-			    	$ufs = ORGuf::all();
-			    	foreach($ufs as $uf):
+			    	// $uf_residencia ="";
+			    	$ufs = ORGuf::find($aso->uf_res);
+			    	$uf_residencia= $ufs ? $ufs->name_uf : '';
+			    	/*foreach($ufs as $uf):
 	                  	    if($aso->uf_res == $uf->id_uf):
 	                  	        $uf_residencia=$uf->name_uf;
 	                  	    break;
 	                  	    endif;
-	                  	endforeach;
+	                  	endforeach;*/
 			    	$pais_residencia = $aso->pais_res;
 			    	$empresa = $aso->empresa;
-		              	$logradouro_com ="";
-				   		foreach($backyards as $backyard):
+		            $logradouro_com ="";
+		            $backyard = ORGBackyards::find($aso->logradouro_res);
+	              	$logradouro_com = $backyard ? $backyard->nombre : '';
+				   		/*foreach($backyards as $backyard):
 		              	        if($aso->logradouro_com == $backyard->id_logradouro):
 		              	            $logradouro_com=$backyard->nombre;
 		              	        break;
 		              	        endif;
-		              	    endforeach;
+		              	    endforeach;*/
 			    	$municipio_empresa = ORGTowns::find($aso->municipio_com);
 			    	$direccion_empresa = $aso->dir_com;
 			    	$uf_empresa="";
-	                  	foreach($ufs as $uf):
+			    	$ufs = ORGuf::find($aso->uf_com);
+			    	$uf_empresa= $ufs ? $ufs->name_uf : '';
+	                  	/*foreach($ufs as $uf):
 	                  	    if($aso->uf_com == $uf->id_uf):
 	                  	        $uf_empresa=$uf->name_uf;
 	                  	    break;
 	                  	    endif;
-	                  	endforeach;
+	                  	endforeach;*/
 			    	$numero_empresa = $aso->numero_com;
 			    	$cep_empresa = $aso->cep_com;
 		              	$barrio_empresa = $aso->bairro_com;
@@ -343,7 +370,7 @@ class ORGAssociateController extends \BaseController {
 			    	// $area_de_especializacion_empresa=$aso->area_de_especializacion_otro;
 			    	
 
-				    $cols = array(
+				    /*$cols = array(
 						"Codigo Asociado",
 						"Nome Completo",
 						"Razon Social",
@@ -360,7 +387,7 @@ class ORGAssociateController extends \BaseController {
 				    $annuities = ORGAnnuities::all();
 
 				    foreach($annuities as $annuity):
-				    	$cols = array_merge($cols, array('anuidade_'.$annuity->ano, 'valor_anuidade_'.$annuity->ano, 'valor_pago_'.$annuity->ano) );
+				    	$cols = array_merge($cols, array('valor_anuidade_'.$annuity->ano, 'valor_pago_'.$annuity->ano) );
 				    endforeach;
 
 				    $cols = array_merge($cols, array(
@@ -400,11 +427,11 @@ class ORGAssociateController extends \BaseController {
 						// "Observaçoes",
 						"Institucion",
 						"Data Cadastro"
-				    ));
+				    ));*/
 
-				    $sheet->appendRow(1, $cols);
+				    // $sheet->appendRow(1, $cols);
 			    	
-			    	/*$sheet->appendRow(1,array("Codigo Asociado",
+			    	$sheet->appendRow(1,array("Codigo Asociado",
 			    						  "Nome Completo",
 			    						  "Razon Social",
 			    						  "Inscription estadual",
@@ -415,18 +442,8 @@ class ORGAssociateController extends \BaseController {
 			    						  "Celular",
 			    						  "Email",
 			    						  "Telefone",
-			    						  "anuidade_2013",
-			    						  "valor_anuidade_2013",
-			    						  "valor_pago_2013",
-			    						  "data_anuidade_2013",
-			    						  "anuidade_2014",
-			    						  "valor_anuidade_2014",
-			    						  "valor_pago_2014",
-			    						  "data_anuidade_2014",
-			    						  "anuidade_2015",
-			    						  "valor_anuidade_2015",
-			    						  "valor_pago_2015",
-			    						  "data_anuidade_2015",
+			    						  "valor_anuidade_".date('Y'),
+			    						  "valor_pago_".date('Y'),
 			    						  // "Pagamento",
 			    						  // "Fecha",
 			    						  // "User Type",
@@ -465,7 +482,7 @@ class ORGAssociateController extends \BaseController {
 			    						  // "Publicacoes",
 			    						  // "Observaçoes",
 			    						  "Institucion",
-			    						  "Data Cadastro" ));*/
+			    						  "Data Cadastro" ));
 
 					/*$anuidade_2013 = null;
 					$anuidade_2014 = null;
@@ -503,35 +520,89 @@ class ORGAssociateController extends \BaseController {
 			    		"telefone" => $telefone_residencia,
 					];
 
-					foreach($annuities as $annuity):
-						$payment = $aso->getPaymentByAnnuity($annuity);
-						if($payment):
-							$interval = $annuity->getAnnuityCategoryByAssociateCategory($aso->category)->getCustomInterval($payment->data_pagamento);
+					foreach(ORGAnnuities::where('ano','=',date('Y'))->take(1)->get() as $annuity):
+					
+						/*if($payment = $aso->getPaymentByAnnuity($annuity)):
+							$interval = $payment->category->getCustomInterval( $payment->data_pagamento );
 							$total = array_merge($total, array(
-								'anuidade_'.$annuity->ano => $annuity->ano,
+								// 'anuidade_'.$annuity->ano => $annuity->ano,
 								'valor_anuidade_'.$annuity->ano => $interval->preco,
 								'valor_pago_'.$annuity->ano => $payment->pagamento,
 								)
 							);
 						else:
-							$dates = $annuity->getAnnuityCategoryByAssociateCategory($aso->category)->dates;
-							if(isset($dates[0])):
-								$interval = $dates[0];
+							$category = $annuity->getAnnuityCategoryByAssociateCategory($aso->category);
+							if($category == null):
 								$total = array_merge($total, array(
-									'anuidade_'.$annuity->ano => $annuity->ano,
-									'valor_anuidade_'.$annuity->ano => $interval->preco,
-									'valor_pago_'.$annuity->ano => 'Não tem anuidade',
-									)
-								);
-							else:
-								$total = array_merge($total, array(
-									'anuidade_'.$annuity->ano => $annuity->ano,
+									// 'anuidade_'.$annuity->ano => $annuity->ano,
 									'valor_anuidade_'.$annuity->ano => 'Não tem anuidade',
 									'valor_pago_'.$annuity->ano => 'Não tem anuidade',
 									)
 								);
+							else:
+
+								$interval = $category->dates;
+
+								$total = array_merge($total, array(
+									// 'anuidade_'.$annuity->ano => $annuity->ano,
+									'valor_anuidade_'.$annuity->ano => $interval[count($interval)-1]->preco,
+									'valor_pago_'.$annuity->ano => 'Não tem anuidade',
+									)
+								);
+
 							endif;
-						endif;
+
+						endif;*/
+						
+							if($payment = $aso->getPaymentByAnnuity($annuity)):
+								$interval = $payment->category->getCustomInterval($payment->data_pagamento);
+								if($interval == null):
+									$interval = $payment->category->dates;
+									if(isset($interval[0])) $interval = $interval[0];
+								endif;
+								$total = array_merge($total, array(
+									// 'anuidade_'.$annuity->ano => $annuity->ano,
+									'valor_anuidade_'.$annuity->ano => $interval->preco,
+									'valor_pago_'.$annuity->ano => $payment->pagamento,
+									)
+								);
+							else:
+								if($aso->categoria != ''):
+									$dates = $annuity->getAnnuityCategoryByAssociateCategory($aso->category);
+									if($dates == null) :
+										$dates = $dates;
+									else:
+										$dates = $dates->dates;
+									endif;
+									if(isset($dates[0])):
+										$interval = $dates[0];
+										$total = array_merge($total, array(
+											// 'anuidade_'.$annuity->ano => $annuity->ano,
+											'valor_anuidade_'.$annuity->ano => $interval->preco,
+											'valor_pago_'.$annuity->ano => 'Não tem anuidade',
+											)
+										);
+									else:
+										$total = array_merge($total, array(
+											// 'anuidade_'.$annuity->ano => $annuity->ano,
+											'valor_anuidade_'.$annuity->ano => 'Não tem anuidade',
+											'valor_pago_'.$annuity->ano => 'Não tem anuidade',
+											)
+										);
+									endif;
+								else:
+									// dd($aso);
+
+									$total = array_merge($total, array(
+										// 'anuidade_'.$annuity->ano => $annuity->ano,
+										'valor_anuidade_'.$annuity->ano => 'Não tem anuidade',
+										'valor_pago_'.$annuity->ano => 'Não tem anuidade',
+										)
+									);
+								endif;
+							endif;
+
+
 					endforeach;
 
 					$total = array_merge($total, array(
@@ -645,6 +716,8 @@ class ORGAssociateController extends \BaseController {
 			        $sheet->appendRow($n,$total);
 
 			        $n++;
+
+			        // if($n>500) dd('meta');
 			    	// array_push($total,$inscription->user->name,$inscription->user->email);
 			    endforeach;
 

@@ -7,5 +7,7 @@ class ORGBackyards extends Eloquent {
 	protected $table = 'logradouro';
 
     public $timestamps = false;
+
+	public $primaryKey  = 'id_logradouro';
 	
 }

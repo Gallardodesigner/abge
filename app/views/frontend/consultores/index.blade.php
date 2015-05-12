@@ -16,7 +16,7 @@
 </style>
 
 
-<div class="left_column">
+<div class="left_column" style="margin-bottom:62px">
 
 	<div class="home_article">
 		<div class="home_article_title texto_azul">
@@ -85,14 +85,14 @@
 
 	                <tr>
 
-	                  <td width="150" style="padding-left: 0;">
+	                  <td width="100" style="padding-left: 0;">
 	    
 	                    @if($classificados->classificados_imagem)
-	                      {{ HTML::image('/uploads/classificados/'.$classificados->classificados_imagem, '', array('class'=>'borderImage', 'width' => '150', 'height' => '110')) }}
+	                      {{ HTML::image('/uploads/classificados/'.$classificados->classificados_imagem, '', array('class'=>'borderImage', 'width' => '100')) }}
 	                    @elseif($classificados->sexo != 2)
-	                      {{ HTML::image('hombre.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '150', 'height' => '110')) }}
+	                      {{ HTML::image('hombre.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
 	                    @else:
-	                      {{ HTML::image('mujer.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '150', 'height' => '110')) }}
+	                      {{ HTML::image('mujer.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
 	                    @endif
 
 	                  </td>
