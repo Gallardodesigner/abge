@@ -1,0 +1,5 @@
+/vendor
+composer.phar
+composer.lock
+/src/views
+/src/config/config.dev.php
