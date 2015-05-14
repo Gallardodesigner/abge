@@ -128,6 +128,7 @@ return array(
 		'Maxxscho\LaravelTcpdf\LaravelTcpdfServiceProvider',
 		'Ollieread\Multiauth\MultiauthServiceProvider',
 		'Alexanderzon\Hashids\HashidsServiceProvider',
+		'Bogardo\Mailgun\MailgunServiceProvider',
 
 	),
 

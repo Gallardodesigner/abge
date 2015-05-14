@@ -6,7 +6,7 @@ class NewsController extends \BaseController {
 
 	public function getIndex(){
 
-		$news = SFNews::all();
+		$news = SFNews::orderBy('date','DESC')->get();
 		// $news = SFNews::where('category','=','1')->get();
 
 		$args = array(

@@ -899,6 +899,40 @@ class ORGAssociateController extends \BaseController {
 				return Redirect::to($this->route);
 
 			else:
+
+				if(Input::get('senha') != ''):
+
+					$new_password = Input::get('senha');
+
+					if($associate->associate != null):
+
+						$user = $associate->associate->getuser;
+						$user->password = Hash::make($new_password);
+						$user->save();
+
+					else:
+
+						$user = new User();
+						$user->type = 'associate';
+						$user->email = $associate->email;
+						$user->password = Hash::make($new_password);
+						$user->name = $associate->nombre_completo;
+						$user->status = 'publish';
+						$user->save();
+
+						$assoc = new Associates();
+						$assoc->associate = $associate->id_asociado;
+						$assoc->user = $user->id;
+						$assoc->name = $associate->nombre_completo;
+						$assoc->email = $associate->email;
+						$assoc->password = $associate->senha;
+						$assoc->cpf = $associate->cpf;
+						$assoc->type = 'associate';
+						$assoc->status = 'publish';
+						$assoc->save();
+
+					endif;
+				endif;
 				
 				$associate->status_asso = Input::get('status_asso') != null ? Input::get('status_asso') : $associate->status_asso;
 				$associate->categoria = Input::get('categoria') != null ? Input::get('categoria') : $associate->categoria;

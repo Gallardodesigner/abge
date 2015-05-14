@@ -52,7 +52,7 @@
 		                  <td width="100" style="padding-left: 0;">
 		    
 		                    @if($noticia->image)
-		                      {{ HTML::image('/uploads/noticia/'.$noticia->noticia_imagem, '', array('class'=>'borderImage', 'width' => '100')) }}
+		                      {{ HTML::image('/uploads/news/small_'.$noticia->image, '', array('class'=>'borderImage', 'width' => '100')) }}
 		                    @else:
 		                      {{ HTML::image('mujer.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
 		                    @endif
