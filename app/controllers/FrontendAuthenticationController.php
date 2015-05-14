@@ -57,6 +57,71 @@ class FrontendAuthenticationController extends \BaseController {
 
 	}
 
+	public function getSenha(){
+
+		$args = array(
+			'route' => self::$route,
+			);
+
+		return View::make('auth.senha')->with($args);
+
+	}
+
+	public function postSenha(){
+
+		$associate = ORGAssociates::where('email','=',Input::get('login'))->take(1)->get();
+
+		if(isset($associate[0])):
+
+			$new_password = Hashids::encode(date('YmdHis'));
+
+			$associate = $associate[0];
+
+			$associate->senha = md5($new_password);
+			$associate->save();
+
+			if($associate->associate != null):
+
+				$user = $associate->associate->getuser;
+				$user->password = Hash::make($new_password);
+				$user->save();
+
+			else:
+
+				$user = new User();
+				$user->type = 'associate';
+				$user->email = $associate->email;
+				$user->password = Hash::make($new_password);
+				$user->name = $associate->nombre_completo;
+				$user->status = 'publish';
+				$user->save();
+
+				$assoc = new Associates();
+				$assoc->associate = $associate->id_asociado;
+				$assoc->user = $user->id;
+				$assoc->name = $associate->nombre_completo;
+				$assoc->email = $associate->email;
+				$assoc->password = $associate->senha;
+				$assoc->cpf = $associate->cpf;
+				$assoc->type = 'associate';
+				$assoc->status = 'publish';
+				$assoc->save();
+
+			endif;
+
+			var_dump($associate->email);
+			dd($new_password);
+
+		else:
+
+			dd('email no encontrado');
+
+		endif;
+
+		return Redirect::to(self::$route);
+
+	}
+
 	public function postCadastrofisica(){
 
 		if(count(ORGAssociates::where('email','=', Input::get('login'))->get()) > 0):

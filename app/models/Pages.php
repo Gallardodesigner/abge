@@ -16,7 +16,7 @@ class Pages extends \Eloquent {
 
 	public function children(){
 
-		return $this->hasMany('Pages', 'id_parent','id');
+		return $this->hasMany('Pages', 'id_parent','id')->where('status','=','active');
 
 	}
 

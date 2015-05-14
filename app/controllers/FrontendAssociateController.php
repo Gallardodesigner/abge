@@ -78,6 +78,16 @@ class FrontendAssociateController extends \BaseController {
 
 		$associate = Auth::user()->user()->associate->asociado;
 
+		if(Input::get('senha') != ''):
+			$associate->senha = md5(Input::get('senha'));
+			$assoc = $associate->associate;
+			$assoc->password = $associate->senha;
+			$assoc->save();
+			$user = $assoc->user;
+			$user->password = Hash::make(Input::get('senha'));
+			$user->save();
+		endif;
+		
 		$associate->nombre_completo = Input::get('nombre_completo');
 		$associate->data_nascimento = date('Y-m-d', strtotime(Input::get('data_nascimento')));
 		$associate->email = Input::get('email');

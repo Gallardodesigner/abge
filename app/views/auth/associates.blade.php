@@ -115,6 +115,7 @@ input[type="text"],input[type="password"]{
             <div class="inputwrapper animate3 bounceIn">
                 <button name="submit">Sign In</button>
                 <a class="cadastro" href="{{$route}}/cadastro">Cadastrar</a>
+                <a class="cadastro" href="{{$route}}/senha">Esqueci minha senha</a>
             </div>
            
         </form>

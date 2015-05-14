@@ -77,8 +77,8 @@
                                 <label>Status</label>
                                 <span class="field">
 									<select name="status">
-										<option value="active" selected>Habilitado</option>
-										<option value="inactive">Deshabilitado</option>
+										<option value="active" {{ $page->status == 'active' ? 'selected' : '' }}>Habilitado</option>
+										<option value="inactive" {{ $page->status == 'inactive' ? 'selected' : '' }}>Deshabilitado</option>
 									</select>
                                 </span>
                             </p>  
