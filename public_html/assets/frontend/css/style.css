@@ -1,5 +1,5 @@
 body{
-  background-image: url(../images/frontend/body_background_2.png);
+  background-image: url(/images/frontend/body_background_2.png);
   background-repeat: repeat-x;
   /*font-family: arial;*/
   font-family: "Trebuchet MS";
@@ -67,7 +67,7 @@ h4, h5{
 }
 
 #menu_top li:hover{
-  background-image: url(../images/frontend/background_menu_top_hover.png);
+  background-image: url(/images/frontend/background_menu_top_hover.png);
   background-repeat: repeat-y;
 }
 
@@ -77,13 +77,13 @@ h4, h5{
 
 .banner_principal_home{
   height: 326px;
-  background-image: url(../images/frontend/background_banner_home.png);
+  background-image: url(/images/frontend/background_banner_home.png);
 }
 
 .footer_container{
   color: white;
   height: 60px !important;
-  background-image: url(../../../assets/frontend/img/background_footer.png);
+  background-image: url(/images/frontend/background_footer.png);
 }
 
 .columna_lateral_home{

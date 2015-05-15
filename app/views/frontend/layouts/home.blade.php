@@ -36,87 +36,231 @@
           This browser is not supported to view this page. Please update it.
       </div>
       <![endif]-->
+    
       <div id="page" class="container">
+
         <div id="header" class="div_float">
-          <div style="padding: 13px 8px 15px 10px; float: left;">
-            <a href="http://abge.org.br/index.php/"><img src="/assets/frontend/img/logo_header.png"></a>  </div>
+          	<div style="padding: 13px 8px 15px 10px; float: left;">
+            	<a href="http://abge.org.br/index.php/"><img src="/assets/frontend/img/logo_header.png"></a>  
+            </div>
             <div style="float:left; margin-left: 430px;margin-top: 20px;">
-              <a href="https://www.facebook.com/abge.abge" target="_blank"><img src="/assets/frontend/img/face-abge.jpg" border="0"></a></div>
+              	<a href="https://www.facebook.com/abge.abge" target="_blank"><img src="/assets/frontend/img/face-abge.jpg" border="0"></a>
             </div>
-            <div class="div_float" style="padding: 0 0 4px 0; height: 32px;">
+        </div>
+        <div class="div_float" style="padding: 0 0 4px 0; height: 32px;">
 
               <!-- Nav Menu -->
-              <div id="myslidemenu" class="jqueryslidemenu">
-                <ul id="menu_top">
-                  @foreach(Pages::where('id_parent','=','0')->where('status','=','active')->orderBy('order','ASC')->get() as $page)
-                    <?php $children = $page->children ?>
-                    @if(count($children) > 0)
-                      <li>
-                        <a @if($page->content != '') href="{{ $page->url != '' ? $page->url : '/page/'.$page->name }}" @endif>{{ $page->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>
-                        <ul style="top: 31px; display: none; visibility: visible;">
-                          @foreach($children as $child)
-                            <?php $grandchildren = $child->children ?> 
-                            @if(count($grandchildren) > 0)
-                              <li>
-                                <a @if($child->content != '') href="{{ $child->url != '' ? $child->url : '/page/'.$child->name }}" @endif>{{ $child->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>  
-                                <ul style="top: 0px; left:174px !important; display: none; visibility: visible;">
-                                  @foreach($grandchildren as $grandchild)
-                                    <?php $bigchildren = $grandchild->children ?>
-                                    @if(count($bigchildren) > 0)
-                                      <li>
-                                        <a @if($grandchild->content != '') href="{{ $grandchild->url != '' ? $grandchild->url : '/page/'.$grandchild->name }}" @endif>{{ $grandchild->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>
-                                        <ul style="top: 0px; left:174px !important; display: none; visibility: visible;">
-                                          @foreach($bigchildren as $bigchild)
-                                            <li>
-                                              <a @if($bigchild->content != '') href="{{ $bigchild->url != '' ? $bigchild->url : '/page/'.$bigchild->name }}" @endif>{{ $bigchild->title }}</a>  
-                                            </li>
-                                          @endforeach
-                                        </ul>
-                                      </li>
-                                    @else
-                                      <li>
-                                        <a href="{{ $grandchild->url != '' ? $grandchild->url : '/page/'.$grandchild->name }}">{{ $grandchild->title }}</a>  
-                                      </li>
-                                    @endif
-                                  @endforeach
-                                </ul>
-                              </li>
-                            @else
-                              <li>
-                                <a href="{{ $child->url != '' ? $child->url : '/page/'.$child->name }}">{{ $child->title }}</a>  
-                              </li>
-                            @endif                           
-                          @endforeach
-                        </ul> 
-                      </li>
-                    @else
-                      <li>
-                        <a href="{{ $page->url != '' ? $page->url : '/page/'.$page->name }}">{{ $page->title }}</a>  
-                      </li>
-                    @endif
-                  @endforeach
-                </ul>
-              </div>
+              	<div id="myslidemenu" class="jqueryslidemenu">
+	                <ul id="menu_top">
+	                  @foreach(Pages::where('id_parent','=','0')->where('status','=','active')->orderBy('order','ASC')->get() as $page)
+	                    <?php $children = $page->children ?>
+	                    @if(count($children) > 0)
+	                      <li>
+	                        <a @if($page->content != '') href="{{ $page->url != '' ? $page->url : '/page/'.$page->name }}" @endif>{{ $page->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>
+	                        <ul style="top: 31px; display: none; visibility: visible;">
+	                          @foreach($children as $child)
+	                            <?php $grandchildren = $child->children ?> 
+	                            @if(count($grandchildren) > 0)
+	                              <li>
+	                                <a @if($child->content != '') href="{{ $child->url != '' ? $child->url : '/page/'.$child->name }}" @endif>{{ $child->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>  
+	                                <ul style="top: 0px; left:174px !important; display: none; visibility: visible;">
+	                                  @foreach($grandchildren as $grandchild)
+	                                    <?php $bigchildren = $grandchild->children ?>
+	                                    @if(count($bigchildren) > 0)
+	                                      <li>
+	                                        <a @if($grandchild->content != '') href="{{ $grandchild->url != '' ? $grandchild->url : '/page/'.$grandchild->name }}" @endif>{{ $grandchild->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>
+	                                        <ul style="top: 0px; left:174px !important; display: none; visibility: visible;">
+	                                          @foreach($bigchildren as $bigchild)
+	                                            <li>
+	                                              <a @if($bigchild->content != '') href="{{ $bigchild->url != '' ? $bigchild->url : '/page/'.$bigchild->name }}" @endif>{{ $bigchild->title }}</a>  
+	                                            </li>
+	                                          @endforeach
+	                                        </ul>
+	                                      </li>
+	                                    @else
+	                                      <li>
+	                                        <a href="{{ $grandchild->url != '' ? $grandchild->url : '/page/'.$grandchild->name }}">{{ $grandchild->title }}</a>  
+	                                      </li>
+	                                    @endif
+	                                  @endforeach
+	                                </ul>
+	                              </li>
+	                            @else
+	                              <li>
+	                                <a href="{{ $child->url != '' ? $child->url : '/page/'.$child->name }}">{{ $child->title }}</a>  
+	                              </li>
+	                            @endif                           
+	                          @endforeach
+	                        </ul> 
+	                      </li>
+	                    @else
+	                      <li>
+	                        <a href="{{ $page->url != '' ? $page->url : '/page/'.$page->name }}">{{ $page->title }}</a>  
+	                      </li>
+	                    @endif
+	                  @endforeach
+	                </ul>
+              	</div>
               <!-- Nav Menu -->
 
-            </div>
-            <script>
-              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        </div>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-              ga('create', 'UA-46004748-1', 'abge.org.br');
-              ga('send', 'pageview');
+            ga('create', 'UA-46004748-1', 'abge.org.br');
+            ga('send', 'pageview');
 
-            </script>
+        </script>
 
-          </div>
+    </div>
+
+        <div class="banner_principal_home">
+      <div style="margin: 0 auto; padding-top: 10px; width: 1000px; height: 398px;">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/home_banner_principal/style2.css" />
+<script type="text/javascript" src="/js/home_banner_principal/jquery.js"></script>
+<script type="text/javascript" src="/js/home_banner_principal/jquery.easing.js"></script>
+<script type="text/javascript" src="/js/home_banner_principal/script.js"></script>
+<script type="text/javascript">
+  $(document).ready( function(){
+    var buttons = {
+      previous:$('#jslidernews2 .button-previous'),
+      next:$('#jslidernews2 .button-next')
+    };
+    
+    $('#jslidernews2').lofJSidernews( { 
+      interval: 5000,
+      easing: 'easeInOutQuad',
+      duration: 1200,
+      auto: true,
+      mainWidth: 1000,
+      mainHeight: 398,
+      navigatorHeight: 100,
+      navigatorWidth: 310,
+      maxItemDisplay: 4,
+      buttons:buttons } );					
+  });
+</script>
+
+<style>
+  ul.lof-main-wapper li {
+    position:relative;	
+  }
+  
+</style>
+<!------------------------------------- THE CONTENT ------------------------------------------------->
+<div id="jslidernews2" class="lof-slidecontent">
+  <div class="preload"><div></div></div>
+  <div  class="button-previous">Previous</div>
+  
+  <!-- MAIN CONTENT --> 
+  <div class="main-slider-content" style="width:1000px; height:398px;">
+    <ul class="sliders-wrap-inner">
+                          <li>
+              <a href="/index.php/abge/noticias/detalle/165-Abge-promove-simp-sio-de-sucesso-em-cuiab">
+                <img title="ABGE promove Simpósio de sucesso em Cuiabá" alt="ABGE promove Simpósio de sucesso em Cuiabá" src="/uploads/news/banner_165_img_20150325_1545154.jpg" />              </a>  
+              <!--<div class="slider-description">
+                <div class="slider-meta"><a target="_parent" title="Newsflash 1" href="#Category-1">ABGE promove Simpósio de sucesso em...</a> <i> — 26-03-2015</i></div>
+                <p>...
+                  <a class="readmore" href="">
+                    Ler mais
+                  </a>
+                </p>
+              </div>-->
+            </li> 
+                                  <li>
+              <a href="/index.php/abge/noticias/detalle/93-Bento-gon-alves-rs-sediar-o-15-cbge-em-2015">
+                <img title="Bento Gonçalves-RS sediará o 15º CBGE em 2015" alt="Bento Gonçalves-RS sediará o 15º CBGE em 2015" src="/uploads/news/banner_93_15_cbge_horiz.jpg" />              </a>  
+              <!--<div class="slider-description">
+                <div class="slider-meta"><a target="_parent" title="Newsflash 1" href="#Category-1">Bento Gonçalves-RS sediará o 15º...</a> <i> — 15-01-2015</i></div>
+                <p>...
+                  <a class="readmore" href="">
+                    Ler mais
+                  </a>
+                </p>
+              </div>-->
+            </li> 
+                                  <li>
+              <a href="/index.php/abge/noticias/detalle/142-Abge-aborda-tbm-em-evento-de-sucesso">
+                <img title="ABGE aborda TBM em evento de sucesso" alt="ABGE aborda TBM em evento de sucesso" src="/uploads/news/banner_142_dsc09450_red.jpg" />              </a>  
+              <!--<div class="slider-description">
+                <div class="slider-meta"><a target="_parent" title="Newsflash 1" href="#Category-1">ABGE aborda TBM em evento de sucesso</a> <i> — 24-10-2014</i></div>
+                <p>...
+                  <a class="readmore" href="">
+                    Ler mais
+                  </a>
+                </p>
+              </div>-->
+            </li> 
+                      <!--
+        <li>
+                <div class="slider-description">
+          <div class="slider-meta"><a target="_parent" title="Newsflash 6" href="#">/ Newsflash 6 /</a>	<i> — Monday, February 15, 2010 12:42</i></div>
+          <h4>Content of Newsflash 6</h4>
+          <p>Joomla! 1.5 - 'Experience the Freedom'!. It has never been easier to create your own dynamic Web...
+            <a class="readmore" href="#">Read more </a>
+          </p>
+        </div>
+      </li> 
+      
+        -->
+    </ul>  	
+  </div>
+  <!-- END MAIN CONTENT -->
+  
+  <!-- NAVIGATOR -->
+  <div class="navigator-content">
+    <div class="navigator-wrapper">
+      <ul class="navigator-wrap-inner">
+                <li>
+          <div style="padding-top: 15px;">
+            <h3>ABGE promove Simpósio de sucesso em...</h3>
+            <span>26 de março de 2015</span> &nbsp;-&nbsp;
+            <a style="color: #FFF;" class="readmore" href="/index.php/abge/noticias/detalle/165-Abge-promove-simp-sio-de-sucesso-em-cuiab">
+                Veja Mais
+            </a>
+          </div>    
+        </li>
+                <li>
+          <div style="padding-top: 15px;">
+            <h3>Bento Gonçalves-RS sediará o 15º...</h3>
+            <span>15 de janeiro de 2015</span> &nbsp;-&nbsp;
+            <a style="color: #FFF;" class="readmore" href="/index.php/abge/noticias/detalle/93-Bento-gon-alves-rs-sediar-o-15-cbge-em-2015">
+                Veja Mais
+            </a>
+          </div>    
+        </li>
+                <li>
+          <div style="padding-top: 15px;">
+            <h3>ABGE aborda TBM em evento de sucesso</h3>
+            <span>24 de outubro de 2014</span> &nbsp;-&nbsp;
+            <a style="color: #FFF;" class="readmore" href="/index.php/abge/noticias/detalle/142-Abge-aborda-tbm-em-evento-de-sucesso">
+                Veja Mais
+            </a>
+          </div>    
+        </li>
+              </ul>
+    </div>
+    
+  </div> 
+  <!----------------- END OF NAVIGATOR --------------------->
+  
+  <div class="button-next">Next</div>
+  
+  <!-- BUTTON PLAY-STOP -->
+  <div class="button-control"><span></span></div>
+  <!-- END OF BUTTON PLAY-STOP -->
+</div> 
+      </div>
+    </div>
 
 
         </div> 
       </div>
     </div>
+
     <div id="page" class="container" style="padding-top: 15px;">
 
     	<div class="columna_lateral_home">
@@ -445,7 +589,7 @@
 
     </div>
 
-    <div class="div_float footer_container" style="position: fixed;bottom:0px;">
+    <div class="div_float footer_container" style="position: fixed;bottom:0px;z-index: 999;">
     	<div id="page" class="container" style="position: relative; height: 100%">
         	<div style="position: absolute; left: 10px; bottom: 10px; width: 814px;">
         		Secretaria Executiva ABGE <br> Av. Profº Almeida Prado, 532 - IPT (Prédio 11) - Cidade Universitária- SP 05508-901
