@@ -3,7 +3,7 @@
 
 <!-- Titulo de la pagina -->
 @section("title")
-	Cursos
+	{{ $page->title }}
 @stop
 
 <!-- Contenido principal -->

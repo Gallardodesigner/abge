@@ -84,14 +84,7 @@ input[type="text"],input[type="password"]{
     <div class="loginpanelinner">
         <div class="logo animate0 bounceIn"><img src="/assetsadmin/images/logo.png" alt="" /></div>
         <p align="center">
-        <strong>
-            <a href="{{ $route }}/cadastrofisica" style="color:rgb(220,220,220);font-family: Verdana;">PESSOA FÍSICA</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
-            <a href="{{ $route }}/cadastrojuridica" style="color:rgb(220,220,220);font-family: Verdana;">PESSOA JURÍDICA</a>
-        </strong>
-        </p>
-        <p align="center"> </p>
-        <p align="center"> </p>
+            
 		<div align="justify">
 			@if($page)
 				{{ $page->content }}

@@ -58,17 +58,17 @@
                             <?php $grandchildren = $child->children ?> 
                             @if(count($grandchildren) > 0)
                               <li>
-                                <a @if($page->content != '') href="{{ $child->url != '' ? $child->url : '/page/'.$child->name }}" @endif>{{ $child->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>  
+                                <a @if($child->content != '') href="{{ $child->url != '' ? $child->url : '/page/'.$child->name }}" @endif>{{ $child->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>  
                                 <ul style="top: 0px; left:174px !important; display: none; visibility: visible;">
                                   @foreach($grandchildren as $grandchild)
                                     <?php $bigchildren = $grandchild->children ?>
                                     @if(count($bigchildren) > 0)
                                       <li>
-                                        <a @if($page->content != '') href="{{ $grandchild->url != '' ? $grandchild->url : '/page/'.$grandchild->name }}" @endif>{{ $grandchild->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>
+                                        <a @if($grandchild->content != '') href="{{ $grandchild->url != '' ? $grandchild->url : '/page/'.$grandchild->name }}" @endif>{{ $grandchild->title }}<img src="/images/right.png" class="rightarrowclass" style="border:0;"></a>
                                         <ul style="top: 0px; left:174px !important; display: none; visibility: visible;">
                                           @foreach($bigchildren as $bigchild)
                                             <li>
-                                              <a @if($page->content != '') href="{{ $bigchild->url != '' ? $bigchild->url : '/page/'.$bigchild->name }}" @endif>{{ $bigchild->title }}</a>  
+                                              <a @if($bigchild->content != '') href="{{ $bigchild->url != '' ? $bigchild->url : '/page/'.$bigchild->name }}" @endif>{{ $bigchild->title }}</a>  
                                             </li>
                                           @endforeach
                                         </ul>

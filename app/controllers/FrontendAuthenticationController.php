@@ -80,6 +80,8 @@ class FrontendAuthenticationController extends \BaseController {
 			$associate->senha = md5($new_password);
 			$associate->save();
 
+			$user = null;
+
 			if($associate->associate != null):
 
 				$user = $associate->associate->getuser;
@@ -109,8 +111,18 @@ class FrontendAuthenticationController extends \BaseController {
 
 			endif;
 
-			var_dump($associate->email);
-			dd($new_password);
+			$data = array(
+			    'associate' => $associate,
+			    // 'user' => $user,
+			    'password' => $new_password
+			);
+
+			Mailgun::send('emails.password', $data, function($message) use ($associate)
+			{
+			    $message->to($associate->email, $associate->nombre_completo)->subject('Recuperación de Contraseña!');
+			});
+
+			return Redirect::to(self::$route);
 
 		else:
 

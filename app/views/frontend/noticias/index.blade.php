@@ -37,6 +37,8 @@
 
 	@if(count($noticias))
 
+		<?php setlocale(LC_TIME, 'portuguese');?>
+
 	    <div id="noticias_content">
 
 	        @foreach($noticias as $noticia)
