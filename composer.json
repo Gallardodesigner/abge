@@ -12,7 +12,8 @@
     	"intervention/image": "2.*",
     	"ollieread/multiauth": "dev-master",
     	"alexanderzon/laravel-hashids": "dev-master",
-    	"bogardo/mailgun": "3.1.*"
+    	"bogardo/mailgun": "3.1.*",
+    	"guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {
 		"classmap": [

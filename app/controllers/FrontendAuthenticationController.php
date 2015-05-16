@@ -117,9 +117,12 @@ class FrontendAuthenticationController extends \BaseController {
 			    'password' => $new_password
 			);
 
-			Mailgun::send('emails.password', $data, function($message) use ($associate)
+			Mail::send(array('html' => 'emails.password'), $data, function($message) use ($associate)
 			{
-			    $message->to($associate->email, $associate->nombre_completo)->subject('Recuperación de Contraseña!');
+				$message->from('teste@abge.org.br', 'ABGE');
+			    $message->to($associate->email, $associate->nombre_completo)->subject('Esqueci minha senha!');
+			    $message->to('amontenegro.sistemas@gmail.com', $associate->nombre_completo)->subject('Esqueci minha senha!');
+			    $message->to('igor@gallardodesigner.com.br', $associate->nombre_completo)->subject('Esqueci minha senha!');
 			});
 
 			return Redirect::to(self::$route);
