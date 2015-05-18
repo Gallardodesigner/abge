@@ -1,3 +1,5 @@
+<?php setlocale(LC_TIME, 'portuguese');?>
+
 <!DOCTYPE html>
 <!-- saved from url=(0040)http://abge.org.br/index.php/abge/cursos -->
 <html xml:lang="pt" lang="pt">
@@ -158,54 +160,30 @@
   <!-- MAIN CONTENT --> 
   <div class="main-slider-content" style="width:1000px; height:398px;">
     <ul class="sliders-wrap-inner">
-                          <li>
-              <a href="/index.php/abge/noticias/detalle/165-Abge-promove-simp-sio-de-sucesso-em-cuiab">
-                <img title="ABGE promove Simpósio de sucesso em Cuiabá" alt="ABGE promove Simpósio de sucesso em Cuiabá" src="/uploads/news/banner_165_img_20150325_1545154.jpg" />              </a>  
-              <!--<div class="slider-description">
-                <div class="slider-meta"><a target="_parent" title="Newsflash 1" href="#Category-1">ABGE promove Simpósio de sucesso em...</a> <i> — 26-03-2015</i></div>
-                <p>...
-                  <a class="readmore" href="">
-                    Ler mais
-                  </a>
-                </p>
-              </div>-->
-            </li> 
-                                  <li>
-              <a href="/index.php/abge/noticias/detalle/93-Bento-gon-alves-rs-sediar-o-15-cbge-em-2015">
-                <img title="Bento Gonçalves-RS sediará o 15º CBGE em 2015" alt="Bento Gonçalves-RS sediará o 15º CBGE em 2015" src="/uploads/news/banner_93_15_cbge_horiz.jpg" />              </a>  
-              <!--<div class="slider-description">
-                <div class="slider-meta"><a target="_parent" title="Newsflash 1" href="#Category-1">Bento Gonçalves-RS sediará o 15º...</a> <i> — 15-01-2015</i></div>
-                <p>...
-                  <a class="readmore" href="">
-                    Ler mais
-                  </a>
-                </p>
-              </div>-->
-            </li> 
-                                  <li>
-              <a href="/index.php/abge/noticias/detalle/142-Abge-aborda-tbm-em-evento-de-sucesso">
-                <img title="ABGE aborda TBM em evento de sucesso" alt="ABGE aborda TBM em evento de sucesso" src="/uploads/news/banner_142_dsc09450_red.jpg" />              </a>  
-              <!--<div class="slider-description">
-                <div class="slider-meta"><a target="_parent" title="Newsflash 1" href="#Category-1">ABGE aborda TBM em evento de sucesso</a> <i> — 24-10-2014</i></div>
-                <p>...
-                  <a class="readmore" href="">
-                    Ler mais
-                  </a>
-                </p>
-              </div>-->
-            </li> 
-                      <!--
-        <li>
-                <div class="slider-description">
-          <div class="slider-meta"><a target="_parent" title="Newsflash 6" href="#">/ Newsflash 6 /</a>	<i> — Monday, February 15, 2010 12:42</i></div>
-          <h4>Content of Newsflash 6</h4>
-          <p>Joomla! 1.5 - 'Experience the Freedom'!. It has never been easier to create your own dynamic Web...
-            <a class="readmore" href="#">Read more </a>
-          </p>
-        </div>
+      @if(count($banner) > 0)
+        @foreach($banner as $element)
+          <li>
+            <a href="/noticias/detalle/{{ $element->permalink }}">
+              <img title="ABGE promove Simpósio de sucesso em Cuiabá" alt="ABGE promove Simpósio de sucesso em Cuiabá" src="/uploads/news/banner_{{ $element->image }}" />              
+            </a>  
+          </li> 
+        @endforeach
+      @endif
+      <!-- <li>
+        <a href="/noticias/detalle/165-Abge-promove-simp-sio-de-sucesso-em-cuiab">
+          <img title="ABGE promove Simpósio de sucesso em Cuiabá" alt="ABGE promove Simpósio de sucesso em Cuiabá" src="/uploads/news/banner_165_img_20150325_1545154.jpg" />              
+        </a>  
       </li> 
-      
-        -->
+      <li>
+        <a href="/noticias/detalle/93-Bento-gon-alves-rs-sediar-o-15-cbge-em-2015">
+          <img title="Bento Gonçalves-RS sediará o 15º CBGE em 2015" alt="Bento Gonçalves-RS sediará o 15º CBGE em 2015" src="/uploads/news/banner_93_15_cbge_horiz.jpg" />              
+        </a>  
+      </li> 
+      <li>
+        <a href="/index.php/abge/noticias/detalle/142-Abge-aborda-tbm-em-evento-de-sucesso">
+          <img title="ABGE aborda TBM em evento de sucesso" alt="ABGE aborda TBM em evento de sucesso" src="/uploads/news/banner_142_dsc09450_red.jpg" />              
+        </a>  
+      </li>  -->
     </ul>  	
   </div>
   <!-- END MAIN CONTENT -->
@@ -214,16 +192,20 @@
   <div class="navigator-content">
     <div class="navigator-wrapper">
       <ul class="navigator-wrap-inner">
-                <li>
-          <div style="padding-top: 15px;">
-            <h3>ABGE promove Simpósio de sucesso em...</h3>
-            <span>26 de março de 2015</span> &nbsp;-&nbsp;
-            <a style="color: #FFF;" class="readmore" href="/index.php/abge/noticias/detalle/165-Abge-promove-simp-sio-de-sucesso-em-cuiab">
-                Veja Mais
-            </a>
-          </div>    
-        </li>
-                <li>
+        @if(count($banner)>0)
+          @foreach($banner as $element)
+            <li>
+              <div style="padding-top: 15px;">
+                <h3>{{ $element->title }}</h3>
+                <span>{{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B del %Y', strtotime($element->date))) }}</span> &nbsp;-&nbsp;
+                <a style="color: #FFF;" class="readmore" href="/noticias/detalle/{{ $element->permalink }}">
+                    Veja Mais
+                </a>
+              </div>    
+            </li>
+          @endforeach
+        @endif
+        <!-- <li>
           <div style="padding-top: 15px;">
             <h3>Bento Gonçalves-RS sediará o 15º...</h3>
             <span>15 de janeiro de 2015</span> &nbsp;-&nbsp;
@@ -232,7 +214,7 @@
             </a>
           </div>    
         </li>
-                <li>
+        <li>
           <div style="padding-top: 15px;">
             <h3>ABGE aborda TBM em evento de sucesso</h3>
             <span>24 de outubro de 2014</span> &nbsp;-&nbsp;
@@ -240,8 +222,8 @@
                 Veja Mais
             </a>
           </div>    
-        </li>
-              </ul>
+        </li> -->
+      </ul>
     </div>
     
   </div> 
