@@ -420,13 +420,18 @@
         <p><img src="/images/preload.gif"> Loading...</p>
     </div>
     <div id="content_newsletter">
+    <style>
+      table, tr, td{
+        border:0px !important;
+      }
+    </style>
     <!--<form id="frm_newsletter" action="" method="post" >-->
         <table border="0" cellpadding="0" cellspacing="5">
             <tbody>                
                 <tr>
                     <td align="center" style="padding: 0px !important;">
                         <div id="frmLogin">
-                                                                                    <table cellpadding="0" cellspacing="3" border="0" style="margin-top: 0px;margin-bottom: 20px;border:0px !important">
+                                                                                    <table cellpadding="0" cellspacing="3" border="0" style="margin-top: 0px;margin-bottom: 20px;">
                                 <tbody><tr align="left">
                                     <td>
                                         <label for="newsletter_nombre">Nome</label><br>
