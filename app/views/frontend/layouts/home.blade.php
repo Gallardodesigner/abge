@@ -297,7 +297,7 @@
   Publicações
   
   <div class="link_ver_todos" style="position: absolute; right: 0; top: 0;">
-    <a href="http://abge.org.br/magento/" target="_blank" "="">Ver todos</a>    
+    <a href="http://abge.org.br/magento/" target="_blank">Ver todos</a>    
   </div>
   
 </div>
@@ -341,49 +341,7 @@
    if (document.context) document.write ("&context=" + escape(document.context));
    if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
    document.write ("'><\/scr"+"ipt>");
-//]]>--></script><script type="text/javascript" src="http://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php?zoneid=4&amp;cb=41235144086&amp;charset=UTF-8&amp;loc=http%3A//abge.org.br/"></script><img src="http://abge1.hospedagemdesites.ws/openx/www/images/d93417bb7e58d86d929ab7d73d877afe.jpg" width="120" height="168" alt="" title="" border="0"><div id="beacon_63ce2dca10" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="http://abge1.hospedagemdesites.ws/openx/www/delivery/lg.php?bannerid=68&amp;campaignid=37&amp;zoneid=4&amp;loc=http%3A%2F%2Fabge.org.br%2F&amp;cb=63ce2dca10" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
-<noscript>&lt;a href='http://abge1.hospedagemdesites.ws/openx/www/delivery/ck.php?n=ae7d02a7&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://abge1.hospedagemdesites.ws/openx/www/delivery/avw.php?zoneid=4&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=ae7d02a7' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
-
-
-<!--Zona - livro 2-->
-
-
-<!--/* OpenX Javascript Tag v2.8.10 */-->
-
-<!--/*
-  * The backup image section of this tag has been generated for use on a
-  * non-SSL page. If this tag is to be placed on an SSL page, change the
-  *   'http://abge1.hospedagemdesites.ws/openx/www/delivery/...'
-  * to
-  *   'https://abge1.hospedagemdesites.ws/openx/www/delivery/...'
-  *
-  * This noscript section of this tag only shows image banners. There
-  * is no width or height in these banners, so if you want these tags to
-  * allocate space for the ad before it shows, you will need to add this
-  * information to the <img> tag.
-  *
-  * If you do not want to deal with the intricities of the noscript
-  * section, delete the tag (from <noscript>... to </noscript>). On
-  * average, the noscript tag is called from less than 1% of internet
-  * users.
-  */-->
-
-<script type="text/javascript"><!--//<![CDATA[
-   var m3_u = (location.protocol=='https:'?'https://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php':'http://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php');
-   var m3_r = Math.floor(Math.random()*99999999999);
-   if (!document.MAX_used) document.MAX_used = ',';
-   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-   document.write ("?zoneid=5");
-   document.write ('&amp;cb=' + m3_r);
-   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-   document.write ("&amp;loc=" + escape(window.location));
-   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-   if (document.context) document.write ("&context=" + escape(document.context));
-   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
-   document.write ("'><\/scr"+"ipt>");
-//]]>--></script><script type="text/javascript" src="http://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php?zoneid=5&amp;cb=73155891801&amp;charset=UTF-8&amp;loc=http%3A//abge.org.br/"></script><img src="http://abge1.hospedagemdesites.ws/openx/www/images/326b1e40d5dc461f272f42711efcd84a.jpg" width="120" height="168" alt="" title="" border="0"><div id="beacon_e023a26c19" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="http://abge1.hospedagemdesites.ws/openx/www/delivery/lg.php?bannerid=70&amp;campaignid=39&amp;zoneid=5&amp;loc=http%3A%2F%2Fabge.org.br%2F&amp;cb=e023a26c19" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
-<noscript>&lt;a href='http://abge1.hospedagemdesites.ws/openx/www/delivery/ck.php?n=a49cc322&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'&gt;&lt;img src='http://abge1.hospedagemdesites.ws/openx/www/delivery/avw.php?zoneid=5&amp;amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;amp;n=a49cc322' border='0' alt='' /&gt;&lt;/a&gt;</noscript>
+//]]>--></script><script type="text/javascript" src="http://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php?zoneid=4&amp;cb=41235144086&amp;charset=UTF-8&amp;loc=http%3A//abge.org.br/"></script><div id="beacon_63ce2dca10" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="http://abge1.hospedagemdesites.ws/openx/www/delivery/lg.php?bannerid=68&amp;campaignid=37&amp;zoneid=4&amp;loc=http%3A%2F%2Fabge.org.br%2F&amp;cb=63ce2dca10" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
 </div>  </div>
   
   <div class="home_article">
@@ -431,7 +389,7 @@
                 <tr>
                     <td align="center" style="padding: 0px !important;">
                         <div id="frmLogin">
-                                                                                    <table cellpadding="0" cellspacing="3" border="0" style="margin-top: 0px;margin-bottom: 20px;">
+                                                                                    <table cellpadding="0" cellspacing="3" border="0" style="margin-top: 0px;margin-bottom: 20px;>
                                 <tbody><tr align="left">
                                     <td>
                                         <label for="newsletter_nombre">Nome</label><br>
