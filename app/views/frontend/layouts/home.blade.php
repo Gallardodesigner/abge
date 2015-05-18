@@ -426,7 +426,7 @@
                 <tr>
                     <td align="center" style="padding: 0px !important;">
                         <div id="frmLogin">
-                                                                                    <table cellpadding="0" cellspacing="3" border="0" style="margin-top: 0px;margin-bottom: 20px;">
+                                                                                    <table cellpadding="0" cellspacing="3" border="0" style="margin-top: 0px;margin-bottom: 20px;border:0px !important">
                                 <tbody><tr align="left">
                                     <td>
                                         <label for="newsletter_nombre">Nome</label><br>
