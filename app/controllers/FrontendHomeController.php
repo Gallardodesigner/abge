@@ -27,8 +27,15 @@ class FrontendHomeController extends \BaseController {
 
 
 	public function getCorreomasivo(){
-		// $campos = Input::all();
-		dd( "Juan Lopez");
+		 $campos = Input::get('newsletter');
+		// dd( "Juan Lopez");
+
+		$correo = new Newsletters();
+		$correo->name = $campos["nombre"];
+		$correo->email = $campos["email"];
+		$correo->save();
+		return "Datos guardados con Exito";
+		// return $campos;
 	}
 
 }
