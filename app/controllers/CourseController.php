@@ -82,13 +82,16 @@ class CourseController extends \BaseController {
 				)
 			);
 			*/
-		$image = Input::file('header');
+		$header = Input::file('header');
+		$image = Input::file('image');
 		$validator = Validator::make(
 			array(
+				'header' => $header,
 				'image' => $image,
 				), 
 			array(
-				'image' => 'mimes:png,jpeg,gif'
+				'header' => 'mimes:png,jpeg,gif',
+				'image' => 'mimes:png,jpeg,gif',
 				),
 			array(
 				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
@@ -100,54 +103,64 @@ class CourseController extends \BaseController {
 
 		else:
 
-			if($image!=""):
-				$filename = $this->uploadHeader($image);
+			if($header!=""):
+				$headerfilename = $this->uploadHeader($header);
 			else:
-				$filename = "";
+				$headerfilename = "";
 			endif;
 
-		$course = new Courses();
-		$course->title = Input::get('title');
-		$course->description = Input::get('description');
-		$course->header = $filename;/*
-		$course->description = Input::get('description');
-		$course->inscription = Input::get('inscription');
-		$course->associates_payment = Input::get('associates_payment');
-		$course->participants_payment = Input::get('participants_payment');
-		$course->associates_message = Input::get('associates_message');
-		$course->program = Input::get('program');
-		$course->participants_message = Input::get('participants_message');*/
-		$course->category_id = Input::get('category_id');
-		$course->company_id = Input::get('company_id');
-		$course->event_id = Input::get('event_id');
-		$course->type = Input::get('type');
-		$course->route = Input::get('route');
-		$course->min = Input::get('min');
-		$course->max = Input::get('max');
-		$course->min_message = Input::get('min_message');
-		$course->max_message = Input::get('max_message');
-		$course->address = Input::get('address');
-		$course->start = date("Y-m-d", strtotime(Input::get('start')));
-		$course->end = date("Y-m-d", strtotime(Input::get('end')));
+			if($image!=""):
+				$imagefilename = $this->uploadCourseImage($image);
+			else:
+				$imagefilename = "";
+			endif;
 
-		if($course->save()):
+			$course = new Courses();
+			$course->title = Input::get('title');
+			$course->description = Input::get('description');
+			$course->header = $headerfilename;
+			$course->image = $imagefilename;
+			/*
+			$course->description = Input::get('description');
+			$course->inscription = Input::get('inscription');
+			$course->associates_payment = Input::get('associates_payment');
+			$course->participants_payment = Input::get('participants_payment');
+			$course->associates_message = Input::get('associates_message');
+			$course->program = Input::get('program');
+			$course->participants_message = Input::get('participants_message');
+			*/
+			$course->category_id = Input::get('category_id');
+			$course->company_id = Input::get('company_id');
+			$course->event_id = Input::get('event_id');
+			$course->type = Input::get('type');
+			$course->route = Input::get('route');
+			$course->min = Input::get('min');
+			$course->max = Input::get('max');
+			$course->min_message = Input::get('min_message');
+			$course->max_message = Input::get('max_message');
+			$course->address = Input::get('address');
+			$course->start = date("Y-m-d", strtotime(Input::get('start')));
+			$course->end = date("Y-m-d", strtotime(Input::get('end')));
 
-			/*$teachers = Input::get('teachers');
-			$course->teachers()->sync($teachers);
-			$promotioners = Input::get('promotioners');
-			$course->promotioners()->sync($promotioners);
-			$supporters = Input::get('supporters');
-			$course->supporters()->sync($supporters);*/
-			$sections = Input::get('section');
-			$course->sections()->sync($sections);
+			if($course->save()):
 
-			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $course->title )));
+				/*$teachers = Input::get('teachers');
+				$course->teachers()->sync($teachers);
+				$promotioners = Input::get('promotioners');
+				$course->promotioners()->sync($promotioners);
+				$supporters = Input::get('supporters');
+				$course->supporters()->sync($supporters);*/
+				$sections = Input::get('section');
+				$course->sections()->sync($sections);
 
-		else:
+				return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $course->title )));
 
-			return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $course->title )));
+			else:
 
-		endif;
+				return Redirect::to($this->route)->with('msg_error', Lang::get('messages.companies_create_err', array( 'title' => $course->title )));
+
+			endif;
+
 		endif;
 
 	}
@@ -209,16 +222,25 @@ class CourseController extends \BaseController {
 	{
 
 		$course = Courses::find($id);
-		$image = Input::file('header');
+		$header = Input::file('header');
+		$image = Input::file('image');
+		
+		if($header!=""):
+			$headerfilename = $this->uploadHeader($header);
+		else:
+			$headerfilename = Input::get('imghidden');
+		endif;
 		
 		if($image!=""):
-			$filename = $this->uploadHeader($image);
+			$imagefilename = $this->uploadCourseImage($image);
 		else:
-			$filename = Input::get('imghidden');
+			$imagefilename = $course->image;
 		endif;
+
 		$course->title = Input::get('title');
 		$course->description = Input::get('description');
-		$course->header = $filename;
+		$course->header = $headerfilename;
+		$course->image = $imagefilename;
 		$course->category_id = Input::get('category_id');
 		$course->company_id = Input::get('company_id');
 		$course->event_id = Input::get('event_id');
@@ -474,6 +496,29 @@ class CourseController extends \BaseController {
 		for ($i=0; $i <count($width) ; $i++):
 
 			$path = public_path('uploads/headers/'.$nombres[$i]);
+			Image::make($image->getRealPath())->resize($width[$i],null,function ($constraint) {$constraint->aspectRatio();})->save($path);
+		
+		endfor;
+
+		return $filename;
+		
+	}
+
+	public function uploadCourseImage($image){
+
+		//dd(storage_path('uploads/'));
+
+		$info_image = getimagesize($image);
+		$ratio = $info_image[0] / $info_image[1];
+		$newheight=array();
+		$width=array("200");
+		#$filename = "prueba.".$image->getClientOriginalExtension();
+		$filename = str_replace('/', '!', Hash::make($image->getClientOriginalName().date('Y-m-d H:i:s'))).".".$image->getClientOriginalExtension();
+		$nombres=[$filename];
+
+		for ($i=0; $i <count($width) ; $i++):
+
+			$path = public_path('uploads/courses/'.$nombres[$i]);
 			Image::make($image->getRealPath())->resize($width[$i],null,function ($constraint) {$constraint->aspectRatio();})->save($path);
 		
 		endfor;

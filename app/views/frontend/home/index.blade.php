@@ -122,7 +122,7 @@
           @foreach($courses as $element)
             <div style="float: left; padding-top: 0px;">
               <div style="float: left; width: 60px; height: 72px;">
-                <img class="borderImage" src="/uploads/courses/small_{{ $element->image }}">                      
+                <img class="borderImage" src="/uploads/courses/{{ $element->image }}" width="60">                      
               </div>        
               <div style="float: left; padding: 0 0 0px 19px; width: 320px; min-height: 60px; position: relative;">
                 <h5>
