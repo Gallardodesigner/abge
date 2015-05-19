@@ -325,6 +325,10 @@ Courses
                                         <span class="field"><input type="file" name="header" id="header" class="btn btn-primary" /></span>
                                     </p>
                                     <p>
+                                        <label>Image</label>
+                                        <span class="field"><input type="file" name="image" id="image" class="btn btn-primary" /></span>
+                                    </p>
+                                    <p>
                                         <label>Company</label>
                                         <span class="field">
                                             @if (isset($companies))

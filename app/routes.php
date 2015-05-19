@@ -88,7 +88,7 @@ endif;
 	Route::controller('/autenticacao', 'AuthenticationController');
 	Route::controller('/entrar', 'FrontendAuthenticationController');
 	Route::controller('/anuidades', 'FrontendAnnuityController');
-	Route::controller('/courses/{id?}/{content?}/{idContent?}', 'FrontendCourseController');
+	Route::controller('/cursos/{id?}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/page/{name?}', 'FrontendPageController');
 	Route::controller('/consultores', 'FrontendConsultoresController');
 	Route::controller('/videos', 'FrontendVideoController');
