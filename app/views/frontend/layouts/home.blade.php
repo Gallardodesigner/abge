@@ -43,7 +43,7 @@
 
         <div id="header" class="div_float">
           	<div style="padding: 13px 8px 15px 10px; float: left;">
-            	<a href="/"><img src="/assets/frontend/img/logo_header.png"></a>  
+            	<a href="http://abge.org.br/index.php/"><img src="/assets/frontend/img/logo_header.png"></a>  
             </div>
             <div style="float:left; margin-left: 430px;margin-top: 20px;">
               	<a href="https://www.facebook.com/abge.abge" target="_blank"><img src="/assets/frontend/img/face-abge.jpg" border="0"></a>
@@ -284,7 +284,7 @@
     <div id="slider-banco" class="lof-slidecontent">      
       <!-- MAIN CONTENT --> 
       <div class="main-slider-content" style="width:250px; height:168px;">
-              <a href="/page/banco-de-ensino"><img src="/images/frontend/img-banco-geologia-no-brasil.jpg"></a>
+              <a href="http://www.abge.org.br/index.php/abge/banco-de-ensino"><img src="/images/frontend/img-banco-geologia-no-brasil.jpg"></a>
       </div>
       <!-- END MAIN CONTENT -->
       <!-- END OF BUTTON PLAY-STOP -->
@@ -346,25 +346,23 @@
   
   <div class="home_article">
     <div class="home_article_title texto_azul" style="position: relative;">
-      Vídeos
-      <div style="position: absolute; right: 0; top: 0;">
-        <a class="link_ver_todos" href="/videos">Ver todos</a>  
-      </div>
-    </div>
-    @if($video != null)
-    <div class="div_float">
-      <div class="column span-4 first">
-        <div class="column span-4 last frameVideo" style="width: 250px; height: 187px; background-color: #fff; border: none;">
-          <a href="/videos/ver/{{ $video->getBitURI() }}">
-            <div class="video" style="margin-top: 3px; ">
-              <img src="{{ $video->getYoutubeImage() }}" class="lateral">
+  Vídeos
+  <div style="position: absolute; right: 0; top: 0;">
+    <a class="link_ver_todos" href="/index.php/abge/videos">Ver todos</a>  </div>
+</div>
+
+<div class="div_float">
+          <div class="column span-4 first">
+            <div class="column span-4 last frameVideo" style="width: 250px; height: 187px; background-color: #fff; border: none;">
+                <a href="/index.php/abge/videos/8-AreasDe">
+                <div class="video" style="margin-top: 3px; ">
+                    <img src="http://img.youtube.com/vi/bhKWHx08jFA/0.jpg" class="lateral">
+                </div>
+                </a>
             </div>
-          </a>
+            
         </div>
-      </div>
-    </div>  
-    @endif
-  </div>
+    </div>  </div>
   
   <div class="home_article">
     <div class="div_float">
@@ -376,7 +374,7 @@
 </div>
 
 <div class="div_float">
-    <form id="frm_newsletter" onsubmit="jQuery.ajax({type:'GET',data:jQuery(this).serialize(),success:function(data, textStatus){console.log(data);},beforeSend:function(XMLHttpRequest){$('#indicator').show();$('#content_newsletter').hide();},complete:function(XMLHttpRequest, textStatus){$('#indicator').hide();$('#content_newsletter').show();},url:'/correomasivo'}); return false;" action="#" method="get">    <div id="indicator" class="" align="left" style="display: none;">
+    <form id="frm_newsletter" onsubmit="jQuery.ajax({type:'get',data:jQuery(this).serialize(),success:function(data, textStatus){jQuery('#content_newsletter').html(data);},beforeSend:function(XMLHttpRequest){$('#indicator').show();$('#content_newsletter').hide();},complete:function(XMLHttpRequest, textStatus){$('#indicator').hide();$('#content_newsletter').show();},url:'/correomasivo'}); return false;" action="#" method="get">    <div id="indicator" class="" align="left" style="display: none;">
         <p><img src="/images/preload.gif"> Loading...</p>
     </div>
     <div id="content_newsletter">
@@ -459,7 +457,7 @@
 				</div>
 	    		
 	    		<div style="position: relative;top: 0px;">
-	        		<a style="font-size: 12px; float: right; text-decoration: underline;" href="/page/socio-patro">Ver todos</a>
+	        		<a style="font-size: 12px; float: right; text-decoration: underline;" href="http://abge.org.br/index.php/abge/socios-patrocinadore">Ver todos</a>
 	        	</div>
 	      	
 	      	</div>
@@ -494,7 +492,7 @@
 		    	<div style="position: relative;top: 0px;">
 		    
 		    		<br>
-		      		<a style="font-size: 12px; float: right; text-decoration: underline; margin-top:10px;" href="/page/apoio">Ver Todos</a>
+		      		<a style="font-size: 12px; float: right; text-decoration: underline; margin-top:10px;" href="http://abge.org.br/index.php/abge/apoio">Ver Todos</a>
 
 		      	</div>
     
@@ -528,7 +526,7 @@
 				</div>
 
 				<div style="position: relative;top: 0px;">
-					<a style="font-size: 12px; float: right; text-decoration: underline;" href="/page/entidades">Ver Todos</a>
+					<a style="font-size: 12px; float: right; text-decoration: underline;" href="http://abge.org.br/index.php/abge/entidades">Ver Todos</a>
 				</div>
 			
 			</div>
