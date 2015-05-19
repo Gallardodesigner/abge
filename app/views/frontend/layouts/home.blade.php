@@ -374,7 +374,7 @@
 </div>
 
 <div class="div_float">
-    <form id="frm_newsletter" onsubmit="jQuery.ajax({type:'POST',dataType:'html',data:jQuery(this).serialize(),success:function(data, textStatus){jQuery('#content_newsletter').html(data);},beforeSend:function(XMLHttpRequest){$('#indicator').show();$('#content_newsletter').hide();},complete:function(XMLHttpRequest, textStatus){$('#indicator').hide();$('#content_newsletter').show();},url:'/index.php/ajax/recibirNoticia'}); return false;" action="/index.php/ajax/recibirNoticia" method="post">    <div id="indicator" class="" align="left" style="display: none;">
+    <form id="frm_newsletter" onsubmit="jQuery.ajax({type:'POST',dataType:'html',data:jQuery(this).serialize(),success:function(data, textStatus){console.log(data);},beforeSend:function(XMLHttpRequest){$('#indicator').show();$('#content_newsletter').hide();},complete:function(XMLHttpRequest, textStatus){$('#indicator').hide();$('#content_newsletter').show();},url:'/Correomasivo'}); return false;" action="#" method="post">    <div id="indicator" class="" align="left" style="display: none;">
         <p><img src="/images/preload.gif"> Loading...</p>
     </div>
     <div id="content_newsletter">
@@ -389,16 +389,16 @@
                 <tr>
                     <td align="center" style="padding: 0px !important;">
                         <div id="frmLogin">
-                                                                                    <table cellpadding="0" cellspacing="3" border="0" style="margin-top: 0px;margin-bottom: 20px;>
+                                                                                    <table cellpadding="0" cellspacing="3" border="0" style="margin-top: 0px;margin-bottom: 20px;">
                                 <tbody><tr align="left">
                                     <td>
                                         <label for="newsletter_nombre">Nome</label><br>
-                                        <input class="validate[required]" size="30" type="text" name="newsletter[nombre]" id="newsletter_nombre">                                    </td>
+                                        <input class="validate[required]" size="30" type="text" name="newsletter[nombre]" id="newsletter_nombre" required>                                    </td>
                                 </tr>
                                 <tr align="left">
                                     <td style="background-color: #FFF !important;">
                                         <label for="newsletter_email">Email</label><br>
-                                        <input class="validate[required]" size="30" type="text" name="newsletter[email]" id="newsletter_email">                                    </td>
+                                        <input class="validate[required]" size="30" type="text" name="newsletter[email]" id="newsletter_email" required>                                    </td>
                                 </tr>
                                 <tr>
 

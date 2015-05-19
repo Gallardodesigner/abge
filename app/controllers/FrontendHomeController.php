@@ -22,4 +22,10 @@ class FrontendHomeController extends \BaseController {
 		
 	}
 
+
+	public function postCorreomasivo(){
+		// $campos = Input::all();
+		echo "Juan Lopez";
+	}
+
 }
