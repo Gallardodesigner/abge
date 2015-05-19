@@ -284,7 +284,7 @@
     <div id="slider-banco" class="lof-slidecontent">      
       <!-- MAIN CONTENT --> 
       <div class="main-slider-content" style="width:250px; height:168px;">
-              <a href="http://www.abge.org.br/index.php/abge/banco-de-ensino"><img src="/images/frontend/img-banco-geologia-no-brasil.jpg"></a>
+              <a href="/page/banco-de-ensino"><img src="/images/frontend/img-banco-geologia-no-brasil.jpg"></a>
       </div>
       <!-- END MAIN CONTENT -->
       <!-- END OF BUTTON PLAY-STOP -->
@@ -494,7 +494,7 @@
 				</div>
 	    		
 	    		<div style="position: relative;top: 0px;">
-	        		<a style="font-size: 12px; float: right; text-decoration: underline;" href="http://abge.org.br/index.php/abge/socios-patrocinadore">Ver todos</a>
+	        		<a style="font-size: 12px; float: right; text-decoration: underline;" href="/page/socio-patro">Ver todos</a>
 	        	</div>
 	      	
 	      	</div>
@@ -529,7 +529,7 @@
 		    	<div style="position: relative;top: 0px;">
 		    
 		    		<br>
-		      		<a style="font-size: 12px; float: right; text-decoration: underline; margin-top:10px;" href="http://abge.org.br/index.php/abge/apoio">Ver Todos</a>
+		      		<a style="font-size: 12px; float: right; text-decoration: underline; margin-top:10px;" href="/page/apoio">Ver Todos</a>
 
 		      	</div>
     
@@ -563,7 +563,7 @@
 				</div>
 
 				<div style="position: relative;top: 0px;">
-					<a style="font-size: 12px; float: right; text-decoration: underline;" href="http://abge.org.br/index.php/abge/entidades">Ver Todos</a>
+					<a style="font-size: 12px; float: right; text-decoration: underline;" href="/page/entidades">Ver Todos</a>
 				</div>
 			
 			</div>

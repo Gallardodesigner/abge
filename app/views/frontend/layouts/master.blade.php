@@ -25,7 +25,7 @@
 <body>
 <style>
   table, tr, td{
-  border:1px solid;
+  border:0px solid !important;
 }
 
 
@@ -119,13 +119,13 @@
     </div>
     <div id="page" class="container" style="padding-top: 15px;">
 
-		<div class="left_column">
+		<div class="left_column" style="margin-bottom:62px">
         
         	@yield("maincontent")
 
 		</div>
 
-		<div class="right_column">
+		<div class="right_column" style="margin-bottom:62px">
 
             <div class="home_article">
                   
@@ -158,7 +158,7 @@
 				</div>
 	    		
 	    		<div style="position: relative;top: 0px;">
-	        		<a style="font-size: 12px; float: right; text-decoration: underline;" href="http://abge.org.br/index.php/abge/socios-patrocinadore">Ver todos</a>
+	        		<a style="font-size: 12px; float: right; text-decoration: underline;" href="/page/socio-patro">Ver todos</a>
 	        	</div>
 	      	
 	      	</div>
@@ -193,7 +193,7 @@
 		    	<div style="position: relative;top: 0px;">
 		    
 		    		<br>
-		      		<a style="font-size: 12px; float: right; text-decoration: underline; margin-top:10px;" href="http://abge.org.br/index.php/abge/apoio">Ver Todos</a>
+		      		<a style="font-size: 12px; float: right; text-decoration: underline; margin-top:10px;" href="/page/apoio">Ver Todos</a>
 
 		      	</div>
     
@@ -227,7 +227,7 @@
 				</div>
 
 				<div style="position: relative;top: 0px;">
-					<a style="font-size: 12px; float: right; text-decoration: underline;" href="http://abge.org.br/index.php/abge/entidades">Ver Todos</a>
+					<a style="font-size: 12px; float: right; text-decoration: underline;" href="/page/entidades">Ver Todos</a>
 				</div>
 			
 			</div>
