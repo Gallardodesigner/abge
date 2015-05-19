@@ -376,7 +376,7 @@
 </div>
 
 <div class="div_float">
-    <form id="frm_newsletter" onsubmit="jQuery.ajax({type:'POST',dataType:'html',data:jQuery(this).serialize(),success:function(data, textStatus){console.log(data);},beforeSend:function(XMLHttpRequest){$('#indicator').show();$('#content_newsletter').hide();},complete:function(XMLHttpRequest, textStatus){$('#indicator').hide();$('#content_newsletter').show();},url:'/Correomasivo'}); return false;" action="#" method="post">    <div id="indicator" class="" align="left" style="display: none;">
+    <form id="frm_newsletter" onsubmit="jQuery.ajax({type:'GET',data:jQuery(this).serialize(),success:function(data, textStatus){console.log(data);},beforeSend:function(XMLHttpRequest){$('#indicator').show();$('#content_newsletter').hide();},complete:function(XMLHttpRequest, textStatus){$('#indicator').hide();$('#content_newsletter').show();},url:'/Correomasivo'}); return false;" action="#" method="get">    <div id="indicator" class="" align="left" style="display: none;">
         <p><img src="/images/preload.gif"> Loading...</p>
     </div>
     <div id="content_newsletter">

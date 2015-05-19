@@ -93,6 +93,7 @@ endif;
 	Route::controller('/consultores', 'FrontendConsultoresController');
 	Route::controller('/videos', 'FrontendVideoController');
 	Route::controller('/noticias', 'FrontendNoticiasController');
+	Route::get('/correomasivo','FrontendHomeController@getCorreomasivo');
 	Route::controller('/{id}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/', 'FrontendHomeController');
 
