@@ -91,6 +91,7 @@ endif;
 	Route::controller('/courses/{id?}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/page/{name?}', 'FrontendPageController');
 	Route::controller('/consultores', 'FrontendConsultoresController');
+	Route::controller('/videos', 'FrontendVideoController');
 	Route::controller('/noticias', 'FrontendNoticiasController');
 	Route::controller('/{id}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/', 'FrontendHomeController');

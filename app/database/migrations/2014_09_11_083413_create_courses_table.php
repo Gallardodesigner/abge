@@ -28,6 +28,7 @@ class CreateCoursesTable extends Migration {
 			$table->integer('category_id');
 			$table->integer('event_id');
 			$table->string('route');
+			$table->string('image');
 			$table->string('type');
 			$table->string('status');
 			$table->timestamps();

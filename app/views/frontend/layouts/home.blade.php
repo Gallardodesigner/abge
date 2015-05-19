@@ -43,7 +43,7 @@
 
         <div id="header" class="div_float">
           	<div style="padding: 13px 8px 15px 10px; float: left;">
-            	<a href="http://abge.org.br/index.php/"><img src="/assets/frontend/img/logo_header.png"></a>  
+            	<a href="/"><img src="/assets/frontend/img/logo_header.png"></a>  
             </div>
             <div style="float:left; margin-left: 430px;margin-top: 20px;">
               	<a href="https://www.facebook.com/abge.abge" target="_blank"><img src="/assets/frontend/img/face-abge.jpg" border="0"></a>
@@ -346,23 +346,25 @@
   
   <div class="home_article">
     <div class="home_article_title texto_azul" style="position: relative;">
-  Vídeos
-  <div style="position: absolute; right: 0; top: 0;">
-    <a class="link_ver_todos" href="/index.php/abge/videos">Ver todos</a>  </div>
-</div>
-
-<div class="div_float">
-          <div class="column span-4 first">
-            <div class="column span-4 last frameVideo" style="width: 250px; height: 187px; background-color: #fff; border: none;">
-                <a href="/index.php/abge/videos/8-AreasDe">
-                <div class="video" style="margin-top: 3px; ">
-                    <img src="http://img.youtube.com/vi/bhKWHx08jFA/0.jpg" class="lateral">
-                </div>
-                </a>
+      Vídeos
+      <div style="position: absolute; right: 0; top: 0;">
+        <a class="link_ver_todos" href="/videos">Ver todos</a>  
+      </div>
+    </div>
+    @if($video != null)
+    <div class="div_float">
+      <div class="column span-4 first">
+        <div class="column span-4 last frameVideo" style="width: 250px; height: 187px; background-color: #fff; border: none;">
+          <a href="/videos/ver/{{ $video->getBitURI() }}">
+            <div class="video" style="margin-top: 3px; ">
+              <img src="{{ $video->getYoutubeImage() }}" class="lateral">
             </div>
-            
+          </a>
         </div>
-    </div>  </div>
+      </div>
+    </div>  
+    @endif
+  </div>
   
   <div class="home_article">
     <div class="div_float">
