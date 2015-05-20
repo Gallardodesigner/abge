@@ -113,6 +113,125 @@
 
           </div>
 
+        <div class="banner_principal_home">
+      <div style="margin: 0 auto; padding-top: 10px; width: 1000px; height: 398px;">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/home_banner_principal/style2.css" />
+<script type="text/javascript" src="/js/home_banner_principal/jquery.js"></script>
+<script type="text/javascript" src="/js/home_banner_principal/jquery.easing.js"></script>
+<script type="text/javascript" src="/js/home_banner_principal/script.js"></script>
+<script type="text/javascript">
+  $(document).ready( function(){
+    var buttons = {
+      previous:$('#jslidernews2 .button-previous'),
+      next:$('#jslidernews2 .button-next')
+    };
+    
+    $('#jslidernews2').lofJSidernews( { 
+      interval: 5000,
+      easing: 'easeInOutQuad',
+      duration: 1200,
+      auto: true,
+      mainWidth: 1000,
+      mainHeight: 398,
+      navigatorHeight: 100,
+      navigatorWidth: 310,
+      maxItemDisplay: 4,
+      buttons:buttons } );          
+  });
+</script>
+
+<style>
+  ul.lof-main-wapper li {
+    position:relative;  
+  }
+  
+</style>
+<!------------------------------------- THE CONTENT ------------------------------------------------->
+<div id="jslidernews2" class="lof-slidecontent">
+  <div class="preload"><div></div></div>
+  <div  class="button-previous">Previous</div>
+  
+  <!-- MAIN CONTENT --> 
+  <div class="main-slider-content" style="width:1000px; height:398px;">
+    <ul class="sliders-wrap-inner">
+    <?php $banner = SFNews::where('sticky','=','0')->where('category','=','0')->where('status','=','1')->where('home','=','1')->orderBy('date', 'DESC')->take(3)->get(); ?>
+      @if(count($banner) > 0)
+        @foreach($banner as $element)
+          <li>
+            <a href="/noticias/detalle/{{ $element->permalink }}">
+              <img title="ABGE promove Simpósio de sucesso em Cuiabá" alt="ABGE promove Simpósio de sucesso em Cuiabá" src="/uploads/news/banner_{{ $element->image }}" />              
+            </a>  
+          </li> 
+        @endforeach
+      @endif
+      <!-- <li>
+        <a href="/noticias/detalle/165-Abge-promove-simp-sio-de-sucesso-em-cuiab">
+          <img title="ABGE promove Simpósio de sucesso em Cuiabá" alt="ABGE promove Simpósio de sucesso em Cuiabá" src="/uploads/news/banner_165_img_20150325_1545154.jpg" />              
+        </a>  
+      </li> 
+      <li>
+        <a href="/noticias/detalle/93-Bento-gon-alves-rs-sediar-o-15-cbge-em-2015">
+          <img title="Bento Gonçalves-RS sediará o 15º CBGE em 2015" alt="Bento Gonçalves-RS sediará o 15º CBGE em 2015" src="/uploads/news/banner_93_15_cbge_horiz.jpg" />              
+        </a>  
+      </li> 
+      <li>
+        <a href="/index.php/abge/noticias/detalle/142-Abge-aborda-tbm-em-evento-de-sucesso">
+          <img title="ABGE aborda TBM em evento de sucesso" alt="ABGE aborda TBM em evento de sucesso" src="/uploads/news/banner_142_dsc09450_red.jpg" />              
+        </a>  
+      </li>  -->
+    </ul>   
+  </div>
+  <!-- END MAIN CONTENT -->
+  
+  <!-- NAVIGATOR -->
+  <div class="navigator-content">
+    <div class="navigator-wrapper">
+      <ul class="navigator-wrap-inner">
+        @if(count($banner)>0)
+          @foreach($banner as $element)
+            <li>
+              <div style="padding-top: 15px;">
+                <h3>{{ $element->title }}</h3>
+                <span>{{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B del %Y', strtotime($element->date))) }}</span> &nbsp;-&nbsp;
+                <a style="color: #FFF;" class="readmore" href="/noticias/detalle/{{ $element->permalink }}">
+                    Veja Mais
+                </a>
+              </div>    
+            </li>
+          @endforeach
+        @endif
+        <!-- <li>
+          <div style="padding-top: 15px;">
+            <h3>Bento Gonçalves-RS sediará o 15º...</h3>
+            <span>15 de janeiro de 2015</span> &nbsp;-&nbsp;
+            <a style="color: #FFF;" class="readmore" href="/index.php/abge/noticias/detalle/93-Bento-gon-alves-rs-sediar-o-15-cbge-em-2015">
+                Veja Mais
+            </a>
+          </div>    
+        </li>
+        <li>
+          <div style="padding-top: 15px;">
+            <h3>ABGE aborda TBM em evento de sucesso</h3>
+            <span>24 de outubro de 2014</span> &nbsp;-&nbsp;
+            <a style="color: #FFF;" class="readmore" href="/index.php/abge/noticias/detalle/142-Abge-aborda-tbm-em-evento-de-sucesso">
+                Veja Mais
+            </a>
+          </div>    
+        </li> -->
+      </ul>
+    </div>
+    
+  </div> 
+  <!----------------- END OF NAVIGATOR --------------------->
+  
+  <div class="button-next">Next</div>
+  
+  <!-- BUTTON PLAY-STOP -->
+  <div class="button-control"><span></span></div>
+  <!-- END OF BUTTON PLAY-STOP -->
+</div> 
+      </div>
+    </div>
 
         </div> 
       </div>
@@ -126,6 +245,27 @@
 		</div>
 
 		<div class="right_column" style="margin-bottom:62px">
+
+      <div class="home_article">
+  
+        <div class="div_float">
+          
+          <div class="home_article_title texto_azul">
+            Área do Associado
+          </div>
+          <div class="div_float" style="line-height: 17px; ">   
+            <div id="content_logeo" style="float: left;">
+              @if(Auth::user()->check() AND Auth::user()->user()->type == 'associate')
+                Olá <strong style="color: #0066cc;">{{Auth::user()->user()->name }}</strong>, seja bem-vindo<br>
+              <strong style="color: #0066cc;"></strong>
+              @endif
+              <br>
+              <a target="_blank" href="/entrar"><img src="/images/bt-area-associado.png"></a><br>
+              <!--<a href=""> Clique aqui para sair</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
 
             <div class="home_article">
                   
@@ -235,7 +375,7 @@
 
     </div>
 
-    <div class="div_float footer_container" style="position: fixed;bottom:0px;">
+    <div class="div_float footer_container" style="position: fixed;bottom:0px;z-index: 999;">
     	<div id="page" class="container" style="position: relative; height: 100%">
         	<div style="position: absolute; left: 10px; bottom: 10px; width: 814px;">
         		Secretaria Executiva ABGE <br> Av. Profº Almeida Prado, 532 - IPT (Prédio 11) - Cidade Universitária- SP 05508-901

@@ -245,7 +245,7 @@
 
     <div id="page" class="container" style="padding-top: 15px;">
 
-    	<div class="columna_lateral_home">
+    	<div class="columna_lateral_home"  style="margin-bottom:62px">
   <div class="home_article">
     
 <script type="text/javascript">
@@ -346,24 +346,27 @@
   
   <div class="home_article">
     <div class="home_article_title texto_azul" style="position: relative;">
-  Vídeos
-  <div style="position: absolute; right: 0; top: 0;">
-    <a class="link_ver_todos" href="/index.php/abge/videos">Ver todos</a>  </div>
-</div>
+      Vídeos
+      <div style="position: absolute; right: 0; top: 0;">
+        <a class="link_ver_todos" href="/videos">Ver todos</a>  
+      </div>
+    </div>
 
-<div class="div_float">
-          <div class="column span-4 first">
-            <div class="column span-4 last frameVideo" style="width: 250px; height: 187px; background-color: #fff; border: none;">
-                <a href="/index.php/abge/videos/8-AreasDe">
-                <div class="video" style="margin-top: 3px; ">
-                    <img src="http://img.youtube.com/vi/bhKWHx08jFA/0.jpg" class="lateral">
-                </div>
-                </a>
+    @if($video != null)
+    <div class="div_float">
+      <div class="column span-4 first">
+        <div class="column span-4 last frameVideo" style="width: 250px; height: 187px; background-color: #fff; border: none;">
+          <a href="/videos/ver/{{ $video->getBitURI() }}">
+            <div class="video" style="margin-top: 3px; ">
+              <img src="{{ $video->getYoutubeImage() }}" class="lateral">
             </div>
-            
+          </a>
         </div>
-    </div>  </div>
-  
+      </div>
+    </div>  
+    @endif
+  </div>
+
   <div class="home_article">
     <div class="div_float">
   <a href="http://abge1.hospedagemdesites.ws/frontend.php/abge/forum"><img src="/images/frontend/banner_forum.png"></a></div>  </div>
@@ -424,7 +427,28 @@
 
 		</div>
 
-		<div class="columna_lateral_home" style="padding:0">
+		<div class="columna_lateral_home"  style="margin-bottom:62px;padding:0">
+
+      <div class="home_article">
+  
+        <div class="div_float">
+          
+          <div class="home_article_title texto_azul">
+            Área do Associado
+          </div>
+          <div class="div_float" style="line-height: 17px; ">   
+            <div id="content_logeo" style="float: left;">
+              @if(Auth::user()->check() AND Auth::user()->user()->type == 'associate')
+                Olá <strong style="color: #0066cc;">{{Auth::user()->user()->name }}</strong>, seja bem-vindo<br>
+              <strong style="color: #0066cc;"></strong>
+              @endif
+              <br>
+              <a target="_blank" href="/entrar"><img src="/images/bt-area-associado.png"></a><br>
+              <!--<a href=""> Clique aqui para sair</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
 
             <div class="home_article">
                   
