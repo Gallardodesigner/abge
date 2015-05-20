@@ -8,7 +8,7 @@ class FrontendHomeController extends \BaseController {
 
 		$event = Events::where('title','=','EVENTOS')->take(1)->get();
 
-		$courses = isset($event[0]) ? $event[0]->courses : null;
+		$courses = isset($event[0]) ? $event[0]->getPublishCourses(3) : null;
 		
 		$banner = SFNews::where('sticky','=','0')->where('category','=','0')->where('status','=','1')->where('home','=','1')->orderBy('date', 'DESC')->take(3)->get();
 		$principal = SFNews::where('sticky','=','0')->where('category','=','1')->where('status','=','1')->where('home','=','1')->orderBy('date','DESC')->take(1)->get();

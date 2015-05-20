@@ -114,7 +114,7 @@
       <div class="home_article_title texto_azul" style="position: relative;">
         Eventos
         <div style="font-size: 12px; position: absolute; right: 0; top: 0;">
-          <a class="link_ver_todos" href="/cursos">Ver Todos</a>  
+          <a class="link_ver_todos" href="/eventos">Ver Todos</a>  
         </div>
       </div>
       <div id="home_news_content" class="div_float">

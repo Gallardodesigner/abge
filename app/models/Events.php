@@ -6,6 +6,16 @@ class Events extends Eloquent {
 		return $this->hasMany('Courses', 'event_id', 'id');
 	}
 
+	public function getPublishCourses( $count = 0, $orderBy = 'courses.start', $sort = 'ASC' ){
+		$courses = $this->hasMany('Courses', 'event_id', 'id')->where('courses.status','=','publish')->orderBy($orderBy, $sort);
+		if($count <= 0):
+			return $courses->get();
+		else:
+			return $courses->take($count)->get();
+		endif;
+
+	}
+
 
 
 /* --------------------------- */

@@ -27,7 +27,9 @@ class FrontendCourseController extends \BaseController {
 
 		if( $route == '' ):
 
-			$courses = Courses::getPublish();
+			$event = Events::where('title','=','CURSO')->take(1)->get();
+
+			$courses = isset($event[0]) ? $event[0]->getPublishCourses() : null;
 
 			foreach ($courses as $course) {
 				$course->start = date("d-m-Y", strtotime($course->start));

@@ -367,7 +367,7 @@
 				</div>
 
 				<div style="position: relative;top: 0px;">
-					<a style="font-size: 12px; float: right; text-decoration: underline;" href="/page/entidades">Ver Todos</a>
+					<a style="font-size: 12px; float: right; text-decoration: underline;" href="/page/parceiros">Ver Todos</a>
 				</div>
 			
 			</div>

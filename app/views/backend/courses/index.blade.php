@@ -12,8 +12,64 @@
 {{HTML::script("assetsadmin/js/jquery.alerts.js")}}
 {{HTML::script("assetsadmin/js/jquery.dataTables.min.js")}}
 
-<script type='text/javascript'>
+<script type="text/javascript">
+    var confirmButtons = function(){
+        if(jQuery('.confirmbutton').length > 0) {
+            jQuery('.confirmbutton').on("click",function(e){
+                e.preventDefault();
+                var elem=jQuery(this);
+                jConfirm('{{ Lang::get("messages.are_you_sure") }} '+elem.attr("data-action")+' {{ Lang::get("messages.this_element") }}', '{{ Lang::get("display.confirmation_dialog")}}', function(r) {
+                     // jAlert('Confirmed: ' + r, 'Confirmation Results');
+                    if(r==true){
+                        window.location.assign("{{ $route }}/"+elem.attr("data-action")+"/"+elem.attr("data-id"));
+                    }
+                });
+            });
+        }
+        if(jQuery('.delete-inscription').length > 0){
+            console.log("delete");
+            jQuery('.delete-inscription').on("click",function(e){
+                console.log("click");
+                e.preventDefault();
+                var elem=jQuery(this);
+                jConfirm('{{ Lang::get("messages.are_you_sure") }} {{ Lang::get("display.delete") }} {{ Lang::get("messages.this_element") }}', '{{ Lang::get("display.confirmation_dialog")}}', function(r) {
+                     // jAlert('Confirmed: ' + r, 'Confirmation Results');
+                    if(r==true){
+                        window.location.assign("{{ $route }}/delete/"+elem.attr("data-id"));
+                    }
+                });
+            });
+        }
+    }
 
+     jQuery(document).on('ready', function(){
+        // dynamic table
+        console.log("ready");
+        var table = jQuery('#dyntable').dataTable({
+            "sPaginationType": "full_numbers",
+            "aaSortingFixed": [[0,'asc']],
+            "fnDrawCallback": function(oSettings) {
+                jQuery.uniform.update();
+            }
+        });
+
+        confirmButtons();
+
+        table.on('page.dt', function(e){
+            console.log("page");
+            confirmButtons();
+        });
+
+        table.on('draw.dt', function(e){
+            console.log("draw");
+            confirmButtons();
+        });
+        
+    });
+</script>
+
+<script type='text/javascript'>
+/*
      jQuery(document).ready(function(){
         // dynamic table
         jQuery('#dyntable').dataTable({
@@ -54,7 +110,7 @@
         });
       }
         
-    });
+    });*/
 </script>
 @stop
 
