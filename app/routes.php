@@ -92,6 +92,7 @@ endif;
 	Route::controller('/eventos', 'FrontendEventController');
 	Route::controller('/page/{name?}', 'FrontendPageController');
 	Route::controller('/consultores', 'FrontendConsultoresController');
+	Route::controller('/galeria', 'FrontendGalleryController');
 	Route::controller('/videos', 'FrontendVideoController');
 	Route::controller('/noticias', 'FrontendNoticiasController');
 	Route::get('/correomasivo','FrontendHomeController@getCorreomasivo');
