@@ -16,16 +16,18 @@
         <table style="width: 100%"></table>
         @if(count($albums)>0)
         	@foreach( $albums as $album )
-		        <div class="contentPrviewAlbum">
-		            <a title="" href="{{ $route }}/ver/{{ $album->getBitURI() }}">
-		            	<img height="165" width="220" alt="" title="" src="/uploads/photo_album/medium_{{ $album->getFirstImageURI() }}">
-		            </a>                    
-			        <div>
-				        <label>Album:</label> {{ $album->album_name }}<br>
-				        <label>Total: </label>{{ count($album->galleries) }} fotos<br>
-				        <label>Data: </label>{{ iconv('ISO-8859-2', 'UTF-8', strftime('%d de %B del %Y', strtotime($album->fecha))) }}<br>
-		            </div>
-		        </div>
+            @if($album->galleries->count() > 0)
+  		        <div class="contentPrviewAlbum">
+  		            <a title="" href="{{ $route }}/ver/{{ $album->getBitURI() }}" style="display: block;height: 165px;overflow: hidden;">
+  		            	<img width="220" alt="" title="" src="/uploads/photo_album/medium_{{ $album->getFirstImageURI() }}">
+  		            </a>                    
+  			        <div>
+  				        <label>Album:</label> {{ $album->album_name }}<br>
+  				        <label>Total: </label>{{ count($album->galleries) }} fotos<br>
+  				        <label>Data: </label>{{ iconv('ISO-8859-2', 'UTF-8', strftime('%d de %B del %Y', strtotime($album->fecha))) }}<br>
+  		            </div>
+  		        </div>
+            @endif
         	@endforeach
         @endif
                <!--                                  <div class="contentPrviewAlbum">

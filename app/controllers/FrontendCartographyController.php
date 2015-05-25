@@ -2,85 +2,36 @@
 
 class FrontendCartographyController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /frontendcartography
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
+	public static $route = '/cartografia';
+
+	public function getIndex(){
+
+		$args = array(
+			'route' => self::$route,
+			);
+
+		return View::make('frontend.cartography.index')->with($args);
+
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /frontendcartography/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+	public function getObjetivos(){
+
+		$args = array(
+			'route' => self::$route,
+			);
+
+		return View::make('frontend.cartography.objetivos')->with($args);
+
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /frontendcartography
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+	public function getTrabalhos(){
 
-	/**
-	 * Display the specified resource.
-	 * GET /frontendcartography/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+		$args = array(
+			'route' => self::$route,
+			);
 
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /frontendcartography/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+		return View::make('frontend.cartography.trabalhos')->with($args);
 
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /frontendcartography/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /frontendcartography/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }
