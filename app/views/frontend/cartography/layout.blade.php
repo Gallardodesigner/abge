@@ -40,13 +40,13 @@
         	<h1>Banco de Datos de Cartografia Geotécnica e Geoambiental</h1>
             <h1>@yield('cartography_section')</h1>
             
-            <form method="post" name="adminForm" action="{{ $route }}/banco-de-cartografia ">        
+            <form method="get" name="adminForm" action="{{ $route }}/trabalhos ">        
 		        <table width="50%" style="border-bottom: 1px solid #0066CC;">
 		            <tbody>
 		                <tr>                
 		                    <td colspan="2" align="right" style="border: 0px solid #000; text-align: right;"> 
 		                        <div class="borderMenu" align="right" style="width: 480px; float: right;">
-		                            <a class="boton_white" href="{{ $route }}/historico">Histórico</a>&nbsp;|&nbsp;
+		                            <a class="boton_white" href="{{ $route }}/index">Histórico</a>&nbsp;|&nbsp;
 		                            <a class="boton_white" href="{{ $route }}/objetivos">Objetivos</a>&nbsp;|&nbsp;
 		                            <a class="boton_white" href="{{ $route }}/trabalhos">Trabalhos</a>&nbsp;<!-- |&nbsp;
                                     <a class="boton_white" href="{{ $route }}/banco-de-cartografia/acesso">Acesso</a>&nbsp;|&nbsp;
@@ -54,6 +54,7 @@
                                 </div>
                     		</td>
 						</tr>
+						@yield('cartography_info')
                     </tbody>
         		</table>
         	</form>                       
