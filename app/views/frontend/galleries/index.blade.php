@@ -24,7 +24,7 @@
   			        <div>
   				        <label>Album:</label> {{ $album->album_name }}<br>
   				        <label>Total: </label>{{ count($album->galleries) }} fotos<br>
-  				        <label>Data: </label>{{ iconv('ISO-8859-2', 'UTF-8', strftime('%d de %B del %Y', strtotime($album->fecha))) }}<br>
+  				        <label>Data: </label>{{ iconv('ISO-8859-2', 'UTF-8', strftime('%d de %B de %Y', strtotime($album->fecha))) }}<br>
   		            </div>
   		        </div>
             @endif

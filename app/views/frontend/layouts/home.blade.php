@@ -197,7 +197,7 @@
             <li>
               <div style="padding-top: 15px;">
                 <h3>{{ $element->title }}</h3>
-                <span>{{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B del %Y', strtotime($element->date))) }}</span> &nbsp;-&nbsp;
+                <span>{{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B de %Y', strtotime($element->date))) }}</span> &nbsp;-&nbsp;
                 <a style="color: #FFF;" class="readmore" href="/noticias/detalle/{{ $element->permalink }}">
                     Veja Mais
                 </a>

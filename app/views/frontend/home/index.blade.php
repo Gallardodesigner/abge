@@ -31,7 +31,7 @@
             </a>
           </div>
           <span class="home_news_date">
-            {{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B del %Y', strtotime($element->date))) }} | 
+            {{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B de %Y', strtotime($element->date))) }} | 
             <a class="texto_gris_claro" href="/noticias/detalle/{{ $element->permalink }}">
               Ler mais
             </a>
@@ -54,7 +54,7 @@
               </a>
             </h5>
             <div class="home_news_date" style="bottom: 0; margin-top: 5px;">
-              {{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B del %Y', strtotime($element->date))) }} | 
+              {{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B de %Y', strtotime($element->date))) }} | 
               {{ date('d-m-Y', strtotime($element->date)) }}            
               <a class="texto_gris_claro" href="/noticias/detalle/{{ $element->permalink }}">
                 Ler mais
@@ -133,7 +133,7 @@
                 {{ $element->description }}
                 <br>
                 <div class="home_news_date" style="margin-bottom: 10px; margin-top: 4px;     bottom: 0;">
-                  {{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B del %Y', strtotime($element->start))) }} | 
+                  {{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B de %Y', strtotime($element->start))) }} | 
                   <a class="texto_gris_claro" href="/{{ $element->route }}">
                     Ler mais
                   </a>
