@@ -54,8 +54,8 @@
               </a>
             </h5>
             <div class="home_news_date" style="bottom: 0; margin-top: 5px;">
-              {{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B de %Y', strtotime($element->date))) }} | 
-              {{ date('d-m-Y', strtotime($element->date)) }}            
+              {{ iconv('ISO-8859-2', 'UTF-8',strftime('%d de %B de %Y', strtotime($element->date))) }} {{--|--}} 
+              {{-- {{ date('d-m-Y', strtotime($element->date)) }}             --}}
               <a class="texto_gris_claro" href="/noticias/detalle/{{ $element->permalink }}">
                 Ler mais
               </a>
