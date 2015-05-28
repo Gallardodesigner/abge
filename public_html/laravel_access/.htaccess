@@ -1,6 +1,6 @@
 AddHandler php55-script .php
 
-suPHP_ConfigPath /home/abge/
+suPHP_ConfigPath /home/abge1/
 
 
 

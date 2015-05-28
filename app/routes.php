@@ -88,6 +88,7 @@ endif;
 	 	return Redirect::to('/entrar');
 	});
 	//Route::controller('/auth', 'AuthenticationController');
+	Route::controller('/openx', 'OpenxController');
 	Route::controller('/autenticacao', 'AuthenticationController');
 	Route::controller('/entrar', 'FrontendAuthenticationController');
 	Route::controller('/anuidades', 'FrontendAnnuityController');
@@ -102,8 +103,6 @@ endif;
 	Route::get('/correomasivo','FrontendHomeController@getCorreomasivo');
 	Route::controller('/{id}/{content?}/{idContent?}', 'FrontendCourseController');
 	Route::controller('/', 'FrontendHomeController');
-
-
 
 // Route::get('/', function(){
 // 	$course = Courses::find(1);

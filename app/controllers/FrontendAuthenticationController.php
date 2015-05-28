@@ -36,7 +36,7 @@ class FrontendAuthenticationController extends \BaseController {
 
 		else:
 
-			return Redirect::to( self::$route )->with(array('msg_error'=>'Usuario o Contraseña Inválidos'));
+			return Redirect::to( self::$route )->with(array('msg_error'=>'Usuário ou Senha Invalida!'));
 
 		endif;
 
@@ -121,7 +121,7 @@ class FrontendAuthenticationController extends \BaseController {
 			{
 				$message->from('teste@abge.org.br', 'ABGE');
 			    $message->to($associate->email, $associate->nombre_completo)->subject('Esqueci minha senha!');
-			    $message->to('amontenegro.sistemas@gmail.com', $associate->nombre_completo)->subject('Esqueci minha senha!');
+			    /*$message->to('amontenegro.sistemas@gmail.com', $associate->nombre_completo)->subject('Esqueci minha senha!');*/
 			    $message->to('igor@gallardodesigner.com.br', $associate->nombre_completo)->subject('Esqueci minha senha!');
 			});
 
@@ -291,7 +291,7 @@ class FrontendAuthenticationController extends \BaseController {
 
 		else:
 
-			return Redirect::to( self::$route )->with(array('msg_error'=>'Usuario o Contraseña Inválidos'));
+			return Redirect::to( self::$route )->with(array('msg_error'=>'Usuário ou Senha Invalida!'));
 
 		endif;
 

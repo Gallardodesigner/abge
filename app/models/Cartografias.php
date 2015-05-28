@@ -10,4 +10,10 @@ class Cartografias extends \Eloquent {
 
 	public $timestamps = false;
 
+	public function usuario(){
+
+		return $this->belongsTo('CartografiaUsuarios', 'id_user', 'id_user');
+
+	}
+
 }

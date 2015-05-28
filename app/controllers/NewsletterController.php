@@ -6,11 +6,12 @@ class NewsletterController extends \BaseController {
 
 	public function getIndex(){
 
-		$newsletters = Newsletters::all();
+		$newsletters = Newsletters::paginate(50);
 
 		$args = array(
 			'route' => self::$route,
 			'newsletters' => $newsletters,
+			'filter' => '',
 			);
 
 		return View::make('backend.newsletters.index')->with($args);

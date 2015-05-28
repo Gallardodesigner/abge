@@ -932,6 +932,64 @@ class ORGAssociateController extends \BaseController {
 						$assoc->save();
 
 					endif;
+
+				endif;
+
+				if(Input::get('email') != $associate->email):
+
+					$new_email = Input::get('email');
+
+					$asocs = ORGAssociates::where('email','=',$new_email)->get();
+
+					$users = User::where('email','=',$new_email)->get();
+
+					$bool = false;
+
+					if(isset($asocs[0])):
+						foreach($asocs as $ascoc) if($ascoc->id_asociado != $associate->id_asociado) $bool = true;
+					endif;
+
+					if(isset($users[0])):
+						foreach($users as $user): 
+							if(!($user->type == 'associate' AND $user->associate->asociado->id_asociado == $associate->id_asociado)) $bool = true;
+						endforeach;
+					endif;
+
+					if(!$bool):
+
+						if($associate->associate != null):
+
+							$user = $associate->associate->getuser;
+							$user->email = $new_email;
+							$user->save();
+
+						else:
+
+							$user = new User();
+							$user->type = 'associate';
+							$user->email = $new_email;
+							$user->name = $associate->nombre_completo;
+							$user->status = 'publish';
+							$user->save();
+
+							$assoc = new Associates();
+							$assoc->associate = $associate->id_asociado;
+							$assoc->user = $user->id;
+							$assoc->name = $associate->nombre_completo;
+							$assoc->email = $new_email;
+							$assoc->cpf = $associate->cpf;
+							$assoc->type = 'associate';
+							$assoc->status = 'publish';
+							$assoc->save();
+
+						endif;
+
+					else:
+
+						dd('Este correo ya le pertenece a un asociado registrado');
+
+					endif;
+
 				endif;
 				
 				$associate->status_asso = Input::get('status_asso') != null ? Input::get('status_asso') : $associate->status_asso;

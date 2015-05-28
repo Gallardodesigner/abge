@@ -59,7 +59,7 @@
 		                        
 		                      <div><a class="titulo_listado" href="{{ $route }}/detalle/{{ $noticia->permalink }}">{{ $noticia->title }}</a></div>
 		                      <div class="summary"></div>
-		                      <div class="fecha_listado">{{ iconv('ISO-8859-2', 'UTF-8', strftime('%d de %B del %Y', strtotime($noticia->date))) }}</div>
+		                      <div class="fecha_listado">{{ iconv('ISO-8859-2', 'UTF-8', strftime('%d de %B de %Y', strtotime($noticia->date))) }}</div>
 		                    </div>
 		                  </td>
 

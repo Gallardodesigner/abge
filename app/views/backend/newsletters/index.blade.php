@@ -8,6 +8,17 @@
 
 
 @section("js")
+
+
+<?php 
+
+    function paginatorURI( $filter ){
+        return '';
+       /* return "&nombre_completo=". ($filter['nombre_completo'] != '' ? $filter['nombre_completo'] : '0') ."&categoria=". ($filter['categoria'] != '' ? $filter['categoria'] : '0') ."&tipo_pessoa=".( $filter['tipo_pessoa'] != '' ? $filter['tipo_pessoa'] : '0') ."&pagamento=".( $filter['pagamento'] != '' ? $filter['pagamento'] : '0') ."";*/
+    }
+
+?>
+
 {{HTML::script("assetsadmin/js/jquery.jgrowl.js")}}
 {{HTML::script("assetsadmin/js/jquery.alerts.js")}}
 {{HTML::script("assetsadmin/js/jquery.dataTables.min.js")}}
@@ -53,13 +64,13 @@
      jQuery(document).ready(function(){
         // dynamic table
 
-        var table = jQuery('#dyntable').dataTable({
+        /*var table = jQuery('#dyntable').dataTable({
             "sPaginationType": "full_numbers",
             "aaSortingFixed": [[0,'asc']],
             "fnDrawCallback": function(oSettings) {
                 jQuery.uniform.update();
             }
-        });
+        });*/
 
         confirmButtons();
 
@@ -140,7 +151,76 @@ Newsletters
                             @endif
                         </tbody>
                     </table>
+                    <div class="pagination">
+
+                        <ul class="pagination"> 
+                            <li>
+                                <a href="{{$route}}?page=1{{paginatorURI( $filter )}}">Primera</a>
+                            </li>
+                            <li {{ $newsletters->getCurrentPage() == 1 ? 'class=disabled': '' }}>
+                                @if($newsletters->getCurrentPage() == 1)
+                                    <span>Anterior</span>
+                                @else
+                                    <a href="{{$route}}?page={{ $newsletters->getCurrentPage() -1 }}{{paginatorURI( $filter )}}">Anterior</a>
+                                @endif
+                            </li>
+                            @if($newsletters->getCurrentPage() > 8)
+                                <li>
+                                    <a href="{{$route}}?page=1{{paginatorURI( $filter )}}">1</a>
+                                </li>
+                                <li {{ $newsletters->getCurrentPage() == 1 ? 'class=disabled': '' }}>
+                                    <a href="{{$route}}?page=2{{paginatorURI( $filter )}}">2</a>
+                                </li>
+                                <li class="disabled"><span>...</span></li>
+                            @endif
+                            @for($i = $newsletters->getCurrentPage() - 3 ; $i <= ($newsletters->getCurrentPage() + 3) ; $i++)
+                                @if($i > 0 && $i <= $newsletters->getLastPage())
+                                    @if($i == $newsletters->getCurrentPage())
+                                        <li class="active">
+                                            <span>{{($i)}}</span>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a href="{{$route}}?page={{($i)}}{{paginatorURI( $filter )}}">{{($i)}}</a>
+                                        </li>
+                                    @endif
+                                @endif
+                            @endfor
+                            @if($newsletters->getCurrentPage() < ($newsletters->getLastPage() - 5))
+                                <li class="disabled"><span>...</span></li>
+                                <li>
+                                    <a href="{{$route}}?page={{($newsletters->getLastPage() - 1)}}{{paginatorURI( $filter )}}">{{($newsletters->getLastPage() - 1)}}</a>
+                                </li>
+                                <li >
+                                    <a href="{{$route}}?page={{($newsletters->getLastPage())}}{{paginatorURI( $filter )}}">{{($newsletters->getLastPage() )}}</a>
+                                </li>
+                            @endif
+                            <li {{ $newsletters->getCurrentPage() == 1 ? 'class=disabled': '' }}>
+                                @if($newsletters->getCurrentPage() == $newsletters->getLastPage())
+                                    <span>Siguiente</span>
+                                @else
+                                    <a href="{{$route}}?page={{$newsletters->getCurrentPage() + 1}}{{paginatorURI( $filter )}}">Siguiente</a>
+                                @endif
+                            </li>
+                            <li>
+                                <a href="{{$route}}?page={{ $newsletters->getLastPage() }}{{paginatorURI( $filter )}}">Última</a>
+                            </li>
+                        </ul>   
+                        
+                        <!--{{ $newsletters->links() }}-->
+                        
+                    </div>
                 </div>
+                
+                    <style type="text/css">
+                        .pagination ul{
+                            list-style: none;
+                            display: inline-block;
+                        }
+                        .pagination{
+                            text-align: right;
+                        }
+                    </style>
 
                 
 @stop

@@ -87,6 +87,40 @@ class FrontendAssociateController extends \BaseController {
 			$user->password = Hash::make(Input::get('senha'));
 			$user->save();
 		endif;
+
+		if(Input::get('email') != $associate->email):
+
+			$new_email = Input::get('email');
+
+			$asocs = ORGAssociates::where('email','=',$new_email)->get();
+
+			$users = User::where('email','=',$new_email)->get();
+
+			$bool = false;
+
+			if(isset($asocs[0])):
+				foreach($asocs as $ascoc) if($ascoc->id_asociado != $associate->id_asociado) $bool = true;
+			endif;
+
+			if(isset($users[0])):
+				foreach($users as $user): 
+					if(!($user->type == 'associate' AND $user->associate->asociado->id_asociado == $associate->id_asociado)) $bool = true;
+				endforeach;
+			endif;
+
+			if(!$bool):
+
+					$user = $associate->associate->getuser;
+					$user->email = $new_email;
+					$user->save();
+
+			else:
+
+				dd('Este correo ya le pertenece a un usuario registrado');
+
+			endif;
+
+		endif;
 		
 		$associate->nombre_completo = Input::get('nombre_completo');
 		$associate->data_nascimento = date('Y-m-d', strtotime(Input::get('data_nascimento')));

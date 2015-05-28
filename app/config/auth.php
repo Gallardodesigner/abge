@@ -61,7 +61,7 @@ return array(
     'multi' => array(
         'cartography' => array(
             'driver' => 'eloquent',
-            'model' => 'CartographyUser'
+            'model' => 'CartografiaUsuarios'
         ),
         'user' => array(
             'driver' => 'eloquent',

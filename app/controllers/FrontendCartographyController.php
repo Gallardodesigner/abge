@@ -69,4 +69,96 @@ class FrontendCartographyController extends \BaseController {
 
 	}
 
+	public function getVer( $id ){
+
+		$trabalho = Cartografias::find(str_replace('cartografo-', '', $id));
+
+		if($trabalho):
+			$args = array(
+				'route' => self::$route,
+				'trabalho' => $trabalho
+				);
+				
+			return View::make('frontend.cartography.ver')->with($args);
+		else:
+			return Redirect::to(self::$route.'/trabalhos');
+		endif;
+
+	}
+
+	public function getAcesso(){
+
+		$args = array(
+			'route' => self::$route,
+			);
+
+		return View::make('frontend.cartography.acesso')->with($args);
+		
+	}
+
+	public function postAcesso(){
+
+		$credentials = array(
+			'login' => Input::get('login'),
+			'password' => Input::get('password'),
+			);
+
+		$usuario_cartografia = null;
+
+		/*$login = Auth::cartography()->attempt(array(
+			'username' => 'Igor',
+			'password' => 'e10adc3949ba59abbe56e057f20f883e:pXp60N5wSQ0IIr6E',
+			));
+
+		dd(Auth::cartography()->check());*/
+
+		if(strpos($credentials['login'], '@') === false):
+
+			$usuario_cartografia = CartografiaUsuarios::where('username','=',$credentials['login'])->where('senha','LIKE','%'.md5($credentials['password']).'%')->get();
+
+		else:
+			
+			$usuario_cartografia = CartografiaUsuarios::where('email_user','=',$credentials['login'])->where('senha','LIKE','%'.md5($credentials['password']).'%')->get();
+
+		endif;
+
+		if(isset($usuario_cartografia[0])):
+
+			$usuario_cartografia = $usuario_cartografia[0];
+
+			// dd($usuario_cartografia);
+
+			$login = Auth::cartography()->login($usuario_cartografia);
+
+			dd($login);
+
+			if($login):
+				dd('Usuario Autenticado');
+			else:
+				dd('La fuerza que en ti se encuentra no es suficiente para la republica');
+			endif;
+
+		else:
+
+		endif;
+
+		dd($usuario_cartografia);
+
+	}
+
+	public function getCadastro(){
+
+		$args = array(
+			'route' => self::$route,
+			);
+
+		return View::make('frontend.cartography.cadastro')->with($args);
+
+	}
+
+	public function postCadastro(){
+
+
+	}
+
 }

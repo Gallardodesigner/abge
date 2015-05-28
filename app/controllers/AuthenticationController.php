@@ -54,7 +54,7 @@ class AuthenticationController extends \BaseController {
 
 	public function getCheck(){
 
-		//return dd(Auth::user()->check());
+		return dd(Auth::user()->check());
 
 	}
 
