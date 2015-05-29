@@ -1,0 +1,1 @@
+C:\wamp\www\gallardodesignerprojects\abge\app/views/test/letters_images.blade.php
