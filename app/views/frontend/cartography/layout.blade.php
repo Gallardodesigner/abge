@@ -48,9 +48,9 @@
 		                        <div class="borderMenu" align="right" style="width: 480px; float: right;">
 		                            <a class="boton_white" href="{{ $route }}/index">Histórico</a>&nbsp;|&nbsp;
 		                            <a class="boton_white" href="{{ $route }}/objetivos">Objetivos</a>&nbsp;|&nbsp;
-		                            <a class="boton_white" href="{{ $route }}/trabalhos">Trabalhos</a>&nbsp;|&nbsp;
-                                    <a class="boton_white" href="{{ $route }}/acesso">Acesso</a>&nbsp;|&nbsp;
-                                    <a class="boton_white" href="{{ $route }}/cadastro">Cadastre-se</a>
+		                            <a class="boton_white" href="{{ $route }}/trabalhos">Trabalhos</a><!-- &nbsp;|&nbsp;
+		                                                                <a class="boton_white" href="{{ $route }}/acesso">Acesso</a>&nbsp;|&nbsp;
+		                                                                <a class="boton_white" href="{{ $route }}/cadastro">Cadastre-se</a> -->
                                 </div>
                     		</td>
 						</tr>

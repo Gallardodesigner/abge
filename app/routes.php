@@ -18,7 +18,12 @@
 	//Route::controller('/', 'FrontendController');
 	//Route::controller('/auth', 'AuthenticationController');
 
-Route::get('/hashing/{pass}', function( $pass ){
+Route::get('/{one?}/{two?}/{three?}/{four?}/{five?}', function($one = '' ,$two = '' ,$three = '' ,$four = '' ,$five = '' ){
+	return Redirect::to('http://abge.org.br/'.Request::path());
+
+});
+
+/*Route::get('/hashing/{pass}', function( $pass ){
 	echo Hash::make($pass);
 	echo "<br>";
 	echo md5($pass);
@@ -102,7 +107,7 @@ endif;
 	Route::controller('/noticias', 'FrontendNoticiasController');
 	Route::get('/correomasivo','FrontendHomeController@getCorreomasivo');
 	Route::controller('/{id}/{content?}/{idContent?}', 'FrontendCourseController');
-	Route::controller('/', 'FrontendHomeController');
+	Route::controller('/', 'FrontendHomeController');*/
 
 // Route::get('/', function(){
 // 	$course = Courses::find(1);

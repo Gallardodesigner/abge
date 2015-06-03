@@ -327,22 +327,8 @@
   * users.
   */-->
 
-<script type="text/javascript"><!--//<![CDATA[
-   var m3_u = (location.protocol=='https:'?'https://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php':'http://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php');
-   var m3_r = Math.floor(Math.random()*99999999999);
-   if (!document.MAX_used) document.MAX_used = ',';
-   document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-   document.write ("?zoneid=4");
-   document.write ('&amp;cb=' + m3_r);
-   if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-   document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-   document.write ("&amp;loc=" + escape(window.location));
-   if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-   if (document.context) document.write ("&context=" + escape(document.context));
-   if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
-   document.write ("'><\/scr"+"ipt>");
-//]]>--></script><script type="text/javascript" src="http://abge1.hospedagemdesites.ws/openx/www/delivery/ajs.php?zoneid=4&amp;cb=41235144086&amp;charset=UTF-8&amp;loc=http%3A//abge.org.br/"></script><div id="beacon_63ce2dca10" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="http://abge1.hospedagemdesites.ws/openx/www/delivery/lg.php?bannerid=68&amp;campaignid=37&amp;zoneid=4&amp;loc=http%3A%2F%2Fabge.org.br%2F&amp;cb=63ce2dca10" width="0" height="0" alt="" style="width: 0px; height: 0px;"></div>
-</div>  </div>
+{{ OpenxController::getPublicaciones() }}
+</div>  </div> 
   
   <div class="home_article">
     <div class="home_article_title texto_azul" style="position: relative;">

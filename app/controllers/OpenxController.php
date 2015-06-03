@@ -49,6 +49,15 @@ class OpenxController extends \BaseController {
 		'd65cf64e3512f17fd55e4ed724bf4042.jpg'
 		);
 
+	public static $publicaciones = array(
+		'2bd5264eb260e2f5dc1bed6e8224ebda.jpg',
+		'326b1e40d5dc461f272f42711efcd84a.jpg',
+		'6bc963b083d6c0f5b2a22b754622e09f.jpg',
+		'99cab14b4c07447d2fdf51cd956a1bf2.jpg',
+		'd93417bb7e58d86d929ab7d73d877afe.jpg',
+		'fc9e8dfcb79b5395e5ac9ba01dd73412.jpg',
+		);
+
 	public function getNewsletter(){
 
 		$all_newsletters = new ORGNewsletter();
@@ -64,21 +73,39 @@ class OpenxController extends \BaseController {
 	public static function getSocios(){
 
 		$pos = rand(0, count(self::$socios)-1);
-		return '<img src="'.self::$images_folder.self::$socios[$pos].'"/>';
+		return '<img width="250" src="'.self::$images_folder.self::$socios[$pos].'"/>';
 
 	}
 
 	public static function getParceiros(){
 
 		$pos = rand(0, count(self::$parceiros)-1);
-		return '<img src="'.self::$images_folder.self::$parceiros[$pos].'"/>';
+		return '<img width="250" src="'.self::$images_folder.self::$parceiros[$pos].'"/>';
 
 	}
 
 	public static function getEventos(){
 
 		$pos = rand(0, count(self::$eventos)-1);
-		return '<img src="'.self::$images_folder.self::$eventos[$pos].'"/>';
+		return '<img width="250" src="'.self::$images_folder.self::$eventos[$pos].'"/>';
+
+	}
+
+	public static function getPublicaciones(){
+
+		$pos1 = rand(0, count(self::$publicaciones)-1);
+		$pos2 = self::getRand(count(self::$publicaciones)-1, $pos1);
+		return '<img src="'.self::$images_folder.self::$publicaciones[$pos1].'"/><img src="'.self::$images_folder.self::$publicaciones[$pos2].'"/>';
+
+	}
+
+	public static function getRand($length,$pos){
+
+		$ptmp = rand(0, $length);
+
+		if($ptmp == $pos) return self::getRand($length,$pos);
+
+		return $ptmp;
 
 	}
 

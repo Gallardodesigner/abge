@@ -37,7 +37,7 @@
       @if(count($galleries)>0)
         @foreach( $galleries as $gallery )
           <div class="listGallery" style="width: 222px; float: left; min-height: 190px;">
-            <a rel="gallery_abge" title="" href="/uploads/photo_album/big_{{ $gallery->image }}" style="height: 165px;display: block;text-align: center;background: currentColor;">
+            <a rel="gallery_abge" title="" href="/uploads/photo_album/big_{{ $gallery->image }}" style="height: 165px;display: block;text-align: center;background: white;">
             	<img alt="" title="" src="/uploads/photo_album/medium_{{ $gallery->image }}" height="165">
             </a>
           </div>          
