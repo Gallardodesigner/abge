@@ -17,13 +17,10 @@
 	//Route::controller('/dashboard/', 'DashboardController');
 	//Route::controller('/', 'FrontendController');
 	//Route::controller('/auth', 'AuthenticationController');
-
-Route::get('/{one?}/{two?}/{three?}/{four?}/{five?}', function($one = '' ,$two = '' ,$three = '' ,$four = '' ,$five = '' ){
-	return Redirect::to('http://abge.org.br/'.Request::path());
-
+Route::get('/cbge2015/', function(){
+	return View::make('frontend.courses.cbge2015');
 });
-
-/*Route::get('/hashing/{pass}', function( $pass ){
+Route::get('/hashing/{pass}', function( $pass ){
 	echo Hash::make($pass);
 	echo "<br>";
 	echo md5($pass);
@@ -70,6 +67,7 @@ if(Auth::user()->check() && Auth::user()->user()->type=="superadmin"):
 	Route::controller('/dashboard/companies', 'CompanyController');
 	Route::controller('/dashboard/categories', 'CategoryController');
 	Route::controller('/dashboard/events', 'EventController');
+	Route::controller('/dashboard/banners', 'OpenxController');
 	Route::controller('/dashboard/courses/{idCourse}/usertypes/{idUserType}/dates', 'DateController');
 	Route::controller('/dashboard/courses/{idCourse}/usertypes', 'UserTypeController');
 	Route::controller('/dashboard/courses/{idCourse}/inscriptions/{idInscription}/files', 'FileController');
@@ -107,7 +105,7 @@ endif;
 	Route::controller('/noticias', 'FrontendNoticiasController');
 	Route::get('/correomasivo','FrontendHomeController@getCorreomasivo');
 	Route::controller('/{id}/{content?}/{idContent?}', 'FrontendCourseController');
-	Route::controller('/', 'FrontendHomeController');*/
+	Route::controller('/', 'FrontendHomeController');
 
 // Route::get('/', function(){
 // 	$course = Courses::find(1);
