@@ -327,7 +327,7 @@
   * users.
   */-->
 
-{{ OpenxController::getPublicaciones() }}
+{{ OpenxController::getOldPublicaciones() }}
 </div>  </div> 
   
   <div class="home_article">
@@ -446,7 +446,7 @@
 
                 <div class="div_float">
 
-	       			{{ OpenxController::getSocios() }}
+	       			{{ OpenxController::getOldSocios() }}
 
 				</div>
 	    		
@@ -466,7 +466,7 @@
 
 		    		
 
-              {{ OpenxController::getEventos() }}
+              {{ OpenxController::getOldEventos() }}
 
 		    	</div>
 		    
@@ -489,7 +489,7 @@
 
 					
 
-              {{ OpenxController::getParceiros() }}
+              {{ OpenxController::getOldParceiros() }}
 
 				</div>
 

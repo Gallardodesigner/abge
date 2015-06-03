@@ -1,6 +1,281 @@
 <?php
 
 class OpenxController extends \BaseController {
+	
+	protected $route = '/dashboard/banners';
+
+	public function getIndex(){
+
+		$banners = Banners::_get('not_publicaciones', 'all');
+
+		$msg_success = Session::get('msg_success');
+
+		$msg_error = Session::get('msg_error');
+
+		return View::make('backend.banners.index', array(
+			'banners' => $banners,
+			'route' => $this->route,
+			'msg_success' => $msg_success,
+			'msg_error' => $msg_error
+			));
+
+	}
+
+	public function getPublicaciones(){
+
+		$banners = Banners::_get('publicaciones', 'all');
+
+		$msg_success = Session::get('msg_success');
+
+		$msg_error = Session::get('msg_error');
+
+		return View::make('backend.banners.index', array(
+			'banners' => $banners,
+			'route' => $this->route,
+			'msg_success' => $msg_success,
+			'msg_error' => $msg_error
+			));
+
+	}
+
+	public function getCreate(){
+
+		return View::make('backend.banners.create', array(
+			'route' => $this->route
+			));
+
+	}
+
+	public function postCreate(){
+
+		$image = Input::file('image');
+
+		$validator = Validator::make(
+			array(
+				'image' => $image
+				), 
+			array(
+				'image' => 'required|mimes:png,jpeg,gif'
+				),
+			array(
+				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+				)
+			);
+
+		if($validator->fails()):
+
+			return Redirect::to($this->route.'/create')->with('msg_error', Lang::get('Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'));
+
+		else:
+
+			$filename = Banners::upload($image);
+
+			$type = '';
+
+			if( Input::get('type') != null ):
+				foreach (Input::get('type') as $_t):
+					# code...
+					$type .= $_t;
+				endforeach;
+			endif;
+
+			$banner = new Banners();
+			$banner->name = Input::get('name');
+			$banner->type = $type;
+			$banner->status = 'draft';
+			$banner->image = $filename;
+
+			if($banner->save()):
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('Banner Adicionado'));
+
+			else:
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('Banner no Adicionado'));
+
+			endif;
+
+		endif;
+	}
+
+	public function getUpdate( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route);
+		
+		else:
+
+			$banner = Banners::find($id);
+
+			if(!$banner):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('Banner Atualizado'));
+
+			else:
+
+				return View::make('backend.banners.update', array(
+					'route' => $this->route,
+					'banner' => $banner
+					));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function postUpdate( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route);
+		
+		else:
+
+			$banner = Banners::find($id);
+
+			if(!$banner):
+
+				return Redirect::to($this->route);
+
+			else:
+
+				$type = '';
+
+				if( Input::get('type') != null ):
+					foreach (Input::get('type') as $_t):
+						# code...
+						$type .= $_t;
+					endforeach;
+				endif;
+
+				$banner->name = Input::get('name');
+				$banner->type = $type;
+
+				$image = Input::file('image');
+
+				if($image != null):
+
+					$validator = Validator::make(
+						array(
+							'image' => $image
+							), 
+						array(
+							'image' => 'required|mimes:png,jpeg,gif'
+							),
+						array(
+							'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+							)
+						);
+
+					if($validator->fails()):
+
+						return Redirect::to($this->route.'/update/'.$id)->with('msg_succes', Lang::get('Banner no Atualizado'));
+
+					else:
+
+						$filename = Banners::upload($image);
+
+						$banner->image = $filename;
+					
+					endif;
+
+				endif;
+
+				if($banner->save()):
+
+					return Redirect::to($this->route)->with('msg_succes', Lang::get('Banner Atualizado'));
+
+				else:
+
+					return Redirect::to($this->route)->with('msg_error', Lang::get('Banner no Atualizado'));
+
+				endif;
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getPublish( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('No se encontro Banner'));
+		
+		else:
+
+			$banner = Banners::find($id);
+
+			$publish = Banners::publish($id);
+
+			if(!$publish):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('Banner no Publicado'));
+
+			else:
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('Banner publicado'));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getDraft( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('No se encontro Banner'));
+		
+		else:
+
+			$banner = Banners::find($id);
+
+			$draft = Banners::draft($id);
+
+			if(!$draft):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('Banner no betado'));
+
+			else:
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('Banner betado'));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getDelete( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('No se encontro Banner'));
+
+		else:
+
+			$banner = Banners::find($id);
+
+			$delete = Banners::destroy($id);
+
+			if(!$delete):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('Banner no deletado'));
+
+			else:
+
+				return Redirect::to($this->route)->with('msg_success', Lang::get('Banner deletado	'));
+
+			endif;
+
+		endif;
+
+	}
 
 	public static $images_folder = '/uploads/openx/images/';
 
@@ -58,40 +333,28 @@ class OpenxController extends \BaseController {
 		'fc9e8dfcb79b5395e5ac9ba01dd73412.jpg',
 		);
 
-	public function getNewsletter(){
-
-		$all_newsletters = new ORGNewsletter();
-
-		foreach($all_newsletters as $old_newsletter):
-			$newsletter = new Newsleter();
-			$newsletter->email = $old_newsletter->email;
-			$newsletter->name = $old_newsletter->nombre;
-		endforeach;
-
-	}
-
-	public static function getSocios(){
+	public static function getOldSocios(){
 
 		$pos = rand(0, count(self::$socios)-1);
 		return '<img width="250" src="'.self::$images_folder.self::$socios[$pos].'"/>';
 
 	}
 
-	public static function getParceiros(){
+	public static function getOldParceiros(){
 
 		$pos = rand(0, count(self::$parceiros)-1);
 		return '<img width="250" src="'.self::$images_folder.self::$parceiros[$pos].'"/>';
 
 	}
 
-	public static function getEventos(){
+	public static function getOldEventos(){
 
 		$pos = rand(0, count(self::$eventos)-1);
 		return '<img width="250" src="'.self::$images_folder.self::$eventos[$pos].'"/>';
 
 	}
 
-	public static function getPublicaciones(){
+	public static function getOldPublicaciones(){
 
 		$pos1 = rand(0, count(self::$publicaciones)-1);
 		$pos2 = self::getRand(count(self::$publicaciones)-1, $pos1);

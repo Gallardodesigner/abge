@@ -250,6 +250,14 @@
                 <li class="{{ (Request::is('dashboard/videos') ? 'active' : '') }}{{ (Request::is('dashboard/videos/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/videos/') }}"><span class="iconfa-facetime-video"></span> {{ Lang::get('nav.videos') }}</a></li>
                 <li class="{{ (Request::is('dashboard/pages') ? 'active' : '') }}{{ (Request::is('dashboard/pages/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/pages/') }}"><span class="iconfa-list"></span> {{ Lang::get('Páginas') }}</a></li>
                 <li class="{{ (Request::is('dashboard/cartography') ? 'active' : '') }}{{ (Request::is('dashboard/cartography/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/cartography/') }}"><span class="iconfa-globe"></span> {{ Lang::get('Cartografia') }}</a></li>
+                <!-- <li class="{{ (Request::is('dashboard/banners') ? 'active' : '') }}{{ (Request::is('dashboard/banners/*') ? 'active' : '') }}"><a href="{{ URL::to('/dashboard/banners/') }}"><span class="iconfa-picture"></span> {{ Lang::get('Banners') }}</a></li> -->
+
+                <li class="dropdown {{ (Request::is('dashboard/banners') ? 'active' : '') }}{{ (Request::is('dashboard/banners/*') ? 'active' : '') }}"><a href=""><span class="iconfa-picture"></span>{{ Lang::get('Banners') }}</a>
+                    <ul {{ (Request::is('dashboard/banners') ? 'style="display: block"' : '') }}{{ (Request::is('dashboard/banners/*') ? 'style="display: block"' : '') }}>
+                        <li><a href="{{{ URL::to('/dashboard/banners') }}}">{{ Lang::get('Banners') }}</a></li>
+                        <li><a href="{{{ URL::to('/dashboard/banners/publicaciones') }}}">{{ Lang::get('Publicações') }}</a></li>
+                    </ul>
+                </li>
             </ul>
         </div><!--leftmenu-->
         

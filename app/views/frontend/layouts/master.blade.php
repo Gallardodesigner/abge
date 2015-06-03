@@ -279,7 +279,7 @@
 
 	       			
 
-              {{ OpenxController::getSocios() }}
+              {{ OpenxController::getOldSocios() }}
 
 				</div>
 	    		
@@ -298,7 +298,7 @@
 		        <div class="div_float">
 
 
-              {{ OpenxController::getEventos() }}
+              {{ OpenxController::getOldEventos() }}
 
 		    	</div>
 		    
@@ -319,7 +319,7 @@
 
 		    	<div class="div_float">
 
-              {{ OpenxController::getParceiros() }}
+              {{ OpenxController::getOldParceiros() }}
 
 				</div>
 
