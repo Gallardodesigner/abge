@@ -21,7 +21,7 @@
 @stop
 
 @section("title")
-Banners
+Publicações
 @stop
 
 @section("iconpage")
@@ -29,11 +29,11 @@ Banners
 @stop
 
 @section("maintitle")
-Banners
+Publicações
 @stop
 
 @section("nameview")
-    Atualizar Banner
+    Atualizar Publicações
 @stop
 
 
@@ -45,14 +45,14 @@ Banners
                 <div class="widgetbox">
                 <div class="headtitle">
                     <div class="btn-group">
-                        <a href="{{ $route }}" class="btn dropdown-toggle">Voltar</a>
+                        <a href="{{ $route }}/publicaciones" class="btn dropdown-toggle">Voltar</a>
                     </div>
                     </div>
-                <h4 class="widgettitle">Atualizar Banner</h4>
+                <h4 class="widgettitle">Atualizar Publicações</h4>
                 <div class="widgetcontent">
                     <form class="stdform stdform2" method="post" enctype="multipart/form-data">
                             <p>
-                                <label>Imagem do Banner</label>
+                                <label>Imagem do Publicações</label>
                                 <span class="field"><img class="rounded" src="/{{ Banners::$images_folder }}thumb_{{$banner->image}}"/><input type="file" name="image" id="image" class="btn btn-primary"></span>
                             </p>
                             <p>
@@ -62,15 +62,7 @@ Banners
                             <p>
                                 <label>URL</label>
                                 <span class="field"><input type="text" name="url" id="url" class="input-xxlarge" value="{{$banner->url}}"></span>
-                            </p>
-                            <p>
-                                <label>Tipo</label>
-                                <span class="field">
-                                    Socios - Patrocinadores <input type="checkbox" name="type[]" value="socios"{{ Str::contains($banner->type, 'socios' ) ? 'checked' : '' }}/>
-                                    Eventos- Apoio ABGE  <input type="checkbox" name="type[]" value="eventos"{{ Str::contains($banner->type, 'eventos' ) ? 'checked' : '' }}/>
-                                    Parceiros <input type="checkbox" name="type[]" value="parceiros"{{ Str::contains($banner->type, 'parceiros' ) ? 'checked' : '' }}/>
-                                </span>
-                            </p>                            
+                            </p>                        
                             <p class="pull-right">
                                 <button class="btn btn-primary">Submit</button>
                                 <button type="reset" class="btn">Reset</button>

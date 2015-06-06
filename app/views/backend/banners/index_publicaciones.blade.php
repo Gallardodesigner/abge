@@ -39,10 +39,19 @@
                 case 'draft':
                     action = '{{Lang::get("messages.draft")}}';
                     break;
+                case 'publishpublicacion':
+                    action = '{{Lang::get("messages.publish")}}';
+                    break;
+                case 'draftpublicacion':
+                    action = '{{Lang::get("messages.draft")}}';
+                    break;
                 case 'trash':
                     action = '{{Lang::get("messages.trash")}}';
                     break;
                 case 'delete':
+                    action = '{{Lang::get("messages.delete")}}';
+                    break;
+                case 'deletepublicacion':
                     action = '{{Lang::get("messages.delete")}}';
                     break;
                 default:
@@ -63,7 +72,7 @@
 @stop
 
 @section("title")
-Banners
+Publicações
 @stop
 
 @section("iconpage")
@@ -71,11 +80,11 @@ Banners
 @stop
 
 @section("maintitle")
-Banners
+Publicações
 @stop
 
 @section("nameview")
-    Todos os banners
+    Todas as Publicações
 @stop
 
 @section("MainContent")
@@ -104,9 +113,9 @@ Banners
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="{{ $route }}/create" class="btn dropdown-toggle">Adicionar Banner</a>
+                            <a href="{{ $route }}/createpublicacion" class="btn dropdown-toggle">Adicionar Publicações</a>
                         </div>
-                        <h4 class="widgettitle">Todos os banners</h4>
+                        <h4 class="widgettitle">Todas as Publicações</h4>
                     </div>
                     
                     <table id="dyntable" class="table table-bordered responsive">
@@ -116,7 +125,6 @@ Banners
                                 <th class="head0 nosort"><input type="checkbox" class="checkall" /></th>
                                 <th class="head0" style="text-align:center;width:10%;">Thumb</th>
                                 <th class="head0" style="text-align:center;width:20%;">Nome</th>
-                                <th class="head0" style="text-align:center;width:20%;">Tipo</th>
                                 <th class="head1" style="text-align:center;width:10%;">Status</th>
                                 <th class="head0" style="text-align:center;width:20%;">Actions</th>
                             </tr>
@@ -129,28 +137,22 @@ Banners
                               </span></td>
                                 <td class="center" style="vertical-align:middle;width:10%;"><a href="{{ $banner->url != '' ? $banner->url : '#' }}"><img class="rounded" src="/{{ Banners::$images_folder }}thumb_{{$banner->image}}" /></a></td>
                                 <td class="center" style="vertical-align:middle;width:20%;"><h4>{{$banner->name}}</h4></td>
-                                <td class="center" style="vertical-align:middle;width:10%;">
-									{{ Str::contains($banner->type, 'publicaciones' ) ? 'Publicações<br>' : '' }}
-									{{ Str::contains($banner->type, 'socios' ) ? 'Socios - Patrocinadores<br>' : '' }}
-									{{ Str::contains($banner->type, 'eventos' ) ? 'Eventos- Apoio ABGE <br>' : '' }}
-									{{ Str::contains($banner->type, 'parceiros' ) ? 'Parceiros<br>' : '' }}
-                                </td>
                                 <td class="center" style="vertical-align:middle;width:10%;">{{ Lang::get('display.'.$banner->status) }}</td>
                                 <td class="center" style="vertical-align:middle;width:20%;">
 
-                                    <a href="{{ $route }}/update/{{$banner->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Atualizar</a>
+                                    <a href="{{ $route }}/updatepublicacion/{{$banner->id}}" class="btn btn-warning alertwarning" style="color:#FFF !important;"><i class="iconfa-edit" style="color:#FFF;margin-right:10px;"></i>Atualizar</a>
                                    
                                     @if($banner->status == 'publish')
 
-                                        <a data-id="{{$banner->id}}" data-action="draft" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
+                                        <a data-id="{{$banner->id}}" data-action="draftpublicacion" class="btn confirmbutton btn-primary alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-file" style="color:#FFF;margin-right:10px;"></i>Draft</a>
                                     
                                     @else
                                     
-                                        <a data-id="{{$banner->id}}" data-action="publish" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
+                                        <a data-id="{{$banner->id}}" data-action="publishpublicacion" class="btn confirmbutton btn-success alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-ok" style="color:#FFF;margin-right:10px;"></i>Publish</a>
 
                                     @endif
 
-                                    <a data-id="{{$banner->id}}" data-action="delete" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Deletar</a>
+                                    <a data-id="{{$banner->id}}" data-action="deletepublicacion" class="btn confirmbutton btn-danger alertdanger" style="color:#FFF !important; margin-left:10px;"><i class="iconfa-trash" style="color:#FFF;margin-right:10px;"></i>Deletar</a>
 
                                </td>
                             </tr>

@@ -1,0 +1,1 @@
+C:\wamp\www\gallardodesignerprojects\abge\app/views/index_publicaciones.blade.php

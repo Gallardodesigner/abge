@@ -30,7 +30,7 @@ class AuthenticationController extends \BaseController {
 
 		else:
 
-			return Redirect::to('/gd-admin')->with(array('msg_error'=>'Usuario o Contraseña Inválidos'));
+			return Redirect::to('/gd-admin')->with(array('msg_error'=>'Usuário ou Senha Invalida!'));
 
 		endif;
 

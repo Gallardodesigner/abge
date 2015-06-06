@@ -29,7 +29,7 @@ class OpenxController extends \BaseController {
 
 		$msg_error = Session::get('msg_error');
 
-		return View::make('backend.banners.index', array(
+		return View::make('backend.banners.index_publicaciones', array(
 			'banners' => $banners,
 			'route' => $this->route,
 			'msg_success' => $msg_success,
@@ -41,6 +41,14 @@ class OpenxController extends \BaseController {
 	public function getCreate(){
 
 		return View::make('backend.banners.create', array(
+			'route' => $this->route
+			));
+
+	}
+
+	public function getCreatepublicacion(){
+
+		return View::make('backend.banners.create_publicaciones', array(
 			'route' => $this->route
 			));
 
@@ -81,6 +89,7 @@ class OpenxController extends \BaseController {
 
 			$banner = new Banners();
 			$banner->name = Input::get('name');
+			$banner->url = Input::get('url');
 			$banner->type = $type;
 			$banner->status = 'draft';
 			$banner->image = $filename;
@@ -92,6 +101,52 @@ class OpenxController extends \BaseController {
 			else:
 
 				return Redirect::to($this->route)->with('msg_error', Lang::get('Banner no Adicionado'));
+
+			endif;
+
+		endif;
+	}
+
+	public function postCreatepublicacion(){
+
+		$image = Input::file('image');
+
+		$validator = Validator::make(
+			array(
+				'image' => $image
+				), 
+			array(
+				'image' => 'required|mimes:png,jpeg,gif'
+				),
+			array(
+				'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+				)
+			);
+
+		if($validator->fails()):
+
+			return Redirect::to($this->route.'/createpublicacion')->with('msg_error', Lang::get('Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'));
+
+		else:
+
+			$filename = Banners::upload($image);
+
+			$type = 'publicaciones';
+
+			$banner = new Banners();
+			$banner->name = Input::get('name');
+			$banner->url = Input::get('url');
+			$banner->type = $type;
+			$banner->status = 'draft';
+			$banner->image = $filename;
+
+			if($banner->save()):
+
+				return Redirect::to($this->route.'/publicaciones')->with('msg_success', Lang::get('Publicação Adicionado'));
+
+			else:
+
+				return Redirect::to($this->route.'/publicaciones')->with('msg_error', Lang::get('Publicação no Adicionado'));
 
 			endif;
 
@@ -115,6 +170,33 @@ class OpenxController extends \BaseController {
 			else:
 
 				return View::make('backend.banners.update', array(
+					'route' => $this->route,
+					'banner' => $banner
+					));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getUpdatepublicacion( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route);
+		
+		else:
+
+			$banner = Banners::find($id);
+
+			if(!$banner):
+
+				return Redirect::to($this->route)->with('msg_error', Lang::get('Publicação Atualizado'));
+
+			else:
+
+				return View::make('backend.banners.update_publicaciones', array(
 					'route' => $this->route,
 					'banner' => $banner
 					));
@@ -151,6 +233,7 @@ class OpenxController extends \BaseController {
 				endif;
 
 				$banner->name = Input::get('name');
+				$banner->url = Input::get('url');
 				$banner->type = $type;
 
 				$image = Input::file('image');
@@ -199,6 +282,71 @@ class OpenxController extends \BaseController {
 
 	}
 
+	public function postUpdatepublicacion( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route);
+		
+		else:
+
+			$banner = Banners::find($id);
+
+			if(!$banner):
+
+				return Redirect::to($this->route);
+
+			else:
+
+				$banner->name = Input::get('name');
+				$banner->url = Input::get('url');
+
+				$image = Input::file('image');
+
+				if($image != null):
+
+					$validator = Validator::make(
+						array(
+							'image' => $image
+							), 
+						array(
+							'image' => 'required|mimes:png,jpeg,gif'
+							),
+						array(
+							'mimes' => 'Tipo de imagen inválido, solo se admite los formatos PNG, JPEG, y GIF'
+							)
+						);
+
+					if($validator->fails()):
+
+						return Redirect::to($this->route.'/updatepublicacion/'.$id)->with('msg_succes', Lang::get('Publicação no Atualizado'));
+
+					else:
+
+						$filename = Banners::upload($image);
+
+						$banner->image = $filename;
+					
+					endif;
+
+				endif;
+
+				if($banner->save()):
+
+					return Redirect::to($this->route.'/publicaciones')->with('msg_succes', Lang::get('Publicação Atualizado'));
+
+				else:
+
+					return Redirect::to($this->route.'/publicaciones')->with('msg_error', Lang::get('Publicação no Atualizado'));
+
+				endif;
+
+			endif;
+
+		endif;
+
+	}
+
 	public function getPublish( $id = '' ){
 
 		if( $id == '' ):
@@ -218,6 +366,32 @@ class OpenxController extends \BaseController {
 			else:
 
 				return Redirect::to($this->route)->with('msg_success', Lang::get('Banner publicado'));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getPublishpublicacion( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('No se encontro Publicação'));
+		
+		else:
+
+			$banner = Banners::find($id);
+
+			$publish = Banners::publish($id);
+
+			if(!$publish):
+
+				return Redirect::to($this->route.'/publicaciones')->with('msg_error', Lang::get('Publicação no Publicado'));
+
+			else:
+
+				return Redirect::to($this->route.'/publicaciones')->with('msg_success', Lang::get('Publicação publicado'));
 
 			endif;
 
@@ -251,6 +425,32 @@ class OpenxController extends \BaseController {
 
 	}
 
+	public function getDraftpublicacion( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('No se encontro Publicação'));
+		
+		else:
+
+			$banner = Banners::find($id);
+
+			$draft = Banners::draft($id);
+
+			if(!$draft):
+
+				return Redirect::to($this->route.'/publicaciones')->with('msg_error', Lang::get('Publicação no betado'));
+
+			else:
+
+				return Redirect::to($this->route.'/publicaciones')->with('msg_success', Lang::get('Publicação betado'));
+
+			endif;
+
+		endif;
+
+	}
+
 	public function getDelete( $id = '' ){
 
 		if( $id == '' ):
@@ -274,6 +474,38 @@ class OpenxController extends \BaseController {
 			endif;
 
 		endif;
+
+	}
+
+	public function getDeletepublicacion( $id = '' ){
+
+		if( $id == '' ):
+
+			return Redirect::to($this->route)->with('msg_error', Lang::get('No se encontro Publicação'));
+
+		else:
+
+			$banner = Banners::find($id);
+
+			$delete = Banners::destroy($id);
+
+			if(!$delete):
+
+				return Redirect::to($this->route.'/publicaciones')->with('msg_error', Lang::get('Publicação no deletado'));
+
+			else:
+
+				return Redirect::to($this->route.'/publicaciones')->with('msg_success', Lang::get('Publicação deletado	'));
+
+			endif;
+
+		endif;
+
+	}
+
+	public function getModulo(){
+
+		dd(Banners::getImage('publicaciones'));
 
 	}
 

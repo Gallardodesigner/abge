@@ -9,6 +9,7 @@
 
 <!--  -->
 
+
 <style>
 .loginpanelinner .logo {
 text-align: center;
@@ -22,6 +23,18 @@ display: block;
 border: 1px solid #0c57a3;
 padding: 10px;
 background: #0972dd;
+width: 100%;
+color: #fff;
+text-transform: uppercase;
+}
+a.cadastro{
+text-decoration: none;
+font-size: 11px;
+font-family: arial, sans-serif !important;
+text-align: right;
+font-style: none;
+display: block;
+padding: 10px;
 width: 100%;
 color: #fff;
 text-transform: uppercase;
@@ -84,8 +97,8 @@ input[type="text"],input[type="password"]{
         <div class="logo animate0 bounceIn"><img src="/assetsadmin/images/logo.png" alt="" /></div>
         <form id="login" method="post">
             @if(isset($msg_error))
-                <div class="inputwrapper">
-                    <div class="alert alert-error">{{$msg_error}}</div>
+                <div class="inputwrapper" >
+                    <a class="cadastro" style="text-align:center !important;">{{$msg_error}}</a>
                 </div>
             @endif
             <div class="inputwrapper animate1 bounceIn">

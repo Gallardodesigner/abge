@@ -47,9 +47,17 @@ class Banners extends \Eloquent {
 
 		$banners = self::_get($type, $status);
 
-		$pos = rand(0, count($banners)-1);
+		if(count($banners)>0):
 
-		return $banners[$pos];
+			$pos = rand(0, count($banners)-1);
+
+			return $banners[$pos];
+
+		else:
+
+			return null;
+
+		endif;
 
 	}
 
@@ -57,17 +65,33 @@ class Banners extends \Eloquent {
 
 		$banner = self::getRand($type, 'publish');
 
-		return '<img width="250" src="/'.self::$images_folder.$banner->image.'"/>';
+		if($banner != null):
+
+			return '<a target="_blank" href="'.($banner->url != '' ? $banner->url : '#').'"><img width="250" src="/'.self::$images_folder.$banner->image.'"/></a>';
+
+		else:
+
+			return null;
+
+		endif;
 
 	}
 
-	public static function getOldPublicaciones(){
+	public static function getPublicaciones(){
 
 		$publicaciones = self::_get('publicaciones');
 
-		$pos1 = rand(0, count($publicaciones)-1);
-		$pos2 = self::getPubRand(count($publicaciones)-1, $pos1);
-		return '<img src="/'.self::$images_folder.$publicaciones[$pos1]->image.'"/><img src="/'.self::$images_folder.$publicaciones[$pos2]->image.'"/>';
+		if(count($publicaciones)>1):
+
+			$pos1 = rand(0, count($publicaciones)-1);
+			$pos2 = self::getPubRand(count($publicaciones)-1, $pos1);
+			return '<a target="_blank" href="'.($publicaciones[$pos1]->url != '' ? $publicaciones[$pos1]->url : '#').'"><img src="/'.self::$images_folder.$publicaciones[$pos1]->image.'"/></a><a target="_blank" href="'.($publicaciones[$pos2]->url != '' ? $publicaciones[$pos2]->url : '#').'"><img src="/'.self::$images_folder.$publicaciones[$pos2]->image.'"/></a>';
+
+		else:
+
+			return null;
+
+		endif;
 
 	}
 

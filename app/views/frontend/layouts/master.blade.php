@@ -279,7 +279,7 @@
 
 	       			
 
-              {{ OpenxController::getOldSocios() }}
+              {{ Banners::getImage('socios') }}
 
 				</div>
 	    		
@@ -298,7 +298,7 @@
 		        <div class="div_float">
 
 
-              {{ OpenxController::getOldEventos() }}
+              {{ Banners::getImage('eventos') }}
 
 		    	</div>
 		    
@@ -319,7 +319,7 @@
 
 		    	<div class="div_float">
 
-              {{ OpenxController::getOldParceiros() }}
+              {{ Banners::getImage('parceiros') }}
 
 				</div>
 
