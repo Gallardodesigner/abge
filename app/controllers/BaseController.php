@@ -35,9 +35,19 @@ class BaseController extends Controller {
 
 	public static function remove_spaces($string){
 
-		$no_permitidas= array (" ","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","]",";",":","/","?",".",">",",","<","\\","'","\"");
+		$no_permitidas= array (" ","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","]",";",":","/","?",".",">",",","<","\\","'","\"","°");
 
 		$texto = str_replace($no_permitidas, "" ,$string);
+
+		return $texto;
+
+	}
+
+	public static function guide_spaces($string){
+
+		$no_permitidas= array (" ","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","]",";",":","/","?",".",">",",","<","\\","'","\"","°");
+
+		$texto = str_replace($no_permitidas, "-" ,$string);
 
 		return $texto;
 

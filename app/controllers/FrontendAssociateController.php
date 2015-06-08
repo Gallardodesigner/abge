@@ -22,6 +22,33 @@ class FrontendAssociateController extends \BaseController {
 
 	public function getAnuidades(){
 
+		if(Auth::user()->check()):
+
+			if(Auth::user()->user()->type == 'associate'):
+
+				if($payment = ORGAssociateAnnuities::hasAnnuity(Auth::user()->user())):
+
+					//self::acusado();
+
+				else:
+
+					self::pagamento();
+
+				endif;
+
+			else:
+
+				Auth::user()->logout();
+				return Redirect::to(self::$route);
+
+			endif;
+
+		else:
+
+			return Redirect::to(self::$route);
+
+		endif;
+
 		$associate = Auth::user()->user()->associate->asociado;
 
 		$annuities = ORGAnnuities::all();
@@ -336,6 +363,52 @@ class FrontendAssociateController extends \BaseController {
 
 		return $filename;
 		
+	}
+
+
+
+	public static function pagamento(){
+
+		$user = Auth::user()->user();
+		$associate = $user->associate->asociado;
+		$associateCategory = $associate->category;
+
+		$annuity = ORGAnnuities::getLastAnnuity();
+		$category = $annuity->getAnnuityCategoryByAssociateCategory( $associateCategory );
+
+		if($date = $category->getActualInterval()):
+
+			if( $associateAnnuity = $category->hasPayment( $associate ) ):
+
+				$associateAnnuity->data_pagamento = date('Y-m-d');
+				$associateAnnuity->save();
+
+			else:
+
+				$associateAnnuity = new ORGAssociateAnnuities();
+				$associateAnnuity->id_anuidade_categoria = $category->id;
+				$associateAnnuity->id_asociado = $associate->id_asociado;
+				$associateAnnuity->pagamento = $date->preco;
+				$associateAnnuity->data_pagamento = date('Y-m-d');
+				$associateAnnuity->status = 0;
+				$associateAnnuity->save();
+
+			endif;
+
+			/*$args = array(
+				'date' => $date,
+				'associate' => $associate,
+				'route' => self::$route
+				);
+
+			return View::make('frontend.anuidades.payment')->with( $args );*/
+
+		else:
+
+			/*return Redirect::to( self::$route . '/error');*/
+
+		endif;
+
 	}
 
 }

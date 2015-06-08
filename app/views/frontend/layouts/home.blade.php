@@ -430,7 +430,11 @@
               @endif
               <br>
               <a target="_blank" href="/entrar"><img src="/images/bt-area-associado.png"></a><br>
-              <!--<a href=""> Clique aqui para sair</a>-->
+              @if(!(Auth::user()->check() AND Auth::user()->user()->type == 'associate'))
+                <a href="/entrar/cadastro" style="margin-right: 50px;">Associe-se</a>
+                <a href="/entrar/senha">Esqueci minha senha</a>
+              @endif
+
             </div>
           </div>
         </div>

@@ -125,7 +125,7 @@ class FrontendAuthenticationController extends \BaseController {
 			    $message->to('igor@gallardodesigner.com.br', $associate->nombre_completo)->subject('Esqueci minha senha!');
 			});
 
-			return Redirect::to(self::$route);
+			return View::make('auth.minhasenha')->with('route', self::$route);
 
 		else:
 

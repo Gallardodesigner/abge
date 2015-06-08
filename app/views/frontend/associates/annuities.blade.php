@@ -175,7 +175,6 @@
 		</div>
 		<div class="col-md-1"></div>
 	</div>
-
     <!-- <div class="row center">
       	<div class="col-md-3">
            <span class="tile col-md-12 bg-light-blue">

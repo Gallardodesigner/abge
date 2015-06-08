@@ -70,7 +70,7 @@ class NewsController extends \BaseController {
 			$news->status = 1;
 			$news->home = 1;
 			$news->author = 'ABGE';
-			$news->sticky = 1;
+			$news->sticky = 0;
 			$news->category = Input::get('category');
 			$news->title = Input::get('title');
 			$news->sub_title = Input::get('sub_title');
@@ -83,6 +83,9 @@ class NewsController extends \BaseController {
 			$news->author = Input::get('author');
 			$news->image = $image;
 			$news->image_principal = $image_principal;
+			$news->save();
+
+			$news->permalink = $news->id_news.'-'.substr(BaseController::guide_spaces( strtolower(BaseController::remove_accents( $this->title ) ) ), 0, 50 );
 			$news->save();
 
 			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $news->title )));
@@ -147,7 +150,7 @@ class NewsController extends \BaseController {
 			$news->status = 1;
 			$news->home = 1;
 			$news->author = 'ABGE';
-			$news->sticky = 1;
+			$news->sticky = 0;
 			$news->category = Input::get('category');
 			$news->title = Input::get('title');
 			$news->sub_title = Input::get('sub_title');
@@ -155,10 +158,12 @@ class NewsController extends \BaseController {
 			$news->summary = Input::get('summary');
 			$news->body = Input::get('body');
 			$news->date = date("Y-m-d", strtotime(Input::get('date')));
-			$news->permalink = "";
 			$news->author = Input::get('author');
 			$news->image = $image;
 			$news->image_principal = $image_principal;
+			$news->save();
+
+			$news->permalink = $news->id_news.'-'.substr(BaseController::guide_spaces( strtolower(BaseController::remove_accents( $this->title ) ) ), 0, 50 );
 			$news->save();
 
 			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_edit', array( 'title' => $news->title )));

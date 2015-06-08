@@ -17,6 +17,9 @@
 	//Route::controller('/dashboard/', 'DashboardController');
 	//Route::controller('/', 'FrontendController');
 	//Route::controller('/auth', 'AuthenticationController');
+Route::get('phpinfo', function(){
+	echo phpinfo();
+});
 Route::get('/cbge2015/', function(){
 	return View::make('frontend.courses.cbge2015');
 });

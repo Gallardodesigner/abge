@@ -92,7 +92,7 @@ input[type="text"],input[type="password"]{
                 <input type="text" name="login" id="login" placeholder="Digite aqui seu email" required/>
             </div>
             <div class="inputwrapper animate3 bounceIn">
-                <button name="submit">Sign In</button>
+                <button name="submit">Enviar</button>
             </div>
            
         </form>
