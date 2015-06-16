@@ -430,6 +430,8 @@ class InscriptionController extends \BaseController {
 		    		$responsable =  $users[$inscription->id]->responsavel;
 		    		$publicaciones =  $users[$inscription->id]->publicacoes;
 		    		$nombre_cientifico =  $users[$inscription->id]->nome_cientifico;
+		    		$num_res = $users[$inscription->id]->numero_res;
+		    		$num_com = $users[$inscription->id]->numero_com;
 		    		//Fin de no agregados
 		    		//Campos participants no agregados
 
@@ -476,6 +478,8 @@ class InscriptionController extends \BaseController {
 		    		$responsable =  "";
 		    		$publicaciones =  "";
 		    		$nombre_cientifico =  "";
+		    		$num_res = $users[$inscription->id]->numero;
+		    		$num_com = $users[$inscription->id]->numero_empresa;
 		    		//fin de campos asociados obligatorios
 
 		    		//Campos participants no agregados
@@ -516,6 +520,7 @@ class InscriptionController extends \BaseController {
 		    		$telefone = $users[$inscription->id]->telefone;
 		    		$estado = $state;
 		    		$cidade = $users[$inscription->id]->cidade;
+		    		$cidade_empresa = $users[$inscription->id]->cidade_empresa;
 		    	endif;
 		    $sheet->appendRow(1,array("Codigo Asociado",
 		    						  "Nome",
@@ -536,6 +541,7 @@ class InscriptionController extends \BaseController {
 		    						  "Logradouro Residencia",
 		    						  "Endereço",
 		    						  "Complemento",
+		    						  "Número Res",
 		    						  "Barrio Res",
 		    						  "CEP",
 		    						  "Cidade",
@@ -544,9 +550,9 @@ class InscriptionController extends \BaseController {
 		    						  "Logradouro Empresa",
 		    						  "Endereço Empresa",
 		    						  "Cidade Empresa",
-		    						  "Estado Empresa",
 		    						  "CEP Empresa",
 		    						  "Complemento Empresa",
+		    						  "Número Empresa",
 		    						  "Barrio Empresa",
 		    						  "Telefone Empresa",
 		    						  "CNPJ",
@@ -576,6 +582,7 @@ class InscriptionController extends \BaseController {
 		    			 "logradouro_res" => $logradouro_res, 
 		    			 "dir" => $dir,
 		    			 "complemento" => $complemento,
+		    			 "num_res" => $num_res,
 		    			 "barrio_res" => $barrio_res,
 		    			 "cep" => $cep,
 		    			 "cidade" => $cidade,
@@ -583,8 +590,10 @@ class InscriptionController extends \BaseController {
 		    			 "empresa" => $empresa,
 		    			 "logradouro_com" => $logradouro_com,
 		    			 "empresa_dir" => $empresa_dir,
+		    			 "cidade_empresa" => $cidade_empresa,
 		    			 "cep_empresa" => $cep_empresa,
 		    			 "empresa_com" => $empresa_com,
+		    			 "num_com" => $num_com,
 		    			 "barrio_com" => $barrio_com,
 		    			 "empresa_tel" => $empresa_tel,
 		    			 "cnpj" => $cnpj,

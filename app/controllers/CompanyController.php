@@ -64,7 +64,7 @@ class CompanyController extends \BaseController {
 			$company->title = Input::get('title');
 			$company->content = Input::get('content');
 			$company->address = Input::get('address');
-			$company->contact = Input::get('contact');
+			// $company->contact = Input::get('contact');
 			$company->type = $type;
 			$company->status = 'draft';
 			$company->url = $filename;
@@ -135,7 +135,7 @@ class CompanyController extends \BaseController {
 				$company->content = Input::get('content');
 				$company->address = Input::get('address');
 				$company->type = $type;
-				$company->contact = Input::get('contact');
+				// $company->contact = Input::get('contact');
 
 				$image = Input::file('url');
 
