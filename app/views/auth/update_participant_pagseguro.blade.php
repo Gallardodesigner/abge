@@ -105,7 +105,7 @@
 		</div>
 		<div class="control-box">
 			<label>Email: </label>
-			<input type="email" name="email" value="{{ $participant->email }}"/>
+			<input type="email" name="email" value="{{ $participant->email }}" required/>
 		</div>
 		<!--<div class="control-box">
 			<label>CNPJ: </label>

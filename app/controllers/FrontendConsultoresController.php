@@ -6,16 +6,21 @@ class FrontendConsultoresController extends \BaseController {
 
 	//Listado de palabras para obviar en la busqueda
 	public $deleted_words = array(
-		'el',
-		'la',
-		'los',
+		'a',
+		'e',
+		'ao',
+		'da',
+		'das',
 		'de',
-		'del',
+		'do',
+		'dos',
+		'na',
+		'no',
+		'em',
 		'para',
-		'que',
-		'cual',
-		'como'
-		);
+		'com',
+		'pelo',
+		 );
 
 	public function getIndex(){
 
@@ -45,21 +50,78 @@ class FrontendConsultoresController extends \BaseController {
 
 		$quest = Input::get('q');
 
-		$pk = 'id_asociado';
+		$area = Input::get('area_de_especializacion');
 
-		$results = $this->engine($quest, $pk);
+		$per_page = 5;
 
-		dd($results);
+		if($quest != null):
+
+			$pk = 'id_asociado';
+
+			$parameters = $this->engine($quest, $pk, $area);
+
+			$pieces = $parameters['pieces'];
+			$regexp = $parameters['regexp'];
+			$ins = $parameters['ins'];
+			$primary_key = $parameters['primary_key'];
+
+			$consultores = ORGAssociates::whereNested(function($query) use($pieces, $regexp, $ins, $primary_key){
+
+				$query->whereRaw($primary_key.' in ('.$ins.') ');
+
+			})->select(array('id_asociado','nombre_completo','email', 'telefone_res','ddi_res','sexo','classificados_conteudo','classificados_imagem'))
+			  ->orderByRaw(\DB::raw("FIELD(".$primary_key.", ".$ins.")"))->paginate($per_page);
+
+			// Lighthing top_results
+			foreach( $consultores as $result ):
+				$result->nombre_completo = str_replace(trim($quest), '<span style="background-color:#FFFF00">'.trim($quest).'</span>', $result->nombre_completo);
+				$result->nombre_completo = str_replace(mb_strtoupper(trim($quest), 'UTF-8'), '<span style="background-color:#FFFF00">'.trim(mb_strtoupper($quest, 'UTF-8')).'</span>', $result->nombre_completo);
+				$result->nombre_completo = str_replace(mb_strtolower(trim($quest), 'UTF-8'), '<span style="background-color:#FFFF00">'.trim(mb_strtolower($quest, 'UTF-8')).'</span>', $result->nombre_completo);
+				$result->nombre_completo= str_replace(mb_convert_case(trim($quest), MB_CASE_TITLE, 'UTF-8'), '<span style="background-color:#FFFF00">'.trim(mb_convert_case($quest, MB_CASE_TITLE, 'UTF-8')).'</span>', $result->nombre_completo);
+				$result->light_email = str_replace(trim($quest), '<span style="background-color:#FFFF00">'.trim($quest).'</span>', $result->email);
+				$result->classificados_conteudo = str_replace(trim($quest), '<span style="background-color:#FFFF00">'.trim($quest).'</span>', $result->classificados_conteudo);
+				$result->classificados_conteudo = str_replace(mb_strtoupper(trim($quest), 'UTF-8'), '<span style="background-color:#FFFF00">'.trim(mb_strtoupper($quest, 'UTF-8')).'</span>', $result->classificados_conteudo);
+				$result->classificados_conteudo = str_replace(mb_strtolower(trim($quest), 'UTF-8'), '<span style="background-color:#FFFF00">'.trim(mb_strtolower($quest, 'UTF-8')).'</span>', $result->classificados_conteudo);
+				$result->classificados_conteudo= str_replace(mb_convert_case(trim($quest), MB_CASE_TITLE, 'UTF-8'), '<span style="background-color:#FFFF00">'.trim(mb_convert_case($quest, MB_CASE_TITLE, 'UTF-8')).'</span>', $result->classificados_conteudo);
+				foreach( $pieces as $piece ):
+					$result->classificados_conteudo= str_replace($piece, ' <span style="background-color:#FFFF00">'.trim($piece).'</span> ', $result->classificados_conteudo);
+					$result->classificados_conteudo= str_replace(mb_strtoupper($piece,'UTF-8'), ' <span style="background-color:#FFFF00">'.trim(mb_strtoupper($piece,'UTF-8')).'</span> ', $result->classificados_conteudo);
+					$result->classificados_conteudo= str_replace(mb_strtolower($piece,'UTF-8'), ' <span style="background-color:#FFFF00">'.trim(mb_strtolower($piece,'UTF-8')).'</span> ', $result->classificados_conteudo);
+					$result->classificados_conteudo= str_replace(mb_convert_case($piece, MB_CASE_TITLE, 'UTF-8'), ' <span style="background-color:#FFFF00">'.trim(mb_convert_case($piece, MB_CASE_TITLE, 'UTF-8')).'</span> ', $result->classificados_conteudo);
+				endforeach;
+			endforeach;
+
+		elseif ($area != '-1' && $area != null):
+			# code...
+
+			$consultores = ORGAssociates::where('classificados_view','=','1')->where('area_de_especializacion','=',$area)->paginate($per_page);
+
+		else:
+
+			$consultores = ORGAssociates::where('classificados_view','=','1')->paginate($per_page);
+
+		endif;
+
+		$args = array(
+			'q' => $quest,
+			'consultores' => $consultores,
+			'data' => $area,
+			'route' => self::$route,
+			);
+
+		return View::make('frontend.consultores.engine')->with($args);
 
 	}
 
-	public function nombre($quest, $pk){
+	public function nombre($quest, $pk, $area){
 
-		$results = ORGAssociates::whereNested(function($query) use($quest){
+		$results = ORGAssociates::whereNested(function($query) use($quest, $area){
 
 			$query->where('nombre_completo', 'LIKE', '%'.$quest.'%');
 			$query->where('classificados_view', '=', '1');
 
+			if($area != null && $area != '-1') $query->where('area_de_especializacion', '=', $area);
+
 		})->select(array( $pk ))
 		  ->get();
 
@@ -67,13 +129,15 @@ class FrontendConsultoresController extends \BaseController {
 
 	}
 
-	public function email($quest, $pk){
+	public function email($quest, $pk, $area){
 
-		$results = ORGAssociates::whereNested(function($query) use($quest){
+		$results = ORGAssociates::whereNested(function($query) use($quest, $area){
 
 			$query->where('email', 'LIKE', '%'.$quest.'%');
 			$query->where('classificados_view', '=', '1');
 
+			if($area != null && $area != '-1') $query->where('area_de_especializacion', '=', $area);
+
 		})->select(array( $pk ))
 		  ->get();
 
@@ -81,12 +145,14 @@ class FrontendConsultoresController extends \BaseController {
 
 	}
 
-	public function conteudo($quest, $pk){
+	public function conteudo($quest, $pk, $area){
 
-		$results = ORGAssociates::whereNested(function($query) use($quest){
+		$results = ORGAssociates::whereNested(function($query) use($quest, $area){
 
 			$query->where('classificados_conteudo', 'LIKE', '%'.$quest.'%');
 			$query->where('classificados_view', '=', '1');
+
+			if($area != null && $area != '-1') $query->where('area_de_especializacion', '=', $area);
 
 		})->select(array( $pk ))->get();
 
@@ -94,37 +160,18 @@ class FrontendConsultoresController extends \BaseController {
 
 	}
 
-	public function engine($quest, $primary_key){
+	public function engine($quest, $primary_key, $area){
 
-		$name_results = $this->nombre($quest, $primary_key);
-		$email_results = $this->email($quest, $primary_key);
-		$conteudo_results = $this->conteudo($quest, $primary_key);
+		$name_results = $this->nombre($quest, $primary_key, $area);
+		$email_results = $this->email($quest, $primary_key, $area);
+		$conteudo_results = $this->conteudo($quest, $primary_key, $area);
 
 		$top_results = $this->arrayMergin($name_results, $email_results);
 		$top_results = $this->arrayMergin($top_results, $conteudo_results);
 
 		$pieces = strtolower(trim($quest));
 
-		$pieces = explode(" ",$pieces);	
-
-		$deleted_positions = array();
-
-		//Registrar posiciones de palabras a eliminar
-		for ($position = 0; $position < count($pieces); $position++) :
-			# code...
-			if(in_array($pieces[$position], $this->deleted_words)):
-				$deleted_positions[] = $position;
-			else:
-				$pieces[$position] = ' '.$pieces[$position].' ';
-			endif;
-
-		endfor;
-
-		//Eliminacion de palabras en el listado anterior
-		foreach ($deleted_positions as $position) :
-			# code...
-			unset($pieces[$position]);
-		endforeach;
+		$pieces = $this->explodePieces($pieces);
 
 		//Contruyendo Expresion regular a partir de las palabras de la busqueda
 		$regexp = $this->arrayToText($pieces, '|');
@@ -133,9 +180,12 @@ class FrontendConsultoresController extends \BaseController {
 		$field = 'classificados_conteudo';
 
 		//Busqueda de coincidencias en el Modelo por expresion regular
-		$results = ORGAssociates::whereNested(function($query) use($field, $regexp){
+		$results = ORGAssociates::whereNested(function($query) use($field, $regexp, $area){
 
 			$query->whereRaw($field.' REGEXP "('.$regexp.')"');
+			$query->where('classificados_view', '=', '1');
+
+			if($area != null && $area != '-1') $query->where('area_de_especializacion', '=', $area);
 
 		})->select(array('id_asociado', 'classificados_conteudo'))
 		  ->get();
@@ -159,20 +209,48 @@ class FrontendConsultoresController extends \BaseController {
 
 		$ins = $this->arrayToText($list, ',');
 
+		if($ins == '') $ins = '0';
+
+		return array(
+			'pieces' => $pieces,
+			'regexp' => $regexp,
+			'ins' => $ins,
+			'primary_key' => $primary_key
+			);
+
 		//Busqueda de registros ordenados por pesos
-		$results = ORGAssociates::whereNested(function($query) use($pieces, $regexp, $ins, $primary_key){
+		/*$results = ORGAssociates::whereNested(function($query) use($pieces, $regexp, $ins, $primary_key){
 
 			$query->whereRaw($primary_key.' in ('.$ins.') ');
 
-		})->select(array('id_asociado','nombre_completo','telefone_res','ddi_res','classificados_conteudo','classificados_imagem'))
-		  ->orderByRaw(\DB::raw("FIELD(".$primary_key.", ".$ins.")"))->get();
+		})->select(array('id_asociado','nombre_completo','email', 'telefone_res','ddi_res','sexo','classificados_conteudo','classificados_imagem'))
+		  ->orderByRaw(\DB::raw("FIELD(".$primary_key.", ".$ins.")"))->paginate(2);
 
 		foreach( $results as $result ):
 			$result->nombre_completo = str_replace($quest, ' <span style="background-color:#FFFF00">'.trim($quest).'</span> ', $result->nombre_completo);
 			$result->email = str_replace($quest, ' <span style="background-color:#FFFF00">'.trim($quest).'</span> ', $result->email);
 			$result->classificados_conteudo = str_replace($quest, ' <span style="background-color:#FFFF00">'.trim($quest).'</span> ', $result->classificados_conteudo);
+			$result->classificados_conteudo = str_replace(mb_strtoupper($quest, 'UTF-8'), ' <span style="background-color:#FFFF00">'.trim(mb_strtoupper($quest, 'UTF-8')).'</span> ', $result->classificados_conteudo);
+			$result->classificados_conteudo = str_replace(mb_strtolower($quest, 'UTF-8'), ' <span style="background-color:#FFFF00">'.trim(mb_strtolower($quest, 'UTF-8')).'</span> ', $result->classificados_conteudo);
+			$result->classificados_conteudo= str_replace(mb_convert_case($quest, MB_CASE_TITLE, 'UTF-8'), ' <span style="background-color:#FFFF00">'.trim(mb_convert_case($quest, MB_CASE_TITLE, 'UTF-8')).'</span> ', $result->classificados_conteudo);
 			foreach( $pieces as $piece ):
-				$result->$field = str_replace($piece, ' <span style="background-color:#FFFF00">'.trim($piece).'</span> ', $result->$field);
+				$result->classificados_conteudo= str_replace($piece, ' <span style="background-color:#FFFF00">'.trim($piece).'</span> ', $result->classificados_conteudo);
+				$result->classificados_conteudo= str_replace(mb_strtoupper($piece,'UTF-8'), ' <span style="background-color:#FFFF00">'.trim(mb_strtoupper($piece,'UTF-8')).'</span> ', $result->classificados_conteudo);
+				$result->classificados_conteudo= str_replace(mb_strtolower($piece,'UTF-8'), ' <span style="background-color:#FFFF00">'.trim(mb_strtolower($piece,'UTF-8')).'</span> ', $result->classificados_conteudo);
+				$result->classificados_conteudo= str_replace(mb_convert_case($piece, MB_CASE_TITLE, 'UTF-8'), ' <span style="background-color:#FFFF00">'.trim(mb_convert_case($piece, MB_CASE_TITLE, 'UTF-8')).'</span> ', $result->classificados_conteudo);
+				//var_dump($result->classificados_conteudo);
+				//var_dump('<br>');
+				//var_dump($piece);
+				//var_dump('<br>');
+				//var_dump(strtoupper($piece));
+				//var_dump('<br>');
+				//var_dump(mb_strtoupper($piece,'UTF-8'));
+				//var_dump('<br>');
+				//var_dump(utf8_encode($piece));
+				//var_dump('<br>');
+				//var_dump(utf8_decode($piece));
+				//var_dump('<br>');
+				//var_dump('<br>');
 			endforeach;
 		endforeach;
 
@@ -184,7 +262,7 @@ class FrontendConsultoresController extends \BaseController {
 			);
 
 		//Construccion de vista con parametros ordenados
-		return $args;
+		return $results;*/
 
 	}
 
@@ -240,6 +318,33 @@ class FrontendConsultoresController extends \BaseController {
 		endfor;
 
 		return $array1;
+
+	}
+
+	public function explodePieces( $pieces ){
+
+		$pieces = explode(" ",$pieces);	
+
+		$deleted_positions = array();
+
+		//Registrar posiciones de palabras a eliminar
+		for ($position = 0; $position < count($pieces); $position++) :
+			# code...
+			if(in_array($pieces[$position], $this->deleted_words)):
+				$deleted_positions[] = $position;
+			else:
+				$pieces[$position] = ' '.$pieces[$position].' ';
+			endif;
+
+		endfor;
+
+		//Eliminacion de palabras en el listado anterior
+		foreach ($deleted_positions as $position) :
+			# code...
+			unset($pieces[$position]);
+		endforeach;
+
+		return $pieces;
 
 	}
 
