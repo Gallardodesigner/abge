@@ -22,7 +22,7 @@ class FrontendConsultoresController extends \BaseController {
 		'pelo',
 		 );
 
-	public function getIndex(){
+	public function getBusqueda(){
 
 		$data = Input::get('area_de_especializacion');
 
@@ -46,7 +46,7 @@ class FrontendConsultoresController extends \BaseController {
 
 	}
 
-	public function getBusqueda(){
+	public function getIndex(){
 
 		$quest = Input::get('q');
 

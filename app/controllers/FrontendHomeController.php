@@ -12,7 +12,7 @@ class FrontendHomeController extends \BaseController {
 		
 		$banner = SFNews::where('sticky','=','0')->where('category','=','0')->where('status','=','1')->where('home','=','1')->orderBy('date', 'DESC')->take(3)->get();
 		$principal = SFNews::where('sticky','=','0')->where('category','=','1')->where('status','=','1')->where('home','=','1')->orderBy('date','DESC')->take(1)->get();
-		$news = SFNews::where('status','=','1')->where('home','=','1')->orderBy('date','DESC')->take(3)->get();
+		$news = SFNews::where('sticky','=','0')->where('category','=','2')->where('status','=','1')->where('home','=','1')->orderBy('date','DESC')->take(3)->get();
 		$video = SFVideos::where('position','=','1')->take(1)->get();
 		$video = isset($video[0]) ? $video[0] : null;
 

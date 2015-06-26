@@ -89,4 +89,43 @@ class NewsletterController extends \BaseController {
 
 	}
 
+	public function getExport(){
+
+		$newsletters = Newsletters::all();
+		
+		Excel::create('Export Asociados - '. rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($newsletters){
+
+		    $excel->sheet('Excel sheet', function($sheet) use ($newsletters){
+				
+		        $sheet->setOrientation('portrait');
+		    	
+		    	$n =2;
+
+				$annuity_categories = array();
+			    	
+			    $sheet->appendRow(1,array("Nombre",
+			    						  "Email" ));
+
+				foreach($newsletters as $newsletter):
+
+			    	$name = $newsletter->name;
+			    	$email = $newsletter->email;
+
+					$total = [
+						"name"=>$name,
+			    		"email" => $email,
+					];
+
+			        $sheet->appendRow($n,$total);
+
+			        $n++;
+
+			    endforeach;
+
+		    });
+
+		})->export('xlsx');
+
+	}
+
 }

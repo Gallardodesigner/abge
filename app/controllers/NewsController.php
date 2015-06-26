@@ -85,7 +85,7 @@ class NewsController extends \BaseController {
 			$news->image_principal = $image_principal;
 			$news->save();
 
-			$news->permalink = $news->id_news.'-'.substr(BaseController::guide_spaces( strtolower(BaseController::remove_accents( $this->title ) ) ), 0, 50 );
+			$news->permalink = $news->id_news.'-'.substr(BaseController::guide_spaces( strtolower(BaseController::remove_accents( $news->title ) ) ), 0, 50 );
 			$news->save();
 
 			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_create', array( 'title' => $news->title )));
@@ -163,7 +163,7 @@ class NewsController extends \BaseController {
 			$news->image_principal = $image_principal;
 			$news->save();
 
-			$news->permalink = $news->id_news.'-'.substr(BaseController::guide_spaces( strtolower(BaseController::remove_accents( $this->title ) ) ), 0, 50 );
+			$news->permalink = $news->id_news.'-'.substr(BaseController::guide_spaces( strtolower(BaseController::remove_accents( $news->title ) ) ), 0, 50 );
 			$news->save();
 
 			return Redirect::to($this->route)->with('msg_success', Lang::get('messages.companies_edit', array( 'title' => $news->title )));
