@@ -17,15 +17,15 @@ class Courses extends Eloquent {
 	}
 
 	public function promotioners(){
-		return $this->belongsToMany('Companies', 'promotioners', 'course_id', 'company_id');
+		return $this->belongsToMany('Companies', 'promotioners', 'course_id', 'company_id')->orderBy('companies.title', 'ASC');
 	}
 
 	public function supporters(){
-		return $this->belongsToMany('Companies', 'supporters', 'course_id', 'company_id');
+		return $this->belongsToMany('Companies', 'supporters', 'course_id', 'company_id')->orderBy('companies.title', 'ASC');
 	}
 	
 	public function helpers(){
-		return $this->belongsToMany('Companies', 'helpers', 'course_id', 'company_id');
+		return $this->belongsToMany('Companies', 'helpers', 'course_id', 'company_id')->orderBy('companies.title', 'ASC');
 	}
 
 	public function category(){

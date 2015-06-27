@@ -30,7 +30,7 @@ class Companies extends Eloquent {
 				break;
 		}
 		
-		return self::where( 'status', $operator, $status )->orderBy('created_at', 'desc')->get();
+		return self::where( 'status', $operator, $status )->orderBy('title', 'ASC')->get();
 	}
 
 	public static function getPublish(){
