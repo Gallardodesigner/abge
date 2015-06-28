@@ -112,7 +112,8 @@ Newsletters
                 <div class="widgetbox">
                     <div class="headtitle">
                         <div class="btn-group">
-                            <a href="{{ $route }}/create" class="btn dropdown-toggle">Adicionar Newsletter</a>
+                            <a href="{{ $route }}/export" class="btn dropdown-toggle">Exportar</a>
+                            <a href="{{ $route }}/create" class="btn dropdown-toggle" style="padding-left:20px">Adicionar Newsletter</a>
                         </div>
                         <h4 class="widgettitle">Newsletters</h4>
                     </div>
