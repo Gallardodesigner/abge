@@ -41,7 +41,7 @@
 	  <input type="text" name="q" placeholder="Pesquisar" value="{{ $q }}" style="font-size:12px;height:26px;display:inline-block; width:35%; padding-left:10px" />
 	  <select name="area_de_especializacion" style="font-size:12px;height:30px;display:inline-block;width:50%">
 	    <option value="-1" {{ ($data == "-1") ? 'selected' : '' }}>Selecione a Área de Atuação - TODAS</option>
-	    <optgroup label="OBRAS DE INFRAESTRUCTURA">
+	    <optgroup label="OBRAS DE INFRAESTRUTURA">
 	      <option value="14" {{ ($data == "14") ? 'selected' : '' }}>BARRAGENS</option>
 	      <option value="15" {{ ($data == "15") ? 'selected' : '' }}>SUBTERRÂNEAS</option>
 	      <option value="16" {{ ($data == "16") ? 'selected' : '' }}>LINEARES</option>

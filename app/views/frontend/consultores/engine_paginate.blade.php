@@ -5,12 +5,12 @@
 
 	@if($consultores->getCurrentPage() > 1)
 
-    	<a href="{{ $route }}/busqueda?{{ ($q != null) ? 'q='.$q.'&area_de_especializacion='.$data.'&' : '' }}{{ 'page='.($consultores->getCurrentPage()-1) }}"><img alt="" title="" border="0" src="http://abge.org.br/images/icon_prew_page.jpg"> </a> 
+    	<a href="{{ $route }}?{{ ($q != null) ? 'q='.$q.'&area_de_especializacion='.$data.'&' : '' }}{{ 'page='.($consultores->getCurrentPage()-1) }}"><img alt="" title="" border="0" src="http://abge.org.br/images/icon_prew_page.jpg"> </a> 
 
 	@endif
 	@if($consultores->getCurrentPage() < $consultores->getLastPage())
             
-        <a href="{{ $route }}/busqueda?{{ ($q != null) ? 'q='.$q.'&area_de_especializacion='.$data.'&' : '' }}{{ 'page='.($consultores->getCurrentPage()+1) }}"><img alt="" title="" border="0" src="http://abge.org.br/images/icon_next_page.jpg"></a>
+        <a href="{{ $route }}?{{ ($q != null) ? 'q='.$q.'&area_de_especializacion='.$data.'&' : '' }}{{ 'page='.($consultores->getCurrentPage()+1) }}"><img alt="" title="" border="0" src="http://abge.org.br/images/icon_next_page.jpg"></a>
 	
 	@endif
 

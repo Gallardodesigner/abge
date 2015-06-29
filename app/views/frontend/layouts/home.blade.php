@@ -43,7 +43,7 @@
 
         <div id="header" class="div_float">
           	<div style="padding: 13px 8px 15px 10px; float: left;">
-            	<a href="http://abge.org.br/index.php/"><img src="/assets/frontend/img/logo_header.png"></a>  
+            	<a href="http://abge.org.br/"><img src="/assets/frontend/img/logo_header.png"></a>  
             </div>
             <div style="float:left; margin-left: 430px;margin-top: 20px;">
               	<a href="https://www.facebook.com/abge.abge" target="_blank"><img src="/assets/frontend/img/face-abge.jpg" border="0"></a>
@@ -284,7 +284,7 @@
     <div id="slider-banco" class="lof-slidecontent">      
       <!-- MAIN CONTENT --> 
       <div class="main-slider-content" style="width:250px; height:168px;">
-              <a href="http://www.abge.org.br/index.php/abge/banco-de-ensino"><img src="/images/frontend/img-banco-geologia-no-brasil.jpg"></a>
+              <a href="http://www.abge.org.br/page/banco-de-ensino"><img src="/images/frontend/img-banco-geologia-no-brasil.jpg"></a>
       </div>
       <!-- END MAIN CONTENT -->
       <!-- END OF BUTTON PLAY-STOP -->
