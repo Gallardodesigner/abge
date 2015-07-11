@@ -200,7 +200,7 @@ class ORGAssociateController extends \BaseController {
 
 	public function getExportasociados($nome = '', $categoria = '', $tipo_pessoa = '', $pagamento = ''){
 
-		if( $nome == '0' AND $categoria == '0' AND $tipo_pessoa == '0'):
+		/*if( $nome == '0' AND $categoria == '0' AND $tipo_pessoa == '0'):
 
 			$associates = ORGAssociates::all();
 
@@ -260,7 +260,62 @@ class ORGAssociateController extends \BaseController {
 
 			$associates = $associates->get();
 
-		endif;
+		endif;*/
+
+
+			$associates = new ORGAssociates();
+
+			if($nome != '' AND $nome != '0'):
+				$associates = $associates->where('nombre_completo','LIKE', '%'.$nome.'%')->orWhere('id_asociado','=', $nome);
+			endif;
+
+			if($categoria != '0'):
+				$associates = $associates->where('categoria', '=',$categoria);
+			endif;
+
+			if($tipo_pessoa != '0'):
+				$categories = ORGAssociateCategories::where('tipo_usuario','=',$tipo_pessoa)->get();
+				foreach($categories as $category):
+					$associates = $associates->orWhere('categoria','=',$category->id_categoria_asociado);
+				endforeach;
+			endif;
+
+			if($pagamento != '0'):
+				$annuity = ORGAnnuities::getLastAnnuity();
+				$temps = $associates->get();
+				switch($pagamento){
+					case 'paid':
+						foreach($temps as $temp):
+							if($payment = $temp->getPaymentByAnnuity( $annuity )):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+						break;
+					case 'paid_active':
+						foreach($temps as $temp):
+							if($payment = $temp->getPaymentByAnnuity( $annuity ) AND $payment->status):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+						break;
+					case 'paid_inactive':
+						foreach($temps as $temp):
+							if($payment = $temp->getPaymentByAnnuity( $annuity ) AND !$payment->status):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+						break;
+					case 'notpaid':
+						foreach($temps as $temp):
+							if(!$temp->getPaymentByAnnuity( $annuity )):
+								$associates = $associates->orWhere('id_asociado','=',$temp->id_asociado);
+							endif;
+						endforeach;
+						break;
+				}
+			endif;
+
+			$associates = $associates->get();
 		
 		Excel::create('Export Asociados - '. rand(2, 700*date("H"))."-".date("d-m-Y"), function($excel) use ($associates){
 
@@ -278,6 +333,8 @@ class ORGAssociateController extends \BaseController {
 						'id_categoria_asociado' => $annuity_category->id_categoria_asociado
 						);
 				endforeach;*/
+
+				$counter = 0;
 
 				foreach($associates as $aso):
 			    	
@@ -520,6 +577,9 @@ class ORGAssociateController extends \BaseController {
 			    		"telefone" => $telefone_residencia,
 					];
 
+					$counter++;
+					$inter_counter = 0;
+
 					foreach(ORGAnnuities::where('ano','=',date('Y'))->take(1)->get() as $annuity):
 					
 						/*if($payment = $aso->getPaymentByAnnuity($annuity)):
@@ -553,19 +613,31 @@ class ORGAssociateController extends \BaseController {
 							endif;
 
 						endif;*/
-						
+
+							$inter_counter++;
+							
 							if($payment = $aso->getPaymentByAnnuity($annuity)):
 								$interval = $payment->category->getCustomInterval($payment->data_pagamento);
-								if($interval == null):
+								if($interval == null OR $interval == false):
 									$interval = $payment->category->dates;
 									if(isset($interval[0])) $interval = $interval[0];
 								endif;
-								$total = array_merge($total, array(
-									// 'anuidade_'.$annuity->ano => $annuity->ano,
-									'valor_anuidade_'.$annuity->ano => $interval->preco,
-									'valor_pago_'.$annuity->ano => $payment->pagamento,
-									)
-								);
+								// if($counter >= 40){dd($interval->isEmpty());}
+								if(isset($interval->preco)):
+									$total = array_merge($total, array(
+										// 'anuidade_'.$annuity->ano => $annuity->ano,
+										'valor_anuidade_'.$annuity->ano => $interval->preco,
+										'valor_pago_'.$annuity->ano => $payment->pagamento,
+										)
+									);
+								else:
+									$total = array_merge($total, array(
+										// 'anuidade_'.$annuity->ano => $annuity->ano,
+										'valor_anuidade_'.$annuity->ano => "Não há dados",
+										'valor_pago_'.$annuity->ano => $payment->pagamento,
+										)
+									);
+								endif;
 							else:
 								if($aso->categoria != ''):
 									$dates = $annuity->getAnnuityCategoryByAssociateCategory($aso->category);

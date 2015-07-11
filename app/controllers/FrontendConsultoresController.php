@@ -69,7 +69,7 @@ class FrontendConsultoresController extends \BaseController {
 
 				$query->whereRaw($primary_key.' in ('.$ins.') ');
 
-			})->select(array('id_asociado','nombre_completo','email', 'telefone_res','ddi_res','sexo','classificados_conteudo','classificados_imagem'))
+			})->select(array('id_asociado','nombre_completo','email','telefone_res','ddi_res','telefone_com','ddi_com','sexo','classificados_conteudo','classificados_imagem'))
 			  ->orderByRaw(\DB::raw("FIELD(".$primary_key.", ".$ins.")"))->paginate($per_page);
 
 			// Lighthing top_results

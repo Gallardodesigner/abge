@@ -104,7 +104,15 @@
 							@else
 	                      		<a href="mailto:{{ $classificados->email }}">{{ $classificados->email }}</a> 
 							@endif
-	                      | {{ 'Telefone: '.($classificados->telefone_res != '' ? $classificados->ddi_res.' '.$classificados->telefone_res : 'Sem telefone' ); }}</div>
+	                      		| {{ 'Telefone: '}}
+	                      		@if($classificados->telefone_com != '') 
+	                      			{{ $classificados->ddi_com.' '.$classificados->telefone_com }} 
+								@elseif($classificados->telefone_res != '')
+	                      			{{ $classificados->ddi_res.' '.$classificados->telefone_res }} 
+	                      		@else
+	                      		{{ 'Sem telefone' }}
+	                      		@endif
+	                      	</div>
 	                      <div class="summary" style="line-height:16px">{{ substr($classificados->classificados_conteudo,0,500) }}</div>
 
 	                      <div class="fecha_listado">

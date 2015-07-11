@@ -110,7 +110,7 @@ class FrontendAssociateController extends \BaseController {
 			$assoc = $associate->associate;
 			$assoc->password = $associate->senha;
 			$assoc->save();
-			$user = $assoc->user;
+			$user = $assoc->getuser;
 			$user->password = Hash::make(Input::get('senha'));
 			$user->save();
 		endif;
