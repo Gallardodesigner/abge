@@ -147,9 +147,9 @@ Todos os Associados
                                     <label>Pagamento: </label>
                                     <select name="pagamento">
                                         <option value="0" {{ $filter['pagamento'] == '0' ? 'selected' : '' }}>Selecione</option>
-                                        <option value="paid" {{ $filter['pagamento'] === 'paid' ? 'selected' : '' }}>Pago</option>
-                                        <option value="paid_active" {{ $filter['pagamento'] === 'paid_active' ? 'selected' : '' }}>Pago ativo</option>
-                                        <option value="paid_inactive" {{ $filter['pagamento'] === 'paid_inactive' ? 'selected' : '' }}>Pago inativo</option>
+                                        <option value="paid" {{ $filter['pagamento'] === 'paid' ? 'selected' : '' }}>Todos</option>
+                                        <option value="paid_active" {{ $filter['pagamento'] === 'paid_active' ? 'selected' : '' }}>Pago Validado</option>
+                                        <option value="paid_inactive" {{ $filter['pagamento'] === 'paid_inactive' ? 'selected' : '' }}>Pago Não Validado</option>
                                         <option value="notpaid" {{ $filter['pagamento'] === 'notpaid' ? 'selected' : '' }}>Não Pago</option>
                                     </select>
                                 </span>
@@ -193,8 +193,8 @@ Todos os Associados
                                 <th class="head1" style="width:20%;margin-right: 0px;">Email</th>
                                 <th class="head0" style="width:10%;margin-right: 0px;">Nome Da Empresa</th>
                                 <th class="head1" style="width:7%;margin-right: 0px;">Tipo de Pessoa</th>
-                                <th class="head1" style="width:7%;margin-right: 0px;">Es Associado</th>
-                                <th class="head1" style="width:7%;margin-right: 0px;">Estatuto</th>
+                                <th class="head1" style="width:7%;margin-right: 0px;">Status</th>
+                                <th class="head1" style="width:7%;margin-right: 0px;">Pago</th>
                                 <th class="head1" style="width:9%;margin-right: 0px;">Pagamento {{ $annuity->ano }}</th>
                                 <th class="head0" style="width:18%">Ações</th>
                             </tr>
@@ -219,11 +219,15 @@ Todos os Associados
                                             @endif
                                         </td>
                                         <td>
-                                            @if($associate->status_asso)
-                                                <a href="{{ $route }}/status/{{$associate->id_asociado}}"><i class="iconfa-ok" style="color:#9F9;margin-right:10px;font-size:20pt"></i></a>
+                                            @if( $payment = $associate->getPaymentByAnnuity( $annuity ) )
+                                                @if( $payment->status )
+                                                    <a href="{{ $route }}/status/{{$associate->id_asociado}}"><i class="iconfa-ok" style="color:#9F9;margin-right:10px;font-size:20pt"></i></a>
+                                                @else
+                                                    <a href="{{ $route }}/status/{{$associate->id_asociado}}"><i class="iconfa-remove" style="color:#F99;margin-right:10px;font-size:20pt"></i></a>
+                                                @endif
                                             @else
-                                                <a href="{{ $route }}/status/{{$associate->id_asociado}}"><i class="iconfa-remove" style="color:#F99;margin-right:10px;font-size:20pt"></i></a>
-                                            @endif
+                                                <i class="iconfa-remove" style="color:#000;margin-right:10px;font-size:20pt"></i>
+                                            @endif                                
                                         </td>
                                         <td>
                                             @if( $payment = $associate->getPaymentByAnnuity( $annuity ) )
@@ -234,7 +238,7 @@ Todos os Associados
                                                 @endif
                                             @else
                                                     <a href="{{ $route }}/{{$associate->id_asociado}}/ticket" style="color:#000;margin-right:10px;font-size:12pt;font-style:none;" target="_blank">R$ {{ number_format(0, 2, ',', '.') }}</a>
-                                            @endif                                
+                                            @endif
                                         </td>
                                         <td class="center">
                                             <a href="{{ $route }}/{{$associate->id_asociado}}/payments" class="btn btn-primary" style="color:#FFF !important;"><i class="iconfa-money" style="color:#FFF;margin-right:10px;"></i>{{Lang::get('Anuidades')}}</a>
