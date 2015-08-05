@@ -173,6 +173,11 @@ class FrontendAssociateController extends \BaseController {
 		$associate->pais_res = Input::get('pais_res');
 		$associate->uf_res = Input::get('uf_res');
 		$associate->municipio_res = Input::get('municipio_res');
+
+		$associate->ddd_res = Input::get('ddd_res');
+		$associate->ddi_res = Input::get('ddi_res');
+		$associate->telefone_res = Input::get('telefone_res');
+
 		$associate->cep_com = Input::get('cep_com');
 		$associate->logradouro_com = Input::get('logradouro_com');
 		$associate->numero_com = Input::get('numero_com');
@@ -182,6 +187,11 @@ class FrontendAssociateController extends \BaseController {
 		$associate->pais_com = Input::get('pais_com');
 		$associate->uf_com = Input::get('uf_com');
 		$associate->municipio_com = Input::get('municipio_com');
+
+		$associate->ddd_com = Input::get('ddd_com');
+		$associate->ddi_com = Input::get('ddi_com');
+		$associate->telefone_com = Input::get('telefone_com');
+		
 		$associate->area_de_especializacion = Input::get('area_de_especializacion');
 		$associate->classificados_conteudo = Input::get('classificados_conteudo');
 

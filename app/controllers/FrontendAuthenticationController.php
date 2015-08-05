@@ -149,31 +149,31 @@ class FrontendAuthenticationController extends \BaseController {
 
 		else:
 
-		$org_associate = new ORGAssociates();
-		$org_associate->email = Input::get('login');
-		$org_associate->senha = md5(Input::get('password'));
-		$org_associate->tipo_pessoa = 'F';
-		$org_associate->save();
+			$org_associate = new ORGAssociates();
+			$org_associate->email = Input::get('login');
+			$org_associate->senha = md5(Input::get('password'));
+			$org_associate->tipo_pessoa = 'F';
+			$org_associate->save();
 
-		$user = new User();
-		$user->email = Input::get('login');
-		$user->password = Hash::make(Input::get('password'));
-		$user->type = 'associate';
-		$user->status = 'publish';
-		$user->save();
+			$user = new User();
+			$user->email = Input::get('login');
+			$user->password = Hash::make(Input::get('password'));
+			$user->type = 'associate';
+			$user->status = 'publish';
+			$user->save();
 
-		$associate = new Associates();
-		$associate->email = Input::get('login');
-		$associate->password = md5(Input::get('password'));
-		$associate->user = $user->id;
-		$associate->associate = $org_associate->id_asociado;
-		$associate->type = 'associate';
-		$associate->status = 'publish';
-		$associate->save();
+			$associate = new Associates();
+			$associate->email = Input::get('login');
+			$associate->password = md5(Input::get('password'));
+			$associate->user = $user->id;
+			$associate->associate = $org_associate->id_asociado;
+			$associate->type = 'associate';
+			$associate->status = 'publish';
+			$associate->save();
 
-		Auth::user()->login($user);
+			Auth::user()->login($user);
 
-		return Redirect::to(self::$route);
+			return Redirect::to(self::$route);
 			
 		endif;
 		

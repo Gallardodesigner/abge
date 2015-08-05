@@ -894,7 +894,7 @@ class ORGAssociateController extends \BaseController {
 		$associate->telefone_seg_com = Input::get('telefone_seg_com');
 		$associate->ddd_cel_com = Input::get('ddd_cel_com');
 		$associate->ddi_cel_com = Input::get('ddi_cel_com');
-		$associate->celular_com = Input::get('cel_com');
+		$associate->celular_com = Input::get('celular_com');
 
 		$associate->data_cadastro = date('Y-m-d');
 		$associate->codigo_matricula = Input::get('codigo_matricula');

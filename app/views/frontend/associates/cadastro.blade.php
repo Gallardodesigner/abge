@@ -480,6 +480,18 @@
 										<label class="control-label">CEP</label>
 										<input type="text" name="cep_res" value="{{ $associate->cep_res }}" id="cep_res" class="form-control" >
 									</div>
+									<div class="form-group col-md-6">
+										<label class="control-label col-md-12">Telefone</label>
+										<div class="col-md-3">
+											<input class=" form-control" type="text" name="ddd_res" value="{{ $associate->ddd_res }}" id="ddd_res" class="form-control" >
+										</div>
+										<div class="col-md-3">
+											<input class=" form-control" type="text" name="ddi_res" value="{{ $associate->ddi_res }}" id="ddi_res" class="form-control" >
+										</div>
+										<div class="col-md-6">
+											<input class=" form-control" type="text" name="telefone_res" value="{{ $associate->telefone_res }}" id="telefone_res" class="form-control" >
+										</div>
+									</div>
 								</div>	
 						    </div>
 						    <div role="tabpanel" class="tab-pane" id="EndComercial">
@@ -827,6 +839,18 @@
 									<div class="form-group col-md-6">
 										<label class="control-label">CEP</label>
 										<input type="text" name="cep_com" value="{{ $associate->cep_com }}" id="cep_com" class="form-control" >
+									</div>
+									<div class="form-group col-md-6">
+										<label class="control-label col-md-12">Telefone</label>
+										<div class="col-md-3">
+											<input class=" form-control" type="text" name="ddd_com" value="{{ $associate->ddd_com }}" id="ddd_com" class="form-control" >
+										</div>
+										<div class="col-md-3">
+											<input class=" form-control" type="text" name="ddi_com" value="{{ $associate->ddi_com }}" id="ddi_com" class="form-control" >
+										</div>
+										<div class="col-md-6">
+											<input class=" form-control" type="text" name="telefone_com" value="{{ $associate->telefone_com }}" id="telefone_com" class="form-control" >
+										</div>
 									</div>
 								</div>	
 						    </div>

@@ -37,7 +37,7 @@ class FrontendHomeController extends \BaseController {
 		$correo->name = $campos["nombre"];
 		$correo->email = $campos["email"];
 		$correo->save();
-		return "Datos guardados con Exito";
+		return "Cadastro efetuado com sucesso!";
 		// return $campos;
 	}
 
