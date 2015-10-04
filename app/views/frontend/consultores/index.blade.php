@@ -83,9 +83,9 @@
 	                    @if($classificados->classificados_imagem)
 	                      {{ HTML::image('/uploads/classificados/'.$classificados->classificados_imagem, '', array('class'=>'borderImage', 'width' => '100')) }}
 	                    @elseif($classificados->sexo != 2)
-	                      {{ HTML::image('hombre.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
+	                      {{ HTML::image('images/hombre.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
 	                    @else:
-	                      {{ HTML::image('mujer.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
+	                      {{ HTML::image('images/mujer.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
 	                    @endif
 
 	                  </td>

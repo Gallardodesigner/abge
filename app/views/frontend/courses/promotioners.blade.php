@@ -48,7 +48,12 @@
       @if(count($promotioners) > 0 AND ($counter = 0) == 0)
         @foreach($promotioners as $promotioner)
           <div class="frame">
-            <span class="helper"></span><img class="thumb-image" src="/uploads/small_{{$promotioner->url}}" />
+
+            @if($promotioner->route != null and $promotioner->route != '')
+              <span class="helper"></span><a href="{{ $promotioner->route }}"><img class="thumb-image" src="/uploads/small_{{$promotioner->url}}" /></a>
+            @else
+              <span class="helper"></span><img class="thumb-image" src="/uploads/small_{{$promotioner->url}}" />
+            @endif
           </div>
           @if(++$counter%2 == 0)
           @endif

@@ -122,7 +122,7 @@ class FrontendAuthenticationController extends \BaseController {
 				$message->from('teste@abge.org.br', 'ABGE');
 			    $message->to($associate->email, $associate->nombre_completo)->subject('Esqueci minha senha!');
 			    /*$message->to('amontenegro.sistemas@gmail.com', $associate->nombre_completo)->subject('Esqueci minha senha!');*/
-			    $message->to('igor@gallardodesigner.com.br', $associate->nombre_completo)->subject('Esqueci minha senha!');
+			    // $message->to('igor@gallardodesigner.com.br', $associate->nombre_completo)->subject('Esqueci minha senha!');
 			});
 
 			return View::make('auth.minhasenha')->with('route', self::$route);

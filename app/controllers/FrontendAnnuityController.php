@@ -287,7 +287,7 @@ class FrontendAnnuityController extends \BaseController {
 
 		if($date = $category->getActualInterval()):
 
-			if( $associateAnnuity = $category->hasPayment( $associate ) ):
+			/*if( $associateAnnuity = $category->hasPayment( $associate ) ):
 
 				$associateAnnuity->data_pagamento = date('Y-m-d');
 				$associateAnnuity->save();
@@ -302,7 +302,7 @@ class FrontendAnnuityController extends \BaseController {
 				$associateAnnuity->status = 0;
 				$associateAnnuity->save();
 
-			endif;
+			endif;*/
 
 			$args = array(
 				'date' => $date,

@@ -56,6 +56,10 @@ Company
                                 <span class="field"><input type="file" name="url" id="url" class="btn btn-primary"></span>
                             </p>
                             <p>
+                                <label>URL</label>
+                                <span class="field"><input type="text" name="route" id="route" class="input-xxlarge"></span>
+                            </p>
+                            <p>
                                 <label>Title</label>
                                 <span class="field"><input type="text" name="title" id="title" class="input-xxlarge"></span>
                             </p>

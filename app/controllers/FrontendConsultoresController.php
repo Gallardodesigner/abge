@@ -94,11 +94,11 @@ class FrontendConsultoresController extends \BaseController {
 		elseif ($area != '-1' && $area != null):
 			# code...
 
-			$consultores = ORGAssociates::where('classificados_view','=','1')->where('area_de_especializacion','=',$area)->paginate($per_page);
+			$consultores = ORGAssociates::where('classificados_view','=','1')->where('area_de_especializacion','=',$area)->orderBy('nombre_completo', 'ASC')->paginate($per_page);
 
 		else:
 
-			$consultores = ORGAssociates::where('classificados_view','=','1')->paginate($per_page);
+			$consultores = ORGAssociates::where('classificados_view','=','1')->orderBy('nombre_completo', 'ASC')->paginate($per_page);
 
 		endif;
 

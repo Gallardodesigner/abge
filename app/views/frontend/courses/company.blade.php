@@ -18,7 +18,11 @@
     <div id="content">
       <div>
         <div class="thumb">
-          <img src="/uploads/thumb_{{$course->company->url}}" />
+          @if($course->company->route != null and $course->company->route != '')
+            <a href="{{ $course->company->route}}"><img src="/uploads/thumb_{{$course->company->url}}"></a>
+          @else
+            <img src="/uploads/thumb_{{$course->company->url}}" />
+          @endif
         </div>
         <div class="org_desc">
           <p>{{$course->company->title}}</p>

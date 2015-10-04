@@ -83,11 +83,11 @@
 	                    @if($classificados->classificados_imagem)
 	                      {{ HTML::image('/uploads/classificados/'.$classificados->classificados_imagem, '', array('class'=>'borderImage', 'width' => '100')) }}
 	                    @elseif($classificados->sexo != 2)
-	                      {{ HTML::image('hombre.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
+	                      {{ HTML::image('images/hombre.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
 	                    @else:
-	                      {{ HTML::image('mujer.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
+	                      {{ HTML::image('images/mujer.jpg', '', array('class'=>'borderImage', 'border' => '0', 'width' => '100')) }}
 	                    @endif
-
+						<input type="hidden" name="sexo" value="{{$classificados->sexo}}">
 	                  </td>
 
 	                  <td width="3"></td>
@@ -113,7 +113,7 @@
 	                      		{{ 'Sem telefone' }}
 	                      		@endif
 	                      	</div>
-	                      <div class="summary" style="line-height:16px">{{ substr($classificados->classificados_conteudo,0,500) }}</div>
+	                      <div class="summary" style="line-height:16px">{{ $classificados->classificados_conteudo }}</div>
 
 	                      <div class="fecha_listado">
 

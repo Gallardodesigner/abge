@@ -19,6 +19,7 @@ class CreateCompaniesTable extends Migration {
 			$table->longText('address');
 			$table->longText('contact');
 			$table->text('url');
+			$table->text('route');
 			$table->string('type');
 			$table->string('status');
 			$table->timestamps();

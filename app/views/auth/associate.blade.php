@@ -30,8 +30,8 @@
             <input type="password" name="password"/>
         </div>
         <div class="control-box">
-            <a href="http://www.abge.org.br/index.php/abge/cadastro">Associe-se</a>
-            <a class="right" href="http://www.abge.org.br/index.php/abge/esqueci-minha-senha">Esqueci minha senha</a>
+            <a href="/entrar/cadastro">Associe-se</a>
+            <a class="right" href="/entrar/senha">Esqueci minha senha</a>
         </div>
         <div class="control-box">
 		    <input type="submit" value="Enviar"/>

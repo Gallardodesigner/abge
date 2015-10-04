@@ -48,7 +48,11 @@
       @if(count($helpers) > 0 AND ($counter = 0) == 0)
         @foreach($helpers as $helper)
           <div class="frame">
-            <span class="helper"></span><img class="thumb-image" src="/uploads/small_{{$helper->url}}" />
+            @if($helper->route != null and $helper->route != '')
+              <span class="helper"></span><a href="{{ $helper->route }}"><img class="thumb-image" src="/uploads/small_{{$helper->url}}" /></a>
+            @else
+              <span class="helper"></span><img class="thumb-image" src="/uploads/small_{{$helper->url}}" />
+            @endif
           </div>
           @if(++$counter%2 == 0)
           @endif
